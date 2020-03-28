@@ -29,6 +29,21 @@ public class Crawler {
 		maxDepth = 3;
 	}
 
+	public void crawl() {
+		String[] urls = { "https://colorlib.com/wp/",
+				"https://www.forbes.com/sites/robertadams/2017/03/02/top-income-earning-blogs",
+				"https://firstsiteguide.com/examples-of-blogs",
+				"https://www.lifehack.org/articles/communication/top-10-most-inspirational-bloggers-the-world.html",
+				"https://www.theguardian.com/technology/2008/mar/09/blogs",
+				"https://www.rankxl.com/examples-successful-blogs", "https://makeawebsitehub.com/examples-of-blogs",
+				"https://detailed.com/50", "https://www.sparringmind.com/successful-blogs",
+				"https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-blogging-platform",
+				"https://www.bluleadz.com/blog/8-of-the-most-interesting-blogs-out-there" };
+		for (String url : urls) {
+			startCrawler(url, 0);
+		}
+	}
+
 	/**
 	 * This method search for links in the web page and stores html in list
 	 * 
@@ -36,7 +51,7 @@ public class Crawler {
 	 * @param depth [depth of the urls to be crawled]
 	 * @throws IOException
 	 */
-	public void startCrawler(String url, int depth) throws IOException {
+	public void startCrawler(String url, int depth) {
 		if (depth <= maxDepth) {
 			try {
 				Document document = Jsoup.connect(url).get();
@@ -90,24 +105,6 @@ public class Crawler {
 		if (nextUrl.endsWith(".jpeg")) {
 			return false;
 		}
-
 		return true;
 	}
-
-	public static void main(String[] args) throws IOException {
-		Crawler crawler = new Crawler();
-		String[] urls = { "https://colorlib.com/wp/",
-				"https://www.forbes.com/sites/robertadams/2017/03/02/top-income-earning-blogs",
-				"https://firstsiteguide.com/examples-of-blogs",
-				"https://www.lifehack.org/articles/communication/top-10-most-inspirational-bloggers-the-world.html",
-				"https://www.theguardian.com/technology/2008/mar/09/blogs",
-				"https://www.rankxl.com/examples-successful-blogs", "https://makeawebsitehub.com/examples-of-blogs",
-				"https://detailed.com/50", "https://www.sparringmind.com/successful-blogs",
-				"https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-blogging-platform",
-				"https://www.bluleadz.com/blog/8-of-the-most-interesting-blogs-out-there" };
-		for (int i = urls.length - 1; i > 0; i--) {
-			crawler.startCrawler(urls[i], 0);
-		}
-	}
-
 }

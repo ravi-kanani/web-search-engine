@@ -1,23 +1,22 @@
 package functionality;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jsoup.nodes.Document;
-
 import model.DocFrequency;
 import model.DocInfo;
 import model.DocRank;
+import model.Path;
 import textprocessing.TST;
 
 public class Indexer {
-
-	Crawler crawler = new Crawler();
-
 	private static final Logger logger = Logger.getLogger(Indexer.class.getName());
 
 	private TST<List<DocFrequency>> indexedTerms = new TST<List<DocFrequency>>();
@@ -37,31 +36,20 @@ public class Indexer {
 		return indexer;
 	}
 
-	public void indexDocuments() throws IOException {
-		if (crawler.getWebPageList().size() <= 0) {
-			String[] urls = { "https://colorlib.com/wp/",
-					"https://www.forbes.com/sites/robertadams/2017/03/02/top-income-earning-blogs",
-					"https://firstsiteguide.com/examples-of-blogs",
-					"https://www.lifehack.org/articles/communication/top-10-most-inspirational-bloggers-the-world.html",
-					"https://www.theguardian.com/technology/2008/mar/09/blogs",
-					"https://www.rankxl.com/examples-successful-blogs", "https://makeawebsitehub.com/examples-of-blogs",
-					"https://detailed.com/50", "https://www.sparringmind.com/successful-blogs",
-					"https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-blogging-platform",
-					"https://www.bluleadz.com/blog/8-of-the-most-interesting-blogs-out-there" };
-			logger.log(Level.INFO, "Crawling Started");
-			for (int i = 0; i < urls.length; i++) {
-//				crawler.startCrawler(urls[i], 0);
-			}
-			logger.log(Level.INFO, "Pages Crawled:" + crawler.getWebPageList().size());
-		}
+	public void startIndexer() throws IOException {
+		logger.log(Level.INFO, "Indexing Started");
+//		new Crawler().crawl();
 
 		List<String> tokenWords;
-		logger.log(Level.INFO, "Indexing Started");
-//		for (Document doc : crawler.getWebPageList()) {
-		for (Document doc : Parser.getWebPageListLocal()) {
-			double documentLength = doc.body().text().toLowerCase().split("[^a-zA-Z0-9'-]").length;
-			documentIdNameMap.put(id, new DocInfo(doc.head().getElementsByTag("title").text(), doc.baseUri()));
-			tokenWords = Parser.parse(doc);
+		for (File file : Parser.getWebPageFilesList()) {
+			String title = file.getName().substring(0, file.getName().length() - 4);
+			String parentDir = file.getAbsolutePath().replaceAll(Path.txtDirectoryName, "");
+			String link = parentDir.substring(0, parentDir.length() - 4) + ".html";
+			String data = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
+
+			double documentLength = data.split("[^a-zA-Z0-9'-]").length;
+			documentIdNameMap.put(id, new DocInfo(title, link));
+			tokenWords = Parser.parse(data);
 
 			tokenWords.stream().filter(word1 -> word1.trim().length() > 1 || word1.length() > 1).forEach(word -> {
 				stemmedWord = word;

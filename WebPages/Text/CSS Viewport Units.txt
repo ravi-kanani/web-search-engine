@@ -1,0 +1,184 @@
+hey 👋! i published a guide about right-to-left styling in css. check it out ahmad shadeed home works articles about hire me @shadeed9 css viewport units 12 mar 2020 reading time: ~ 22 mins css viewport units have been around for the last few years, and by time, i see them being used more and more by developers. their benefit lies in providing us with a way to size things in a fluid and dynamic way, without the need to use javascript. also, it’s easy to provide a fallback if they fail. in this article, we will learn about css viewport units and how to use them, along with some use-cases and solutions for common issues. let’s start and dig in! introduction according to the css spec, viewport-percentage units are relative to the size of the initial containing block, which is the root element of a web page. the viewport units are: vw, vh, vmin, and vmax. viewport width the vw unit represents a percentage of the root element width. one vw is equal to 1% of the viewport width. we have an element with the following css: .element {
+    width: 50vw;
+}
+ when the width of the viewport is 500px, the 50vw will be calculated as below: width = 500*50% = 250px viewport height the vh unit represents a percentage of the root element height. one vh is equal to 1% of the viewport height. we have an element with the following css: .element {
+    height: 50vh;
+}
+ when the height of the viewport is 290px, the 70vh will be calculated as below: height = 290*70% = 202px that’s it. let’s move to a different kind of viewport units! vmin unit the vmin represents the value of the minimum of the width and height of the viewport. if the viewport width is greater than its height, then the value will be calculated based on the height. let’s take the following example. we have a mobile in landscape mode, and an element has the vmin unit. in that case, the value will be calculated based on the viewport height, because it’s less than the width. .element {
+    padding-top: 10vmin;
+    padding-bottom: 10vmin;
+{
+ here is how vmin will be calculated: as you might guessed it, the result will be calculated as the below: padding-top = (10% of height) = 10% * 164 = 32px padding-bottom = (10% of height) = 10% * 164 = 32px vmax unit it’s the opposite of vmin. the value is calculated based on the maximum width and height. let’s take the following example. .element {
+    padding-top: 10vmax;
+    padding-bottom: 10vmax;
+{
+ the result will be calculated as the below: padding-top = (10% of width) = 10% * 350 = 35px padding-bottom = (10% of width) = 10% * 350 = px how viewport units are different from percentages? viewport units are based on the root element of the page, while the percentage is based on the container they are in. for that reason, they’re different from each other and each one has its use cases. use cases for viewport units in the following sections, i will explore some use cases for viewport units and how to implement them in your project. font size css viewport units are perfect for responsive typography. for example, we can use the following for an article title: .title {
+    font-size: 5vw;
+}
+ the title’s font-size will increase or shrink based on the viewport width. it’s like giving a font size of 5% of the viewport width. however, it might be tempting to just use it without proper testing. let’s see the video below: notice that the font size became very small in mobile sizing, this is bad for accessibility and user experience. as far as i know, the minimum font size on a mobile device shouldn’t go beyond 14px. in the gif, the font size went below 10px. to solve that issue, we need to give the title a minimum font size that it can’t go below it. css calc() to the rescue! .title {
+    font-size: calc(14px + 2vw);
+}
+ the calc() css function will have a base 14px value, and it will add 2vw to it. with that in hand, the font-size value won’t become too small. another important thing to consider is how the font size will behave on large screens, for example, a 27” imac. what will happen? well, you guessed it. the font size went to around 95px, which a huge value. to prevent that, we should use media queries at certain breakpoints and change the font-size. @media (min-width: 1800px) {
+    .title {
+        font-size: 40px;
+    }
+}
+ by resetting the font-size, we can be sure that the size won’t go too huge. you might also need to add multiple media queries, but it’s up to you and depends on the context of your project. demo full screen sections sometimes, we need a section to take 100% of the viewport height. this is known as ** full-screen sections**. to do so, we can use the viewport height unit. .section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+ by adding height: 100vh, we can ensure that the section height will take 100% of the viewport. also, i added some flexbox to handle centering the content horizontally and vertically. demo sticky footer on a large screen, you might notice that website content is short, and the footer is not stuck to the bottom. that’s normal, and it’s not considered as a bad practice. however, there is room for enhancement. consider the following figure that represents the issue: to solve that, we need to give the main content a height that is equal to viewport height - (header + footer). it’s tricky to do that dynamically, but with css viewport units, it’s quite easy. 1. first solution: calc and viewport units if the header and footer height is fixed, it’s possible to combine both css calc() function with viewport units. here is how: header,
+footer {
+    height: 70px;
+}
+
+main {
+    height: calc(100vh - 70px - 70px);
+}
+ this solution is not guaranteed to work all the time, especially for the footer. in my career, i haven’t used a footer with a fixed height, because it’s not doable, for example, on different screen sizes. 2. second solution: flexbox and viewport units (recommended) by adding the 100vh as a height for the body element, we can then use flexbox to make the main element take the remaining space. body {
+    min-height: 100vh;
+    display: flex
+    flex-direction: column;
+{
+
+main {
+    /* this will make the main element take the remaining space dynamically */
+    flex-grow: 1;
+}
+ with that, the issue is fixed and we have a sticky footer regardless of the content length. demo responsive elements i stumbled upon this article while researching, and i really liked it, so i will re-take the use-case and explain it my way. suppose that we have a portfolio to showcase our responsive design work, and we have three devices (mobile, tablet, and laptop). each device contains an image. the goal is to make this 100% responsive in css. by using css grid and viewport units, we can make this fully responsive and dynamic. <div class="wrapper">
+  <div class="device laptop"></div>
+  <div class="device mobile"></div>
+  <div class="device tablet"></div>
+</div>
+ notice that viewport units are used in the grid-* properties. they’re also used for the border, border-radius, and other properties. all of this will result in a fluid design. .wrapper {
+  display: grid;
+  grid-template-columns: repeat(20, 5vw); 
+  grid-auto-rows: 6vw;
+}
+
+.mobile { 
+  position: relative;
+  z-index: 1;
+  grid-column: 2 / span 3;
+  grid-row: 3 / span 5;
+}
+ 
+.tablet {
+  position: relative;
+  z-index: 1;
+  grid-column: 13 / span 7; 
+  grid-row: 4 / span 4;
+  border-bottom: 1vw solid #a9b9dd;
+  border-right: solid 3vw #a9b9dd;
+}
+ 
+.laptop {
+  position: relative;
+  grid-column: 3/span 13;
+  grid-row: 2 / span 8;
+}
+
+/* viewport units are used for the bottom, left, right, height, and border-radius. isn't that cool? */
+.laptop:after {
+    content:"";
+    position:absolute;
+    bottom: -3vw;
+    left: -5.5vw;
+    right: -5.5vw;
+    height: 3vw;
+    background-color: #a9b9dd;
+    border-radius: 0 0 1vw 1vw;
+}
+ demo breaking out of the container i have noticed a use case which is most suitable for editorial layouts. a child element that takes 100% width of the viewport, even if its parent width is limited. consider the below figure: to achieve a similar effect, we can use viewport units and some positioning properties. here is the css: .break-out {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+ let’s break it down so we understand how all of this works bit by bit. 1. adding width: 100vw the most important step, which will give the image a width equal to 100% of the viewport. 2. adding margin-left: -50vw to center the image, we will need to give it a negative margin with half of the viewport width. 3. adding left: 50% finally, we will need to push the image to the right with a value of 50% of its parent width. demo vertical and horizontal spacing another interesting use-case that i thought about is using viewport units for spacing between elements. this can be used with values like margin, top, bottom, and grid-gap. when used, the spacing will be based on the viewport width or height, which might be useful to make a layout more dynamic. modal for modals, we need to push them from the top of the viewport. often, i made this with the top property and i use either percentage or pixel value. however, with viewport units, we can add a spacing that can change based on the viewport’s height. .modal-body {
+    top: 20vh;
+}
+ see the video below for the final result. demo page header a page header is a section that acts as an introduction for a page. it often has a title and a description, and among that there is either a fixed height or padding for the top and bottom edges. we’re interested in the padding thing. for example, here is how the css looks: .page-header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+@media (min-width: 800px) {
+    .page-header {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+ the vertical padding is small on mobile, and it gets larger on greater viewports. what about using viewport units? let’s explore that. .page-header {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+}
+
+.page-header h2 {
+    margin-bottom: 1.5vh;
+}
+ i used vh unit for the padding of the page header, and the margin below the title. notice how the spacing changes! demo grid of items another use case for the dynamic spacing is a grid of items. it can for anything, like a grid of articles, services section.. etc. for our case, we will take a look at how to use that for an article grid. by using viewport units inside grid-gap, we can get the desired result. notice that i used css calc() function as well. the goal of using calc() is to have a base vertical and horizontal gap. .wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: calc(14px + 1vh) calc(14px + 0.5vw);
+}
+ demo vmin and vmax use cases while researching about use-cases for these two values, i didn’t find anything but this one from css-tricks. the use-case is about the top and bottom padding for a page header element. the padding is often reduced when the viewport is small (mobile). by using vmin, we can have a fluid top and bottom padding based on the viewport smaller dimension (width or height). .page-header {
+    padding: 10vmin 1rem;
+}
+ demo vertical media queries and viewport units four years ago, i wrote an article about vertical media queries. i want to shed light on this topic since it’s related to this article that you’re reading now full height sections in landscape mode by using vertical media queries, we can check if the user phone or tablet is in landscape mode. if it is, then it won’t make sense to have a section taking the full height of the viewport by using height: 100vh. to solve that issue, we can do the following: @media (min-height: 400px) {
+    .section {
+        height: 100vh;
+    }
+}
+ or we can use the orientation media query: @media (orientation: landscape) {
+    .section {
+        height: 100vh;
+    }
+}
+ aspect ratio we can use vw unit to create responsive elements that maintain its aspect ratio regardless of the viewport size. let’s explore that. we will need to decide on the aspect ratio we need. for this example, i will use 9/16. section {
+    /* 9/16 * 100 */
+    height: 56.25vw;
+}
+ demo using viewport units for graphical elements i’m not sure if my naming for this is correct, but i hope you will get my point from the following visual examples. the popular top border do you know that top border which is most of the websites use these days? mostly, its color is the same as the brand color – which will give some personality. let’s support that the initial value for the border is 3px. how to convert that fixed value to a viewport thing? well, here is how to calculate the vw equivalent of it. vw = (pixel value / viewport width) * 100 the viewport width is used to estimate the ratio between the pixel value and the desired vw unit. for our example, here is how the top border added: .header {
+    border-top: 4px solid #8f7ebc;  
+}
+ in my case, the viewport width is 1440 (this is not a fixed number, replace it with your own) vw = (4 / 1440) * 100 = 0.277 .header {
+    border-top: 0.277vw solid #8f7ebc;  
+}
+ even better, we can use a base pixel value, and the viewport unit can be an addition. .header {
+    border-top: calc(2px + 0.138vw) solid $color-main;
+}
+ section numbering for section items with a counter or an icon, we can leverage the usage of viewport units. see the mockup below: we have a circle containing a number, and there is text content. both of them need to be sized fluidly with viewport units. let’s explore how! /**
+1. using a fluid value for the flex, width, and height properties.
+2. the line-height is used to center the text vertically
+3. font size
+4. the spacing between the circle and the text
+**/
+.point:before {
+    flex: 0 0 calc(24px + 4vw); /* [1] */
+    width: calc(24px + 4vw); /* [1] */
+    height: calc(24px + 4vw); /* [1] */
+    line-height: calc(24px + 4vw); /* [2] */
+    font-size: calc(14px + 1vw); /* [3] */
+    margin-right: calc(10px + 0.5vw); /* [4] */
+}
+ demo viewport units watcher i made a tool to help me in checking the current computed value elements with viewport units. consider the below: i added the class name and property for each element, and on viewport resize, the values are updated dynamically. this is much better than inspecting devtools and going to the computed for each specific element. try it yourself scroll issue on mobile there is a common issue in mobile which cases a scroll, even if 100vh is used. the reason is that the address bar height is in view. louis hoebregts wrote an article about that with a simple and easy fix. .my-element {
+  height: 100vh; /* fallback for browsers that do not support custom properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+ // first we get the viewport height and we multiple it by 1% to get a value for a vh unit
+let vh = window.innerheight * 0.01;
+// then we set the value in the --vh custom property to the root of the document
+document.documentelement.style.setproperty('--vh', `${vh}px`);
+ demo using 100vw is an antipattern when using 100vw to give an element the full width of the viewport, things might work great if you’re a mac os user because the vertical scrollbar is hidden by default. as a result, the scrollbar width is added to the total width. however, on a windows machine, you will notice a horizontal scrolling in the page, because the width of the scrollbar is being added to the width. let’s say you added the following: .element {
+    width: 100vw;
+}
+ on windows, the computed width of the .element will be 100vw + 8.5px, where 8.5px is the width of the vertical scrollbar. this is not good! as far from what i know, there is no solution for this unless we use javascript, and i don’t recommended that. it’s better to avoid 100vw and use an alternative. for example, we can use css grid to have make an element break out of its container, see this article on cloudfour. thanks a lot to chris morgan and kilian valkhof for warning me about that issue. accessibility is important when using viewport units extensively in a project, like for building a whole layout with it, accessibility is important. when a layout is zoomed in/out, the elements with viewport units won’t scale as you might expect. this will cause an issue to users who rely on zoom to browse the web. as per this tweet by sāra soueidān, using viewport units alone for font sizing is bad for accessibility. it’s better to combine them with fixed values, like the below: .title {
+    font-size: calc(16px + .3vw);
+}
+ ..and it will be good to go. please make sure that using viewport units is suitable for what you’re doing, and test well. useful tools i found this little px to vw converter which might help you in your project. do you have a useful tool? please let me know at @shadeed9 resources & related articles full width containers in limited width parents fun with viewport units simple little use case for vmin minmaxing: understanding vmin and vmax in css the end that’s a wrap. do you have a comment or a suggestion? please feel free to ping me on @shadeed9. more articles previous article learn box alignment next article everything about auto in css subscribe to my rss feed ahmad shadeed ui, ux designer & front-end developer. you can hire me. i write about web accessibility on @weba11ymatters and share articles on my blog. the online studio of ahmad shadeed. © 2012–2020 copyright ahmad shadeed. all rights reserved. find me online instagram twitter behance codepen github rss feed

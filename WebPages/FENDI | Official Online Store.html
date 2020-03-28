@@ -1,0 +1,1306 @@
+<!doctype html>
+<html class="no-js hf-new new-menu" lang="en">
+ <head>
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQIGVFRQCxACXFNQAQcFUQ==",licenseKey:"80f97d8c29",applicationID:"28226627"};window.NREUM||(NREUM={}),__nr_require=function(a,f,c){function b(g){if(!f[g]){var h=f[g]={exports:{}};a[g][0].call(h.exports,function(i){var e=a[g][1][i];return b(e||i)},h,h.exports)}return f[g].exports}if("function"==typeof __nr_require){return __nr_require}for(var d=0;d<c.length;d++){b(c[d])}return b}({1:[function(l,f,h){function b(a){try{m.console&&console.log(a)}catch(c){}}var d,g=l("ee"),k=l(21),m={};try{d=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(m.console=!0,d.indexOf("dev")!==-1&&(m.dev=!0),d.indexOf("nr_dev")!==-1&&(m.nrDev=!0))}catch(j){}m.nrDev&&g.on("internal-error",function(a){b(a.stack)}),m.dev&&g.on("fn-err",function(a,i,c){b(c.stack)}),m.dev&&(b("NR AGENT IN DEVELOPMENT MODE"),b("flags: "+k(m,function(a,c){return a}).join(", ")))},{}],2:[function(C,k,x){function b(a,p,l,h,c){try{g?g-=1:j(c||new E(a,p,l),!0)}catch(i){try{q("ierr",[i,z.now(),!0])}catch(o){}}return"function"==typeof B&&B.apply(this,A(arguments))}function E(a,d,c){this.message=a||"Uncaught error with no additional information",this.sourceURL=d,this.line=c}function j(a,d){var c=d?null:z.now();q("err",[a,c])}var q=C("handle"),A=C(22),D=C("ee"),z=C("loader"),w=C("gos"),B=window.onerror,y=!1,m="nr@seenError",g=0;z.features.err=!0,C(1),window.onerror=b;try{throw new Error}catch(v){"stack" in v&&(C(9),C(8),"addEventListener" in window&&C(5),z.xhrWrappable&&C(10),y=!0)}D.on("fn-start",function(a,d,c){y&&(g+=1)}),D.on("fn-err",function(a,d,c){y&&!c[m]&&(w(c,m,function(){return !0}),this.thrown=!0,j(c))}),D.on("fn-end",function(){y&&!this.thrown&&g>0&&(g-=1)}),D.on("internal-error",function(a){q("ierr",[a,z.now(),!0])})},{}],3:[function(a,c,b){a("loader").features.ins=!0},{}],4:[function(A,F,M){function C(a){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var E=A("ee"),I=A("handle"),P=A(9),B=A(8),O="learResourceTimings",L="addEventListener",z="resourcetimingbufferfull",N="bstResource",H="resource",D="-start",J="-end",G="fn"+D,k="fn"+J,q="bstTimer",K="pushState",b=A("loader");b.features.stn=!0,A(7),"addEventListener" in window&&A(5);var j=NREUM.o.EV;E.on(G,function(a,d){var c=a[0];c instanceof j&&(this.bstStart=b.now())}),E.on(k,function(a,d){var c=a[0];c instanceof j&&I("bst",[c,d,this.bstStart,b.now()])}),P.on(G,function(a,d,c){this.bstStart=b.now(),this.bstType=c}),P.on(k,function(a,c){I(q,[c,this.bstStart,b.now(),this.bstType])}),B.on(G,function(){this.bstStart=b.now()}),B.on(k,function(a,c){I(q,[c,this.bstStart,b.now(),"requestAnimationFrame"])}),E.on(K+D,function(a){this.time=b.now(),this.startPath=location.pathname+location.hash}),E.on(K+J,function(a){I("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),L in window.performance&&(window.performance["c"+O]?window.performance[L](z,function(a){I(N,[window.performance.getEntriesByType(H)]),window.performance["c"+O]()},!1):window.performance[L]("webkit"+z,function(a){I(N,[window.performance.getEntriesByType(H)]),window.performance["webkitC"+O]()},!1)),document[L]("scroll",C,{passive:!0}),document[L]("keypress",C,!1),document[L]("click",C,!1)}},{}],5:[function(w,h,l){function b(a){for(var c=a;c&&!c.hasOwnProperty(v);){c=Object.getPrototypeOf(c)}c&&g(c)}function g(a){x.inPlace(a,[v,m],"-",j)}function j(a,c){return a[1]}var q=w("ee").get("events"),x=w("wrap-function")(q,!0),p=w("gos"),k=XMLHttpRequest,v="addEventListener",m="removeEventListener";h.exports=q,"getPrototypeOf" in Object?(b(document),b(window),b(k.prototype)):k.prototype.hasOwnProperty(v)&&(g(window),g(k.prototype)),q.on(v+"-start",function(a,f){var d=a[1],c=p(d,"nr@wrapped",function(){function e(){if("function"==typeof d.handleEvent){return d.handleEvent.apply(d,arguments)}}var i={object:e,"function":d}[typeof d];return i?x(i,"fn-",null,i.name||"anonymous"):d});this.wrapped=a[1]=c}),q.on(m+"-start",function(a){a[1]=this.wrapped||a[1]})},{}],6:[function(E,k,z){function b(a,f,d){var c=a[f];"function"==typeof c&&(a[f]=function(){var h=w(arguments),l={};j.emit(d+"before-start",[h],l);var e;l[q]&&l[q].dt&&(e=l[q].dt);var i=c.apply(this,h);return j.emit(d+"start",[h,e],i),i.then(function(m){return j.emit(d+"end",[null,m],i),m},function(m){throw j.emit(d+"end",[m],i),m})})}var j=E("ee").get("fetch"),w=E(22),C=E(21);k.exports=j;var F=window,B="fetch-",y=B+"body-",D=["arrayBuffer","blob","json","text","formData"],A=F.Request,v=F.Response,g=F.fetch,x="prototype",q="nr@context";A&&v&&g&&(C(D,function(a,c){b(A[x],c,y),b(v[x],c,y)}),b(F,"fetch",B),j.on(B+"end",function(a,f){var d=this;if(f){var c=f.headers.get("content-length");null!==c&&(d.rxSize=c),j.emit(B+"done",[null,f],d)}else{j.emit(B+"done",[a],d)}}))},{}],7:[function(d,j,g){var f=d("ee").get("history"),h=d("wrap-function")(f);j.exports=f;var c=window.history&&window.history.constructor&&window.history.constructor.prototype,b=window.history;c&&c.pushState&&c.replaceState&&(b=c),h.inPlace(b,["pushState","replaceState"],"-")},{}],8:[function(b,g,d){var c=b("ee").get("raf"),f=b("wrap-function")(c),a="equestAnimationFrame";g.exports=c,f.inPlace(window,["r"+a,"mozR"+a,"webkitR"+a,"msR"+a],"raf-"),c.on("raf-start",function(e){e[0]=f(e[0],"fn-")})},{}],9:[function(w,h,l){function b(a,d,c){a[0]=q(a[0],"fn-",null,c)}function g(a,d,c){this.method=c,this.timerDuration=isNaN(a[1])?0:+a[1],a[0]=q(a[0],"fn-",this,c)}var j=w("ee").get("timer"),q=w("wrap-function")(j),x="setTimeout",p="setInterval",k="clearTimeout",v="-start",m="-";h.exports=j,q.inPlace(window,[x,"setImmediate"],x+m),q.inPlace(window,[p],p+m),q.inPlace(window,[k,"clearImmediate"],k+m),j.on(p+v,b),j.on(x+v,g)},{}],10:[function(D,J,R){function G(a,b){S.inPlace(b,["onreadystatechange"],"fn-",F)}function I(){var a=this,b=B.context(a);a.readyState>3&&!b.resolved&&(b.resolved=!0,B.emit("xhr-resolved",[],a)),S.inPlace(a,P,"fn-",F)}function M(a){k.push(a),N&&(U?U.then(V):z?z(V):(C=-C,j.data=C))}function V(){for(var a=0;a<k.length;a++){G([],k[a])}k.length&&(k=[])}function F(a,b){return b}function T(a,c){for(var b in a){c[b]=a[b]}return c}D(5);var Q=D("ee"),B=Q.get("xhr"),S=D("wrap-function")(B),L=NREUM.o,H=L.XHR,N=L.MO,K=L.PR,z=L.SI,A="readystatechange",P=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],k=[];J.exports=B;var q=window.XMLHttpRequest=function(a){var d=new H(a);try{B.emit("new-xhr",[d],d),d.addEventListener(A,I,!1)}catch(c){try{B.emit("internal-error",[c])}catch(b){}}return d};if(T(H,q),q.prototype=H.prototype,S.inPlace(q.prototype,["open","send"],"-xhr-",F),B.on("send-xhr-start",function(a,b){G(a,b),M(b)}),B.on("open-xhr-start",G),N){var U=K&&K.resolve();if(!z&&!K){var C=1,j=document.createTextNode(C);new N(V).observe(j,{characterData:!0})}}else{Q.on("fn-end",function(a){a[0]&&a[0].type===A||V()})}},{}],11:[function(d,k,h){function g(v){if(!c(v)){return null}var i=window.NREUM;if(!i.loader_config){return null}var m=(i.loader_config.accountID||"").toString()||null,a=(i.loader_config.agentID||"").toString()||null,w=(i.loader_config.trustKey||"").toString()||null;if(!m||!a){return null}var p=b.generateCatId(),l=b.generateCatId(),q=Date.now(),o=j(p,l,q,m,a,w);return{header:o,guid:p,traceId:l,timestamp:q}}function j(p,x,v,u,w,m){var l="btoa" in window&&"function"==typeof window.btoa;if(!l){return null}var q={v:[0,1],d:{ty:"Browser",ac:u,ap:w,id:p,tr:x,ti:v}};return m&&u!==m&&(q.d.tk=m),btoa(JSON.stringify(q))}function c(l){var s=!1,p=!1,m={};if("init" in NREUM&&"distributed_tracing" in NREUM.init&&(m=NREUM.init.distributed_tracing,p=!!m.enabled),p){if(l.sameOrigin){s=!0}else{if(m.allowed_origins instanceof Array){for(var q=0;q<m.allowed_origins.length;q++){var a=f(m.allowed_origins[q]);if(l.hostname===a.hostname&&l.protocol===a.protocol&&l.port===a.port){s=!0;break}}}}}return p&&s}var b=d(19),f=d(13);k.exports={generateTracePayload:g,shouldGenerateTrace:c}},{}],12:[function(k,A,G){function x(a){var f=this.params,d=this.metrics;if(!this.ended){this.ended=!0;for(var c=0;c<C;c++){a.removeEventListener(H[c],this.listener,!1)}f.aborted||(d.duration=J.now()-this.startTime,this.loadCaptureCalled||4!==a.readyState?null==f.status&&(f.status=0):D(this,a),d.cbTime=this.cbTime,j.emit("xhr-done",[a],a),q("xhr",[f,d,this.startTime]))}}function z(a,f){var d=I(f),c=a.params;c.host=d.hostname+":"+d.port,c.pathname=d.pathname,a.parsedOrigin=I(f),a.sameOrigin=a.parsedOrigin.sameOrigin}function D(a,f){a.params.status=f.status;var d=b(f,a.lastSize);if(d&&(a.metrics.rxSize=d),a.sameOrigin){var c=f.getResponseHeader("X-NewRelic-App-Data");c&&(a.params.cat=c.split(", ").pop())}a.loadCaptureCalled=!0}var J=k("loader");if(J.xhrWrappable){var q=k("handle"),I=k(13),F=k(11).generateTracePayload,j=k("ee"),H=["load","error","abort","timeout"],C=H.length,y=k("id"),E=k(17),B=k(16),b=k(14),g=window.XMLHttpRequest;J.features.xhr=!0,k(10),k(6),j.on("new-xhr",function(a){var c=this;c.totalCbs=0,c.called=0,c.cbTime=0,c.end=x,c.ended=!1,c.xhrGuids={},c.lastSize=null,c.loadCaptureCalled=!1,a.addEventListener("load",function(d){D(c,a)},!1),E&&(E>34||E<10)||window.opera||a.addEventListener("progress",function(d){c.lastSize=d.loaded},!1)}),j.on("open-xhr-start",function(a){this.params={method:a[0]},z(this,a[1]),this.metrics={}}),j.on("open-xhr-end",function(a,d){"loader_config" in NREUM&&"xpid" in NREUM.loader_config&&this.sameOrigin&&d.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var c=F(this.parsedOrigin);c&&c.header&&(d.setRequestHeader("newrelic",c.header),this.dt=c)}),j.on("send-xhr-start",function(c,m){var h=this.metrics,f=c[0],l=this;if(h&&f){var a=B(f);a&&(h.txSize=a)}this.startTime=J.now(),this.listener=function(i){try{"abort"!==i.type||l.loadCaptureCalled||(l.params.aborted=!0),("load"!==i.type||l.called===l.totalCbs&&(l.onloadCalled||"function"!=typeof m.onload))&&l.end(m)}catch(o){try{j.emit("internal-error",[o])}catch(n){}}};for(var d=0;d<C;d++){m.addEventListener(H[d],this.listener,!1)}}),j.on("xhr-cb-time",function(a,d,c){this.cbTime+=a,d?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof c.onload||this.end(c)}),j.on("xhr-load-added",function(a,d){var c=""+y(a)+!!d;this.xhrGuids&&!this.xhrGuids[c]&&(this.xhrGuids[c]=!0,this.totalCbs+=1)}),j.on("xhr-load-removed",function(a,d){var c=""+y(a)+!!d;this.xhrGuids&&this.xhrGuids[c]&&(delete this.xhrGuids[c],this.totalCbs-=1)}),j.on("addEventListener-end",function(a,c){c instanceof g&&"load"===a[0]&&j.emit("xhr-load-added",[a[1],a[2]],c)}),j.on("removeEventListener-end",function(a,c){c instanceof g&&"load"===a[0]&&j.emit("xhr-load-removed",[a[1],a[2]],c)}),j.on("fn-start",function(a,d,c){d instanceof g&&("onload"===c&&(this.onload=!0),("load"===(a[0]&&a[0].type)||this.onload)&&(this.xhrCbStart=J.now()))}),j.on("fn-end",function(a,c){this.xhrCbStart&&j.emit("xhr-cb-time",[J.now()-this.xhrCbStart,this.onload,c],c)}),j.on("fetch-before-start",function(f){var p,l=f[1]||{};"string"==typeof f[0]?p=f[0]:f[0]&&f[0].url&&(p=f[0].url),p&&(this.parsedOrigin=I(p),this.sameOrigin=this.parsedOrigin.sameOrigin);var h=F(this.parsedOrigin);if(h&&h.header){var m=h.header;if("string"==typeof f[0]){var d={};for(var c in l){d[c]=l[c]}d.headers=new Headers(l.headers||{}),d.headers.set("newrelic",m),this.dt=h,f.length>1?f[1]=d:f.push(d)}else{f[0]&&f[0].headers&&(f[0].headers.append("newrelic",m),this.dt=h)}}})}},{}],13:[function(a,d,c){var b={};d.exports=function(h){if(h in b){return b[h]}var m=document.createElement("a"),k=window.location,l={};m.href=h,l.port=m.port;var g=m.href.split("://");!l.port&&g[1]&&(l.port=g[1].split("/")[0].split("@").pop().split(":")[1]),l.port&&"0"!==l.port||(l.port="https"===g[0]?"443":"80"),l.hostname=m.hostname||k.hostname,l.pathname=m.pathname,l.protocol=g[0],"/"!==l.pathname.charAt(0)&&(l.pathname="/"+l.pathname);var f=!m.protocol||":"===m.protocol||m.protocol===k.protocol,j=m.hostname===document.domain&&m.port===k.port;return l.sameOrigin=f&&(!m.hostname||j),"/"===l.pathname&&(b[h]=l),l}},{}],14:[function(a,f,c){function b(g,i){var h=g.responseType;return"json"===h&&null!==i?i:"arraybuffer"===h||"blob"===h||"json"===h?d(g.response):"text"===h||"document"===h||""===h||void 0===h?d(g.responseText):void 0}var d=a(16);f.exports=b},{}],15:[function(C,k,x){function b(){}function j(a,d,c){return function(){return q(a,[w.now()].concat(D(arguments)),d?null:this,c),d?void 0:this}}var q=C("handle"),A=C(21),D=C(22),z=C("ee").get("tracer"),w=C("loader"),B=NREUM;"undefined"==typeof window.newrelic&&(newrelic=B);var y=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],m="api-",g=m+"ixn-";A(y,function(a,c){B[c]=j(m+c,!0,"api")}),B.addPageAction=j(m+"addPageAction",!0),B.setCurrentRouteName=j(m+"routeName",!0),k.exports=newrelic,B.interaction=function(){return(new b).get()};var v=b.prototype={createTracer:function(a,h){var d={},c=this,f="function"==typeof h;return q(g+"tracer",[w.now(),a,d],c),function(){if(z.emit((f?"":"no-")+"fn-start",[w.now(),c,f],d),f){try{return h.apply(this,arguments)}catch(e){throw z.emit("fn-err",[arguments,this,e],d),e}finally{z.emit("fn-end",[w.now()],d)}}}}};A("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(a,c){v[c]=j(g+c)}),newrelic.noticeError=function(a,c){"string"==typeof a&&(a=new Error(a)),q("err",[a,w.now(),!1,c])}},{}],16:[function(a,c,b){c.exports=function(d){if("string"==typeof d&&d.length){return d.length}if("object"==typeof d){if("undefined"!=typeof ArrayBuffer&&d instanceof ArrayBuffer&&d.byteLength){return d.byteLength}if("undefined"!=typeof Blob&&d instanceof Blob&&d.size){return d.size}if(!("undefined"!=typeof FormData&&d instanceof FormData)){try{return JSON.stringify(d).length}catch(e){return}}}}},{}],17:[function(a,f,c){var b=0,d=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);d&&(b=+d[1]),f.exports=b},{}],18:[function(A,j,v){function b(a,d){var c=a.getEntries();c.forEach(function(e){"first-paint"===e.name?x("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&x("timing",["fcp",Math.floor(e.startTime)])})}function h(a,d){var c=a.getEntries();c.length>0&&x("lcp",[c[c.length-1]])}function m(a){if(a instanceof z&&!k){var d,c=Math.round(a.timeStamp);d=c>1000000000000?Date.now()-c:q.now()-c,k=!0,x("timing",["fi",c,{type:a.type,fid:d}])}}if(!("init" in NREUM&&"page_view_timing" in NREUM.init&&"enabled" in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var y,B,x=A("handle"),q=A("loader"),z=NREUM.o.EV;if("PerformanceObserver" in window&&"function"==typeof window.PerformanceObserver){y=new PerformanceObserver(b),B=new PerformanceObserver(h);try{y.observe({entryTypes:["paint"]}),B.observe({entryTypes:["largest-contentful-paint"]})}catch(w){}}if("addEventListener" in document){var k=!1,g=["click","keydown","mousedown","pointerdown","touchstart"];g.forEach(function(a){document.addEventListener(a,m,!1)})}}},{}],19:[function(a,f,c){function b(){function j(){return q?15&q[m++]:16*Math.random()|0}var q=null,m=0,l=window.crypto||window.msCrypto;l&&l.getRandomValues&&(q=l.getRandomValues(new Uint8Array(31)));for(var p,h="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",g="",k=0;k<h.length;k++){p=h[k],"x"===p?g+=j().toString(16):"y"===p?(p=3&j()|8,g+=p.toString(16)):g+=p}return g}function d(){function h(){return m?15&m[k++]:16*Math.random()|0}var m=null,k=0,j=window.crypto||window.msCrypto;j&&j.getRandomValues&&Uint8Array&&(m=j.getRandomValues(new Uint8Array(31)));for(var l=[],g=0;g<16;g++){l.push(h().toString(16))}return l.join("")}f.exports={generateUuid:b,generateCatId:d}},{}],20:[function(l,f,h){function b(i,q){if(!d){return !1}if(i!==d){return !1}if(!q){return !0}if(!g){return !1}for(var p=g.split("."),o=q.split("."),c=0;c<o.length;c++){if(o[c]!==p[c]){return !1}}return !0}var d=null,g=null,k=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var m=navigator.userAgent,j=m.match(k);j&&m.indexOf("Chrome")===-1&&m.indexOf("Chromium")===-1&&(d="Safari",g=j[1])}f.exports={agent:d,version:g,match:b}},{}],21:[function(a,f,c){function b(h,l){var k=[],j="",g=0;for(j in h){d.call(h,j)&&(k[g]=l(j,h[j]),g+=1)}return k}var d=Object.prototype.hasOwnProperty;f.exports=b},{}],22:[function(a,d,c){function b(g,l,j){l||(l=0),"undefined"==typeof j&&(j=g?g.length:0);for(var h=-1,k=j-l||0,f=Array(k<0?0:k);++h<k;){f[h]=g[l+h]}return f}d.exports=b},{}],23:[function(a,c,b){c.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(y,h,p){function b(){}function g(A){function c(e){return e&&e instanceof b?e:e?v(e,z,k):k()}function l(D,n,t,B){if(!j.aborted||B){A&&A(D,n,t);for(var G=c(t),H=d(D),F=H.length,C=0;C<F;C++){H[C].apply(G,n)}var E=x[o[D]];return E&&E.push([r,D,n,G]),G}}function a(e,B){i[e]=d(e).concat(B)}function f(B,E){var D=i[B];if(D){for(var C=0;C<D.length;C++){D[C]===E&&D.splice(C,1)}}}function d(e){return i[e]||[]}function s(e){return q[e]=q[e]||g(l)}function u(e,B){m(e,function(n,C){B=B||"feature",o[C]=B,B in x||(x[B]=[])})}var i={},o={},r={on:a,addEventListener:a,removeEventListener:f,emit:l,get:s,listeners:d,context:c,buffer:u,abort:w,aborted:!1};return r}function k(){return new b}function w(){(x.api||x.feature)&&(j.aborted=!0,x=j.backlog={})}var z="nr@context",v=y("gos"),m=y(21),x={},q={},j=h.exports=g();j.backlog=x},{}],gos:[function(a,f,c){function b(h,l,k){if(d.call(h,l)){return h[l]}var j=k();if(Object.defineProperty&&Object.keys){try{return Object.defineProperty(h,l,{value:j,writable:!0,enumerable:!1}),j}catch(g){}}return h[l]=j,j}var d=Object.prototype.hasOwnProperty;f.exports=b},{}],handle:[function(a,f,c){function b(g,j,i,h){d.buffer([g],h),d.emit(g,j,i)}var d=a("ee").get("handle");f.exports=b,b.ee=d},{}],id:[function(d,j,g){function f(a){var e=typeof a;return !a||"object"!==e&&"function"!==e?-1:a===window?0:b(a,c,function(){return h++})}var h=1,c="nr@id",b=d("gos");j.exports=f},{}],loader:[function(D,J,R){function G(){if(!C++){var a=U.info=NREUM.info,c=H.getElementsByTagName("script")[0];if(setTimeout(B.abort,30000),!(a&&a.licenseKey&&a.applicationID&&c)){return B.abort()}Q(k,function(f,d){a[f]||(a[f]=d)}),T("mark",["onload",V()+U.offset],null,"api");var b=H.createElement("script");b.src="https://"+a.agent,c.parentNode.insertBefore(b,c)}}function I(){"complete"===H.readyState&&M()}function M(){T("mark",["domContent",V()+U.offset],null,"api")}function V(){return j.exists&&performance.now?Math.round(performance.now()):(F=Math.max((new Date).getTime(),F))-U.offset}var F=(new Date).getTime(),T=D("handle"),Q=D(21),B=D("ee"),S=D(20),L=window,H=L.document,N="addEventListener",K="attachEvent",z=L.XMLHttpRequest,A=z&&z.prototype;NREUM.o={ST:setTimeout,SI:L.setImmediate,CT:clearTimeout,XHR:z,REQ:L.Request,EV:L.Event,PR:L.Promise,MO:L.MutationObserver};var P=""+location,k={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},q=z&&A&&A[N]&&!/CriOS/.test(navigator.userAgent),U=J.exports={offset:F,now:V,origin:P,features:{},xhrWrappable:q,userAgent:S};D(15),D(18),H[N]?(H[N]("DOMContentLoaded",M,!1),L[N]("load",G,!1)):(H[K]("onreadystatechange",I),L[K]("onload",G)),T("mark",["firstbyte",F],null,"api");var C=0,j=D(23)},{}],"wrap-function":[function(l,f,h){function b(a){return !(a&&a instanceof Function&&a.apply&&!a[k])}var d=l("ee"),g=l(22),k="nr@original",m=Object.prototype.hasOwnProperty,j=!1;f.exports=function(i,r){function p(u,x,v,w){function s(){var t,e,n,A;try{e=this,t=g(arguments),n="function"==typeof v?v(t,e):v||{}}catch(y){a([y,"",[t,e,w],n])}c(x+"start",[t,e,w],n);try{return A=u.apply(e,t)}catch(z){throw c(x+"err",[t,e,z],n),z}finally{c(x+"end",[t,e,A],n)}}return b(u)?u:(x||(x=""),s[k]=u,q(u,s),s)}function o(v,A,y,u){y||(y="");var e,w,z,x="-"===y.charAt(0);for(z=0;z<A.length;z++){w=A[z],e=v[w],b(e)||(v[w]=p(e,x?w+y:y,u,w))}}function c(u,t,v){if(!j||r){var s=j;j=!0;try{i.emit(u,t,v,r)}catch(n){a([n,u,t,v])}j=s}}function q(s,x){if(Object.defineProperty&&Object.keys){try{var v=Object.keys(s);return v.forEach(function(n){Object.defineProperty(x,n,{get:function(){return s[n]},set:function(e){return s[n]=e,e}})}),x}catch(u){a([u])}}for(var w in s){m.call(s,w)&&(x[w]=s[w])}return x}function a(t){try{i.emit("internal-error",t)}catch(s){}}return i||(i=d),p.inPlace=o,p.flag=k,p}},{}]},{},["loader",2,12,4,3]);</script>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <style>@media only screen and (min-width:768px){.hero-banner .btn{margin:0 10px}}.brightcove-container:not(.brightcove-container-modal) .video-js{background:#FDFCFA}@media only screen and (min-width:768px){.categories-launch .item.video figure{display:block}}@charset "UTF-8";@import url("https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,700");html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}figcaption,figure,footer,header,main,nav,section{display:block}video{display:inline-block;vertical-align:baseline}a{background-color:transparent}strong{font-weight:bold}h1{font-size:2em;margin:0.67em 0}img{border:0}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}button,input,select{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button{-webkit-appearance:button}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:10px}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:10px;line-height:1.428571429;color:#333333;background-color:#fff}input,button,select{font-family:inherit;font-size:inherit;line-height:inherit}a{color:#71716F;text-decoration:none}figure{margin:0}img{vertical-align:middle}hr{margin-top:14px;margin-bottom:14px;border:0;border-top:1px solid #eeeeee}h1,h2,h4,.h5{font-family:inherit;font-weight:500;line-height:1.1;color:inherit}h1,h2{margin-top:14px;margin-bottom:7px}h4,.h5{margin-top:7px;margin-bottom:7px}h1{font-size:30px}h2{font-size:22px}h4{font-size:13px}.h5{font-size:10px}p{margin:0 0 7px}ul{margin-top:0;margin-bottom:7px}ul ul{margin-bottom:0}.list-unstyled{padding-left:0;list-style:none}.container-fluid{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}.container-fluid:before,.container-fluid:after{content:" ";display:table}.container-fluid:after{clear:both}.col-xs-10,.col-sm-12{position:relative;min-height:1px;padding-left:15px;padding-right:15px}.col-xs-10{float:left}.col-xs-10{width:83.3333333333%}@media (min-width:768px){.col-sm-12{float:left}.col-sm-12{width:100%}}label{display:inline-block;max-width:100%;margin-bottom:5px;font-weight:bold}.form-control{display:block;width:100%;height:40px;padding:6px 12px;font-size:10px;line-height:1.428571429;color:#555555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:0;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075)}.form-control::-moz-placeholder{color:#999;opacity:1}.form-control:-ms-input-placeholder{color:#999}.form-control::-webkit-input-placeholder{color:#999}.form-control::-ms-expand{border:0;background-color:transparent}.form-group{margin-bottom:15px}.btn{display:inline-block;margin-bottom:0;font-weight:normal;text-align:center;vertical-align:middle;touch-action:manipulation;background-image:none;border:1px solid transparent;white-space:nowrap;padding:6px 12px;font-size:10px;line-height:1.428571429;border-radius:0}.btn-primary{color:#212121;background-color:#F9B949;border-color:#F9B949}.fade{opacity:0}.fade.in{opacity:1}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}.pull-right{float:right!important}.hidden{display:none!important}@-ms-viewport{width:device-width}.visible-xs{display:none!important}.visible-sm{display:none!important}@media (max-width:767px){.visible-xs{display:block!important}}@media (min-width:768px) and (max-width:991px){.visible-sm{display:block!important}}@media (max-width:767px){.hidden-xs{display:none!important}}@media (min-width:768px) and (max-width:991px){.hidden-sm{display:none!important}}@media (min-width:992px) and (max-width:1639px){.hidden-md{display:none!important}}@font-face{font-family:"Proxima Nova";src:url("../fonts/3267CF_5_0.eot");src:url("../fonts/3267CF_5_0.eot?#iefix") format('eot'),url("../fonts/3267CF_5_0.woff2"),url("../fonts/3267CF_5_0.woff"),url("../fonts/3267CF_5_0.ttf");font-weight:600}@font-face{font-family:"Proxima Nova";src:url("../fonts/3267CF_B_0.eot");src:url("../fonts/3267CF_B_0.eot?#iefix") format('eot'),url("../fonts/3267CF_B_0.woff2"),url("../fonts/3267CF_B_0.woff"),url("../fonts/3267CF_B_0.ttf");font-weight:400}@font-face{font-family:"fendi";src:url("../fonts/fendi.eot");src:url("../fonts/fendi.eot?#iefix") format('eot'),url("../fonts/fendi.ttf"),url("../fonts/fendi.woff"),url("../fonts/fendi.svg");font-weight:400}.brightcove-container{position:relative;display:block;width:100%}.brightcove-container .video-js{width:100%;height:100%}.brightcove-container:not(.brightcove-container-modal) .video-js{background-color:#FDFCFA}html,body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background-color:#FDFCFA;font-family:"Proxima Nova","Helvetica Neue",Helvetica,Arial,sans-serif;color:#212121;min-height:100%;position:relative;min-width:320px}body{position:static;overflow-x:hidden}.container-fluid{max-width:1560px;min-width:320px}h1,h2,h4,.h5{text-transform:uppercase;letter-spacing:.12em}h4,.h5{font-weight:600;color:#212121}.h5{font-size:11px}p{letter-spacing:1px}hr{margin:30px 0}img{max-width:100%}ul{padding-left:1.2em}.dark-backdrop{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0;background-color:rgba(0,0,0,0.6);position:fixed;top:0;left:0;z-index:-1}.dark-backdrop img{display:none}.print-only{display:none}.show-on-focus{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0}.skip-navigation{color:#000;top:-35px;left:130px;z-index:100000}.skip-navigation-wrapper{position:relative}.arrow3{border:solid #F9B949;border-width:0 1px 1px 0;display:inline-block;padding:1px}.carousel-lazy{opacity:0}.page-scroll-down{position:fixed;bottom:20px;width:47px;height:47px;border:solid 1px #EEEDEB;background-color:#FDFCFA}.page-scroll-down.bottomRight{right:20px}.chevron{width:1px;height:1px;display:inline-block;line-height:1rem;vertical-align:middle}.chevron,.chevron:after,.chevron:before{background-color:#000}.chevron:after,.chevron:before{display:block;content:""}.chevron:after{width:1px;height:1rem}.chevron:before{width:1rem;height:1px;margin-left:1px}.chevron.left{transform:rotate(-45deg);margin-right:1rem}.chevron.right{transform:rotate(135deg);margin-left:1rem}button.btn-reset{padding:0}.btn.underlined-cta{border-bottom:0;position:relative;text-decoration:none;color:#000;height:unset;min-height:unset;padding:0;background:transparent;text-transform:lowercase;font-weight:300;font-size:14px;min-width:unset}.btn.underlined-cta:first-letter{text-transform:uppercase}.btn.underlined-cta:before,.btn.underlined-cta:after{content:"";display:block;position:absolute;height:1px;width:100%}.btn.underlined-cta:before{bottom:0;right:0;background-color:#000}.btn.underlined-cta:after{bottom:0;left:0;background-color:#FFF;transform:translateX(-100%)}[class^='icon-']:before{content:"";display:inline-block;vertical-align:middle}.back-to-top:before,html.hf-new footer.main .exp button:after,html.hf-new footer.main .grp-exp button:after,html.hf-new footer.main .dropdown button:after,.close:after,.dropdown button:before,.scheduled-banner .scheduled-banner-title .scheduled-banner-toggle.expand-banner:before,[class^='iconfendi-'],[class*=' iconfendi-']{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:"fendi";speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;vertical-align:middle}.iconfendi-wishlist:before{content:""}.iconfendi-user:before{content:""}.iconfendi-bag:before{content:""}.iconfendi-pin:before{content:""}.iconfendi-search:before{content:""}.iconfendi-telephone:before{content:""}header.main{background-color:#FDFCFA;z-index:65635;position:fixed;left:0;right:0;top:0}header.main .ico{font-size:14px}header.main button{color:#212121}footer.main ul{padding-left:0}footer.main ul li{list-style:none}.back-to-top:before{content:""}html.hf-new footer.main a{color:#212121}html.hf-new footer.main .site-utils button{border:0;border-bottom:0;padding:0;background-color:#EEEDEB}html.hf-new footer.main .site-utils button:before{display:none}html.hf-new footer.main .exp button,html.hf-new footer.main .grp-exp button,html.hf-new footer.main .dropdown button{width:100%;text-align:left}html.hf-new footer.main .exp button:after,html.hf-new footer.main .grp-exp button:after,html.hf-new footer.main .dropdown button:after{content:"";margin-left:10px;display:inline-block;font-size:5px;margin-top:-2px}html.hf-new footer.main .expand-list span:after{font-size:8px;float:right;margin-top:4px}html.hf-new footer.main .submit{padding:0}html.hf-new footer.main .list-link li{padding-top:5px;padding-bottom:10px}html.hf-new .newsletter-form .completion .form-group .form-control{background-color:#FDFCFA}i.icon-menu{padding:0;position:relative;width:20px;display:inline-block;vertical-align:middle}i.icon-menu,i.icon-menu:before,i.icon-menu:after{height:1px;background-color:#212121}i.icon-menu:before,i.icon-menu:after{content:"";display:block;position:absolute;left:0;right:0;margin:auto}i.icon-menu:before{top:-5px}i.icon-menu:after{bottom:-5px}i.icon-menu+span{position:absolute;bottom:8px;right:0;height:1rem;line-height:1rem;left:0}html.hf-new i.icon-menu{margin-top:-1rem}#minicart{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;right:-325px;position:fixed;top:0;bottom:0;z-index:65656;background-color:#FDFCFA;margin:0;display:block;overflow:auto;width:325px;visibility:hidden}#minicart header,#minicart .tab-content,#minicart .tab-pane{position:absolute;left:0;right:0;padding:0 20px}#minicart header{top:0;height:60px;padding-top:20px}#minicart .tab-content{top:60px;bottom:0}#minicart .tab-pane{top:0;bottom:0;background-color:#FDFCFA;z-index:1}#minicart header{text-align:center}#minicart ul.tabs{overflow:hidden;*zoom:1;list-style-type:none;padding:0;margin:0 auto;white-space:nowrap}#minicart ul.tabs li{display:inline-block;text-transform:uppercase;font-weight:bold;color:#212121;padding:0;vertical-align:middle}#minicart ul.tabs a{line-height:38px;display:block;text-transform:uppercase;position:relative;padding:0 10px;color:#212121}#minicart ul.tabs a i{display:inline-block;margin-top:-3px;margin-left:20px;font-size:14px;position:relative}#minicart ul.tabs a span.count{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:"Proxima Nova","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:400;font-style:normal;font-weight:bold}.btn{white-space:nowrap;overflow:hidden;-ms-text-overflow:ellipsis;-o-text-overflow:ellipsis;text-overflow:ellipsis;font-weight:bold;min-width:130px;border:0;min-height:30px;color:#212121;font-size:10px}.btn-primary{padding:8px 20px;font-weight:bold;color:#212121;background-color:#F9B949;border-radius:0}a,.call-to-action,.btn,button{letter-spacing:1px}.call-to-action,.btn{text-transform:uppercase;color:#212121}a,button{border:0;background-color:transparent}a.bag,a.wishlist,button.bag{position:relative}a span.count,button span.count{text-align:center;border-radius:100%;position:absolute;background-color:#F9B949;height:14px;width:14px;line-height:14px;vertical-align:middle;right:50%;top:50%;margin-top:-12px;margin-right:-12px;font-size:10px;font-weight:bold;color:#212121}a span.count:empty,button span.count:empty{display:none}a.ico,button.ico{color:#181715;border:0;background-color:transparent}a.ico span.text,button.ico span.text{display:none}.close{display:inline;float:right;text-transform:uppercase;font-weight:600}.close:after{content:"";display:inline-block;margin-top:-6px}.close span{line-height:1.7;padding-right:8px}.more-info{font-size:11px;letter-spacing:1px;color:#212121;font-weight:bold}.form-control,input[type='text'],select{-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none;border-radius:0;border:1px solid transparent;background-color:#EEEDEB;color:#181715;padding:5px 10px;letter-spacing:1px}select{min-width:60px;height:40px;display:inline-block;position:relative;background-color:#EEEDEB}select:not([multiple]){background-position:calc(100% - 5px) 50%;background-repeat:no-repeat;background-image:url("../images/chevron-down.png");background-size:12px 12px;padding-right:20px}select.form-control{background-position:calc(100% - 5px) 50%;background-repeat:no-repeat;background-image:url("../images/chevron-down.png");background-size:12px 12px;padding-right:20px}label{color:#212121}.control-label{text-transform:uppercase;font-weight:600;letter-spacing:1px;color:#212121;display:block;word-wrap:break-word}.popover{position:absolute;visibility:hidden;opacity:0;background-color:#FDFCFA;z-index:-1;text-align:left;width:320px;padding:8px}.popover.full{width:100%;top:0;left:0;padding:24px 0 0;border-top:0;border-left:0;border-right:0}.popover span{vertical-align:bottom;margin-left:8px}.popover h4{padding:0 8px;font-size:10px;line-height:1.4;text-transform:none}.popover .more-info{padding-left:8px}.popover#boutique-nearest,.popover#telephone-information{border:1px solid #EEEDEB}.popover#telephone-information,.popover#boutique-nearest{padding:15px;width:325px;height:200px}.popover#telephone-information i{padding:0}.popover#telephone-information i+span{letter-spacing:1px;margin-left:20px}.popover#telephone-information h4{margin-top:20px;padding:0}.popover#telephone-information .more-info{float:left;padding-bottom:0;text-decoration:underline;padding:0;position:absolute;left:15px;bottom:15px}.popover#telephone-information{top:16px;left:38px}.popover#telephone-information p{padding:0}.popover#boutique-nearest{top:16px;left:9px}.popover#search-bar{overflow:hidden;border-bottom:1px solid #EEEDEB}html.hf-new .popover.full{padding:0}.login-register{color:#212121}.newsletter-form p{font-size:10px;letter-spacing:1px;white-space:normal;margin-bottom:0}.newsletter-form p a{text-transform:none;color:#212121;font-weight:bold}.newsletter-form .btn{white-space:normal;height:40px}.newsletter-form .form-group{display:block}.newsletter-form .completion .form-group label{display:block;text-transform:uppercase}.newsletter-form .completion .form-group select{background-color:#EEEDEB;text-transform:uppercase;padding:6px 10px}.newsletter-form .completion .form-group button{width:100%}.newsletter-form .info-privacy{display:none}html.hf-new .newsletter-form .disclaimer p{margin-bottom:20px}html.hf-new .newsletter-form .privacy-text{margin:5px 0 20px}.dropdown button{position:relative;border:1px solid #FDFCFA}.dropdown button:before{content:"";font-weight:lighter;font-style:normal;font-size:5px;position:absolute;top:15px;right:6px}.dropdown button.active{background-color:#FDFCFA;border:1px solid #EEEDEB;border-bottom:0;z-index:65639}.tab-content>.tab-pane{display:none}.tab-content>.active{display:block}.notification-message{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0;-webkit-transform:translateY(-100%);-moz-transform:translateY(-100%);-ms-transform:translateY(-100%);-o-transform:translateY(-100%);transform:translateY(-100%);overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:65635;visibility:hidden}.notification-message p{margin-bottom:0;padding:10px;max-width:90%;text-transform:uppercase;color:#212121}.notification-message p a{text-decoration:underline;color:#181715;font-weight:600}.notification-message .ico{position:absolute}.scheduled-banner{z-index:65625;background-color:#FDFCFA}.scheduled-banner .scheduled-banner-title{display:flex;align-items:center;position:relative;min-height:42px;background-color:#FDFCFA;border-bottom:1px solid #EEEDEB}.scheduled-banner .scheduled-banner-title p{padding-top:0;padding-bottom:0;letter-spacing:.12em}.scheduled-banner .scheduled-banner-title .scheduled-banner-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);padding:0;width:30px;height:30px;line-height:30px;text-align:center}.scheduled-banner .scheduled-banner-title .scheduled-banner-toggle:before{transform-origin:center;display:inline-block;font-size:15px;transform:rotate(-90deg)}.scheduled-banner .scheduled-banner-title .scheduled-banner-toggle.expand-banner:before{content:""}.scheduled-banner .scheduled-banner-body{height:0;overflow:hidden;opacity:0;border-bottom:1px solid transparent}.scheduled-banner .scheduled-banner-main{padding:10px}.scheduled-banner .scheduled-banner-main p{max-width:initial;padding:0;text-transform:none;font-size:14px}.scheduled-banner.open .scheduled-banner-title{border-bottom-color:transparent}.scheduled-banner.open .scheduled-banner-body{height:auto}.scheduled-banner.open .scheduled-banner-toggle.expand-banner:before{transform:rotate(90deg)}.scheduled-banner .scheduled-banner-title p{line-height:unset}.scheduled-banner .scheduled-banner-title{display:flex;align-items:center}.hero-banner{text-align:center}.hero-banner.fixed-ratio .brightcove-container:after{content:'';display:block;padding-bottom:100%}.hero-banner figcaption,.hero-banner .caption{padding:0 15px}.categories-launch p{margin:20px 0}figcaption .widget-title{display:block;margin:20px 0}figcaption .widget-title{text-transform:uppercase}.fendi-land-divider,.fendi-land-divider.top{display:none}@media only screen and (min-width:768px){.video-figure{display:none}}@media only screen and (min-width:768px){footer.main .lower-bar .list-link a{text-transform:none;color:#212121;display:inline-block}html.hf-new footer.main .grouping-row{margin-left:-15px;margin-right:-15px;overflow:hidden;*zoom:1}}@media only screen and (min-width:768px){html.hf-new footer.main .form-group{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media only screen and (min-width:768px) and (min-width:768px){html.hf-new footer.main .form-group{float:left;width:25%}}@media only screen and (min-width:768px){html.hf-new footer.main .title{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media only screen and (min-width:768px) and (min-width:768px){html.hf-new footer.main .title{float:left;width:16.6666666667%}}@media only screen and (min-width:768px){html.hf-new footer.main .disclaimer,html.hf-new footer.main .privacy-text{width:50%}html.hf-new footer.main .expand-list span:after{font-size:5px;margin-top:-2px;float:none}html.hf-new footer.main .exp-common{display:none}html.hf-new footer.main .group-link .h5{font-size:12px}html.hf-new footer.main .group-link .h5 button{text-transform:uppercase}}@media only screen and (min-width:768px){.newsletter-form .completion{display:none}.newsletter-form .completion .select{width:100%}.newsletter-form label{display:none}.newsletter-form p{overflow:hidden;*zoom:1}html.hf-new .newsletter-form label{font-size:12px}}@media only screen and (min-width:768px){.login-register{border-bottom:1px solid #EEEDEB}.login-register.popover{z-index:65735}}@media only screen and (min-width:768px){figcaption{text-align:center;color:#212121}figcaption:after{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);opacity:0.5;content:"";position:absolute;top:50%;width:0;margin-top:1px;height:1px;background:#181715;z-index:12}figcaption h2,figcaption p,figcaption .btn,figcaption .widget-title{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1;-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);transform:translateY(0)}figcaption h2,figcaption .widget-title{font-size:20px;line-height:24px}figcaption .btn{margin-top:10px}}@media only screen and (min-width:768px){.popover#countries{border-bottom:1px solid #EEEDEB}.hero-banner.fixed-ratio .brightcove-container:after{padding-bottom:37.5%}.hero-banner .btn{margin-left:10px;margin-right:10px}.categories-launch .item.video figure{display:none}}@media only screen and (min-width:768px){.home{padding:0}}@media only screen and (min-width:992px){header.main{background-color:#FDFCFA}header.main a{letter-spacing:1px;color:#212121}header.main .nav-toggler{display:none}header.main .user-utils{display:inline;float:right;text-align:right;margin:4px 4px 0 0;position:relative}header.main .user-utils>*{display:inline-block}header.main .lower-bar{margin-left:-15px;margin-right:-15px;overflow:hidden;*zoom:1;overflow:inherit;border-top:5px solid #F9B949;height:80px;padding-top:24px;text-align:center;position:relative}header.main .logo{position:absolute;width:100px;left:50%;margin-left:-50px}header.main .ico{color:#212121}header.main #login-popup{display:none;position:absolute;top:39px;right:0;z-index:1;width:330px;padding:10px;text-align:center;background:#FFF;border:2px solid #EEEDEB}header.main #login-popup:after,header.main #login-popup:before{content:"";position:absolute;top:-11px;left:230px;width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:9px solid #EEEDEB}header.main #login-popup:after{top:-8px;border-bottom:9px solid #FFF}header.main #login-popup .register-pane a{padding:0 0 0 6px;color:#212121;text-decoration:underline;font-weight:bold}header.main #login-popup .btn-primary{display:block;margin-bottom:10px}html.hf-new .logo a:before{background-image:url("../images/sprite-ld-all.png");background-position:-241px -400px;width:99px;height:30px;content:"";display:block}}@media only screen and (min-width:992px) and (-o-min-device-pixel-ratio:5/4),only screen and (min-width:992px) and (-webkit-min-device-pixel-ratio:1.25),only screen and (min-width:992px) and (min-resolution:120dpi){html.hf-new .logo a:before{background-image:url("../images/sprite-hd-all.png");background-size:568px 499px}}@media only screen and (min-width:992px){html.hf-new header.main{height:65px}html.hf-new header.main .user-utils{margin:8px 4px 0 0}html.hf-new header.main .ico{padding:10px}}@media only screen and (min-width:992px){html.new-menu .subnavigator ul li{line-height:1.4;padding-bottom:10px}html.new-menu .subnavigator .group{width:16.6%;padding-right:30px}html.new-menu .subnavigator .group:last-child{padding-right:0}html.new-menu .subnavigator .group:last-child img{padding-right:30px}html.new-menu .subnavigator img{width:100%;margin-bottom:5px}html.new-menu .subnavigator .subcategories{max-width:100%}html.new-menu .wrapper-nav-img{overflow:hidden}nav.main{background-color:#FDFCFA;position:fixed;top:77px;left:0;right:0;z-index:65634;height:54px}nav.main a{text-transform:uppercase;letter-spacing:1px;color:#212121}nav.main .wrapper{max-width:1560px;margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}nav.main ul.first-level{text-align:center;list-style:none;padding:0;margin:0 -15px;position:relative}nav.main ul.first-level>li{display:inline-block;padding:0 20px;list-style:none}nav.main ul.first-level>li>a{text-decoration:none;color:#71716F;padding:18px 0 19px;letter-spacing:1px;font-weight:bold;position:relative;display:block}nav.main ul.first-level>li>a.active{color:#212121;text-decoration:none}nav.main ul.first-level>li>a.active:after{width:100%}nav.main ul.first-level>li>a:after{-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);-o-transform:translateX(-50%);transform:translateX(-50%);content:"";position:absolute;left:50%;bottom:0;width:0;height:4px;background:#F9B949;z-index:1}.subnavigator:not(.subnavigator-sm){filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);opacity:0;padding:15px;margin-top:1px;visibility:hidden;position:absolute;left:0;width:100%;margin:0 auto;right:0;background-color:#FDFCFA;z-index:9;border-bottom:1px solid #EEEDEB;border-top:1px solid #EEEDEB}.subnavigator .subhome{display:none}.subnavigator .subcategories{overflow:hidden;*zoom:1;margin:15px auto 0;max-width:970px;text-align:center;white-space:nowrap;position:relative}.subnavigator .group{display:inline-block;white-space:normal;width:25%;text-align:left;vertical-align:top;padding-right:50px}.subnavigator .main-sub{display:block;margin:0 0 10px;padding-left:15px;font-weight:bold;border-left:4px solid #F9B949}.subnavigator ul{padding-left:0}.subnavigator ul li{padding-bottom:8px;list-style:none}.subnavigator ul li a{color:#212121;text-transform:none;vertical-align:super;display:block}.subnavigator img{margin-bottom:15px}html.hf-new header.main .lower-bar{padding-top:0;height:65px;border-bottom:1px solid #EEEDEB}html.hf-new header.main .logo{z-index:200;display:block;float:left;margin-left:15px;position:relative;left:0;margin-top:-8px}html.hf-new header.main .user-utils{z-index:200}html.hf-new nav.main{display:block;background-color:#FDFCFA;z-index:100;top:5px}html.hf-new nav.main .view-all{font-weight:600}html.hf-new nav.main ul.first-level>li{height:59px}html.hf-new nav.main ul.first-level>li>a{padding:21px 0 6px;margin-bottom:15px}.site{padding-top:131px}html.hf-new .site{padding-top:65px}.popover#search-bar{-webkit-transform:translateY(-130%);-moz-transform:translateY(-130%);-ms-transform:translateY(-130%);-o-transform:translateY(-130%);transform:translateY(-130%)}#minicart{z-index:65738}.notification-message .container-fluid{border-top:5px solid #F9B949}.notification-message .ico.close{padding-top:0;right:10px;top:10px}.notification-message .ico.close:after{margin-top:-2px}figcaption h2,figcaption .widget-title{font-size:22px}}@media only screen and (min-width:992px){.newsletter-form .grouping-row{margin-left:-15px;margin-right:-15px;overflow:hidden;*zoom:1}.newsletter-form .title{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media only screen and (min-width:992px) and (min-width:992px){.newsletter-form .title{float:left;width:16.6666666667%}}@media only screen and (min-width:992px){.newsletter-form .name,.newsletter-form .surname{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media only screen and (min-width:992px) and (min-width:992px){.newsletter-form .name,.newsletter-form .surname{float:left;width:41.6666666667%}}@media only screen and (min-width:992px){.newsletter-form .country{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media only screen and (min-width:992px) and (min-width:992px){.newsletter-form .country{float:left;width:66.6666666667%}}@media only screen and (min-width:992px){.newsletter-form .submit{position:relative;min-height:1px;padding-left:15px;padding-right:15px}}@media only screen and (min-width:992px) and (min-width:992px){.newsletter-form .submit{float:left;width:33.3333333333%}}@media only screen and (min-width:992px){html,body{font-size:12px}header.main .user-utils{margin:3px 15px 0 0}header.main .ico{padding:8px}header.main .logo{position:absolute;width:97px;left:50%;top:25px;margin-left:-54px}.form-control,select{font-size:12px}.call-to-action,.btn{font-size:12px}.close:after{margin-top:-6px}nav.main ul.first-level>li{display:inline-block;padding:0 17px}.popover h4{font-size:12px}}@media only screen and (min-width:1640px) and (min-width:768px){html.hf-new footer.main .form-group{float:left;width:16.6666666667%}}@media only screen and (min-width:1640px) and (min-width:768px){html.hf-new footer.main .title{float:left;width:8.3333333333%}}@media only screen and (max-width:991px){.logo{display:inline-block;height:100%}.logo a{display:block;height:100%;padding:0 0 0 20px}.logo a,.logo img{vertical-align:middle}.site{padding-top:46px}*[class^='icon-']{padding:4px}header.main .container-fluid{width:100%;padding:0;margin:0}header.main .lower-bar{overflow:hidden;*zoom:1;background-color:#FDFCFA;height:46px;line-height:46px;border-bottom:1px solid #EEEDEB}header.main .lower-bar .ico.wishlist{padding-top:1px}header.main .nav-toggler{display:inline;float:left;width:50px;height:46px;background-color:#F9B949;text-align:center;position:relative}header.main .user-utils{display:inline;float:right;white-space:nowrap;font-size:0}header.main .user-utils a{overflow:hidden;display:inline-block;height:46px;padding:0 14px;width:46px;font-size:0}header.main .user-utils a i{font-size:14px}header.main button{width:46px;padding:0;vertical-align:top}.login-register{-webkit-overflow-scrolling:touch}html.new-menu nav.main .subnavigator .group{border-bottom:1px solid #EEEDEB}html.new-menu nav.main .subnavigator .group:last-of-type{border:0}html.new-menu nav.main .subnavigator .exp .nav-sub a{text-transform:uppercase;font-weight:600}html.new-menu nav.main .subnavigator a.subhome,html.new-menu nav.main .subnavigator span.subhome{text-align:center;background-color:#EEEDEB;text-transform:uppercase}nav.main{position:fixed;width:280px;top:46px;bottom:0;left:-100%;overflow:auto;z-index:65656;visibility:hidden}nav.main a{font-size:11px}nav.main section{position:absolute;left:0;right:0}nav.main section{top:45px;bottom:0;overflow:auto;overflow-x:hidden}nav.main footer .first-level li{position:relative}nav.main img{display:none}nav.main .popover{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1;visibility:visible;position:static;width:auto}nav.main .first-level>li{border-bottom:1px solid #EEEDEB;position:relative}nav.main .first-level>li>a,nav.main .first-level>li span.subhome{font-size:12px;letter-spacing:1px;margin-left:0}nav.main ul{margin:0;padding-left:0}nav.main .site-menu li{padding:0 25px}nav.main li{list-style:none}nav.main li a,nav.main li span.subhome{padding-top:14px;padding-bottom:14px;color:#212121;display:block;position:relative}nav.main .subnavigator{margin:-1px 0;padding:1px 0}nav.main .subnavigator .nav-sub{margin:0;display:block}nav.main .subnavigator .nav-sub a{color:#212121;padding-left:0;font-weight:400}nav.main .subnavigator .nav-sub a:after{color:#212121}nav.main .subnavigator a,nav.main .subnavigator span.subhome,nav.main .subnavigator .nav-sub{padding-left:20px;padding-right:20px;font-size:13px}nav.main .subnavigator li{padding-left:initial;padding-right:20px}html.hf-new nav.main{line-height:1.8rem;top:0;width:calc(100% - 46px);overflow:visible}html.hf-new nav.main .wrapper{width:100%;background-color:#FDFCFA;height:100%;display:block;position:relative}html.hf-new nav.main .first-level>li{position:static}html.hf-new nav.main .close{width:46px;height:46px;font-size:16px;z-index:65656;color:#F9B949;text-align:center;display:none;position:absolute;top:0;left:100%}html.hf-new nav.main .nav-back .chevron{margin-right:2rem}html.hf-new nav.main .highlights{background-color:#EEEDEB;padding:0 25px}html.hf-new nav.main .highlights li{border-bottom:1px solid #DBDBDB}html.hf-new nav.main .highlights li .cur-sel{text-decoration:underline;float:right}html.hf-new nav.main .highlights li i{font-size:14px;margin-right:16px;width:14px;text-align:center}html.hf-new nav.main .highlights li a{margin-right:0;font-weight:normal}html.hf-new nav.main .highlights li a:after{display:none}html.hf-new nav.main .site-menu{font-weight:bold;text-transform:uppercase}html.hf-new nav.main .leaf,html.hf-new nav.main .nav-back,html.hf-new nav.main .view-all{text-transform:none}html.hf-new nav.main .view-all{text-decoration:none}html.hf-new nav.main .leaf,html.hf-new nav.main .nav-back{font-weight:normal}html.hf-new nav.main .subnavigator{top:0;z-index:1;height:100%;position:absolute;left:100%;overflow:hidden;background-color:#FDFCFA;visibility:hidden}html.hf-new nav.main .subnavigator a.subhome,html.hf-new nav.main .subnavigator span.subhome{text-align:left}html.hf-new.new-menu nav.main section{top:0}html.hf-new.new-menu nav.main section li .right{position:absolute;right:0;top:50%}html.hf-new.new-menu nav.main section li a.subhome .right{right:20px}html.hf-new.new-menu nav.main section li:last-child{border:0}html.hf-new footer.main .list-link .h5 button{text-transform:uppercase}html.hf-new footer.main .list-link ul{margin:0}html.hf-new footer.main .list-link li:last-child{padding-bottom:15px}.popover.full{position:fixed;top:46px;bottom:0;left:0;right:0;padding:0;overflow:auto}.popover#search-bar{bottom:auto}#minicart{top:46px;width:100%}#minicart .tab-content{top:0}html.hf-new #minicart{line-height:1.428571429}html.hf-new #minicart header{text-align:left;padding-top:10px}html.hf-new #minicart header .close{font-size:16px}html.hf-new #minicart header .tabs{float:left}html.hf-new #minicart header .ico i{display:none}html.hf-new #minicart .tab-content{top:55px}.login-register{background-color:#FDFCFA;line-height:1}.login-register.full{bottom:inherit}}@media only screen and (max-width:991px){figcaption h2,figcaption .widget-title{font-size:20px}}@media only screen and (max-width:991px){.user-utils{height:46px}.fendi-land-divider,.fendi-land-divider.top{display:none}}@media only screen and (max-width:767px){footer.main .list-link .h5{padding:15px 20px;border-top:1px solid #EEEDEB;margin:0;position:relative;font-size:12px}footer.main .list-link li{padding-bottom:10px;font-size:12px}footer.main .list-link ul{display:none;padding-left:20px}.back-to-top-wrapper{display:block;background-color:#EEEDEB;text-align:center}.back-to-top-wrapper a{display:inline-block;text-transform:uppercase;color:#181715;position:relative;padding:15px 20px;font-weight:600;font-size:12px}.back-to-top-wrapper a:before{position:absolute;left:0;top:18px;font-size:8px}html.hf-new footer.main .exp button:after{font-size:8px;float:right;margin-top:4px}html.hf-new footer.main .list-link li{padding-bottom:23px}html.hf-new footer.main .dropdown button:after{content:""}html.hf-new footer.main .dropdown .cur-sel{float:right;text-decoration:underline}.form-control,select,label{font-size:12px}.newsletter-form .completion{overflow:hidden;*zoom:1;display:none;padding-top:20px}.newsletter-form .completion .form-group{margin-bottom:10px}.newsletter-form .completion .btn{width:100%;line-height:22px}.newsletter-form select{display:block}.newsletter-form label,.newsletter-form input{font-size:12px}header.main .container-fluid{padding:0}header.main .user-utils .ico{width:42px;padding-top:0;padding-bottom:0}header.main .logo img{height:15px}.login-register{background-color:#FDFCFA;line-height:1}.btn{min-height:40px}a.btn{min-height:40px;line-height:25px}.brightcove-container,.brightcove-container .video-js{display:none}.scheduled-banner .scheduled-banner-main{padding:10px 20px;margin-bottom:20px;text-align:center}.scheduled-banner.open .scheduled-banner-title{border-bottom:1px solid #EEEDEB}figcaption h2,figcaption .widget-title{font-size:16px}.hero-banner{border:1px solid #EEEDEB;margin:20px;padding-bottom:20px}.hero-banner h2{font-size:16px}.hero-banner .brightcove-container,.hero-banner .brightcove-container .video-js{display:block}.hero-banner .btn{display:block}.categories-launch .brightcove-container,.categories-launch .brightcove-container .video-js{display:block}.categories-launch figcaption,.categories-launch .caption{margin-bottom:20px;padding:0 15px}.categories-launch .btn{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1;-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);transform:translateY(0)}.categories-launch .brightcove-container,.categories-launch .brightcove-container .video-js{display:block}.categories-launch figcaption,.categories-launch .caption{margin-bottom:20px;padding:0 15px}.categories-launch .btn{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1;-webkit-transform:translateY(0);-moz-transform:translateY(0);-ms-transform:translateY(0);-o-transform:translateY(0);transform:translateY(0)}.mobile-categories li:not(:last-child) a{border-bottom:0}.mobile-categories a{position:relative;padding:13px 11px;display:block;margin:0 20px;border:1px solid #EEEDEB;color:#212121;font-size:12px;text-transform:uppercase}.mobile-categories .arrow3{border-color:#212121;position:absolute;top:17px;right:20px;width:11px;height:11px;transform:rotate(-45deg)}}@media only screen and (max-width:767px){.t-homepage header.main .lower-bar{border-bottom:1px solid #EEEDEB}.t-homepage .container-fluid{padding:0}}body{margin:0;padding:0}select:-webkit-autofill,input:-webkit-autofill{-webkit-box-shadow:0 0 0 100px #EEEDEB inset;border:1px solid #FDFCFA}select:-webkit-autofill,input:-webkit-autofill{background-color:#EEEDEB;-webkit-box-shadow:0 0 0 100px #EEEDEB inset}select::-ms-expand,select::-ms-clear,input::-ms-expand,input::-ms-clear{display:none}body,html{padding:0;margin:0}.page-scroll-down{display:none!important}</style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300i,700">
+  <meta content="4ei9f-KVt8Ar_JwawR2913cYXxKebGw5DHwUlq-EAs8" name="google-site-verification">
+  <meta content="i5M-hBjS2T40uGDlFIbqlvX1ro52BO3AKu3QHLqYXYA" name="google-site-verification">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="default" name="apple-mobile-web-app-status-bar-style">
+  <meta content="FENDI" name="apple-mobile-web-app-title">
+  <link crossorigin="use-credentials" href="https://www.fendi.com/docroot/fendi/manifest.json" rel="manifest">
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/iphone5_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/iphone6_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" href="https://www.fendi.com/docroot/fendi/favicons/iphoneplus_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="https://www.fendi.com/docroot/fendi/favicons/iphonex_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/iphonexr_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="https://www.fendi.com/docroot/fendi/favicons/iphonexsmax_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/ipad_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/ipadpro1_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/ipadpro3_splash.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" href="https://www.fendi.com/docroot/fendi/favicons/ipadpro2_splash.png">
+  <title>FENDI | Official Online Store</title>
+  <meta content="Shop the best Fendi collections for women, men and kids online: runway looks, bags, accessories, jewelry and much more. Made in Italy. " name="description">
+  <meta content="1618054005144073" property="fb:app_id">
+  <meta content="website" property="og:type">
+  <meta content="en_US" property="og:locale">
+  <meta content="FENDI | Official Online Store" property="og:title">
+  <meta content="https://www.fendi.com/ca/" property="og:url">
+  <meta content="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon.png" property="og:image">
+  <meta content="Shop the best Fendi collections for women, men and kids online: runway looks, bags, accessories, jewelry and much more. Made in Italy. " property="og:description">
+  <meta content="Fendi Online Store" property="og:site_name">
+  <meta content="summary" name="twitter:card">
+  <meta content="https://www.fendi.com/ca/" name="twitter:site">
+  <meta content="FENDI | Official Online Store" name="twitter:title">
+  <meta content="Shop the best Fendi collections for women, men and kids online: runway looks, bags, accessories, jewelry and much more. Made in Italy. " name="twitter:description">
+  <meta content="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon.png" name="twitter:image">
+  <meta content="@Fendi" name="twitter:creator">
+  <link href="https://www.fendi.com/ca/" rel="canonical">
+  <link rel="alternate" hreflang="en-ie" href="https://www.fendi.com/ie/">
+  <link rel="alternate" hreflang="en-ae" href="https://www.fendi.com/ae/">
+  <link rel="alternate" hreflang="en-it" href="https://www.fendi.com/it-en/">
+  <link rel="alternate" hreflang="en-at" href="https://www.fendi.com/at-en/">
+  <link rel="alternate" hreflang="en-au" href="https://www.fendi.com/au/">
+  <link rel="alternate" hreflang="en-ro" href="https://www.fendi.com/ro/">
+  <link rel="alternate" hreflang="en-be" href="https://www.fendi.com/be-en/">
+  <link rel="alternate" hreflang="en-ru" href="https://www.fendi.com/ru-en/">
+  <link rel="alternate" hreflang="en-bg" href="https://www.fendi.com/bg/">
+  <link rel="alternate" hreflang="en-jp" href="https://www.fendi.com/jp-en/">
+  <link rel="alternate" hreflang="en-bh" href="https://www.fendi.com/bh/">
+  <link rel="alternate" hreflang="fr-ca" href="https://www.fendi.com/ca-fr/">
+  <link rel="alternate" hreflang="en-sa" href="https://www.fendi.com/sa/">
+  <link rel="alternate" hreflang="fr-be" href="https://www.fendi.com/be/">
+  <link rel="alternate" hreflang="en-se" href="https://www.fendi.com/se/">
+  <link rel="alternate" hreflang="en-sg" href="https://www.fendi.com/sg/">
+  <link rel="alternate" hreflang="en-si" href="https://www.fendi.com/si/">
+  <link rel="alternate" hreflang="en-sk" href="https://www.fendi.com/sk/">
+  <link rel="alternate" hreflang="en-gr" href="https://www.fendi.com/gr/">
+  <link rel="alternate" hreflang="de-at" href="https://www.fendi.com/at/">
+  <link rel="alternate" hreflang="en-pl" href="https://www.fendi.com/pl/">
+  <link rel="alternate" hreflang="zh-tw" href="https://www.fendi.com/tw/">
+  <link rel="alternate" hreflang="ko-kr" href="https://www.fendi.com/kr/">
+  <link rel="alternate" hreflang="en-hk" href="https://www.fendi.com/hk-en/">
+  <link rel="alternate" hreflang="en-pt" href="https://www.fendi.com/pt/">
+  <link rel="alternate" hreflang="en-hr" href="https://www.fendi.com/hr/">
+  <link rel="alternate" hreflang="en-hu" href="https://www.fendi.com/hu/">
+  <link rel="alternate" hreflang="ru-ru" href="https://www.fendi.com/ru/">
+  <link rel="alternate" hreflang="it-mt" href="https://www.fendi.com/mt-it/">
+  <link rel="alternate" hreflang="en-qa" href="https://www.fendi.com/qa/">
+  <link rel="alternate" hreflang="zh-us" href="https://www.fendi.com/us-zh/">
+  <link rel="alternate" hreflang="en-us" href="https://www.fendi.com/us/">
+  <link rel="alternate" hreflang="en-ee" href="https://www.fendi.com/ee/">
+  <link rel="alternate" hreflang="en-mt" href="https://www.fendi.com/mt/">
+  <link rel="alternate" hreflang="en-es" href="https://www.fendi.com/es-en/">
+  <link rel="alternate" hreflang="ja-jp" href="https://www.fendi.com/jp/">
+  <link rel="alternate" hreflang="de-ch" href="https://www.fendi.com/ch-de/">
+  <link rel="alternate" hreflang="en-nl" href="https://www.fendi.com/nl/">
+  <link rel="alternate" hreflang="en-no" href="https://www.fendi.com/no/">
+  <link rel="alternate" hreflang="en-fi" href="https://www.fendi.com/fi/">
+  <link rel="alternate" hreflang="en-fr" href="https://www.fendi.com/fr-en/">
+  <link rel="alternate" hreflang="zh-sg" href="https://www.fendi.com/sg-zh/">
+  <link rel="alternate" hreflang="it-ch" href="https://www.fendi.com/ch-it/">
+  <link rel="alternate" hreflang="zh-ca" href="https://www.fendi.com/ca-zh">
+  <link rel="alternate" hreflang="fr-fr" href="https://www.fendi.com/fr/">
+  <link rel="alternate" hreflang="en-gb" href="https://www.fendi.com/gb/">
+  <link rel="alternate" hreflang="en-ca" href="https://www.fendi.com/ca/">
+  <link rel="alternate" hreflang="en-ch" href="https://www.fendi.com/ch-en/">
+  <link rel="alternate" hreflang="en-kr" href="https://www.fendi.com/kr-en/">
+  <link rel="alternate" hreflang="en-kw" href="https://www.fendi.com/kw/">
+  <link rel="alternate" hreflang="fr-ch" href="https://www.fendi.com/ch/">
+  <link rel="alternate" hreflang="es-us" href="https://www.fendi.com/us-es/">
+  <link rel="alternate" hreflang="en-cz" href="https://www.fendi.com/cz/">
+  <link rel="alternate" hreflang="en-cy" href="https://www.fendi.com/cy/">
+  <link rel="alternate" hreflang="de-de" href="https://www.fendi.com/de/">
+  <link rel="alternate" hreflang="en-tr" href="https://www.fendi.com/tr/">
+  <link rel="alternate" hreflang="en-de" href="https://www.fendi.com/de-en/">
+  <link rel="alternate" hreflang="zh-hk" href="https://www.fendi.com/hk/">
+  <link rel="alternate" hreflang="en-tw" href="https://www.fendi.com/tw-en/">
+  <link rel="alternate" hreflang="es-es" href="https://www.fendi.com/es/">
+  <link rel="alternate" hreflang="en-dk" href="https://www.fendi.com/dk/">
+  <link rel="alternate" hreflang="en-lu" href="https://www.fendi.com/lu/">
+  <link rel="alternate" hreflang="en-lt" href="https://www.fendi.com/lt/">
+  <link rel="alternate" hreflang="en-lv" href="https://www.fendi.com/lv">
+  <link rel="alternate" hreflang="it-it" href="https://www.fendi.com/it/">
+  <link hreflang="x-default" href="https://www.fendi.com/" rel="alternate">
+  <meta content="Fendi" name="author">
+  <meta content="no" name="msapplication-tap-highlight">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/stylesheets/style.css" rel="stylesheet">
+  <script src="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/ie-hacks.js"></script>
+  <link href="https://www.fendi.com/aws/static/holidays-19/v8/main.css" rel="stylesheet">
+  <link href="https://www.fendi.com/aws/static/display-none/display_none_scroll.css" rel="stylesheet">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-57x57.png" sizes="57x57" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-60x60.png" sizes="60x60" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-72x72.png" sizes="72x72" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-76x76.png" sizes="76x76" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-114x114.png" sizes="114x114" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-120x120.png" sizes="120x120" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-144x144.png" sizes="144x144" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-152x152.png" sizes="152x152" rel="apple-touch-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/apple-touch-icon-180x180.png" sizes="180x180" rel="apple-touch-icon">
+  <link sizes="32x32" href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/favicon-32x32.png" type="image/png" rel="icon">
+  <link sizes="194x194" href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/favicon-194x194.png" type="image/png" rel="icon">
+  <link sizes="192x192" href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/android-chrome-192x192.png" type="image/png" rel="icon">
+  <link sizes="16x16" href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/favicon-16x16.png" type="image/png" rel="icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/manifest.json" rel="manifest">
+  <link color="#f9b949" href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/safari-pinned-tab.svg" rel="mask-icon">
+  <link href="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/favicon.ico" rel="shortcut icon">
+  <meta content="#f9b949" name="msapplication-TileColor">
+  <meta content="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/mstile-144x144.png" name="msapplication-TileImage">
+  <meta content="https://static.www.fendi.com/docroot/fendi/8.4.9/favicons/browserconfig.xml" name="msapplication-config">
+  <meta content="#F9B949" name="theme-color">
+  <meta content="Fendi" name="application-name">
+  <style type="text/css">@media only screen and (max-width: 767px) {
+    
+    /* da cancellare */
+    .hero-banner.boxed-arrows .slick-arrow.slick-next {
+        right: 0;
+    }
+    .hero-banner.boxed-arrows .slick-arrow.slick-prev {
+        left: 0;
+    }
+ 
+    .btn.video:before {
+        line-height: 40px !important;
+    }
+
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+    
+    /* cancellare*/
+   .hero-banner .btn {
+       margin: 0 10px;
+   }
+   
+   /* cancellare*/
+   .module-banner  .brightcove-container {
+    position: absolute;
+    height: 100%;
+   }
+   
+   /* cancellare*/
+   .module-banner .multiple-products {
+       display: flex;
+       flex-wrap: wrap;
+   }
+   
+   
+}
+
+
+@media only screen and (max-width: 991px) {
+    
+    /* cancellare*/
+    html.ios.touchevents.hamburger-open, html.ios.touchevents.hamburger-open body {
+        height: auto;
+    }
+}
+
+/* cancellare*/
+.checkout-aside header {
+    padding-right: 35px;
+}
+
+/* cancellare*/
+.product-card .meta .label, .product-card .meta .soldout {
+     margin-bottom: 20px;
+     display: inline-block;
+     padding: 2px 12px 2px;
+}
+
+
+
+
+/*sizeguide temporary patch*/
+@media only screen and (min-width: 768px) {
+    .sizes-tables-container .fitguide-wrapper .bound-elems.has-img {
+        width: 60% !important;
+        float: left !important;
+    }
+    
+    .sizes-image-container {
+        max-width: 40% !important;
+        float: left !important;
+    }
+}
+.sizes-tables-container .fitguide-wrapper .controls {
+    max-width: 100% !important;
+}
+
+.brightcove-container:not(.brightcove-container-modal) .video-js {
+  background: #FDFCFA;
+}
+
+/*FEN-8129 temporary patch for products: 7AR844ABW9F1B6C*/
+body.t-product[data-product-code="7AR844ABW9F1B6C"] .shipping-information-desktop {
+    display: none;
+}
+
+/*FEN-8555 temporary patch to remove border*/
+@media only screen and (max-width: 767px) {
+    .cart-bar .wrap-icon-wishlist-highlight-ab-enabled .add-to-wishlist, .cart-bar .wrap-icon-wishlist-highlight-ab-enabled .added-to-wishlist {
+         border-right: none !important;
+    }
+}
+
+
+/* cancellare*/
+
+/*temporary for FEN-8825*/
+@media only screen and (min-width: 768px) {
+    .categories-launch .item.video figure {
+        display: block;
+    }
+}
+
+
+/* cancellare*/
+.products-module-free {
+    display: flex;
+    flex-wrap: wrap;
+}</style>
+  <meta name="generator" content="Kleecks">
+  <meta name="robots" content="INDEX,FOLLOW">
+  <meta name="twitter:url" content="https://www.fendi.com/ca/">
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://www.fendi.com/","logo":"https://static.www.fendi.com/docroot/fendi/7.7.3/images/logo-xs.png%202x","name":"Fendi","sameAs":["https://www.facebook.com/Fendi","https://www.instagram.com/Fendi","https://www.pinterest.com/FendiOfficial","https://www.twitter.com/Fendi","https://www.youtube.com/Fendi"]}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"Website","url":"https://www.fendi.com/ca/","name":"Fendi","potentialAction":{"@type":"SearchAction","target":"https://www.fendi.com/search-results?async=false&q={query_term}","query-input":"required name=query_term"}}</script>
+  <style>.dropdown .dropdown-toggle, .dropdown .hover-toggle {
+  padding-right: 30px!important;
+}
+.ck-h1 {
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.listing.filtered .banner {
+  display: block!important;
+}
+.premium-services .service {
+    width: 24%!important;
+}
+div.product-description h2.description {
+  padding-top: 2px!important;
+    margin-top: 0!important;
+    margin-bottom: 2px!important;
+    letter-spacing: 1px!important;
+}
+.my-account .my-wishlist-dbunico .nav {
+  overflow: hidden;
+}
+.my-account .my-wishlist-dbunico .nav li {
+    float:left;
+}
+#listing_abstract {
+	width: 50%;
+	margin: auto;
+    text-align: center;
+	margin-bottom: 10px;
+ 	font-size: 14px!important;
+}
+#listing_abstract a {
+	font-weight: bolder;
+    color: black;
+    text-decoration: underline;
+}
+@media only screen and (max-width: 767px){
+  #listing_abstract {
+      width: 100%!important;
+  }
+}
+
+@media only screen and (max-width: 991px){
+  #overlay-gallery .list-inline li {
+      width: 11%!important;
+  }
+}
+@media only screen and (max-width: 767px){
+  .product .product-share li {
+      width: 11%!important;
+  }
+}</style>
+ </head>
+ <body data-base-path="/ca/" data-dy-context="HOMEPAGE" ontouchstart="" data-edit-modules="" data-product-code="" data-rec-action="" data-language="en" data-nl-show="false" data-nl-link="/ca/action/newsletter/subscribe" data-include="Header;MainMenu;GtmTracking;EngineRec;QuickBuy;DynamicIframe" data-controller="Homepage" class="t-homepage en_US image-crop KL-D-34 KL-LANG-en KL-URL-ca KL-URL-LEVEL-1 KL-CMS_URL-LEVEL-1 KL-UA-DESKTOP sp-HOME">
+  <div data-notificationmessage-cookie="notification-message-ca-0" data-notificationmessage-show="false" id="notification-message" class="notification-message ">
+   <div class="container-fluid">
+    <button data-notificationmessage-target="#notification-message" aria-label="Close" class="ico close"><span>Close</span></button>
+   </div>
+  </div>
+  <div data-newsletter="false" data-scheduled-banner-recommendations="false" data-scheduled-banner-body=".scheduled-banner-body" data-scheduled-banner-slide-toggle=".scheduled-banner-title .expand-banner" data-scheduled-banner-show-open="false" data-scheduled-banner-expandable="true" aria-label=" In the interest of health and safety, all boutiques in Canada are temporarily closed. Please connect with us on Fendi.com or contact customer care for additional help." id="scheduled-banner" class="notification-message scheduled-banner ">
+   <div class="container-fluid">
+    <div class="scheduled-banner-content">
+     <div aria-controls="scheduled-banner-body" aria-expanded="false" class="scheduled-banner-title clearfix">
+      <p class="col-xs-10"><strong> In the interest of health and safety, all boutiques in Canada are temporarily closed. Please connect with us on Fendi.com or contact customer care for additional help.</strong></p><button aria-label="" class="scheduled-banner-toggle pull-right expand-banner"></button>
+     </div>
+     <div id="#scheduled-banner-body" aria-hidden="false" class="scheduled-banner-body clearfix">
+      <div class="scheduled-banner-main col-sm-12">
+       <div class="scheduled-banner-text">
+        <p>For further information, please contact <a href="https://www.fendi.com/2/info/customer-care/contact-us" title="contact us">Customer Care</a> using the link. You will be able to make online purchases at Fendi.com throughout this period</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>(function(){var a=undefined;var b=[];window.dataLayer=window.dataLayer||[];window.dataLayer.push({userId:"",userType:"GUEST",ambiente:"PROD",template:"t-homepage",selectedLang:"en_US",pageType:"homepage",pageName:"|HOME",breadcrumbLiv0:"ca",breadcrumbLiv1:"home",ecommerce:a})})();</script>
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMWVG7" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <script>(function(b,m,h,a,g){b[a]=b[a]||[];b[a].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var k=m.getElementsByTagName(h)[0],e=m.createElement(h),c=a!="dataLayer"?"&l="+a:"";e.async=true;e.src="//www.googletagmanager.com/gtm.js?id="+g+c;k.parentNode.insertBefore(e,k)})(window,document,"script","dataLayer","GTM-PMWVG7");</script>
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5W74KZN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <script>(function(b,m,h,a,g){b[a]=b[a]||[];b[a].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var k=m.getElementsByTagName(h)[0],e=m.createElement(h),c=a!="dataLayer"?"&l="+a:"";e.async=true;e.src="https://www.googletagmanager.com/gtm.js?id="+g+c;k.parentNode.insertBefore(e,k)})(window,document,"script","dataLayer","GTM-5W74KZN");</script>
+  <div class="site">
+   <div class="skip-navigation-wrapper container-fluid">
+    <a title="Jump to main content" aria-label="Jump to main content" tabindex="0" class="skip-navigation show-on-focus" href="#wrapper">Jump to main content</a>
+   </div>
+   <header class="main">
+    <div class="dark-backdrop">
+     <img aria-hidden="true" alt="Loading" src="https://static.www.fendi.com/docroot/fendi/8.4.9/images/loader.gif">
+    </div>
+    <hr class="fendi-land-divider top">
+    <div class="container-fluid">
+     <div class="lower-bar">
+      <button aria-label="Toggle menu" data-backdrop=".dark-backdrop, .close" data-menu-html-class="hamburger-open" data-menu="nav.main" class="nav-toggler"><i class="icon-menu"></i><span>menu</span></button>
+      <div class="logo">
+       <a aria-label="Fendi Home Page" href="https://www.fendi.com/ca/" title="ca"><img alt="Fendi Roma" srcset="https://static.www.fendi.com/docroot/fendi/8.4.9/images/logo-xs.png 2x" class="hidden-md hidden-lg hidden-print"><img alt="Fendi Roma" srcset="https://static.www.fendi.com/docroot/fendi/8.4.9/images/logo.png 2x" class="print-only"></a>
+      </div>
+      <nav data-menu-scroll=".wrapper > section" class="main">
+       <div class="wrapper">
+        <section data-aria-focus-loop-sm="[data-level='level 1'],.highlights a" data-aria-focus-loop-xs="[data-level='level 1'],.highlights a" class="nav-section " role="navigation">
+         <div class="site-menu">
+          <ul data-mainmenu-items="> li" data-mainmenu="" class="first-level expandable-sm expandable-xs" role="menu">
+           <li data-mainmenu-lg-target="#woman-popover" data-mainmenu-md-target="#woman-popover" aria-haspopup="true" role="menuitem" class=""><a href="#" target="_self" aria-selected="false" data-title-en="1000 - Woman" role="menuitemradio" data-expandable-modal="true" data-menu-clickable="false" class="main menu-switch-woman" data-level="level 1" rel="noopener noreferrer"> Woman <i class="hidden-md hidden-lg chevron right"></i></a>
+            <div data-aria-focus-esc-lg="*md" data-aria-focus-esc-md=".menu-switch-woman" data-aria-focus-loop-lg="*md" data-aria-focus-loop-md=".subcategories a" data-aria-focus-loop-sm="*xs" data-aria-focus-loop-xs=">a,.nav-sub[data-level='level 2']" id="woman-popover" class="subnavigator popover ">
+             <a class="visible-xs visible-sm nav-back" href="#"><i class="chevron left"></i>Back</a><span class="subhome "> Woman</span>
+             <div class="subcategories">
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-812a91af-1a77-4797-a161-49b3bf71e1a0" data-mainmenu-xs-target="#uuid-812a91af-1a77-4797-a161-49b3bf71e1a0" data-mainmenu-md-target="#uuid-812a91af-1a77-4797-a161-49b3bf71e1a0" data-mainmenu-lg-target="#uuid-812a91af-1a77-4797-a161-49b3bf71e1a0" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Highlights" data-title-v2="" class="no-follow-lg nav-sub" href="#">Highlights<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Woman</a><span class="subhome ">Highlights</span>
+                 </div>
+                 <ul id="uuid-812a91af-1a77-4797-a161-49b3bf71e1a0" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category="1002"><a href="https://www.fendi.com/ca/new-arrivals-woman" class="" target="_self" tabindex="0" data-id="new-in" data-title-en="New in" data-level="level 2" role="navigation" title="new arrivals woman"> New in </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/woman/highlights-woman/me-and-my-peekaboo" class="" target="_self" tabindex="0" data-id="fendi-peekaboo" data-title-en="Fendi Peekaboo" data-level="level 2" role="navigation" title="me and my peekaboo"> Fendi Peekaboo </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/woman/highlights-woman/fendi-baguette" class="" target="_self" tabindex="0" data-id="fendi-baguette" data-title-en="Fendi Baguette" data-level="level 2" role="navigation" title="fendi baguette"> Fendi Baguette </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/woman/highlights-woman/resort-2020" class="" target="_self" tabindex="0" data-id="resort-2020" data-title-en="Resort 2020" data-level="level 2" role="navigation" title="resort 2020"> Resort 2020 </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/woman/highlights-woman/spring-summer-2020" class="" target="_self" tabindex="0" data-id="springsummer-2020" data-title-en="Spring/Summer 2020" data-level="level 2" role="navigation" title="spring summer 2020"> Spring/Summer 2020 </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/woman/highlights-woman/spring-summer-2020-must-haves-items" class="" target="_self" tabindex="0" data-id="the-season’s-top-picks" data-title-en="The season’s top picks" data-level="level 2" role="navigation" title="spring summer 2020 must haves items"> The season’s top picks </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/woman/highlights-woman/fall-winter-2020-21-collection" class="" target="_self" tabindex="0" data-id="fallwinter-2020-21-collection" data-title-en="Fall/Winter 2020-21 Collection" data-level="level 2" role="navigation" title="fall winter 2020 21 collection"> Fall/Winter 2020-21 Collection </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-da2cec57-867b-417d-bc09-18bb7f4e109c" data-mainmenu-xs-target="#uuid-da2cec57-867b-417d-bc09-18bb7f4e109c" data-mainmenu-md-target="#uuid-da2cec57-867b-417d-bc09-18bb7f4e109c" data-mainmenu-lg-target="#uuid-da2cec57-867b-417d-bc09-18bb7f4e109c" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Bags" data-title-v2="/ca/woman/bags" class=" nav-sub" href="https://www.fendi.com/ca/bags-woman_9" title="bags woman_9">Bags<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="1200" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Woman</a><span class="subhome ">Bags</span>
+                 </div>
+                 <ul id="uuid-da2cec57-867b-417d-bc09-18bb7f4e109c" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/bags-woman_9" title="bags woman_9">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/peekaboo" class="" target="_self" tabindex="0" data-id="peekaboo" data-title-en="Peekaboo" data-level="level 2" role="navigation" title="peekaboo"> Peekaboo </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/baguette" class="" target="_self" tabindex="0" data-id="baguette" data-title-en="Baguette" data-level="level 2" role="navigation" title="baguette"> Baguette </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/top-handles-and-totes" class="" target="_self" tabindex="0" data-id="top-handles-&amp;-totes" data-title-en="Top Handles &amp; Totes" data-level="level 2" role="navigation" title="top handles and totes"> Top Handles &amp; Totes </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/boston-bags" class="" target="_self" tabindex="0" data-id="boston-bags" data-title-en="Boston Bags" data-level="level 2" role="navigation" title="boston bags"> Boston Bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/shoulder-bags" class="" target="_self" tabindex="0" data-id="shoulder-bags" data-title-en="Shoulder bags" data-level="level 2" role="navigation" title="shoulder bags"> Shoulder bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/mini-bags-and-belt-bags" class="" target="_self" tabindex="0" data-id="mini-bags-&amp;-belt-bags" data-title-en="Mini Bags &amp; Belt Bags" data-level="level 2" role="navigation" title="mini bags and belt bags"> Mini Bags &amp; Belt Bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/clutches" class="" target="_self" tabindex="0" data-id="clutches" data-title-en="Clutches" data-level="level 2" role="navigation" title="clutches"> Clutches </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-woman_9/backpacks" class="" target="_self" tabindex="0" data-id="backpacks" data-title-en="Backpacks" data-level="level 2" role="navigation" title="backpacks"> Backpacks </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1200a"><a href="https://www.fendi.com/ca/bag-accessories-woman" class="" target="_self" tabindex="0" data-id="shoulder-straps-&amp;-bag-accessories" data-title-en="Shoulder Straps &amp; Bag Accessories" data-level="level 2" role="navigation" title="bag accessories woman"> Shoulder Straps &amp; Bag Accessories </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-9884de4f-e1c3-4237-aae6-3df166d482c8" data-mainmenu-xs-target="#uuid-9884de4f-e1c3-4237-aae6-3df166d482c8" data-mainmenu-md-target="#uuid-9884de4f-e1c3-4237-aae6-3df166d482c8" data-mainmenu-lg-target="#uuid-9884de4f-e1c3-4237-aae6-3df166d482c8" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Ready to wear" data-title-v2="/ca/woman/ready-to-wear" class=" nav-sub" href="https://www.fendi.com/ca/ready-to-wear-woman" title="ready to wear woman">Ready to wear<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="1101" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Woman</a><span class="subhome ">Ready to wear</span>
+                 </div>
+                 <ul id="uuid-9884de4f-e1c3-4237-aae6-3df166d482c8" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/ready-to-wear-woman" title="ready to wear woman">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/coats-and-jackets" class="" target="_self" tabindex="0" data-id="coats-&amp;-jackets" data-title-en="Coats &amp; Jackets" data-level="level 2" role="navigation" title="coats and jackets"> Coats &amp; Jackets </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/dresses" class="" target="_self" tabindex="0" data-id="dresses" data-title-en="Dresses" data-level="level 2" role="navigation" title="dresses"> Dresses </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/tops-and-shirts" class="" target="_self" tabindex="0" data-id="tops-&amp;-shirts" data-title-en="Tops &amp; Shirts" data-level="level 2" role="navigation" title="tops and shirts"> Tops &amp; Shirts </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/knitwears" class="" target="_self" tabindex="0" data-id="knitwears" data-title-en="Knitwears" data-level="level 2" role="navigation" title="knitwears"> Knitwears </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/skirts-and-trousers" class="" target="_self" tabindex="0" data-id="skirts-&amp;-trousers" data-title-en="Skirts &amp; Trousers" data-level="level 2" role="navigation" title="skirts and trousers"> Skirts &amp; Trousers </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/t-shirts-and-sweatshirts" class="" target="_self" tabindex="0" data-id="t-shirts-&amp;-sweatshirts" data-title-en="T-shirts &amp; Sweatshirts" data-level="level 2" role="navigation" title="t shirts and sweatshirts"> T-shirts &amp; Sweatshirts </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/activewear" class="" target="_self" tabindex="0" data-id="activewear" data-title-en="Activewear" data-level="level 2" role="navigation" title="activewear"> Activewear </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-woman/beachwear" class="" target="_self" tabindex="0" data-id="beachwear" data-title-en="Beachwear" data-level="level 2" role="navigation" title="beachwear"> Beachwear </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-929a7e30-53ad-47d0-b662-17d755a349aa" data-mainmenu-xs-target="#uuid-929a7e30-53ad-47d0-b662-17d755a349aa" data-mainmenu-md-target="#uuid-929a7e30-53ad-47d0-b662-17d755a349aa" data-mainmenu-lg-target="#uuid-929a7e30-53ad-47d0-b662-17d755a349aa" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Shoes" data-title-v2="/ca/woman/shoes" class=" nav-sub" href="https://www.fendi.com/ca/shoes-woman" title="shoes woman">Shoes<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="1500" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Woman</a><span class="subhome ">Shoes</span>
+                 </div>
+                 <ul id="uuid-929a7e30-53ad-47d0-b662-17d755a349aa" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/shoes-woman" title="shoes woman">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/category/1502" class="" target="_self" tabindex="0" data-id="colibrì" data-title-en="Colibrì" data-level="level 2" role="navigation" title="1502"> Colibrì </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/slingbacks" class="" target="_self" tabindex="0" data-id="slingback-shoes" data-title-en="Slingback Shoes" data-level="level 2" role="navigation" title="slingbacks"> Slingback Shoes </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/boots-and-booties" class="" target="_self" tabindex="0" data-id="boots-&amp;-booties" data-title-en="Boots &amp; Booties" data-level="level 2" role="navigation" title="boots and booties"> Boots &amp; Booties </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/sandals-and-slides" class="" target="_self" tabindex="0" data-id="sandals-&amp;-slides" data-title-en="Sandals &amp; Slides" data-level="level 2" role="navigation" title="sandals and slides"> Sandals &amp; Slides </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/pumps" class="" target="_self" tabindex="0" data-id="pumps" data-title-en="Pumps" data-level="level 2" role="navigation" title="pumps"> Pumps </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/flat-shoes" class="" target="_self" tabindex="0" data-id="flat-shoes" data-title-en="Flat Shoes" data-level="level 2" role="navigation" title="flat shoes"> Flat Shoes </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/sneakers" class="" target="_self" tabindex="0" data-id="sneakers" data-title-en="Sneakers" data-level="level 2" role="navigation" title="sneakers"> Sneakers </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-woman/socks-and-tights" class="" target="_self" tabindex="0" data-id="socks-&amp;-tights" data-title-en="Socks &amp; Tights" data-level="level 2" role="navigation" title="socks and tights"> Socks &amp; Tights </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-e9a51083-b3c8-42ab-9993-13689fa41f15" data-mainmenu-xs-target="#uuid-e9a51083-b3c8-42ab-9993-13689fa41f15" data-mainmenu-md-target="#uuid-e9a51083-b3c8-42ab-9993-13689fa41f15" data-mainmenu-lg-target="#uuid-e9a51083-b3c8-42ab-9993-13689fa41f15" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Accessories" data-title-v2="/ca/woman/women-s-accessories" class=" nav-sub" href="https://www.fendi.com/ca/woman/women-039-s-accessories" title="women 039 s accessories">Accessories<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Woman</a><span class="subhome ">Accessories</span>
+                 </div>
+                 <ul id="uuid-e9a51083-b3c8-42ab-9993-13689fa41f15" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/woman/women-039-s-accessories" title="women 039 s accessories">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1300"><a href="https://www.fendi.com/ca/wallets-and-small-accessories-woman" class="" target="_self" tabindex="0" data-id="wallets-and-small-accessories" data-title-en="Wallets and Small Accessories" data-level="level 2" role="navigation" title="wallets and small accessories woman"> Wallets and Small Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1800"><a href="https://www.fendi.com/ca/belts-woman" class="" target="_self" tabindex="0" data-id="belts" data-title-en="Belts" data-level="level 2" role="navigation" title="belts woman"> Belts </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1601"><a href="https://www.fendi.com/ca/bag-charms" class="" target="_self" tabindex="0" data-id="shoulder-straps-&amp;-bag-accessories" data-title-en="Shoulder Straps &amp; Bag Accessories" data-level="level 2" role="navigation" title="bag charms"> Shoulder Straps &amp; Bag Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1600"><a href="https://www.fendi.com/ca/fashion-jewelry-woman" class="" target="_self" tabindex="0" data-id="fashion-jewelry" data-title-en="Fashion Jewelry" data-level="level 2" role="navigation" title="fashion jewelry woman"> Fashion Jewelry </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1700"><a href="https://www.fendi.com/ca/textile-accessories-woman" class="" target="_self" tabindex="0" data-id="textile-accessories" data-title-en="Textile Accessories" data-level="level 2" role="navigation" title="textile accessories woman"> Textile Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="1360"><a href="https://www.fendi.com/ca/travel-accessories-woman" class="" target="_self" tabindex="0" data-id="travel-accessories" data-title-en="Travel Accessories" data-level="level 2" role="navigation" title="travel accessories woman"> Travel Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="5001"><a href="https://www.fendi.com/ca/books-woman" class="" target="_self" tabindex="0" data-id="books" data-title-en="Books" data-level="level 2" role="navigation" title="books woman"> Books </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div></li>
+           <li data-mainmenu-lg-target="#man-popover" data-mainmenu-md-target="#man-popover" aria-haspopup="true" role="menuitem" class=""><a href="#" target="_self" aria-selected="false" data-title-en="2000 - Man" role="menuitemradio" data-expandable-modal="true" data-menu-clickable="false" class="main menu-switch-man" data-level="level 1" rel="noopener noreferrer"> Man <i class="hidden-md hidden-lg chevron right"></i></a>
+            <div data-aria-focus-esc-lg="*md" data-aria-focus-esc-md=".menu-switch-man" data-aria-focus-loop-lg="*md" data-aria-focus-loop-md=".subcategories a" data-aria-focus-loop-sm="*xs" data-aria-focus-loop-xs=">a,.nav-sub[data-level='level 2']" id="man-popover" class="subnavigator popover ">
+             <a class="visible-xs visible-sm nav-back" href="#"><i class="chevron left"></i>Back</a><span class="subhome "> Man</span>
+             <div class="subcategories">
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-d992505e-33f5-4891-9c39-d98c67d6f838" data-mainmenu-xs-target="#uuid-d992505e-33f5-4891-9c39-d98c67d6f838" data-mainmenu-md-target="#uuid-d992505e-33f5-4891-9c39-d98c67d6f838" data-mainmenu-lg-target="#uuid-d992505e-33f5-4891-9c39-d98c67d6f838" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Highlights" data-title-v2="" class="no-follow-lg nav-sub" href="#">Highlights<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Man</a><span class="subhome ">Highlights</span>
+                 </div>
+                 <ul id="uuid-d992505e-33f5-4891-9c39-d98c67d6f838" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category="2001"><a href="https://www.fendi.com/ca/new-arrivals-man" class="" target="_self" tabindex="0" data-id="new-in" data-title-en="New in" data-level="level 2" role="navigation" title="new arrivals man"> New in </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/man/highlights-man/moonstar" class="" target="_self" tabindex="0" data-id="moonstar" data-title-en="Moonstar" data-level="level 2" role="navigation" title="moonstar"> Moonstar </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/man/highlights-man/fun-formal" class="" target="_self" tabindex="0" data-id="fun-formal" data-title-en="Fun Formal" data-level="level 2" role="navigation" title="fun formal"> Fun Formal </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/man/highlights-man/peekaboo-man" class="" target="_self" tabindex="0" data-id="peekaboo-man" data-title-en="Peekaboo Man" data-level="level 2" role="navigation" title="peekaboo man"> Peekaboo Man </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/man/highlights-man/resort-2020" class="" target="_self" tabindex="0" data-id="resort-2020" data-title-en="Resort 2020" data-level="level 2" role="navigation" title="resort 2020"> Resort 2020 </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/man/highlights-man/spring-summer-2020" class="" target="_self" tabindex="0" data-id="springsummer-2020" data-title-en="Spring/Summer 2020" data-level="level 2" role="navigation" title="spring summer 2020"> Spring/Summer 2020 </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/man/highlights-man/fall-winter-2020-21" class="" target="_self" tabindex="0" data-id="fallwinter-2020-21" data-title-en="Fall/Winter 2020-21" data-level="level 2" role="navigation" title="fall winter 2020 21"> Fall/Winter 2020-21 </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-e02c53f9-7068-419f-9382-8564b8dd466a" data-mainmenu-xs-target="#uuid-e02c53f9-7068-419f-9382-8564b8dd466a" data-mainmenu-md-target="#uuid-e02c53f9-7068-419f-9382-8564b8dd466a" data-mainmenu-lg-target="#uuid-e02c53f9-7068-419f-9382-8564b8dd466a" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Bags" data-title-v2="/ca/man/bags" class=" nav-sub" href="https://www.fendi.com/ca/bags-man_1" title="bags man_1">Bags<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="2100" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Man</a><span class="subhome ">Bags</span>
+                 </div>
+                 <ul id="uuid-e02c53f9-7068-419f-9382-8564b8dd466a" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/bags-man_1" title="bags man_1">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/peekaboo" class="" target="_self" tabindex="0" data-id="peekaboo" data-title-en="Peekaboo" data-level="level 2" role="navigation" title="peekaboo"> Peekaboo </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/baguette" class="" target="_self" tabindex="0" data-id="baguette" data-title-en="Baguette" data-level="level 2" role="navigation" title="baguette"> Baguette </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/briefcases" class="" target="_self" tabindex="0" data-id="briefcases" data-title-en="Briefcases" data-level="level 2" role="navigation" title="briefcases"> Briefcases </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/backpacks" class="" target="_self" tabindex="0" data-id="backpacks" data-title-en="Backpacks" data-level="level 2" role="navigation" title="backpacks"> Backpacks </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/messenger-bags" class="" target="_self" tabindex="0" data-id="messenger-bags" data-title-en="Messenger Bags" data-level="level 2" role="navigation" title="messenger bags"> Messenger Bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/belt-bags-and-pouches" class="" target="_self" tabindex="0" data-id="belt-bags-&amp;-pouches" data-title-en="Belt Bags &amp; Pouches" data-level="level 2" role="navigation" title="belt bags and pouches"> Belt Bags &amp; Pouches </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/totes" class="" target="_self" tabindex="0" data-id="totes" data-title-en="Totes" data-level="level 2" role="navigation" title="totes"> Totes </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/bags-man_1/travel-bags" class="" target="_self" tabindex="0" data-id="travel-bags" data-title-en="Travel Bags" data-level="level 2" role="navigation" title="travel bags"> Travel Bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="2400"><a href="https://www.fendi.com/ca/bag-accessories-man" class="" target="_self" tabindex="0" data-id="shoulder-straps-&amp;-bag-accessories" data-title-en="Shoulder Straps &amp; Bag Accessories" data-level="level 2" role="navigation" title="bag accessories man"> Shoulder Straps &amp; Bag Accessories </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-51758a98-e5c2-42d1-a08d-46ab63b22589" data-mainmenu-xs-target="#uuid-51758a98-e5c2-42d1-a08d-46ab63b22589" data-mainmenu-md-target="#uuid-51758a98-e5c2-42d1-a08d-46ab63b22589" data-mainmenu-lg-target="#uuid-51758a98-e5c2-42d1-a08d-46ab63b22589" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Ready to wear" data-title-v2="/ca/man/ready-to-wear" class=" nav-sub" href="https://www.fendi.com/ca/ready-to-wear-man" title="ready to wear man">Ready to wear<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="2003" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Man</a><span class="subhome ">Ready to wear</span>
+                 </div>
+                 <ul id="uuid-51758a98-e5c2-42d1-a08d-46ab63b22589" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/ready-to-wear-man" title="ready to wear man">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/coats-and-jackets" class="" target="_self" tabindex="0" data-id="coats-&amp;-jackets" data-title-en="Coats &amp; Jackets" data-level="level 2" role="navigation" title="coats and jackets"> Coats &amp; Jackets </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/shirts" class="" target="_self" tabindex="0" data-id="shirts" data-title-en="Shirts" data-level="level 2" role="navigation" title="shirts"> Shirts </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/t-shirts-and-polos" class="" target="_self" tabindex="0" data-id="t-shirts-&amp;-polos" data-title-en="T-shirts &amp; Polos" data-level="level 2" role="navigation" title="t shirts and polos"> T-shirts &amp; Polos </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/knitwears" class="" target="_self" tabindex="0" data-id="knitwears" data-title-en="Knitwears" data-level="level 2" role="navigation" title="knitwears"> Knitwears </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/sweatshirts" class="" target="_self" tabindex="0" data-id="sweatshirts" data-title-en="Sweatshirts" data-level="level 2" role="navigation" title="sweatshirts"> Sweatshirts </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/denim-and-trousers" class="" target="_self" tabindex="0" data-id="denim-&amp;-trousers" data-title-en="Denim &amp; Trousers" data-level="level 2" role="navigation" title="denim and trousers"> Denim &amp; Trousers </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/beachwear" class="" target="_self" tabindex="0" data-id="beachwear" data-title-en="Beachwear" data-level="level 2" role="navigation" title="beachwear"> Beachwear </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/ready-to-wear-man/ties" class="" target="_self" tabindex="0" data-id="ties" data-title-en="Ties" data-level="level 2" role="navigation" title="ties"> Ties </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-109a7b9b-a8ec-4660-89ee-717f4fb2a79f" data-mainmenu-xs-target="#uuid-109a7b9b-a8ec-4660-89ee-717f4fb2a79f" data-mainmenu-md-target="#uuid-109a7b9b-a8ec-4660-89ee-717f4fb2a79f" data-mainmenu-lg-target="#uuid-109a7b9b-a8ec-4660-89ee-717f4fb2a79f" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Shoes" data-title-v2="/ca/man/shoes" class=" nav-sub" href="https://www.fendi.com/ca/shoes-man" title="shoes man">Shoes<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="2300" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Man</a><span class="subhome ">Shoes</span>
+                 </div>
+                 <ul id="uuid-109a7b9b-a8ec-4660-89ee-717f4fb2a79f" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/shoes-man" title="shoes man">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-man/sneakers" class="" target="_self" tabindex="0" data-id="sneakers" data-title-en="Sneakers" data-level="level 2" role="navigation" title="sneakers"> Sneakers </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-man/sandals-and-slides" class="" target="_self" tabindex="0" data-id="sandals-&amp;-slides" data-title-en="Sandals &amp; Slides" data-level="level 2" role="navigation" title="sandals and slides"> Sandals &amp; Slides </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-man/loafers-and-slippers" class="" target="_self" tabindex="0" data-id="loafers-&amp;-slippers" data-title-en="Loafers &amp; Slippers" data-level="level 2" role="navigation" title="loafers and slippers"> Loafers &amp; Slippers </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/shoes-man/lace-ups-and-boots" class="" target="_self" tabindex="0" data-id="lace-ups-&amp;-boots" data-title-en="Lace Ups &amp; Boots" data-level="level 2" role="navigation" title="lace ups and boots"> Lace Ups &amp; Boots </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-2b96daa8-7ad8-41a5-a630-1c59fb86a2b0" data-mainmenu-xs-target="#uuid-2b96daa8-7ad8-41a5-a630-1c59fb86a2b0" data-mainmenu-md-target="#uuid-2b96daa8-7ad8-41a5-a630-1c59fb86a2b0" data-mainmenu-lg-target="#uuid-2b96daa8-7ad8-41a5-a630-1c59fb86a2b0" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Accessories" data-title-v2="/ca/man/men-s-accessories" class=" nav-sub" href="https://www.fendi.com/ca/man/men-039-s-accessories" title="men 039 s accessories">Accessories<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Man</a><span class="subhome ">Accessories</span>
+                 </div>
+                 <ul id="uuid-2b96daa8-7ad8-41a5-a630-1c59fb86a2b0" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/man/men-039-s-accessories" title="men 039 s accessories">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="2200"><a href="https://www.fendi.com/ca/wallets-and-small-accessories-man" class="" target="_self" tabindex="0" data-id="wallets-&amp;-small-accessories" data-title-en="Wallets &amp; Small Accessories" data-level="level 2" role="navigation" title="wallets and small accessories man"> Wallets &amp; Small Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="2630"><a href="https://www.fendi.com/ca/belts-man" class="" target="_self" tabindex="0" data-id="belts" data-title-en="Belts" data-level="level 2" role="navigation" title="belts man"> Belts </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="2400"><a href="https://www.fendi.com/ca/bag-accessories-man" class="" target="_self" tabindex="0" data-id="shoulder-straps-&amp;-bag-accessories" data-title-en="Shoulder Straps &amp; Bag Accessories" data-level="level 2" role="navigation" title="bag accessories man"> Shoulder Straps &amp; Bag Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="2450"><a href="https://www.fendi.com/ca/fashion-jewelry-man" class="" target="_self" tabindex="0" data-id="fashion-jewellery" data-title-en="Fashion Jewellery" data-level="level 2" role="navigation" title="fashion jewelry man"> Fashion Jewellery </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="2470"><a href="https://www.fendi.com/ca/textile-accessories-man" class="" target="_self" tabindex="0" data-id="textile-accessories" data-title-en="Textile Accessories" data-level="level 2" role="navigation" title="textile accessories man"> Textile Accessories </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category="5001"><a href="https://www.fendi.com/ca/book-man" class="" target="_self" tabindex="0" data-id="books" data-title-en="Books" data-level="level 2" role="navigation" title="book man"> Books </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div></li>
+           <li data-mainmenu-lg-target="#gift-ideas-popover" data-mainmenu-md-target="#gift-ideas-popover" aria-haspopup="true" role="menuitem" class=""><a href="#" target="_self" aria-selected="false" data-title-en="gift-ideas" role="menuitemradio" data-expandable-modal="true" data-menu-clickable="false" class="main menu-switch-gift-ideas" data-level="level 1" rel="noopener noreferrer"> Gift Ideas <i class="hidden-md hidden-lg chevron right"></i></a>
+            <div data-aria-focus-esc-lg="*md" data-aria-focus-esc-md=".menu-switch-gift-ideas" data-aria-focus-loop-lg="*md" data-aria-focus-loop-md=".subcategories a" data-aria-focus-loop-sm="*xs" data-aria-focus-loop-xs=">a,.nav-sub[data-level='level 2']" id="gift-ideas-popover" class="subnavigator popover ">
+             <a class="visible-xs visible-sm nav-back" href="#"><i class="chevron left"></i>Back</a><span class="subhome "> Gift Ideas</span>
+             <div class="subcategories">
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-34743b79-1a99-4cb6-9ac2-2ebf0ce2bdac" data-mainmenu-xs-target="#uuid-34743b79-1a99-4cb6-9ac2-2ebf0ce2bdac" data-mainmenu-md-target="#uuid-34743b79-1a99-4cb6-9ac2-2ebf0ce2bdac" data-mainmenu-lg-target="#uuid-34743b79-1a99-4cb6-9ac2-2ebf0ce2bdac" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="FOR HER" data-title-v2="/ca/gift-ideas/Gifts/for-her" class=" nav-sub" href="https://www.fendi.com/ca/gift-ideas/gifts/for-her" title="for her">FOR HER<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/updates/update_17_12_19/fendi_cny_menu_gift_woman/original/fendi_cny_menu_gift_woman.jpg" data-link="https://www.fendi.com/ca/gift-ideas/gifts/for-her">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Gift Ideas</a><span class="subhome ">FOR HER</span>
+                 </div>
+                 <ul id="uuid-34743b79-1a99-4cb6-9ac2-2ebf0ce2bdac" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/gift-ideas/gifts/for-her" title="for her">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-her-gift-ideas_10?q=:relevance:category2:1200" class="" target="_self" tabindex="0" data-id="bags" data-title-en="Bags" data-level="level 2" role="navigation" title="for her gift ideas_10"> Bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-her-gift-ideas_10?q=:relevance:category2:1101" class="" target="_self" tabindex="0" data-id="ready-to-wear" data-title-en="Ready to wear" data-level="level 2" role="navigation" title="for her gift ideas_10"> Ready to wear </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-her-gift-ideas_10?q=:relevance:category2:1500" class="" target="_self" tabindex="0" data-id="shoes" data-title-en="Shoes" data-level="level 2" role="navigation" title="for her gift ideas_10"> Shoes </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-her-gift-ideas_10?q=:relevance:category2:1200a:category2:1700:category2:1300:category2:1900:category2:1800:category2:1600" class="" target="_self" tabindex="0" data-id="accessories" data-title-en="Accessories" data-level="level 2" role="navigation" title="for her gift ideas_10"> Accessories </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-8600faf7-34b9-4dad-baa4-33f59c2b1135" data-mainmenu-xs-target="#uuid-8600faf7-34b9-4dad-baa4-33f59c2b1135" data-mainmenu-md-target="#uuid-8600faf7-34b9-4dad-baa4-33f59c2b1135" data-mainmenu-lg-target="#uuid-8600faf7-34b9-4dad-baa4-33f59c2b1135" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="FOR HIM" data-title-v2="/ca/gift-ideas/Gifts/for-him" class=" nav-sub" href="https://www.fendi.com/ca/gift-ideas/gifts/for-him" title="for him">FOR HIM<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/updates/update_17_12_19/fendi_cny_menu_gift_man/original/fendi_cny_menu_gift_man.jpg" data-link="https://www.fendi.com/ca/gift-ideas/gifts/for-him">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Gift Ideas</a><span class="subhome ">FOR HIM</span>
+                 </div>
+                 <ul id="uuid-8600faf7-34b9-4dad-baa4-33f59c2b1135" role="menu" class=" ">
+                  <li role="menuitem" class="view-all"><a href="https://www.fendi.com/ca/gift-ideas/gifts/for-him" title="for him">View all</a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-him-gift-ideas_8?q=:relevance:category2:2100" class="" target="_self" tabindex="0" data-id="bags" data-title-en="Bags" data-level="level 2" role="navigation" title="for him gift ideas_8"> Bags </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-him-gift-ideas_8?q=:relevance:category2:2003" class="" target="_self" tabindex="0" data-id="ready-to-wear" data-title-en="Ready to wear" data-level="level 2" role="navigation" title="for him gift ideas_8"> Ready to wear </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-him-gift-ideas_8?q=:relevance:category2:2300" class="" target="_self" tabindex="0" data-id="shoes" data-title-en="Shoes" data-level="level 2" role="navigation" title="for him gift ideas_8"> Shoes </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/for-him-gift-ideas_8?q=:relevance:category2:2470:category2:2400:category2:2200:category2:2630:category2:2450:category2:2700" class="" target="_self" tabindex="0" data-id="accessories" data-title-en="Accessories" data-level="level 2" role="navigation" title="for him gift ideas_8"> Accessories </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div></li>
+           <li data-mainmenu-lg-target="#kids-popover" data-mainmenu-md-target="#kids-popover" aria-haspopup="true" role="menuitem" class=""><a href="#" target="_self" aria-selected="false" data-title-en="4000 - KIDS" role="menuitemradio" data-expandable-modal="true" data-menu-clickable="false" class="main menu-switch-kids" data-level="level 1" rel="noopener noreferrer"> Kids <i class="hidden-md hidden-lg chevron right"></i></a>
+            <div data-aria-focus-esc-lg="*md" data-aria-focus-esc-md=".menu-switch-kids" data-aria-focus-loop-lg="*md" data-aria-focus-loop-md=".subcategories a" data-aria-focus-loop-sm="*xs" data-aria-focus-loop-xs=">a,.nav-sub[data-level='level 2']" id="kids-popover" class="subnavigator popover ">
+             <a class="visible-xs visible-sm nav-back" href="#"><i class="chevron left"></i>Back</a><span class="subhome "> Kids</span>
+             <div class="subcategories">
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-3d33c1eb-f326-4410-86ef-b1ee6ff4b689" data-mainmenu-xs-target="#uuid-3d33c1eb-f326-4410-86ef-b1ee6ff4b689" data-mainmenu-md-target="#uuid-3d33c1eb-f326-4410-86ef-b1ee6ff4b689" data-mainmenu-lg-target="#uuid-3d33c1eb-f326-4410-86ef-b1ee6ff4b689" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="BABY" data-title-v2="" class="no-follow-lg nav-sub" href="#">BABY<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/kids/menu_baby/original/menu_baby.jpg" data-link="">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Kids</a><span class="subhome ">BABY</span>
+                 </div>
+                 <ul id="uuid-3d33c1eb-f326-4410-86ef-b1ee6ff4b689" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/luxury-kids-wear-children-039-s-clothing/lookbook-baby" class="" target="_self" tabindex="0" data-id="discover-the-looks" data-title-en="Discover the looks" data-level="level 2" role="navigation" title="lookbook baby"> Discover the looks </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-4edb244f-088e-4fbc-aa5a-d0391f541e22" data-mainmenu-xs-target="#uuid-4edb244f-088e-4fbc-aa5a-d0391f541e22" data-mainmenu-md-target="#uuid-4edb244f-088e-4fbc-aa5a-d0391f541e22" data-mainmenu-lg-target="#uuid-4edb244f-088e-4fbc-aa5a-d0391f541e22" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="KIDS" data-title-v2="" class="no-follow-lg nav-sub" href="#">KIDS<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/kids/menu_kids/original/menu_kids.jpg" data-link="">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Kids</a><span class="subhome ">KIDS</span>
+                 </div>
+                 <ul id="uuid-4edb244f-088e-4fbc-aa5a-d0391f541e22" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/luxury-kids-wear-children-039-s-clothing/lookbook-kids" class="" target="_self" tabindex="0" data-id="discover-the-looks" data-title-en="Discover the looks" data-level="level 2" role="navigation" title="lookbook kids"> Discover the looks </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div></li>
+           <li data-mainmenu-lg-target="#casa-popover" data-mainmenu-md-target="#casa-popover" aria-haspopup="true" role="menuitem" class=""><a href="https://www.fendi.com/ca/casa" target="_self" aria-selected="false" data-title-en="Casa - subhome" role="menuitemradio" data-expandable-modal="true" data-menu-clickable="true" class="main menu-switch-casa" data-level="level 1" title="casa"> Casa <i class="hidden-md hidden-lg chevron right"></i></a>
+            <div data-aria-focus-esc-lg="*md" data-aria-focus-esc-md=".menu-switch-casa" data-aria-focus-loop-lg="*md" data-aria-focus-loop-md=".subcategories a" data-aria-focus-loop-sm="*xs" data-aria-focus-loop-xs=">a,.nav-sub[data-level='level 2']" id="casa-popover" class="subnavigator popover ">
+             <a class="visible-xs visible-sm nav-back" href="#"><i class="chevron left"></i>Back</a><a href="https://www.fendi.com/ca/casa" target="_self" data-label-id="Discover More" aria-hidden="true" class="subhome " title="casa"> Scopri di più <i class="hidden-md hidden-lg chevron right"></i></a>
+             <div class="subcategories">
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-509b694c-f3b3-4a3c-b127-0b721bc3f462" data-mainmenu-xs-target="#uuid-509b694c-f3b3-4a3c-b127-0b721bc3f462" data-mainmenu-md-target="#uuid-509b694c-f3b3-4a3c-b127-0b721bc3f462" data-mainmenu-lg-target="#uuid-509b694c-f3b3-4a3c-b127-0b721bc3f462" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Collection" data-title-v2="" class="no-follow-lg nav-sub" href="#">Collection<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Casa</a><span class="subhome ">Collection</span>
+                 </div>
+                 <ul id="uuid-509b694c-f3b3-4a3c-b127-0b721bc3f462" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news" class="" target="_self" tabindex="0" data-id="latest-news" data-title-en="Latest News" data-level="level 2" role="navigation" title="latest news"> Latest News </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news#living" class="" target="_self" tabindex="0" data-id="living" data-title-en="Living" data-level="level 2" role="navigation" title="latest news"> Living </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news#dining" class="" target="_self" tabindex="0" data-id="dining" data-title-en="Dining" data-level="level 2" role="navigation" title="latest news"> Dining </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news#kitchen" class="" target="_self" tabindex="0" data-id="kitchen" data-title-en="Kitchen" data-level="level 2" role="navigation" title="latest news"> Kitchen </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news#bedroom" class="" target="_self" tabindex="0" data-id="sleep" data-title-en="Sleep" data-level="level 2" role="navigation" title="latest news"> Sleep </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news#luce" class="" target="_self" tabindex="0" data-id="luce" data-title-en="Luce" data-level="level 2" role="navigation" title="latest news"> Luce </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/collection/latest-news#outdoor" class="" target="_self" tabindex="0" data-id="outdoor" data-title-en="Outdoor" data-level="level 2" role="navigation" title="latest news"> Outdoor </a></li>
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/services-fendi" class="" target="_self" tabindex="0" data-id="find-boutique" data-title-en="Find Boutique" data-level="level 2" role="navigation" title="services fendi"> Find Boutique </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-db5acf86-444d-4b4e-b0ee-8d3613f52cc7" data-mainmenu-xs-target="#uuid-db5acf86-444d-4b4e-b0ee-8d3613f52cc7" data-mainmenu-md-target="#uuid-db5acf86-444d-4b4e-b0ee-8d3613f52cc7" data-mainmenu-lg-target="#uuid-db5acf86-444d-4b4e-b0ee-8d3613f52cc7" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Fendi Casa - il Viaggio" data-title-v2="" class="no-follow-lg nav-sub" href="#">Fendi Casa - il Viaggio<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/casa/casa_2019/il_viaggio/il-viaggio_menu_thumb/original/il-viaggio_menu_thumb.jpg" data-link="">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Casa</a><span class="subhome ">Fendi Casa - il Viaggio</span>
+                 </div>
+                 <ul id="uuid-db5acf86-444d-4b4e-b0ee-8d3613f52cc7" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/il-viaggio" class="" target="_self" tabindex="0" data-id="discover" data-title-en="Discover" data-level="level 2" role="navigation" title="il viaggio"> Discover </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-12d27b10-7c1e-4ad0-aa01-57b54e22135b" data-mainmenu-xs-target="#uuid-12d27b10-7c1e-4ad0-aa01-57b54e22135b" data-mainmenu-md-target="#uuid-12d27b10-7c1e-4ad0-aa01-57b54e22135b" data-mainmenu-lg-target="#uuid-12d27b10-7c1e-4ad0-aa01-57b54e22135b" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Interior Design" data-title-v2="" class="no-follow-lg nav-sub" href="#">Interior Design<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/casa_2017/interior_menu/original/interior_menu2.jpg" data-link="">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Casa</a><span class="subhome ">Interior Design</span>
+                 </div>
+                 <ul id="uuid-12d27b10-7c1e-4ad0-aa01-57b54e22135b" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/interior-design/all-projects" class="" target="_self" tabindex="0" data-id="view-all-projects" data-title-en="View All Projects" data-level="level 2" role="navigation" title="all projects"> View All Projects </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+              <div class="group 0">
+               <div class="exp ">
+                <span data-mainmenu-sm-target="#uuid-fb89afbf-a060-481a-967b-e439a30a964b" data-mainmenu-xs-target="#uuid-fb89afbf-a060-481a-967b-e439a30a964b" data-mainmenu-md-target="#uuid-fb89afbf-a060-481a-967b-e439a30a964b" data-mainmenu-lg-target="#uuid-fb89afbf-a060-481a-967b-e439a30a964b" style="" class="nav-sub main-sub"><a data-aria-haspopup-sm="*xs" data-aria-haspopup-xs="true" aria-expanded="true" aria-haspopup="false" data-level="level 2" data-title-en="Fendi Casa Icons" data-title-v2="" class="no-follow-lg nav-sub" href="#">Fendi Casa Icons<i class="hidden-md hidden-lg chevron right"></i></a></span>
+                <div class="wrapper-nav-img">
+                 <img title="" alt="" src="https://static.www.fendi.com/mediaObject/fendi/casa_2017/icons_menu2/original/icons_menu2.jpg" data-link="">
+                </div>
+                <div data-aria-focus-loop-sm="a" data-aria-focus-loop-xs="a" data-category="" class="subnavigator subnavigator-sm">
+                 <div class="visible-xs visible-sm">
+                  <a class="nav-back" href="#"><i class="chevron left"></i>Back to Casa</a><span class="subhome ">Fendi Casa Icons</span>
+                 </div>
+                 <ul id="uuid-fb89afbf-a060-481a-967b-e439a30a964b" role="menu" class=" ">
+                  <li role="menuitem" class="leaf 0 " data-category=""><a href="https://www.fendi.com/ca/casa/fendi-casa-icons/all-projects" class="" target="_self" tabindex="0" data-id="view-all-projects" data-title-en="View All Projects" data-level="level 2" role="navigation" title="all projects"> View All Projects </a></li>
+                 </ul>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div></li>
+          </ul>
+         </div>
+         <footer class="visible-xs visible-sm highlights">
+          <ul class="first-level">
+           <li class=""><a data-popover-target="#telephone-information" href="" class="ico customer-service-link"><i class="iconfendi-telephone"></i><span class="label">Customer Service</span></a></li>
+           <li class=""><a href="https://www.fendi.com/ca/wishlist" class="ico wishlist-link" title="wishlist"><i class="iconfendi-wishlist"></i><span class="label">Wishlist</span></a></li>
+           <li class=""><a href="https://www.fendi.com/ca/services-fendi" class="ico store-locator-link" title="services fendi"><i class="iconfendi-pin"></i><span class="label">Store Locator</span></a></li>
+           <li class=""><a class="active" data-popover-skip-hover="true" aria-expanded="true" data-popover-target="#countries" href="#"> Shipping to: <span class="cur-sel">Canada</span></a></li>
+           <li class=""><a data-aria-focus-next-sm="nav.main first-level li:first a" data-aria-focus-next-xs="nav.main li:first a" class="active" data-popover-skip-hover="true" aria-expanded="true" data-popover-target="#language-xs" href="#"> Language: <span class="cur-sel">English</span></a></li>
+          </ul>
+         </footer>
+        </section>
+       </div>
+       <hr class="fendi-land-divider"><button data-aria-key-if=".in" data-aria-key="esc" class="hidden-md hidden-lg hidden-xl close"></button>
+      </nav>
+      <div data-open="false" aria-hidden="true" class="js-minicart-container minicart-paypal" id="minicart">
+       <header>
+        <ul role="tablist" class="tabs nav nav-tabs">
+         <li role="presentation" class="active">
+          <div aria-controls="minicart-content" class="ico bag">
+            Shopping Bag <i class="iconfendi-bag"><span class="count js-cart-items-counter">0</span></i>
+          </div></li>
+        </ul><span class="close visible-xs visible-sm"></span>
+       </header>
+       <div class="tab-content">
+        <div role="tabpanel" id="minicart-content" data-url="/ca/action/minicart" class="tab-pane fade in active js-minicart"></div>
+       </div>
+      </div>
+      <div class="user-utils">
+       <div id="login-popup">
+        <a href="https://www.fendi.com/ca/login" class="btn btn-primary" title="login"> Sign in to your account </a>
+        <div class="register-pane">
+          Not registered yet? <a href="https://www.fendi.com/ca/login" title="login"> Create an account </a>
+        </div>
+       </div><button data-popover-focus="input[type='search']" data-popover-skip-hover="true" data-toggle-html-class="hamburger-open" data-popover-hideloading="true" data-popover-target="#search-bar" aria-label="Search" class="ico" id="js-search-btn"><i class="iconfendi-search"></i><span class="text">Search</span></button><button data-toggle-html-class="hamburger-open" data-popover-skip-hover="true" data-popover-target="#login-register-popover" aria-label="Log in/Register" class="ico"><i class="iconfendi-user"></i></button><a data-wishlist-arialabel="Wishlist" href="https://www.fendi.com/ca/wishlist" aria-label="" class="ico wishlist js-miniwishlist-link hidden-xs hidden-sm" title="wishlist"><i class="iconfendi-wishlist"></i><span class="count js-wishlist-items-counter"></span><span class="text">Wishlist</span></a><button data-minicart-arialabel="Shopping Bag" data-tab="#minicart-content" data-menu="#minicart" data-menu-html-class="minicart-in" aria-label="Shopping Bag: 0 item" class="ico bag js-minicart-link"><i class="iconfendi-bag"></i><span class="count js-cart-items-counter"></span><span class="text">Shopping Bag</span></button>
+      </div>
+      <div data-remote="/ca/action/modals/nearest-boutique" id="boutique-nearest" aria-hidden="true" class="popover"></div>
+      <div aria-hidden="true" id="telephone-information" class="popover">
+       <i class="ico iconfendi-telephone"></i><span>Customer Care</span>
+       <h4> Contact us by phone at +1 647 494 3707 </h4>
+       <p>We're happy to help with any questions you may have regarding our products, orders or corporate information.</p><a class="more-info" href="https://www.fendi.com/ca/info/customer-care/contact-us" title="contact us">More info</a>
+      </div>
+      <div class="popover full login-register" id="login-register-popover" aria-hidden="true" role="dialog" data-remote="/ca/action/modals/auth?targeturl=%2Fca%2F" data-remote-callback="App.Pages.Header.buildCarousel()"></div>
+      <div class="popover full " id="search-bar" aria-hidden="true" role="dialog" data-remote="/ca/search-results?bar=true"></div>
+      <div class="popover full " id="countries" aria-hidden="true" role="dialog" data-remote="/ca/action/modals/country-selector"></div>
+      <div class="popover full " id="language-xs" aria-hidden="true" role="dialog" data-remote="/ca/action/modals/languages-selector"></div>
+     </div>
+    </div>
+   </header>
+   <div id="fixable">
+    <main class="" role="main" id="wrapper">
+     <div class="container-fluid">
+      <h1 class="hidden">FENDI | Official Online Store</h1>
+      <h2 class="hidden">Shop the best Fendi collections for women, men and kids online: runway looks, bags, accessories, jewelry and much more. Made in Italy. </h2>
+      <div data-introppoup-url="https://www.fendi.com/ca/action/siteintro" class="home">
+       <section data-autoplay="false" data-slides-to-show="1" data-dots="true" data-fade="true" data-custom-arrows="true" data-autoplay-speed="3000" class="carousel list-unstyled js-hero-banner hero-banner carousel-lazy custom-arrows fixed-ratio">
+        <div class="js-hero-banner-item item">
+         <figure class="" data-link="https://www.fendi.com/ca/woman/highlights-woman/spring-summer-2020-must-haves-items">
+          <picture data-link="https://www.fendi.com/ca/woman/highlights-woman/spring-summer-2020-must-haves-items">
+           <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_1_Mobile/original/Fendi_Hp_Update_Banner_1_Mobile.jpg" media="(max-width: 767px)">
+           <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_1_Desktop/original/Fendi_Hp_Update_Banner_1_Desktop.jpg" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+           <img alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_1_Desktop/original/Fendi_Hp_Update_Banner_1_Desktop.jpg">
+          </picture>
+          <figcaption class="js-caption " data-viewport="true">
+           <h2 class="widget-title">Newness alert: Spring Summer 2020 arrivals</h2><a href="https://www.fendi.com/ca/woman/highlights-woman/spring-summer-2020-must-haves-items" class="read-more-ico btn btn-primary call-to-action " data-viewport="true" bisbanner="true" title="spring summer 2020 must haves items"> shop now </a>
+          </figcaption>
+         </figure>
+        </div>
+       </section>
+       <section class="fased-carousel">
+        <h2 data-placement-nav="" data-richrelevancecriteria="" class="text-center "> our suggestions </h2>
+        <div class="carousel" data-slides-to-show="4" data-accessibility="true" data-slides-to-scroll="4" data-slides-to-scroll-xs="2" data-slides-to-show-xs="2" data-dots="true" data-autoplay="false" data-infinite="true" data-custom-arrows="true" data-append-dots-xs=".fased-carousel">
+         <div class="item">
+          <a href="https://www.fendi.com/ca/bags-woman_9/peekaboo-iconic-medium-8bn290abhyf192e" title="peekaboo iconic medium 8bn290abhyf192e">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h08/h95/8993943322654/8BN290ABHYF192E_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h08/h95/8993943322654/8BN290ABHYF192E_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>PEEKABOO ICONIC MEDIUM</h2>
+              <p>Yellow leather interlace bag</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="7600" itemprop="price"><span class="price "> C$ 7,600.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/bag-accessories-woman/strap-you-8av134acwpf0u4d" title="strap you 8av134acwpf0u4d">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/haf/h2b/8996208148510/8AV134ACWPF0U4D_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/haf/h2b/8996208148510/8AV134ACWPF0U4D_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>STRAP YOU</h2>
+              <p>Green ribbon shoulder strap</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="990" itemprop="price"><span class="price "> C$ 990.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/bags-man_1/peekaboo-x-lite-fit-7va447abgbf09pn" title="peekaboo x lite fit 7va447abgbf09pn">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h8e/h1c/8974291271710/7VA447ABGBF09PN_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h8e/h1c/8974291271710/7VA447ABGBF09PN_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>PEEKABOO X-LITE FIT</h2>
+              <p>Gray leather bag</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="4800" itemprop="price"><span class="price "> C$ 4,800.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/shoes-man/sneakers-7e1347aawzf19o5" title="sneakers 7e1347aawzf19o5">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h08/had/8974134280222/7E1347AAWZF19O5_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h08/had/8974134280222/7E1347AAWZF19O5_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>SNEAKERS</h2>
+              <p>Multicolor tech knit high-tops</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="1100" itemprop="price"><span class="price "> C$ 1,100.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/shoes-woman/slingbacks-8x7067aaxhf0vau" title="slingbacks 8x7067aaxhf0vau">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h49/h89/8994259533854/8X7067AAXHF0VAU_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h49/h89/8994259533854/8X7067AAXHF0VAU_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>SLINGBACKS</h2>
+              <p>Brown fabric sandals</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="990" itemprop="price"><span class="price "> C$ 990.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/ready-to-wear-woman/sweater-fs7298ac4hf1aky" title="sweater fs7298ac4hf1aky">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h75/hb3/8994420588574/FS7298AC4HF1AKY_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h75/hb3/8994420588574/FS7298AC4HF1AKY_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>SWEATER</h2>
+              <p>Check sequin sweater</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="2450" itemprop="price"><span class="price "> C$ 2,450.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/textile-accessories-man/hat-fxq789abckf1a7t" title="hat fxq789abckf1a7t">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h7c/h6a/8974619443230/FXQ789ABCKF1A7T_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h7c/h6a/8974619443230/FXQ789ABCKF1A7T_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>HAT</h2>
+              <p>Beige canvas bucket hat</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="610" itemprop="price"><span class="price "> C$ 610.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/shoes-man/fendi-and-moonstar-sneakers-7e1355aax4f19od" title="fendi and moonstar sneakers 7e1355aax4f19od">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h93/h78/9008093986846/7E1355AAX4F19OD_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h93/h78/9008093986846/7E1355AAX4F19OD_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>FENDI AND MOONSTAR SNEAKERS</h2>
+              <p>High-tops in canvas and brown rubber</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="1190" itemprop="price"><span class="price "> C$ 1,190.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/bags-woman_9/baguette-8br600a9p2f1a18" title="baguette 8br600a9p2f1a18">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/hab/h80/8961388576798/8BR600A9P2F1A18_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/hab/h80/8961388576798/8BR600A9P2F1A18_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>BAGUETTE</h2>
+              <p>Blue denim bag</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="3100" itemprop="price"><span class="price "> C$ 3,100.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/shoes-woman/sneakers-8e7043a8p5f18s5" title="sneakers 8e7043a8p5f18s5">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h0a/h9e/8961750499358/8E7043A8P5F18S5_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h0a/h9e/8961750499358/8E7043A8P5F18S5_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>SNEAKERS</h2>
+              <p>Low-tops in black suede</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="990" itemprop="price"><span class="price "> C$ 990.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/wallets-and-small-accessories-man/wallet-7m0169ab00f1ae4" title="wallet 7m0169ab00f1ae4">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h6b/ha8/8974171340830/7M0169AB00F1AE4_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h6b/ha8/8974171340830/7M0169AB00F1AE4_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>WALLET</h2>
+              <p>Brown leather bi-fold wallet</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="520" itemprop="price"><span class="price "> C$ 520.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+         <div class="item">
+          <a href="https://www.fendi.com/ca/fashion-jewelry-woman/pico-baguette-charm-7ar845abqqf060z" title="pico baguette charm 7ar845abqqf060z">
+           <figure>
+            <picture>
+             <source srcset="https://images.www.fendi.com/images/h54/he5/8993789870110/7AR845ABQQF060Z_01_medium#category-a-medium" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+             <img alt="" src="https://images.www.fendi.com/images/h54/he5/8993789870110/7AR845ABQQF060Z_01_medium#category-a-medium">
+            </picture>
+            <figcaption>
+             <div class="inner">
+              <h2>PICO BAGUETTE CHARM</h2>
+              <p>Charm with pink beads</p>
+              <h2>
+               <div itemtype="http://schema.org/Offer" itemscope itemprop="offers" class="prices ">
+                <meta content="CAD" itemprop="priceCurrency">
+                <meta content="860" itemprop="price"><span class="price "> C$ 860.00 </span>
+                <link href="http://schema.org/InStock" itemprop="availability">
+               </div></h2>
+             </div>
+            </figcaption>
+           </figure></a>
+         </div>
+        </div>
+       </section>
+       <section class="mobile-categories visible-xs">
+        <ul class="list-unstyled">
+         <li><a href="https://www.fendi.com/ca/new-arrivals-woman" title="new arrivals woman">Woman<span class="arrow3"></span></a></li>
+         <li><a href="https://www.fendi.com/ca/new-arrivals-man" title="new arrivals man">Man<span class="arrow3"></span></a></li>
+         <li><a href="https://www.fendi.com/ca/bags-woman_9" title="bags woman_9">Woman's Bag<span class="arrow3"></span></a></li>
+         <li><a href="https://www.fendi.com/ca/bags-woman_9/peekaboo" title="peekaboo">Peekaboo For Her<span class="arrow3"></span></a></li>
+        </ul>
+       </section>
+       <div class="twin-media">
+        <section class="media left ">
+         <figure class="" data-link="https://www.fendi.com/ca/woman/highlights-woman/fendi-baguette">
+          <picture data-link="https://www.fendi.com/ca/woman/highlights-woman/fendi-baguette">
+           <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_2_Mobile/original/Fendi_Hp_Update_Banner_2_Mobile.jpg" media="(max-width: 767px)">
+           <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_2_Desktop/original/Fendi_Hp_Update_Banner_2_Desktop.jpg" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+           <img alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_2_Desktop/original/Fendi_Hp_Update_Banner_2_Desktop.jpg">
+          </picture>
+          <figcaption class="js-caption " data-viewport="true">
+           <p><span class="widget-title">Hello, Miami! </span><a href="https://www.fendi.com/ca/woman/highlights-woman/fendi-baguette" class="read-more-ico boxed-cta btn btn-primary call-to-action " data-viewport="true" title="fendi baguette"> Shop the Baguette edit </a></p>
+          </figcaption>
+         </figure>
+        </section>
+        <section class="media right ">
+         <figure class="" data-link="https://www.fendi.com/ca/man/highlights-man/spring-summer-2020">
+          <picture data-link="https://www.fendi.com/ca/man/highlights-man/spring-summer-2020">
+           <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_3_Mobile/original/Fendi_Hp_Update_Banner_3_Mobile.jpg" media="(max-width: 767px)">
+           <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_3_Desktop/original/Fendi_Hp_Update_Banner_3_Desktop.jpg" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+           <img alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_3_Desktop/original/Fendi_Hp_Update_Banner_3_Desktop.jpg">
+          </picture>
+          <figcaption class="js-caption " data-viewport="true">
+           <p><span class="widget-title">Seasonal Masterpieces</span><a href="https://www.fendi.com/ca/man/highlights-man/spring-summer-2020" class="read-more-ico boxed-cta btn btn-primary call-to-action " data-viewport="true" title="spring summer 2020"> Shop Now </a></p>
+          </figcaption>
+         </figure>
+        </section>
+       </div>
+       <section class="categories-launch">
+        <ul class="list-unstyled">
+         <li class="item ">
+          <figure class="" data-link="https://www.fendi.com/ca/fisfor">
+           <picture data-link="https://www.fendi.com/ca/fisfor">
+            <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_4_Mobile/original/Fendi_Hp_Update_Banner_4_Mobile.jpg" media="(max-width: 767px)">
+            <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_4_Desktop/original/Fendi_Hp_Update_Banner_4_Desktop.jpg" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+            <img alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_4_Desktop/original/Fendi_Hp_Update_Banner_4_Desktop.jpg">
+           </picture>
+           <figcaption class="js-caption " data-viewport="true">
+            <p><span class="widget-title">F is For…</span><a href="https://www.fendi.com/ca/fisfor" class="read-more-ico underlined-cta btn btn-primary call-to-action " data-viewport="true" title="fisfor"> Discover more </a></p>
+           </figcaption>
+          </figure></li>
+         <li class="item ">
+          <figure class="" data-link="https://www.fendi.com/ca/bags-man_1/peekaboo">
+           <picture data-link="https://www.fendi.com/ca/bags-man_1/peekaboo">
+            <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_5_Mobile/original/Fendi_Hp_Update_Banner_5_Mobile.jpg" media="(max-width: 767px)">
+            <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_5_Desktop/original/Fendi_Hp_Update_Banner_5_Desktop.jpg" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+            <img alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/2020.03.27_Hp_Update_WW/2020.03.27_Hp_Update_WW/Fendi_Hp_Update_Banner_5_Desktop/original/Fendi_Hp_Update_Banner_5_Desktop.jpg">
+           </picture>
+           <figcaption class="js-caption " data-viewport="true">
+            <p><span class="widget-title">The timeless luxury of Peekaboo</span><a href="https://www.fendi.com/ca/bags-man_1/peekaboo" class="read-more-ico underlined-cta btn btn-primary call-to-action " data-viewport="true" title="peekaboo"> Shop </a></p>
+           </figcaption>
+          </figure></li>
+         <li class="item ">
+          <figure class="" data-link="https://www.fendi.com/ca/shoes-woman/boots-and-booties">
+           <picture data-link="https://www.fendi.com/ca/shoes-woman/boots-and-booties">
+            <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/UpdateHP/Fendi_New_Boots_Mobile/original/Fendi_New_Boots_Mobile.jpg" media="(max-width: 767px)">
+            <source srcset="https://static.www.fendi.com/mediaObject/fendi/homepage/UpdateHP/Fendi_New_Boots_Desktop/original/Fendi_New_Boots_Desktop.jpg" media="net.sourceforge.openutils.mgnlmedia.media.tags.el.MediaEl@1ce96608">
+            <img alt="" src="https://static.www.fendi.com/mediaObject/fendi/homepage/UpdateHP/Fendi_New_Boots_Desktop/original/Fendi_New_Boots_Desktop.jpg">
+           </picture>
+           <figcaption class="js-caption " data-viewport="true">
+            <p><span class="widget-title">The ultimate power boots</span><a href="https://www.fendi.com/ca/shoes-woman/boots-and-booties" class="read-more-ico underlined-cta btn btn-primary call-to-action " data-viewport="true" title="boots and booties"> Shop now </a></p>
+           </figcaption>
+          </figure></li>
+        </ul>
+       </section>
+      </div>
+      <div class="ab-test"></div><a class="page-scroll-down js-scroll-down bottomRight"><img src="https://www.fendi.com/images/fendi-arrow.gif" alt="fendi arrow" title="fendi arrow"></a>
+     </div>
+    </main>
+    <footer class="main" id="site-footer">
+     <h2 class="sr-only">Footer</h2>
+     <div class="container-fluid">
+      <div class="upper-bar">
+       <div data-modal-title="Subscribe to our Newsletter" data-haserrors="false" data-is-modal="" data-modal-close-text="Close" data-nl-modal-title="Subscribe to our Newsletter" class="newsletter-form js-newsletter-container modal-false">
+        <h3 class="h-main">Subscribe to our Newsletter</h3>
+        <form id="newsletterForm" data-replace-element=".js-newsletter-container" data-remote="true" data-action="/ca/action/newsletter/subscribe?modal=false&amp;isExclusive=false" class="js-newsletter-form " action="https://www.fendi.com/ca/black-leather-bag/p-8bs019a4k5f0kur" method="post" autocomplete="off">
+         <div class=""></div>
+         <div class="entry">
+          <div class="form-group">
+           <input id="subscribe-newsletter" name="email" data-show=".completion" data-down="true" data-slide="false" placeholder="Enter your email address" type="email" class="form-control" aria-label="Email" required value="" autocomplete="email">
+          </div>
+         </div>
+         <div class="completion ---- ">
+          <div class="disclaimer">
+           <p>To receive more personalised content, including access to special events and the latest news in your area, please provide the following details:</p>
+          </div>
+          <div class="grouping-row">
+           <div class="form-group title">
+            <label for="titleCodeNl">Title*</label><select id="titleCodeNl" name="titleCode" autocomplete="honorific-prefix" aria-required="true" type="text" class="form-control " aria-label="Title*" required><option aria-hidden="true" value=""></option><option value="mrs">Mrs</option><option value="ms">Ms</option><option value="miss">Miss</option><option value="mr">Mr</option></select>
+           </div>
+           <div class="form-group name">
+            <label for="firstNameNl">First Name* </label>
+            <input id="firstNameNl" name="firstName" aria-required="true" type="text" class="form-control " aria-label="First Name*" required value="" maxlength="150" autocomplete="given-name">
+           </div>
+           <div class="form-group surname">
+            <label for="lastNameNl">Last Name* </label>
+            <input id="lastNameNl" name="lastName" aria-required="true" type="text" class="form-control " aria-label="Last Name*" required value="" maxlength="150" autocomplete="family-name">
+           </div>
+          </div>
+          <div class="grouping-row">
+           <div class="form-group country">
+            <label for="country-select" class="control-label">Location</label>
+            <div class="select " id="country-nl">
+             <span class="chevron-down"></span><select id="country-select" name="country" autocomplete="country-name" class="form-control" aria-label="Location"><option value="AF">Afghanistan</option><option value="AX">Aland Islands</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua and Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BQ">Bonaire, Saint Eustatius and Saba</option><option value="BA">Bosnia and Herzegovina</option><option value="BW">Botswana</option><option value="BV">Bouvet Island</option><option value="BR">Brasile</option><option value="IO">British Indian Ocean Territory</option><option value="BN">Brunei Darussalam</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA" selected>Canada</option><option value="CV">Cape Verde</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China Mainland</option><option value="CX">Christmas Island</option><option value="CC">Cocos (Keeling) Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo</option><option value="CD">Congo, the Democratic Republic of the</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="CI">Cote d'Ivoire</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CW">Curaçao</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="GQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="ET">Ethiopia</option><option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji</option><option value="FI">Finland</option><option value="FR">France</option><option value="GF">French Guiana</option><option value="PF">French Polynesia</option><option value="TF">French Southern Territories</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="GE">Georgia</option><option value="DE">Germany</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GB">Great Britain</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GP">Guadeloupe</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GG">Guernsey</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HM">Heard Island and McDonald Islands</option><option value="VA">Holy See (Vatican City State)</option><option value="HN">Honduras</option><option value="HK">Hong Kong SAR</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IR">Ireland</option><option value="IM">Isle of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="JM">Jamaica</option><option value="JP">Japan</option><option value="JE">Jersey</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="KP">Korea, Democratic People's Republic of</option><option value="KR">Korea, Republic of</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Lao People's Democratic Republic</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libyan Arab Jamahiriya</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macao SAR</option><option value="MK">Macedonia</option><option value="MG">Madagascar</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia, Federated States of</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="ME">Montenegro</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="MP">Northern Mariana Islands</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PW">Palau</option><option value="PS">Palestinian Territory</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="RE">Reunion</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="RW">Rwanda</option><option value="BL">Saint Barthélemy</option><option value="SH">Saint Helena, Ascension and Tristan da Cunha</option><option value="KN">Saint Kitts and Nevis</option><option value="LC">Saint Lucia</option><option value="MF">Saint Martin (French part)</option><option value="PM">Saint Pierre and Miquelon</option><option value="VC">Saint Vincent and the Grenadines</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">Sao Tome and Principe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="SX">Sint Maarten (Dutch part)</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia and the South Sandwich Islands</option><option value="SS">South Sudan</option><option value="ES">Spain</option><option value="LK">Sri Lanka</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SJ">Svalbard and Jan Mayen</option><option value="SZ">Swaziland</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syrian Arab Republic</option><option value="TW">Taiwan region</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TL">Timor-Leste</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad and Tobago</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks and Caicos Islands</option><option value="TV">Tuvalu</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="US">United States</option><option value="UM">United States Minor Outlying Islands</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VE">Venezuela</option><option value="VN">Viet Nam</option><option value="VG">Virgin Islands, British</option><option value="VI">Virgin Islands, U.S.</option><option value="WF">Wallis and Futuna</option><option value="EH">Western Sahara</option><option value="YE">Yemen</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select>
+            </div>
+           </div>
+          </div>
+          <p class="privacy-text">Your personal data will be used by Fendi S.r.l. to provide the Newsletter service expressly requested by you. Please consult the <a href="https://www.fendi.com/ca/info/legal-area/privacy-policy?section=legal_privacy_nl" target="_blank" title="privacy policy">Privacy Information Notice</a> for further information.</p>
+          <script defer async src="https://www.google.com/recaptcha/api.js"></script>
+          <script>function pageNewsletterCaptchaFn(a){console.warn("submit",a);$("#newsletterForm button[type='submit']").submit()}setTimeout(function(){var a=$(".grecaptcha-badge");if(a.length>0){a.find("iframe").attr("tabindex",-1)}},1000);</script>
+          <p class="captcha-disclaimer"> This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply. </p>
+          <div class="grouping-row">
+           <div class="form-group submit captcha">
+            <button data-callback="pageNewsletterCaptchaFn" data-sitekey="6LfqHSkUAAAAAEXYIL8vY9ReZphjLpWXKrtW8iAp" value="subscribe" class="btn btn-primary call-to-action js-newsletter-subscribe g-recaptcha" type="submit"> SUBSCRIBE </button>
+           </div>
+          </div>
+         </div>
+        </form><a class="info-privacy" href="https://www.fendi.com/ca/info/legal-area/privacy-policy" title="privacy policy">More info</a>
+       </div>
+       <div class="site-utils">
+        <a aria-label="Nearest stores" href="https://www.fendi.com/ca/services-fendi" class="store-locator-link" title="services fendi"><span class="text">Store Locator</span></a><span class="v-separator"></span>
+        <div class="dropdown">
+         <button class="active hidden-xs hidden-sm" aria-expanded="true" data-modal="/ca/action/shipping-to" data-toggle="modal"> Shipping to: <span class="cur-sel">Canada</span></button><button class="active visible-xs visible-sm" aria-expanded="true" data-popover-target="#countries" data-toggle="modal"> Shipping to: <span class="cur-sel">Canada</span></button>
+        </div><span class="v-separator"></span>
+        <div class="lang-sel dropdown">
+         <button data-toggle-html-class="hamburger-open" data-popover-skip-hover="true" aria-expanded="false" aria-label="Change Language: English" data-popover-target-xs="#language-xs" data-popover-target="#language"><span class="text"> Language: </span><span class="cur-sel"> English </span></button>
+         <div role="dialog" aria-hidden="true" class="popover" id="language">
+          <ul>
+           <li><a href="https://www.fendi.com/?lang=fr" title="">Français</a></li>
+           <li><a href="https://www.fendi.com/?lang=zh_CN" title="">Simplified Chinese</a></li>
+          </ul>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="lower-bar">
+       <div class="group-link grp-exp">
+        <div class="list-link exp expandable">
+         <h4 class="visible-xs h5"><button data-expandable-restrict="xs" data-expandable-target="#ref-9c171ebf-a5d8-4ba5-90d2-0d111a74f1c0" data-expandable-context=".exp" data-scroll-to-bottom="true" type="button" class="expand-list btn-reset"><span>Customer Care</span></button></h4>
+         <h4 class="hidden-xs h5"><button data-expandable-exclude="xs" data-expandable-target=".exp-common" data-expandable-context=".grp-exp" type="button" data-scroll-to-bottom="true" class="expand-list btn-reset"><span>Customer Care</span></button></h4>
+         <ul aria-label="Customer Care" class="list-unstyled exp-common" role="menu" id="ref-9c171ebf-a5d8-4ba5-90d2-0d111a74f1c0">
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/customer-care/contact-us" target="_self" title="contact us">Contact us</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/customer-care/faq" target="_self" title="faq">FAQs</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/customer-care/shipping-and-delivery" target="_self" title="shipping and delivery">Orders and Shipping</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/customer-care/returns-and-refunds" target="_self" title="returns and refunds">Returns and Refunds</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/customer-care/track-your-order" target="_self" title="track your order">Track your Order</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/customer-care/return-form" target="_self" title="return form">Return Form</a></li>
+         </ul>
+        </div>
+        <div class="list-link exp expandable">
+         <h4 class="visible-xs h5"><button data-expandable-restrict="xs" data-expandable-target="#ref-fe200562-dfd8-4e58-90dd-f24f0cdbcb21" data-expandable-context=".exp" data-scroll-to-bottom="true" type="button" class="expand-list btn-reset"><span>Fendi &amp; Me</span></button></h4>
+         <h4 class="hidden-xs h5"><button data-expandable-exclude="xs" data-expandable-target=".exp-common" data-expandable-context=".grp-exp" type="button" data-scroll-to-bottom="true" class="expand-list btn-reset"><span>Fendi &amp; Me</span></button></h4>
+         <ul aria-label="Fendi &amp; Me" class="list-unstyled exp-common" role="menu" id="ref-fe200562-dfd8-4e58-90dd-f24f0cdbcb21">
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/my-account" target="_self" title="my account">Log in / Register</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/my-account/suggestions" target="_self" title="suggestions">Fendi 4 You</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/wishlist" target="_self" title="wishlist">Wish List</a></li>
+         </ul>
+        </div>
+        <div class="list-link exp expandable">
+         <h4 class="visible-xs h5"><button data-expandable-restrict="xs" data-expandable-target="#ref-a75cd483-85a2-4e20-9ba4-3e41074b9533" data-expandable-context=".exp" data-scroll-to-bottom="true" type="button" class="expand-list btn-reset"><span>Corporate</span></button></h4>
+         <h4 class="hidden-xs h5"><button data-expandable-exclude="xs" data-expandable-target=".exp-common" data-expandable-context=".grp-exp" type="button" data-scroll-to-bottom="true" class="expand-list btn-reset"><span>Corporate</span></button></h4>
+         <ul aria-label="Corporate" class="list-unstyled exp-common" role="menu" id="ref-a75cd483-85a2-4e20-9ba4-3e41074b9533">
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/services-fendi" target="_self" title="services fendi">Store Locator</a></li>
+          <li class="hidden-xs" role="menuitem"><a href="https://careers.fendi.com/" target="_blank" rel="noopener noreferrer">Careers</a></li>
+          <li class="" role="menuitem"><a href="http://www.fendiprivatesuites.com/en" target="_blank" rel="noopener noreferrer">Fendi Boutique Hotel</a></li>
+          <li class="0" role="menuitem"><a href="https://www.lvmh.fr/groupe/engagements/societe-environnement/life-initiative-lvmh/" target="_blank" rel="noopener noreferrer">Sustainability</a></li>
+         </ul>
+        </div>
+        <div class="list-link exp expandable">
+         <h4 class="visible-xs h5"><button data-expandable-restrict="xs" data-expandable-target="#ref-5ba1ebba-da2f-4d6a-b458-7f142886c92d" data-expandable-context=".exp" data-scroll-to-bottom="true" type="button" class="expand-list btn-reset"><span>Fendi Roma</span></button></h4>
+         <h4 class="hidden-xs h5"><button data-expandable-exclude="xs" data-expandable-target=".exp-common" data-expandable-context=".grp-exp" type="button" data-scroll-to-bottom="true" class="expand-list btn-reset"><span>Fendi Roma</span></button></h4>
+         <ul aria-label="Fendi Roma" class="list-unstyled exp-common" role="menu" id="ref-5ba1ebba-da2f-4d6a-b458-7f142886c92d">
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/fendi-roma/about-fendi" target="_self" title="about fendi">About Fendi</a></li>
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/fendi-roma/the-history-of-fendi" target="_self" title="the history of fendi">The history of Fendi</a></li>
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/fendi-roma/fendi-and-art" target="_self" title="fendi and art">Fendi and art</a></li>
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/fendi-roma/borsa-fendi-personalizzata-richiedi-un-appuntamento" target="_self" title="borsa fendi personalizzata richiedi un appuntamento">Made to order</a></li>
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/fendi-roma/pellicceria-fendi" target="_self" title="pellicceria fendi">Fur Atelier</a></li>
+          <li class="0" role="menuitem"><a href="https://www.fendi.com/ca/info/fendi-roma/about-fendi#special-projects" target="_self" title="about fendi">Special Projects</a></li>
+         </ul>
+        </div>
+        <div class="list-link exp expandable">
+         <h4 class="visible-xs h5"><button data-expandable-restrict="xs" data-expandable-target="#ref-e4f87e4d-da3f-4dde-bb1a-69ee7b819ef5" data-expandable-context=".exp" data-scroll-to-bottom="true" type="button" class="expand-list btn-reset"><span>Legal&amp;Privacy</span></button></h4>
+         <h4 class="hidden-xs h5"><button data-expandable-exclude="xs" data-expandable-target=".exp-common" data-expandable-context=".grp-exp" type="button" data-scroll-to-bottom="true" class="expand-list btn-reset"><span>Legal&amp;Privacy</span></button></h4>
+         <ul aria-label="Legal&amp;Privacy" class="list-unstyled exp-common" role="menu" id="ref-e4f87e4d-da3f-4dde-bb1a-69ee7b819ef5">
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/legal-area/privacy-policy" target="_self" title="privacy policy">Privacy Policies</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/legal-area/cookie-policy" target="_self" title="cookie policy">Cookie Policy</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/legal-area/terms-sale" target="_self" title="terms sale">Terms and Conditions of Sale</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/legal-area/terms-use" target="_self" title="terms use">Website Terms of Use</a></li>
+          <li class="" role="menuitem"><a href="https://www.fendi.com/ca/info/legal-area/code-conduct" target="_self" title="code conduct">Code of Conduct</a></li>
+         </ul>
+        </div>
+       </div>
+       <div class="bottom">
+        <p class="copy">© FENDI - all rights reserved - P. IVA 00900421009 Licenza SIAE N. 3566/I/1417 - v. 8.4.9.as1</p>
+       </div>
+      </div>
+     </div>
+    </footer>
+    <div class="back-to-top-wrapper visible-xs">
+     <a href="#" class="back-to-top in">Back to top</a>
+    </div>
+   </div>
+  </div>
+  <script>
+try {
+if ('serviceWorker' in navigator) {window.addEventListener('load', () => { navigator.serviceWorker.register('https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/sw.js');});}
+}
+catch (ex) {
+console.log('serviceworker registration failed:', ex, ex.stack);
+}
+</script>
+  <script id="cookies-setup">window.CookiesSetup={message:"This website uses third-party profiling cookies to send advertisements in line with your preferences. Should you need further information or wish to deactivate all or some of the cookies,  &lt;a style=&#034;color: black; text-decoration: underline&#034; href=&#034;/ca/info/legal-area/cookie-policy&#034;&gt;&lt;strong&gt;click here&lt;/strong&gt;&lt;/a&gt;. By continuing to browse our website or by clicking on &lt;b&gt;I authorize&lt;/b&gt; you consent the use of cookies",button:"I authorize",cookieName:"f_cookiedisclaimer-v1",path:"/",expires:30,newCookie:true};</script>
+  <script src="https://players.brightcove.net/5704890267001/default_default/index.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.prepend" crossorigin="anonymous"></script>
+  <script src="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/libs.js"></script>
+  <script src="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/jwplayer.js"></script>
+  <script src="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/map-libs.js"></script>
+  <script src="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/videojs-ga.js"></script>
+  <script src="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/main.js"></script>
+  <script charset="UTF-8" type="text/javascript" src="https://optanon.blob.core.windows.net/consent/0c9cc005-0126-4e69-8119-295b5a19cece.js"></script>
+  <script type="text/javascript">function OptanonWrapper(){};</script>
+  <script src="https://media.richrelevance.com/rrserver/js/1.2/p13n.js"></script>
+  <script type="text/javascript" charset="utf-8">if(typeof window.r3_common!="undefined"&&typeof window.App.Pages.EngineRec!="undefined"){R3_COMMON=new r3_common();App.Pages.EngineRec.initialize("e67c20af2cfee28b","recs","","C9E12D25BB2EB36CF98F26AC571C693E.pro-hybris-fendi-as1","t-homepage",true,"ca","/ca/","https://www.fendi.com/");App.Pages.EngineRec.trackData={categoryId:"",categoryName:"Fendi Official Store"};App.Pages.EngineRec.action="trackCollection"};</script>
+  <link href="https://cdn.dynamicyield.com" rel="preconnect">
+  <link href="https://st.dynamicyield.com" rel="preconnect">
+  <link href="https://rcom.dynamicyield.com" rel="preconnect">
+  <link href="https://cdn.dynamicyield.com" rel="dns-prefetch">
+  <link href="https://st.dynamicyield.com" rel="dns-prefetch">
+  <link href="https://rcom.dynamicyield.com" rel="dns-prefetch">
+  <script type="text/javascript">var products=[];window.DY=window.DY||{};DY.recommendationContext={type:"HOMEPAGE",data:App.Components.RecommendationsDy.config.data};</script>
+  <script src="https://cdn.dynamicyield.com/api/8769189/api_dynamic.js" type="text/javascript"></script>
+  <script src="https://cdn.dynamicyield.com/api/8769189/api_static.js" type="text/javascript"></script>
+  <script type="text/javascript" charset="utf-8">$(document).ready(function(){if(window.location.hostname.indexOf("vap.")==0){var a="<br/>PLEASE MANUALLY RE-INSERT YOUR PAYMENT INFORMATION, EVEN IF ALREADY SAVED.<br/>FILL THE FORM BELOW.";$(".t-checkout-payment .note:not(.dynamic-text)").addClass("dynamic-text").append("<br/>"+a)}});</script>
+  <script src="https://www.fendi.com/aws/static/holidays-19/v8/main.js"></script>
+  <script>App.ieHacks="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/ie-hacks.js";App.Utils.Ajax.useUjs=true;App.gapi_key="AIzaSyBH8zrI7BmpU_RWBXH_DX4toNsYz3aeBWk";App.videojsGa="https://static.www.fendi.com/docroot/fendi/8.4.9/javascripts/videojs.ga.js";App.init();</script>
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={errorBeacon:"bam.nr-data.net",licenseKey:"80f97d8c29",agent:"",beacon:"bam.nr-data.net",applicationTime:99,applicationID:"28226627",transactionName:"ZlFbMBRQXBYHBRVRWV8behEVRV0ISRJMUFlcUUkFAVQ=",queueTime:1};</script>
+  <script type="text/javascript">var _paq=window._paq||[];_paq.push(["trackPageView"]);_paq.push(["enableLinkTracking"]);(function(){var a="//matomo.kleecks.com/";_paq.push(["setTrackerUrl",a+"matomo.php"]);_paq.push(["setSiteId","60"]);var e=document,c=e.createElement("script"),b=e.getElementsByTagName("script")[0];c.type="text/javascript";c.async=true;c.defer=true;c.src=a+"matomo.js";b.parentNode.insertBefore(c,b)})();</script>
+  <noscript>
+   <p><img src="//matomo.kleecks.com/matomo.php?idsite=60&amp;rec=1" style="border:0;" alt=""></p>
+  </noscript>
+ </body>
+</html>

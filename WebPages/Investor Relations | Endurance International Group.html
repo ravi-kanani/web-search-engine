@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en" dir="ltr" prefix="og: http://ogp.me/ns#"> 
+ <head> 
+  <meta charset="utf-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"761e715901",applicationID:"35893545"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="title" content="Investor Relations | Endurance International Group"> 
+  <link rel="shortlink" href="http://ir.endurance.com/"> 
+  <meta property="og:site_name" content="Endurance International Group"> 
+  <link rel="canonical" href="http://ir.endurance.com/"> 
+  <meta property="og:type" content="website"> 
+  <meta name="description" content="The Investor Relations website contains information about Endurance International Group's business for stockholders, potential investors, and financial analysts."> 
+  <meta property="og:url" content="https://ir.endurance.com/investor-relations"> 
+  <meta property="og:title" content="Investor Relations | Endurance International Group"> 
+  <meta name="referrer" content="no-referrer"> 
+  <meta property="og:description" content="The Investor Relations website contains information about Endurance International Group's business for stockholders, potential investors, and financial analysts."> 
+  <meta name="Generator" content="Drupal 8 (https://www.drupal.org)"> 
+  <meta name="MobileOptimized" content="width"> 
+  <meta name="HandheldFriendly" content="true"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="shortcut icon" href="/sites/g/files/knoqqb21681/files/favicon_0_0.png" type="image/png"> 
+  <link rel="alternate" hreflang="en" href="https://ir.endurance.com/investor-relations"> 
+  <link rel="revision" href="https://ir.endurance.com/investor-relations"> 
+  <title>Investor Relations | Endurance International Group</title> 
+  <link rel="stylesheet" media="all" href="/sites/g/files/knoqqb21681/files/css/css_99v8ymF_mpzobuOf89FVg3FKhcjKqiwyFOXYVCVBOFg.css?q7irx7"> 
+  <link rel="stylesheet" media="all" href="/sites/g/files/knoqqb21681/files/css/css_-0elVsLPB-3E_qg1VJPef-khddaOjb-a8PgcO1H4Hzk.css?q7irx7"> 
+  <link rel="stylesheet" media="print" href="/sites/g/files/knoqqb21681/files/css/css_sf0hjbKw_lY5YbIT7OPqf6krNom3bx1LjVuLuJn6rhU.css?q7irx7"> 
+  <link rel="stylesheet" media="all" href="/sites/g/files/knoqqb21681/files/css/css_xKiYmirH47feyyuW4y5HKwEmbs1dPsEtc9gpnYf7afE.css?q7irx7"> 
+  <link rel="stylesheet" media="print" href="/sites/g/files/knoqqb21681/files/css/css__EyfdUV9iQOJiDqq-J6WRaNSHBoQlb5gBVqUYKiEVCw.css?q7irx7"> <!--[if lte IE 8]>
+<script src="/sites/g/files/knoqqb21681/files/js/js_VtafjXmRvoUgAzqzYTA3Wrjkx9wcWhjP0G4ZnnqRamA.js"></script>
+<![endif]--> 
+  <script src="/core/assets/vendor/modernizr/modernizr.min.js?v=3.3.1"></script> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69116836-1"></script> 
+  <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-69116836-1');
+</script> 
+ </head> 
+ <body class="body-sidebars-first nir-node nir-node--type-nir-landing-page nir-node--5806 path-frontpage page-node-type-nir-landing-page"> 
+  <div id="skip"> <a class="visually-hidden focusable skip-link" href="#main-menu"> Skip to main navigation </a> 
+  </div> 
+  <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas> 
+   <header id="main-header" class="container"> 
+    <div class="inner"> <a id="header-logo" href="http://endurance.com/" title="Endurance International Group"> <img src="/sites/g/files/knoqqb21681/themes/site/nir_pid1978/client/images/endurance-header-logo.png" alt="Endurance International Group"> </a> <a id="mobile-nav" class="mobile-nav right hide24" href="#site-nav"> <span>Mobile nav</span> </a> 
+     <nav class="main-menu hide12 hide6 hide3"> 
+      <ul> 
+       <li> <a href="http://endurance.com/our-company/">Our Company</a> </li> 
+       <li> <a href="http://endurance.com/our-brands/">Our Brands</a> </li> 
+       <li> <a href="http://endurance.com/our-customers/">Our Customers</a> </li> 
+       <li> <a href="http://endurance.com/our-partners/">Our Partners</a> </li> 
+       <li> <a href="https://jobs.endurance.com/">Careers</a> </li> 
+       <li> <a href="http://newsroom.endurance.com">Press</a> </li> 
+       <li class="active"> <a href="/investor-relations">Investors</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </header> 
+   <div id="page" class="page"> 
+    <div class="inner"> 
+     <header class="container"> 
+      <div class="inner"> 
+       <h1 class="title content size20of24 pre4of24 size10of12 pre1of12 size6of6 size3of3"> <span class="inner "></span> </h1> 
+      </div> 
+     </header> 
+     <section id="main" class="container"> 
+      <div class="inner"> 
+       <div class="column size4of24 hide12 hide6 hide3"> 
+        <aside class="sidebar-first sidebars" id="sidebar-first"> 
+         <div class="region region-sidebar-first"> 
+          <nav id="nav-sidebar"> 
+           <nav role="navigation" aria-labelledby="block-nir-pid1978-investorrelations-menu" id="block-nir-pid1978-investorrelations" class="block--system-menu-blockir block--system-menu-blockir--5806 block--sidebar-first--system-menu-block--ir block--sidebar-first--system-menu-block--ir--5806 block--249bbec4-db06-4da6-b412-0025d3a9c435 block--249bbec4-db06-4da6-b412-0025d3a9c435--5806 block block-menu navigation block-system-menublock menu--ir"> 
+            <h2 class="visually-hidden" id="block-nir-pid1978-investorrelations-menu">Investor Relations</h2> 
+            <ul data-block-uuid="249bbec4-db06-4da6-b412-0025d3a9c435" class="menu side-menu"> 
+             <li class="side-menu__item"> <a href="/financial-information/quarterly-results" target="" rel="" data-drupal-link-system-path="node/5986">Quarterly Financial Results</a> </li> 
+             <li class="side-menu__item"> <a href="/financial-information/annual-reports" target="" rel="" data-drupal-link-system-path="node/5881">Annual Reports &amp; Proxies</a> </li> 
+             <li class="side-menu__item"> <a href="/events-and-presentations" data-drupal-link-system-path="node/5821">Events &amp; Presentations</a> </li> 
+             <li class="side-menu__item"> <a href="/financial-information/sec-filings" data-drupal-link-system-path="node/5876">SEC Filings</a> </li> 
+             <li class="side-menu__item"> <a href="/stock-information" target="" rel="" data-drupal-link-system-path="node/5916">Stock Information</a> 
+              <ul class="menu side-menu"> 
+               <li class="side-menu__item"> <a href="/stock-information" target="" rel="" data-drupal-link-system-path="node/5916">Stock Overview</a> </li> 
+               <li class="side-menu__item"> <a href="/stock-information/historic-stock-lookup" data-drupal-link-system-path="node/5921">Historic Stock Lookup</a> </li> 
+               <li class="side-menu__item"> <a href="/stock-information/analyst-coverage" data-drupal-link-system-path="node/5896">Analyst Coverage</a> </li> 
+              </ul> </li> 
+             <li class="side-menu__item"> <a href="/corporate-governance" target="" rel="" data-drupal-link-system-path="node/5836">Corporate Governance</a> 
+              <ul class="menu side-menu"> 
+               <li class="side-menu__item"> <a href="/corporate-governance" data-drupal-link-system-path="node/5836">Governance Overview</a> </li> 
+               <li class="side-menu__item"> <a href="http://endurance.com/our-company/our-team/" target="" rel="">Executives</a> </li> 
+               <li class="side-menu__item"> <a href="/corporate-governance/board-of-directors" target="" rel="" data-drupal-link-system-path="node/5841">Board of Directors</a> </li> 
+               <li class="side-menu__item"> <a href="/corporate-governance/committee-composition" target="" rel="" data-drupal-link-system-path="node/5851">Committee Composition</a> </li> 
+               <li class="side-menu__item"> <a href="/static-files/6e618ee6-754f-4e14-8efd-46c9f9e261fb" target="" rel="" data-drupal-link-system-path="static-files/6e618ee6-754f-4e14-8efd-46c9f9e261fb">Code of Conduct</a> </li> 
+              </ul> </li> 
+             <li class="side-menu__item"> <a href="/press-releases" data-drupal-link-system-path="node/5816">Press Releases</a> </li> 
+             <li class="side-menu__item"> <a href="/investor-faqs" data-drupal-link-system-path="node/5941">Investor FAQs</a> </li> 
+            </ul> 
+           </nav> 
+           <nav role="navigation" aria-labelledby="block-nir-pid1978-shareholdertools-menu" id="block-nir-pid1978-shareholdertools" class="block--system-menu-blockshareholder-tools block--system-menu-blockshareholder-tools--5876 block--sidebar-first--system-menu-block--shareholder-tools block--sidebar-first--system-menu-block--shareholder-tools--5876 block--dcbbe77a-568c-4a6f-8cb9-f15b213d4bc5 block--dcbbe77a-568c-4a6f-8cb9-f15b213d4bc5--5876 block block-menu navigation block-system-menublock menu--shareholder-tools"> 
+            <h2 id="block-nir-pid1978-shareholdertools-menu">Shareholder Tools <span class="plus"></span></h2> 
+            <div id="shareholder-tools" class="show"> <a class="close" href="#close">close</a> 
+             <div class="inner"> 
+              <h2>shareholder tools</h2> 
+              <div class="tools"> 
+               <ul data-block-uuid="dcbbe77a-568c-4a6f-8cb9-f15b213d4bc5" class="menu side-menu ndq-top-tools"> 
+                <li class="side-menu__item"> <a href="/download-library" target="" rel="" class="shareholder-folder" data-drupal-link-system-path="node/6016">Downloads</a> </li> 
+                <li class="side-menu__item"> <a href="" target="" rel="" class="shareholder-print">Print</a> </li> 
+                <li class="side-menu__item"> <a href="/printed-materials" target="" rel="" class="shareholder-printed-material" data-drupal-link-system-path="node/5966">Printed Materials</a> </li> 
+                <li class="side-menu__item"> <a href="" target="" rel="" class="shareholder-share">Share</a> </li> 
+               </ul> 
+              </div>  
+             </div> 
+            </div> 
+           </nav> 
+           <div id="block-nir-pid1978-sidebaremailalertcontent" class="block-content--nir-global-block block-content--nir-global-block--9636 block--block-content86bf3b89-59dd-420c-a725-60f1f81aee51 block--block-content86bf3b89-59dd-420c-a725-60f1f81aee51--5806 block--sidebar-first--block-content--86bf3b89-59dd-420c-a725-60f1f81aee51 block--sidebar-first--block-content--86bf3b89-59dd-420c-a725-60f1f81aee51--5806 block--f54861ae-95e5-4b14-802a-f6b5a69ccba8 block--f54861ae-95e5-4b14-802a-f6b5a69ccba8--5806 block block-block-content block-block-content86bf3b89-59dd-420c-a725-60f1f81aee51"> 
+            <div class="field field--name-field-nir-global-block-node field--type-entity-reference field--label-hidden field__item"> 
+             <div class="clearfix text-formatted field field--name-field-nir-global-block-body field--type-text-long field--label-hidden field__item">
+              <div class="email-alert"> 
+               <h2>Email alerts</h2> 
+               <p>Automatically receive Endurance International Group financial updates &amp; information.</p> <a class="button button-border-gradient" href="/email-alerts"><span class="fg">Sign up today</span><span class="bg"></span></a>
+              </div>
+             </div> 
+            </div> 
+           </div> 
+          </nav> 
+         </div> 
+        </aside> 
+        <div class="ndq-dialog" style="display: block;"> 
+         <ul id="ndq-share"> 
+          <li><a class="ndqicon-fb" href="http://www.facebook.com/share.php?u=https://ir.endurance.com/ &amp; t=Investor Relations - Endurance International Group" onclick="window.open('http://www.facebook.com/share.php?u=https://ir.endurance.com/ &amp; t=Investor Relations - Endurance International Group','Facebook','resizable=yes,scrollbars=yes,width=900,height=570'); return false;" alt="Facebook" title="Facebook" aria-label="Facebook"><span class="hide-txt">Facebook</span></a></li> 
+          <li><a class="ndqicon-google" href="https://plus.google.com/share?url=https://ir.endurance.com/&amp;title=Investor Relations - Endurance International Group" onclick="window.open('https://plus.google.com/share?url=https://ir.endurance.com/&amp;title=Investor Relations - Endurance International Group','GooglePlus','resizable=yes,scrollbars=yes,width=900,height=570'); return false;" alt="Google" title="GooglePlus" aria-label="GooglePlus"><span class="hide-txt">Google</span></a></li> 
+          <li><a class="ndqicon-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://ir.endurance.com/&amp;title=Investor Relations - Endurance International Group" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&amp;url=https://ir.endurance.com/&amp;title=Investor Relations - Endurance International Group','LinkedIn','resizable=yes,scrollbars=yes,width=900,height=570'); return false;" alt="LinkedIn" title="LinkedIn" aria-label="LinkedIn"><span class="hide-txt">LinkedIn</span></a></li> 
+          <li><a class="ndqicon-tw" href="http://twitter.com/home?status=Currently%20reading%20https://ir.endurance.com/" onclick="window.open('http://twitter.com/home?status=Currently%20reading%20https://ir.endurance.com/','Twitter','resizable=yes,scrollbars=yes,width=900,height=570'); return false;" alt="Twitter" title="Twitter" aria-label="Twitter"><span class="hide-txt">Twitter</span></a></li> 
+          <li><a class="ndqicon-rss" href="/rss-news-feeds" alt="RSS" title="RSS" aria-label="RSS"><span class="hide-txt">RSS</span></a></li> 
+         </ul> <button class="ndq-close-dialog ndqicon-close" title="Close" aria-label="Close"><span class="hide-txt">Close</span></button> 
+        </div> 
+       </div> 
+       <div class="column size20of24 pre4of24 size12of12 size6of6 size3of3 ndq-index-page"> 
+        <div class="region region-content"> 
+         <div id="ndq-content"> 
+          <div id="block-nir-pid1978-websitenoticeblock" class="block--website-notice-block block--website-notice-block--5806 block--content--website-notice-block block--content--website-notice-block--5806 block--421634eb-5c1c-4a2b-b92e-4ee6d1c6ec3c block--421634eb-5c1c-4a2b-b92e-4ee6d1c6ec3c--5806 block block-nir-website-notices block-website-notice-block"> 
+          </div> 
+          <div data-drupal-messages-fallback class="hidden"></div> 
+          <div id="block-nir-pid1978-content" class="block--system-main-block block--system-main-block--5806 block--content--system-main-block block--content--system-main-block--5806 block--edb0b663-f90c-481b-baae-df6b1ded173c block--edb0b663-f90c-481b-baae-df6b1ded173c--5806 block block-system block-system-main-block"> 
+           <article class="node node--type-nir_landing_page node--view-mode-full clearfix"> 
+            <h1> Investor Relations </h1> 
+            <div> 
+             <div class="panel-display sutro-double clearfix "> 
+              <div class="container-fluid"> 
+               <div class="row"> 
+                <div class="col-md-12 radix-layouts-header panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                 </div> 
+                </div> 
+               </div> 
+               <div class="row"> 
+                <div class="col-md-6 radix-layouts-column1 panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                  <div class="block-region-column1">
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9641 block--block-content672f1a7a-002f-4b31-9ae3-514e86ddbd47 block--block-content672f1a7a-002f-4b31-9ae3-514e86ddbd47--5806 block--column1--block-content--672f1a7a-002f-4b31-9ae3-514e86ddbd47 block--column1--block-content--672f1a7a-002f-4b31-9ae3-514e86ddbd47--5806 block--108c597b-21b2-43c2-9cce-1bff276235f7 block--108c597b-21b2-43c2-9cce-1bff276235f7--5806 block block-block-content block-block-content672f1a7a-002f-4b31-9ae3-514e86ddbd47"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <div class="content size12of20 hide12 hide6 hide3"> 
+                       <div class="inner"> 
+                        <div class="parallax" style="margin-bottom:150px">
+                         <img alt="financial_info" data-entity-type="file" data-entity-uuid="1cf0d283-5eaa-4dce-91b4-10294aa15f16" src="/system/files-encrypted/nasdaq_kms/inline-images/financial-info-1.jpg">
+                        </div> 
+                       </div> 
+                      </div>
+                     </div> 
+                    </div> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+                <div class="col-md-6 radix-layouts-column2 panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                  <div class="block-region-column2">
+                   <div class="views-element-container block--views-blockwidget-bundled-content-block-1 block--views-blockwidget-bundled-content-block-1--5806 block--column2--views-block--widget-bundled-content-block-1 block--column2--views-block--widget-bundled-content-block-1--5806 block--db1846a7-fdd8-4231-ba09-415e747332d2 block--db1846a7-fdd8-4231-ba09-415e747332d2--5806 block block-views block-views-blockwidget-bundled-content-block-1"> 
+                    <h2>Upcoming events</h2> 
+                    <div data-block-uuid="db1846a7-fdd8-4231-ba09-415e747332d2">
+                     <div class="acc-wrap view view-widget-bundled-content view-id-widget_bundled_content view-display-id-block_1 js-view-dom-id-5d62ed254182303149a8588cb104b71448be7fe0517f6533514f98766438a1fb"> 
+                      <div class="view-filters"> 
+                       <form class="views-exposed-form" data-drupal-selector="views-exposed-form-widget-bundled-content-block-1" action="/" method="get" id="views-exposed-form-widget-bundled-content-block-1" accept-charset="UTF-8"> 
+                        <div class="form--inline clearfix"> 
+                        </div> 
+                       </form> 
+                      </div> 
+                      <div class="view-content"> 
+                       <div class="view-grouping"> 
+                        <div class="view-grouping-content"> 
+                         <div class="ndq-bundle-home-title">
+                          fourth quarter
+                         </div> 
+                         <div class="ndq-bundle-home-body"> 
+                          <div class="views-row "> 
+                           <div class="views-field views-field-field-nir-bundle-content">
+                            <div class="field-content">
+                             <div class="item-list">
+                              <ul>
+                               <li>
+                                <div class=" clearfix"> 
+                                 <div class="content"> 
+                                  <div class="field field--name-field-nir-content-ref field--type-entity-reference field--label-hidden field__item webcast-link">
+                                   <a href="/events/event-details/endurance-international-group-2019-fourth-quarter-and-full-year-financial" hreflang="en">Endurance International Group 2019 Fourth Quarter and Full Year Financial Results Conference Call</a>
+                                  </div> 
+                                 </div> 
+                                </div> </li>
+                               <li>
+                                <div class=" clearfix"> 
+                                 <div class="content"> 
+                                  <div class="field field--name-field-nir-content-ref field--type-entity-reference field--label-hidden field__item"> 
+                                   <div class="file-link"> <span class="file file--mime-application-pdf file--application-pdf"> <a href="https://ir.endurance.com/static-files/f679a57f-868d-4519-ba35-032949b17af2" type="application/pdf; length=271068" title="FY2019 Q4+FY Earnings Release_vFinal_Final.pdf">Earnings Release</a></span><span class="filesize"> 271 KB</span> 
+                                   </div> 
+                                  </div> 
+                                 </div> 
+                                </div> </li>
+                               <li>
+                                <div class=" clearfix"> 
+                                 <div class="content"> 
+                                  <div class="field field--name-field-nir-content-ref field--type-entity-reference field--label-hidden field__item"> 
+                                   <div class="file-link"> <span class="file file--mime-application-pdf file--application-pdf"> <a href="https://ir.endurance.com/static-files/c85dbfb8-4e69-45b8-9090-a553b8cf1510" type="application/pdf; length=1642812" title="FY2019_Q4+FY_EarningsPresentation_vFinal.pdf">Earnings Presentation</a></span><span class="filesize"> 1.6 MB</span> 
+                                   </div> 
+                                  </div> 
+                                 </div> 
+                                </div> </li>
+                               <li>
+                                <div class=" clearfix"> 
+                                 <div class="content"> 
+                                  <div class="field field--name-field-nir-content-ref field--type-entity-reference field--label-hidden field__item"> 
+                                   <div class="file-link"> <span class="file file--mime-application-pdf file--application-pdf"> <a href="https://ir.endurance.com/static-files/b134dabe-91bf-4930-826e-6b975d47b7ee" type="application/pdf; length=170533" title="FY2019_Q4+FY_EarningsTranscript_vFinal_posted20200206.pdf">Prepared Remarks</a></span><span class="filesize"> 170.5 KB</span> 
+                                   </div> 
+                                  </div> 
+                                 </div> 
+                                </div> </li>
+                              </ul>
+                             </div>
+                            </div>
+                           </div> 
+                          </div> 
+                         </div> 
+                        </div> 
+                       </div> 
+                      </div> 
+                      <div class="view-footer"> 
+                      </div> 
+                     </div> 
+                    </div> 
+                   </div> 
+                   <div class="block--homepage-news block--nir-news__widget block--nir-news__widget--5806 block--column2--nir-news__widget block--column2--nir-news__widget--5806 block--08e5587b-a6b1-4dad-9abc-2bf349feeec7 block--08e5587b-a6b1-4dad-9abc-2bf349feeec7--5806 block block-nir-news block-nir-news__widget"> 
+                    <div class="nir-widget"> 
+                     <div class="nir-widget--label">
+                       latest news releases 
+                     </div> 
+                     <div class="nir-widget--content"> 
+                      <div class="nir-widget--list"> 
+                       <article role="article" class="clearfix node node--nir-news--nir-widget-list node--type-nir-news node--view-mode-nir-widget-list node--promoted"> 
+                        <div class="nir-widget--field nir-widget--news--date-time">
+                          Mar 10, 2020 
+                        </div> 
+                        <div class="nir-widget--field nir-widget--news--headline"> <a href="/news-releases/news-release-details/endurance-international-group-announces-40-million-share" hreflang="en">Endurance International Group Announces $40 Million Share Repurchase Authorization</a> 
+                        </div> 
+                       </article> 
+                       <article role="article" class="clearfix node node--nir-news--nir-widget-list node--type-nir-news node--view-mode-nir-widget-list node--promoted"> 
+                        <div class="nir-widget--field nir-widget--news--date-time">
+                          Feb 06, 2020 
+                        </div> 
+                        <div class="nir-widget--field nir-widget--news--headline"> <a href="/news-releases/news-release-details/endurance-international-group-reports-2019-fourth-quarter-and" hreflang="en">Endurance International Group Reports 2019 Fourth Quarter&nbsp;and Full Year Results</a> 
+                        </div> 
+                       </article> 
+                       <article role="article" class="clearfix node node--nir-news--nir-widget-list node--type-nir-news node--view-mode-nir-widget-list node--promoted"> 
+                        <div class="nir-widget--field nir-widget--news--date-time">
+                          Jan 16, 2020 
+                        </div> 
+                        <div class="nir-widget--field nir-widget--news--headline"> <a href="/news-releases/news-release-details/endurance-international-group-announce-2019-fourth-quarter-and" hreflang="en">Endurance International Group to Announce 2019 Fourth Quarter and Full Year Financial Results on February 6, 2020</a> 
+                        </div> 
+                       </article> 
+                      </div> 
+                      <div class="nir-widget--pager"> 
+                      </div> 
+                      <div class="nir-widget--total-results"> 
+                      </div> 
+                     </div> 
+                    </div> 
+                   </div> 
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9646 block--block-contentd1a7c0a0-ade3-4e53-83de-4a2d3a043a35 block--block-contentd1a7c0a0-ade3-4e53-83de-4a2d3a043a35--5806 block--column2--block-content--d1a7c0a0-ade3-4e53-83de-4a2d3a043a35 block--column2--block-content--d1a7c0a0-ade3-4e53-83de-4a2d3a043a35--5806 block--76118fba-6357-4be6-8c28-7c8c403fb636 block--76118fba-6357-4be6-8c28-7c8c403fb636--5806 block block-block-content block-block-contentd1a7c0a0-ade3-4e53-83de-4a2d3a043a35"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <p><a class="button button-border-gradient" href="/press-releases"><span class="fg">see all releases</span><span class="bg"></span></a></p>
+                     </div> 
+                    </div> 
+                   </div> 
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9651 block--block-contentcebacdf2-c081-4906-a9b4-fbf3d6c82d09 block--block-contentcebacdf2-c081-4906-a9b4-fbf3d6c82d09--5806 block--column2--block-content--cebacdf2-c081-4906-a9b4-fbf3d6c82d09 block--column2--block-content--cebacdf2-c081-4906-a9b4-fbf3d6c82d09--5806 block--0d1c7fec-29f1-4ac1-8346-1251c8521048 block--0d1c7fec-29f1-4ac1-8346-1251c8521048--5806 block block-block-content block-block-contentcebacdf2-c081-4906-a9b4-fbf3d6c82d09"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <div class="content size8of20 size10of12 pre1of12 size6of6 size3of3"> 
+                       <div class="inner"> 
+                        <h2>company overview</h2> 
+                        <p>As a leading provider of cloud-based solutions, Endurance is transforming the way small business does business. We are equally committed to serving the best interests of our employees, communities and shareholders. In our dedicated Investor Relations section, you will find key shareholder information and financial reports that will help you stay abreast of the latest developments and put Endurance International Group's financial performance into perspective.</p> 
+                       </div> 
+                      </div> 
+                      <div class="content size8of20 size6of12 pre1of12 size4of6 size3of3" style="float:right"> 
+                       <div class="inner"> 
+                        <h2>financial information</h2> 
+                        <p>Financials and filings, including annual reports, quarterly earnings information, proxy statements, and 10-K and 10-Q forms.</p> <a class="button button-border-gradient" href="/financial-information/quarterly-results"><span class="fg">where we stand</span><span class="bg"></span></a>
+                       </div> 
+                      </div>
+                     </div> 
+                    </div> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+               </div> 
+               <div class="row"> 
+                <div class="col-md-12 radix-layouts-middle panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                  <div class="block-region-middle">
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9656 block--block-contentaad6fe8f-cec4-4eb7-ab64-53d6516110ea block--block-contentaad6fe8f-cec4-4eb7-ab64-53d6516110ea--5806 block--middle--block-content--aad6fe8f-cec4-4eb7-ab64-53d6516110ea block--middle--block-content--aad6fe8f-cec4-4eb7-ab64-53d6516110ea--5806 block--9845269d-2efa-4bff-8e58-5a9bbfeed708 block--9845269d-2efa-4bff-8e58-5a9bbfeed708--5806 block block-block-content block-block-contentaad6fe8f-cec4-4eb7-ab64-53d6516110ea"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <div class="content right size12of20 size12of12 size6of6 size3of3"> 
+                       <div class="inner"> 
+                        <div class="parallax">
+                         <img alt="event_sec" data-entity-type="file" data-entity-uuid="0bec04e2-05b4-4b4e-bda3-84ee622d6324" src="/system/files-encrypted/nasdaq_kms/inline-images/events-and-sec.jpg">
+                        </div> 
+                       </div> 
+                      </div> 
+                      <div class="content size7of20 pre1of20 size6of12 pre1of12 size4of6 size3of3"> 
+                       <div class="inner"> 
+                        <h2>events &amp; presentations</h2> 
+                        <p>Details on upcoming events.</p> <a class="button button-border-gradient" href="/events-and-presentations"><span class="fg">see what’s going on</span><span class="bg"></span></a>
+                       </div> 
+                      </div> 
+                      <div class="content size7of20 pre1of20 size6of12 pre1of12 size4of6 size3of3"> 
+                       <div class="inner"> 
+                        <h2>sec filings</h2> 
+                        <p>View document submitted to the U.S. Securities and Exchange Commission.</p> <a class="button button-border-gradient" href="/financial-information/sec-filings"><span class="fg">view documents</span><span class="bg"></span></a>
+                       </div> 
+                      </div>
+                     </div> 
+                    </div> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+               </div> 
+               <div class="row"> 
+                <div class="col-md-6 radix-layouts-secondcolumn1 panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                  <div class="block-region-secondcolumn1">
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9661 block--block-content178d3eab-a273-4b4d-b0d3-1a1f4a0319f5 block--block-content178d3eab-a273-4b4d-b0d3-1a1f4a0319f5--5806 block--secondcolumn1--block-content--178d3eab-a273-4b4d-b0d3-1a1f4a0319f5 block--secondcolumn1--block-content--178d3eab-a273-4b4d-b0d3-1a1f4a0319f5--5806 block--065cc84f-1923-4785-b9fe-ec1fc8ccaee9 block--065cc84f-1923-4785-b9fe-ec1fc8ccaee9--5806 block block-block-content block-block-content178d3eab-a273-4b4d-b0d3-1a1f4a0319f5"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <div class="content size12of20 hide12 hide6 hide3"> 
+                       <div class="inner"> 
+                        <div class="parallax">
+                         <img alt="stock_info" data-entity-type="file" data-entity-uuid="b545decc-4059-421d-886b-f607bb651ab8" src="/system/files-encrypted/nasdaq_kms/inline-images/stock-info.jpg">
+                        </div> 
+                       </div> 
+                      </div>
+                     </div> 
+                    </div> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+                <div class="col-md-6 radix-layouts-secondcolumn2 panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                  <div class="block-region-secondcolumn2">
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9666 block--block-contentb91cd18a-37d9-4270-90aa-41e89e630fa6 block--block-contentb91cd18a-37d9-4270-90aa-41e89e630fa6--5806 block--secondcolumn2--block-content--b91cd18a-37d9-4270-90aa-41e89e630fa6 block--secondcolumn2--block-content--b91cd18a-37d9-4270-90aa-41e89e630fa6--5806 block--3e0350d4-7c86-41fe-9346-8e1a3daea4e8 block--3e0350d4-7c86-41fe-9346-8e1a3daea4e8--5806 block block-block-content block-block-contentb91cd18a-37d9-4270-90aa-41e89e630fa6"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <h2>stock information</h2> 
+                      <p>Stock information for Endurance International Group</p>
+                     </div> 
+                    </div> 
+                   </div> 
+                   <div data-storage-id="node:5806:full:20076" data-uuid="ef6147b4-5c48-4bb5-a249-efadc198f426" class="block--market-data-block__stock-quote block--market-data-block__stock-quote--5806 block--secondcolumn2--market-data-block__stock-quote block--secondcolumn2--market-data-block__stock-quote--5806 block--ef6147b4-5c48-4bb5-a249-efadc198f426 block--ef6147b4-5c48-4bb5-a249-efadc198f426--5806 block block-nir-market-data-block block-market-data-block__stock-quote"> 
+                    <div class="quote-wrap user-toggle-off stock-quote__featured"> 
+                     <div class="quote-wrapper"> 
+                      <div class="stock-quote" data-exchange=""> 
+                       <p>(: ).</p> 
+                       <div class="stock-info"> <span>stock summary</span> 
+                        <div class="inner"> 
+                         <h1></h1> 
+                         <p></p> 
+                         <p> on </p> 
+                        </div> 
+                       </div> 
+                      </div> 
+                     </div> 
+                    </div> 
+                   </div> 
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9676 block--block-contentac14299c-d65f-479e-a2f5-0b837db2f79f block--block-contentac14299c-d65f-479e-a2f5-0b837db2f79f--5806 block--secondcolumn2--block-content--ac14299c-d65f-479e-a2f5-0b837db2f79f block--secondcolumn2--block-content--ac14299c-d65f-479e-a2f5-0b837db2f79f--5806 block--6123d9da-74eb-482b-b14b-78fe0b8bb83d block--6123d9da-74eb-482b-b14b-78fe0b8bb83d--5806 block block-block-content block-block-contentac14299c-d65f-479e-a2f5-0b837db2f79f"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <a class="button button-border-gradient" href="/stock-information"><span class="fg">more about our stock</span><span class="bg"></span></a>
+                     </div> 
+                    </div> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+               </div> 
+               <div class="row"> 
+                <div class="col-md-12 radix-layouts-footer panel-panel"> 
+                 <div class="panel-panel-inner"> 
+                  <div class="block-region-footer">
+                   <div class="block-content--nir-lp-block block-content--nir-lp-block--9671 block--block-content7282d158-a423-41e5-b87e-25f1f5e86448 block--block-content7282d158-a423-41e5-b87e-25f1f5e86448--5806 block--footer--block-content--7282d158-a423-41e5-b87e-25f1f5e86448 block--footer--block-content--7282d158-a423-41e5-b87e-25f1f5e86448--5806 block--7e1ec2c7-5859-4de7-bd78-be5b588f36e5 block--7e1ec2c7-5859-4de7-bd78-be5b588f36e5--5806 block block-block-content block-block-content7282d158-a423-41e5-b87e-25f1f5e86448"> 
+                    <div class="field field--name-field-nir-lp-block-node field--type-entity-reference field--label-hidden field__item"> 
+                     <div class="clearfix text-formatted field field--name-field-nir-lp-block-body field--type-text-long field--label-hidden field__item">
+                      <div class="content right size12of20 size12of12 size6of6 size3of3"> 
+                       <div class="inner"> 
+                        <div class="parallax">
+                         <img alt="gov_press_faq" data-entity-type="file" data-entity-uuid="cd83ad13-2ecb-4e65-b8f6-1a61d8dc17ef" src="/system/files-encrypted/nasdaq_kms/inline-images/governance-press-faqs.jpg">
+                        </div> 
+                       </div> 
+                      </div> 
+                      <div class="content size7of20 pre1of20 size6of12 pre1of12 size4of6 size3of3"> 
+                       <div class="inner"> 
+                        <h2>Corporate Governance</h2> 
+                        <p>Corporate governance documents.</p> <a class="button button-border-gradient" href="/corporate-governance"><span class="fg">about our approach</span><span class="bg"></span></a>
+                       </div> 
+                      </div> 
+                      <div class="content size7of20 pre1of20 size6of12 pre1of12 size4of6 size3of3"> 
+                       <div class="inner"> 
+                        <h2>financial press releases</h2> 
+                        <p>Highlights of Endurance in the News and Brand Assets.</p> <a class="button button-border-gradient" href="/press-releases"><span class="fg">read our releases</span><span class="bg"></span></a>
+                       </div> 
+                      </div> 
+                      <div class="content size7of20 pre1of20 size6of12 pre1of12 size4of6 size3of3"> 
+                       <div class="inner"> 
+                        <h2>investor faqs</h2> 
+                        <p>Find the answers here.</p> <a class="button button-border-gradient" href="/investor-faqs"><span class="fg">let us help</span><span class="bg"></span></a>
+                       </div> 
+                      </div>
+                     </div> 
+                    </div> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+               </div> 
+              </div> 
+             </div><!-- /.sutro-double --> 
+            </div> 
+           </article> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+       <div id="content-header"> 
+       </div> 
+       <footer class="back-to-top content size1of1"> <a href="#main-header" class="back-to-top" id="back-to-top"> 
+         <svg height="210" width="400"> <path d="M2.06 6.56V19h1.9V6.56h2.07L3.01 0 0 6.56h2.06z"></path> 
+         </svg> </a> 
+       </footer> 
+      </div> 
+     </section> 
+    </div> 
+   </div> 
+   <footer id="main-footer" class="container"> 
+    <div class="inner"> 
+     <nav class="content size20of24 size8of12 size3of6 size2of3 footer-menu"> 
+      <div> <a href="http://endurance.com/our-company/">Our Company</a> 
+       <ul> 
+        <li> <a href="http://endurance.com/our-company/our-story/">Our Story</a> </li> 
+        <li> <a href="http://endurance.com/our-company/our-team/">Our Team</a> </li> 
+        <li> <a href="http://endurance.com/our-company/our-mission/">Our Mission</a> </li> 
+        <li> <a href="http://endurance.com/our-company/responsibility/">Responsibility</a> </li> 
+        <li> <a href="http://endurance.com/our-company/locations/">Locations</a> </li> 
+       </ul> 
+      </div> 
+      <div> <a href="http://endurance.com/our-brands/">Our Brands</a> 
+      </div> 
+      <div> <a href="http://endurance.com/our-customers/">Our Customers</a> 
+      </div> 
+      <div> <a href="http://endurance.com/our-partners/">Our Partners</a> 
+      </div> 
+      <div> <a href="https://jobs.endurance.com/">Careers</a> 
+      </div> 
+      <div> <a href="http://newsroom.endurance.com">Press</a> 
+      </div> 
+      <div> <a href="/investor-relations">Investors</a> 
+       <ul> 
+        <li> <a href="/financial-information/quarterly-results">Quarterly Financial Results</a> </li> 
+        <li> <a href="/financial-information/annual-reports">Annual Reports &amp; Proxies</a> </li> 
+        <li> <a href="/events-and-presentations">Events &amp; Presentations</a> </li> 
+        <li> <a href="/financial-information/sec-filings">SEC filings</a> </li> 
+        <li> <a href="/stock-information">Stock Information</a> </li> 
+        <li> <a href="/corporate-governance">Corporate Governance</a> </li> 
+        <li> <a href="/press-releases">Press Releases</a> </li> 
+        <li> <a href="/investor-faqs">Investor FAQs</a> </li> 
+       </ul> 
+      </div> 
+      <div> <a href="http://endurance.com/our-policies/">Our Policies</a> 
+       <ul> 
+        <li> <a href="http://endurance.com/our-policies/privacy-statement/">Privacy Statement</a> </li> 
+        <li> <a href="http://endurance.com/our-policies/terms-of-use/">Terms of Use</a> </li> 
+        <li> <a href="http://endurance.com/our-policies/infringement-policy/">Infringement Policy</a> </li> 
+       </ul> 
+      </div> 
+      <div> <a class="no-target" href="#social-links">Social</a> 
+       <ul> 
+        <li> <a target="_blank" rel="noopener" href="https://www.facebook.com/EnduranceInternational">Facebook</a> </li> 
+        <li> <a target="_blank" rel="noopener" href="https://twitter.com/enduranceintl">Twitter</a> </li> 
+        <li> <a target="_blank" rel="noopener" href="https://www.linkedin.com/company/endurance-international-group">LinkedIn</a> </li> 
+        <li> <a target="_blank" rel="noopener" href="https://www.instagram.com/enduranceintl/">Instagram</a> </li> 
+        <li> <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCbie4qXwI3xDYe_xj7avk_A">YouTube</a> </li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <div class="content size4of24 size4of12 size3of6 size1of3 footer-info"> 
+      <div class="inner"> 
+       <div class="footer-stock"> 
+        <div class="stock-info"> 
+         <footer id="nir-footer"> 
+          <div class="container"> 
+           <div class="region region-footer"> 
+            <div id="block-nir-pid1978-stockquote" class="block--market-data-block__stock-quote block--market-data-block__stock-quote--5876 block--footer--market-data-block__stock-quote block--footer--market-data-block__stock-quote--5876 block--3e399116-99b9-4ae2-869b-fa6a3d4d8dca block--3e399116-99b9-4ae2-869b-fa6a3d4d8dca--5876 block block-nir-market-data-block block-market-data-block__stock-quote"> 
+             <h2>Stock Summary</h2> 
+             <div class="stock-quote stock-quote__short"> 
+              <div class="quote-wrapper"> 
+               <div class="stock-info"> 
+                <div id="stock-symbol">
+                 : 
+                </div> 
+                <h1 id="stock-price"></h1> 
+                <div id="stock-difference"></div> 
+                <div id="stock-time">
+                  on 
+                </div> 
+               </div> 
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+         </footer> 
+        </div> 
+       </div> 
+       <div class="footer-address"> 
+        <p>10 Corporate Drive <br> Burlington, MA 01803 USA <br> <a href="mailto:customer@endurance.com">customer@endurance.com</a> <br> <a href="tel:602-226-2389">602-226-2389</a> </p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="content size1of1 copyright">
+      ©2020 Endurance International Group
+     </div> 
+    </div> 
+   </footer> 
+   <div id="site-nav"> 
+    <div class="inner"> 
+     <ul> 
+      <li> <a href="http://endurance.com/our-company/">Home</a> </li> 
+      <li> <a class="acc-t" href="http://endurance.com/our-company/">Our Company<i class="arrow"></i></a> 
+       <div class="acc-c"> 
+        <ul class="inner"> 
+         <li><a href="http://endurance.com/our-company/our-story/">Our Story</a></li> 
+         <li><a href="http://endurance.com/our-company/our-team/">Our Team</a></li> 
+         <li><a href="http://endurance.com/our-company/our-mission/">Our Mission</a></li> 
+         <li><a href="http://endurance.com/our-company/responsibility/">Responsibility</a></li> 
+         <li><a href="http://endurance.com/our-company/locations/">Locations</a></li> 
+        </ul> 
+       </div> </li> 
+      <li> <a href="http://endurance.com/our-brands/">Our Brands</a> </li> 
+      <li> <a href="http://endurance.com/our-customers/">Our Customers</a> </li> 
+      <li><a href="http://endurance.com/our-partners/">Our Partners</a></li> 
+      <li> <a href="https://jobs.endurance.com/">Careers</a> </li> 
+      <li> <a href="http://newsroom.endurance.com">Press</a> </li> 
+      <li class="active"> <a class="acc-t" href="http://ir.endurance.com/">Investors <i class="arrow"></i></a> 
+       <div class="acc-c"> 
+        <div class="region region-mobile-menu"> 
+         <nav role="navigation" aria-labelledby="block-investorrelations-2-menu" id="block-investorrelations-2" class="block--system-menu-blockir block--system-menu-blockir--5806 block--mobile-menu--system-menu-block--ir block--mobile-menu--system-menu-block--ir--5806 block--36319ab7-934a-461f-950c-9c4a6eb0eda7 block--36319ab7-934a-461f-950c-9c4a6eb0eda7--5806 block block-menu navigation block-system-menublock menu--ir"> 
+          <h2 id="block-investorrelations-2-menu">Investor Relations</h2> 
+          <ul data-block-uuid="36319ab7-934a-461f-950c-9c4a6eb0eda7" class="menu side-menu"> 
+           <li class="side-menu__item"> <a href="/financial-information/quarterly-results" target="" rel="" data-drupal-link-system-path="node/5986">Quarterly Financial Results</a> </li> 
+           <li class="side-menu__item"> <a href="/financial-information/annual-reports" target="" rel="" data-drupal-link-system-path="node/5881">Annual Reports &amp; Proxies</a> </li> 
+           <li class="side-menu__item"> <a href="/events-and-presentations" data-drupal-link-system-path="node/5821">Events &amp; Presentations</a> </li> 
+           <li class="side-menu__item"> <a href="/financial-information/sec-filings" data-drupal-link-system-path="node/5876">SEC Filings</a> </li> 
+           <li class="side-menu__item"> <a href="/stock-information" target="" rel="" data-drupal-link-system-path="node/5916">Stock Information</a> 
+            <ul class="menu side-menu"> 
+             <li class="side-menu__item"> <a href="/stock-information" target="" rel="" data-drupal-link-system-path="node/5916">Stock Overview</a> </li> 
+             <li class="side-menu__item"> <a href="/stock-information/historic-stock-lookup" data-drupal-link-system-path="node/5921">Historic Stock Lookup</a> </li> 
+             <li class="side-menu__item"> <a href="/stock-information/analyst-coverage" data-drupal-link-system-path="node/5896">Analyst Coverage</a> </li> 
+            </ul> </li> 
+           <li class="side-menu__item"> <a href="/corporate-governance" target="" rel="" data-drupal-link-system-path="node/5836">Corporate Governance</a> 
+            <ul class="menu side-menu"> 
+             <li class="side-menu__item"> <a href="/corporate-governance" data-drupal-link-system-path="node/5836">Governance Overview</a> </li> 
+             <li class="side-menu__item"> <a href="http://endurance.com/our-company/our-team/" target="" rel="">Executives</a> </li> 
+             <li class="side-menu__item"> <a href="/corporate-governance/board-of-directors" target="" rel="" data-drupal-link-system-path="node/5841">Board of Directors</a> </li> 
+             <li class="side-menu__item"> <a href="/corporate-governance/committee-composition" target="" rel="" data-drupal-link-system-path="node/5851">Committee Composition</a> </li> 
+             <li class="side-menu__item"> <a href="/static-files/6e618ee6-754f-4e14-8efd-46c9f9e261fb" target="" rel="" data-drupal-link-system-path="static-files/6e618ee6-754f-4e14-8efd-46c9f9e261fb">Code of Conduct</a> </li> 
+            </ul> </li> 
+           <li class="side-menu__item"> <a href="/press-releases" data-drupal-link-system-path="node/5816">Press Releases</a> </li> 
+           <li class="side-menu__item"> <a href="/investor-faqs" data-drupal-link-system-path="node/5941">Investor FAQs</a> </li> 
+          </ul> 
+         </nav> 
+        </div> 
+       </div> </li> 
+     </ul> <a class="shareholder-tools button button-gradient" href="#shareholder-tools">Shareholder Tools <span class="plus">+</span></a> 
+     <div class="email-alert"> 
+      <h2>Email alerts</h2> 
+      <p>Automatically receive Endurance International Group financial updates &amp; information.</p> <a class="button button-border-gradient" href="/"><span class="fg">Sign up today</span><span class="bg"></span></a> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script type="text/javascript">var s_CCSWebHostingAccount = "trcgendurance";</script> 
+  <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/5806","currentPathIsAdmin":false,"isFront":true,"currentLanguage":"en"},"pluralDelimiter":"\u0003","ajaxPageState":{"libraries":"classy\/node,core\/drupal.collapse,core\/html5shiv,nir_base\/adobe_omniture,nir_base\/lib,nir_base\/nir_icons,nir_base\/nir_toolbar,nir_ckeditor_datatables\/datatables,nir_market_data_block\/nir_market_data_block.command,nir_market_data_block\/nir_market_data_block.stockQuote,nir_multimedia\/nir_multimedia,nir_pid1978\/override,nir_website_notices\/nir_website_notices.notices,radix_layouts\/radix_layouts,system\/base,views\/views.module","theme":"nir_pid1978","theme_token":null},"ajaxTrustedUrl":{"\/investor-relations":true},"user":{"uid":0,"permissionsHash":"ac64c7244ec034ffdf18399ab49466ae952aa5dda0b6e960ef92828983a27a14"}}</script> 
+  <script src="/sites/g/files/knoqqb21681/files/js/js_8Pn7fPlqmE6ddXfPdFCkQEqT6QoyXfhZ5blqFgPl0mI.js"></script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"761e715901","applicationID":"35893545,24276188","transactionName":"ZlVXYRcAW0ZRW0QKX18fdFYRCFpbH2ddBkRQRFRSOhFUW1VUWRlVQ29FRwA+R1BeXFUR","queueTime":0,"applicationTime":583,"atts":"ShJUF18aSEg=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en_US" class=""> 
+ <head> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge"> 
+  <script>window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"27c13f1b92","applicationID":"15227941","transactionName":"c1hYQEMLXw1RS0pcW0ZeU0ceF1sOQw==","queueTime":0,"applicationTime":400,"agent":""}</script> 
+  <script>(window.NREUM||(NREUM={})).loader_config={licenseKey:"27c13f1b92",applicationID:"15227941"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> 
+  <meta property="fb:app_id" content="709069665904607"> 
+  <title>The Beginning of Life | VIDEOCAMP</title> 
+  <meta name="description" content="One of the greatest neuroscience breakthroughs is having discovered that babies are far more than a genetic load. The development of all human beings lies on the combination of genetics, the quality of the relationships and the environment they are set on. The Beginning of Life invites everyone to"> 
+  <meta property="og:site_name" content="VIDEOCAMP"> 
+  <meta property="og:title" content="The Beginning of Life"> 
+  <meta property="og:description" content="One of the greatest neuroscience breakthroughs is having discovered that babies are far more than a genetic load. The development of all human beings lies on the combination of genetics, the quality of the relationships and the environment they are set on. The Beginning of Life invites everyone to"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:image" content="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/120/120/thumb_POSTER_CRIAN_A_EN.jpg"> 
+  <meta name="thumbnail" content="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/120/120/thumb_POSTER_CRIAN_A_EN.jpg"> 
+  <link rel="stylesheet" media="all" href="https://cdn.videocamp.com/assets/application-815bd31bc62a2ee6e81974ef96858aaf7bdc3dbf180c280a2d0feb066ff76374.css"> 
+  <meta name="csrf-param" content="authenticity_token"> 
+  <meta name="csrf-token" content="3MJASx/5DqT7xxWdGhmm0gOSkPs/C9jW0m9Ea6TGIRrsqMbLD4HQb4EO+M7LCvni6pj41DH8RVnN1S/ZazHiYw=="> <!-- Facebook Pixel Code --> 
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2626220757389342');
+  fbq('track', 'PageView');
+</script> 
+  <noscript>
+   &lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2626220757389342&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;
+  </noscript> <!-- End Facebook Pixel Code --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-981477153"></script> 
+  <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-981477153'); </script> 
+  <link rel="apple-touch-icon" sizes="57x57" href="https://cdn.videocamp.com/images/apple-touch-icon-57x57.png"> 
+  <link rel="apple-touch-icon" sizes="60x60" href="https://cdn.videocamp.com/images/apple-touch-icon-60x60.png"> 
+  <link rel="apple-touch-icon" sizes="72x72" href="https://cdn.videocamp.com/images/apple-touch-icon-72x72.png"> 
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.videocamp.com/images/apple-touch-icon-76x76.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="https://cdn.videocamp.com/images/apple-touch-icon-114x114.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="https://cdn.videocamp.com/images/apple-touch-icon-120x120.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="https://cdn.videocamp.com/images/apple-touch-icon-144x144.png"> 
+  <link rel="apple-touch-icon" sizes="152x152" href="https://cdn.videocamp.com/images/apple-touch-icon-152x152.png"> 
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.videocamp.com/images/apple-touch-icon-180x180.png"> 
+  <link rel="icon" type="image/png" href="https://cdn.videocamp.com/images/favicon-32x32.png" sizes="32x32"> 
+  <link rel="icon" type="image/png" href="https://cdn.videocamp.com/images/android-chrome-192x192.png" sizes="192x192"> 
+  <link rel="icon" type="image/png" href="https://cdn.videocamp.com/images/favicon-96x96.png" sizes="96x96"> 
+  <link rel="icon" type="image/png" href="https://cdn.videocamp.com/images/favicon-16x16.png" sizes="16x16"> 
+  <link rel="manifest" href="/manifest.json"> 
+  <link rel="mask-icon" href="https://cdn.videocamp.com/images/safari-pinned-tab.svg" color="#000000"> 
+  <meta name="msapplication-TileColor" content="#ffcb31"> 
+  <meta name="msapplication-TileImage" content="https://cdn.videocamp.com/images/mstile-144x144.png"> 
+  <meta name="theme-color" content="#ffffff"> 
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=latin-ext" rel="stylesheet"> 
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-60840323-1', 'auto');
+
+    ga('set', {
+      dimension1: false,
+      dimension2: 'guest'
+    });
+
+    ga('send', 'pageview');
+
+  </script> 
+ </head> 
+ <body data-page="movies#show" class="body-movies body-movies-single  "> 
+  <div class="wrapper"> 
+   <header class="site-header"> <a href="/en" class="logo">VIDEOCAMP</a> 
+    <div class="col-menus"> 
+     <div class="top"> 
+      <nav class="big-links"> <a href="/en" class="big-link big-link-mobile">Home</a> <a class="big-link" href="/en/movies">Films</a> <a class="big-link" href="/en/about">About</a> <a class="big-link" href="/en/playlists?kind=regular">Playlists</a> <a class="big-link big-link-mobile" href="/en/login">My profile</a> <a class="big-link big-link-mobile" href="/en/users/account">First access</a> 
+      </nav> 
+      <div class="search-container"> 
+       <form class="search" action="/en/movies" method="get"> 
+        <input type="text" class="input" name="query" placeholder="Search" value=""> <button class="bt-search">Search&gt;</button> 
+       </form> 
+      </div> 
+      <div class="language-container"> <label class="language"> <span class="lang-label" rel="en">English<i></i></span> <span class="lang-options"> <a class="lang-option" href="/pt/movies/o-comeco-da-vida">Português BR (Portuguese BR)</a> <a class="lang-option" href="/es/movies/o-comeco-da-vida">Español (Spanish)</a> </span> </label> 
+      </div> 
+      <nav class="medium-links"> <a class="medium-link" href="/en/login">My profile</a> <a class="medium-link" href="/en/users/account">First access</a> 
+      </nav> <button class="bt-menu"></button> 
+     </div> 
+     <div class="bottom"> 
+      <nav class="menu"> 
+       <div class="menu-group"> <span class="menu-item">Screenings</span> 
+        <nav class="menu-submenu"> <a class="menu-item" href="https://www.videocamp.com/en/exhibitions">Screenings schedule</a> <a class="menu-item" href="/en/exhibitions/map">The Videocamp around the world</a> 
+        </nav> 
+       </div> <a class="menu-item" href="/en/filmmakers">Producers</a> 
+       <div class="menu-group"> <span class="menu-item">Funds</span> 
+        <nav class="menu-submenu"> <a target="_blank" class="menu-item" href="http://filmfund2018.videocamp.com/en/">2018 Edition</a><a target="_blank" class="menu-item" href="http://editalcocacola.videocamp.com/">2017 Edition</a> 
+        </nav> 
+       </div> <a target="_blank" class="menu-item" href="/en/download/practical_guide">Discussion Guide</a> 
+      </nav> <button class="bt-exhibitor" data-play-vimeo="<iframe src=&quot;https://player.vimeo.com/video/192632169?autoplay=1&amp;title=0&amp;byline=0&amp;portrait=0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>"> <span> <em>Understand How</em> <strong>Videocamp Works</strong> </span> </button> <button class="bt-more"><span>More</span><i></i></button> 
+      <nav class="menu-more"> 
+       <div class="more-section"> 
+        <h3 class="more-title">VIDEOCAMP</h3> <a class="more-item" href="/en/about">About</a> 
+       </div> 
+       <div class="more-section"> 
+        <h3 class="more-title">Help</h3> <a class="more-item" href="/en/faq">Frequently Asked Questions</a> <a target="_blank" class="more-item" href="https://s3-sa-east-1.amazonaws.com/videocamp-prod/docs/MDDA-EN.pdf">Copyright holder manual</a> 
+        <p class="more-item"><a class="" href="mailto:info@videocamp.com">Get in touch</a></p> 
+       </div> 
+       <div class="more-section"> 
+        <h3 class="more-title">More</h3> <a class="more-item" href="/en/users/new/filmmaker">Submit film</a> 
+       </div> 
+       <div class="more-networks"> <a href="https://www.facebook.com/videocampvideo" class="more-net facebook">Facebook</a> <a href="https://twitter.com/videocamp" class="more-net twitter">Twitter</a> <a href="https://www.instagram.com/_videocamp/" class="more-net instagram">Instagram</a> <span class="more-net-label">Follow us</span> 
+       </div> 
+      </nav> 
+     </div> 
+    </div> 
+   </header> 
+   <div class="js-home-slide-modal home-slide-modal modal dark-modal" tabindex="-1" role="dialog" data-ga-category="header" data-provider="Vimeo" data-label="header_button" data-modal="header_special_button"> 
+    <div class="modal-content v-center"> <button data-dismiss="modal" type="button" class="close-modal btn-action fl-right modal-close-btn modal-close-btn-header-menu"> <span class="icon-close"></span> </button> 
+     <div class="modal-body"> <iframe src="https://player.vimeo.com/video/192517156" width="1920" height="1080" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen data-ready="true"></iframe> 
+     </div> 
+    </div> 
+   </div> 
+   <section class="film-webdoor"> 
+    <div class="is-mobile"></div> 
+    <div class="inner top"> 
+     <div class="col-left"> 
+      <figure class="poster"> 
+       <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/120/120/thumb_POSTER_CRIAN_A_EN.jpg" alt="The Beginning of Life"> 
+      </figure> <a onclick="ga('send', 'event', 'Button', 'click', 'Organizar Sessão')" class="bt-organize btn-organize-en" href="/en/movies/o-comeco-da-vida/exhibitions/new"> Organize a screening </a> 
+      <p class="text">Still do not understand how a videocamp display works? <a href="#" data-play-vimeo="<iframe src=&quot;https://player.vimeo.com/video/192632169?autoplay=1&amp;title=0&amp;byline=0&amp;portrait=0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>">Click here!</a></p> 
+      <div class="film-webdoor__buttons-container"> <a href="https://www.videocamp.com/en/movies/o-comeco-da-vida/support_material" class="bt-download"><span>download support material</span><i></i></a> 
+      </div> 
+     </div> 
+     <div class="col-right"> 
+      <div class="right-top"> 
+       <p class="item-producer"><a target="_blank" href="/en/filmmakers/maria-farinha-filmes">Maria Farinha Filmes</a> presents:</p> 
+       <h1 class="item-title">The Beginning of Life</h1> 
+       <p class="film-webdoor-details"> <span class="item-stars"> <em class="item-star active"></em> <em class="item-star active"></em> <em class="item-star active"></em> <em class="item-star active"></em> <em class="item-star half"></em> </span> <span class="item-rating age_free" data-label="Content descriptors" data-content-warnings=""> General Audience </span> <span class="item-div"></span> <span class="item-year">2016</span> <span class="item-runtime"><strong>97</strong>min</span> </p> 
+       <div class="film-webdoor-languages"> 
+        <div class="item-langs-list"> 
+         <p class="item" data-label="Available Audios"><i class="ico-sound"></i><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.several&quot;>Several</span>" class="uppercase lang">several</span><span data-label="Español (Spanish)" class="uppercase lang">es</span><span data-label="English" class="uppercase lang">en</span><span data-label="Français (French)" class="uppercase lang">fr</span><span data-label="Português BR (Portuguese)" class="uppercase lang">pt-br</span><span data-label="Bulgarian" class="uppercase lang">bg</span><span data-label="Arabic" class="uppercase lang">ar</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.tet&quot;>Tet</span>" class="uppercase lang">tet</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.km&quot;>Km</span>" class="uppercase lang">km</span></p>
+         <p class="item" data-label="Available Standards"><i class="ico-subs"></i><span data-label="Português BR (Portuguese)" class="uppercase lang">pt-br</span><span data-label="Español (Spanish)" class="uppercase lang">es</span><span data-label="English" class="uppercase lang">en</span><span data-label="Italiano (Italian)" class="uppercase lang">it</span><span data-label="Français (French)" class="uppercase lang">fr</span><span data-label="dansk (Danish)" class="uppercase lang">da</span><span data-label="Suomi (Finnish)" class="uppercase lang">fi</span><span data-label="Català (Catalan)" class="uppercase lang">ca</span><span data-label="Svenska (Swedish)" class="uppercase lang">sv</span><span data-label="Arabic" class="uppercase lang">ar</span><span data-label="日本語 (Japanese)" class="uppercase lang">ja</span><span data-label="한국어 (Korean)" class="uppercase lang">ko</span><span data-label="Deutsch (German)" class="uppercase lang">de</span><span data-label="Português (Portuguese)" class="uppercase lang">pt</span><span data-label="Türkçe (Turkish)" class="uppercase lang">tr</span><span data-label="Русский язык (Russian)" class="uppercase lang">ru</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.id&quot;>Id</span>" class="uppercase lang">id</span><span data-label="Nederlands (Dutch)" class="uppercase lang">nl</span><span data-label="Bulgarian" class="uppercase lang">bg</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.no&quot;>No</span>" class="uppercase lang">no</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.zh-CN&quot;>Zh Cn</span>" class="uppercase lang">zh-CN</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.zh-TW&quot;>Zh Tw</span>" class="uppercase lang">zh-TW</span><span data-label="Hrvatski (Croatian)" class="uppercase lang">hr</span><span data-label="српски (Serbian)" class="uppercase lang">sr</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.az&quot;>Az</span>" class="uppercase lang">az</span><span data-label="<span class=&quot;translation_missing&quot; title=&quot;translation missing: en.language.code.tet&quot;>Tet</span>" class="uppercase lang">tet</span></p>
+         <p class="item" data-label="Audio Descriptions Available"><i class="ico-ad"></i><span data-label="Português BR (Portuguese)" class="uppercase lang">pt-br</span></p> 
+        </div> 
+       </div> 
+       <p class="item-alert green"><strong>It is possible to download the archive</strong> of this film for Videocamp sessions. Organize your screening by clicking <a href="/en/movies/o-comeco-da-vida/exhibitions/new">here</a>.</p> <a href="" class="bt-trailer" data-toggle="modal" data-targets="#trailer-modal">Watch the trailer</a> 
+      </div> 
+      <div class="film-webdoor-buttons"> <span class="bt-favorite favorite favorite-js " data-movie-id="61"></span> 
+       <div class="tr-rate-wrap rate-js" data-movie-id="61"> <span class="bt-star rate-btn"></span> 
+        <div class="rate-btn-helper"></div> 
+        <div class="tr-rate"> 
+         <div class="jrate fl-left"></div> 
+         <p> <span class="tr-rate-label">Rate</span> <span class="icon-remove tr-rate-remove remove-js"></span> </p> 
+        </div> 
+       </div> 
+       <nav class="share left"> <span class="bt-share">Compartilhar</span> 
+        <div class="share-options"> <a class="btn-social icon-facebook2 social-js" data-share-url="https://www.videocamp.com/en/movies/o-comeco-da-vida" data-share-network="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.videocamp.com%2Fen%2Fmovies%2Fo-comeco-da-vida"> <button class="bt-share-facebook">Compartilhar no Facebook</button> </a> <a class="btn-social icon-twitter social-js" data-share-url="https://www.videocamp.com/en/movies/o-comeco-da-vida" data-share-network="twitter" data-share-text="The Beginning of Life" href="https://twitter.com/home?status=https%3A%2F%2Fwww.videocamp.com%2Fen%2Fmovies%2Fo-comeco-da-vida"> <button class="bt-share-twitter">Compartilhar no Twitter</button> </a> 
+        </div> 
+       </nav> 
+      </div> 
+      <div class="item-description synopse-more" data-see-more-text="View more" data-see-less-text="Hide text">
+        One of the greatest neuroscience breakthroughs is having discovered that babies are far more than a genetic load. The development of all human beings lies on the combination of genetics, the quality of the relationships and the environment they are set on. The Beginning of Life invites everyone to reflect: are we taking good care of this unique moment, which defines both the present and future of humankind? The film is available for free public screenings Worldwide. 
+      </div> 
+      <div class="film-webdoor-boxes"> 
+       <div class="item-boxes-inner"> 
+        <div class="item-box mobile small"> 
+         <h3 class="item-credit-title">Directed by</h3> 
+         <p class="item-credit-data">Estela Renner</p> 
+        </div> 
+        <div class="item-box small"> 
+         <h3 class="item-credit-title">Produced by</h3> 
+         <p class="item-credit-data">Maria Farinha Filmes</p> 
+        </div> 
+        <div class="item-box"> 
+         <h3 class="item-credit-title">Coproduction</h3> 
+         <p class="item-credit-data">--</p> 
+        </div> 
+        <div class="item-box small"> 
+         <h3 class="item-credit-title">Sponsorship</h3> 
+         <p class="item-credit-data">FUNDAÇÃO MARIA CECÍLIA SOUTO VIDIGAL, FUNDAÇÃO BERNARD VAN LEER, INSTITUTO ALANA, UNICEF</p> 
+        </div> 
+        <div class="item-box small"> 
+         <h3 class="item-credit-title">Official Support</h3> 
+         <p class="item-credit-data">--</p> 
+        </div> 
+        <div class="item-box mobile-last"> <button class="bt-credits bt-credits-js"><span>View complete sheet</span></button> 
+        </div> 
+        <div class="item-box small"> 
+         <h3 class="item-tags-title">Category</h3> 
+         <p class="item-tags-data"><a target="_blank" class="item-tag" href="/en/movies?category=4">Documentary</a></p> 
+        </div> 
+        <div class="item-box small"> 
+         <h3 class="item-tags-title">Theme (title)</h3> 
+         <p class="item-tags-data"> <a target="_blank" class="item-tag" href="/en/movies?theme=8">Childhood</a> <a target="_blank" class="item-tag" href="/en/movies?theme=9">Inspirational</a> </p> 
+        </div> <!--subtema--> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="inner bottom"> 
+     <div class="col-left bigger"> 
+      <div class="film-logos item-ods item-ods-line"> <a target="_blank" href="https://sustainabledevelopment.un.org/sdgs"> <img class="item-ods-line__main-logo" src="https://cdn.videocamp.com/images/ods/en/ODS_title.png"> </a> 
+       <div class="group size-3"> 
+        <div class="list"> 
+         <figure class="item"> <a target="_blank" href="https://sustainabledevelopment.un.org/sdg3"> <img src="https://cdn.videocamp.com/images/ods/en/ODS_3.png"> </a> 
+         </figure> 
+         <figure class="item"> <a target="_blank" href="https://sustainabledevelopment.un.org/sdg5"> <img src="https://cdn.videocamp.com/images/ods/en/ODS_5.png"> </a> 
+         </figure> 
+         <figure class="item"> <a target="_blank" href="https://sustainabledevelopment.un.org/sdg8"> <img src="https://cdn.videocamp.com/images/ods/en/ODS_8.png"> </a> 
+         </figure> 
+         <figure class="item"> <a target="_blank" href="https://sustainabledevelopment.un.org/sdg10"> <img src="https://cdn.videocamp.com/images/ods/en/ODS_10.png"> </a> 
+         </figure> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="col-right"> 
+      <div class="film-webdoor-stats"> 
+       <div class="item-stats-inner"> 
+        <div class="item-stat"> <em class="ico-rating"></em> 
+         <div> <strong>4.6</strong> <span>rating</span> 
+         </div> 
+        </div> 
+        <div class="item-stat item-stat-hover item-stat-common" data-title="8210"> <em class="ico-vc-sessions"></em> 
+         <div> <strong>8.21 K</strong> <span>Screenings</span> 
+         </div> 
+        </div> 
+        <div class="item-stat item-stat-hover item-stat-common" data-title="212321"> <em class="ico-vc-audience"></em> 
+         <div> <strong>212 K</strong> <span>audience</span> 
+         </div> 
+        </div> 
+        <div class="item-stat item-stat-hover item-stat-list" data-title="Audience totals"> <em class="ico-total-audience"></em> 
+         <div> <strong>1.24 M</strong> <span>total aud.</span> 
+         </div> 
+         <div class="list-tolltip-data"> 
+          <ul> 
+           <li class="">Online (YouTube, Vimeo, etc)</li> 
+           <li class="is-active">Public screenings</li> 
+           <li class="is-active">Cinemas</li> 
+           <li class="is-active">On demand (iTunes, Now, etc)</li> 
+           <li class="is-active">Other media (DVD, Blu-ray, media kit, etc)</li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="film-webdoor-buttons__container-mobile"> <a href="https://www.videocamp.com/en/movies/o-comeco-da-vida/support_material" class="bt-download"><span>download support material</span><i></i></a> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-logos film-logos--with-border"> 
+    <div class="inner"> 
+     <div class="group size-2 size--third"> 
+      <h3 class="title">Produced by:</h3> 
+      <div class="list"> 
+       <figure class="item"> <a target="_blank" href="http://mff.com.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_producer/image/000/000/001/1/thumb_Logo_Maria_Farinha_Filmes.png"> </a> 
+       </figure> 
+      </div> 
+     </div> 
+     <div class="group size-2 size--third"> 
+      <h3 class="title">Sponsorship:</h3> 
+      <div class="list"> 
+       <figure class="item"> <a target="_blank" href="http://www.fmcsv.org.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_sponsor/image/000/000/004/4/thumb_AF_Logo_MariaCecilia_RGB__3_.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="https://bernardvanleer.org/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_sponsor/image/000/000/003/3/thumb_1._BVLF_3.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.alana.org.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_sponsor/image/000/000/005/5/thumb_2._ALANA_6.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.unicef.org/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_sponsor/image/000/000/020/20/thumb_3._UNICEF_7.png"> </a> 
+       </figure> 
+      </div> 
+      <div class="swiper-button-prev"></div> 
+      <div class="swiper-button-next"></div> 
+     </div> 
+     <div class="group size-2 size--third"> 
+      <h3 class="title">Promotional support:</h3> 
+      <div class="list"> 
+       <figure class="item"> <a target="_blank" href="https://www.ashoka.org/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/006/6/thumb_0._ASHOKA_MAIOR_2.PNG"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.worldbank.org/en/topic/earlychildhooddevelopment/overview"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/007/7/thumb_1._WORLD_BANK_3.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="https://www.ubs.com/global/en/wealth_management/optimusfoundation.html"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/013/13/thumb_2._UBS_3.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.iadb.org/pt/banco-interamericano-de-desenvolvimento,2837.html"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/048/48/thumb_3._BID.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/031/31/thumb_barra_de_separa__o_2_copy.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="https://www.johnsonsbaby.com.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/014/14/thumb_5._JOHNSON_S_MAIOR.PNG"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="https://www.huggies.com.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/015/15/thumb_6._HUGGIES_MAIOR.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://natura.com.br"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/016/16/thumb_7._NATURA_MAIOR.PNG"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/035/35/thumb_3._barra_de_separa__o.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.obesidadeinfantilnao.com.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/017/17/thumb_8._AMIL_MAIOR.PNG.PNG"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="https://www.pompom.com.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/018/18/thumb_9._POMPOM_MAIOR.PNG"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.tam.com.br/b2c/vgn/v/index.jsp?vgnextoid=97981ed526b72210VgnVCM1000003752070aRCRD"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/019/19/thumb_10._TAM_MAIOR.PNG.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.sesc.com.br"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/036/36/thumb_11._SESC.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.sp.senac.br"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/050/50/thumb_13._SENAC.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/049/49/thumb_13._ESPA_O_FILMES__itau_cinemas_.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.videocamp.com"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter_official/image/000/000/039/39/thumb_14._VC.png"> </a> 
+       </figure> 
+      </div> 
+      <div class="swiper-button-prev"></div> 
+      <div class="swiper-button-next"></div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-logos film-logos--with-border"> 
+    <div class="inner"> 
+     <div class="group size-7 size--just-two"> 
+      <h3 class="title">Outreach support:</h3> 
+      <div class="list"> 
+       <figure class="item"> <a target="_blank" href="http://revistacrescer.globo.com/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/021/21/thumb_01._logo_crescer_site.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="https://catraquinha.catracalivre.com.br/brasil/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/022/22/thumb_catraquinha_horizontal.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.otima.com/Site/php/home.php"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/023/23/thumb_02._logo_otima_preto.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/040/40/thumb_3._barra_de_separa__o.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.readynation.org/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/025/25/thumb_04._logo_readynation_NOVO.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/032/32/thumb_04._united_way_menor.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/033/33/thumb_b_corp.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/026/26/thumb_MDS.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/027/27/thumb_07._logo_MINC_site.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/051/51/thumb_Assinatura_SDH_nova-2.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/028/28/thumb_08._logo_iat_site.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/029/29/thumb_09._logo_educarparatransformar_site.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.ba.gov.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/030/30/thumb_10._logo_secretariaeduca__oBAHIA_site_copy.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.saopaulo.sp.gov.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/046/46/thumb_12._Secretaria_Sa_de_SP_horizontal.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/041/41/thumb_12._Logo_Cear__mais_inf_ncia_2.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.ceara.gov.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/042/42/thumb_15._Logo_Cear_.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.sobral.ce.gov.br/site_novo/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/043/43/thumb_16._Prefeitura_de_Sobral.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://www.ifan.com.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/024/24/thumb_15._logo_ifan_site.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://primeirainfancia.org.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/045/45/thumb_17._RNPI_horizontal.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/034/34/thumb_cecd_southafrica_copy.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href="http://atletaspelobrasil.org.br/"> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/052/52/thumb_20._atletas_pelo_brasil.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/053/53/thumb_LOGO_PIM.png"> </a> 
+       </figure> 
+       <figure class="item"> <a target="_blank" href=""> <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/advertisement_logo_supporter/image/000/000/054/54/thumb_LOGO_RS.png"> </a> 
+       </figure> 
+      </div> 
+      <div class="swiper-button-prev"></div> 
+      <div class="swiper-button-next"></div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-share"> 
+    <div class="inner"> 
+     <div class="film-share__wrapper"> <button class="bt-facebook" data-share="facebook"></button> <button class="bt-twitter" data-share="twitter"></button> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-sessions"> 
+    <div class="inner"> 
+     <h2 class="film-section-title">NEXT VIDEOCAMP PUBLIC SCREENINGS</h2> 
+     <div class="nav-mobile"> 
+      <div class="swiper-container"> 
+       <div class="swiper-wrapper"> 
+        <div class="nav-item swiper-slide"> 
+         <div class="item-date-mobile"> <em></em> <span>20/04</span> 
+         </div> 
+        </div> 
+        <div class="nav-item swiper-slide"> 
+         <div class="item-date-mobile"> <em></em> <span>09/10</span> 
+         </div> 
+        </div> 
+        <div class="nav-item swiper-slide"> 
+         <div class="item-date-mobile"> <em></em> <span>28/08</span> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <button class="bt-prev"></button> <button class="bt-next"></button> 
+     </div> 
+     <div class="list swiper-container"> 
+      <div class="swiper-wrapper"> 
+       <div class="item swiper-slide"> 
+        <p class="item-date">20/04</p> 
+        <div class="item-sessions"> 
+         <div class="item-session"> 
+          <div class="item-time">
+           17:30
+          </div> 
+          <div class="item-inner"> 
+           <div class="item-details item-details--end"> 
+            <p class="item-location item-location--name"><strong>Colômbia, São Paulo</strong> | Cemei Francisca Luzia de Avelar</p> 
+            <p class="item-address">Rua Ramos da Natividade 855</p> 
+           </div> 
+           <nav class="share gray"> <button class="bt-share">Compartilhar</button> 
+            <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+            </div> 
+           </nav> <a href="/en/movies/o-comeco-da-vida/exhibitions/43135/info" class="bt-details"> <em></em> <span>See details</span> </a> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="item swiper-slide"> 
+        <p class="item-date">09/10</p> 
+        <div class="item-sessions"> 
+         <div class="item-session"> 
+          <div class="item-time">
+           14:00
+          </div> 
+          <div class="item-inner"> 
+           <div class="item-details item-details--end"> 
+            <p class="item-location item-location--name"><strong>Mogi das Cruzes, São Paulo</strong> | Lucéia Marques do Amaral</p> 
+            <p class="item-address">RUA Domingos de Souza 185</p> 
+           </div> 
+           <nav class="share gray"> <button class="bt-share">Compartilhar</button> 
+            <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+            </div> 
+           </nav> <a href="/en/movies/o-comeco-da-vida/exhibitions/45426/info" class="bt-details"> <em></em> <span>See details</span> </a> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="item swiper-slide"> 
+        <p class="item-date">28/08</p> 
+        <div class="item-sessions"> 
+         <div class="item-session"> 
+          <div class="item-time">
+           10:00
+          </div> 
+          <div class="item-inner"> 
+           <div class="item-details item-details--end"> 
+            <p class="item-location item-location--name"><strong>Mossoró, Rio Grande do Norte</strong> | Cinema Partage Shopping</p> 
+            <p class="item-address">Partage Shopping Mossoró</p> 
+           </div> 
+           <nav class="share gray"> <button class="bt-share">Compartilhar</button> 
+            <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+            </div> 
+           </nav> <a href="/en/movies/o-comeco-da-vida/exhibitions/3695/info" class="bt-details"> <em></em> <span>See details</span> </a> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="bottom"> 
+      <p class="disclaimer">The film's producer are the responsable for this schedule.</p> <a href="/en/exhibitions?movies%5B%5D=61" class="bt-more">See complete schedule</a> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-cols"> 
+    <div class="inner"> 
+     <div class="col-left"> 
+      <section class="film-knowmore"> 
+       <h2 class="film-section-title">Learn more about the theme (title)</h2> 
+       <div class="list"> 
+        <div class="item"> 
+         <h3 class="item-title">Discussion Material</h3> 
+         <p class="item-text">This post-screening material is a way of offering more resources to promote inspiring and consistent discussions, and help in discovering the importance of Early Childhood Development (ECD). This booklet was developed in modular fashion, so you can use the parts you wish, in the way you find most appropriate and the order that makes most sense to you. </p> <a target="_blank" class="item-file" href="https://videocamp-prod-us.s3.amazonaws.com/uploads/movie_know_more/attachment/000/000/153/153/Discussion_Material.zip">Discussion Material</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">UN - Millennium Development Goals</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.un.org/millenniumgoals/">http://www.un.org/millenniumgoals/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Save the Children</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.savethechildren.org/site/c.8rKLIXMGIpI4E/b.6115947/k.8D6E/Official_Site.htm">http://www.savethechildren.org/site/c...</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">WHO - World Health Organization</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.who.int/en/">http://www.who.int/en/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Center of Excellence for Early Childhood Development</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.excellence-earlychildhood.ca/">http://www.excellence-earlychildhood.ca/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Center on the Developing Child - Harvard University</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://developingchild.harvard.edu/">http://developingchild.harvard.edu/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Child Trends</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.childtrends.org">http://www.childtrends.org</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">ReadyNation</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.readynation.org/">http://www.readynation.org/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Ashoka</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="https://www.ashoka.org/">https://www.ashoka.org/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">UBS Optimus Foundation</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="https://www.ubs.com/global/en/wealth_management/optimusfoundation.html">https://www.ubs.com/global/en/wealth_...</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">World Bank</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.worldbank.org/en/topic/earlychildhooddevelopment/overview">http://www.worldbank.org/en/topic/ear...</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">UNICEF</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.unicef.org/">http://www.unicef.org/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Bernard van Leer Foundation</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.bernardvanleer.org/">http://www.bernardvanleer.org/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">Alana Institute</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://alana.org.br/en/">http://alana.org.br/en/</a> 
+        </div> 
+        <div class="item"> 
+         <h3 class="item-title">FMCSV - Maria Cecília Souto Vidigal Foundation</h3> 
+         <p class="item-text"></p> <a target="_blank" class="item-link" href="http://www.fmcsv.org.br/en-us/Pages/default.aspx">http://www.fmcsv.org.br/en-us/Pages/d...</a> 
+        </div> 
+       </div> <span class="bt-more">Read more</span> 
+      </section> 
+     </div> 
+     <div class="col-right"> 
+      <h2 class="film-section-title">Extras</h2> 
+      <section class="film-photos"> 
+       <h3 class="film-cols-title-mobile">Photos</h3> 
+       <div class="list-mobile swiper-container"> 
+        <div class="swiper-wrapper"> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5707/23346611371_0ee1c65bee_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5824/23061180289_ec1bb1de4c_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm1.staticflickr.com/602/22801985953_bb51dbf16c_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5745/23133358790_c6c88e5ffa_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5814/23320677142_d77f10c70a_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5775/23346607051_c8b6753439_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5790/23429145935_79b703a9a8_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm1.staticflickr.com/694/23346605401_22e1930abe_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm1.staticflickr.com/761/23346604281_b0170870e9_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5798/23061173689_e2053bb3b5_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5731/23133352700_44d032a57b_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm1.staticflickr.com/596/22801977303_a52b4781dc_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm1.staticflickr.com/596/22801976233_75daaec8ea_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm1.staticflickr.com/692/23402968366_58c48aae84_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5794/23061168199_ffa00cb361_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5662/23320666292_1cea4ec370_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5786/23133347480_f57b73b2bf_q.jpg)"></a> 
+         </div> 
+         <div class="swiper-slide"> <a class="item-mobile extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5828/23346595531_93b14b15b0_q.jpg)"></a> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="list"> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5707/23346611371_0ee1c65bee_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5824/23061180289_ec1bb1de4c_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm1.staticflickr.com/602/22801985953_bb51dbf16c_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5745/23133358790_c6c88e5ffa_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5814/23320677142_d77f10c70a_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5775/23346607051_c8b6753439_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5790/23429145935_79b703a9a8_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm1.staticflickr.com/694/23346605401_22e1930abe_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm1.staticflickr.com/761/23346604281_b0170870e9_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5798/23061173689_e2053bb3b5_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5731/23133352700_44d032a57b_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm1.staticflickr.com/596/22801977303_a52b4781dc_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm1.staticflickr.com/596/22801976233_75daaec8ea_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm1.staticflickr.com/692/23402968366_58c48aae84_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5794/23061168199_ffa00cb361_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5662/23320666292_1cea4ec370_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5786/23133347480_f57b73b2bf_q.jpg)"></a> <a class="item extra-image-js" style="background-image:url(https://farm6.staticflickr.com/5828/23346595531_93b14b15b0_q.jpg)"></a> 
+       </div> <span data-toggle="modal" data-targets="#extra-images-modal" class="bt-more">See all photos</span> 
+      </section> 
+      <section class="film-soundtrack"> 
+       <h3 class="film-cols-title-mobile">Musics</h3> 
+       <div class="list-mobile swiper-container"> 
+        <div class="swiper-wrapper"> 
+         <div class="swiper-slide extra-audio-js"> <a href="#" class="item-image-mobile" style="background-image:url(http://i1.sndcdn.com/artworks-000182942983-8pu5ae-t500x500.jpg)"></a> 
+          <h3 class="item-title-mobile">O Começo da Vida - Trilha Musical by Maria Farinha Filmes</h3> 
+          <p class="item-author-mobile">Maria Farinha Filmes</p> 
+         </div> 
+         <div class="swiper-slide"> <span data-toggle="modal" data-targets="#extra-audios-modal" class="bt-more-mobile">See all music</span> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="list"> 
+        <div class="item"> <a class="item-image extra-audio-js"> <img src="http://i1.sndcdn.com/artworks-000182942983-8pu5ae-t500x500.jpg"> </a> 
+         <div class="item-contents"> 
+          <h3 class="item-title">O Começo da Vida - Trilha Musical by Maria Farinha Filmes</h3> 
+          <p class="item-author">Maria Farinha Filmes</p> 
+         </div> 
+        </div> 
+       </div> <span data-toggle="modal" data-targets="#extra-audios-modal" class="bt-more">See all music</span> 
+      </section> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-links"> 
+    <div class="inner"> 
+     <h2 class="film-section-title">Additional information</h2> 
+     <div class="box"> 
+      <div class="col"> 
+       <h3 class="title">You can also watch it at:</h3> <a href="https://itunes.apple.com/br/movie/o-comeco-da-vida/id1107116703" target="_blank" class="link">iTUNES</a> <a href="https://play.google.com/store/movies/details/O_Come%C3%A7o_da_Vida?id=y1tNCLdyOPk" target="_blank" class="link">GOOGLE PLAY (LEG) </a> <a href="https://play.google.com/store/movies/details/O_Come%C3%A7o_da_Vida?id=1zFLgMJMH9c" target="_blank" class="link">GOOGLE PLAY (DUB)</a> <a href="http://webportal.nowonline.com.br/catalogue/play/64151?section=CATALOGUE&amp;leaf=search" target="_blank" class="link">NET NOW</a> <a href="http://mff.com.br/loja/" target="_blank" class="link">BUY DVD</a> 
+      </div> 
+      <div class="col"> 
+       <h3 class="title">Awards:</h3> <span>--</span> 
+      </div> 
+      <div class="col"> 
+       <h3 class="title">Official site:</h3> <a href="http://www.ocomecodavida.com.br" target="_blank" class="link">Official site</a> 
+       <h3 class="title">Press Kit:</h3> <span>--</span> 
+      </div> 
+     </div> 
+     <p class="film-links--text">Todas as informações disponíveis nessa página foram fornecidas e são de responsabilidade do detentor de direitos da obra.</p> 
+    </div> 
+   </section> 
+   <section class="comments"> 
+    <div class="container"> 
+     <h1 class="title">Comments</h1> 
+    </div> 
+    <div class="container container-slim"> 
+     <div id="disqus_thread"></div> 
+    </div> 
+   </section> 
+   <section class="film-related"> 
+    <div class="inner"> 
+     <h2 class="film-section-title">Films you could like</h2> 
+     <div class="swiper-container"> 
+      <div class="swiper-wrapper"> 
+       <div class="swiper-slide "> 
+        <div class="film film-poster-js" data-movie-url="/en/movies/o-comeco-da-vida-a-serie-livre-para-aprender"> 
+         <figure class="item-image"> <a href="/en/movies/o-comeco-da-vida-a-serie-livre-para-aprender"><img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/640/640/small_The_Beggning_Of_Life_Series_-_Poster.jpg"></a> 
+          <div class="item-overlay"> 
+           <div class="item-top"> 
+            <p class="item-data"> <span class="item-year">2016</span><span> · </span><span class="item-runtime">42</span> min </p> 
+            <p class="item-tags"> <a href="/en/movies?category=4">Documentary</a> </p> 
+           </div> 
+           <p class="item-about"> The early years are the ones that structure the life of a person. “The Beginning of Life - The Series” follows the successful moveme... </p> 
+           <div class="item-bottom"> <a class="bt-page" href="/en/movies/o-comeco-da-vida-a-serie-livre-para-aprender">Movie page</a> <a class="bt-organize bt-organize-js btn-organize-poster-en" onclick="ga('send', 'event', 'Button', 'click', 'Organizar Sessão')" href="/en/movies/o-comeco-da-vida-a-serie-livre-para-aprender/exhibitions/new"> <span>Organize a screening</span> </a> 
+           </div> <a class="item-link" href="/en/movies/o-comeco-da-vida-a-serie-livre-para-aprender"></a> 
+          </div> 
+         </figure> 
+         <nav class="item-options"> <span class="item-stars">5</span> 
+          <nav class="share"> <button class="bt-share">Compartilhar</button> 
+           <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+           </div> 
+          </nav> <button class="item-favorite favorite-js " data-movie-id="446">Marcar como favorito</button> 
+         </nav> 
+         <h3 class="item-title"> <a href="/en/movies/o-comeco-da-vida-a-serie-livre-para-aprender">Ep. 3 - The Beginning of Life - The S...</a> </h3> 
+        </div> 
+       </div> 
+       <div class="swiper-slide "> 
+        <div class="film film-poster-js" data-movie-url="/en/movies/o-comeco-da-vida-a-serie-infancia-negada"> 
+         <figure class="item-image"> <a href="/en/movies/o-comeco-da-vida-a-serie-infancia-negada"><img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/638/638/small_The_Beggning_Of_Life_Series_-_Poster.jpg"></a> 
+          <div class="item-overlay"> 
+           <div class="item-top"> 
+            <p class="item-data"> <span class="item-year">2016</span><span> · </span><span class="item-runtime">43</span> min </p> 
+            <p class="item-tags"> <a href="/en/movies?category=4">Documentary</a> </p> 
+           </div> 
+           <p class="item-about"> The early years are the ones that structure the life of a person. “The Beginning of Life - The Series” follows the successful moveme... </p> 
+           <div class="item-bottom"> <a class="bt-page" href="/en/movies/o-comeco-da-vida-a-serie-infancia-negada">Movie page</a> <a class="bt-organize bt-organize-js btn-organize-poster-en" onclick="ga('send', 'event', 'Button', 'click', 'Organizar Sessão')" href="/en/movies/o-comeco-da-vida-a-serie-infancia-negada/exhibitions/new"> <span>Organize a screening</span> </a> 
+           </div> <a class="item-link" href="/en/movies/o-comeco-da-vida-a-serie-infancia-negada"></a> 
+          </div> 
+         </figure> 
+         <nav class="item-options"> <span class="item-stars">4.5</span> 
+          <nav class="share"> <button class="bt-share">Compartilhar</button> 
+           <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+           </div> 
+          </nav> <button class="item-favorite favorite-js " data-movie-id="445">Marcar como favorito</button> 
+         </nav> 
+         <h3 class="item-title"> <a href="/en/movies/o-comeco-da-vida-a-serie-infancia-negada">Ep. 4 - The Beginning of Life - The S...</a> </h3> 
+        </div> 
+       </div> 
+       <div class="swiper-slide "> 
+        <div class="film film-poster-js" data-movie-url="/en/movies/o-comeco-da-vida-a-serie-criando-junto"> 
+         <figure class="item-image"> <a href="/en/movies/o-comeco-da-vida-a-serie-criando-junto"><img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/636/636/small_The_Beggning_Of_Life_Series_-_Poster.jpg"></a> 
+          <div class="item-overlay"> 
+           <div class="item-top"> 
+            <p class="item-data"> <span class="item-year">2016</span><span> · </span><span class="item-runtime">43</span> min </p> 
+            <p class="item-tags"> <a href="/en/movies?category=4">Documentary</a> </p> 
+           </div> 
+           <p class="item-about"> The early years are the ones that structure the life of a person. “The Beginning of Life - The Series” follows the successful moveme... </p> 
+           <div class="item-bottom"> <a class="bt-page" href="/en/movies/o-comeco-da-vida-a-serie-criando-junto">Movie page</a> <a class="bt-organize bt-organize-js btn-organize-poster-en" onclick="ga('send', 'event', 'Button', 'click', 'Organizar Sessão')" href="/en/movies/o-comeco-da-vida-a-serie-criando-junto/exhibitions/new"> <span>Organize a screening</span> </a> 
+           </div> <a class="item-link" href="/en/movies/o-comeco-da-vida-a-serie-criando-junto"></a> 
+          </div> 
+         </figure> 
+         <nav class="item-options"> <span class="item-stars">0</span> 
+          <nav class="share"> <button class="bt-share">Compartilhar</button> 
+           <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+           </div> 
+          </nav> <button class="item-favorite favorite-js " data-movie-id="444">Marcar como favorito</button> 
+         </nav> 
+         <h3 class="item-title"> <a href="/en/movies/o-comeco-da-vida-a-serie-criando-junto">Ep. 5 - The Beginning of Life - The S...</a> </h3> 
+        </div> 
+       </div> 
+       <div class="swiper-slide "> 
+        <div class="film film-poster-js" data-movie-url="/en/movies/o-comeco-da-vida-a-serie-o-surgimento-do-eu"> 
+         <figure class="item-image"> <a href="/en/movies/o-comeco-da-vida-a-serie-o-surgimento-do-eu"><img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/634/634/small_The_Beggning_Of_Life_Series_-_Poster.jpg"></a> 
+          <div class="item-overlay"> 
+           <div class="item-top"> 
+            <p class="item-data"> <span class="item-year">2016</span><span> · </span><span class="item-runtime">43</span> min </p> 
+            <p class="item-tags"> <a href="/en/movies?category=4">Documentary</a> </p> 
+           </div> 
+           <p class="item-about"> The early years are the ones that structure the life of a person. “The Beginning of Life - The Series” follows the successful moveme... </p> 
+           <div class="item-bottom"> <a class="bt-page" href="/en/movies/o-comeco-da-vida-a-serie-o-surgimento-do-eu">Movie page</a> <a class="bt-organize bt-organize-js btn-organize-poster-en" onclick="ga('send', 'event', 'Button', 'click', 'Organizar Sessão')" href="/en/movies/o-comeco-da-vida-a-serie-o-surgimento-do-eu/exhibitions/new"> <span>Organize a screening</span> </a> 
+           </div> <a class="item-link" href="/en/movies/o-comeco-da-vida-a-serie-o-surgimento-do-eu"></a> 
+          </div> 
+         </figure> 
+         <nav class="item-options"> <span class="item-stars">5</span> 
+          <nav class="share"> <button class="bt-share">Compartilhar</button> 
+           <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+           </div> 
+          </nav> <button class="item-favorite favorite-js " data-movie-id="443">Marcar como favorito</button> 
+         </nav> 
+         <h3 class="item-title"> <a href="/en/movies/o-comeco-da-vida-a-serie-o-surgimento-do-eu">Ep. 6 - The Beginning of Life - The S...</a> </h3> 
+        </div> 
+       </div> 
+       <div class="swiper-slide "> 
+        <div class="film film-poster-js" data-movie-url="/en/movies/the-beginning-of-life-the-series-becoming-a-parent"> 
+         <figure class="item-image"> <a href="/en/movies/the-beginning-of-life-the-series-becoming-a-parent"><img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/632/632/small_The_Beggning_Of_Life_Series_-_Poster.jpg"></a> 
+          <div class="item-overlay"> 
+           <div class="item-top"> 
+            <p class="item-data"> <span class="item-year">2016</span><span> · </span><span class="item-runtime">44</span> min </p> 
+            <p class="item-tags"> <a href="/en/movies?category=4">Documentary</a> </p> 
+           </div> 
+           <p class="item-about"> The early years are the ones that structure the life of a person. “The Beginning of Life - The Series” follows the successful moveme... </p> 
+           <div class="item-bottom"> <a class="bt-page" href="/en/movies/the-beginning-of-life-the-series-becoming-a-parent">Movie page</a> <a class="bt-organize bt-organize-js btn-organize-poster-en" onclick="ga('send', 'event', 'Button', 'click', 'Organizar Sessão')" href="/en/movies/the-beginning-of-life-the-series-becoming-a-parent/exhibitions/new"> <span>Organize a screening</span> </a> 
+           </div> <a class="item-link" href="/en/movies/the-beginning-of-life-the-series-becoming-a-parent"></a> 
+          </div> 
+         </figure> 
+         <nav class="item-options"> <span class="item-stars">4.5</span> 
+          <nav class="share"> <button class="bt-share">Compartilhar</button> 
+           <div class="share-options"> <button class="bt-share-facebook">Compartilhar no Facebook</button> <button class="bt-share-twitter">Compartilhar no Twitter</button> 
+           </div> 
+          </nav> <button class="item-favorite favorite-js " data-movie-id="442">Marcar como favorito</button> 
+         </nav> 
+         <h3 class="item-title"> <a href="/en/movies/the-beginning-of-life-the-series-becoming-a-parent">Ep. 2 - The Beginning of Life - The ...</a> </h3> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="film-credits"> 
+    <div class="background"></div> 
+    <div class="inner"> <button class="bt-close"></button> 
+     <div class="top"> 
+      <figure class="item-poster"> 
+       <img src="https://videocamp-prod-us.s3.amazonaws.com/uploads/poster_image/image/000/000/120/120/thumb_POSTER_CRIAN_A_EN.jpg" alt=""> 
+      </figure> 
+      <div class="film-credits__header"> 
+       <div> 
+        <h2 class="title">Complete sheet</h2> 
+        <p class="item-title"> The Beginning of Life <span>(2016)</span> </p> 
+       </div> 
+       <div> 
+        <p class="item-alert"><strong>Age rating:</strong> General Audience </p>
+       </div> 
+       <p class="item-alert green"><strong>It is possible to download the archive</strong> of this film for Videocamp sessions. Organize your screening by clicking <a href="/en/movies/o-comeco-da-vida/exhibitions/new">here</a>.</p> 
+      </div> 
+     </div> 
+     <div class="list"> 
+      <p class="item"> <strong class="item-term">Directed by</strong> <span class="item-data">Estela Renner</span> </p> 
+      <p class="item"> <strong class="item-term">Produced by</strong> <span class="item-data">Maria Farinha Filmes</span> </p> 
+      <p class="item"> <strong class="item-term">Coproduction</strong> <span class="item-data">--</span> </p> 
+      <p class="item"> <strong class="item-term">Sponsorship</strong> <span class="item-data">FUNDAÇÃO MARIA CECÍLIA SOUTO VIDIGAL, FUNDAÇÃO BERNARD VAN LEER, INSTITUTO ALANA, UNICEF</span> </p> 
+      <p class="item"> <strong class="item-term">Official Support</strong> <span class="item-data">--</span> </p> 
+      <p class="item"> <strong class="item-term">Category</strong> <span class="item-data"><a target="_blank" class="item-tag" href="/en/movies?category=4">Documentary</a></span> </p> 
+      <p class="item"> <strong class="item-term">Theme (title)</strong> <span class="item-data"><a target="_blank" class="item-tag" href="/en/movies?theme=8">Childhood</a> <a target="_blank" class="item-tag" href="/en/movies?theme=9">Inspirational</a></span> </p> 
+      <p class="item"> <strong class="item-term">ODSs</strong> <span class="item-data">ODS 3 - Good Health and Well-Being, ODS 5 - Gender Equality, ODS 8 - Decent Work and Economic Growth, ODS 10 - Reduced Inequalities</span> </p> 
+     </div> 
+     <h2 class="subtitle">Audio and Subtitles</h2> 
+     <div class="list"> 
+      <p class="item"> <strong class="item-term"><span class="translation_missing" title="translation missing: en.movies.show.credits.audio">Audio</span></strong> <span class="item-data">Several, Spanish, English, French, Portuguese BR, Bulgarian, Arabic, Tetum, Central Khmer</span> </p> 
+      <p class="item"> <strong class="item-term">Standard</strong> <span class="item-data">Portuguese BR, Spanish, English, Italian, French, Danish, Finnish, Catalan, Swedish, Arabic, Japanese, Korean, German, Portuguese, Turkish, Russian, Indonesian, Dutch, Bulgarian, Norwegian, Chinese (Traditional), Chinese (Simplified), Croatian, Serbian, Bulgarian, Azerbaijani, English, Tetum</span> </p> 
+      <p class="item"> <strong class="item-term">Close Caption</strong> <span class="item-data">--</span> </p> 
+      <p class="item"> <strong class="item-term">Audio Description</strong> <span class="item-data">Portuguese BR</span> </p> 
+      <p class="item"> <strong class="item-term">Sign Language</strong> <span class="item-data">--</span> </p> 
+     </div> 
+     <h2 class="subtitle">Synopsis</h2> 
+     <div class="text"> 
+      <p>One of the greatest neuroscience breakthroughs is having discovered that babies are far more than a genetic load. The development of all human beings lies on the combination of genetics, the quality of the relationships and the environment they are set on. </p> 
+      <p>The Beginning of Life invites everyone to reflect: are we taking good care of this unique moment, which defines both the present and future of humankind? </p> 
+      <p>The film is available for free public screenings Worldwide. </p> 
+     </div> 
+     <div class="modal-internal__tables"> 
+      <h2 class="subtitle">Cast</h2> 
+      <div class="list"> 
+       <p class="item"> <strong class="item-data">JACK SHONKOFF</strong> </p> 
+       <p class="item"> <strong class="item-data">JAMES HECKMAN</strong> </p> 
+       <p class="item"> <strong class="item-data">RAFFI CAVOUKIAN</strong> </p> 
+       <p class="item"> <strong class="item-data">CHARLES A. NELSON III</strong> </p> 
+       <p class="item"> <strong class="item-data">ALISON GOPNIK</strong> </p> 
+       <p class="item"> <strong class="item-data">ANDREW MELTZOFF</strong> </p> 
+       <p class="item"> <strong class="item-data">GISELE BÜNDCHEN</strong> </p> 
+       <p class="item"> <strong class="item-data">VERA IACONELLI</strong> </p> 
+       <p class="item"> <strong class="item-data">Vilma</strong> </p> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <div id="trailer-modal" tabindex="-1" role="dialog" class="modal dark-modal" data-provider="YouTube" data-ga-category="trailer" data-ga-label="o-comeco-da-vida"> 
+    <div class="modal-content v-center"> <button data-dismiss="modal" type="button" class="close-modal btn-action fl-right modal-close-btn"><span class="icon-close"></span></button> 
+     <div class="modal-body"> <iframe width="480" height="270" src="https://www.youtube.com/embed/LHqUMqvL1RQ?enablejsapi=1&amp;feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="extra-images-modal" tabindex="-1" role="dialog" class="modal dark-modal extra-modal extra-images-modal"> 
+    <div class="modal-dialog"> <button data-dismiss="modal" type="button" class="close-modal btn-action fl-right modal-close-btn"><span class="icon-close"></span></button> 
+     <div id="extra-images-flexslider" class="extra-flexslider"> 
+      <ul class="slides"> 
+       <li> <img src="https://farm6.staticflickr.com/5707/23346611371_0ee1c65bee_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5824/23061180289_ec1bb1de4c_b.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/602/22801985953_bb51dbf16c_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5745/23133358790_c6c88e5ffa_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5814/23320677142_d77f10c70a_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5775/23346607051_c8b6753439_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5790/23429145935_79b703a9a8_b.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/694/23346605401_22e1930abe_b.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/761/23346604281_b0170870e9_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5798/23061173689_e2053bb3b5_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5731/23133352700_44d032a57b_b.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/596/22801977303_a52b4781dc_b.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/596/22801976233_75daaec8ea_b.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/692/23402968366_58c48aae84_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5794/23061168199_ffa00cb361_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5662/23320666292_1cea4ec370_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5786/23133347480_f57b73b2bf_b.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5828/23346595531_93b14b15b0_b.jpg"> </li> 
+      </ul> 
+     </div> 
+     <div id="extra-images-caroucel-flexslider" class="extra-caroucel-flexslider"> 
+      <ul class="slides"> 
+       <li> <img src="https://farm6.staticflickr.com/5707/23346611371_0ee1c65bee_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5824/23061180289_ec1bb1de4c_q.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/602/22801985953_bb51dbf16c_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5745/23133358790_c6c88e5ffa_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5814/23320677142_d77f10c70a_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5775/23346607051_c8b6753439_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5790/23429145935_79b703a9a8_q.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/694/23346605401_22e1930abe_q.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/761/23346604281_b0170870e9_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5798/23061173689_e2053bb3b5_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5731/23133352700_44d032a57b_q.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/596/22801977303_a52b4781dc_q.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/596/22801976233_75daaec8ea_q.jpg"> </li> 
+       <li> <img src="https://farm1.staticflickr.com/692/23402968366_58c48aae84_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5794/23061168199_ffa00cb361_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5662/23320666292_1cea4ec370_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5786/23133347480_f57b73b2bf_q.jpg"> </li> 
+       <li> <img src="https://farm6.staticflickr.com/5828/23346595531_93b14b15b0_q.jpg"> </li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="extra-audios-modal" tabindex="-1" role="dialog" class="modal dark-modal extra-modal extra-audios-modal"> 
+    <div class="modal-dialog"> <button data-dismiss="modal" type="button" class="close-modal btn-action fl-right modal-close-btn"><span class="icon-close"></span></button> 
+     <div class="extra-audios-modal-wrap"> <iframe width="100%" height="160" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F259788773&amp;show_artwork=true&amp;width=1920"></iframe> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="classPlanModal" class="modal classPlan_modal" tabindex="-1" role="dialog"> 
+    <div class="modal-content"> 
+     <div class="modal-header"> <button data-dismiss="modal" type="button" class="close-modal"><i class="icon-close"></i></button> 
+     </div> 
+     <div class="modal-body"> 
+     </div> 
+     <div class="modal-footer"></div> 
+    </div> 
+   </div> 
+   <div id="research-trail-modal" class="modal research-trail-modal" tabindex="-1" role="dialog"> 
+    <div class="modal-content"> 
+     <div class="modal-header"> <button data-dismiss="modal" type="button" class="close-modal"><i class="icon-close"></i></button> 
+     </div> 
+     <div class="modal-body"> 
+     </div> 
+     <div class="modal-footer"></div> 
+    </div> 
+   </div> 
+   <section data-content-triggers-modal="61" class="modal-reports modal-questionnarie movie-content-trigger"> 
+    <div class="modal-reports__wrapper modal-content-trigger"> 
+     <header> 
+      <p>ALERTA DE GATILHO</p> 
+     </header> 
+     <div class="modal-reports__content questions-content"> 
+      <div class="inner"> 
+       <p class="trigger-subheader"> Essa obra trata dos seguintes temas:</p> 
+       <div> 
+       </div> 
+       <hr class="trigger-separator"> 
+       <p>Recomendamos que pessoas, sejam elas mobilizadoras ou participantes da sessão, que se sintam sensíveis a esses temas, não assistam à obra.</p> 
+       <div> <button data-content-trigger-continue data-exibition-href="/en/movies/o-comeco-da-vida/exhibitions/new?skip_trigger=true" class="trigger-success trigger-button">Quero Continuar com o agendamento da sessão</button> <button data-content-trigger-close class="trigger-alert trigger-button">Não quero continuar com o agendamento da sessão</button> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <section data-content-warnings-modal class="modal-reports modal-questionnarie movie-content-trigger"> 
+    <div class="modal-reports__wrapper modal-content-trigger"> 
+     <header> 
+      <p>AVISO DE CONTEÚDO IMPRÓPRIO PARA MENORES DE GENERAL AUDIENCE</p> 
+     </header> 
+     <div class="modal-reports__content questions-content"> 
+      <div class="inner"> 
+       <p class="trigger-subheader"> Este filme pode conter cenas de:</p> 
+       <div> 
+       </div> 
+       <p>e, por isso, não é recomendado para menores de General Audience.</p> 
+       <hr class="trigger-separator"> 
+       <p>Antes de prosseguir com seu agendamento, certifique-se de que a audiência da sua sessão está dentro desta classificação indicativa.</p> 
+       <div> <button data-content-warnings-continue data-exibition-href="/en/movies/o-comeco-da-vida/exhibitions/new?skip_trigger=true" class="trigger-success trigger-button"> Sim, estou ciente</button> <button data-content-warnings-close class="trigger-alert trigger-button">Escolher outro filme</button> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <div id="modal-loader" class="modal-loader" style="display: none"></div> 
+  </div> 
+  <footer class="site-footer"> 
+   <div class="top"> 
+    <div class="inner"> 
+     <nav class="col"> 
+      <h3 class="title">Videocamp</h3> <a class="item" href="/en/about">About VIDEOCAMP</a> <a class="item" href="/en/movies">Films</a> <a class="item" href="/en/playlists">Playlists</a> <!--<li><a href="/en/movies/o-comeco-da-vida">VIDEOCAMP blog</a></li>--> <!--<li><a href="/en/movies/o-comeco-da-vida">Curators</a></li>--> 
+     </nav> 
+     <nav class="col"> 
+      <h3 class="title">Help</h3> <a class="item" href="/en/faq">Frequently Asked Questions</a> <a target="_blank" class="item" href="https://s3-sa-east-1.amazonaws.com/videocamp-prod/docs/MDDA-EN.pdf">Copyright holder manual</a> 
+      <p class="item"><a class="item" href="mailto:info@videocamp.com">Get in touch<br>info@videocamp.com</a></p> 
+     </nav> 
+     <nav class="col"> 
+      <h3 class="title">More</h3> <a class="item" href="/en/users/new/filmmaker">Submit film</a> <a class="item" href="/en/exhibitions/map">The Videocamp around the world</a> <a target="_blank" class="item" href="/en/download/practical_guide">Practical guide for moderating discussions</a> 
+     </nav> 
+     <nav class="col col-last"> 
+      <div class="col-top"> 
+       <h3 class="title">Receive our newsletter</h3> 
+       <form class="newsletter"> 
+        <input type="text" class="input" id="newsletter_input" placeholder="example@email.com"> <button type="submit" id="newsletter_submit" class="bt-newsletter">Send</button> 
+        <p id="newsletter_msg" class="footer_msg success uppercase">E-mail registered successfully!</p> 
+        <p id="newsletter_error_msg" class="footer_msg error uppercase">Error registering email</p> 
+       </form> 
+      </div> 
+      <div class="networks"> <a href="https://www.facebook.com/videocampvideo" class="net-item facebook">Facebook</a> <a href="https://twitter.com/videocamp" class="net-item twitter">Twitter</a> <a href="https://www.instagram.com/_videocamp/" class="net-item instagram">Instagram</a> <span class="net-label">Follow us</span> 
+      </div> 
+     </nav> 
+    </div> 
+   </div> 
+   <div class="bottom"> 
+    <div class="inner"> 
+     <p class="copyright">® VIDEOCAMP 2017 - All rights reserved</p> 
+     <div class="drop-links"> <a class="dlks-item" href="/en/terms">Terms of use</a> 
+      <div class="dlks-drop"> <a class="dlks-drop-item" href="/en/terms#privacy">Privacy</a> 
+      </div> 
+     </div> 
+     <div class="drop-links"> <a class="dlks-item" href="/en/terms-films">Terms for work License</a> 
+      <div class="dlks-drop"> <a class="dlks-drop-item" href="/en/terms-films#privacy">Privacy</a> 
+      </div> 
+     </div> 
+     <div class="language-container"> <i class="ico-language"></i> <label class="language atfooter"> <span class="lang-label">English <i></i></span> <span class="lang-options"> <a class="lang-option" href="/pt/movies/o-comeco-da-vida">Português BR (Portuguese BR)</a> <a class="lang-option" href="/es/movies/o-comeco-da-vida">Español (Spanish)</a> </span> </label> 
+     </div> 
+    </div> 
+   </div> 
+  </footer> 
+  <div class="js-watch-now watch-now-slide-modal modal dark-modal" tabindex="-1" role="dialog" data-ga-category="header" data-label="watch_now" data-modal="watch_now"> 
+   <div class="modal-content v-center"> <button data-dismiss="modal" type="button" class="close-modal btn-action fl-right modal-close-btn modal-close-btn-header-menu"> <span class="icon-close"></span> </button> 
+    <div class="modal-body"> <iframe src="" style="max-width:100%;" width="1920" height="1080" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen></iframe> 
+    </div> 
+   </div> 
+  </div> 
+  <script src="//w.soundcloud.com/player/api.js"></script>
+  <script src="https://player.vimeo.com/api/player.js"></script> 
+  <script type="text/javascript">
+  var app = app || {};
+  app.language = 'en';
+  app.logged_in = false;
+</script> 
+  <script src="https://cdn.videocamp.com/assets/application-293355981d4fda83e39392880c8f21fc2e4a2777e2c53cf2526cb9e37d9b177c.js"></script> 
+  <script>
+        var disqus_config = function () {
+            this.page.url = 'https://www.videocamp.com/en/movies/o-comeco-da-vida';
+            this.page.identifier = 'movie-61';
+            this.language = "en";
+        };
+        (function() {  // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//videocamp.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script> 
+  <script type="text/javascript">
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            app.movie_profile.init_youtube_players();
+        }
+        app.research_trail.init_list();
+        if($(window).width() < 1000) {
+          $('#filmPefilModal .close-modal').trigger('click');
+        }
+    </script> 
+  <div vw class="enabled"> 
+   <div vw-access-button class="active"></div> 
+   <div vw-plugin-wrapper> 
+    <div class="vw-plugin-top-wrapper"></div> 
+   </div> 
+  </div> 
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> 
+  <script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>  
+ </body>
+</html>

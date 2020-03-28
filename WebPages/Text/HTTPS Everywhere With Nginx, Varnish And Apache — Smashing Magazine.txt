@@ -1,0 +1,140 @@
+skip to main content start reading the article jump to list of all articles search topics articles . design & development books . physical & digital books events . conferences & workshops jobs . find work & employees membership . webinars & early-birds browse all topics clear search browse all topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow about the author rachel andrew is not only editor in chief of smashing magazine, but also a web developer, writer and speaker. she is the author of a number of books, including … more about rachel andrew … september 17, 2015 leave a comment https everywhere with nginx, varnish and apache 17 min read coding, development, optimization, caching, varnish, nginx share on twitter or linkedin smashing newsletter upgrade your inbox and get our editors’ picks 2× a month — delivered right into your inbox. earlier issues. your (smashing) email subscribe → the web is moving toward using https encryption by default. this move has been encouraged by google, which announced that https would be a ranking signal. however, moving your website to https is good for other reasons, too. rather than debate those reasons, this article assumes you have already decided to move to https. we’ll walk through how to move your website to https, taking advantage of varnish cache. the web is moving toward using https encryption by default. this move has been encouraged by google, which announced that https would be a ranking signal. however, moving your website to https is good for other reasons, too. rather than debate those reasons, this article assumes you have already decided to move to https. we’ll walk through how to move your website to https, taking advantage of varnish cache. further reading on smashingmag: http/2: a guide for web designers and developers world wide web, not wealthy western web understanding rest and rpc for http apis a look at the modern wordpress server stack what’s the problem with varnish and https? in previous articles on smashing magazine, i’ve explained how to use varnish to speed up your website. for those of us who use varnish and also want to move to https, there is a problem: varnish doesn’t support https. if you make the move to ssl, configuring apache to serve your website securely, then you lose the speed advantage of varnish. there is a relatively straightforward way to deal with this issue, and that is to stick something in between incoming ssl requests and varnish, a layer that handles the secure connection and ssl certificates and then passes the request back to varnish. for this task, we will use nginx. you may know nginx as a web server alternative to apache, and it is. however, it can also be used as a proxy to handle and pass requests on to other services, which is what we are going to do here. in other words, we’re going to create a web server sandwich, with varnish as the tasty cache-meat in the middle. where we are and where we want to be i’m assuming you are in a similar situation as me and have a server — whether virtual or dedicated hardware — with a number of websites running on it. some of those websites you want to make fully https, and perhaps some will remain http for the time being. your current configuration would have every request on port 80 handled by varnish. varnish then decides, based on the rules added to your varnish configuration language (vcl), whether to deliver a cached copy of the page or hand the request back to apache for a new page to be created. once the page hits apache, the web server might need to pull information from the database or do other processing before delivering it. by the end of this tutorial, we want to be in the following position: nginx will run on port 443 and handle incoming https requests, handing them off to varnish. varnish will run on port 80 and handle incoming http requests, including those from nginx, delivering directly from cache or handing to apache apache will run on port 8080 and do what apache does: deliver your website or application. in this situation, nginx becomes a proxy. it does no processing of your website, and it isn’t running php or connecting to your database. all it does is accept the https requests and pass them back to varnish. varnish then decides whether to hand back a cached copy or pass it back to apache to get a fresh one, using the varnish rules you already have. my example environment i’m going to work in vagrant, using ubuntu trusty. my starting point is as described above, with apache installed on port 8080, and varnish 4 installed on port 80. if you would like to follow along, you can download my environment from github. instructions on setting up are in the readme file. i have two websites configured. if i visit those websites in a browser, varnish will handle the request on port 80, either delivering the file from cache or passing it back to apache. at this point, it is useful to check which ports things are running on. ssh into vagrant on the command line: 
+> vagrant ssh
+ then, run netstat: 
+> sudo netstat -taupen
+ this will give you an output of ports, as well as information on which process is using them. you should find that varnish is running on port 80 and apache on 8080. (view large version) you can also check that varnish is running normally and serving pages from the cache by running the following: 
+> varnishstat
+ (view large version) if you reload your page in the web browser, you should see cache hits and misses. if you are using my vcl from github, i’ve added to the varnish configuration some code that will send a hit or miss header to the browser. this means you can look at the headers being sent. you should see x-cache: hit if the page came from varnish and x-cache: miss if it was served by apache. installing nginx we can now install nginx. on an ubuntu system, this is as straightforward as issuing the following command: 
+> sudo apt-get install nginx
+ nginx’s documentation has information on installing nginx on a variety of systems, as well as packages for systems that do not include it in their package management. remember that we are just using nginx as a proxy, so you don’t need to worry about configuring php or mysql support. nginx won’t start by default, and currently it is unable to start because varnish is already using port 80. if you were doing this process on a live server, you would be safe to run this step without any impact on your running websites. create or install an ssl certificate the next step is to set up our ssl certificate. because we are working locally, we can create a “self-signed” certificate in order to test ssl connections. to create a self-signed certificate for testing, first choose or create a directory to put it in. i’ve created an nginx directory in /etc/ssl. then, run the command below to generate the key and certificate pair. 
+> sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.key -out /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.crt
+ when you run this command you will be prompted for a series of questions. you can mostly put junk in these; however, when prompted for the “common name,” use the domain that you type in the url bar to access your website on vagrant. for me, this is smashing_ssl_one.tutorials.eoms. (view large version) if you look now in the folder you created, you should see two files, one with a .key extension and one with a .crt extension. on your live server, you would purchase a certificate from an issuing authority. you would then be given the key and certificate files and, rather than create them, you would place them on your server before following the next step. configure the ssl websites in nginx with your self-signed or purchased ssl certificates in place, you can set up your websites in nginx. first, remove the default configuration file from /etc/nginx/sites-enabled. you can delete the default file or move it elsewhere. we only need to configure websites that will be served over ssl; any other websites will continue to be served directly from varnish on port 80. in my case, i’m going to configure smashing_ssl_one.tutorials.eoms. wherever you see that domain in the steps below, you can replace it with your own live or local domain, if you are not using my example. in /etc/nginx/sites-available/, create a configuration file as your_domain.com.conf. in that file, add the following: 
+server {
+  listen *:443 ssl;
+  server_name smashing_ssl_one.tutorials.eoms;
+
+  ssl on;
+  ssl_certificate /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.crt;
+  ssl_certificate_key /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.key;
+
+  location / {
+
+    proxy_pass            http://127.0.0.1:80;
+    proxy_read_timeout    90;
+    proxy_connect_timeout 90;
+    proxy_redirect        off;
+
+    proxy_set_header      x-real-ip $remote_addr;
+    proxy_set_header      x-forwarded-for $proxy_add_x_forwarded_for;
+    proxy_set_header      x-forwarded-proto https;
+    proxy_set_header      x-forwarded-port 443;
+    proxy_set_header      host $host;
+  }
+} 
+ the first line tells the server we are listening on port 443. this is the default port for https connections, just as port 80 is for http. we then give the server name. we set ssl to be on and then add the certificate and key that we created or installed, using a full file system path. under location, we use proxy_pass to pass the request back to port 80, where varnish is waiting for it. we then set some headers, which will be passed through. after adding this file, symlink the file in sites-available to sites-enabled. if you ever want to switch off the website, you can just delete the symlink. the following command will create a symlink on the command line: 
+> ln -s /etc/nginx/sites-available/smashing_ssl_one.tutorials.eoms.conf /etc/nginx/sites-enabled/smashing_ssl_one.tutorials.eoms.conf
+ then, restart nginx: 
+> sudo service nginx restart
+ if you see the output restarting nginx nginx, followed by [fail], the likely problem is some typo in your configuration. my usual problem are either separating the keys and values with a colon or forgetting the semicolon at the end of the line. if nginx fails to start, look at the log in /var/log/nginx/error.log because most problems are self-explanatory. you will see [ok] if nginx starts up successfully. now, if you check to see what is running on which port, you should see that nginx is now on port 443, varnish still has port 80 and apache 8080. 
+> sudo netstat -taupen
+ the big test is to now visit the website using https://. if you are using a self-signed certificate, then you will have to step through the warning messages — your browser is warning you that the certificate is issued by an unknown authority. (view large version) if you see your page served securely with the padlock in the url bar, then you are now serving https via nginx. if you check the hit or miss headers or run varnishstat on the command line, you’ll be able to check that pages are being served from varnish and not hitting apache each time. (view large version) redirecting to ssl using varnish based on my own experience of doing this, you might want to tweak a few things. if your website was running on http and you want to run it on https, then you will need to redirect all http requests. you can do this using varnish. varnish is at at port 80, handling any non-ssl requests. what we want to do is ask varnish to spot any request for our website and redirect it to https. in your vcl file at /etc/varnish/default.vcl, add a subroutine as follows: 
+# handles redirecting from http to https
+sub vcl_synth {
+  if (resp.status == 750) {
+    set resp.status = 301;
+    set resp.http.location = req.http.x-redir;
+    return(deliver);
+  }
+}
+ then, in the sub vcl_recv block, add this: 
+if ( (req.http.host ~ "^(?i)smashing_ssl_one.tutorials.eoms") && req.http.x-forwarded-proto !~ "(?i)https") {
+  set req.http.x-redir = "https://" + req.http.host + req.url;
+  return (synth(750, ""));
+}
+ you can view the full vcl, with this code included, on github. i am pattern-matching my domain and redirecting it to https with a 301 “moved permanently” code. so, now everything should be switched to ssl. restart varnish, and try to go to the http version of the website and check that you are being redirected. another useful check is to use curl on the command line. the following command will return only the headers of your request. you should see that you are getting a 301 when testing the http url. 
+> curl -i http://smashing_ssl_one.tutorials.eoms
+ (view large version) if you seem to be getting a lot of cache misses on your website, then it would be worth checking which cookies are being stripped by varnish. varnish doesn’t cache content with cookies because it assumes that this is personalized content. however, things like google analytics cookies should not make your content uncacheable. in my example vcl, i’m dealing with some common cookies, but look at mattias geniar’s post for a way to see which cookies are being sent to the back end so that you can deal with your unique examples. grade an ssl you’ve likely heard of the various compromises in openssl. if you are going to all the trouble of running your websites on https, then make sure you aren’t vulnerable to any of these issues. once you have a live website using ssl, a great way to check is to use the ssl server test from qualys ssl labs. add your domain name and wait for the test to run. the test checks for many common issues in ssl configurations — your aim is to pass with an a. when i first ran this on a server with a similar setup to our example vagrant installation — ubuntu trusty, nginx, varnish and apache — i got a b rating, due to the server being vulnerable to the logjam attack. the fix for this is detailed in “weak diffie-hellman and the logjam attack.” back on your server, cd to the directory that you used to put or create ssl certificates, and run the following: 
+> openssl dhparam -out dhparams.pem 2048
+ this will create a file named dhparams.pem. you can then add to your nginx configuration the code detailed under “nginx” on the “weak diffie-hellman and the logjam attack” website. 
+server {
+  listen *:443 ssl;
+  server_name smashing_ssl_one.tutorials.eoms;
+
+  ssl on;
+  ssl_certificate /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.crt;
+  ssl_certificate_key /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.key;
+  ssl_dhparam /etc/ssl/nginx/dhparams.pem;
+  ssl_protocols tlsv1 tlsv1.1 tlsv1.2;
+  ssl_ciphers 'ecdhe-rsa-aes128-gcm-sha256:ecdhe-ecdsa-aes128-gcm-sha256:ecdhe-rsa-aes256-gcm-sha384:ecdhe-ecdsa-aes256-gcm-sha384:dhe-rsa-aes128-gcm-sha256:dhe-dss-aes128-gcm-sha256:kedh+aesgcm:ecdhe-rsa-aes128-sha256:ecdhe-ecdsa-aes128-sha256:ecdhe-rsa-aes128-sha:ecdhe-ecdsa-aes128-sha:ecdhe-rsa-aes256-sha384:ecdhe-ecdsa-aes256-sha384:ecdhe-rsa-aes256-sha:ecdhe-ecdsa-aes256-sha:dhe-rsa-aes128-sha256:dhe-rsa-aes128-sha:dhe-dss-aes128-sha256:dhe-rsa-aes256-sha256:dhe-dss-aes256-sha:dhe-rsa-aes256-sha:aes128-gcm-sha256:aes256-gcm-sha384:aes128-sha256:aes256-sha256:aes128-sha:aes256-sha:aes:camellia:des-cbc3-sha:!anull:!enull:!export:!des:!rc4:!md5:!psk:!aecdh:!edh-dss-des-cbc3-sha:!edh-rsa-des-cbc3-sha:!krb5-des-cbc3-sha';
+
+  ssl_prefer_server_ciphers on;
+
+  location / {
+
+   proxy_pass            http://127.0.0.1:80;
+   proxy_read_timeout    90;
+   proxy_connect_timeout 90;
+   proxy_redirect        off;
+
+   proxy_set_header      x-real-ip $remote_addr;
+   proxy_set_header      x-forwarded-for $proxy_add_x_forwarded_for;
+   proxy_set_header      x-forwarded-proto https;
+   proxy_set_header      x-forwarded-port 443;
+   proxy_set_header      host $host;
+
+  }
+} 
+ reload nginx and retest your website. once you have achieved a a rating, you can periodically check your website to make sure you still have that a. (view large version) check for mixed content warnings your website may well have resources being loaded from other domains that are not https — this will cause a warning on your website. in many cases, the third party will have an https endpoint that you can link to. however, i had to remove the lanyrd badges from my own website because the javascript was hosted only on http. further reading and resources i’ve added links to additional reading throughout this article. for your reference, here are those links, plus some extra resources i’ve found useful. https and ssl “10 reasons to use https,” guy podjarny, medium “the big list of seo tips and tricks for using https on your website,” cyrus shepard, moz blog “guide to deploying diffie-hellman for tls” a guide to protecting your server from the logjam attack ssl server test, qualys ssl labs startssl free ssl certificates let’s encrypt offering free ssl certificates, this service will be available in september. varnish “varnish tip: see which cookies are being stripped in your vcl,” mattias geniar “varnish and website performance,” varnish cache this section of the documentation will help you tune varnish to your application. if you know of any other helpful resources, or if you’ve followed these steps and found some extra piece of information, please add it to the comments. it will help out the next person doing it. under location, we use proxy_pass to pass the request back to port 80, where varnish is waiting for it. we then set some headers, which will be passed through. after adding this file, symlink the file in sites-available to sites-enabled. if you ever want to switch off the website, you can just delete the symlink. the following command will create a symlink on the command line: 
+> ln -s /etc/nginx/sites-available/smashing_ssl_one.tutorials.eoms.conf /etc/nginx/sites-enabled/smashing_ssl_one.tutorials.eoms.conf
+ then, restart nginx: 
+> sudo service nginx restart
+ if you see the output restarting nginx nginx, followed by [fail], the likely problem is some typo in your configuration. my usual problem are either separating the keys and values with a colon or forgetting the semicolon at the end of the line. if nginx fails to start, look at the log in /var/log/nginx/error.log because most problems are self-explanatory. you will see [ok] if nginx starts up successfully. now, if you check to see what is running on which port, you should see that nginx is now on port 443, varnish still has port 80 and apache 8080. 
+> sudo netstat -taupen
+ the big test is to now visit the website using https://. if you are using a self-signed certificate, then you will have to step through the warning messages — your browser is warning you that the certificate is issued by an unknown authority. (view large version) if you see your page served securely with the padlock in the url bar, then you are now serving https via nginx. if you check the hit or miss headers or run varnishstat on the command line, you’ll be able to check that pages are being served from varnish and not hitting apache each time. (view large version) redirecting to ssl using varnish based on my own experience of doing this, you might want to tweak a few things. if your website was running on http and you want to run it on https, then you will need to redirect all http requests. you can do this using varnish. varnish is at at port 80, handling any non-ssl requests. what we want to do is ask varnish to spot any request for our website and redirect it to https. in your vcl file at /etc/varnish/default.vcl, add a subroutine as follows: 
+# handles redirecting from http to https
+sub vcl_synth {
+  if (resp.status == 750) {
+    set resp.status = 301;
+    set resp.http.location = req.http.x-redir;
+    return(deliver);
+  }
+}
+ then, in the sub vcl_recv block, add this: 
+if ( (req.http.host ~ "^(?i)smashing_ssl_one.tutorials.eoms") && req.http.x-forwarded-proto !~ "(?i)https") {
+  set req.http.x-redir = "https://" + req.http.host + req.url;
+  return (synth(750, ""));
+}
+ you can view the full vcl, with this code included, on github. i am pattern-matching my domain and redirecting it to https with a 301 “moved permanently” code. so, now everything should be switched to ssl. restart varnish, and try to go to the http version of the website and check that you are being redirected. another useful check is to use curl on the command line. the following command will return only the headers of your request. you should see that you are getting a 301 when testing the http url. 
+> curl -i http://smashing_ssl_one.tutorials.eoms
+ (view large version) if you seem to be getting a lot of cache misses on your website, then it would be worth checking which cookies are being stripped by varnish. varnish doesn’t cache content with cookies because it assumes that this is personalized content. however, things like google analytics cookies should not make your content uncacheable. in my example vcl, i’m dealing with some common cookies, but look at mattias geniar’s post for a way to see which cookies are being sent to the back end so that you can deal with your unique examples. grade an ssl you’ve likely heard of the various compromises in openssl. if you are going to all the trouble of running your websites on https, then make sure you aren’t vulnerable to any of these issues. once you have a live website using ssl, a great way to check is to use the ssl server test from qualys ssl labs. add your domain name and wait for the test to run. the test checks for many common issues in ssl configurations — your aim is to pass with an a. when i first ran this on a server with a similar setup to our example vagrant installation — ubuntu trusty, nginx, varnish and apache — i got a b rating, due to the server being vulnerable to the logjam attack. the fix for this is detailed in “weak diffie-hellman and the logjam attack.” back on your server, cd to the directory that you used to put or create ssl certificates, and run the following: 
+> openssl dhparam -out dhparams.pem 2048
+ this will create a file named dhparams.pem. you can then add to your nginx configuration the code detailed under “nginx” on the “weak diffie-hellman and the logjam attack” website. 
+server {
+  listen *:443 ssl;
+  server_name smashing_ssl_one.tutorials.eoms;
+
+  ssl on;
+  ssl_certificate /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.crt;
+  ssl_certificate_key /etc/ssl/nginx/smashing_ssl_one.tutorials.eoms.key;
+  ssl_dhparam /etc/ssl/nginx/dhparams.pem;
+  ssl_protocols tlsv1 tlsv1.1 tlsv1.2;
+  ssl_ciphers 'ecdhe-rsa-aes128-gcm-sha256:ecdhe-ecdsa-aes128-gcm-sha256:ecdhe-rsa-aes256-gcm-sha384:ecdhe-ecdsa-aes256-gcm-sha384:dhe-rsa-aes128-gcm-sha256:dhe-dss-aes128-gcm-sha256:kedh+aesgcm:ecdhe-rsa-aes128-sha256:ecdhe-ecdsa-aes128-sha256:ecdhe-rsa-aes128-sha:ecdhe-ecdsa-aes128-sha:ecdhe-rsa-aes256-sha384:ecdhe-ecdsa-aes256-sha384:ecdhe-rsa-aes256-sha:ecdhe-ecdsa-aes256-sha:dhe-rsa-aes128-sha256:dhe-rsa-aes128-sha:dhe-dss-aes128-sha256:dhe-rsa-aes256-sha256:dhe-dss-aes256-sha:dhe-rsa-aes256-sha:aes128-gcm-sha256:aes256-gcm-sha384:aes128-sha256:aes256-sha256:aes128-sha:aes256-sha:aes:camellia:des-cbc3-sha:!anull:!enull:!export:!des:!rc4:!md5:!psk:!aecdh:!edh-dss-des-cbc3-sha:!edh-rsa-des-cbc3-sha:!krb5-des-cbc3-sha';
+
+  ssl_prefer_server_ciphers on;
+
+  location / {
+
+   proxy_pass            http://127.0.0.1:80;
+   proxy_read_timeout    90;
+   proxy_connect_timeout 90;
+   proxy_redirect        off;
+
+   proxy_set_header      x-real-ip $remote_addr;
+   proxy_set_header      x-forwarded-for $proxy_add_x_forwarded_for;
+   proxy_set_header      x-forwarded-proto https;
+   proxy_set_header      x-forwarded-port 443;
+   proxy_set_header      host $host;
+
+  }
+} 
+ reload nginx and retest your website. once you have achieved a a rating, you can periodically check your website to make sure you still have that a. (view large version) check for mixed content warnings your website may well have resources being loaded from other domains that are not https — this will cause a warning on your website. in many cases, the third party will have an https endpoint that you can link to. however, i had to remove the lanyrd badges from my own website because the javascript was hosted only on http. further reading and resources i’ve added links to additional reading throughout this article. for your reference, here are those links, plus some extra resources i’ve found useful. https and ssl “10 reasons to use https,” guy podjarny, medium “the big list of seo tips and tricks for using https on your website,” cyrus shepard, moz blog “guide to deploying diffie-hellman for tls” a guide to protecting your server from the logjam attack ssl server test, qualys ssl labs startssl free ssl certificates let’s encrypt offering free ssl certificates, this service will be available in september. varnish “varnish tip: see which cookies are being stripped in your vcl,” mattias geniar if you know of any other helpful resources, or if you’ve followed these steps and found some extra piece of information, please add it to the comments. it will help out the next person doing it. excerpt image: yuri samoilov (vf, ml, al) browse all smashing magazine topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow with a commitment to quality content for the design community. founded by vitaly friedman and sven lennartz. 2006–2020. smashing is proudly running on netlify. fonts by latinotype. ✎ write for us contact us about us (impressum) privacy policy membership login delivery times advertise back to top

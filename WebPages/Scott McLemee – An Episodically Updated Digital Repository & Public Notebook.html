@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <link rel="pingback" href="https://mclemee.com/xmlrpc.php"> 
+  <title>Scott McLemee – An Episodically Updated Digital Repository &amp; Public Notebook</title> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9tY2xlbWVlLmNvbQ%3D%3D"
+		+ "&wpcomid=68294336"
+		+ "&time=1585341696";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//mclemee.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="alternate" type="application/rss+xml" title="Scott McLemee » Feed" href="https://mclemee.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Scott McLemee » Comments Feed" href="https://mclemee.com/comments/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s2.wp.com/_static/??-eJylk9FuwyAMRX9oxKNV2u5h2reQ4DG3QCJsmuXvR5NUq7qtm9aXKJh7rq/AwNCrtouCUSBk1fvsKDIMfdsFxYE8jlerqmV+gO8xTwdk2KP0pj2oafVFfta6XJYNJld2EsK22lYamkzeQuO7CW+SSSOwjB7/YDNRF93N2GVRLpH9r0UyQtHxL/hr9l4xCSq0dAKW44DNWq+3m9UT4LHoC5ej2G6Ic5u7Xc8phQJ6ini3YYlVih0LLwktscCRcPjRtO2WI9PV6rHSapqUmZs3qjnUdK93RJtT+eJ7Ge26ems0T0NW6qE3clKE0smgx1Bkt7CBrEMpOJ//leD7bWR6LU3TJ2RW5RsoByVvpdfX1zCXYVGBNeTHYNznXb6EZ13val3XO73ZfwDMNV3Z?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link crossorigin="anonymous" rel="stylesheet" id="dailymag-fonts-css" href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C400italic%2C700%7CAbril+Fatface%3A400%7CLora%3A400%2C400italic%2C700%2C700italic&amp;subset=latin%2Clatin-ext&amp;ver=0.9.0" media="all"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s1.wp.com/_static/??-eJzTLy/QTc7PK0nNK9HPLdUtyClNz8wr1k9PzdfNyU9OLMnMz0Ph6KblJGYW6SUXF+voY9dalJqUk58OZKbrA1UhcUGa7HNtDU1MLU1MLMwNTbIAmkQtqg==?cssminify=yes" type="text/css" media="all"> 
+  <link rel="stylesheet" id="print-css-3-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-4-1" href="https://s0.wp.com/_static/??-eJx9jtEOgjAMRX/I2Uwc4oPxW8Yco1o2spYY/96ZQMSQ+NQ2Off2wHNULkXxUWCY1EhTwMhgnWCKrc3fbe+Yd7DCF7abiBSjeOVvKBjD3AJ1patTfThDoNTawsiLPAOLFXTQko2PTenKYUwsqiOLGbi3uRQv81+Kk8Pyi1JIv8cmJL0fik5/nP0+wHW4aNMYbUyj6/sbZOVojw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJzTLy/QzcxLzilNSS3WzwKiwtLUokoopZdVrKOPT4FubmZ6UWJJql5uZh5McXJ+XklqXglIbW5+UmZOqm5pcWpRYjpQDGhQWj5QnX2uraGpqYWxqZmZqXEWALkfL7E="></script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/wp-content/mu-plugins/highlander-comments/style.css?m=1530132353h&amp;cssminify=yes" type="text/css" media="all"> <!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' media='all' />
+<![endif]--> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://mclemee.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="shortlink" href="https://wp.me/4Cyty"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Scott McLemee"> 
+  <meta property="og:description" content="An Episodically Updated Digital Repository &amp; Public Notebook"> 
+  <meta property="og:url" content="https://mclemee.com/"> 
+  <meta property="og:site_name" content="Scott McLemee"> 
+  <meta property="og:image" content="https://mclemee.files.wordpress.com/2019/12/cropped-srm-south-park.jpeg?w=200"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="200"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:creator" content="@McLemee"> 
+  <meta name="twitter:site" content="@McLemee"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="openid.server" href="https://mclemee.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://mclemee.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://mclemee.com/osd.xml" title="Scott McLemee"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <meta name="application-name" content="Scott McLemee">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="An Episodically Updated Digital Repository &amp; Public Notebook">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://mclemee.com/feed/;icon-uri=https://mclemee.files.wordpress.com/2019/12/cropped-srm-south-park.jpeg?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="An Episodically Updated Digital Repository &amp; Public Notebook"> 
+  <link rel="icon" href="https://mclemee.files.wordpress.com/2019/12/cropped-srm-south-park.jpeg?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://mclemee.files.wordpress.com/2019/12/cropped-srm-south-park.jpeg?w=192" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://mclemee.files.wordpress.com/2019/12/cropped-srm-south-park.jpeg?w=180"> 
+  <meta name="msapplication-TileImage" content="https://mclemee.files.wordpress.com/2019/12/cropped-srm-south-park.jpeg?w=270"> 
+ </head> 
+ <body class="home blog customizer-styles-applied layout-three-column-center has-site-logo highlander-enabled highlander-light custom-colors"> 
+  <div id="page" class="hfeed site"> <a class="skip-link screen-reader-text" href="#content">Skip to content</a> 
+   <div class="secondary-navigation-container"> 
+    <nav id="secondary-navigation" class="nav-menu-wrapper" role="navigation"> 
+     <div class="menu">
+      <ul> 
+       <li class="current_page_item"><a href="https://mclemee.com/">Home</a></li>
+       <li class="page_item page-item-386"><a href="https://mclemee.com/articles/">Articles</a></li> 
+       <li class="page_item page-item-366"><a href="https://mclemee.com/essays/">Essays</a></li> 
+       <li class="page_item page-item-338"><a href="https://mclemee.com/notebook-2/">Notebook</a></li> 
+       <li class="page_item page-item-382"><a href="https://mclemee.com/interviews/">placeholder 1</a></li> 
+       <li class="page_item page-item-362"><a href="https://mclemee.com/reviews/">Reviews</a></li> 
+       <li class="page_item page-item-376"><a href="https://mclemee.com/video/">Video</a></li> 
+       <li class="page_item page-item-299"><a href="https://mclemee.com/about/">About</a></li> 
+      </ul>
+     </div> 
+    </nav><!-- #site-navigation --> 
+   </div> 
+   <header id="masthead" class="site-header" role="banner"> 
+    <div class="site-title-wrapper"> 
+     <div class="site-title-wrapper-inner"> 
+      <div class="site-logo">
+       <a href="https://mclemee.com/" class="site-logo-link" rel="home" itemprop="url"><img width="845" height="563" src="https://mclemee.files.wordpress.com/2019/12/lappad.jpg" class="site-logo attachment-full" alt="" data-size="full" itemprop="logo" srcset="https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=845&amp;h=563 845w, https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=150&amp;h=100 150w, https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=300&amp;h=200 300w, https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=768&amp;h=512 768w, https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=1024&amp;h=682 1024w, https://mclemee.files.wordpress.com/2019/12/lappad.jpg 1280w" sizes="(max-width: 845px) 100vw, 845px" data-attachment-id="322" data-permalink="https://mclemee.com/lappad/" data-orig-file="https://mclemee.files.wordpress.com/2019/12/lappad.jpg" data-orig-size="1280,853" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="lappad" data-image-description="" data-medium-file="https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=300" data-large-file="https://mclemee.files.wordpress.com/2019/12/lappad.jpg?w=845"></a>
+      </div> 
+      <h1 class="site-title"><a href="https://mclemee.com/" rel="home">Scott McLemee</a></h1> 
+      <div class="site-description">
+       An Episodically Updated Digital Repository &amp; Public Notebook
+      </div> 
+     </div><!-- .site-info-inner --> 
+     <div class="social-menu"> 
+      <div class="menu-social-media-container">
+       <ul id="menu-social-media" class="menu">
+        <li id="menu-item-312" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-312"><a href="https://www.facebook.com/mclemee">Facebook</a></li> 
+        <li id="menu-item-319" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319"><a href="https://twitter.com/McLemee">Twitter</a></li> 
+        <li id="menu-item-349" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-349"><a href="https://getpocket.com/@eW4TRAa5g5fY4p02eDd8c1ad83p8g463230cP4N02fkW6eT22c298z95de4UA124">Pocket</a></li> 
+        <li id="menu-item-318" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-318"><a href="http://scott-mclemee-2415286">LinkedIn</a></li> 
+       </ul>
+      </div> 
+     </div><!-- .social-menu --> 
+    </div><!-- .site-title-wrapper --> 
+   </header><!-- #masthead --> 
+   <div class="main-navigation-container"> 
+    <nav id="site-navigation" class="nav-menu-wrapper" role="navigation"> <button class="menu-toggle" id="menu-toggle" aria-controls="primary-menu" aria-expanded="false">☰ Menu</button> 
+     <div class="menu-primary-container">
+      <ul id="menu-primary" class="menu">
+       <li id="menu-item-309" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-309"><a href="/" aria-current="page">Home</a></li> 
+       <li id="menu-item-310" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-310"><a href="https://mclemee.com/about/">About</a></li> 
+       <li id="menu-item-345" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-345"><a href="https://mclemee.com/notebook-2/">Notebook</a></li> 
+      </ul>
+     </div> 
+    </nav><!-- #site-navigation --> 
+   </div> 
+   <div class="featured-content"> 
+    <div class="featured-content-inner"> 
+     <article id="post-302" class="post-302 post type-post status-publish format-standard hentry category-uncategorized tag-featured"> <a href="https://mclemee.com/2019/12/28/featured-content/"> 
+       <div>
+        <span class="category">Uncategorized</span>
+       </div> <h1 class="entry-title">Featured Content</h1> </a> 
+     </article> 
+    </div><!-- .featured-content-inner --> 
+   </div><!-- .featured-content --> 
+   <div id="content" class="site-content"> 
+    <div id="primary" class="content-area"> 
+     <main id="main" class="site-main" role="main"> 
+      <article id="post-303" class="post-303 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized"> 
+       <div class="featured-image"> 
+        <img width="845" height="450" src="https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=845&amp;h=450&amp;crop=1" class="attachment-dailymag-featured size-dailymag-featured wp-post-image" alt="" srcset="https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=845&amp;h=450&amp;crop=1 845w, https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=150&amp;h=80&amp;crop=1 150w, https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=300&amp;h=160&amp;crop=1 300w, https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=768&amp;h=409&amp;crop=1 768w, https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=1024&amp;h=546&amp;crop=1 1024w" sizes="(max-width: 845px) 100vw, 845px" data-attachment-id="317" data-permalink="https://mclemee.com/2019/12/28/featured-content-2/placeholder-image-5/" data-orig-file="https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg" data-orig-size="1280,853" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Placeholder Image" data-image-description="" data-medium-file="https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=300" data-large-file="https://mclemee.files.wordpress.com/2019/12/drink-coffee2.jpg?w=845">
+       </div><!-- .featured-image --> 
+       <header class="entry-header"> 
+        <div class="entry-header-row"> 
+         <div class="entry-header-column"> 
+          <div class="entry-meta"> <span class="posted-on"><a href="https://mclemee.com/2019/12/28/featured-content-2/" rel="bookmark"><time class="entry-date published" datetime="2019-12-28T16:46:05-05:00">28 December 2019</time><time class="updated" datetime="2019-12-30T20:15:20-05:00">30 December 2019</time></a></span> 
+          </div><!-- .entry-meta --> <a href="https://mclemee.com/2019/12/28/featured-content-2/" rel="permalink"><h1 class="entry-title">Featured Content</h1></a> 
+         </div><!-- .entry-header-column --> 
+        </div><!-- .entry-header-row --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>This is a featured content post. Click the Edit link to modify or delete it, or <a href="https://wordpress.com/post">start a new post</a>.</p> 
+        <div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled">
+         <div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-68294336-303-5e7e650039305" data-src="//widgets.wp.com/likes/index.html?ver=20190321#blog_id=68294336&amp;post_id=303&amp;origin=mclemee.wordpress.com&amp;obj_id=68294336-303-5e7e650039305&amp;domain=mclemee.com" data-name="like-post-frame-68294336-303-5e7e650039305">
+          <h3 class="sd-title">Like this:</h3>
+          <div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;">
+           <span class="button"><span>Like</span></span> <span class="loading">Loading...</span>
+          </div><span class="sd-text-color"></span><a class="sd-link-color"></a>
+         </div>
+        </div> 
+       </div><!-- .entry-content --> 
+       <footer class="entry-footer"> 
+        <div class="entry-footer-right"> <span class="comments-link"><a href="https://mclemee.com/2019/12/28/featured-content-2/#respond">Leave a comment</a></span> 
+        </div> 
+       </footer><!-- .entry-footer --> 
+      </article><!-- #post-## --> 
+     </main><!-- #main --> 
+    </div><!-- #primary --> 
+    <div id="secondary" class="widget-area" role="complementary"> 
+     <aside id="search-1" class="widget widget_search">
+      <h6 class="widget-title">Search</h6>
+      <form role="search" method="get" class="search-form" action="https://mclemee.com/"> <label> <span class="screen-reader-text">Search for:</span> <input type="search" class="search-field" placeholder="Search …" value="" name="s"> </label> 
+       <input type="submit" class="search-submit" value="Search"> 
+      </form>
+     </aside>
+     <aside id="text-1" class="widget widget_text">
+      <h6 class="widget-title">Text Widget</h6> 
+      <div class="textwidget">
+       This is a text widget, which allows you to add text or HTML to your sidebar. You can use them to display text, links, images, HTML, or a combination of these. Edit them in the Widget section of the <a href="https://wordpress.com/customize/">Customizer</a>.
+      </div> 
+     </aside> 
+    </div><!-- #secondary --> 
+    <div id="tertiary" class="widget-area" role="complementary"> 
+     <aside id="archives-3" class="widget widget_archive">
+      <h6 class="widget-title">Archives</h6> 
+      <ul> 
+       <li><a href="https://mclemee.com/2019/12/">December 2019</a></li> 
+      </ul> 
+     </aside>
+     <aside id="categories-1" class="widget widget_categories">
+      <h6 class="widget-title">Categories</h6> 
+      <ul> 
+       <li class="cat-item cat-item-1"><a href="https://mclemee.com/category/uncategorized/">Uncategorized</a> </li> 
+      </ul> 
+     </aside> 
+     <aside id="recent-posts-1" class="widget widget_recent_entries"> 
+      <h6 class="widget-title">Recent Posts</h6> 
+      <ul> 
+       <li> <a href="https://mclemee.com/2019/12/28/featured-content/">Featured Content</a> </li> 
+       <li> <a href="https://mclemee.com/2019/12/28/featured-content-2/">Featured Content</a> </li> 
+      </ul> 
+     </aside> 
+    </div><!-- #tertiary --> 
+   </div><!-- #content --> 
+   <footer id="colophon" class="site-footer" role="contentinfo"> 
+    <div class="site-footer-inner"> 
+    </div><!-- .site-footer-inner --> 
+   </footer><!-- #colophon --> 
+   <div class="site-info-wrapper"> 
+    <div class="site-info"> 
+     <div class="site-info-inner"> 
+      <h6>An Episodically Updated Digital Repository &amp; Public Notebook</h6> 
+      <div class="social-menu"> 
+       <h6 class="find-us">Find us on</h6> 
+       <div class="menu-social-media-container">
+        <ul id="menu-social-media-1" class="menu">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-312"><a href="https://www.facebook.com/mclemee">Facebook</a></li> 
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-319"><a href="https://twitter.com/McLemee">Twitter</a></li> 
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-349"><a href="https://getpocket.com/@eW4TRAa5g5fY4p02eDd8c1ad83p8g463230cP4N02fkW6eT22c298z95de4UA124">Pocket</a></li> 
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-318"><a href="http://scott-mclemee-2415286">LinkedIn</a></li> 
+        </ul>
+       </div> 
+      </div><!-- .social-menu --> 
+      <div class="site-info-text"> <a href="https://wordpress.com/?ref=footer_custom_powered" rel="nofollow">Powered by WordPress.com</a>. 
+      </div><!-- .site-info-text --> 
+     </div><!-- .site-info-inner --> 
+    </div><!-- .site-info --> 
+   </div><!-- .site-info-wrapper --> 
+  </div><!-- #page --> <!--  --> 
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+  </div> 
+  <script>
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/mclemee.wordpress.com\/public.api\/connect\/?action=request&domain=mclemee.com","logoutURL":"https:\/\/mclemee.wordpress.com\/wp-login.php?action=logout&_wpnonce=800df7e55e","homeURL":"https:\/\/mclemee.com\/","postID":"303","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1573483029j"></script> 
+  <link rel="stylesheet" id="all-css-0-3" href="https://s2.wp.com/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css?m=1583834955h&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"68294336","siteName":"Scott McLemee","siteURL":"https:\/\/mclemee.com","icon":"<img alt='' src='https:\/\/mclemee.files.wordpress.com\/2019\/12\/cropped-srm-south-park.jpeg?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"premium\/dailymag","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fmclemee.com%2F2019%2F12%2F28%2Ffeatured-content-2%2F&signup_flow=account&domain=mclemee.com","themeURL":"","xhrURL":"https:\/\/mclemee.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"33cdf69f5f\" \/>","referer":"https:\/\/mclemee.com\/","canFollow":"1","feedID":"41956543","statusMessage":"","customizeLink":"https:\/\/mclemee.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fmclemee.wordpress.com%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: DailyMag","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 1,101 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fmclemee.com%2F2019%2F12%2F28%2Ffeatured-content-2%2F&signup_flow=account&domain=mclemee.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script type="text/javascript" src="https://s2.wp.com/_static/??-eJyVUtFuwyAM/KFRlFXpuodp30LBSZ2AYdik675+ZEqrra229QUsn+/sw+hDUjaSAIkeWDuY0EJ6Xw38oH9CKbIEYDY93ECHtwL5uFwrpAnh8GfZAJKMHVUGxo8r1VBU8qVHYu1xBNaVVGBvyHnIp2Ik64ur4Dw8sugJyMU8Qyn6Y4ferwLSpfZJuCveK0YBBQ4FqV9a6s26WT9tHp/1zsearN5Z1dCOS5cb9v6vCXVIqbxC4uKBFuGvky/Byy6yh7oFnTIELEE7g/4YTD/7JzNhbwTjPSQeMSmPNKou2sKqw6vlf1uEcfUx1c5kHQwL5BqpOEHOOO/gnLtTQXL9Bfwbyc6uZtI5qtWv4aVpt23TtttmM3wC9IYKaQ=="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script> <iframe src="https://widgets.wp.com/likes/master.html?ver=20190321#ver=20190321" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe> 
+  <div id="likes-other-gravatars">
+   <div class="likes-text">
+    <span>%d</span> bloggers like this:
+   </div>
+   <ul class="wpl-avatars sd-like-gravatars"></ul>
+  </div> 
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'68294336','blog_tz':'-4','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'68294336','v':'wpcom','tz':'-4','user_id':'0','subd':'mclemee'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGNrd29+Smw0TDhnZmRTK0hlRi9QSGh6bi9GXVhBJWIlZlR5U1JMLU8/MkNtblkvY1dWZjRBaVl+LSVWend2NjctTWpIVk4vTEdIMzk1U0JxLEdhREV2L3x3UVJyPS5MP1hfTEVVTD1tMHJKP0IyUVpmL0xnSXBRYkdYP2syVFJfblNQL0pKUHJxVEdLflpYZlR8d0ZWL2dTd0lPZ0JNcy5QX1JhdW1ZdHNMW0Jbd1R1NnVaUC1hU1pycT1LU3E3bHx6NG5ZSEU3OSZlUytrWFFRQTlQVGZjVmU='}]);
+_stq.push([ 'clickTrackerInit', '68294336', '0' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>  
+ </body>
+</html>

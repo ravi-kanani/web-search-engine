@@ -1,0 +1,1610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"> 
+ <head profile="http://gmpg.org/xfn/11"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>Jack | petite anglaise</title> 
+  <link rel="pingback" href="https://petiteanglaise.com/xmlrpc.php"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9wZXRpdGVhbmdsYWlzZS5jb20%3D"
+		+ "&wpcomid=14262311"
+		+ "&time=1585342247";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//petiteanglaise.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Feed" href="https://petiteanglaise.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Comments Feed" href="https://petiteanglaise.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Jack Comments Feed" href="https://petiteanglaise.com/2009/11/14/jack/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s2.wp.com/_static/??-eJylk9tuwjAMhl9oaVZQgV1Me5akNZlZTkocur79XFq0DgSbxk0VO/7sP7Yr+yja4Ak8SVdEtMWgzzKBVQSdiCHThVW1OT/JBXZmTGFTQzJ8k0Buq21VS13QdlLb0H4IizqpNMhMg4U/pDlRWR6AohpxNYRCwiTs/psiKUJv8i/4vlgrMhII6HAE5rbIzbpebzerFwlHjmeueOpC76cyD2c9qyR0YNHDwwlZlpmGNivsMJM8IvQ3k7ZhblldrZ6rWvSxDW7ipotqEnWa6wPSJlWW8y6lXXqvCixWdFwy9ruoaIxwXEmBBcdh97AeOwO80xwynwXB531k7IHQOibIWfDXYXGC3rnW9d8wuWUsWrZW5YztjTEuChgIgp/Lyxn8D0PsrcJ0D00wDpmP5vSib3OE3txr3eyauml29ebwBVtYdEw=?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link rel="stylesheet" id="print-css-1-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s0.wp.com/_static/??-eJx9jtEOgjAMRX/I2Uwc4oPxW8Yco1o2spYY/96ZQMSQ+NQ2Off2wHNULkXxUWCY1EhTwMhgnWCKrc3fbe+Yd7DCF7abiBSjeOVvKBjD3AJ1patTfThDoNTawsiLPAOLFXTQko2PTenKYUwsqiOLGbi3uRQv81+Kk8Pyi1JIv8cmJL0fik5/nP0+wHW4aNMYbUyj6/sbZOVojw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script>
+var related_posts_js_options = {"post_heading":"h4"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJx9zcEKwjAMBuAXMqs7uOlBfJa5xZLSpLVJGb69HehliBAIIV/yuzUDyRzrgupCq2fF8vq0LujB/QPA5Mtk2DHJF89JDMU2m5Mao+rk8ceW050iQlUsDYi1mEfaO66QY/Uk6grGFrXA9nU3tasbX/vT2F+O4zCcwxtEF0+w"></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://petiteanglaise.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <link rel="prev" title="over and out?" href="https://petiteanglaise.com/2009/09/28/over-and-out/"> 
+  <link rel="next" title="postscript" href="https://petiteanglaise.com/2013/11/01/2372/"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="canonical" href="https://petiteanglaise.com/2009/11/14/jack/"> 
+  <link rel="shortlink" href="https://wp.me/sXQhh-jack"> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2009%2F11%2F14%2Fjack%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2009%2F11%2F14%2Fjack%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="Jack"> 
+  <meta property="og:url" content="https://petiteanglaise.com/2009/11/14/jack/"> 
+  <meta property="og:description" content="Jack was finally born at 41 weeks and 4 days on Monday 2 November, on the night of the full moon. His birth was spookily similar to Tadpole’s. I found myself in the same salle d’accouch…"> 
+  <meta property="article:published_time" content="2009-11-14T20:13:21+00:00"> 
+  <meta property="article:modified_time" content="2019-01-18T18:14:35+00:00"> 
+  <meta property="og:site_name" content="petite anglaise"> 
+  <meta property="og:image" content="https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg"> 
+  <meta property="og:image:width" content="318"> 
+  <meta property="og:image:height" content="238"> 
+  <meta property="og:image:alt" content="click to see full flickr set"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> 
+  <meta name="twitter:text:title" content="Jack"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="openid.server" href="https://petiteanglaise.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://petiteanglaise.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://petiteanglaise.com/osd.xml" title="petite anglaise"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style> 
+  <meta name="application-name" content="petite anglaise">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://petiteanglaise.com/feed/;icon-uri=https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Jack was finally born at 41 weeks and 4 days on Monday 2 November, on the night of the full moon. His birth was spookily similar to Tadpole's. I found myself in the same salle d'accouchement at the Maternité des Lilas where my daughter had been born six years earlier and, like his big sister,…"> 
+  <link rel="amphtml" href="https://petiteanglaise.com/2009/11/14/jack/amp/">
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta name="msapplication-TileImage" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&amp;csblog=XQhh&amp;cscache=6&amp;csrev=77"> 
+ </head> 
+ <body class="post-template-default single single-post postid-1250 single-format-standard customizer-styles-applied highlander-enabled highlander-light"> 
+  <div id="rap"> 
+   <h1 id="header"><a href="https://petiteanglaise.com/">petite anglaise</a></h1> 
+   <div id="content"> <!-- end header --> 
+    <h2>November 14, 2009</h2> 
+    <div class="post-1250 post type-post status-publish format-standard hentry category-misc" id="post-1250"> 
+     <h3 class="storytitle"> Jack </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/misc/" rel="category tag">misc</a> — petiteanglaiseparis @ 10:13 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <a href="http://www.flickr.com/photos/petiteanglaise/sets/72157622676685633/"><img data-attachment-id="1446" data-permalink="https://petiteanglaise.com/2009/11/14/jack/4103138864_8cf1966136/" data-orig-file="https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg" data-orig-size="500,375" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="4103138864_8cf1966136" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg?w=300" data-large-file="https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg?w=500" class="  wp-image-1446 alignleft" title="4103138864_8cf1966136" src="https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg?w=318&amp;h=238" alt="click to see full flickr set" width="318" height="238" srcset="https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg?w=318&amp;h=238 318w, https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg?w=150&amp;h=113 150w, https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg?w=300&amp;h=225 300w, https://petiteanglaise.files.wordpress.com/2009/11/4103138864_8cf1966136.jpg 500w" sizes="(max-width: 318px) 100vw, 318px"></a>
+      </div> 
+      <div align="justify"> 
+       <p>Jack was finally born at 41 weeks and 4 days on Monday 2 November, on the night of the full moon.</p> 
+       <p>His birth was spookily similar to Tadpole’s. I found myself in the same <em>salle d’accouchement</em> at the <em>Maternité des Lilas</em> where my daughter had been born six years earlier and, like his big sister, Jack wasn’t all that keen on coming out. As a result, my hoped-for natural birth was soon forgotten as I had to be hooked up to various drips, given an epidural and strapped to a monitor. Finally, at 7.03 pm, just as the midwife was paging the obstetrician and threatening me with forceps, I saw a head of dark hair emerging and the marathon was finally over (contractions had begun a full 24 hours earlier). I sobbed with relief afterwards and swore I would NEVER go through it all again.</p> 
+       <p>Eleven days later we are all well, blissfully happy and revelling in The Boy’s paternity leave. Jack would happily eat all day long, but he compensates by sleeping 4 or 5 hours in a row, twice a night. He pulls the most ridiculous faces when he’s trying to poo. The softest place in the whole world is the portion of his neck just below his little ears.</p> 
+       <p>I’m besotted with him, in short. We all are.</p> 
+       <p>Tadpole wasn’t able to visit us at the hospital (H1N1 has a lot to answer for), but instantly fell in love with her little brother when I brought him home. ‘Mummy,’ she said to me after her first cuddle with baby brother, ‘<em>felicitations</em> for making such a perfect baby.’</p> 
+       <p><a href="http://www.cantine20.wordpress.com">&nbsp;</a></p> 
+      </div> 
+      <div id="jp-post-flair" class="sharedaddy sd-sharing-enabled">
+       <div class="sharedaddy sd-sharing-enabled">
+        <div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing">
+         <h3 class="sd-title">Share this:</h3>
+         <div class="sd-content">
+          <ul>
+           <li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-1250" class="share-twitter sd-button share-icon" href="https://petiteanglaise.com/2009/11/14/jack/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li>
+           <li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-1250" class="share-facebook sd-button share-icon" href="https://petiteanglaise.com/2009/11/14/jack/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li>
+           <li class="share-end"></li>
+          </ul>
+         </div>
+        </div>
+       </div> 
+       <div id="jp-relatedposts" class="jp-relatedposts"> 
+        <h3 class="jp-relatedposts-headline"><em>Related</em></h3> 
+       </div>
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2009/11/14/jack/#comments">Comments (144)</a> 
+     </div> 
+    </div> 
+    <h2 id="comments">144 Comments</h2> 
+    <ol id="commentlist"> 
+     <li id="comment-27843" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27843" class="vcard"> 
+       <p>Really HAPPY FOR YOU!!!<br> Baby is absolutely gorgeous, wishing all of you every happiness together.<br> Tadpole is the perfect big sister! :)</p> 
+       <p><cite>Comment by <span class="fn">happyforyou</span> — November 14, 2009 @ <a href="#comment-27843">10:23 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27844" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27844" class="vcard"> 
+       <p>How delicious is Jack?! He’s delightful.<br> Congratulations to you and The Boy and Tadpole, and welcome to the world, Jack.<br> I am delurking after years – just happened to check in to see if there was any news – but very glad I did.<br> Catherine, you and Heather over at Dooce have succeeded in making me very sentimental for those first, new-baby weeks. As you know, they are very special, and fleeting.<br> I do hope that you are all settling in well together -best wishes to you all.</p> 
+       <p><cite>Comment by <span class="fn">Rosehippy</span> — November 14, 2009 @ <a href="#comment-27844">10:23 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27845" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27845" class="vcard"> 
+       <p>He is absolutely gorgeous! I’m sad now though as i suspect this is probably the last time you will ever post! I wish you and your beautiful family good health and every form of happiness. Thank you for the years of pleasurable reading.</p> 
+       <p><cite>Comment by <span class="fn">Ellie</span> — November 14, 2009 @ <a href="#comment-27845">10:32 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27846" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27846" class="vcard"> 
+       <p>Felicitations indeed. He’s beautiful. Congratulations!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://spritewrites.net" rel="external nofollow ugc" class="url">sprite</a></span> — November 14, 2009 @ <a href="#comment-27846">10:47 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27847" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27847" class="vcard"> 
+       <p>Tadpole always seems to know exactly what to say. Ditto.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://theboldsoul.com" rel="external nofollow ugc" class="url">The Bold Soul</a></span> — November 14, 2009 @ <a href="#comment-27847">10:51 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27848" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27848" class="vcard"> 
+       <p>Congratulations! And thank you for taking time from your busy days to let us know.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://materfamiliasknits.blogspot.com" rel="external nofollow ugc" class="url">materfamilias</a></span> — November 14, 2009 @ <a href="#comment-27848">10:53 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27849" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27849" class="vcard"> 
+       <p>Congratulations to all of you – and welcome to the world, Jack! He’s lovely!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://pinklea.wordpress.com/" rel="external nofollow ugc" class="url">pinklea</a></span> — November 14, 2009 @ <a href="#comment-27849">11:22 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27850" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27850" class="vcard"> 
+       <p>felicitations for your perfect baby indeed!!! twinkle twinkle happiness…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://beyondthewindow.wordpress.com" rel="external nofollow ugc" class="url">beyond</a></span> — November 14, 2009 @ <a href="#comment-27850">11:28 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27851" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27851" class="vcard"> 
+       <p>He is so lovely! Now I want a new baby to snuggle…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://designermama-manaallamano.blogspot.com/" rel="external nofollow ugc" class="url">http://designermama-manaallamano.blogspot.com/</a></span> — November 15, 2009 @ <a href="#comment-27851">12:03 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27852" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27852" class="vcard"> 
+       <p>Congrats, Petite.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://brennigjones.com/blog" rel="external nofollow ugc" class="url">Brennig</a></span> — November 15, 2009 @ <a href="#comment-27852">12:29 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27853" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27853" class="vcard"> 
+       <p>Félicitations ! I can’t say it any better than Tadpole.</p> 
+       <p>I just showed my 2-year-old the pictures of Jack, and he’s saying “See Jack again.”</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://mightiadd.blogspot.com/" rel="external nofollow ugc" class="url">might i add...?</a></span> — November 15, 2009 @ <a href="#comment-27853">12:32 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27854" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27854" class="vcard"> 
+       <p>un magnifique petit garçon, bravo !<br> et la ressemblance qu’on peut deviner entre Tadpole et vous est ahurissante… :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://dodinous.blogspot.com" rel="external nofollow ugc" class="url">Dodinette</a></span> — November 15, 2009 @ <a href="#comment-27854">12:43 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27855" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27855" class="vcard"> 
+       <p>Fantastic news congratulations. Please please please keep blogging!</p> 
+       <p><cite>Comment by <span class="fn">Jus</span> — November 15, 2009 @ <a href="#comment-27855">1:04 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27856" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27856" class="vcard"> 
+       <p>Congratulations – he’s beautiful!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://woolliemind.blogspot.com" rel="external nofollow ugc" class="url">Di</a></span> — November 15, 2009 @ <a href="#comment-27856">1:38 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27857" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27857" class="vcard"> 
+       <p>What a beautiful baby. He has such a wonderful expressive face. Congratulations xx</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://theyellowhouseintheu@blogspot.com" rel="external nofollow ugc" class="url">Karin</a></span> — November 15, 2009 @ <a href="#comment-27857">1:56 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27858" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27858" class="vcard"> 
+       <p>welcome Jack!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.pixiepost.blogspot.com" rel="external nofollow ugc" class="url">pixie</a></span> — November 15, 2009 @ <a href="#comment-27858">2:09 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27859" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27859" class="vcard"> 
+       <p>Just fabulous. Happy for you all. Jack is beautiful.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://onemomsopinion.blogspot.com/" rel="external nofollow ugc" class="url">One Mom's Opinion</a></span> — November 15, 2009 @ <a href="#comment-27859">2:40 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27860" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27860" class="vcard"> 
+       <p>Completely gorgeous! Congratulations, and I am so happy for you and your family. He’s so handsome too, and to my eyes, looks so French is a really cool heartbreaker kinda way.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://coastalaussie.wordpress.com/" rel="external nofollow ugc" class="url">Coastal Aussie</a></span> — November 15, 2009 @ <a href="#comment-27860">2:51 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27861" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27861" class="vcard"> 
+       <p>Opps, sorry, I forgot to say that I really dig Tadpoles specs – very snazzy. And it’s wonderful to know she’s thrilled with her new baby brother.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://coastalaussie.wordpress.com/" rel="external nofollow ugc" class="url">Coastal Aussie</a></span> — November 15, 2009 @ <a href="#comment-27861">2:53 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27862" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27862" class="vcard"> 
+       <p>Felicitations on such a beautiful baby…and a loving big sister!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.sleeplessinkl.com" rel="external nofollow ugc" class="url">Sleepless In KL</a></span> — November 15, 2009 @ <a href="#comment-27862">4:05 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27863" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27863" class="vcard"> 
+       <p>Congrats petite!!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://hopelesslyseeking.blogspot.com/" rel="external nofollow ugc" class="url">lily</a></span> — November 15, 2009 @ <a href="#comment-27863">4:08 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27864" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27864" class="vcard"> 
+       <p>Congratulations ! Very happy for you.</p> 
+       <p><cite>Comment by <span class="fn">Michel</span> — November 15, 2009 @ <a href="#comment-27864">7:26 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27865" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27865" class="vcard"> 
+       <p>Congratulations! Wish I could leave a comment worthy of such a wonderful post, but have to get up to constantly chase after my 4yr odl and 18mth old who are trying to beat one another with golf clubs…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.droversrun.net" rel="external nofollow ugc" class="url">Ness</a></span> — November 15, 2009 @ <a href="#comment-27865">8:05 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27866" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27866" class="vcard"> 
+       <p>Well done :) Hope you are being treated like a queen. You deserve it after that marathon.</p> 
+       <p>I love the blessing from “The Fifth Sacred Thing” (Starhawk’s spookily predictive novel)</p> 
+       <p>Dear Jack “May you never thirst, may you never hunger”, may all be well in your world.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://confessionsofafoodnazi.blogspot.com" rel="external nofollow ugc" class="url">another outspoken female</a></span> — November 15, 2009 @ <a href="#comment-27866">9:14 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27867" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27867" class="vcard"> 
+       <p>Congratulations. How exciting for you all. Is he going to get a nickname in any future book…?</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://crazybritheaven.blogspot.com" rel="external nofollow ugc" class="url">L.C.T.</a></span> — November 15, 2009 @ <a href="#comment-27867">10:59 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27868" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27868" class="vcard"> 
+       <p>Warmest congratulations and well done! He looks beautiful and such gorgeous photographs of you all. Very best wishes to you and your family :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.chezlee.co.nz" rel="external nofollow ugc" class="url">Sarah</a></span> — November 15, 2009 @ <a href="#comment-27868">12:04 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27869" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27869" class="vcard"> 
+       <p>i know i said it already but awww, just showed my boy these pictures and told him i want one!! hes so beautiful.</p> 
+       <p><cite>Comment by <span class="fn">Mikki</span> — November 15, 2009 @ <a href="#comment-27869">1:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27870" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27870" class="vcard"> 
+       <p>I am so happy for you Petite. Your time has come. Jack has arrived, Tadpole is absolutely delighted and the Boy has a son. A pigeon pair for you. It doesn’t get much better than that. Now is the time. THE END.</p> 
+       <p><cite>Comment by <span class="fn">Roberta</span> — November 15, 2009 @ <a href="#comment-27870">1:51 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27871" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27871" class="vcard"> 
+       <p>Congratulations !! The baby is sooo cute :) ♥</p> 
+       <p>I wanted to tell you that actually, I’m in an english section in Lycée des Pontonniers in Strasbourg, and with my english teacher we studied a text from your blog to have a lesson on the british and the american accents. I found the article very interesting and so I decided to visit your blog :). You are very famous, that’s cool !</p> 
+       <p><cite>Comment by <span class="fn">Nympheaceae</span> — November 15, 2009 @ <a href="#comment-27871">1:55 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27872" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27872" class="vcard"> 
+       <p>Congratulations, and best wishes too!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://wolfgang.lonien.de/" rel="external nofollow ugc" class="url">Wolfgang Lonien</a></span> — November 15, 2009 @ <a href="#comment-27872">1:58 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27873" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27873" class="vcard"> 
+       <p>Congrats! (Measures against H1N1 might soon become more threatening than the real desease…!)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://vonric.blogexpat.com/" rel="external nofollow ugc" class="url">Vonric</a></span> — November 15, 2009 @ <a href="#comment-27873">3:38 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27874" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27874" class="vcard"> 
+       <p>Congratulations! He’s beautiful. Wishing you all much happiness and good health.<br> PS Many thanks for your blog over the years.</p> 
+       <p><cite>Comment by <span class="fn">Jude</span> — November 15, 2009 @ <a href="#comment-27874">3:56 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27875" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27875" class="vcard"> 
+       <p>Congratulations petite, well done!</p> 
+       <p><cite>Comment by <span class="fn">ontario frog</span> — November 15, 2009 @ <a href="#comment-27875">3:59 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27876" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27876" class="vcard"> 
+       <p>Congratulations! The pic with big sis and her new little brother is too cute for words.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://myfrenchwindow.com" rel="external nofollow ugc" class="url">Pumpkin</a></span> — November 15, 2009 @ <a href="#comment-27876">4:27 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27877" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27877" class="vcard"> 
+       <p>As the brits often say “well done, you!”<br> Well done.</p> 
+       <p><cite>Comment by <span class="fn">ang04</span> — November 15, 2009 @ <a href="#comment-27877">5:26 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27878" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27878" class="vcard"> 
+       <p>Congratulations! I am expecting my own Jack in 2 months’ time – hope he is as gorgeous as yours!</p> 
+       <p><cite>Comment by <span class="fn">Cath</span> — November 15, 2009 @ <a href="#comment-27878">8:21 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27879" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27879" class="vcard"> 
+       <p>Congratulations…</p> 
+       <p>Wishing you all, a happy and healthy future…</p> 
+       <p>:-)</p> 
+       <p><cite>Comment by <span class="fn">Steve...</span> — November 15, 2009 @ <a href="#comment-27879">8:53 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27880" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27880" class="vcard"> 
+       <p>Glad all went well. How lovely to have a new young life to hold and enjoy.</p> 
+       <p><cite>Comment by <span class="fn">andrew</span> — November 16, 2009 @ <a href="#comment-27880">2:51 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27881" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27881" class="vcard"> 
+       <p>Well done indeed! He is beautiful</p> 
+       <p><cite>Comment by <span class="fn">jo</span> — November 16, 2009 @ <a href="#comment-27881">7:45 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27882" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27882" class="vcard"> 
+       <p>Congratulations!! That is great news and he is a very beautiful little baby. I am so happy for all of you.</p> 
+       <p><cite>Comment by <span class="fn">Hazy</span> — November 16, 2009 @ <a href="#comment-27882">12:06 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27883" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27883" class="vcard"> 
+       <p>My baby Jack was 20 on 2 November! Many congratulations to you all.</p> 
+       <p><cite>Comment by <span class="fn">Deirdre</span> — November 16, 2009 @ <a href="#comment-27883">3:45 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27884" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27884" class="vcard"> 
+       <p>congratulations!! what a cutie patootie! love the sisterly love from tadpole, too… enjoy your familie time together… cheers!</p> 
+       <p><cite>Comment by <span class="fn">carol</span> — November 16, 2009 @ <a href="#comment-27884">3:52 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27885" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27885" class="vcard"> 
+       <p>felicitations petite et famille! Such a cutie!!</p> 
+       <p><cite>Comment by <span class="fn">philadelphie</span> — November 16, 2009 @ <a href="#comment-27885">4:43 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27886" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27886" class="vcard"> 
+       <p>Thanks so much for the lovely photos. He’s a doll! Congratulations to you all. Here’s to a long and happy life filled with light and love always. X</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://nicedaytostartagain.blogspot.com" rel="external nofollow ugc" class="url">Donna Deluso</a></span> — November 16, 2009 @ <a href="#comment-27886">4:58 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27887" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27887" class="vcard"> 
+       <p>congratulations</p> 
+       <p>sp999</p> 
+       <p><cite>Comment by <span class="fn">sp999</span> — November 16, 2009 @ <a href="#comment-27887">5:00 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27888" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27888" class="vcard"> 
+       <p>Wonderful, he’s gorgeous!<br> S.</p> 
+       <p><cite>Comment by <span class="fn">S</span> — November 16, 2009 @ <a href="#comment-27888">5:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27889" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27889" class="vcard"> 
+       <p>Welcome, Jack. And congratulations and best wishes to all of you!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://alcessa.wordpress.com/" rel="external nofollow ugc" class="url">alcessa</a></span> — November 16, 2009 @ <a href="#comment-27889">5:06 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27890" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27890" class="vcard"> 
+       <p>Love that your tadpole said felicitations! Truly ADORABLE! ENJOY!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://fififlowers.com" rel="external nofollow ugc" class="url">Fifi Flowers</a></span> — November 16, 2009 @ <a href="#comment-27890">7:15 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27891" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27891" class="vcard"> 
+       <p>Congratulations!</p> 
+       <p>I hope that we’ll still hear a little from you, Petite :-)</p> 
+       <p><cite>Comment by <span class="fn">Lily</span> — November 16, 2009 @ <a href="#comment-27891">8:09 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27892" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27892" class="vcard"> 
+       <p>Fantastic.</p> 
+       <p>Congratulations.</p> 
+       <p><cite>Comment by <span class="fn">Jeremy Macdonald</span> — November 16, 2009 @ <a href="#comment-27892">8:19 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27893" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27893" class="vcard"> 
+       <p>He looks like a little man. Cute!</p> 
+       <p><cite>Comment by <span class="fn">Sheila</span> — November 16, 2009 @ <a href="#comment-27893">9:23 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27894" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27894" class="vcard"> 
+       <p>I’ve been following on Facebook, but checked in here to see if you had let everyone here know, and I’m glad you did.</p> 
+       <p>Since everyone has words of praise for Jack, I’d just like to say a word for his beautiful mother and the pictures of you on Facebook.</p> 
+       <p>So, eleven days later are you still sure you’ll never do it again :) We’ll see. Happiness to all of you.</p> 
+       <p><cite>Comment by <span class="fn">Steve G</span> — November 16, 2009 @ <a href="#comment-27894">10:52 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27895" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27895" class="vcard"> 
+       <p>Awwwwwww, gorgeous!</p> 
+       <p>Mille felicitations. xxx</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.claresudbery.co.uk" rel="external nofollow ugc" class="url">Clare Sudbery</a></span> — November 17, 2009 @ <a href="#comment-27895">12:22 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27896" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27896" class="vcard"> 
+       <p>Thanks for really lovely post, well done to you all!</p> 
+       <p><cite>Comment by <span class="fn">Tiffany</span> — November 17, 2009 @ <a href="#comment-27896">1:07 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27897" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27897" class="vcard"> 
+       <p>Congrats!! I think he’s darling and can’t believe how much tadpole resembles you with her cute glasses!! Gorgeous family!</p> 
+       <p><cite>Comment by <span class="fn">Angela</span> — November 17, 2009 @ <a href="#comment-27897">2:38 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27898" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27898" class="vcard"> 
+       <p>Congratulations! He is so cute! A perfect baby as Tadpole says!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.rosepourpre.com" rel="external nofollow ugc" class="url">Martine Rose</a></span> — November 17, 2009 @ <a href="#comment-27898">2:59 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27899" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27899" class="vcard"> 
+       <p>What a gorgeous little man! My son was born June 1st, and I already miss those first few weeks. Enjoy every second; they grow far too quickly.</p> 
+       <p>Congratulations to you all, and most sincere thanks for the years you gave carrying us along on your adventures, in a manner of speaking.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://themommygap.blogspot.com" rel="external nofollow ugc" class="url">D</a></span> — November 17, 2009 @ <a href="#comment-27899">3:52 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27900" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27900" class="vcard"> 
+       <p>Thank you for posting these lovely photos of your family. You holding Jack, M bathing him, Tadpole kissing him, and the little franglais himself showing so many expressions, it was all heart-warming.</p> 
+       <p>I certainly hope you might post some Jack audios one of these days.</p> 
+       <p>Goodness, Tadpole is getting big!</p> 
+       <p>Warmly, Pam</p> 
+       <p><cite>Comment by <span class="fn">PJ Carz</span> — November 17, 2009 @ <a href="#comment-27900">5:09 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27901" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27901" class="vcard"> 
+       <p>Congratulations, he really is beautiful. Lots of luck on your new journey, and thanks for popping back on the blog long enough for your readers to sneak a peek at the little guy.<br> :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.warsawtoparis.blogspot.com" rel="external nofollow ugc" class="url">Anne</a></span> — November 17, 2009 @ <a href="#comment-27901">7:27 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27902" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27902" class="vcard"> 
+       <p>Really, just adorable!!! Very happy for you!! :-)</p> 
+       <p>xoxo</p> 
+       <p><a href="http://www.chicsetera.com" rel="nofollow ugc">http://www.chicsetera.com</a></p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.chicsetera.com" rel="external nofollow ugc" class="url">CHICSETERA PARIS</a></span> — November 17, 2009 @ <a href="#comment-27902">4:56 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27903" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27903" class="vcard"> 
+       <p>See how loyal we all are? We’ve been checking in in hopes that Jack’s birth would bring you back again.</p> 
+       <p>What an adorable little bit of baby and of course you’re all besotted. Félicitations indeed.</p> 
+       <p>My 6 month-old grand-nephew will be coming to Paris with his moms on Tuesday to visit. Can I bring him over to play? I’d love to blog about it! ;-)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.areweinparisyet.blogspot.com" rel="external nofollow ugc" class="url">Shelli</a></span> — November 17, 2009 @ <a href="#comment-27903">5:32 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27904" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27904" class="vcard"> 
+       <p>Congratulations he’s just beautiful</p> 
+       <p><cite>Comment by <span class="fn">Kismet</span> — November 17, 2009 @ <a href="#comment-27904">8:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27905" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27905" class="vcard"> 
+       <p>Best wishes to you all.<br> Congrats!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://madwilliam.blogspot.com" rel="external nofollow ugc" class="url">Mad William</a></span> — November 17, 2009 @ <a href="#comment-27905">8:46 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27906" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27906" class="vcard"> 
+       <p>A better reason to come back to the blog I cannot think of. Congratulations to you all</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.izdihar.com" rel="external nofollow ugc" class="url">Chris of Arabia</a></span> — November 17, 2009 @ <a href="#comment-27906">11:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27907" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27907" class="vcard"> 
+       <p>Well done. He is perfectly perfect. Thank you for sharing. :-)</p> 
+       <p><cite>Comment by <span class="fn">Sara</span> — November 17, 2009 @ <a href="#comment-27907">11:42 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27908" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27908" class="vcard"> 
+       <p>Félicitations! Il est très mignon, vivement que j’aie le mien de bébé, eh eh! Je vous souhaite beaucoup de bonheur, de joie et tout le tralala!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.voulezvousparler.com" rel="external nofollow ugc" class="url">Sophie</a></span> — November 18, 2009 @ <a href="#comment-27908">12:06 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27909" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27909" class="vcard"> 
+       <p>Congratulations,</p> 
+       <p>He is beautiful. I hope that you will all be very happy and I wish you every love and luck for the future.</p> 
+       <p>Jx</p> 
+       <p><cite>Comment by <span class="fn">Jessiclees</span> — November 18, 2009 @ <a href="#comment-27909">12:38 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27910" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27910" class="vcard"> 
+       <p>congratulations! he’s adorable!</p> 
+       <p><cite>Comment by <span class="fn">Pattoo</span> — November 18, 2009 @ <a href="#comment-27910">5:16 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27911" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27911" class="vcard"> 
+       <p>Congratulations!! Such lovely news :)</p> 
+       <p><cite>Comment by <span class="fn">La Chat Noir</span> — November 18, 2009 @ <a href="#comment-27911">6:19 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27912" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27912" class="vcard"> 
+       <p>Félicitations indeed – although I can’t see the picture so I’m feeling hard done by :( It won’t show on my iPhone or my work PC so I’ll have to come back again and look from the OH’s Mac…. So pleased it’s all going well for you. Wondering if you’ll keep blogging…..</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.wagwaan.typepad.com" rel="external nofollow ugc" class="url">Jen</a></span> — November 18, 2009 @ <a href="#comment-27912">11:13 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27913" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27913" class="vcard"> 
+       <p>Wonderful news. Nothing better than a happy, healthy momma and baby.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.beanma.com" rel="external nofollow ugc" class="url">BeanMa</a></span> — November 18, 2009 @ <a href="#comment-27913">9:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27914" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27914" class="vcard"> 
+       <p>Congratulations!! Girls are wonderful and a friend for ever, but boys are SO loving! Enjoy your wonderful family!</p> 
+       <p><cite>Comment by <span class="fn">Helen</span> — November 19, 2009 @ <a href="#comment-27914">12:54 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27915" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27915" class="vcard"> 
+       <p>Congratulations !!!! :-)</p> 
+       <p><cite>Comment by <span class="fn">Eric Dolce</span> — November 19, 2009 @ <a href="#comment-27915">6:45 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27916" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27916" class="vcard"> 
+       <p>Hi Catherine,</p> 
+       <p>Am so glad i checked the site today to receive this wonderful news! Jack is so cute and am so happy for you…</p> 
+       <p>My best wishes</p> 
+       <p><cite>Comment by <span class="fn">girl across the ocean</span> — November 19, 2009 @ <a href="#comment-27916">1:21 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27917" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27917" class="vcard"> 
+       <p>*beaming*</p> 
+       <p>I am SO over-the-moon for you! Many congratulations. Welcome, Jack! Some words from the great Kurt Vonnegut to you, “There’s only one rule that I know of, babies—God damn it, you’ve got to be kind.” (cited here: <a href="http://www.avclub.com/articles/15-things-kurt-vonnegut-said-better-than-anyone-el,1858/" rel="nofollow">15 Things KV Said Better Than Anyone</a>)</p> 
+       <p>I am an 11th hour reader of the blog (as in, I started reading after you decided to stop posting, *snort*), but one who lurked almost all the back posts, ran out to contribute to your children’s university fund with the purchase of the memoir, and have enjoyed reading it all very thoroughly. :)</p> 
+       <p>I also just live down the hill from Belleville and because of the blog &amp; book have been out to enjoy the ‘hood a lot more. Yesterday, a new friend of mine and I went out to check out the Parc de Belleville for the first time (I have lived here almost a year and a half and did not know it was there, lol, but discovered it because you wrote about it) and we were duly impressed with the view. You have helped me adjust to living here, helped me to get out and about to see and do some things as you have written about them; in short, you have helped me have a life, and this is a tremendous thing for one human being to give to another. So thanks. I think Jack has a great mom, a great sister, and I am sure a wonderful father, but I did not read the parts about him so much yet, lol. I will get there. I am sure if he is with you, making this beautiful family, he is the cat’s meow. :D</p> 
+       <p>Live long and prosper!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://analienparisienne.wordpress.com/" rel="external nofollow ugc" class="url">Karin (an alien parisienne)</a></span> — November 19, 2009 @ <a href="#comment-27917">2:38 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27918" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27918" class="vcard"> 
+       <p>I said it on Twitter and I will keep saying it: I’m so happy for you! Congratulations!!! Wishing all of you all the best… :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://twitter.com/MtHL" rel="external nofollow ugc" class="url">*Martha*</a></span> — November 20, 2009 @ <a href="#comment-27918">11:44 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27919" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27919" class="vcard"> 
+       <p>Congratulations – what wonderful news! It was fun seeing your blog show up on my reader again today!</p> 
+       <p><cite>Comment by <span class="fn">Alissa</span> — November 21, 2009 @ <a href="#comment-27919">5:42 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27920" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27920" class="vcard"> 
+       <p>Congratulations to you all!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.maalie.blogspot.com/" rel="external nofollow ugc" class="url">Jim</a></span> — November 21, 2009 @ <a href="#comment-27920">11:14 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27921" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27921" class="vcard"> 
+       <p>Oh, Tadpole is such a darling!:)</p> 
+       <p>Congrats Petite! Well done!:)</p> 
+       <p>And thanks for sharing:)</p> 
+       <p><cite>Comment by <span class="fn">Duchesse</span> — November 23, 2009 @ <a href="#comment-27921">11:34 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27922" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27922" class="vcard"> 
+       <p>Very cute! Congratulations to both the happy mother and father!</p> 
+       <p><cite>Comment by <span class="fn">Neepser</span> — November 24, 2009 @ <a href="#comment-27922">8:49 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27923" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27923" class="vcard"> 
+       <p>Congratulations!!</p> 
+       <p><cite>Comment by <span class="fn">Dina</span> — November 25, 2009 @ <a href="#comment-27923">2:22 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27924" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27924" class="vcard"> 
+       <p>Many congratulations. Well done all</p> 
+       <p><cite>Comment by <span class="fn">Jester</span> — November 25, 2009 @ <a href="#comment-27924">11:20 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27925" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27925" class="vcard"> 
+       <p>Congratulations Petite! He’s adorable!</p> 
+       <p><cite>Comment by <span class="fn">Helen</span> — November 25, 2009 @ <a href="#comment-27925">6:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27926" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27926" class="vcard"> 
+       <p>Congratulations to you all.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.bleakhoundsdesign.co.uk" rel="external nofollow ugc" class="url">Googlebear</a></span> — November 26, 2009 @ <a href="#comment-27926">6:56 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27927" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27927" class="vcard"> 
+       <p>Welcome to the world, Jack!! Congratulations Petite, Boy and Tadpole! Have read and loved both your books but what an exciting new chapter of your lives you all have before you. So glad I checked in at your blog – pictures are so sweet – thank you!</p> 
+       <p>Jeanne</p> 
+       <p><cite>Comment by <span class="fn">Jeanne</span> — November 28, 2009 @ <a href="#comment-27927">2:36 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27928" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27928" class="vcard"> 
+       <p>Felicitations on your beautiful baby boy! It feels very bizarre reading your blog and writing a comment!!<br> I am a French teacher and my pupils bought me Petite Anglaise as a present for taking them on a school trip to Paris. Your book has now been passed around our whole department and we’ve all loved it. It brought back so many memories of our ‘year abroad’ from uni and we’ve been reminiscing in the MFL office at every opportunity. I’m going to order French Kissing as a Christmas present for my colleagues (and myself of course!) Merci Petite, after reading your book I feel like I’ve also fallen back in love with France! Best of luck for the future!</p> 
+       <p><cite>Comment by <span class="fn">Laura</span> — November 28, 2009 @ <a href="#comment-27928">11:59 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27929" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27929" class="vcard"> 
+       <p>Hip Hip Hooray (x3) for the whole family! And especially for you Petite – I can’t say it any better than Tadpole!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.curlyn.blogspot.com" rel="external nofollow ugc" class="url">N</a></span> — November 29, 2009 @ <a href="#comment-27929">10:12 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27930" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27930" class="vcard"> 
+       <p>Felicitations indeed. He’s GORGEOUS!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://teeweewonders.blogspot.com" rel="external nofollow ugc" class="url">teeweewonders</a></span> — November 30, 2009 @ <a href="#comment-27930">1:50 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27931" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27931" class="vcard"> 
+       <p>Je suis venue aujourd’hui pour voir s’il y avait des nouvelles de ce bébé et “bingo”, tout est là ! Wow. Félicitations. Beaucoup de blogs ferment en ce moment, c’est la tendance au recentrage sur la vie personnelle… Et c’est tant mieux pour vous ! Bonne vie à vous tous.</p> 
+       <p><cite>Comment by <span class="fn">Lor</span> — December 1, 2009 @ <a href="#comment-27931">6:17 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27932" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27932" class="vcard"> 
+       <p>Incredibly adorable. Congratulations!!!</p> 
+       <p>They grow far too quickly and bring so much joy to our lives, but I’m SO DONE having babies..</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://brilliantsulk.com/" rel="external nofollow ugc" class="url">Amanda</a></span> — December 2, 2009 @ <a href="#comment-27932">12:12 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27933" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27933" class="vcard"> 
+       <p>Congratulations! He is beautiful and you have a lovely family. All the best of health and happiness!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.yourenglishsuccess.com" rel="external nofollow ugc" class="url">Terry Kaufman</a></span> — December 3, 2009 @ <a href="#comment-27933">9:18 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27934" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27934" class="vcard"> 
+       <p>I love his name. Is it Jack or Jacques? or both. You look beautiful and I hope your husband is full of love and admiration for you and his son.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://gutsywriter.blogspot.com" rel="external nofollow ugc" class="url">GutsyWriter</a></span> — December 4, 2009 @ <a href="#comment-27934">6:33 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27935" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27935" class="vcard"> 
+       <p>So sweet! Such joy and happiness is catching. You have ‘spread the love’ to us all. Thanks for your blog and books, I have really enjoyed them.</p> 
+       <p><cite>Comment by <span class="fn">lindsey violet</span> — December 6, 2009 @ <a href="#comment-27935">12:39 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27936" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27936" class="vcard"> 
+       <p>congratulations, bet tadpole is so pleased with having a litle brother. best wishes to all</p> 
+       <p>Dan</p> 
+       <p><cite>Comment by <span class="fn">Devinder</span> — December 6, 2009 @ <a href="#comment-27936">5:34 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27937" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27937" class="vcard"> 
+       <p>Well done ! He is absolutely beautiful. I can almost smell that milky baby perfume :-)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://eleven47.com" rel="external nofollow ugc" class="url">Sarah</a></span> — December 7, 2009 @ <a href="#comment-27937">6:55 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27938" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27938" class="vcard"> 
+       <p>A bit late here, but all the best to you and The Boy. Jack looks like a lovely baby, and may he bring you many years of happiness, even when he’s a teenager… ;-)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://mrnighttime.blogspot.com" rel="external nofollow ugc" class="url">Dave Of The Lake</a></span> — December 9, 2009 @ <a href="#comment-27938">5:53 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27939" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27939" class="vcard"> 
+       <p>Congratulations on your new arrival! Wish you well.<br> A big fan of your writing, just finished your second book while the kids are on summer holidays.<br> From down under.</p> 
+       <p><cite>Comment by <span class="fn">Eva</span> — December 10, 2009 @ <a href="#comment-27939">6:58 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27940" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27940" class="vcard"> 
+       <p>Perfectly lovely. :-) Congratulations! Best of wishes and a lifetime of happiness to your beautiful family.</p> 
+       <p><cite>Comment by <span class="fn">Laura</span> — December 11, 2009 @ <a href="#comment-27940">5:47 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27941" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27941" class="vcard"> 
+       <p>Congratulations on baby Jack!<br> And double congrats on the book! I just stayed up until 4am to read it all at once–I ordered it from the Book Depository ages ago and just now had a night to myself to read–I haven’t done that in years and years! It was a wonderful read, and I so look forward to seeing your name on many more covers in the years to come.<br> Writing from sunny Florida to wish you and your family the best…<br> Aly</p> 
+       <p><cite>Comment by <span class="fn">Aly</span> — December 14, 2009 @ <a href="#comment-27941">4:39 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27942" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27942" class="vcard"> 
+       <p>4-5 hours, twice a day? That’s fantastic — long may it continue!</p> 
+       <p>Love your Turkey pictures by the way. Think we stayed in more or less the same Istanbul hotel at October half-term. What a city !</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://thepriceoflove.net" rel="external nofollow ugc" class="url">Roads</a></span> — December 15, 2009 @ <a href="#comment-27942">9:13 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27943" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27943" class="vcard"> 
+       <p>Congrats Petite!! Jack shares my birthday and what a wonderful day it is. I’m not certain it holds the same significance in Europe but in Mexico, Nov 2nd is celebrated as the Day of the Dead and in Canada, I grew up knowing my day as All Souls Day. Not macabre in the least, for me, but instead a day where life is celebrated and souls remembered. I wish Jack all the luck I have had as a scorpio. Not as fancy as Christmas or St. Patrick’s Day but special all the same.</p> 
+       <p><cite>Comment by <span class="fn">Jen</span> — December 17, 2009 @ <a href="#comment-27943">3:37 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27944" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27944" class="vcard"> 
+       <p>Well done darling xxx And babies first Christmas coming up as well.</p> 
+       <p>My new years resolution… to read your new book xxx</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.missy-blog.com" rel="external nofollow ugc" class="url">missy</a></span> — December 18, 2009 @ <a href="#comment-27944">11:25 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27945" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27945" class="vcard"> 
+       <p>That’s the cutest baby ever :) congratulations</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://urbansensations.wordpress.com" rel="external nofollow ugc" class="url">Angie</a></span> — December 30, 2009 @ <a href="#comment-27945">6:30 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27946" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27946" class="vcard"> 
+       <p>What a gorgeous little man, congratulations.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://partmummypartme.blogspot.com" rel="external nofollow ugc" class="url">Part Mummy Part Me</a></span> — January 2, 2010 @ <a href="#comment-27946">12:50 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27947" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27947" class="vcard"> 
+       <p>Congrats, Petite. Happy 2010 to you and your lovely family.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://unbalanced-reaction.blogspot.com/" rel="external nofollow ugc" class="url">unbalanced reaction</a></span> — January 2, 2010 @ <a href="#comment-27947">3:14 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27948" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27948" class="vcard"> 
+       <p>We also have a son, Jack, who gives us a run for our money. BEST OF LUCK!!!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://verityillustration.com" rel="external nofollow ugc" class="url">kristen verity</a></span> — January 5, 2010 @ <a href="#comment-27948">7:56 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27949" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27949" class="vcard"> 
+       <p>‘French Kissing’ was delivered yesterday to me (ordered from TheBookCommunity) and I could not let go of it, so I finished it today.</p> 
+       <p>I enjoyed it immensely, Thank you Catherine ..!</p> 
+       <p><cite>Comment by <span class="fn">Henri Bik</span> — January 21, 2010 @ <a href="#comment-27949">8:25 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27950" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27950" class="vcard"> 
+       <p>Congratulations and well done. Take care of yourself and your family.</p> 
+       <p><cite>Comment by <span class="fn">Lionel Johnson</span> — January 26, 2010 @ <a href="#comment-27950">9:27 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27951" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27951" class="vcard"> 
+       <p>Congratulations on the addition to your family. I often read your blog, but never comment. Naughty I know.</p> 
+       <p>I am stupid! Why? After reading and enjoying your first book I ordered a copy of what I thought was your new book, “French Kisses”, and when I opened it and started reading without looking at the authors name I thought “This can’t be right” It was then I saw that is was by ‘George East’. Doh!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://athomewithkeith.blogspot.com" rel="external nofollow ugc" class="url">Keith</a></span> — February 2, 2010 @ <a href="#comment-27951">12:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27952" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27952" class="vcard"> 
+       <p>Hi Catherine<br> We havn`t spoken since the Victoria Derbyshire show on Five Live but I really have to congratulate you on the birth of another angel. Chapters close, new ones open – your life really has turned full circle throughout the petite years, probably even better than you ever imagined, live the dream-you deserve it!</p> 
+       <p><cite>Comment by <span class="fn">David</span> — February 4, 2010 @ <a href="#comment-27952">2:25 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27953" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27953" class="vcard"> 
+       <p>Lunch today at the Café Charbon was excellent, thanks to you! I sat next to your special table as I prefer the window; what a pleasure it was to eat there, added greatly by the delight I have had in reading your charming book.I got to page 150 and decided I’ll have to buy this for my daughter, also a francophile, and for many friends. I’m certain this would translate well into French, although I’m sure you must have considered this.<br> How lucky I am to live in Paris in the 11e! No, I could never go back to live in the UK.<br> I was delighted to learn of Jack and his safe arrival. My very best wishes to all four of you, plus of course, Mr Frog. Have a very happy life.</p> 
+       <p><cite>Comment by <span class="fn">Méricourt</span> — February 5, 2010 @ <a href="#comment-27953">5:54 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27954" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27954" class="vcard"> 
+       <p>Hi..<br> this is Ravi Padiyar…<br> just wanted to give my heartiest congratulations<br> :-)</p> 
+       <p><cite>Comment by <span class="fn">Ravi Padiyar</span> — February 9, 2010 @ <a href="#comment-27954">6:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27955" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27955" class="vcard"> 
+       <p>He’s precious. Congratulations!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://librarianlisa.wordpress.com" rel="external nofollow ugc" class="url">Lisa</a></span> — February 12, 2010 @ <a href="#comment-27955">6:17 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27956" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27956" class="vcard"> 
+       <p>Many months late may I add my congratulations to the pile. I am very happy for you, and to see these pictures. Hope life is still as abundant for you. I read your book last year and enjoyed it HUGELY!<br> Take care<br> Livvy</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://livvylife.blogspot.com" rel="external nofollow ugc" class="url">Livvy Unwin</a></span> — February 20, 2010 @ <a href="#comment-27956">11:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27957" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27957" class="vcard"> 
+       <p>Hearty congratulations! Now its more than 3 months, but i wanted to post a comment. Take care.</p> 
+       <p>Bises,<br> 7jades.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.7jades.com" rel="external nofollow ugc" class="url">7jades</a></span> — February 26, 2010 @ <a href="#comment-27957">8:27 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27958" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27958" class="vcard"> 
+       <p>Felicitations indeed. He’s beautiful. Congratulations!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://melodycenta.com" rel="external nofollow ugc" class="url">Adam Wardel</a></span> — March 4, 2010 @ <a href="#comment-27958">1:46 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27959" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27959" class="vcard"> 
+       <p>missing updates, hope all good and well :)</p> 
+       <p><cite>Comment by <span class="fn">Tiffany</span> — March 20, 2010 @ <a href="#comment-27959">3:01 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27960" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27960" class="vcard"> 
+       <p>You’re really lucky to have such a cute baby. Congratulation. I wish I could have my own baby soon. :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://righthealthadvice.blogspot.com/" rel="external nofollow ugc" class="url">Abbey</a></span> — March 23, 2010 @ <a href="#comment-27960">6:41 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27961" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27961" class="vcard"> 
+       <p>Catherine: thanks much for posting the pics of Jack and the one of you too. I very much enjoyed French Kissing and await your next. I check back here occasionally in hopes that you’ll reappear, like Peter Pan back for the next genertion.</p> 
+       <p><cite>Comment by <span class="fn">Steve G</span> — March 26, 2010 @ <a href="#comment-27961">10:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27962" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27962" class="vcard"> 
+       <p>I understand why you haven’t posted in several months. My daughter was born on 11/4/09 so I haven’t had time to post let alone read blogs. But as I’m coming up for air I hope you will and post photos…</p> 
+       <p><cite>Comment by <span class="fn">jennifer</span> — March 30, 2010 @ <a href="#comment-27962">4:15 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27963" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27963" class="vcard"> 
+       <p>Best wishes with the baby.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://sirkkasart.blogspot.com/" rel="external nofollow ugc" class="url">Sirkka</a></span> — April 3, 2010 @ <a href="#comment-27963">9:57 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27964" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27964" class="vcard"> 
+       <p>What a turn up for the books! I was given “Petite Anglaise” as a birthday present and thanks to you I have not done anything but read all morning ;) Finally finished the book and logged on to find not only is there a baby called Jack – who looks divine – but a boy too!<br> Having taken the MFL degree route myself and done the year abroad, I say fair play to you for making it happen by staying there xxx</p> 
+       <p><cite>Comment by <span class="fn">Ella</span> — April 5, 2010 @ <a href="#comment-27964">1:09 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27965" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27965" class="vcard"> 
+       <p>Many many congratulations – my first baby was 41 weeks five days and just under 5kgs – he was in no particular hurry to come out – no doubt enjoying the 15,000 calories a day I was feeding him…</p> 
+       <p>Beautiful baby. Bravo ! xx</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://belgraviawives.blogspot.com" rel="external nofollow ugc" class="url">Belgravia Wife - sort of</a></span> — April 18, 2010 @ <a href="#comment-27965">5:00 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27966" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27966" class="vcard"> 
+       <p>Hi Petite–I know you aren’t blogging anymore, but I would love to see new photos of Jack!!</p> 
+       <p><cite>Comment by <span class="fn">Kathryn</span> — April 21, 2010 @ <a href="#comment-27966">11:59 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27967" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27967" class="vcard"> 
+       <p>I just finished reading your book and I can’t tell you just how much I enjoyed it and felt such a deep personal attachment to it. I was born in Paris of American parents, both writers, who met in Budapest in 1948 and who later married had three of us in Paris, the last one born in London and then we were off to live in Ethiopia followed by Chile. I was taught French first as the expectation was that I would also learn English, having American parents and one day would end up in the United States. And so it went. I now live in the US but starting with Paris and France as a whole is a place I hope to someday be able to actually live in and experience more than for a few days or week at a time. Barring no more volcanic ash interruptions, I am off to France next week for a holiday with my Mr. Frog and couldn’t have timed reading your book any better. Not until today did I know what was new in your life but am thrilled to see you just brought a new life into this world, Jack is adorable, not to mention how nice for Tadpole that she now has a sister. I must take time to go on facebook to find out when Mr. Boy came into the picture, how Tadpole is doing and what is new in Mr. Frog’s life. I look forward to reading your new book too. There are very few times where the reader brings you into their lives and you feel you know them, you connect, you feel their emotions, you know what places they are talking about and you share their outlook, their passions and their wonderful joie de vivre. Thank you for your wonderful story telling, your sincerity and your unique, honest way of sharing your life, your thoughts, and your love for Paris and Tadpole and now Jack. A bientot, Deborah</p> 
+       <p><cite>Comment by <span class="fn">deborah</span> — April 22, 2010 @ <a href="#comment-27967">1:49 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27968" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27968" class="vcard"> 
+       <p>That’s funny, my new son was born on 13th (Friday) of November, not long after your therefore. It’s funny to see you ‘blogging-off’, as it were, as my own blogging activity gets ever more intense. But you are right. Absolutely right, and I wish you well as you continue on your life’s journey, blogless or otherwise. It’s so easy to get our priorities wrong. Or maybe just to not realise when things have naturally come to a logical conclusion. Right now blogging is suiting me fine, but as you say, with Facebook, and me too getting more into Twitter, things will change. As they must.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://paris-and-i.parissetmefree.com/" rel="external nofollow ugc" class="url">Sab</a></span> — April 22, 2010 @ <a href="#comment-27968">3:13 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27969" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27969" class="vcard"> 
+       <p>Bonjour,</p> 
+       <p>Maman de 2 jeunes enfants en congé parental je me dis ce soir que ça fait très longtemps que je n’ai pas fait un tour sur le site de petite anglaise…et que vois-je? un livre sorti en août et un bébé né en novembre…félicitations!!!que le temps passe…j’ai du rattrapage à faire ;-)</p> 
+       <p><cite>Comment by <span class="fn">helene</span> — April 29, 2010 @ <a href="#comment-27969">9:00 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27970" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27970" class="vcard"> 
+       <p>Congratulations! It is very nice to see pictures! Best wishes to your family!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.gonchaya.com/" rel="external nofollow ugc" class="url">Andrew</a></span> — April 30, 2010 @ <a href="#comment-27970">8:25 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27971" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27971" class="vcard"> 
+       <p>First of all concratulations for having this lovely child! I’m from Finland (I apologize my bad English) and I just finished your book, Petite Anglaise. I’m glad I bumped into it in the library, cause it made me so happy and I was so attahced to it. I have an fascination with France too and your book made me believe that moving there could be possible for me too if I just wanted it enough. Your thoughts were similiar to mine and made me think about my relationship in a new way. My words aren’t enough to tell how much the book gave to me. After reading the book I had to came to see if you are still writing your blog. Feels unbelievable to actually see the real you and Tadpole and see what’s happening to you today because before visiting this website you all were just characters in your book. It’s funny to see here what happend after the book, cause the end was so open. Usually you don’t get that opportunity when the story ends :D I’m little sad you are going to stop writing cause I just found your blog, but I wish the best of luck for all of you in the future.</p> 
+       <p>P.S. Inspired by you I got the courage to create my own blog :)</p> 
+       <p><cite>Comment by <span class="fn">lillepyy</span> — May 26, 2010 @ <a href="#comment-27971">5:44 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27989" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27989" class="vcard"> 
+       <p>Warmest congratulations. And what a pleasant surprise to have suddenly ten post pop up in Google Reader after such along hiatus.</p> 
+       <p>My daughter and I wish you wonderful times now that you are four!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://sandlander.blogspot.com" rel="external nofollow ugc" class="url">Malcolm James Thomson</a></span> — June 28, 2010 @ <a href="#comment-27989">12:06 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27990" class="comment byuser comment-author-bipolarinparis bypostauthor even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-27990" class="vcard"> 
+       <p>Hi there</p> 
+       <p>Actually this probably happened because I’ve been moving my blog over to wordpress.com and so the feed must have been re-set as a result. This post was my last and was dated November 2009, I’m afraid!</p> 
+       <p>I want to leave the blog online for posterity, but hosting was expensive and so I’m going to try this service on for size instead…</p> 
+       <p><cite>Comment by <span class="fn"><a href="https://petiteanglaise.wordpress.com" rel="external nofollow ugc" class="url">petiteanglaise</a></span> — June 28, 2010 @ <a href="#comment-27990">12:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-27996" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-27996" class="vcard"> 
+       <p>Chere Petite,</p> 
+       <p>Well, I just wrote a rather long comment and seem to have lost it – so much for my first attempt at responding to a blog! Really, I am long-winded, so the shorter version is probably preferable and, yes, this is the short version :-) I just wanted to say merci mille fois, thanks a million, from an adoring reader, grande indeed pour une femme at almost 180 cm, half frog myself, although of the Canadian variety, who just discovered you recently while on a trip to Maui which, in more ways than one, ended up being a very life changing time in my life. I have lived through the very painful ending of a 7-year relationship to a man that I so wanted to spend forever with, so of course I found myslef in your story, and it is still somewhat impossible to imagine life going on after such an ending, but going on it is, and new beginnings emerge, somehow, out of the ashes, as they say. Reading Petite, and all the comments from other readers and writers, has been tremendously inspiring and comforting to me, and I am so thankful to everyone for all the shared words, stories, and positive emotions which feel as though they are surrounding me with hope and faith in the possibilities of new life to come, just as is shown in the picture of your dear Jack. I do also want to acknowledge here and send best wishes today to my one and only male housemate at the current time, Norman Birdie Bates, my handsome blue budgie whose sweet singing has been keeping me company of late and whose chirpy character and humorous antics never fail to raise my spirits; I apopted him three years ago on July 7, a date which I believe is especially lucky and important because, if I read correctly, it was when Petite Anglaise sprang to life, and a long life to come it has indeed, with new friends finding you, or perhaps it is you finding us, every day – félicitations et bonne anniversaire!</p> 
+       <p><cite>Comment by <span class="fn">Grande Canadienne</span> — July 8, 2010 @ <a href="#comment-27996">8:43 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28001" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-28001" class="vcard"> 
+       <p>Congratulations! Tadpole has a most endearing way with words!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://my-weighttrainingblog.blogspot.com/" rel="external nofollow ugc" class="url">Maris</a></span> — July 12, 2010 @ <a href="#comment-28001">9:35 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28006" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-28006" class="vcard"> 
+       <p>Just finished reading your book and really enjoyed it. This is my first time reading your blog so it’s great being able to find out what happened next, although there are a few gaps I need to fill in.<br> Congratulations on your beautiful baby.<br> Really happy that everything seems to be working out great for you.</p> 
+       <p><cite>Comment by <span class="fn">missusme</span> — August 8, 2010 @ <a href="#comment-28006">1:47 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28008" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-28008" class="vcard"> 
+       <p>I can feel your happiness through the write up. This is a divine feeling and probably the best thing that can ever happen to a woman. Cheers!!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://explore24x7.com/" rel="external nofollow ugc" class="url">Mellisa Lane</a></span> — August 18, 2010 @ <a href="#comment-28008">1:08 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28009" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-28009" class="vcard"> 
+       <p>hiiiii how cute child. Congratulations!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://newsuncle.com" rel="external nofollow ugc" class="url">Jitu | News Uncle</a></span> — August 18, 2010 @ <a href="#comment-28009">9:00 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28010" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-28010" class="vcard"> 
+       <p>Hi, Jack seems to be a pretty nice kid :) Take care and please start posting on this blog again. I am really looking forward to reading more from you. Thanks. Cheers :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.warrenphillipswebdesign.co.uk" rel="external nofollow ugc" class="url">web design manchester</a></span> — August 18, 2010 @ <a href="#comment-28010">3:25 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28012" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-28012" class="vcard"> 
+       <p>Congratulations! He looks adorable. I really enjoy reading your posts.</p> 
+       <p><cite>Comment by <span class="fn">Soma Sengupta</span> — August 22, 2010 @ <a href="#comment-28012">12:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28014" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-28014" class="vcard"> 
+       <p>Hi Catherine! I’m Cri, an American girl, living in Milan, recently went on a trip to Sicily and found your Petite Anglaise book in the hotel where I stayed in Taormina… so I snatched it from the hotel and just got around to reading it this past week while I was sick in bed… needless to say I finished it in all of 3 days, just jumped on to your blog and I find you have a new BABY!! I was just so upset that I finished the book, thinking to myself what to read now… turns out I have a LOT to catch up on!!! Congrats on baby Jack, and I look forward to back tracking on your blog!! Bookmarking you as we speak :) Cri</p> 
+       <p><cite>Comment by <span class="fn">Cri Peru</span> — October 1, 2010 @ <a href="#comment-28014">8:49 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28015" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-28015" class="vcard"> 
+       <p>Hi Cathrine<br> Reading your book in Israel, enjoying very much!<br> Congratulations!<br> wanted to say like 139..</p> 
+       <p><cite>Comment by <span class="fn">Ofra</span> — October 1, 2010 @ <a href="#comment-28015">4:17 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28016" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-28016" class="vcard"> 
+       <p>wow. just finished reading your book, and looked up your blog. now i see you have another baby. gorgeous. x</p> 
+       <p><cite>Comment by <span class="fn">wowowow</span> — October 6, 2010 @ <a href="#comment-28016">6:24 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28017" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-28017" class="vcard"> 
+       <p>Felicitations indeed. And congratulations.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.markhoult.com" rel="external nofollow ugc" class="url">Mark</a></span> — October 14, 2010 @ <a href="#comment-28017">10:35 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28018" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-28018" class="vcard"> 
+       <p>Hi,</p> 
+       <p>I wasn’t familiar with your blog prior but just finished your book (loved it, thought it was very well written and edited)very excited to see you have written a second! All the best and hope you keep up the novel writing:)</p> 
+       <p><cite>Comment by <span class="fn">Sydney Chick</span> — October 17, 2010 @ <a href="#comment-28018">10:47 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-28022" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-28022" class="vcard"> 
+       <p>Jack is really sweeeet! :-) My name is Jenny, my little Jacqueline is almost 3 month old and I’ve got a tip for young mothers who want to lose weight after the birth! Yesterday I discovered a new weight-loss-portal called <a href="http://www.aiqum.co.uk" rel="nofollow ugc">http://www.aiqum.co.uk</a> and wanted to ask if any of you know it?<br> They offer tailor made low carb and low fat menu plans, plus tailor made training plans! There are also thousands of recipes to choose from and many, many tools!<br> You also get numerous diagrams. It´s completely FREE and without obligations! Perfect for every mother to loose pounds healthy and free! ;-)</p> 
+       <p>Kind regards,<br> Jenny :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.aiqum.co.uk" rel="external nofollow ugc" class="url">Jenny</a></span> — November 2, 2010 @ <a href="#comment-28022">11:47 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+    </ol> 
+    <div class="navigation"> 
+     <div class="alignleft"></div> 
+     <div class="alignright"></div> 
+    </div> 
+    <br> 
+    <p><a href="https://petiteanglaise.com/2009/11/14/jack/feed/"><abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.</a></p> 
+    <p>Sorry, the comment form is closed at this time.</p> <!-- begin footer --> 
+   </div> <!-- begin sidebar --> 
+   <div id="menu"> 
+    <ul> 
+     <li id="search-15" class="widget widget_search">
+      <form role="search" method="get" id="searchform" class="searchform" action="https://petiteanglaise.com/"> 
+       <div> <label class="screen-reader-text" for="s">Search for:</label> 
+        <input type="text" value="" name="s" id="s"> 
+        <input type="submit" id="searchsubmit" value="Search"> 
+       </div> 
+      </form></li> 
+     <li id="text-21" class="widget widget_text"> 
+      <div class="textwidget">
+       <ul> 
+        <li id="text" style="list-style-type:none;"> 
+         <ul> 
+          <li><a title="about this site" href="https://petiteanglaise.wordpress.com/about-this-site/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/union-jack2.jpg" alt="union-jack2.jpg"> about</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/book/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/book.png" alt="book.png"> books</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/press/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/press.jpg" alt="press.jpg"> press</a></li> 
+          <li><a title="Petite Anglaise fan page" href="http://www.facebook.com/pages/Petite-Anglaise/8204603380" target="_TOP" rel="noopener noreferrer"><img src="https://petiteanglaise.files.wordpress.com/2010/06/facebook1.png" alt="facebook.png"> fbk</a></li> 
+         </ul> 
+         <ul> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031190?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031190"><img src="https://petiteanglaise.files.wordpress.com/2010/06/petite-paperback1.gif" alt="buy from amazon uk"></a></li> 
+          <li><a title="buy from amazon us" href="http://www.amazon.com/gp/product/0385522800?ie=UTF8&amp;tag=petiteanglais-20&amp;linkCode=xm2&amp;camp=1789&amp;creativeASIN=0385522800"><img src="https://petiteanglaise.files.wordpress.com/2009/11/petitepbusa.jpg" alt="buy from amazon us"></a></li> 
+          <li><a title="buy from amazon.fr" href="http://www.amazon.fr/Petite-anglaise-Catherine-Sanderson/dp/2702140394/ref=sr_1_2?ie=UTF8&amp;s=books&amp;qid=1258292753&amp;sr=8-2"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french_petite.jpg" alt="buy from amazon france"></a></li> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031247?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031247"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french-kissing_web1.jpg" alt="buy from amazon uk"></a></li> 
+         </ul> </li> 
+        <li id="text">potted petite 
+         <ul> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2004/12/02/adoption/">prologue</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/10/burned/">burned</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/22/null-and-void/">null and void</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/29/slacker-mum/">part time mummy</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/03/baggage/">baggage</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/11/23/song/">singing in tongues</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/03/14/eleven-days-later/">eleven days later</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/04/06/semi-detached/">semi-detached</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/07/20/suspendered/">suspend<span style="text-decoration:line-through;">er</span>ed</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2007/06/03/sunday/">sunday</a></li> 
+         </ul> </li> 
+        <li id="text">archives 
+         <ul> 
+          <li><a title="January 2011" href="https://petiteanglaise.com/2011/01/">January 2011</a></li> 
+          <li><a title="November 2009" href="https://petiteanglaise.com/2009/11/">November 2009</a></li> 
+          <li><a title="September 2009" href="https://petiteanglaise.com/2009/09/">September 2009</a></li> 
+          <li><a title="August 2009" href="https://petiteanglaise.com/2009/08/">August 2009</a></li> 
+          <li><a title="July 2009" href="https://petiteanglaise.com/2009/07/">July 2009</a></li> 
+          <li><a title="June 2009" href="https://petiteanglaise.com/2009/06/">June 2009</a></li> 
+          <li><a title="May 2009" href="https://petiteanglaise.com/2009/05/">May 2009</a></li> 
+          <li><a title="April 2009" href="https://petiteanglaise.com/2009/04/">April 2009</a></li> 
+          <li><a title="March 2009" href="https://petiteanglaise.com/2009/03/">March 2009</a></li> 
+          <li><a title="February 2009" href="https://petiteanglaise.com/2009/02/">February 2009</a></li> 
+          <li><a title="January 2009" href="https://petiteanglaise.com/2009/01/">January 2009</a></li> 
+          <li><a title="December 2008" href="https://petiteanglaise.com/2008/12/">December 2008</a></li> 
+          <li><a title="November 2008" href="https://petiteanglaise.com/2008/11/">November 2008</a></li> 
+          <li><a title="October 2008" href="https://petiteanglaise.com/2008/10/">October 2008</a></li> 
+          <li><a title="September 2008" href="https://petiteanglaise.com/2008/09/">September 2008</a></li> 
+          <li><a title="August 2008" href="https://petiteanglaise.com/2008/08/">August 2008</a></li> 
+          <li><a title="July 2008" href="https://petiteanglaise.com/2008/07/">July 2008</a></li> 
+          <li><a title="June 2008" href="https://petiteanglaise.com/2008/06/">June 2008</a></li> 
+          <li><a title="May 2008" href="https://petiteanglaise.com/2008/05/">May 2008</a></li> 
+          <li><a title="April 2008" href="https://petiteanglaise.com/2008/04/">April 2008</a></li> 
+          <li><a title="March 2008" href="https://petiteanglaise.com/2008/03/">March 2008</a></li> 
+          <li><a title="February 2008" href="https://petiteanglaise.com/2008/02/">February 2008</a></li> 
+          <li><a title="January 2008" href="https://petiteanglaise.com/2008/01/">January 2008</a></li> 
+          <li><a title="December 2007" href="https://petiteanglaise.com/2007/12/">December 2007</a></li> 
+          <li><a title="November 2007" href="https://petiteanglaise.com/2007/11/">November 2007</a></li> 
+          <li><a title="October 2007" href="https://petiteanglaise.com/2007/10/">October 2007</a></li> 
+          <li><a title="September 2007" href="https://petiteanglaise.com/2007/09/">September 2007</a></li> 
+          <li><a title="August 2007" href="https://petiteanglaise.com/2007/08/">August 2007</a></li> 
+          <li><a title="July 2007" href="https://petiteanglaise.com/2007/07/">July 2007</a></li> 
+          <li><a title="June 2007" href="https://petiteanglaise.com/2007/06/">June 2007</a></li> 
+          <li><a title="May 2007" href="https://petiteanglaise.com/2007/05/">May 2007</a></li> 
+          <li><a title="April 2007" href="https://petiteanglaise.com/2007/04/">April 2007</a></li> 
+          <li><a title="March 2007" href="https://petiteanglaise.com/2007/03/">March 2007</a></li> 
+          <li><a title="February 2007" href="https://petiteanglaise.com/2007/02/">February 2007</a></li> 
+          <li><a title="January 2007" href="https://petiteanglaise.com/2007/01/">January 2007</a></li> 
+          <li><a title="December 2006" href="https://petiteanglaise.com/2006/12/">December 2006</a></li> 
+          <li><a title="November 2006" href="https://petiteanglaise.com/2006/11/">November 2006</a></li> 
+          <li><a title="October 2006" href="https://petiteanglaise.com/2006/10/">October 2006</a></li> 
+          <li><a title="September 2006" href="https://petiteanglaise.com/2006/09/">September 2006</a></li> 
+          <li><a title="August 2006" href="https://petiteanglaise.com/2006/08/">August 2006</a></li> 
+          <li><a title="July 2006" href="https://petiteanglaise.com/2006/07/">July 2006</a></li> 
+          <li><a title="June 2006" href="https://petiteanglaise.com/2006/06/">June 2006</a></li> 
+          <li><a title="May 2006" href="https://petiteanglaise.com/2006/05/">May 2006</a></li> 
+          <li><a title="April 2006" href="https://petiteanglaise.com/2006/04/">April 2006</a></li> 
+          <li><a title="March 2006" href="https://petiteanglaise.com/2006/03/">March 2006</a></li> 
+          <li><a title="February 2006" href="https://petiteanglaise.com/2006/02/">February 2006</a></li> 
+          <li><a title="January 2006" href="https://petiteanglaise.com/2006/01/">January 2006</a></li> 
+          <li><a title="December 2005" href="https://petiteanglaise.com/2005/12/">December 2005</a></li> 
+          <li><a title="November 2005" href="https://petiteanglaise.com/2005/11/">November 2005</a></li> 
+          <li><a title="October 2005" href="https://petiteanglaise.com/2005/10/">October 2005</a></li> 
+          <li><a title="September 2005" href="https://petiteanglaise.com/2005/09/">September 2005</a></li> 
+          <li><a title="August 2005" href="https://petiteanglaise.com/2005/08/">August 2005</a></li> 
+          <li><a title="July 2005" href="https://petiteanglaise.com/2005/07/">July 2005</a></li> 
+          <li><a title="June 2005" href="https://petiteanglaise.com/2005/06/">June 2005</a></li> 
+          <li><a title="May 2005" href="https://petiteanglaise.com/2005/05/">May 2005</a></li> 
+          <li><a title="April 2005" href="https://petiteanglaise.com/2005/04/">April 2005</a></li> 
+          <li><a title="March 2005" href="https://petiteanglaise.com/2005/03/">March 2005</a></li> 
+          <li><a title="February 2005" href="https://petiteanglaise.com/2005/02/">February 2005</a></li> 
+          <li><a title="January 2005" href="https://petiteanglaise.com/2005/01/">January 2005</a></li> 
+          <li><a title="December 2004" href="https://petiteanglaise.com/2004/12/">December 2004</a></li> 
+          <li><a title="November 2004" href="https://petiteanglaise.com/2004/11/">November 2004</a></li> 
+          <li><a title="October 2004" href="https://petiteanglaise.com/2004/10/">October 2004</a></li> 
+          <li><a title="September 2004" href="https://petiteanglaise.com/2004/09/">September 2004</a></li> 
+          <li><a title="August 2004" href="https://petiteanglaise.com/2004/08/">August 2004</a></li> 
+          <li><a title="July 2004" href="https://petiteanglaise.com/2004/07/">July 2004</a></li> 
+         </ul> </li> 
+        <li id="text">categories 
+         <ul> 
+          <li class="cat-item cat-item-19290"><a title="View all posts filed under adoption" href="https://petiteanglaise.com/category/adoption/">adoption</a></li> 
+          <li class="cat-item cat-item-101238"><a title="View all posts filed under book stuff" href="https://petiteanglaise.com/category/book-stuff/">book stuff</a></li> 
+          <li class="cat-item cat-item-269813"><a title="on Paris and Parisians" href="https://petiteanglaise.com/category/city-of-light/">city of light</a></li> 
+          <li class="cat-item cat-item-777392"><a title="View all posts filed under french touch" href="https://petiteanglaise.com/category/french-touch/">french touch</a></li> 
+          <li class="cat-item cat-item-37959060"><a title="View all posts filed under good time girl" href="https://petiteanglaise.com/category/good-time-girl/">good time girl</a></li> 
+          <li class="cat-item cat-item-36442"><a title="View all posts filed under knocked up" href="https://petiteanglaise.com/category/knocked-up/">knocked up</a></li> 
+          <li class="cat-item cat-item-214948"><a title="View all posts filed under knot tying" href="https://petiteanglaise.com/category/knot-tying/">knot tying</a></li> 
+          <li class="cat-item cat-item-34596"><a title="food for thought" href="https://petiteanglaise.com/category/miam/">miam</a></li> 
+          <li class="cat-item cat-item-1455466"><a title="View all posts filed under mills &amp; boon" href="https://petiteanglaise.com/category/mills-boon/">mills &amp; boon</a></li> 
+          <li class="cat-item cat-item-277"><a title="View all posts filed under misc" href="https://petiteanglaise.com/category/misc/">misc</a></li> 
+          <li class="cat-item cat-item-37959061"><a title="England through rose tinted spectacles" href="https://petiteanglaise.com/category/missing-blighty/">missing blighty</a></li> 
+          <li class="cat-item cat-item-7289"><a title="me me me me me" href="https://petiteanglaise.com/category/navel-gazing/">navel gazing</a></li> 
+          <li class="cat-item cat-item-4358"><a title="View all posts filed under on the road" href="https://petiteanglaise.com/category/on-the-road/">on the road</a></li> 
+          <li class="cat-item cat-item-2439939"><a title="View all posts filed under parting ways" href="https://petiteanglaise.com/category/parting-ways/">parting ways</a></li> 
+          <li class="cat-item cat-item-178503"><a title="View all posts filed under single life" href="https://petiteanglaise.com/category/single-life/">single life</a></li> 
+          <li class="cat-item cat-item-37959062"><a title="View all posts filed under Tadpole rearing" href="https://petiteanglaise.com/category/tadpole-rearing/">Tadpole rearing</a></li> 
+          <li class="cat-item cat-item-37959063"><a title="View all posts filed under Tadpole says" href="https://petiteanglaise.com/category/tadpole-says/">Tadpole says</a></li> 
+          <li class="cat-item cat-item-37959065"><a title="View all posts filed under Tadpole sings" href="https://petiteanglaise.com/category/tadpole-sings/">Tadpole sings</a></li> 
+          <li class="cat-item cat-item-1"><a title="View all posts filed under Uncategorized" href="https://petiteanglaise.com/category/uncategorized/">Uncategorized</a></li> 
+          <li class="cat-item cat-item-4612"><a title="View all posts filed under working girl" href="https://petiteanglaise.com/category/working-girl/">working girl</a></li> 
+         </ul> </li> 
+        <li id="text">stats 
+         <ul> 
+          <li>638 posts</li> 
+          <li>27,981 comments</li> 
+          <li><strong>©</strong> catherine sanderson 2004-2009</li> 
+         </ul> </li> 
+       </ul> 
+       <div style="clear:both;"></div> 
+      </div> </li> 
+    </ul> 
+   </div> 
+   <p class="credit"> <a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></p> 
+  </div> <!--  --> 
+  <div style="display:none"> 
+  </div> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="14262311"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://petiteanglaise.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="petite anglaise"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/2009/11/14/jack/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/petiteanglaise.com\/2009\/11\/14\/jack\/":1250};
+	</script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/_static/??/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css,/wp-content/mu-plugins/carousel/jetpack-carousel.css?m=1583834955j&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"14262311","siteName":"petite anglaise","siteURL":"https:\/\/petiteanglaise.com","icon":"<img alt='' src='https:\/\/petiteanglaise.files.wordpress.com\/2017\/07\/cropped-union-jack.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/classic","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2009%2F11%2F14%2Fjack%2F&signup_flow=account&domain=petiteanglaise.com","themeURL":"","xhrURL":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"fe4c42e1ec\" \/>","referer":"https:\/\/petiteanglaise.com\/2009\/11\/14\/jack\/","canFollow":"1","feedID":"269408","statusMessage":"","customizeLink":"https:\/\/petiteanglaise.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fpetiteanglaise.wordpress.com%2F2009%2F11%2F14%2Fjack%2F","postID":"1250","shortlink":"https:\/\/wp.me\/sXQhh-jack","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/petiteanglaise.com\/1250","statsLink":"https:\/\/wordpress.com\/stats\/post\/1250\/petiteanglaise.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: WordPress Classic","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 104 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2009%2F11%2F14%2Fjack%2F&signup_flow=account&domain=petiteanglaise.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/petiteanglaise.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2009%2F11%2F14%2Fjack%2F","blog_id":"14262311","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=14262311&v=wpcom&tz=2&user_id=0&subd=petiteanglaise","is_public":"1","reblog_enabled":""};
+</script> 
+  <script>
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJydUdFuwjAM/KGlUYfasYdp3xISl7mkSRY7Lfz9XNYCQghpe4ktn+/OsfWUlI2BIbDuSTsY0UI6Vj29aIEwWF8c0BlDYj1CcDHPUIr+1KH31YBhbV+Vki97DKS74r0iZFDgkDHs1S+i2029eWtf3/XORylGYlKS2sPigjD9XxNkSBZeCeziFBbh80v34L3LUNRqZJz8TO1M1oMhhiyZiiPkjPNCLrU/KnA2MsYzkmWMYSZdskfXoHRd+229/y6QT0uobrseeFmTYyHwugdOMpdaC08487FU5w1mTV8mywHWKKTP4aNutk3dNNu67X8ADungjw=="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'14262311','blog_tz':'2','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'14262311','v':'wpcom','tz':'2','user_id':'0','post':'1250','subd':'petiteanglaise'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlXzhxdW0vQ1hzcFE3aUFOUjg2Z2sxLXYlMXwsPVRFfjk1RkZUKz9jTHFvci9mNzJHb2NHVj15R1lHRXwzSCVCTlZaPTJxOHVjUjNmQXxhV1RRaTVhaUcrRTdGaENEcV9+UkM0a3FrYj1YLndBJnh1JnQlb2l3UFpvYS80QUtiWTkuXXc1NnN5RGtkNGpCY2IyfEh+S0loekkvbFBnMWJGJjRnRls0W1R1UWJ6P0ZVfDhHMltHOXx4dVRnZTJ5XU5UeDZTdyZVVWUueStkdU9UWFErdA=='}]);
+_stq.push([ 'clickTrackerInit', '14262311', '1250' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+ </body>
+</html>

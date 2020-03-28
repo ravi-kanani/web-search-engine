@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en-GB"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <link rel="pingback" href="https://indiecator.home.blog/xmlrpc.php"> 
+  <title>Indiecator – Dr. Pepper-loving Indie-fanatic reviews games and talks about other stuff</title> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9pbmRpZWNhdG9yLmhvbWUuYmxvZw%3D%3D"
+		+ "&wpcomid=164492097"
+		+ "&time=1585339423";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//indiecatorhome.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//wordpress.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.pubmine.com"> 
+  <link rel="dns-prefetch" href="//x.bidswitch.net"> 
+  <link rel="dns-prefetch" href="//static.criteo.net"> 
+  <link rel="dns-prefetch" href="//ib.adnxs.com"> 
+  <link rel="dns-prefetch" href="//aax.amazon-adsystem.com"> 
+  <link rel="dns-prefetch" href="//bidder.criteo.com"> 
+  <link rel="dns-prefetch" href="//cas.criteo.com"> 
+  <link rel="dns-prefetch" href="//gum.criteo.com"> 
+  <link rel="dns-prefetch" href="//ads.pubmatic.com"> 
+  <link rel="dns-prefetch" href="//gads.pubmatic.com"> 
+  <link rel="dns-prefetch" href="//tpc.googlesyndication.com"> 
+  <link rel="dns-prefetch" href="//ad.doubleclick.net"> 
+  <link rel="dns-prefetch" href="//googleads.g.doubleclick.net"> 
+  <link rel="dns-prefetch" href="//www.googletagservices.com"> 
+  <link rel="dns-prefetch" href="//cdn.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//delivery.g.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//delivery.swid.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//a.teads.tv"> 
+  <link rel="dns-prefetch" href="//prebid.media.net"> 
+  <link rel="dns-prefetch" href="//adserver-us.adtech.advertising.com"> 
+  <link rel="dns-prefetch" href="//fastlane.rubiconproject.com"> 
+  <link rel="dns-prefetch" href="//prebid-server.rubiconproject.com"> 
+  <link rel="dns-prefetch" href="//hb-api.omnitagjs.com"> 
+  <link rel="dns-prefetch" href="//mtrx.go.sonobi.com"> 
+  <link rel="dns-prefetch" href="//apex.go.sonobi.com"> 
+  <link rel="dns-prefetch" href="//u.openx.net"> 
+  <link rel="alternate" type="application/rss+xml" title="Indiecator » Feed" href="https://indiecator.home.blog/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Indiecator » Comments Feed" href="https://indiecator.home.blog/comments/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s0.wp.com/_static/??-eJylU9tywiAQ/aESGh0vfej0WyDZIsolwy6m/n0JqBNNTTv1hYHl3AZ2ed+xxjsCR9xG1pmotEPed423DK02cLo7VQ3iCx/RpPHqSrQiHIC0U0yKwBP0tjJP7n1oRYtcGS+FmWBH+Yw+API9UCeaA8unCfyCVTEdJQSVbgLwTbWpai6jNu3gnukyiHDiSCcDf5DJrJG7OPlITAXd/lciiOGB8Bf6ZzSGoSZg0Or8ouWGr5f1crNevHE4JnziRUet712xeVr1kpK0BaMdPC1YPt0j4Tlhq5H4UUP/ULTx5yerq8VrVbPckoVXLqoSKv/rE9FKKpN0x9Huq3OtOTRZqttO0ICwyUmAAZtgc7RetwoI88iUPSP4mqfksZSyC4DI0mp1tIx2yWs6DTcJ7ZCmjE02vKkUqubOk05svG4mmsWKd1FywCZSswPvHnTHyF+Bg1Ckf9wO3A/7Xq+2q3q12tbr/Tdd8LvA?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link crossorigin="anonymous" rel="stylesheet" id="escutcheon-fonts-css" href="https://fonts.googleapis.com/css?family=Oswald%3A400%2C300%2C700%7CAlegreya+Sans%3A400%2C400italic%2C700%2C700italic&amp;subset=latin%2Clatin-ext" media="all"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s0.wp.com/_static/??-eJyNjkuOAjEMRC9EsBCfEQvEWRJj0gEnjtoOEbefMKueTYtdlfyeVdCrQylGxcAmyqRQWwBSbIYTSYFUENTeTK5XlLxF1Q0srNxc5RZTUVDB5NllKm2ZV5UWFOdULclod2GWvsZP8qLZhRYCj6l/u9bwnm6RTIHauMozkWPfwShX9vbNg0jiWNB/9v0r7s4+zWvqTIEljhhhUIv6ka75sjsezofTcf9zevwCb8iSvg==?cssminify=yes" type="text/css" media="all"> 
+  <link rel="stylesheet" id="print-css-3-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-4-1" href="https://s1.wp.com/_static/??-eJyNjt2ugkAMhF/o9DSooF6cnGdZlmWpli2hJcS3d00g/iXGq84kM18H5wG8JAvJsJ9g4ClSUnTeSFLtxrv69ao/+BBfs+3EDEoWIDRklOJCwWpbbPfV5oiRpXY5YxcOimrOyGPNLp3foA8bBlGDlh2NqJ0bM3i9n1oqnvIvlijP5q1kXejznG637PtEnamJwRRzZNEQR2rApQaY1L7p1nmGAkErzDK/2Bvgv/8rykNZlOWhqE5X55eXnA==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJx9ztsKwyAMANAfWiqjWPYy9i21TSWixqmZ7O9nd3nZQyGQCychqiWguHhZsSjX4y6Yn980uHJSRwAC2TxXHALFH144Vox1t4ENeQQpmGfbZ/3Qxv8uCCQvlmJRRUxZMqVK3LuNved2wButFuv7q08JRkKCB+G+dQvXs9aXUU+THt0L/uVWUg=="></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://indiecatorhome.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="canonical" href="https://indiecator.home.blog/"> 
+  <link rel="shortlink" href="https://wp.me/Pb8bUl-4"> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Findiecator.home.blog%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Findiecator.home.blog%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Indiecator"> 
+  <meta property="og:description" content="Dr. Pepper-loving Indie-fanatic reviews games and talks about other stuff"> 
+  <meta property="og:url" content="https://indiecator.home.blog/"> 
+  <meta property="og:site_name" content="Indiecator"> 
+  <meta property="og:image" content="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png"> 
+  <meta property="og:image:width" content="500"> 
+  <meta property="og:image:height" content="515"> 
+  <meta property="og:locale" content="en_GB"> 
+  <meta name="twitter:creator" content="@That_Indiecator"> 
+  <meta name="twitter:site" content="@That_Indiecator"> 
+  <meta name="twitter:text:title" content="The Indiecator"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://indiecator.home.blog/osd.xml" title="Indiecator"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <meta name="theme-color" content="#413e4a"> 
+  <meta name="application-name" content="Indiecator">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="Dr. Pepper-loving Indie-fanatic reviews games and talks about other stuff">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://indiecator.home.blog/feed/;icon-uri=https://indiecatorhome.files.wordpress.com/2019/07/necromancer.png?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Hello there!Welcome to my blog. My name's Dan and I'm a soon-to-be-teacher from Germany who enjoys video games and writing and thought he'd combine that into this small side-project, called Indiecator. I mainly post review (Indietail) on here but also other types of content, like stuff about my life outside of the bloggosphere (The Stray…"> 
+  <style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #413e4a; }
+</style> 
+  <script type="text/javascript">
+
+			window.doNotSellCallback = function( $ ) {
+
+				var linkElements = [
+					'a[href="https://wordpress.com/?ref=footer_blog"]',
+					'a[href="https://wordpress.com/?ref=footer_website"]',
+					'a[href="https://wordpress.com/?ref=vertical_footer"]',
+					'a[href^="https://wordpress.com/?ref=footer_segment_"]',
+				].join(',');
+
+				var dnsLink = $( '<a href="https://wordpress.com/advertising-program-optout" rel="nofollow" style="margin-left: 0.5em;">Do Not Sell My Personal Information</a>' );
+				var creditLinks = $( linkElements );
+
+				if ( 0 === creditLinks.length ) {
+					return false;
+				}
+
+				creditLinks.after(dnsLink);
+				return true;
+			};
+		</script> 
+  <script type="text/javascript">
+		function __ATA_CC() {var v = document.cookie.match('(^|;) ?personalized-ads-consent=([^;]*)(;|$)');return v ? 1 : 0;}
+		var __ATA_PP = { pt: 0, ht: 0, tn: 'escutcheon', amp: false, siteid: 8982, blogid: 164492097, consent: __ATA_CC() };
+		var __ATA = __ATA || {};
+		__ATA.cmd = __ATA.cmd || [];
+		__ATA.criteo = __ATA.criteo || {};
+		__ATA.criteo.cmd = __ATA.criteo.cmd || [];
+		</script> 
+  <script type="text/javascript">
+		(function(){var g=Date.now||function(){return+new Date};function h(a,b){a:{for(var c=a.length,d="string"==typeof a?a.split(""):a,e=0;e<c;e++)if(e in d&&b.call(void 0,d[e],e,a)){b=e;break a}b=-1}return 0>b?null:"string"==typeof a?a.charAt(b):a[b]};function k(a,b,c){c=null!=c?"="+encodeURIComponent(String(c)):"";if(b+=c){c=a.indexOf("#");0>c&&(c=a.length);var d=a.indexOf("?");if(0>d||d>c){d=c;var e=""}else e=a.substring(d+1,c);a=[a.substr(0,d),e,a.substr(c)];c=a[1];a[1]=b?c?c+"&"+b:b:c;a=a[0]+(a[1]?"?"+a[1]:"")+a[2]}return a};var l=0;function m(a,b){var c=document.createElement("script");c.src=a;c.onload=function(){b&&b(void 0)};c.onerror=function(){b("error")};a=document.getElementsByTagName("head");var d;a&&0!==a.length?d=a[0]:d=document.documentElement;d.appendChild(c)}function n(a){var b=void 0===b?document.cookie:b;return(b=h(b.split("; "),function(c){return-1!=c.indexOf(a+"=")}))?b.split("=")[1]:""}function p(a){return"string"==typeof a&&0<a.length}
+		function r(a,b,c){b=void 0===b?"":b;c=void 0===c?".":c;var d=[];Object.keys(a).forEach(function(e){var f=a[e],q=typeof f;"object"==q&&null!=f||"function"==q?d.push(r(f,b+e+c)):null!==f&&void 0!==f&&(e=encodeURIComponent(b+e),d.push(e+"="+encodeURIComponent(f)))});return d.filter(p).join("&")}function t(a,b){a||((window.__ATA||{}).config=b.c,m(b.url))}var u=Math.floor(1E13*Math.random()),v=window.__ATA||{};window.__ATA=v;v.rid=u;v.createdAt=g();var w=window.__ATA||{},x="s.pubmine.com";
+		w&&w.serverDomain&&(x=w.serverDomain);var y="//"+x+"/conf",z=window.top===window,A=window.__ATA_PP&&window.__ATA_PP.gdpr_applies,B="boolean"===typeof A?Number(A):null,C=window.__ATA_PP||null,D=z?document.referrer?document.referrer:null:null,E=z?window.location.href:document.referrer?document.referrer:null,F,G=n("__ATA_tuuid");F=G?G:null;var H=window.innerWidth+"x"+window.innerHeight,I=n("usprivacy"),J=r({gdpr:B,pp:C,rid:u,src:D,ref:E,tuuid:F,vp:H,us_privacy:I?I:null},"",".");
+		(function(a){var b=void 0===b?"cb":b;l++;var c="callback__"+g().toString(36)+"_"+l.toString(36);a=k(a,b,c);window[c]=function(d){t(void 0,d)};m(a,function(d){d&&t(d)})})(y+"?"+J);}).call(this);
+		</script>
+  <style type="text/css" id="custom-colors-css">.highlander-dark #respond #comment-form-comment textarea,.highlander-dark #comment-form-share-text-padder textarea,#respond #comment-form-comment,#comment-form-share-text-padder,.highlander-dark #respond .comment-form-service,.highlander-dark #respond .comment-form-fields div.comment-form-input{text-shadow:none !important;box-shadow:none !important}.highlander-dark #respond #comment-form-comment,.highlander-dark #respond #comment-form-comment.active,.highlander-dark #comment-form-share-text-padder:active{border:4px solid}.highlander-dark #respond #comment-form-identity{border-top:0}.jetpack_widget_social_icons a:hover,.widget_wpcom_social_media_icons_widget a:hover{color:inherit}@media screen and (max-width:50em){.main-navigation ul ul{background-color:transparent !important}}.comment-navigation a:hover,.posts-navigation a:hover,.post-navigation a:hover,.comment-navigation a:hover:visited,.posts-navigation a:hover:visited,.post-navigation a:hover:visited,button:hover,input[type=button]:hover,input[type=reset]:hover,input[type=submit]:hover{color:#050505}#infinite-footer,#infinite-footer .container,button,input[type=button],input[type=reset],input[type=submit],.highlander-dark #respond #comment-form-comment textarea,.highlander-dark #comment-form-share-text-padder textarea,.highlander-dark #respond .comment-form-fields div.comment-form-input{color:#fff}body,button,input,select,textarea,.blog .entry-title a:hover,.archive .entry-title a:hover,.search .entry-title a:hover,h3.sd-title,.main-navigation a:hover,.main-navigation a:visited:hover,#infinite-handle span{color:#eee}.highlander-dark #respond label,.highlander-dark #respond .comment-form-service a,.highlander-dark #respond .comment-form-fields p.comment-form-posting-as,.highlander-dark #respond .comment-form-fields p.comment-form-log-out{color:#b5b5b5}.comment-navigation a,.posts-navigation a,.post-navigation a,.comment-navigation a:visited,.posts-navigation a:visited,.post-navigation a:visited{color:#b5b5b5}.entry-meta a,.entry-footer a,.entry-meta a:visited,.entry-footer a:visited,.entry-meta,.entry-footer,.main-navigation a,.main-navigation a:visited,.comments-area .comments-title,.comments-area .comment-meta a,.comments-area .comment-meta a:visited,.comments-area .comment-meta,.site-footer a,.site-footer a:visited,.page-title{color:#b5b5b5}input[type=text]:focus,input[type=email]:focus,input[type=url]:focus,input[type=password]:focus,input[type=search]:focus,textarea:focus{border-color:#aaa}input[type=text]:focus,input[type=email]:focus,input[type=url]:focus,input[type=password]:focus,input[type=search]:focus,textarea:focus,select,input[type=number]:focus,input[type=tel]:focus,input[type=range]:focus,input[type=date]:focus,input[type=month]:focus,input[type=week]:focus,input[type=time]:focus,input[type=datetime]:focus,input[type=datetime-local]:focus,input[type=color]:focus{color:#b5b5b5}#infinite-footer .blog-info a,#infinite-footer .blog-credits a,#infinite-footer .container .blog-info a,#infinite-footer .container .blog-credits a,#infinite-footer .blog-info a:hover,#infinite-footer .blog-credits a:hover,#infinite-footer .container .blog-info a:hover,#infinite-footer .container .blog-credits a:hover{color:#b5b5b5}body,button,input[type=text],input[type=email],input[type=url],input[type=password],input[type=search],select,textarea,#infinite-footer,#infinite-footer .container{background-color:#413e4a}.main-navigation ul ul,.single .entry-meta:before,.site-title:after,.comments-area:after,.comments-area:before,.site-footer:before,.page-header:after{background-color:#2f2d36}.main-navigation ul ul>li:first-of-type:before{border-bottom-color:#2f2d36}.highlander-dark #respond #comment-form-identity,.highlander-dark #respond #comment-form-comment,.highlander-dark #comment-form-share-text-padder,.highlander-dark #respond .comment-form-fields div.comment-form-input{background-color:#413e4a}blockquote,q,input[type=text],input[type=email],input[type=url],input[type=password],input[type=search],select,textarea,input[type=number],input[type=tel],input[type=range],input[type=date],input[type=month],input[type=week],input[type=time],input[type=datetime],input[type=datetime-local],input[type=color],.comments-area .comment-list>.parent,th,td{border-color:#2f2d36}input[type=text],input[type=email],input[type=url],input[type=password],input[type=search],textarea,input[type=number],input[type=tel],input[type=range],input[type=date],input[type=month],input[type=week],input[type=time],input[type=datetime],input[type=datetime-local],input[type=color]{color:#2f2d36}.highlander-dark #respond #comment-form-comment,.highlander-dark #respond #comment-form-comment.active,.highlander-dark #comment-form-share-text-padder:active,.highlander-dark #respond .comment-form-fields div.comment-form-input{border-color:#2f2d36}a,a:visited,a:hover,.comments-area .comment-reply-link,.comments-area .comment-reply-link:visited,.entry-meta a:hover,.entry-footer a:hover,.comments-area .comment-meta a:hover{color:#cdabc4}.jetpack-social-navigation a:hover,.site-title,.site-title a:hover,.site-title a:visited,.entry-title a,.entry-title a:visited,.entry-title{color:#a86b96}.comment-navigation a,.posts-navigation a,.post-navigation a,button,input[type=button],input[type=reset],input[type=submit],button:hover,input[type=button]:hover,input[type=reset]:hover,input[type=submit]:hover,button,input[type=button],input[type=reset],input[type=submit],button:focus,input[type=button]:focus,input[type=reset]:focus,input[type=submit]:focus,button,input[type=button],input[type=reset],input[type=submit],button:active,input[type=button]:active,input[type=reset]:active,input[type=submit]:active,#infinite-handle span,#infinite-handle span:hover{border-color:#a86b96}.comment-navigation a:hover,.posts-navigation a:hover,.post-navigation a:hover{background-color:#a86b96}.main-navigation a:after,.entry-title a:after,button:hover,input[type=button]:hover,input[type=reset]:hover,input[type=submit]:hover{background-color:#a86b96}</style> 
+  <link rel="icon" href="https://indiecatorhome.files.wordpress.com/2019/07/necromancer.png?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://indiecatorhome.files.wordpress.com/2019/07/necromancer.png?w=192" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://indiecatorhome.files.wordpress.com/2019/07/necromancer.png?w=180"> 
+  <meta name="msapplication-TileImage" content="https://indiecatorhome.files.wordpress.com/2019/07/necromancer.png?w=270"> 
+  <script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script> 
+  <script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script> 
+ </head> 
+ <body class="home page-template-default page page-id-4 custom-background customizer-styles-applied admin-bar highlander-enabled highlander-dark"> 
+  <div id="page" class="hfeed site"> <a class="skip-link screen-reader-text" href="#content">Skip to content</a> 
+   <header id="masthead" class="site-header" role="banner"> 
+    <div class="navigation-wrapper"> 
+     <nav class="jetpack-social-navigation jetpack-social-navigation-genericons" role="navigation" aria-label="Social Links Menu"> 
+      <div class="menu-primary-container">
+       <ul id="menu-primary" class="menu">
+        <li id="menu-item-517" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-517"><a href="https://indiecator.home.blog/2019/08/15/stray-sheep-11-social-media/"><span class="screen-reader-text">Social Media</span></a></li> 
+        <li id="menu-item-518" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-518"><a href="https://indiecator.home.blog/2019/07/15/introduction/"><span class="screen-reader-text">Who am I?</span></a></li> 
+       </ul>
+      </div> 
+     </nav><!-- .jetpack-social-navigation --> 
+     <nav id="site-navigation" class="main-navigation" role="navigation"> <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button> 
+      <div class="menu-categories-container">
+       <ul id="menu-categories" class="menu">
+        <li id="menu-item-479" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-479"><a href="https://indiecator.home.blog/category/indietail/">Indietail</a></li> 
+        <li id="menu-item-354" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-354"><a href="https://indiecator.home.blog/category/the-stray-sheep/">The Stray Sheep</a></li> 
+        <li id="menu-item-1209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1209"><a href="https://indiecator.home.blog/category/the-gaming-journal/">The Gaming Journal</a></li> 
+       </ul>
+      </div> 
+     </nav><!-- #site-navigation --> 
+    </div> 
+    <div class="site-branding"> <a href="https://indiecator.home.blog/" rel="home"> <img src="https://indiecatorhome.files.wordpress.com/2019/10/cropped-kristall.png" width="1080" height="607" alt="" class="custom-header"> </a> <a href="https://indiecator.home.blog/" class="site-logo-link" rel="home" itemprop="url"></a> 
+     <h1 class="site-title"><a href="https://indiecator.home.blog/" rel="home">Indiecator</a></h1> 
+     <h2 class="site-description">Dr. Pepper-loving Indie-fanatic reviews games and talks about other stuff</h2> 
+    </div><!-- .site-branding --> 
+   </header><!-- #masthead --> 
+   <div id="content" class="site-content"> 
+    <div id="primary" class="content-area"> 
+     <main id="main" class="site-main" role="main"> 
+      <article id="post-4" class="post-4 page type-page status-publish hentry"> 
+       <div class="entry-wrapper"> 
+        <header class="entry-header"> 
+         <h1 class="entry-title">The Indiecator</h1> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <div style="height:20px;" aria-hidden="true" class="wp-block-spacer"></div> 
+         <p>Hello there!<br><br>Welcome to my blog. My name’s Dan and I’m a soon-to-be-teacher from Germany who enjoys video games and writing and thought he’d combine that into this small side-project, called Indiecator. I mainly post review (Indietail) on here but also other types of content, like stuff about my life outside of the bloggosphere (The Stray Sheep) and my adventures in non-indie-games (The Gaming Journals). <br>Feel free to hang out over here and to take your time while exploring this project of mine. If you scroll down, you’ll also find my social media sides, so follow those or join the discord to get updates on my latest blog posts and other stuff. 🙂<br><br>Cheers!</p> 
+         <figure class="wp-block-image size-large">
+          <img data-attachment-id="670" data-permalink="https://indiecator.home.blog/blaugust2019-awards-newbie/" data-orig-file="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png" data-orig-size="500,527" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="blaugust2019-awards-newbie" data-image-description="" data-medium-file="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png?w=285" data-large-file="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png?w=500" src="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png?w=500" alt="" class="wp-image-670" srcset="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png 500w, https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png?w=142 142w, https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-newbie.png?w=285 285w" sizes="(max-width: 500px) 100vw, 500px">
+          <figcaption>
+           Winner of Blaugust 2019’s Newbie Award
+          </figcaption>
+         </figure> 
+         <figure class="wp-block-image size-large">
+          <img data-attachment-id="651" data-permalink="https://indiecator.home.blog/blaugust2019-awards-rainbow/" data-orig-file="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png" data-orig-size="500,515" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="blaugust2019-awards-rainbow" data-image-description="" data-medium-file="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png?w=291" data-large-file="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png?w=500" src="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png?w=500" alt="" class="wp-image-651" srcset="https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png 500w, https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png?w=146 146w, https://indiecatorhome.files.wordpress.com/2019/09/blaugust2019-awards-rainbow.png?w=291 291w" sizes="(max-width: 500px) 100vw, 500px">
+          <figcaption>
+           Winner of Blaugust 2019’s Rainbow Award for posting 31/31 times!
+          </figcaption>
+         </figure> 
+         <hr class="wp-block-separator is-style-wide"> 
+         <div class="wp-block-group">
+          <div class="wp-block-group__inner-container"> 
+           <h3 class="has-text-align-center">Social media!</h3> 
+           <div class="wp-block-group">
+            <div class="wp-block-group__inner-container"> 
+             <div class="wp-block-buttons alignleft"> 
+              <div class="wp-block-button">
+               <a class="wp-block-button__link no-border-radius" href="https://steamcommunity.com/groups/Indiecator#" title="" target="_blank" rel="noreferrer noopener">Steam </a>
+              </div> 
+              <div class="wp-block-button">
+               <a class="wp-block-button__link no-border-radius" href="https://twitter.com/MagiWasTaken" title="https://twitter.com/MagiWasTaken" target="_blank" rel="noreferrer noopener">Twitter </a>
+              </div> 
+              <div class="wp-block-button">
+               <a class="wp-block-button__link no-border-radius" href="https://www.facebook.com/thatindiecator" title="" target="_blank" rel="noreferrer noopener">Facebook</a>
+              </div> 
+              <div class="wp-block-button">
+               <a class="wp-block-button__link no-border-radius" href="https://www.tumblr.com/blog/thatindiecator" title="">Tumblr</a>
+              </div> 
+              <div class="wp-block-button is-style-fill">
+               <a class="wp-block-button__link no-border-radius" href="dan.indiecator@gmail.com" title="dan.indiecator@gmail.com" target="_blank" rel="noreferrer noopener">E-Mail</a>
+              </div> 
+              <div class="wp-block-button aligncenter is-style-fill">
+               <a class="wp-block-button__link no-border-radius" href="https://twitch.tv/magiwastaken" title="https://twitch.tv/magiwastaken" target="_blank" rel="noreferrer noopener">Twitch</a>
+              </div> 
+             </div> 
+            </div>
+           </div> 
+          </div>
+         </div> 
+         <div class="wp-block-newspack-blocks-homepage-articles  wpnbha show-image image-aligntop ts-4 is-3 " style=""> 
+          <div data-posts> 
+           <article data-post-id="1342"> 
+            <div class="entry-wrapper"> 
+             <h2 class="entry-title"><a href="https://indiecator.home.blog/2020/03/21/tss45-the-coronapocolypse/" rel="bookmark">TSS#45 – The Coronapocolypse?</a></h2> 
+             <p>Today’s Stray Sheep is about my current Covid-19-situation. How are things going for me? How am I holding up over here? What’s the situation in Germany? Note: Today’s post is accompanied by Screenshots from MHW and uhm… yes, I’m behind on posts. I’m working on it. If you know the game, you may notice that […]</p> 
+             <div class="entry-meta"> <span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://indiecator.home.blog/author/MagiWasTaken/">MagiWasTaken</a></span> </span><!-- .author-name --> <time class="entry-date published updated" datetime="2020-03-21T08:55:08+01:00">Mar 21, 2020</time> 
+             </div><!-- .entry-meta --> 
+            </div><!-- .entry-wrapper --> 
+           </article> 
+           <article data-post-id="1338"> 
+            <div class="entry-wrapper"> 
+             <h2 class="entry-title"><a href="https://indiecator.home.blog/2020/03/20/tss44-heros-in-these-times/" rel="bookmark">TSS#44 – Heros in these&nbsp;times</a></h2> 
+             <p>Today’s Stray Sheep is different… in these quite different times. There are people out there that don’t realise how great and important it is that they are doing what they are doing. And I’d like to thank them and praise them or rather sing hymns about them (semi-ironically)… but I shouldn’t sing as I really […]</p> 
+             <div class="entry-meta"> <span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://indiecator.home.blog/author/MagiWasTaken/">MagiWasTaken</a></span> </span><!-- .author-name --> <time class="entry-date published updated" datetime="2020-03-20T12:29:15+01:00">Mar 20, 2020</time> 
+             </div><!-- .entry-meta --> 
+            </div><!-- .entry-wrapper --> 
+           </article> 
+           <article data-post-id="1334"> 
+            <div class="entry-wrapper"> 
+             <h2 class="entry-title"><a href="https://indiecator.home.blog/2020/03/12/monhunlog-2-three-elders-to-go-please/" rel="bookmark">The MonHunLog #2 – Three more Elders To-Go,&nbsp;please</a></h2> 
+             <p>It’s been a while since I posted about the adventures in the New World but uh, I don’t have a reason why I didn’t post sooner. Mostly procrastination, I guess. Either way, last time we were hunting down the vicious Nergigante, as well as some other threats to the eco-system. However, the troubles didn’t end […]</p> 
+             <div class="entry-meta"> <span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://indiecator.home.blog/author/MagiWasTaken/">MagiWasTaken</a></span> </span><!-- .author-name --> <time class="entry-date published updated" datetime="2020-03-12T07:36:10+01:00">Mar 12, 2020</time> 
+             </div><!-- .entry-meta --> 
+            </div><!-- .entry-wrapper --> 
+           </article> 
+          </div> 
+         </div> 
+         <p></p> 
+         <p></p> 
+         <div id="jp-post-flair" class="sharedaddy sharedaddy-dark sd-like-enabled sd-sharing-enabled">
+          <div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-164492097-4-5e7e5c1fb6dd9" data-src="//widgets.wp.com/likes/index.html?ver=20190321#blog_id=164492097&amp;post_id=4&amp;origin=indiecatorhome.wordpress.com&amp;obj_id=164492097-4-5e7e5c1fb6dd9&amp;domain=indiecator.home.blog" data-name="like-post-frame-164492097-4-5e7e5c1fb6dd9">
+           <h3 class="sd-title">Like this:</h3>
+           <div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;">
+            <span class="button"><span>Like</span></span> <span class="loading">Loading...</span>
+           </div><span class="sd-text-color"></span><a class="sd-link-color"></a>
+          </div>
+         </div> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> 
+        </footer><!-- .entry-footer --> 
+       </div> 
+       <div class="sidebar"> 
+        <div id="secondary" class="widget-area" role="complementary"> 
+         <aside id="archives-3" class="widget widget_archive">
+          <h1 class="widget-title">All posts</h1> 
+          <ul> 
+           <li><a href="https://indiecator.home.blog/2020/03/">Mar 2020</a>&nbsp;(4)</li> 
+           <li><a href="https://indiecator.home.blog/2020/02/">Feb 2020</a>&nbsp;(9)</li> 
+           <li><a href="https://indiecator.home.blog/2020/01/">Jan 2020</a>&nbsp;(5)</li> 
+           <li><a href="https://indiecator.home.blog/2019/12/">Dec 2019</a>&nbsp;(3)</li> 
+           <li><a href="https://indiecator.home.blog/2019/11/">Nov 2019</a>&nbsp;(8)</li> 
+           <li><a href="https://indiecator.home.blog/2019/10/">Oct 2019</a>&nbsp;(10)</li> 
+           <li><a href="https://indiecator.home.blog/2019/09/">Sep 2019</a>&nbsp;(14)</li> 
+           <li><a href="https://indiecator.home.blog/2019/08/">Aug 2019</a>&nbsp;(31)</li> 
+           <li><a href="https://indiecator.home.blog/2019/07/">Jul 2019</a>&nbsp;(5)</li> 
+          </ul> 
+         </aside>
+         <aside id="jp_blogs_i_follow-3" class="widget widget_jp_blogs_i_follow">
+          <h1 class="widget-title">Awesome people!</h1>
+          <ul>
+           <li><a href="http://kevinhurtack.wordpress.com" class="bump-view" data-bump-view="bif">Gun Smoke &amp; Ghouls</a></li>
+           <li><a href="http://www.timetoloot.com/" class="bump-view" data-bump-view="bif">Time to Loot</a></li>
+           <li><a href="http://gameswithcoffee.com" class="bump-view" data-bump-view="bif">Games With Coffee</a></li>
+           <li><a href="http://evepics.wordpress.com" class="bump-view" data-bump-view="bif">EVE Online Pictures</a></li>
+           <li><a href="http://www.narratess.com/" class="bump-view" data-bump-view="bif">Narratess</a></li>
+           <li><a href="http://vidchord.com" class="bump-view" data-bump-view="bif">VidChord</a></li>
+           <li><a href="http://gamergirlconfessions.com/" class="bump-view" data-bump-view="bif">Gamer Girl Confessions</a></li>
+           <li><a href="http://thegamingdiaries.wordpress.com" class="bump-view" data-bump-view="bif">The Gaming Diaries</a></li>
+           <li><a href="http://lukaetoile.wordpress.com" class="bump-view" data-bump-view="bif">Étoile Des Avis</a></li>
+           <li><a href="http://jeffbrutlag.com" class="bump-view" data-bump-view="bif">Jeff Brutlag</a></li>
+           <li><a href="http://quietschisto.com/" class="bump-view" data-bump-view="bif">RNG</a></li>
+           <li><a href="http://www.containsmoderateperil.com/blog/" class="bump-view" data-bump-view="bif">Blog - Contains Moderate Peril</a></li>
+           <li><a href="http://www.containsmoderateperil.com/" class="bump-view" data-bump-view="bif">www.containsmoderateperil.com</a></li>
+           <li><a href="http://frostilyte.wordpress.com" class="bump-view" data-bump-view="bif">Frostilyte Writes</a></li>
+           <li><a href="http://aggronaut.com/" class="bump-view" data-bump-view="bif">Tales of the Aggronaut</a></li>
+           <li><a href="http://thewellredmage.com/" class="bump-view" data-bump-view="bif">The Well-Red Mage</a></li>
+           <li><a href="http://unidentifiedsignalsource.wordpress.com" class="bump-view" data-bump-view="bif">Unidentified Signal Source</a></li>
+           <li><a href="http://monsterladysdiary.wordpress.com" class="bump-view" data-bump-view="bif">Monsterlady's Diary</a></li>
+           <li><a href="http://ithlinnemagi.wordpress.com" class="bump-view" data-bump-view="bif">The Filthy Casual</a></li>
+           <li><a href="http://backlogcrusader.com" class="bump-view" data-bump-view="bif">Backlog Crusader</a></li>
+          </ul>
+         </aside>
+         <aside id="text-3" class="widget widget_text">
+          <h1 class="widget-title">About Me</h1> 
+          <div class="textwidget">
+           <p>Heya!<br> Nice to meet you!<br> I’m Dan, a 20yo student from Germany and freetime-blogger.</p> 
+           <p>Contact me via:<br> dan.indiecator@gmail.com</p> 
+           <p>If you’re more casual about it, dm me:&nbsp; <a href="https://twitter.com/That_Indiecator">@That_Indiecator</a>!</p> 
+          </div> 
+         </aside>
+        </div><!-- #secondary --> 
+       </div><!-- .sidebar --> 
+      </article><!-- #post-## --> 
+     </main><!-- #main --> 
+    </div><!-- #primary --> 
+   </div><!-- #content --> 
+   <footer id="colophon" class="site-footer" role="contentinfo"> 
+    <div class="site-info"> <a href="https://wordpress.com/?ref=footer_segment_blog" rel="nofollow">Blog at WordPress.com.</a> 
+    </div><!-- .site-info --> 
+   </footer><!-- #colophon --> 
+  </div><!-- #page --> <!--  --> 
+  <div id="wpcom-follow-bubbles-jp_blogs_i_follow-3" class="wpcom-follow-bubbles">
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-1" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://kevinhurtack.wordpress.com" class="bump-view" data-bump-view="bif">Gun Smoke &amp; Ghouls</a>
+     <p><small>THE WEIRD &amp; MACABRE WORLD OF ARTIST/ILLUSTRATOR/AUTHOR KEVIN HURTACK</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-2" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://www.timetoloot.com/" class="bump-view" data-bump-view="bif">Time to Loot</a>
+     <p><small>Finding fun in loot and adventure</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-3" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://gameswithcoffee.com" class="bump-view" data-bump-view="bif">Games With Coffee</a>
+     <p><small>The Blog for the Mature, Distinguished Gamer</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-4" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://evepics.wordpress.com" class="bump-view" data-bump-view="bif">EVE Online Pictures</a>
+     <p><small>Internet spaceships in their natural environment</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-5" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://www.narratess.com/" class="bump-view" data-bump-view="bif">Narratess</a>
+     <p><small>Because stories are everywhere</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-6" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://vidchord.com" class="bump-view" data-bump-view="bif">VidChord</a>
+     <p></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-7" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://gamergirlconfessions.com/" class="bump-view" data-bump-view="bif">Gamer Girl Confessions</a>
+     <p><small>Where games and geekdom unite.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-8" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://thegamingdiaries.wordpress.com" class="bump-view" data-bump-view="bif">The Gaming Diaries</a>
+     <p><small>The adventures of a life in games and my real geeky life when it takes over.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-9" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://lukaetoile.wordpress.com" class="bump-view" data-bump-view="bif">Étoile Des Avis</a>
+     <p><small>Just the inane ramblings of someone that cares a little bit too much about video games of all shapes and sizes.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-10" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://jeffbrutlag.com" class="bump-view" data-bump-view="bif">Jeff Brutlag</a>
+     <p><small>Full-time Storyteller, Lifetime Geek</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-11" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://quietschisto.com/" class="bump-view" data-bump-view="bif">RNG</a>
+     <p><small>Reviews, Narrative, Game-Design</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-12" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://www.containsmoderateperil.com/blog/" class="bump-view" data-bump-view="bif">Blog - Contains Moderate Peril</a>
+     <p><small>Dr. Pepper-loving Indie-fanatic reviews games and talks about other stuff</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-13" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://www.containsmoderateperil.com/" class="bump-view" data-bump-view="bif">www.containsmoderateperil.com</a>
+     <p></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-14" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://frostilyte.wordpress.com" class="bump-view" data-bump-view="bif">Frostilyte Writes</a>
+     <p><small>And also doodles</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-15" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://aggronaut.com/" class="bump-view" data-bump-view="bif">Tales of the Aggronaut</a>
+     <p><small>Life and times of Belghast: Blogger, Podcaster, Tank, MMO Gamer, Husband, Cat and Ferret Tender, etc</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-16" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://thewellredmage.com/" class="bump-view" data-bump-view="bif">The Well-Red Mage</a>
+     <p><small>A Paradigm Shift for Games Writing</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-17" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://unidentifiedsignalsource.wordpress.com" class="bump-view" data-bump-view="bif">Unidentified Signal Source</a>
+     <p><small>A blog about life, gaming, and everything.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-18" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://monsterladysdiary.wordpress.com" class="bump-view" data-bump-view="bif">Monsterlady's Diary</a>
+     <p><small>Here to unleash my imagination</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-19" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://ithlinnemagi.wordpress.com" class="bump-view" data-bump-view="bif">The Filthy Casual</a>
+     <p><small>sometimes salty. Sometimes sweet. Always sweary</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-20" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://backlogcrusader.com" class="bump-view" data-bump-view="bif">Backlog Crusader</a>
+     <p><small>Comprehensive player reviews, video game backlog slaying, and thoughts on video game culture.</small></p>
+    </div>
+   </div>
+  </div>
+  <div id="wpadminbar" class="marketing-bar">
+   <div class="marketing-bar-text">
+    Create your website at WordPress.com
+   </div><a class="marketing-bar-button" href="https://en-gb.wordpress.com/?ref=marketing_bar">Get started</a>
+  </div>
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+   <div class="grofile-hash-map-3a0263a887c8e3d09fe68dd81dc06838"> 
+   </div> 
+  </div> <!-- CCPA [start] --> 
+  <script type="text/javascript">
+				( function () {
+
+					var setupPrivacy = function() {
+
+						var $ = window.jQuery;
+						if ( ! $ ) return; // jQuery required
+
+						$( document ).ready( function() {
+
+							// Minimal Mozilla Cookie library
+							// https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+							var cookieLib = {getItem:function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},setItem:function(e,o,n,t,r,i){if(!e||/^(?:expires|max\-age|path|domain|secure)$/i.test(e))return!1;var c="";if(n)switch(n.constructor){case Number:c=n===1/0?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+n;break;case String:c="; expires="+n;break;case Date:c="; expires="+n.toUTCString()}return"rootDomain"!==r&&".rootDomain"!==r||(r=(".rootDomain"===r?".":"")+document.location.hostname.split(".").slice(-2).join(".")),document.cookie=encodeURIComponent(e)+"="+encodeURIComponent(o)+c+(r?"; domain="+r:"")+(t?"; path="+t:"")+(i?"; secure":""),!0}};
+
+							var setDefaultOptInCookie = function() {
+								var value = '1YNN';
+								cookieLib.setItem( 'usprivacy', value, 365 * 24 * 60 * 60, '/', '.rootDomain' );
+							};
+
+							var setCcpaAppliesCookie = function( value ) {
+								cookieLib.setItem( 'ccpa_applies', value, 24 * 60 * 60, '/', '.rootDomain' );
+							}
+
+							var maybeCallDoNotSellCallback = function() {
+								if ( 'function' === typeof window.doNotSellCallback ) {
+									return window.doNotSellCallback( $ );
+								}
+
+								return false;
+							}
+
+							var usprivacyCookie = cookieLib.getItem( 'usprivacy' );
+
+							if ( null !== usprivacyCookie ) {
+								maybeCallDoNotSellCallback();
+								return;
+							}
+
+							var ccpaCookie = cookieLib.getItem( 'ccpa_applies' );
+
+							if ( null === ccpaCookie ) {
+								$.ajax({
+									type: 'GET',
+									dataType: "json",
+									cache: false,
+									url: 'https://public-api.wordpress.com/geo/',
+									success: function( data ) {
+										var ccpa_applies = data['region'] && data['region'].toLowerCase() === 'california';
+
+										setCcpaAppliesCookie( ccpa_applies );
+
+										if ( ccpa_applies ) {
+											if ( maybeCallDoNotSellCallback() ) {
+												setDefaultOptInCookie();
+											}
+										}
+									},
+									error: function() {
+										setCcpaAppliesCookie( true );
+										if ( maybeCallDoNotSellCallback() ) {
+											setDefaultOptInCookie();
+										}
+									},
+								} );
+							} else {
+								if ( ccpaCookie === 'true' ) {
+									if ( maybeCallDoNotSellCallback() ) {
+										setDefaultOptInCookie();
+									}
+								}
+							}
+						} );
+					};
+
+					if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+						defQueue.items.push( setupPrivacy );
+					} else {
+						setupPrivacy();
+					}
+
+				} )();
+			</script> <!-- CCPA [end] --> 
+  <script type="text/javascript">
+			( function( $ ) {
+				$( document.body ).on( 'post-load', function () {
+					if ( typeof __ATA.insertInlineAds === 'function' ) {
+						__ATA.insertInlineAds();
+					}
+				} );
+			} )( jQuery );
+			</script> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="164492097"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://indiecator.home.blog"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="Indiecator"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <div class="widget widget_eu_cookie_law_widget">
+   <div class="hide-on-button ads-active" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law"> 
+    <form method="post"> 
+     <input type="submit" value="Close and accept" class="accept"> Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+     <br> To find out more, including how to control cookies, see here: <a href="https://automattic.com/cookies"> Cookie Policy </a> 
+    </form> 
+   </div> 
+  </div>
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/_static/??/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css,/wp-content/mu-plugins/carousel/jetpack-carousel.css?m=1583834955j&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var comment_like_text = {"loading":"Loading..."};
+</script> 
+  <script>
+var actionbardata = {"siteID":"164492097","siteName":"Indiecator","siteURL":"https:\/\/indiecator.home.blog","icon":"<img alt='' src='https:\/\/indiecatorhome.files.wordpress.com\/2019\/07\/necromancer.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/escutcheon","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Findiecator.home.blog%2F&signup_flow=account&domain=indiecator.home.blog","themeURL":"https:\/\/wordpress.com\/theme\/escutcheon\/","xhrURL":"https:\/\/indiecator.home.blog\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"c53ab81ea5\" \/>","referer":"https:\/\/indiecator.home.blog\/","canFollow":"1","feedID":"98048216","statusMessage":"","customizeLink":"https:\/\/indiecatorhome.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Findiecatorhome.wordpress.com%2F","postID":"4","shortlink":"https:\/\/wp.me\/Pb8bUl-4","canEditPost":"","editLink":"https:\/\/wordpress.com\/page\/indiecator.home.blog\/4","statsLink":"https:\/\/wordpress.com\/stats\/post\/4\/indiecator.home.blog","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customise","report":"Report this content","themeInfo":"Get theme: Escutcheon","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 140 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Findiecator.home.blog%2F&signup_flow=account&domain=indiecator.home.blog\">Log in now.<\/a>","stats":"Statistics"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/indiecator.home.blog\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/indiecatorhome.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Findiecator.home.blog%2F","blog_id":"164492097","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=164492097&v=wpcom&tz=1&user_id=0&subd=indiecatorhome","is_public":"1","reblog_enabled":""};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJydU9F2gyAM/aFRjtux6x529i2I0UYRGAFd9/WDTjurnm7di4YbbpJLEj5YJo32oD1viJfQowT7sWvogV+7rCHfAZGoYcPbvAdwp/G3Q90jDL9ea8BbIVvmgPBzFbULzKpQoyausAXikRTgKHSpwE2XUUsVyuhMxSN53oMujUsua9SpQqV2Hepl7ClwFZRihB4YlOhR12NKvn/Knp73jy+8UCaCUTuxaMp2zLIhb1avNF0XIfZdd5MEFJwGtLdErkhXwP8VQJ+CSBO0L82gRxnnLy2dyyz+CLHn3IaCA8ng5RGM5oII/LlELXqshUdzN5NatFGZblllZCBW4WroZm8zYFknYuoGMYwcpcywOP6BDyF6TYvAlBi4h84q4WGB34gjyjhMrBCOd4I8uGgx04NzmGbwgt0Zwbu4BasOz0kyPXEiXaytBSD7M+lz/Hrr5re2xlA4EwgUn7ZzAiLnrXvN8kOe5fkh2zdfdr+V+A=="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script> <iframe src="https://widgets.wp.com/likes/master.html?ver=20190321#ver=20190321&amp;lang=en-gb" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe> 
+  <div id="likes-other-gravatars">
+   <div class="likes-text">
+    <span>%d</span> bloggers like this:
+   </div>
+   <ul class="wpl-avatars sd-like-gravatars"></ul>
+  </div> 
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'164492097','blog_tz':'1','user_lang':'en-gb','blog_lang':'en-gb','user_id':'0'}]);
+_stq.push(['view', {'blog':'164492097','v':'wpcom','tz':'1','user_id':'0','post':'4','subd':'indiecatorhome'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRPUJGYUFhNUdZYm9nLyt5TkFwbm9FSFA5YW8zcW10MFhnRjJ5cyZKXWx4eHp2aGFzRjRQVSY/Y2lfVS1NTlpEbGxNVi1YL35jW3M2M1RpZ3ZmTEJvW2dibnZaME1HWjZMdHRSOGY/RXZ0TGk1cTlBTWZaUy4wMUs4bjVdSG4wPWdUVl1EP2J+SV8va05Ga1prVS1yZ3JlS0UuT1t8Vi9pLUpyOFBjOEdddlVwSEZLWVBXUXFdfiZTMHY3eSw2NT1vNml0MkF6PUsxeSZKW1JdS2slcXVdP1p2WFJ6ZSVlfnQ='}]);
+_stq.push([ 'clickTrackerInit', '164492097', '4' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>  <!--
+	generated in 0.192 seconds
+	66161 bytes batcached for 300 seconds
+-->
+ </body>
+</html>

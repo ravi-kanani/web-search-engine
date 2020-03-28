@@ -1,0 +1,1010 @@
+<!doctype html>
+<html dir="ltr" lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="robots" content="noodp"> 
+  <link rel="pingback" href="https://automattic.com/xmlrpc.php"> 
+  <meta name="google-site-verification" content="LsUOC70Kd1OVRa84YXSdDMeWfa_tu9k9Cyi9HUFlR60"> 
+  <link rel="start" href="https://automattic.com/" title="Automattic"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" href="https://use.typekit.net/fti4bum.css"> 
+  <script type="text/javascript">
+		(function(doc) {
+			var addEvent = 'addEventListener',
+			    type = 'gesturestart',
+			    qsa = 'querySelectorAll',
+			    scales = [1, 1],
+			    meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+			function fix() {
+				meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+				doc.removeEventListener(type, fix, true);
+			}
+			if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+				fix();
+				scales = [.25, 1.6];
+				doc[addEvent](type, fix, true);
+			}
+		}(document));
+		</script> 
+  <title>Cookie Policy – Automattic</title> 
+  <meta name="google-site-verification" content="XECAgs1qhOf9tfH5snpZFPxF4nDR6Jmy58IraJfFVo0"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9hdXRvbWF0dGljLmNvbQ%3D%3D"
+		+ "&wpcomid=54117"
+		+ "&time=1585339380";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//automattic.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wordpress.com"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s0.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s0.wp.com/_static/??-eJylU+12wiAMfaFRRFd1P3b2LNBGxPHRA8HOt1+wdbp57HbWP5wk5N5cEsIN9wFNE3z6MqompSfed4wcBI+8s1kbStCZXAVR000Evqk2leAqG9tyZUPzzqxRUcYTT3iy8AeaMyrxA2AnC1yeQkamo2n/SxElGq/TL/BdtpYlg8CgNQXAhhu+XonVZr184XCkfMJlj23o/VBmNutFJRoH1niYTUiyKBgSplFhaxLyo4H+IWkTxpaJarmoBOu7JrgBN1xUg6jzXGdIG1RZ4r2V9jN6V8BldlUageKuk1gyHFWSYMFR2hSsN60GJHi62AzhYxpSesCU6iKkxOh0JjuGe6p1vw1DmMttw2XG4CTS2rDlQogH47wppCEwejZ90uC/OWxnpYlT0Ahl2GTq88uu7hRINoVcyXi1ZoxU26Ak5ZRXlhUj5Q19Gunvxzg2af88gkrCm3sV9bYWdb0V68MnIROnbQ==?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJx9jtEKwjAMRX/ILtbRsRfxW7qazZalnUvK8O+N4HwQEQL3ISfnBrbFxBzmekWGpHOvuD7e0SQ+wD/AUJxWL9hQzDscShbM8mKXwkLI7Cf8saUyxBlNZVwVyKI1Y/nm5IZqAN8H8FUKeZEYzOloLXy+Ej+op4z7EavkQmfrXN+6rnNtegL5jVQW"></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://automattic.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s0.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="shortlink" href="https://wp.me/Pe4R-TPO"> 
+  <style>
+		@font-face {
+			font-family: Recoleta;
+			src: url('https://s1.wp.com/i/fonts/recoleta/400.woff2')
+		}
+	</style> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fautomattic.com%2Fcookies%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fautomattic.com%2Fcookies%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="Cookie Policy"> 
+  <meta property="og:url" content="https://automattic.com/cookies/"> 
+  <meta property="og:description" content="Our Privacy Policy explains our principles when it comes to the collection, processing, and storage of your information. This policy specifically explains how we, our partners, and users of our ser…"> 
+  <meta property="article:published_time" content="2018-05-10T16:47:29+00:00"> 
+  <meta property="article:modified_time" content="2019-11-12T22:26:41+00:00"> 
+  <meta property="og:site_name" content="Automattic"> 
+  <meta property="og:image" content="https://secure.gravatar.com/blavatar/0d6c430459af115394a012d20b6711d6?s=200&amp;ts=1585339380"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="200"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:creator" content="@automattic"> 
+  <meta name="twitter:site" content="@automattic"> 
+  <meta name="twitter:text:title" content="Cookie Policy"> 
+  <meta name="twitter:image" content="https://secure.gravatar.com/blavatar/0d6c430459af115394a012d20b6711d6?s=240"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> 
+  <meta name="twitter:app:name:iphone" content="WordPress"> 
+  <meta name="twitter:app:id:iphone" content="335703880"> 
+  <meta name="twitter:app:name:ipad" content="WordPress"> 
+  <meta name="twitter:app:id:ipad" content="335703880"> 
+  <meta name="twitter:app:name:googleplay" content="WordPress"> 
+  <meta name="twitter:app:id:googleplay" content="org.wordpress.android"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/0d6c430459af115394a012d20b6711d6?s=32" sizes="16x16"> 
+  <link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/0d6c430459af115394a012d20b6711d6?s=32" sizes="16x16"> 
+  <link rel="apple-touch-icon" href="https://secure.gravatar.com/blavatar/0d6c430459af115394a012d20b6711d6?s=114"> 
+  <link rel="openid.server" href="https://automattic.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://automattic.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://automattic.com/osd.xml" title="Automattic"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <link rel="canonical" href="https://automattic.com/cookies/"> 
+  <meta name="application-name" content="Automattic">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="Making the web a better place">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://automattic.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/0d6c430459af115394a012d20b6711d6?s=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s0.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s0.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s0.wp.com/i/favicon.ico"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s0.wp.com/?custom-css=1&amp;csblog=e4R&amp;cscache=6&amp;csrev=34"> 
+ </head> 
+ <body class="page-template page-template-page-templates page-template-table-of-contents page-template-page-templatestable-of-contents-php page page-id-214632 customizer-styles-applied highlander-enabled highlander-light"> 
+  <div id="wrapper"> 
+   <div class="header"> 
+    <h1 class="logo"><a href="/">Automattic</a></h1> 
+    <ol class="menu"> 
+     <li class="page-item page-item-home "><a href="/">Home</a></li> 
+     <li class="page-item page-item-about "><a href="/about/">About Us</a></li> 
+     <li class="page-item page-item-news "><a href="/news/">News</a></li> 
+     <li class="page-item page-item-jobs "><a href="/work-with-us/">Work With Us</a></li> 
+    </ol> 
+   </div> 
+   <div id="container"> 
+    <div id="content" class="tier"> 
+     <h2>Cookie Policy</h2> 
+     <div class="tertiary"> 
+      <div class="toc-wrapper"> 
+       <h3 class="table-of-contents--title">Sections</h3> 
+       <ul class="table-of-contents">
+        <li><a href="#what-are-cookies">What are cookies?</a></li>
+        <li><a href="#how-we-use-cookies">How we use cookies</a></li>
+        <li><a href="#where-we-place-cookies">Where we place cookies</a></li>
+        <li><a href="#types-of-cookie">Types of Cookie</a></li>
+        <li><a href="#user-sites">User Sites</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a class="toc-h4" href="#advertising">Advertising</a></li>
+        <li><a class="toc-h4" href="#analytics-and-performance">Analytics and Performance</a></li>
+        <li><a class="toc-h4" href="#functionality">Functionality</a></li>
+        <li><a class="toc-h4" href="#security">Security</a></li>
+        <li><a class="toc-h4" href="#strictly-necessary">Strictly Necessary</a></li>
+        <li><a class="toc-h4" href="#advertisements-from-third-parties-through-automattice28099s-ads-program">Advertisements from Third Parties Through Automattic’s Ads Program</a></li>
+        <li><a href="#visitors-to-sites-with-jetpack-installed">Visitors to Sites with Jetpack installed</a></li>
+        <li><a class="toc-h4" href="#jetpack-comments">Jetpack Comments</a></li>
+        <li><a class="toc-h4" href="#mobile-theme">Mobile Theme</a></li>
+        <li><a class="toc-h4" href="#subscriptions">Subscriptions</a></li>
+        <li><a class="toc-h4" href="#eu-cookie-law-banner">EU Cookie Law Banner</a></li>
+        <li><a href="#controlling-cookies">Controlling Cookies</a></li>
+        <li><a href="#our-internal-analytics-tool">Our Internal Analytics Tool</a></li>
+        <li><a href="#consent-for-advertising-cookies-on-our-sites">Consent for Advertising Cookies on Our Sites</a></li>
+        <li><a href="#consent-and-choices-for-advertisements-on-our-userse28099-sites-through-our-ads-program">Consent and Choices for Advertisements on Our Users’ Sites Through Ou…</a></li>
+        <li><a href="#contact-us">Contact Us</a></li>
+       </ul> 
+      </div> 
+     </div> 
+     <div class="primary"> 
+      <p><span style="font-weight: 400;">Our <a href="https://automattic.com/privacy/">Privacy Policy</a> explains our principles when it comes to the collection, processing, and storage of your information. This policy specifically explains how we, our partners, and users of our services deploy cookies, as well as the options you have to control them. </span></p> 
+      <section id="what-are-cookies">
+       <h3>What are cookies?</h3> 
+       <p><span style="font-weight: 400;">Cookies are small pieces of data, stored in text files, that are stored on your computer or other device when websites are loaded in a browser. They are widely used to “remember” you and your preferences, either for a single visit (through a “session cookie”) or for multiple repeat visits (using a “persistent cookie”). They ensure a consistent and efficient experience for visitors, and perform essential functions such as allowing users to register and remain logged in. Cookies may be set by the site that you are visiting (known as “first party cookies”), or by third parties, such as those who serve content or provide advertising or analytics services on the website (“third party cookies”). </span></p> 
+       <p><span style="font-weight: 400;">Both websites and HTML emails may also contain other tracking technologies such as “web beacons” or “pixels.” These are typically small transparent images that provide us with statistics, for similar purposes as cookies. They are often used in conjunction with cookies, though they are not stored on your computer in the same way. As a result, if you disable cookies, web beacons may still load, but their functionality will be restricted. </span></p> 
+      </section>
+      <section id="how-we-use-cookies">
+       <h3><b>How we use cookies</b></h3> 
+       <p><span style="font-weight: 400;">We use cookies for a number of different purposes. Some cookies are necessary for technical reasons; some enable a personalized experience for both visitors and registered users; and some allow the display of advertising from selected third party networks. Some of these cookies may be set when a page is loaded, or when a visitor takes a particular action (clicking the “like” or “follow” button on a post, for example).</span></p> 
+       <p><span style="font-weight: 400;">Many of the cookies we use are only set if you are a registered WordPress.com user (so you don’t have to log in every time, for example), while others are set whenever you visit one of our websites, irrespective of whether you have an account.</span></p> 
+       <p><span style="font-weight: 400;">For more information on the choices you have about the cookies we use, please see the Controlling Cookies section below. </span></p> 
+      </section>
+      <section id="where-we-place-cookies">
+       <h3><b>Where we place cookies</b></h3> 
+       <p><span style="font-weight: 400;">We set cookies in a number of different locations across our services. These include:</span></p> 
+       <ul> 
+        <li style="font-weight: 400;"><span style="font-weight: 400;">On our websites (including automattic.com, wordpress.com, vip.wordpress.com, jetpack.com, woocommerce.com, crowdsignal.com, gravatar.com, intensedebate.com, vaultpress.com, akismet.com, simplenote.com, simperium.com, leandomainsearch.com, cloudup.com, longreads.com, and happy.tools).</span></li> 
+        <li style="font-weight: 400;"><span style="font-weight: 400;">In the administrative dashboards of our websites, such as Calypso and wp-admin.</span></li> 
+        <li style="font-weight: 400;"><span style="font-weight: 400;">On sites we host for our users.</span></li> 
+        <li style="font-weight: 400;">On sites that use our plugins (e.g. Jetpack).</li> 
+        <li style="font-weight: 400;"><span style="font-weight: 400;">In the emails we send.</span></li> 
+       </ul> 
+      </section>
+      <section id="types-of-cookie">
+       <h3><b>Types of Cookie</b></h3> 
+       <p><span style="font-weight: 400;">The table below explains the types of cookies we use on our websites and why we use them. </span></p> 
+       <table> 
+        <tbody> 
+         <tr> 
+          <td><b>Category of cookies</b></td> 
+          <td><b>Why we use these cookies</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Strictly Necessary</span></td> 
+          <td><span style="font-weight: 400;">These cookies are essential for websites on our services to perform their basic functions. These include those required to allow registered users to authenticate and perform account related functions, as well as to save the contents of virtual “carts” on sites that have an ecommerce functionality.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Functionality</span></td> 
+          <td><span style="font-weight: 400;">These cookies are used to store preferences set by users such as account name, language, and location. </span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Security</span></td> 
+          <td><span style="font-weight: 400;">We use these cookies to help identify and prevent potential security risks.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Analytics and Performance</span></td> 
+          <td><span style="font-weight: 400;">Performance cookies collect information on how users interact with our websites</span><span style="font-weight: 400;">,</span><span style="font-weight: 400;"> including what pages are visited most, as well as other analytical data. We use these details to improve how our websites function and to understand how users interact with them.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Advertising</span></td> 
+          <td><span style="font-weight: 400;">These cookies are used to display relevant advertising to visitors who use our services or visit websites we host or provide, as well as to understand and report on the efficacy of ads served on our websites. They track details such as the number of unique visitors, the number of times particular ads have been displayed, and the number of clicks the ads have received. They are also used to build user profiles, including showing you ads based on products you’ve viewed or acts you have taken on our (and other) websites. These are set by Automattic and trusted third party networks, and are generally persistent in nature.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Third Party / Embedded Content</span></td> 
+          <td><span style="font-weight: 400;">Sites hosted on WordPress.com make use of different third party applications and services to enhance the experience of website visitors. These include social media platforms such as Facebook and Twitter (through the use of sharing buttons), or embedded content from Youtube and Vimeo. As a result, cookies may be set by these third parties, and used by them to track your online activity. We have no direct control over the information that is collected by these cookies.</span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </section>
+      <section id="user-sites">
+       <h3>User Sites</h3> 
+       <p><span style="font-weight: 400;">In addition to the cookies set on our own sites, we utilize cookies for our </span><a href="https://en.support.wordpress.com/stats/"><span style="font-weight: 400;">Site Stats</span></a><span style="font-weight: 400;"> feature. This tallies the unique numbers of visitors to a site, as well as the number from specific geographic locations. </span><span style="font-weight: 400;">A visitor is counted when we see a user or browser for the first time in a given period.</span></p> 
+      </section>
+      <section id="examples">
+       <h3>Examples</h3> 
+       <p><span style="font-weight: 400;">Below are examples of the cookies set by Automattic, with explanations of their purpose. Some of these cookies are set across our whole network, whereas some are specific to individual services (e.g. WordPress.com, Longreads, etc). Please note that this is not an exhaustive list, but rather aims to be representative. Information about cookies that may be set by third parties, such as our ads partners, is below.&nbsp;Additionally, we occasionally set referrer cookies on Jetpack connected sites, using WooCommerce.</span></p> 
+       <p><span style="font-weight: 400;">In addition, people and companies that use our services to publish or host their own sites may place additional cookies. We provide more information on these cookies below.</span></p> 
+      </section>
+      <section id="advertising">
+       <h4><b>Advertising</b></h4> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Cookie</b></td> 
+          <td><b>Purpose</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">ads</span></td> 
+          <td><span style="font-weight: 400;">Tracks if a visitor has clicked an ad before.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">lr_nw</span></td> 
+          <td><span style="font-weight: 400;">Counts and tracks pageviews on Longreads.com. Used to determine whether or not to show our Membership popup message.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">wordpress_eli</span></td> 
+          <td><span style="font-weight: 400;">Reduces the display of ads for repeat visitors.</span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+       <p><span style="font-weight: 400;">Please also see the section below on third party advertisements that you may see on our sites or sites that use our services.</span></p> 
+      </section>
+      <section id="analytics-and-performance">
+       <h4><b>Analytics and Performance</b></h4> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Cookie</b></td> 
+          <td><b>Purpose</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">__pdvt</span></td> 
+          <td><span style="font-weight: 400;">Used in log of Crowdsignal survey data to aid in debugging customer problems.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">_hjIncludedInSample<br> mp_6d7c50ad560e01715a871a117a2fbd90_mixpanel<br> optimizelyBuckets<br> optimizelyEndUserId<br> __hstc<br> hubspotutk<br> optimizelySegments</span></td> 
+          <td>Gathers information that helps us understand how visitors interact with our websites, which allows us to create a better visitor experience.</td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">ab</span></td> 
+          <td><span style="font-weight: 400;">Used for “AB testing” of new features.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">nux_flow_name</span></td> 
+          <td><span style="font-weight: 400;">Identifies which user signup flow was shown to the user. </span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">tk_ni / tk_ai / tk_qs</span></td> 
+          <td><span style="font-weight: 400;">Gathers information for our own, first party analytics tool about how our services are used. A collection of internal metrics for user activity, used to improve user experience. </span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">tk_*r</span></td> 
+          <td><span style="font-weight: 400;">Referral cookies used to analyse referrer behavior for Jetpack connected sites using WooCommerce.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">wp-affiliate-tracker</span></td> 
+          <td><span style="font-weight: 400;">Remembers the ID of the affiliate that referred the current user to WordPress.com</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">utma / utmb / utmc / utmt / utmz / ga / gat / gid</span></td> 
+          <td><span style="font-weight: 400;">Google Analytics. Gathers information that helps us understand how visitors interact with our websites, which allow us to create a better experience for our visitors. Our users may also implement Google Analytics on their own websites.</span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </section>
+      <section id="functionality">
+       <h4><b>Functionality</b></h4> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Cookie</b></td> 
+          <td><b>Purpose</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">__stripe_sid / __stripe_mid</span></td> 
+          <td><span style="font-weight: 400;">For processing payment and to aid in fraud detection.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">_longreads_prod_new</span></td> 
+          <td><span style="font-weight: 400;">Authentication for Longreads.com Member accounts. Only active when logged in, on *.longreads.com domains.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">akm_mobile</span></td> 
+          <td><span style="font-weight: 400;">Stores whether a user has chosen to view the mobile version of a website.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">botdlang</span></td> 
+          <td><span style="font-weight: 400;">Used to track the language a user has selected to view popular blogs in.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">landingpage_currency</span></td> 
+          <td><span style="font-weight: 400;">Defines the currency displayed in WordPress.com landing pages.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">pd_dashboard</span></td> 
+          <td><span style="font-weight: 400;">Records last used folder in Crowdsignal dashboard so it can be reopened upon user’s next visit.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">PD_USER_AUTH</span></td> 
+          <td><span style="font-weight: 400;">Login cookie used to identify Crowdsignal user.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">wordpress_logged_in*</span></td> 
+          <td><span style="font-weight: 400;">Checks whether or not the current visitor is a logged in WordPress.com user.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">wp-settings-{user_id}</span></td> 
+          <td><span style="font-weight: 400;">Persists a user’s wp-admin configuration.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">wp_sharing_{id}</span></td> 
+          <td><span style="font-weight: 400;">Tracks whether or not a user has already performed an action.</span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </section>
+      <section id="security">
+       <h4><b>Security</b></h4> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Cookie</b></td> 
+          <td><b>Purpose</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">csrftoken</span></td> 
+          <td><span style="font-weight: 400;">Python/Ajax security cookie used on accounts.longreads.com.</span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </section>
+      <section id="strictly-necessary">
+       <h4><b>Strictly Necessary</b></h4> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Cookie</b></td> 
+          <td><b>Purpose</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">country_code</span></td> 
+          <td><span style="font-weight: 400;">Used in order to determine whether or not the cookie banner should be shown. Set immediately on page load and retained for 6 hours to remember the visitor’s country.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">sensitive_pixel_option</span></td> 
+          <td><span style="font-weight: 400;">Remembers the state of visitor acceptance to the cookie banner. Only set when the visitor clicks Accept.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">twostep_auth</span></td> 
+          <td><span style="font-weight: 400;">Set when the user is logged in using two factor authentication.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">wordpress_test_cookie</span></td> 
+          <td><span style="font-weight: 400;">Checks if cookies are enabled to provide appropriate user experience.</span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </section>
+      <section id="advertisements-from-third-parties-through-automattice28099s-ads-program">
+       <h4>Advertisements from Third Parties Through Automattic’s Ads Program</h4> 
+       <p><span style="font-weight: 400;">Our mission is to democratize publishing. So that we can offer free access to create a website using WordPress.com, we show ads on some of our users’ sites. Our users may also choose to place ads on their site through our ads program. Additionally, we also show ads from our ads program on some of our own websites (e.g. longreads.com), and in emails.</span></p> 
+       <p><span style="font-weight: 400;">We operate our ads program in partnership with third party vendors. As part of the operation of our ads program, we use cookies to collect certain information. Advertising cookies enable us and our partners to serve ads and to personalize those ads based on information like visits to our sites and other sites on the Internet.</span></p> 
+       <p><span style="font-weight: 400;">Below is a representative list of our advertising program partners, along with information on the cookies that that each partner sets.&nbsp;</span><span style="font-weight: 400;">The partners we work with change from time to time, and this is not an exhaustive list. Your choices to control cookies related to our ads program are described below.</span></p> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Partner</b></td> 
+          <td><b>Cookie Info</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">33across</span></td> 
+          <td style="word-break: break-word;"><a href="https://33across.com/privacy-policy/"><span style="font-weight: 400;">https://33across.com/privacy-policy/</span></a> and <a href="https://optout.33across.com"><span style="font-weight: 400;">https://optout.33across.com</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Admixer</span></td> 
+          <td style="word-break: break-word;"><a href="https://admixer.net/privacy">https://admixer.net/privacy</a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">ADYOULIKE</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.adyoulike.com/privacy_policy.php"><span style="font-weight: 400;">https://www.adyoulike.com/privacy_policy.php</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Amazon</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.amazon.co.uk/gp/help/customer/display.html/ref=footer_iba?ie=UTF8&amp;nodeId=201909150"><span style="font-weight: 400;">https://www.amazon.co.uk/gp/help/customer/display.html/ref=footer_iba?ie=UTF8&amp;nodeId=201909150</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">AppNexus</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.appnexus.com/en/company/cookie-policy"><span style="font-weight: 400;">https://www.appnexus.com/en/company/cookie-policy</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">BidSwitch</span></td> 
+          <td style="word-break: break-word;"><a href="http://www.bidswitch.com/cookie-statement/"><span style="font-weight: 400;">http://www.bidswitch.com/cookie-statement/</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Criteo</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.criteo.com/privacy/"><span style="font-weight: 400;"> https://www.criteo.com/privacy/ </span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Google (AdSense, DoubleClick Ad Exchange “AdX”)</span></td> 
+          <td style="word-break: break-word;"><a href="https://policies.google.com/technologies/ads"><span style="font-weight: 400;">https://policies.google.com/technologies/ads</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">LKQD</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.nexstardigital.com/privacy">https://www.nexstardigital.com/privacy</a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Lotame</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.lotame.com/about-lotame/privacy/">https://www.lotame.com/about-lotame/privacy/</a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Media.net</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.media.net/privacy-policy"><span style="font-weight: 400;">https://www.media.net/privacy-policy</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">OATH</span></td> 
+          <td style="word-break: break-word;"><a href="https://policies.oath.com/us/en/oath/privacy/topics/cookies/index.html"><span style="font-weight: 400;">https://policies.oath.com/us/en/oath/privacy/topics/cookies/index.html</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">OpenX</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.openx.com/legal/privacy-policy/">https://www.openx.com/legal/privacy-policy/</a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">PowerInBox</span></td> 
+          <td style="word-break: break-word;"><a href="https://powerinbox.com/privacy-policy/"><span style="font-weight: 400;">https://powerinbox.com/privacy-policy/</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Pubmatic</span></td> 
+          <td style="word-break: break-word;"><a href="https://pubmatic.com/legal/website-cookie-policy/"><span style="font-weight: 400;">https://pubmatic.com/legal/website-cookie-policy/</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Rubicon</span></td> 
+          <td style="word-break: break-word;"><a href="https://rubiconproject.com/privacy/consumer-online-profile-and-opt-out/"><span style="font-weight: 400;">https://rubiconproject.com/privacy/consumer-online-profile-and-opt-out/</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Skimlinks</span></td> 
+          <td style="word-break: break-word;"><a href="https://skimlinks.com/user-cookies"><span style="font-weight: 400;">https://skimlinks.com/user-cookies</span></a>&nbsp;and&nbsp;<a href="https://skimlinks.com/privacy-policy">https://skimlinks.com/privacy-policy</a></td> 
+         </tr> 
+         <tr> 
+          <td>Sonobi</td> 
+          <td style="word-break: break-word;"><a href="https://sonobi.com/privacy-policy/"><span style="font-weight: 400;">https://sonobi.com/privacy-policy/</span></a></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">Teads</span></td> 
+          <td style="word-break: break-word;"><a href="https://www.teads.tv/privacy-policy/">https://www.teads.tv/privacy-policy/</a></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+       <p><span style="font-weight: 400;">Below is a representative list of the cookies that may be set by our ads partners in connection with ads that appear in emails.</span></p> 
+       <table style="width: 100%;"> 
+        <tbody> 
+         <tr> 
+          <td><b>Cookie</b></td> 
+          <td><b>Purpose</b></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">pi-userid</span></td> 
+          <td><span style="font-weight: 400;">Used to personalize email-based ads.</span></td> 
+         </tr> 
+         <tr> 
+          <td><span style="font-weight: 400;">eid_</span></td> 
+          <td><span style="font-weight: 400;">Used in email-based ads to track if a visitor has clicked an ad and report to advertisers how their ads performed. </span></td> 
+         </tr> 
+        </tbody> 
+       </table> 
+      </section>
+      <section id="visitors-to-sites-with-jetpack-installed">
+       <h3>Visitors to Sites with Jetpack installed</h3> 
+       <p>Below are examples of the cookies set for visitors to sites with the Jetpack plugin installed. For more details on the cookies set for administrators, please see&nbsp;<a href="https://jetpack.com/support/cookies/"><span style="font-weight: 400;">https://jetpack.com/support/cookies/</span></a><span style="font-weight: 400;">.</span></p> 
+      </section>
+      <section id="jetpack-comments">
+       <h4><strong>Jetpack Comments</strong></h4> 
+       <div class="cookietable"> 
+        <table> 
+         <tbody> 
+          <tr> 
+           <td><strong>Cookie Name</strong></td> 
+           <td><strong>Purpose</strong></td> 
+          </tr> 
+          <tr> 
+           <td>comment_author_{HASH}</td> 
+           <td>Remembers the value entered into the <a href="https://jetpack.com/support/comments/">comment form</a>‘s <strong>name</strong> field. Specific to the site from which it is set. <em>This cookie mirrors one set by the core WordPress software <a href="https://codex.wordpress.org/WordPress_Cookies">for commenting purposes</a></em>.</td> 
+          </tr> 
+          <tr> 
+           <td>comment_author_email_{HASH}</td> 
+           <td>Remembers the value entered into the <a href="https://jetpack.com/support/comments/">comment form</a>‘s <strong>email</strong> field. Specific to the site from which it is set. <em>This cookie mirrors one set by the core WordPress software <a href="https://codex.wordpress.org/WordPress_Cookies">for commenting purposes</a></em>.</td> 
+          </tr> 
+          <tr> 
+           <td>comment_author_url_{HASH}</td> 
+           <td>Remembers the value entered into the <a href="https://jetpack.com/support/comments/">comment form</a>‘s <strong>URL</strong> field. Specific to the site from which it is set. <em>This cookie mirrors one set by the core WordPress software <a href="https://codex.wordpress.org/WordPress_Cookies">for commenting purposes</a></em></td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </div> 
+      </section>
+      <section id="mobile-theme">
+       <h4 id="mobile-theme"><strong>Mobile Theme</strong></h4> 
+       <div class="cookietable"> 
+        <table> 
+         <tbody> 
+          <tr> 
+           <td>Cookie Name</td> 
+           <td>Purpose</td> 
+          </tr> 
+          <tr> 
+           <td>akm_mobile</td> 
+           <td>Remembers whether or not a user wishes to view the <a href="https://jetpack.com/support/mobile-theme/">mobile version</a> of a site.</td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </div> 
+      </section>
+      <section id="subscriptions">
+       <h4 id="subscriptions"><strong>Subscriptions</strong></h4> 
+       <div class="cookietable"> 
+        <table> 
+         <tbody> 
+          <tr> 
+           <td>Cookie Name</td> 
+           <td>Purpose</td> 
+          </tr> 
+          <tr> 
+           <td>jetpack_comments_subscribe_{HASH}</td> 
+           <td>Remembers the state of the <a href="https://jetpack.com/support/subscriptions/">post and comment subscription</a> checkboxes.</td> 
+          </tr> 
+          <tr> 
+           <td>jetpack_blog_subscribe_{HASH}</td> 
+           <td>Remembers the state of the <a href="https://jetpack.com/support/subscriptions/">post and comment subscription</a> checkboxes.</td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </div> 
+      </section>
+      <section id="eu-cookie-law-banner">
+       <h4><strong>EU Cookie Law Banner</strong></h4> 
+       <div class="cookietable"> 
+        <table> 
+         <tbody> 
+          <tr> 
+           <td>Cookie Name</td> 
+           <td>Purpose</td> 
+          </tr> 
+          <tr> 
+           <td>eucookielaw</td> 
+           <td>Remembers the state of visitor acceptance to the <a href="https://jetpack.com/support/extra-sidebar-widgets/eu-cookie-law-widget/">EU Cookie Law banner</a>.</td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </div> 
+       <p><span style="font-weight: 400;">Please note </span><span style="font-weight: 400;">that this section is not intended to be exhaustive, but rather aims to be representative, and </span><span style="font-weight: 400;">that our users may set additional cookies (such as Google Analytics), depending on the features they have chosen to enable or the plugins they have installed.</span></p> 
+      </section>
+      <section id="controlling-cookies">
+       <h3>Controlling Cookies</h3> 
+       <p><span style="font-weight: 400;">Visitors may wish to restrict the use of cookies or completely prevent them from being set. Most browsers provide for ways to control cookie behavior such as the length of time they are stored – either through built-in functionality or by utilizing third party plugins. If you disable cookies, please be aware that some of the features of our service may not function correctly.</span></p> 
+       <p><span style="font-weight: 400;">To find out more on how to manage and delete cookies, visit aboutcookies.org. For more details on your choices regarding use of your web browsing activity for interest-based advertising you may visit the following sites:</span></p> 
+       <ul> 
+        <li><a href="http://networkadvertising.org">networkadvertising.org</a></li> 
+        <li><span style="font-weight: 400;"><a href="http://optout.aboutads.info">optout.aboutads.info</a>&nbsp;</span></li> 
+        <li><a href="http://youradchoices.com">youradchoices.com</a></li> 
+        <li><span style="font-weight: 400;"><a href="http://youronlinechoices.eu">youronlinechoices.eu</a></span></li> 
+       </ul> 
+       <p><span style="font-weight: 400;">On a mobile device, you may also be to adjust your settings to limit tracking. &nbsp;</span></p> 
+       <p><span style="font-weight: 400;">For example, you can opt out of Google Analytics by installing </span><a href="https://tools.google.com/dlpage/gaoptout"><span style="font-weight: 400;">Google’s opt-out browser add-on</span></a><span style="font-weight: 400;">, or from Hotjar by using the <a href="https://www.hotjar.com/legal/compliance/opt-out">Do Not Track header</a>.</span></p> 
+      </section>
+      <section id="our-internal-analytics-tool">
+       <h3>Our Internal Analytics Tool</h3> 
+       <p><span style="font-weight: 400;">In order to better understand how our services are used, we monitor certain user activities that take place within our products, including page views and clicks on any links used when managing a site via our dashboards. </span></p> 
+       <p><span style="font-weight: 400;">We call each one of these actions an “event.” Analytics events are attached to your WordPress.com account and are handled via a first party system that Automattic owns and maintains. In general, we record the following data for each event: IP address, WordPress.com user ID and username, WordPress.com-connected site ID (for sites not hosted on WordPress.com), user agent, referring URL, timestamp of event, browser language, and country code.</span></p> 
+       <p><span style="font-weight: 400;">We use this information to improve our products, make our marketing to you more relevant, personalize your experience, and for the other purposes described in our <a href="https://automattic.com/privacy/">Privacy Policy</a>.</span></p> 
+       <p><span style="font-weight: 400;">You may opt out of our analytics program through your user settings. By doing so, you won’t share information with our analytics tool about events or actions that happen after the opt-out, while logged in to your WordPress.com account. Note that opting out does not disable the functionality of the actions we track – for example, if you publish a post, we will still have record of that (don’t worry!), but for an event or action after you opt out, we will not have other data associated with that action or event in the analytics tool.</span></p> 
+       <p><span style="font-weight: 400;"><em><strong>For our Simplenote Users:</strong></em> We use our first party analytics tool in Simplenote to help us better understand how Simplenote is used and improve the app for our users. You may opt-out through your privacy settings in the app. By doing so, you won’t share information with our analytics tool about events or actions that happen after the opt-out. One more thing–For Simplenote users who log onto Simplenote using their WordPress.com login, if you’d like to opt-out of our analytics tool on Simplenote, you’ll also need to opt out on the Simplenote app–not on your </span><a href="https://wordpress.com/me/privacy"><span style="font-weight: 400;">WP.COM Account Privacy Settings.</span></a></p> 
+      </section>
+      <section id="consent-for-advertising-cookies-on-our-sites">
+       <h3>Consent for Advertising Cookies on Our Sites</h3> 
+       <p><span style="font-weight: 400;">You may see a “cookie banner” on our websites and dashboards. If you are visiting one of our sites from the EU, then we do not set, or allow our ad partners to set, cookies that are used to show you targeted ads before you click to accept. When you consent in this manner, we and our advertising partners may set advertising cookies on the site you are visiting and on our other websites, dashboards, and services, which we use to show you advertisements about our various Automattic products. We’ll display the banner to you periodically, just in case you change your mind.</span></p> 
+      </section>
+      <section id="consent-and-choices-for-advertisements-on-our-userse28099-sites-through-our-ads-program">
+       <h3><b>Consent and Choices for Advertisements on Our Users’ Sites Through Our Ads Program</b></h3> 
+       <p><span style="font-weight: 400;">You may see a “cookie banner” on our users’ websites, particularly if you are in the European Union. If so, then our ad program does not set, or allow our ad partners to set, cookies that are used to show you targeted ads before you accept. When you consent in this manner, we and our advertising partners may set third party advertising cookies on our network in order to show you personalized ads. We’ll display the banner to you periodically, just in case you change your mind.</span></p> 
+       <p><span style="font-weight: 400;">* Please note this consent feature was implemented on May 22, 2018.</span></p> 
+       <p><span style="font-weight: 400;">We set a cookie to help us understand how visitors engage with websites that participate in our ad program. Visitors may opt out of our use of this information by </span><a href="https://s.pubmine.com/opt-out"><span style="font-weight: 400;">visiting this </span><span style="font-weight: 400;">link</span></a><span style="font-weight: 400;"> (the opt-out will be processed immediately with no confirmation step). When you opt out, we replace the unique value for that cookie with an opt-out value</span><span style="font-weight: 400;">. The opt-out works across all websites in our ads program. If you have opted out by accident, or wish to opt back in, you may do so by </span><a href="https://s.pubmine.com/opt-in"><span style="font-weight: 400;">visiting this </span><span style="font-weight: 400;">link</span></a><span style="font-weight: 400;">. Please note that this option is browser specific, and so if you use a different device or browser or clear your cookies, then you will need to repeat the process.</span></p> 
+      </section>
+      <section id="contact-us">
+       <h3>Contact Us</h3> 
+       <p><span style="font-weight: 400;">If you have any questions about our use of cookies, you can find the most relevant contact details in our </span><a href="https://automattic.com/privacy/"><span style="font-weight: 400;">Privacy Policy</span></a><span style="font-weight: 400;">.</span></p> 
+      </section> 
+     </div> 
+    </div><!-- #content  --> 
+   </div><!-- #container --> 
+   <div class="nav"> 
+    <div class="contactus">
+     <a href="/contact/">Contact Us</a>
+    </div> 
+    <div class="diversity">
+     <a href="/diversity-and-inclusion/">Diversity</a>
+    </div> 
+    <div class="press">
+     <a href="/press/">Press</a>
+    </div> 
+    <div class="privacy">
+     <a href="/privacy/">Privacy Policy</a>
+    </div> 
+    <div class="social-links"> 
+     <div class="twitter">
+      <a class="noticon noticon-twitter" href="https://twitter.com/automattic" target="_blank"><!-- Twitter --></a>
+     </div> 
+     <div class="facebook">
+      <a class="noticon noticon-facebook" href="http://www.facebook.com/AutomatticInc" target="_blank"><!-- Facebook --></a>
+     </div> 
+     <div class="facebook">
+      <a class="noticon noticon-youtube" href="https://www.youtube.com/c/automattic" target="_blank"><!-- YouTube --></a>
+     </div> 
+    </div> 
+    <ol class="menu"> 
+     <li class="page-item "><a href="/">Home</a></li> 
+     <li class="page-item "><a href="/about/">About Us</a></li> 
+     <li class="page-item "><a href="/news/">News</a></li> 
+     <li class="page-item "><a href="/work-with-us/">Work With Us</a></li> 
+    </ol> 
+   </div> 
+   <div class="footer"> 
+    <p class="copyr">© Automattic Inc., purveyors of fine blogging and site-building services since 2005. Thank you for your&nbsp;time.</p> 
+   </div> 
+  </div><!-- #wrapper --> <!--  --> <!-- A8C Analytics [start] --> 
+  <script type="text/javascript">
+				( function() {
+					'use strict';
+
+					var setupAnalytics = function() {
+						var $ = window.jQuery;
+						if ( ! $ ) return; // No jQuery.
+
+						window.a8cAnalyticsConfig = {"cookieBanner":{"text":"Our websites and dashboards use cookies. By continuing, you agree to their use. <a target=\"_blank\" href=\"https:\/\/automattic.com\/cookies\">Learn more<\/a>, including how to control cookies.","buttonText":"Got It!","cookieName":"sensitive_pixel_option","skipBanner":false,"cssZIndex":50001,"cookieDomain":null},"fireAnalyticsOptions":[]};
+					};
+
+					if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+						defQueue.items.push( setupAnalytics );
+					} else {
+						setupAnalytics();
+					}
+				} )();
+			</script> 
+  <script type="text/javascript">
+	$document = jQuery( window.document );
+	$document.on( 'a8c-analytics:loaded', function() {
+		'use strict';
+
+		var kit = window.a8cAnalytics.kit;
+
+		if ( kit.doNotTrack() ) {
+			return;
+		}
+
+		function fireGoogleAnalytics() {
+			kit.loadGoogleAnalytics();
+			ga( 'create', 'UA-52447-5', 'auto' );
+
+			ga( 'set', 'transport', 'function' === typeof navigator.sendBeacon ? 'beacon' : 'xhr' );
+			ga( 'set', 'anonymizeIp', true );
+
+			ga( 'send', 'pageview' );
+		}
+
+		// ------- Fire Normal Pixels -------
+
+				fireGoogleAnalytics();
+
+		// ------- Fire Sensitive Pixels -------
+
+		/* none for now
+		$document.on( 'a8c-analytics:fire-sensitive-pixels', function() {
+		} );
+		*/
+	} );
+</script> 
+  <script type="text/javascript">
+				( function() {
+					'use strict';
+
+					var setupAnalytics = function() {
+						var $ = window.jQuery;
+						if ( ! $ ) return; // No jQuery.
+
+													$.ajax( {
+								async: true,
+								cache: true,
+								dataType: 'script',
+								url: "https:\/\/s1.wp.com\/wp-content\/mu-plugins\/a8c-analytics\/a8c-analytics.js?v=1576871854",
+							} );
+											};
+
+					if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+						defQueue.items.push( setupAnalytics );
+					} else {
+						setupAnalytics();
+					}
+				} )();
+			</script> <!-- A8C Analytics [end] --> 
+  <div style="display:none"> 
+  </div> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css?m=1583834955h&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"54117","siteName":"Automattic","siteURL":"https:\/\/automattic.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/0d6c430459af115394a012d20b6711d6?s=50&d=https%3A%2F%2Fs0.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"a8c\/automattic-2011","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fautomattic.com%2Fcookies%2F&signup_flow=account&domain=automattic.com","themeURL":"","xhrURL":"https:\/\/automattic.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"29e6e93675\" \/>","referer":"https:\/\/automattic.com\/cookies\/","canFollow":"","feedID":"73075320","statusMessage":"","customizeLink":"https:\/\/automattic.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fautomattic.wordpress.com%2Fcookies%2F","postID":"214632","shortlink":"https:\/\/wp.me\/Pe4R-TPO","canEditPost":"","editLink":"https:\/\/wordpress.com\/page\/automattic.com\/214632","statsLink":"https:\/\/wordpress.com\/stats\/post\/214632\/automattic.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Automattic 2011","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 9,796 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fautomattic.com%2Fcookies%2F&signup_flow=account&domain=automattic.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJydUEGOwjAM/NAGq4ta4LDiLSUxyCV1qthp4fe4QDlwQGIv1sjjmbEN0+B8YkVW6AQCjuRxuKw6+QGjiH0sAeXOkSiMyCHlmRpSvB4pxlVPvIwvTkMsJ2KBY4nRCSk6DKTEJ/dgoFlX603zu4NDTNZMouIM+vMzhXD6vyfakmq6whrSxE/je5V38j2lL24JaoNd5g5thr4VxWzIpRFzpvkhr96XDppbW+OTyCslnkUvZNP7/q+qt3VV19uq6W76hqFt"></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'54117','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'54117','v':'wpcom','tz':'0','user_id':'0','post':'214632','subd':'automattic'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1lSiYrZXhzUkM5fD1uTDNLUGt6QzVbd3FKb3Q4aWxFU0VMK3ppSG1wamM0bi81JStxN2lKP1pvVnxQRHk3W0d3VEh0SklpNENJfHppaiZjVlFtdzJJS0ovSDNEYllHTGlmZ2N8XWpOY1p2LDE0dlY2QXZlTWtvMV0vVDBzL1U/cWZsMWMycitPXzRtOWRKNl1DNkdvUUJQSS5RTXdqbnBQNlFDdzNZfnVtW0haVGFBeUlWJm9iVHlrTixVbU0rfngzakUsQi0zfmhtcE85eEJ1VmJ0TUJSUHgyUHhrc29SVnJSQ1ddWGNzMG4yRktzeXB4JlA/K1M1OWosWVd5SFlXaWRuUCttbWJCSC1XbXVna204TlhIREJPUnIvTmlXJmMwRi9X'}]);
+_stq.push([ 'clickTrackerInit', '54117', '214632' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+  <script type="text/javascript" src="/wp-content/themes/a8c/automattic-2011/includes/jquery.cookie.js"></script> 
+  <script type="text/javascript">
+
+console.log("Ready to wrangle JavaScript? https://automattic.com/work-with-us/");
+
+var pg = document.location.href;
+
+if ( pg.indexOf("work-with-us") != -1 ) { 	// check on jobs page
+	if ( pg.length > 37 ) { // check if detail page
+
+		var jvct = jQuery.cookie('jvct');
+		if ( typeof(jvct) == "undefined" ) { jvct = 0; }
+		else { jvct = parseInt(jvct); }
+		if ( isNaN(jvct) ) { jvct = 0; }
+
+		jvct = jvct + 1;
+		jQuery.cookie('jvct', jvct, { expires: 60, path: '/' });
+
+		if ( jvct > 3 ) {
+			var nudge = '<div class="jobs-notes-back card"><h4>Hey there!</h4><p>We couldn’t help but notice that you’ve visited this page a few times. It looks like you’re really thinking about working here, huh?</p><p>Give it a shot and apply already!</p></div>';
+			if ( jvct === 1337 ) {
+				nudge = '<div class="jobs-notes-back card"><h4>We saw what you did there!</h4><p>You like poking around in code, huh? Us too — you seem like just the kind of person we’re looking for. Apply already!</p></div>';
+			}
+
+			// display card flipper
+			jQuery( '.jobsidebar' ).wrap( '<div class="card-container"></div>' );
+			jQuery('.jobs-notes' ).addClass( 'card' );
+
+			jQuery( '.jobsidebar').append( nudge );
+			setTimeout( function() {
+				jQuery( '.jobsidebar' ).toggleClass( 'flipped' );
+			}, 1000 );
+			setInterval( function() {
+				jQuery( '.jobsidebar' ).toggleClass( 'flipped' );
+			}, 20000 );
+		}
+	}
+}
+
+// check on Systems Wrangler page
+if ( pg.indexOf( 'systems-wrangler' ) != -1 ) {
+
+	// On page load/ready
+	jQuery( document ).ready( function () {
+		resizeMap();
+	});
+
+	// On resize
+	jQuery( window ).resize( function() {
+		clearTimeout( this.id );
+		this.id = setTimeout( resizeMap, 500 );
+	});
+
+	function resizeMap() {
+		var w = jQuery( '.jobs-list' ).width(),
+			h = Math.round( w / 2 );
+
+		jQuery( '.embed-anycast-map iframe' ).prop( 'src', 'https://ac-map.automattic.com/?w=' + w.toString() + 'h=' + h.toString() ).prop( 'width', w ).prop( 'height', h );
+	}
+}
+
+</script>  <!--
+	generated 87 seconds ago
+	generated in 0.106 seconds
+	served from batcache in 0.001 seconds
+	expires in 213 seconds
+-->
+ </body>
+</html>

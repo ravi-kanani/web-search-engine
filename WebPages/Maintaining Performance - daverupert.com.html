@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en-us" class=""> 
+ <head> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"> 
+  <title>Maintaining Performance - daverupert.com</title> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> 
+  <meta name="monetization" content="$coil.xrptipbot.com/QJwxWxBwRTST5mk6Cexk8Q"> <!-- Feeds --> 
+  <link rel="alternate" href="https://daverupert.com/atom.xml" type="application/atom+xml" title="Atom 2.0"> <!-- Social Icons --> 
+  <meta property="twitter:account_id" content="14839862"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:image" content="https://daverupert.com/images/global/newshammericon.png"> 
+  <meta name="twitter:site" content="@davatron5000"> 
+  <meta name="twitter:creator" content="@davatron5000"> 
+  <meta property="twitter:title" content="Maintaining Performance"> 
+  <meta property="twitter:description" content="Or... How I shaved ~33s off my page load by fixing fonts"> 
+  <meta property="og:url" content="https://daverupert.com/2020/03/maintaining-performance/"> 
+  <meta property="og:title" content="Maintaining Performance"> 
+  <meta property="og:description" content="Or... How I shaved ~33s off my page load by fixing fonts"> 
+  <link rel="shortcut icon" href="/favicon.ico"> <!-- Base Stylesheet --> 
+  <style>
+    @font-face{font-family:'Rubik';font-style:normal;font-display:swap;src:url("/fonts/Rubik/rubik.variable.latin.woff2") format("woff2"),url("/fonts/Rubik/rubik.variable.latin.woff") format("woff");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Rubik';font-style:normal;font-display:swap;src:url("/fonts/Rubik/rubik.variable.latin-ext.woff2") format("woff2"),url("/fonts/Rubik/rubik.variable.latin-ext.woff") format("woff");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Rubik-Italic';font-style:normal;font-display:swap;src:url("/fonts/Rubik/rubik-italic.variable.latin.woff2") format("woff2"),url("/fonts/Rubik/rubik-italic.variable.latin.woff") format("woff");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Rubik-Italic';font-style:normal;font-display:swap;src:url("/fonts/Rubik/rubik-italic.variable.latin-ext.woff2") format("woff2"),url("/fonts/Rubik/rubik-italic.variable.latin-ext.woff") format("woff");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Domine";font-style:normal;font-weight:400;font-display:swap;src:local("Domine"),local("Domine-Regular"),url(/fonts/Domine/DomineRegular.woff2) format("woff2");unicode-range:U+0000-00ff,U+0131,U+0152-0153,U+02c6,U+02da,U+02dc,U+2000-206f,U+2074,U+20ac,U+2212,U+2215}:root{--bg: WhiteSmoke;--bg-img: none;--bg-size: auto;--bg-attachment: scroll;--border: #d0d0d0;--heading: #3a3a3a;--text: #3a3a3a;--nav: #3a3a3a;--link: #e20000;--link-active: #da1035;--pad: calc(2vw + 0.25rem);--logo-left: #ee5d2d;--logo-right: #d92b2e;--logo-bottom: #f38e2e;--overlay: rgba(0,0,0,0.03) }:root.theme-dark{--bg: #1f1f1f;--text: white;--link: goldenrod;--link-active: gold;--nav: white;--border: #3f3f3f;--heading: white;--overlay: rgba(255,255,255,0.03)}:root.theme-dark img{filter:brightness(0.9) contrast(1.2)}:root.theme-sleepy{--bg: #1B314D;--link: #E04F7F;--link-active: DeepPink;--text: #D2E8DA;--nav: #D2E8DA;--heading: #D2E8DA;--border: rgba(255, 255, 255, 0.4);--overlay: rgba(255,255,255,0.03)}:root.theme-orange{--bg: #E89E82;--heading: #3a3a3a;--link: #FF6F00;--border: #3a3a3a3a}@media (prefers-color-scheme: dark){:root{--bg: #1f1f1f;--text: white;--link: goldenrod;--link-active: gold;--nav: white;--border: #3f3f3f;--heading: white;--overlay: rgba(255,255,255,0.03)}:root img{filter:brightness(0.9) contrast(1.2)}}*{box-sizing:border-box}img,audio,video,iframe,object,embed{max-width:100%;height:auto}picture{display:block}html,body{transition:background-color, color 600ms ease-out;background-color:var(--bg);background-image:var(--bg-img);background-size:var(--bg-size);background-attachment:var(--bg-attachment);color:var(--text);font-family:"Rubik", sans-serif;font-weight:normal;font-variation-settings:'wght' 400;margin:0;min-height:100vh;-webkit-font-smoothing:subpixel-antialiased;-webkit-text-size-adjust:100%}h1,h2,h3,h4,h5,h6{font-family:"Rubik", sans-serif;font-weight:normal;font-variation-settings:"wght" 650;color:var(--heading);padding:0;margin:0;font-size:1rem;line-height:1}p{margin:0}ul,ol{padding-left:1.2em}#layout{display:grid;grid-gap:var(--pad)}#layout>*{min-width:0}#header{display:flex;flex-wrap:wrap;padding:1em var(--pad);position:relative;z-index:2000}#header .icon{height:1.1em;width:1.1em}#header a{color:var(--nav);padding:0;text-decoration:none;text-transform:uppercase;transition:all 0.1s ease-in-out;font-variation-settings:'wght' 650;font-weight:normal}#header a:hover,#header a:focus{color:var(--link-active);box-shadow:0 2px 0 0 var(--link-active)}#logo{flex-shrink:1;margin-right:1em;margin:0.5rem 0;transition:all 0.4s ease-in-out;background:transparent;appearance:none;border:none;padding:0;cursor:pointer}#logo:focus{outline:none}#logo:hover,#logo.focus-visible{box-shadow:none !important;filter:hue-rotate(180deg)}@media (max-width: 30em){#logo svg{width:100%;height:auto;max-width:40px;max-height:32px}}#logo .left{fill:var(--logo-left)}#logo .right{fill:var(--logo-right)}#logo .bottom{fill:var(--logo-bottom)}#nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;position:relative;z-index:2000;width:100%}.nav-list{display:flex;margin:0;padding:0;list-style-type:none}.nav-list li:not(:last-of-type){margin-right:calc(2vw + 0.5em)}#intro{display:grid;grid-gap:var(--pad);align-items:center;padding-bottom:var(--pad)}#intro a{color:var(--link);text-underline-offset:4px;text-decoration-skip-ink:none;text-decoration-thickness:2px;transition:all 0.1s ease-out;text-decoration-color:var(--border)}#intro a:hover,#intro a:focus{text-underline-offset:2px;text-decoration-thickness:4px;color:var(--link-active)}#intro .title{font-size:1.8rem;line-height:1.2;font-size:clamp(1.5rem, 5vw, 3rem);font-variation-settings:'wght' 600}@media (min-width: 29em){#intro{grid-template-columns:2fr 5fr}#intro .title{font-variation-settings:'wght' 650;border-bottom:none}}@media (min-width: 40em){#intro .title{font-size:3rem;font-size:clamp(1.5rem, 5vw, 3rem)}}#hero img{display:block}.home-grid{display:grid;grid-gap:var(--pad);max-width:80em;margin:0 auto;padding:0 var(--pad)}.home-grid #intro{grid-column:1 / -1}@media (min-width: 40em){.home-grid{grid-template-columns:repeat(9, 1fr)}.home-grid #archive{grid-column:1 / -3;grid-row:2 / 3}.home-grid #podcasts{grid-column:-3 / -1;grid-row:2}}@media (min-width: 55em){.home-grid{grid-template-columns:repeat(7, 1fr)}.home-grid #archive{grid-column:1 / -4}.home-grid #podcasts{grid-column:-4 / -1}}.podcast-grid img{display:block}.podcast-grid{display:grid;grid-gap:var(--pad);padding-left:0;list-style:none}@media (max-width: 40em){.podcast-grid{grid-template-columns:repeat(auto-fill, minmax(100px, 1fr))}}@media (min-width: 55em){.podcast-grid{grid-template-columns:repeat(3, 1fr)}}.container{max-width:50em;margin:0 auto;width:92%}.content{font-size:16px;line-height:1.7}.content a{color:var(--link)}.content a:hover,.content a:focus{color:var(--link-active)}.content .centered{text-align:center}.content .button{background:var(--link);color:var(--bg);display:inline-block;text-decoration:none;text-transform:uppercase;padding:0.5em 0.75em;transition:0.1s ease-in-out;font-variation-settings:'wght' 650;font-weight:normal}.content .button.button--small{font-size:13px;padding:0.5em}.content .button:focus,.content .button:hover{background:var(--link-active);color:var(--bg)}.archive-header{display:flex;align-items:center;flex-wrap:wrap}.archive-header .tags{width:100%;margin-top:2em;margin-bottom:2em}.archive-header .title{flex:1;font-size:1.8em;line-height:1;font-weight:normal;font-variation-settings:'wght' 550}@media (min-width: 25em){.archive-header .title{font-variation-settings:'wght' 650}}@media (max-width: 40em){.archive-header .title{-webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto}}@media (min-width: 60em){.archive.archive--has-year{max-width:50em}.archive.archive--has-year li{grid-column:2 / -1}.archive.archive--has-year .archive-year{grid-column:1 / 2}}.archive-list{list-style-type:none;padding-left:0;line-height:1.7;position:relative;display:grid;grid-template-columns:repeat(7, 1fr);grid-gap:1.5em 0}.archive-list .archive-title{line-height:1.2;margin-bottom:0.25rem;font-size:1.6em;font-variation-settings:'wght' 550;font-weight:normal}.archive-list li{border-top:1px solid var(--border);padding:1.5em 0 0;grid-column:1 / -1}.archive-list a{display:block;text-decoration:none;color:var(--text);transition:all 0.1s ease-in-out}.archive-list a:hover,.archive-list a:focus{color:var(--text)}.archive-list a:hover .archive-title,.archive-list a:focus .archive-title{color:var(--link-active)}.archive-list .tldr{font-size:1em}.icon-link{width:0.7em;height:0.7em;display:inline-block}.icon-link path{fill:currentColor}.site-footer{font-size:15px;margin-top:var(--pad);padding:0 var(--pad) 2em;text-align:left}.site-footer p+p{margin-top:1em}.site-footer a{color:var(--text)}.site-footer a:hover,.site-footer a:focus{color:var(--link-active)}
+
+  </style> <!-- Third Parties --> 
+  <link rel="preconnect" href="https://stats.daverupert.com"> 
+  <link rel="preconnect" href="https://cdn.carbonads.com"> 
+  <link rel="preconnect" href="https://srv.carbonads.net"> 
+  <link rel="preconnect" href="https://cdn4.buysellads.net"> 
+  <link rel="preconnect" href="https://daverupert.disqus.com"> 
+ </head> 
+ <body> 
+  <div id="layout"> 
+   <header id="header"> 
+    <nav id="nav" role="navigation"> <a href="/" id="logo"> 
+      <svg viewbox="0 0 119 103" height="40" width="50"> 
+       <title>daverupert.com</title> <polygon class="left" fill="#EE5D2D" points="0.275,101.789 65.287,45.593 60.988,0"></polygon> <polygon class="right" fill="#D92B2E" points="118.558,102.032 100.161,44.142 61.001,0.153 65.3,45.277"></polygon> <polygon class="bottom" fill="#F38E2E" points="0,102.076 118.518,102.076 65.3,45.277"></polygon> 
+      </svg> </a> 
+     <ul class="nav-list"> 
+      <li><a href="/">Home</a></li> 
+      <li><a href="/archive/">Archive</a></li> 
+      <li><a href="/about/">About</a></li> 
+      <li> <a href="/atom.xml" aria-label="RSS"> 
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" height="16" width="16"> <path fill="currentColor" d="M 4 4.44 v 2.83 c 7.03 0 12.73 5.7 12.73 12.73 h 2.83 c 0 -8.59 -6.97 -15.56 -15.56 -15.56 Z m 0 5.66 v 2.83 c 3.9 0 7.07 3.17 7.07 7.07 h 2.83 c 0 -5.47 -4.43 -9.9 -9.9 -9.9 Z M 6.18 15.64 A 2.18 2.18 0 0 1 6.18 20 A 2.18 2.18 0 0 1 6.18 15.64" /> 
+        </svg> </a> </li> 
+     </ul> 
+    </nav> 
+   </header> 
+   <main id="content" class="content"> 
+    <link rel="stylesheet" href="/stylesheets/post.css?v=1"> 
+    <article class="post hentry container"> 
+     <header class="post-header"> 
+      <h1 class="title entry-title">Maintaining Performance</h1> 
+     </header> 
+     <div class="post-precontent"> 
+      <p class="tldr">Or... How I shaved ~33s off my page load by fixing fonts</p> 
+      <p class="meta">March 20, 2020 </p>
+     </div> 
+     <div class="post-content"> 
+      <p>A while back I was able to shave off ~33 seconds from my page load time by fixing how I load fonts.</p> 
+      <blockquote class="twitter-tweet">
+       <p lang="en" dir="ltr">Shaved off ~33s from my page load this morning by... fixing how I load fonts? <a href="https://t.co/jxcOaf1aS7">pic.twitter.com/jxcOaf1aS7</a></p>— Dave Rupert (@davatron5000) <a href="https://twitter.com/davatron5000/status/1191757369551851520?ref_src=twsrc%5Etfw">November 5, 2019</a>
+      </blockquote> 
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+      <p>Surprising, I know! In my previous attempts to follow cutting-edge best practices I made an honest mistake:</p> 
+      <pre><code>&lt;link rel="preload" href="/fonts/rubik.woff2"/&gt;
+&lt;link rel="preload" href="/fonts/rubik-bold.woff2"/&gt;
+&lt;link rel="preload" href="/fonts/domine.woff2"/&gt;
+&lt;link rel="stylesheet" href="/css/fonts.css" media="print" onload="this.media='all'"&gt;
+</code></pre> 
+      <p>Looks fast, right? I’m <a href="https://www.zachleat.com/web/preload/">preloading my font files</a> so they show up fast as possible and then do a little asynchronous switcheroo to prevent my <code>@font-face</code> rule stylesheet from blocking. Well… I fell into a trap. Preloading three fonts meant other things wouldn’t load as quickly and this became a bottleneck that I didn’t notice due to Service Workers or my fast connection. So I burned it all down and went back to plain ol’ CSS font-face with <code>font-display: swap</code>.</p> 
+      <pre><code>@font-face {
+	font-family: "Rubik";
+	font-display: swap;
+  src: url("/fonts/rubik.woff2") format("woff2"),
+       url("/fonts/rubik.woff") format("woff");
+}
+
+...
+</code></pre> 
+      <p>The <code>font-display</code> property is an amazing new tool that didn’t exist the last time I worked on my site. <code>font-display</code> lets me specify <em>how</em> and <em>when</em> I’d like my fonts to be applied. The <code>swap</code> value means my fonts will “swap” in whenever they’re ready without blocking the page load, which is what I was trying to do with that <a href="https://github.com/filamentgroup/loadCSS/">lazy CSS trick</a>. Now that my fonts are lazily applied, I didn’t even need the separate stylesheet anymore.</p> 
+      <p>It’s a bit counterintuitive, but backing away from preloading tricks resulted in my site becoming much faster, with fewer requests, and became easier to maintain. It’s totally possible layering in <code>preload</code> again would produce a tangible benefit, but I learned a lesson to take a more iterative approach with better monitoring.</p> 
+      <h2>This is all to say…</h2> 
+      <p>This story is less about webfont performance and is actually framing for another point I’m trying to make. I, Dave Rupert, a person who cares about web performance, a person who reads web performance blogs, a person who spends lots of hours trying to keep up on best practices, a person who co-hosts a weekly podcast about making websites and speak with web performance professionals… somehow goofed and added 33 SECONDS to their page load.</p> 
+      <p>I find that Web Performance isn’t particularly difficult once you understand the levers you can pull; reduce kilobytes, reduce requests, unblock rendering, defer scripts. But <em>maintaining performance</em> that’s a different story entirely…</p> 
+      <p>Over time on any project I’ve ever worked on, uncontrollable factors start to creep in; TTFB slow down from your web host, Marketing goes on a tracking script spree in Google Tag Manager, those show third parties have slow third-parties, CPUs have major vulnerabilities, clearing technical debt gets pushed to the backlog, and browsers make minor tweaks to loading algorithms.</p> 
+      <p>“Best Practices”, I tend to feel, change every 6~12 months:</p> 
+      <ul> 
+       <li>“Use <code>preload</code>” obviously didn’t scale for me.</li> 
+       <li>“Use blurry images” could probably be “Use <code>loading="lazy"</code> with <code>height</code> and <code>width</code>” now, but some people feel that <code>loading="lazy"</code> is too eager! 🤷</li> 
+       <li>“Do {X,Y,Z} for fonts” is a never-ending enterprise.</li> 
+       <li>“Bundle your JavaScript” is currently morphing into “Only bundle for IE11”…</li> 
+       <li>Oh, and you should be writing all your non-UI code in workers now…</li> 
+      </ul> 
+      <p>The list goes on. It’s also worth noting Web Performance fixes usually fall under the umbrella of architecture. Updating a best practice tends to be a deep fix and involves updating a build process, a global template, or low-level/highly-depended-on component. Doing and undoing those types of performance changes takes effort.</p> 
+      <p>In my experience, 99% of the time Web Performance boils down to two problems:</p> 
+      <ol> 
+       <li>“You wrote too much JavaScript.”</li> 
+       <li>“You have unoptimized images.”</li> 
+      </ol> 
+      <p>Which, okay. Fine. The JavaScript is pretty hard to dig out of and most companies simply won’t. That’s unfortunate for their users and the self-justification from developers is just white noise to me at this point. The images issue, however, is a fairly ubiquitous one and there’s three ways out of that jam:</p> 
+      <ol> 
+       <li>Pay some service forever.</li> 
+       <li>Concoct some ginormous build process.</li> 
+       <li>Constant vigilance and manual labor to ensure best quality per kilobyte.</li> 
+      </ol> 
+      <p>And doesn’t that just sum up nearly every problem in web development? Use a third-party, build some crufty thing yourself, or spend massive amounts of energy establishing a weak process-based culture. Sometimes I wonder what life would be like if I always chose Option #1.</p> 
+      <h2>Automating away some problems</h2> 
+      <p>I like doing web performance manually, so that I have leathered hands that understand the problem. But given that web performance is a shifting problem and a garden you must tend to, perhaps automating away what I can is a smart choice.</p> 
+      <p>I have a short todo list of automated processes I’d like to try and setup and evaluate before passing these recommendations onto a client. Perhaps I can carve some time out in these dreary times to experiment and play, but that’s asking a lot.</p> 
+      <p>I’m looking at adding <a href="https://github.com/treosh/lighthouse-ci-action/">Lighthouse CI as a Github Action</a>. This way, I could solve the “constant vigilance” problem and move the needle from manual monitoring to proactively be notified of any performance regressions. It would also be cool to use <a href="https://github.com/netlify-labs/netlify-plugin-lighthouse">Lighthouse as a Netlify Build Plugin</a> since I typically use Netlify as a CI, but I don’t think it collects historical data at this point.</p> 
+      <p>Another route would be using something like <a href="https://speedcurve.com/">SpeedCurve</a> or <a href="https://www.calibreapp.com/">Calibre</a> to introduce monitoring. While these services are great, they’re priced more for larger (more competitive) businesses than my personal site. $20~$60 per month for my blog would be a 2.5x~5x increase in operation costs.</p> 
+      <p>I’m also looking at <a href="https://web.dev/install-thumbor/">Using Thumbor as an Image CDN</a> to solve the unoptimized image problem. I’ve long dreamed of being able to self-host my own media server that does all the lossless optimization and adaptive serving (like WebP when supported) for me. This adds a ~$5/month on Digital Ocean maintenance cost just to slim down images. I also just learned that <a href="https://docs.netlify.com/large-media/transform-images/">Netlify Large Media has image transformation</a> but requires moving over to GitLFS and doesn’t appear to do adaptive serving.</p> 
+      <p>I feel if I could get these two automations ironed out, I’d have an easier time <em>maintaining</em> performance at a minimal cost. If you’ve had success on this, I’d love to know more about your setup.</p> 
+     </div> 
+    </article> 
+    <div class="container"> 
+     <style>#carbonads{background: var(--bg); border:1px solid var(--border);padding:0.75em 0.75em 0.25em 0.75em;border-radius:3px}#carbonads a{display:block;color:var(--text);text-decoration:none}#carbonads .carbon-wrap{display:flex;flex-wrap:wrap;flex-direction:row;align-items:center;font-size:13px}#carbonads .carbon-wrap img{width:130px;margin-right:1em}#carbonads .carbon-wrap .carbon-text{flex:1;margin-top:0}#carbonads .carbon-poweredby{font-size:13px}</style> 
+     <script defer type="text/javascript" src="https://cdn.carbonads.com/carbon.js?zoneid=1698&amp;serve=CVYD42E&amp;placement=daverupertcombiz" id="_carbonads_js"></script> 
+    </div> 
+    <div id="comments" class="container"> 
+     <div id="disqus_thread"></div> 
+     <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+
+    // var disqus_config = function () {
+    //   this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+    //   this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    // };
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+
+      s.src = '//daverupert.disqus.com/embed.js';
+      s.defer = true;
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script> 
+     <noscript>
+      Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+     </noscript> 
+    </div> 
+   </main> 
+   <footer class="site-footer"> 
+    <p class="copyright"><a href="/">Home</a> • <a href="/about">About</a> • <a href="/archive">Archive</a> • <a href="/likes">Likes</a> • <a href="/bookshelf">Bookshelf</a> • <a href="/atom.xml">RSS</a></p> 
+    <p class="copyright">© 2020 Dave Rupert • <a href="http://twitter.com/davatron5000">Twitter</a> • <a href="http://github.com/davatron5000/">Github</a></p> 
+   </footer> 
+  </div><!-- end layout --> 
+  <script src="/javascripts/scripts.js?buster=v6" defer></script> 
+  <script>
+    if ('serviceWorker' in navigator) {
+      // Register a service worker hosted at the root of the
+      // site using the default scope.
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.log('Service worker registration succeeded:', registration);
+      }).catch(function(error) {
+        console.log('Service worker registration failed:', error);
+      });
+    } else {
+      console.log('Service workers are not supported.');
+    }
+  </script> <!-- Fathom - simple website analytics - https://github.com/usefathom/fathom --> 
+  <script>
+  (function(f, a, t, h, o, m){
+    a[h]=a[h]||function(){
+      (a[h].q=a[h].q||[]).push(arguments)
+    };
+    o=f.createElement('script'),
+    m=f.getElementsByTagName('script')[0];
+    o.async=1; o.src=t; o.id='fathom-script';
+    m.parentNode.insertBefore(o,m)
+  })(document, window, 'https://stats.daverupert.com/tracker.js', 'fathom');
+  fathom('set', 'siteId', 'JEGDI');
+  fathom('trackPageview');
+  </script> <!-- / Fathom -->  
+ </body>
+</html>

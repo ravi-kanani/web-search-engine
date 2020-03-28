@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <link rel="pingback" href="https://damianpenny.com/xmlrpc.php"> 
+  <title>The DAIMNATION! Blog – Damian J. Penny</title> 
+  <script type="text/javascript">
+  WebFontConfig = {"typekit":{"id":"ena0txi"}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://s0.wp.com/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script>
+  <style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .menu-toggle{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .comment-navigation a, .wf-active .paging-navigation a, .wf-active .post-navigation a{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .site-description{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .archive .page-title, .wf-active .search .page-title{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .entry-meta{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .format-quote blockquote:before{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .format-quote blockquote{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active blockquote cite{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .jetpack-testimonial .entry-title{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active .wp-caption-dd, .wf-active .wp-caption-text{font-family:"abril-text-1","abril-text-2",sans-serif}.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4{font-family:"raleway-1","raleway-2",sans-serif;font-weight:400;font-style:normal}.wf-active h1{font-style:normal;font-weight:400}.wf-active h2{font-style:normal;font-weight:400}.wf-active h3{font-style:normal;font-weight:400}.wf-active h4{font-style:normal;font-weight:400}.wf-active h5, .wf-active h6{font-weight:400;font-style:normal}.wf-active .widget-title{font-family:"raleway-1","raleway-2",sans-serif;font-weight:400;font-style:normal}.wf-active .site-title{font-style:normal;font-weight:400}.wf-active .site-description{font-style:normal;font-weight:400}.wf-active .comments-title{font-style:normal;font-weight:400}.wf-active .front-widget-area .widget-title{font-family:"raleway-1","raleway-2",sans-serif;font-weight:400;font-style:normal}</style> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9kYW1pYW5wZW5ueS5jb20%3D"
+		+ "&wpcomid=18876614"
+		+ "&time=1585342340";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//damianpenny.wordpress.com"> 
+  <link rel="alternate" type="application/rss+xml" title="Damian J. Penny » Feed" href="https://damianpenny.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Damian J. Penny » Comments Feed" href="https://damianpenny.com/comments/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s0.wp.com/_static/??-eJylU9lywjAM/KE6amAg5aHTb7ET4Yr6yPggzd9XwdDhKGmnvHgke3e1lmUYetF6l9AlsFn0JmtyEYa+9VZESwbHq6xqY3yCn2nktuQojd/BDfiE1JlThUHzSUBoqqaqQWUyHSjj2w9hSAUZRohpNPgHmQMrwg5TLye6HH1OQgfq/isRZCKn4y/0bTZGREoosKOJcGwGrJf1slkvNoB7xjMvu9T5wZUyD6ueXCayaMjhw4Jsizd9TPHosKOYYE843BVt/bFldbV4rmpxmJPCKwdVMXV41wesFVeGdc+tXe/ODeY0ZLxve5kmhOVKEg1ahs3RyuAr1QeMUfBqKVuR3pk4+w80OgzEB3fCG26RhD4riGjknce8RpFrC7J0fvYm1GlM3GzZovJ++l8fHHzeqXRxFy+4vfwZvLtIxNZICnPUgNNQcaiBUWfpRHqzr/XqZbVcbJpms/sCVdGwiQ==?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <style id="sela-style-inline-css">
+.cat-links, .cat-links + .sep { clip: rect(1px, 1px, 1px, 1px); height: 1px; position: absolute; overflow: hidden; width: 1px; }
+</style> 
+  <link rel="stylesheet" id="print-css-1-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s1.wp.com/_static/??-eJxlzEEOwiAQheELiROsYF0YzwKIdHQYms40xttbkxpN3L3F9354jCY11swKdTYjzQVZICTFxjFM37VNIhv44R97nYmMoGaTL6jIZa2A72x38LsjFGoxLEaflAVEg2KCSIHvf1Edcl3MsF9Pb3CuJ+t6Z53rrb+9ACKOP/E=?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s2.wp.com/_static/??-eJx9zk0KhDAMBeALWYtIZTbiWfyJ0mLS2qQM3t4KymwcIZBFPt6L/gZlaVzTBKxdni1B3K9VOi70G1Bol9gLlGjpxqMnAZLTBs+CwNwv8HBFP9gVVGKIGZDkmtk/VXL4pf//9VIdtpUxn9o0jandAcDzUjU="></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://damianpenny.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Damian J. Penny"> 
+  <meta property="og:description" content="Family and Criminal Law - Dartmouth, Nova Scotia"> 
+  <meta property="og:url" content="https://damianpenny.com/blog/"> 
+  <meta property="og:site_name" content="Damian J. Penny"> 
+  <meta property="og:image" content="https://s0.wp.com/i/blank.jpg"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:creator" content="@damianpenny"> 
+  <meta name="twitter:site" content="@damianpenny"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="apple-touch-icon" href="https://s2.wp.com/i/webclip.png"> 
+  <link rel="openid.server" href="https://damianpenny.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://damianpenny.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://damianpenny.com/osd.xml" title="Damian J. Penny"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <meta name="theme-color" content="#f0f0f0"> 
+  <meta name="application-name" content="Damian J. Penny">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="Family and Criminal Law - Dartmouth, Nova Scotia">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://damianpenny.com/feed/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Family and Criminal Law - Dartmouth, Nova Scotia"> 
+  <style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f0f0f0; }
+</style> 
+  <style type="text/css" id="custom-colors-css">.nav-menu>li>a:after{color:rgba(0,0,0,.3)}.main-navigation a,.social-links ul a:before{color:#494949}.menu-toggle,.menu-toggle:hover,.menu-toggle:focus{color:#494949}.main-navigation.toggled ul ul,.main-navigation.toggled ul ul a{color:#494949}.site-info a{color:#fff}.main-navigation a:hover,.main-navigation ul>:hover>a,.main-navigation ul>.focus>a{color:#494949}.main-navigation li.current_page_item>a,.main-navigation li.current-menu-item>a{color:#494949}.main-navigation li.current_page_item>a .sub-menu li a,.main-navigation li.current-menu-item>a .sub-menu li a,.main-navigation ul ul li.current_page_item>a,.main-navigation ul ul li.current-menu-item>a{color:#4f4f4f}body{background-color:#f0f0f0}.main-navigation,button{background-color:#74ccd1}a,.entry-title a:hover,.comment-meta a,.jetpack-testimonial .entry-title{color:#2b797c}.widget_flickr #flickr_badge_uber_wrapper td a:last-child,.widget-area .milestone-countdown .difference{color:#2b797c}.main-navigation ul ul a:hover,.main-navigation ul ul>li.focus>a{color:#2b797c}input[type="button"],input[type="reset"],input[type="submit"],#infinite-handle span{background-color:#2b797c}input[type="text"]:focus,input[type="email"]:focus,input[type="password"]:focus,input[type="search"]:focus,input[type="url"]:focus,textarea:focus{border-color:#2b797c}.social-links ul a:before,.footer-widget-area button{background-color:#74ccd1}.site-info a:hover{color:#74ccd1}.footer-widget-area a:hover{color:#297679}</style> 
+ </head> 
+ <body class="blog custom-background customizer-styles-applied display-header-text categories-hidden highlander-enabled highlander-light custom-colors infinite-scroll"> 
+  <div id="page" class="hfeed site"> 
+   <header id="masthead" class="site-header" role="banner"> <a class="skip-link screen-reader-text" href="#content" title="Skip to content">Skip to content</a> 
+    <div class="site-branding"> <a href="https://damianpenny.com/" class="site-logo-link" rel="home" itemprop="url"></a> 
+     <h1 class="site-title"><a href="https://damianpenny.com/" title="Damian J. Penny" rel="home">Damian J. Penny</a></h1> 
+     <h2 class="site-description">Family and Criminal Law – Dartmouth, Nova Scotia</h2> 
+    </div><!-- .site-branding --> 
+    <nav id="site-navigation" class="main-navigation" role="navigation"> <button class="menu-toggle" aria-controls="menu" aria-expanded="false">Menu</button> 
+     <div class="menu">
+      <ul> 
+       <li><a href="https://damianpenny.com/">Home</a></li>
+       <li class="page_item page-item-15866"><a href="https://damianpenny.com/about-damian-j-penny/">About Damian J.&nbsp;Penny</a></li> 
+       <li class="page_item page-item-14424"><a href="https://damianpenny.com/contact-me/">Contact Me</a></li> 
+       <li class="page_item page-item-15890 current_page_item"><a href="https://damianpenny.com/blog/" aria-current="page">The DAIMNATION! Blog</a></li> 
+      </ul>
+     </div> 
+    </nav><!-- #site-navigation --> 
+   </header><!-- #masthead --> 
+   <div id="content" class="site-content"> 
+    <div id="primary" class="content-area"> 
+     <main id="main" class="site-main" role="main"> 
+      <article id="post-16440" class="post-16440 post type-post status-publish format-standard hentry category-uncategorized tag-coronavirus tag-courts tag-covid-19 tag-family-law-2 tag-law tag-nova-scotia-2 without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/03/27/covid-19-and-the-courts/" rel="bookmark">COVID-19 and the&nbsp;courts</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/03/27/covid-19-and-the-courts/" title="Permalink to COVID-19 and the&nbsp;courts" rel="bookmark"><time class="entry-date published" datetime="2020-03-27T09:16:59-03:00">March 27, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/03/27/covid-19-and-the-courts/#respond">Leave a comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p><a rel="noreferrer noopener" href="https://www.courts.ns.ca/News_of_Courts/COVID19_Preventative_Measures.htm" target="_blank">The courts of Nova Scotia have issued several memoranda</a> explaining how its practices and procedures have been affected by the coronavirus pandemic: </p> 
+         <ul>
+          <li><a rel="noreferrer noopener" href="https://www.courts.ns.ca/News_of_Courts/documents/NSSC_E-Filing_NR_03_26_20.pdf" target="_blank">the Supreme Court is now only accepting filings electronically</a>.</li>
+          <li><a rel="noreferrer noopener" href="https://www.courts.ns.ca/News_of_Courts/documents/NSSCFD_Scheduling_Guidelines_03_26_20.pdf" target="_blank">the Supreme Court (Family Division)</a> and <a rel="noreferrer noopener" href="https://www.courts.ns.ca/News_of_Courts/documents/NSFC_Measures_03_18_20.pdf" target="_blank">Nova Scotia Family Court</a> have switched to an “essential services” docket, hearing only adult- and child-protection matters, cases where a child has been abducted, and matters deemed emergencies. Even these matters are being held by conference call whenever possible.</li>
+          <li><a rel="noreferrer noopener" href="https://www.courts.ns.ca/documents/Fines_Defaults_NR_03_20_20.pdf" target="_blank">in the Provincial Court</a>, the deadline for payment of many fines has been extended, and for the time being, no one will be automatically convicted for a parking or riving offence if they don’t show up at for their court appearance.</li>
+         </ul> 
+         <p>If you are dealing with any legal matters at the moment, make sure to contact your lawyer and check the courts website to see how your case is being affected. </p> 
+         <p>As for me, my office is closed to the public and I’m working from home. But I’m still meeting with clients when needed – albeit by teleconference or video calling apps. My contact information remains the same, but regular mail may be delayed – email or fax is the best way to get a hold of me.</p> 
+         <p>In the meantime, stay home and keep washing those hands!</p> 
+         <figure class="wp-block-image size-large">
+          <img data-attachment-id="16445" data-permalink="https://damianpenny.com/annotation-2020-03-27-091213/" data-orig-file="https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg" data-orig-size="543,704" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="annotation-2020-03-27-091213" data-image-description="" data-medium-file="https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg?w=231" data-large-file="https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg?w=543" src="https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg?w=543" alt="" class="wp-image-16445" srcset="https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg 543w, https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg?w=116 116w, https://damianpenny.files.wordpress.com/2020/03/annotation-2020-03-27-091213.jpg?w=231 231w" sizes="(max-width: 543px) 100vw, 543px">
+         </figure> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16434" class="post-16434 post type-post status-publish format-standard hentry category-uncategorized tag-coronavirus tag-covid19 tag-halifax tag-italy tag-nova-scotia-2 tag-social-isolation tag-washington-post without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/03/16/if-you-dont-have-to-go-out-dont-go-out/" rel="bookmark">If you don’t have to go out, don’t go&nbsp;out.</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/03/16/if-you-dont-have-to-go-out-dont-go-out/" title="Permalink to If you don’t have to go out, don’t go&nbsp;out." rel="bookmark"><time class="entry-date published" datetime="2020-03-16T09:14:32-03:00">March 16, 2020</time><time class="updated" datetime="2020-03-18T20:50:57-03:00">March 18, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/03/16/if-you-dont-have-to-go-out-dont-go-out/#comments">2 Comments</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p><a href="https://globalnews.ca/news/6679577/coronavirus-nova-scotia/">The novel coronavirus has arrived in Nova Scotia.</a> Or, perhaps it’s more accurate to say the virus has been here for some time, and we’re just getting confirmation now. It takes a few days for symptoms to appear, so anyone reading (or writing) this could have it without even realizing.</p> 
+         <p>The top priority for now is keeping the spread of the virus to a minimum, to avoid strain on the health care system. That means practicing “social distancing” to the greatest extent possible:</p> 
+         <figure class="wp-block-embed-youtube wp-block-embed is-type-rich wp-embed-aspect-16-9 wp-has-aspect-ratio">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="jetpack-video-wrapper">
+            <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="620" height="349" src="https://www.youtube.com/embed/Gev15o6zd-Y?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+           </div> 
+          </div>
+         </figure> 
+         <p>Remember, even if you aren’t sick, you may be carrying the virus without knowing it. And even if you’re young and healthy, you will inevitably come into contact with the elderly, people with chronic breathing problems, and other members of vulnerable groups.</p> 
+         <p><a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/"><em>The Washington Post</em> has posted the best article I’ve seen</a>, illustrating how the coronavirus can spread and how social distancing can keep the problem manageable. The <em>Post</em> uses some very clever (and unnerving) animations to explain some complicated mathematical and scientific concepts. (There’s a reason I went into law instead of a STEM field.)</p> 
+         <p>Court appearances in the coming weeks will be affected, as well. I am now working from home as much as possible, and changing all in-person appointments to phone or videoconference meetings. If you are one of my clients, I will be in touch.</p> 
+         <p>It’s time to take this seriously, but don’t panic. And even though we may have to physically stay home, we can still keep in touch with our friends, relatives and neighbours through social media. Or, if you’re in Italy, by singing on your balcony:</p> 
+         <figure class="wp-block-embed-youtube wp-block-embed is-type-rich wp-embed-aspect-16-9 wp-has-aspect-ratio">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="jetpack-video-wrapper">
+            <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="620" height="349" src="https://www.youtube.com/embed/x_rLw6SCSmE?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+           </div> 
+          </div>
+         </figure> 
+         <p> Don’t worry, everyone: I promise <em>not</em> to sing to you in public, unless the authorities need me to help disperse a crowd.</p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16430" class="post-16430 post type-post status-publish format-standard hentry category-uncategorized tag-coronavirus tag-covid19 tag-netflix tag-streaming tag-washington-post tag-yahoo-finance without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/03/10/how-coronavirus-could-hurt-netflix/" rel="bookmark">How Coronavirus could hurt&nbsp;Netflix</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/03/10/how-coronavirus-could-hurt-netflix/" title="Permalink to How Coronavirus could hurt&nbsp;Netflix" rel="bookmark"><time class="entry-date published" datetime="2020-03-10T15:12:00-03:00">March 10, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/03/10/how-coronavirus-could-hurt-netflix/#comments">1 Comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p>As we watch the coronavirus continue to spread and process the shocking news that <a href="https://www.cnbc.com/2020/03/09/italy-extends-its-quarantine-to-the-entire-country-pm-asks-residents-to-stay-at-home.html">the entire nation of Italy is putting itself under quarantine</a>, people seem to assume the coming<a href="https://www.cbsnews.com/news/coronavirus-social-distancing-definition-us-cases/"> “social distancing”</a> will be good for Netflix if nobody else. If we’re all stuck at home we’ll all be watching it, right?</p> 
+         <p>Yes, we likely will. And <a href="https://finance.yahoo.com/news/why-the-coronavirus-outbreak-is-bad-for-netflix-analyst-160902317.html">this Yahoo! Finance article</a> explains why that could actually be <em>bad</em> for the most successful streaming service:</p> 
+         <blockquote class="wp-block-quote">
+          <p>Netflix (<a href="https://finance.yahoo.com/quote/NFLX?p=NFLX&amp;.tsrc=fin-srch">NFLX</a>) will be yet another company dented by the global coronavirus outbreak, according to Needham analyst Laura Martin.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>[…]</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>…having more people at home to binge more hours of Netflix won’t necessarily translate into higher revenue for the company, Martin pointed out.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>“NFLX charges a fixed price of $9-$16/month in the U.S., regardless of how many hours are watched,” Martin said. “More hours viewed by existing subs are not monetized by NFLX.”</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>Netflix does not offer an ad-driven tier and has so far declined to take on an advertising-based business model, despite broad investor speculation as more competitors join the fray. That decision prevents Netflix from capitalizing on any upside from increased viewership that could arise as social distancing increases with the coronavirus outbreak, Martin said.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>And given that Netflix was already saturated in the U.S. at 61 million domestic subscribers as of December 31, “it’s unlikely that COVID-19 adds new U.S. subs,” Martin said</p>
+         </blockquote> 
+         <p>If anything, their problem is that’s they’re too successful, at least in North America. Pretty much everyone who wants it already has it, so there’s not much room to grow. And the price doesn’t change no matter how much we watch. But the more we stream, the more Netflix has to spend to keep its servers running.</p> 
+         <p>Netflix is an all-you-can-eat buffet, and we’re all Homer Simpson.</p> 
+         <figure class="wp-block-embed-youtube wp-block-embed is-type-rich wp-embed-aspect-16-9 wp-has-aspect-ratio">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="jetpack-video-wrapper">
+            <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="620" height="349" src="https://www.youtube.com/embed/od0lwDxnB8o?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+           </div> 
+          </div>
+         </figure> 
+         <p>I can see some of the other streaming services picking up business while we’re all confined to our homes, though. And maybe, just maybe, could this be something that gets people buying subscriptions to newspapers and magazines again? A heavily discounted online subscription to, say, <em>The Washington Post</em> (and it’s <em>always</em> heavily discounted) could be very enticing at a time like this.</p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16417" class="post-16417 post type-post status-publish format-standard hentry category-uncategorized tag-2020-election tag-bernie-sanders tag-donald-trump tag-joe-biden tag-joe-walsh without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/26/nevertrump-means-never-trump/" rel="bookmark">#NeverTrump means Never&nbsp;Trump</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/26/nevertrump-means-never-trump/" title="Permalink to #NeverTrump means Never&nbsp;Trump" rel="bookmark"><time class="entry-date published" datetime="2020-02-26T13:27:47-04:00">February 26, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/26/nevertrump-means-never-trump/#comments">2 Comments</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p><a href="https://www.washingtonpost.com/outlook/2020/02/25/joe-walsh-im-no-fan-bernie-sanders-nevertrump-means-never-trump/">Joe Walsh</a> (not the “Ordinary Average Guy” guy, but the former Illinois Congressman) says he will not be voting for Trump under any circumstances. Yes, even if the Democrats nominate socialist Bernie Sanders:</p> 
+         <blockquote class="wp-block-quote">
+          <p>No, never-Trump isn’t an official designation. It’s not (yet) a political party. It’s not a club with bylaws. But it is an idea. It means that President Trump — his impeachable conduct, his nonstop racist jabs, his tariffs, his nepotism, his knee-jerk foreign policy and his insistence on turning the presidency into a cult of personality — is the real bridge too far, not Sen. Sanders.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>Never-Trump means that you still believe in the Constitution. It means you knew what Benjamin Franklin meant when he warned that we Americans have been blessed with a republic, “<a href="https://blogs.loc.gov/teachers/2016/09/a-republic-if-you-can-keep-it/">if you can keep it</a>.” It means you recognize that Trump is enough of a threat to our founding principles that you won’t vote for him under&nbsp;<em>any</em>&nbsp;circumstances. And, at least to me, it also means you’ll suck it up and support his Democratic opponent, no matter who that is.&nbsp; …</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>[…]</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>In 2016, sadly, I supported Trump. [<a href="https://twitter.com/walshfreedom/status/791369493809201152?lang=en">Did he ever</a> – DP] I freely admit that I’m a second-wave never-Trumper. But once I got here, it was always my plan to stay. Because, for me, the ways in which Trump threatens this country go beyond left-right ideology.&nbsp;<a href="https://www.washingtonpost.com/politics/2020/01/20/president-trump-made-16241-false-or-misleading-claims-his-first-three-years/?tid=lk_inline_manual_15&amp;itid=lk_inline_manual_15">He lies constantly</a>. He grants pardons to toadies. He&nbsp;<a href="https://www.washingtonpost.com/outlook/2019/08/28/whats-trumps-idea-america-first-g-cash-flowing-his-golf-resort/?tid=lk_inline_manual_15&amp;itid=lk_inline_manual_15">conflates</a>&nbsp;America’s financial interests with his own. He uses his bully pulpit to air a never-ending, year-round list of Festivus grievances.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>He surrounds himself with lackeys and purges staff who won’t do his bidding. He’s an authoritarian who once&nbsp;<a href="https://www.washingtonpost.com/politics/2019/07/23/trump-falsely-tells-auditorium-full-teens-constitution-gives-him-right-do-whatever-i-want/?tid=lk_inline_manual_16&amp;itid=lk_inline_manual_16">said</a>, with a straight face, “I have an Article II, where I have the right to do whatever I want.” That’s a bigger threat to America than free college, a $15-per-hour minimum wage and Glass-Steagall part deux. Yes, I’m a fiscal conservative who still worries about the national debt. But not as much as I worry about Trump wrecking my country.</p>
+         </blockquote> 
+         <p>I really, really, <em>really</em> don’t want Sanders as the alternative to Trump. But even he won’t be…this.</p> 
+         <figure class="wp-block-embed-twitter wp-block-embed is-type-rich">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="embed-twitter">
+            <blockquote class="twitter-tweet" data-width="550" data-dnt="true">
+             <p lang="en" dir="ltr">Somebody please tell incompetent (thanks for my high poll numbers) &amp; corrupt politician Adam “Shifty” Schiff to stop leaking Classified information or, even worse, made up information, to the Fake News Media. Someday he will be caught, &amp; that will be a very unpleasant experience!</p>— Donald J. Trump (@realDonaldTrump) <a href="https://twitter.com/realDonaldTrump/status/1231647192181460993?ref_src=twsrc%5Etfw">February 23, 2020</a>
+            </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+           </div> 
+          </div>
+         </figure> 
+         <p><a href="https://thehill.com/homenews/campaign/484402-poll-biden-holds-15-point-lead-in-south-carolina">It won’t necessarily be Sanders, though.</a></p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16411" class="post-16411 post type-post status-publish format-standard hentry category-uncategorized tag-1972-election tag-2020-election tag-charlie-sykes tag-mcgovern tag-muskie tag-nixon without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/21/its-1972-again/" rel="bookmark">It’s 1972 again</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/21/its-1972-again/" title="Permalink to It’s 1972 again" rel="bookmark"><time class="entry-date published" datetime="2020-02-21T09:19:14-04:00">February 21, 2020</time><time class="updated" datetime="2020-03-09T12:09:18-03:00">March 9, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/21/its-1972-again/#comments">1 Comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p>Last July, <em>The Bulwark</em>‘s Charlie Sykes warned Democrats that 2020 could easily turn into a repeat of 1972 – when their party gambled on a far-left candidate to take on an unpopular, divisive President. The result:</p> 
+         <figure class="wp-block-image size-large">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/1972_Electoral_Map.png/975px-1972_Electoral_Map.png" alt="">
+         </figure> 
+         <p><a href="https://www.politico.com/magazine/story/2019/07/16/memo-to-dems-youre-playing-into-trumps-hands-227362">Read it all</a>, and tell me if you think the party has learned a friggin’ thing from 1972. Or 2016. Or 2018, when “The Squad” got all the attention after winning in overwhelmingly Democratic districts, but moderate Democrats actually flipped the House.</p> 
+         <blockquote class="wp-block-quote">
+          <p>So, let’s talk about the 1972 election.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>In the year leading up to it, the Democrats were giddy with anticipation. The country was still mired in a bloody war, the economy was a mess, and President Richard Nixon, while lacking Trump’s theatricality and instability, was regarded with fear and loathing by much of the country. In the&nbsp;<a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/1970_United_States_elections" target="_blank">1970 midterms</a>, Democrats won the popular vote in House races by 8.7 percent, while adding a dozen seats. In 1971, Nixon’s approval ratings dipped below 50 percent, and stayed there. Surely, they told themselves, they could beat this guy.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>Nixon’s vulnerability attracted a host of potential challengers, with Senator Edmund Muskie, a previous vice-presidential candidate, as the front-runner. He had gravitas;&nbsp;<em>The Times</em>&nbsp;opined that “No national leader since Franklin Roosevelt has been better than Mr. Muskie in delivering a conventional ‘fireside chat.’”</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>But they noted that despite Muskie’s appeal, many Democrats “believe the times call for radical change.” For some Democrats, Muskie “appears a little too cautious. He evokes respect, but not enthusiasm.”</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>This “mild dissatisfaction” gave an opening to a far more liberal candidate, one who spoke to the activated left of the party, George McGovern. For Democrats who shared McGovern’s anti-war passions, his record “establishes his moral superiority,” the&nbsp;<em>Times</em>&nbsp;wrote. But it also noted that others feared that “his views have too sharp a cutting edge and would energize as many elements as he won over.”</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>That turned out to drastically underestimate McGovern’s weakness. As unpopular as he was, Nixon would go on to win 49 of 50 states, 520 electoral votes, and nearly 61 percent of the popular vote, beating McGovern by nearly 18 million votes.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>It’s possible that Nixon would have beaten any Democrat, but what happened in 1972 was not inevitable. It was, however, a choice. Democrats chose to move sharply left – to indulge their ideological id. Nixon ran against the party of “Acid, Amnesty, and Abortion.” The result was a massive landslide for a vulnerable incumbent.</p>
+         </blockquote> 
+         <p>The relatively moderate and well-regarded Edmund Muskie was actually taken down by the Nixon campaign’s <a href="https://www.usnews.com/news/articles/2008/01/17/72-front-runners-tears-hurt">dirty tricks</a>. Again, <a href="https://www.nbcnews.com/politics/2020-election/rival-campaigns-say-trump-ukraine-hits-are-warning-biden-n1125996">history repeats itself.</a></p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16407" class="post-16407 post type-post status-publish format-standard hentry category-uncategorized tag-auto-racing tag-dale-earnhardt tag-daytona-500 tag-ford tag-motorsports tag-nascar tag-ryan-newman tag-vw without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/19/iron-newman/" rel="bookmark">Iron Newman</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/19/iron-newman/" title="Permalink to Iron Newman" rel="bookmark"><time class="entry-date published" datetime="2020-02-19T15:21:12-04:00">February 19, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/19/iron-newman/#comments">1 Comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p>After Ryan Newman’s <a href="https://www.cnn.com/2020/02/17/us/nascar-ryan-newman-accident/index.html">horrific crash</a> at the end of the Daytona 500 on Monday night – a wreck that looked much worse than the ones that claimed the lives of Ayrton Senna and Dale Earnhardt – I never in my wildest dreams imagined I’d see this less than 48 hours later:</p> 
+         <figure class="wp-block-embed-twitter wp-block-embed is-type-rich">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="embed-twitter">
+            <blockquote class="twitter-tweet" data-width="550" data-dnt="true">
+             <p lang="en" dir="ltr">Ryan Newman has been treated and released from Halifax Medical Center <a href="https://t.co/J0twhGgQm7">pic.twitter.com/J0twhGgQm7</a></p>— Roush Fenway (@roushfenway) <a href="https://twitter.com/roushfenway/status/1230201168091078656?ref_src=twsrc%5Etfw">February 19, 2020</a>
+            </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+           </div> 
+          </div>
+         </figure> 
+         <p>I was relieved when I heard that Newman had survived the crash, but still assumed it may have ended his racing career. At the very least, I figured he was probably done for a few months. And here he is now, accompanied by his young daughters, walking out of the hospital under his own power.</p> 
+         <p>A miracle? No argument here. But also <a href="https://www.usatoday.com/story/sports/nascar/2020/02/19/ryan-newman-daytona-500-crash-survival-safety-luck/4801033002/">a testament to how far motorsports safety has come</a> since The Intimidator was killed at the very same race nineteen years ago:</p> 
+         <blockquote class="wp-block-quote">
+          <p>…the short answer is that&nbsp;<a rel="noreferrer noopener" href="https://www.usatoday.com/story/sports/ftw/2020/02/18/steps-nascar-taken-safety-ryan-newman-daytona-crash/41237289/" target="_blank">safety improvements at NASCAR races</a>&nbsp;have made it &nbsp;more unlikely for drivers to die while competing after the death of legendary driver Dale Earnhardt in the same race 19 years ago. They might have even helped save Newman, whose injuries aren’t publicly known.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>“It’s been amazing,” said Terry Trammell, a racing safety consultant and retired orthopedic surgeon. “They’ve turned this whole thing around over time.”</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>Mandated head and neck restraints (<a rel="noreferrer noopener" href="https://www.hansdevice.com/head-and-neck-restraints" target="_blank">HANS devices</a>), along with energy-absorbing walls (<a rel="noreferrer noopener" href="https://sports.usatoday.com/2015/04/30/dean-sicking-safer-barriers-nascar-indycar/" target="_blank">SAFER barriers</a>), are among the biggest safety advancements since Earnhardt died of head injuries after slamming into a wall at Daytona International Speedway in 2001.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>In 2003, NASCAR also opened a research and development center in North Carolina – the first such R&amp;D center owned and operated by a sanctioning body of a major motor sports series. Part of its mission is to track &nbsp;crashes and study safety, helping give NASCAR nearly two decades without driver deaths in its three national series – a seemingly shocking statistic considering the risks involved.&nbsp;</p>
+         </blockquote> 
+         <p>NASCAR has made many, many mistakes since its heyday in the late nineties and early 2000s – too many cookie-cutter tracks, constant messing with the points system – but they’ve certainly gotten this right. The sport’s next major challenge will be <a href="https://www.cnet.com/roadshow/news/volkswagen-motorsport-electric-race-car-idr/">the inevitable transition away from gasoline-powered cars</a>:</p> 
+         <blockquote class="wp-block-quote">
+          <p><a href="https://www.cnet.com/roadshow/make/volkswagen/">Volkswagen</a>&nbsp;has made it quite clear that its future is electric, but its&nbsp;<a href="https://www.cnet.com/tags/motorsport/">motorsport</a>&nbsp;division, appropriately called Volkswagen Motorsport, is following the leader.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>This past Friday, VW Motorsport announced it has ended development of racing vehicles that feature an internal combustion engine. In translation, gasoline-powered race cars are officially a thing of the past at VW Motorsport. Instead, it’s going all in on electric vehicles. Even though the division is saying goodbye to the engine as we know it, the company is excited about the things to come.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>The&nbsp;<a href="https://www.cnet.com/news/volkswagen-id-r-electric-car-nurburgring-lap-record-attempt/">ID R race car</a>&nbsp;will remain the division’s ambassador, so to speak, and the production MEB electric car platform will also spawn new zero-emissions race cars, too. The ID R has been a&nbsp;<a href="https://www.cnet.com/news/vw-id-r-electric-tianmen-mountain-china/">beast on numerous race tracks and courses</a>&nbsp;around the world. It owns the electric car l<a href="https://www.cnet.com/news/vw-id-r-electric-race-car-nurburgring-lap-record/">ap record at the Nurburgring Nordschleife</a>, perhaps the crown jewel of its achievements thus far.</p>
+         </blockquote> 
+         <p>A few years from now, Newman’s NASCAR Mustang might be a <a href="https://www.ford.com/suvs/mach-e/2021/">Mach E.</a></p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16403" class="post-16403 post type-post status-publish format-standard hentry category-uncategorized tag-canada tag-courts tag-jody-wilson-raybould tag-judges tag-judicial-appointments tag-justin-trudeau tag-liberals without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/18/the-partisan-judiciary/" rel="bookmark">The partisan judiciary</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/18/the-partisan-judiciary/" title="Permalink to The partisan judiciary" rel="bookmark"><time class="entry-date published" datetime="2020-02-18T09:30:58-04:00">February 18, 2020</time><time class="updated" datetime="2020-02-18T09:31:43-04:00">February 18, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/18/the-partisan-judiciary/#comments">1 Comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p>As usual, <a href="https://www.theglobeandmail.com/politics/article-e-mails-reveal-network-of-liberal-officials-involved-in-judicial/">if you want to know what a political party is really up to, look at what they accuse their opponents of doing</a>:</p> 
+         <blockquote class="wp-block-quote">
+          <p>The Liberal government relies on a large network of party officials and supporters to decide which lawyers receive sought-after judicial appointments, e-mails obtained by The Globe and Mail show.</p>
+          <p>Liberal MPs, ministerial staff members and even party volunteers have been involved in candidate vetting since the federal government revamped the process in 2016, after having accused the previous Conservative government of politicizing appointments.</p>
+         </blockquote> 
+         <p>In the United States, where the process of appointing judges is blatantly based on partisan loyalties, you pretty much have to belong to the President’s political party if you ever want to make it to the Bench. Here in Canada, um…</p> 
+         <blockquote class="wp-block-quote">
+          <p>The dozens of e-mails between ministerial staffers from 2017 and 2018 detail widespread partisan involvement in the selection of new judges, offering unprecedented insight into the inner workings of the current judicial appointment process. The e-mails also show clear tensions during that time frame between the minister of justice’s office, which handles the appointment process, and the Prime Minister’s Office, which collaborates on those decisions.</p>
+          <p>The PMO ensures Liberal MPs are consulted on all nominations in their ridings, the e-mails show, using the judicial candidates’ postal codes to determine where they live. In 2018, a member of the PMO’s appointment branch asked then-justice minister Jody Wilson-Raybould’s office for the results of MP consultations for more than a dozen candidates, despite the concerns of her judicial affairs adviser, François Giroux.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>[…]</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>The Globe reported last year that the PMO also vets potential candidates with a private Liberal Party database called Liberalist to see whether they had given money to the party in recent years, participated in party activities and even put up Liberal election signs.</p>
+         </blockquote> 
+         <p>Honestly, none of this comes as a surprise, and I’ll go even further and say involvement with the governing political party shouldn’t disqualify you from being appointed as a judge. We lawyers are definitely over-represented in government and politics – heck, the reason <em>I</em> went to law school was because I didn’t know what else I could do with my political science degree – and being a party hack doesn’t mean you aren’t qualified.</p> 
+         <p>My only wish is that we stop pretending this <em>doesn’t</em> happen.</p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16396" class="post-16396 post type-post status-publish format-standard hentry category-uncategorized tag-aboriginal-law tag-british-columbia tag-canada tag-elected-chiefs tag-first-nations tag-hereditary-chiefs tag-wetsuweten without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/14/the-wetsuweten-conundrum/" rel="bookmark">The Wet’suwet’en conundrum</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/14/the-wetsuweten-conundrum/" title="Permalink to The Wet’suwet’en conundrum" rel="bookmark"><time class="entry-date published" datetime="2020-02-14T10:38:45-04:00">February 14, 2020</time><time class="updated" datetime="2020-03-09T12:09:19-03:00">March 9, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/14/the-wetsuweten-conundrum/#comments">1 Comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p>As cross-country protests continue, <a href="https://www.ctvnews.ca/canada/wet-suwet-en-what-s-the-difference-between-the-elected-band-council-and-hereditary-chiefs-1.4811453">CTV News</a> has an explainer about the difference between hereditary chiefs and elected ones, and their different perspectives on the pipeline project that ignited this powder keg:</p> 
+         <blockquote class="wp-block-quote">
+          <p>Protests across the country in support of the Wet’suwet’en hereditary chiefs have prompted questions surrounding the difference between these chiefs and elected band councils — and the answer is complicated.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>Essentially, the hereditary chiefs oversee the management of traditional lands and their authority predates the imposed colonial law, which formed the elected band council.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>While the band council is in support of the Coastal GasLink pipeline, the hereditary chiefs are not.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>[…]</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>Hereditary chiefs represent different houses that make up the First Nation as a whole. Their titles are passed down through generations and predate colonization.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>“The hereditary chiefs draw their authority from Wet’suwet’en law, so their law is the law that pre-exists colonization in the territory,” Kim Stanton, a lawyer at Goldblatt Partners LLP who specializes in Aboriginal law, told CTVNews.ca in a phone interview Thursday.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>“The hereditary chiefs’ authority is with respect to all of their ancestral lands and those are the lands that they’re seeking to protect.”</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>In 1997, the Wet’suwet’en people were part of Delgamuukw v. British Columbia, which ultimately upheld Indigenous peoples’ land claims to land that had never been ceded through a treaty, which includes Wet’suwet’en Nation and much of British Columbia.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>[…]</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>On the other hand, elected band councils — as the title suggests — are elected members of the community.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>These councils were the result of the Indian Act, which was first established in 1876 and defined how the Canadian government interacts with Indigenous people. They were formed to impose a leadership structure that more resembled Canada’s system of governance.</p>
+         </blockquote> 
+         <blockquote class="wp-block-quote">
+          <p>“They don’t have the authority under the Indian Act to make decisions on traditional territory,” Pam Palmater, an Indigenous lawyer and the chair in Indigenous Governance at Ryerson University, told CTV’s Power Play on Thursday.</p>
+         </blockquote> 
+         <p>On its surface, this is about a pipeline project. Fundamentally, it’s about whether the traditional Wet’suwet’en lands – and other First Nations’ territories that were never formally ceded by treaty – are under Canadian authority at all. This dispute has barely even started.</p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16393" class="post-16393 post type-post status-publish format-standard hentry category-uncategorized tag-airplane-seats tag-reclining-seats tag-social-media tag-twitter tag-whats-the-deal-with-airline-food without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/13/the-recline-of-western-civilization/" rel="bookmark">The Recline of Western&nbsp;Civilization</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/13/the-recline-of-western-civilization/" title="Permalink to The Recline of Western&nbsp;Civilization" rel="bookmark"><time class="entry-date published" datetime="2020-02-13T08:25:38-04:00">February 13, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/13/the-recline-of-western-civilization/#comments">2 Comments</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p>Never mind the election or climate change or the corona virus or anti-pipeline protests. This is the moral dilemma going viral on Twitter today:</p> 
+         <figure class="wp-block-embed-twitter wp-block-embed is-type-rich">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="embed-twitter">
+            <blockquote class="twitter-tweet" data-width="550" data-dnt="true">
+             <p lang="en" dir="ltr">This video has the internet legitimately divided .<br><br>Dude is in the last seat on the plane. Seat doesn’t recline.<br><br>Hers does. And she reclines.<br><br>He’s upset, and is punching her seat incessantly— so she records.<br><br>Who is right?!<br>Who is wrong?!<br><br>See you at 7p on <a href="https://twitter.com/hashtag/FOX5LION?src=hash&amp;ref_src=twsrc%5Etfw">#FOX5LION</a><a href="https://twitter.com/fox5dc?ref_src=twsrc%5Etfw">@fox5dc</a> <a href="https://t.co/jjjTLLwvEc">pic.twitter.com/jjjTLLwvEc</a></p>— Marina Marraco (@MarinaMarraco) <a href="https://twitter.com/MarinaMarraco/status/1227709791172206593?ref_src=twsrc%5Etfw">February 12, 2020</a>
+            </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+           </div> 
+          </div>
+         </figure> 
+         <p>Who is right? Neither of them. Who is wrong? Both of them, but he’s worse.</p> 
+         <p>The amount of comfort you get from reclining your seat is rarely proportionate to the aggravation it causes the person behind you, so I think she should have nicely asked him if it was okay. </p> 
+         <p>In turn, the guy in the back is a grown adult man and not a three year-old toddler being told he can’t watch any more unboxing videos on YouTube, so he should have asked nicely if she could put the seat forward instead of throwing a passive-aggressive tantrum.</p> 
+         <p>In my experience, when you ask the person in front of you to put the seat forward they will usually do so, because people in real life aren’t like people on social media. But if that person says no, you suck it up – or maybe ask the flight attendant if you can change seats. But you don’t do this.</p> 
+         <p>So, in this case there’s plenty of blame to go around. Also, <a href="https://www.nytimes.com/2018/05/15/science/yanny-laurel.html">I heard “Laurel”</a> and <a href="https://slate.com/technology/2017/04/heres-why-people-saw-the-dress-differently.html">the dress is definitely black and blue</a>.</p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <article id="post-16386" class="post-16386 post type-post status-publish format-standard hentry category-uncategorized tag-2020-election tag-amy-klobuchar tag-bernie tag-bernie-sanders tag-campaign-2020 tag-new-hampshire tag-primary without-featured-image"> 
+       <header class="entry-header "> 
+        <h1 class="entry-title"><a href=" https://damianpenny.com/2020/02/12/bernie-is-the-front-runner-for-now/" rel="bookmark">Bernie is the front-runner. For&nbsp;now.</a></h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-body"> 
+        <div class="entry-meta"> <span class="date"><a href="https://damianpenny.com/2020/02/12/bernie-is-the-front-runner-for-now/" title="Permalink to Bernie is the front-runner. For&nbsp;now." rel="bookmark"><time class="entry-date published" datetime="2020-02-12T09:52:24-04:00">February 12, 2020</time></a></span><span class="comments-link"><a href="https://damianpenny.com/2020/02/12/bernie-is-the-front-runner-for-now/#respond">Leave a comment</a></span> 
+        </div><!-- .entry-meta --> 
+        <div class="entry-content"> 
+         <p><a href="https://www.nbcnews.com/politics/2020-primary-elections/new-hampshire-results">The socialist won the New Hampshire Democratic primary last night</a> – but not by as much as you may have expected:</p> 
+         <figure class="wp-block-image size-large">
+          <img data-attachment-id="16387" data-permalink="https://damianpenny.com/annotation-2020-02-12-092925/" data-orig-file="https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg" data-orig-size="494,682" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="annotation-2020-02-12-092925" data-image-description="" data-medium-file="https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg?w=217" data-large-file="https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg?w=494" src="https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg?w=494" alt="" class="wp-image-16387" srcset="https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg 494w, https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg?w=109 109w, https://damianpenny.files.wordpress.com/2020/02/annotation-2020-02-12-092925.jpg?w=217 217w" sizes="(max-width: 494px) 100vw, 494px">
+         </figure> 
+         <p>A win is a win, and this win certainly gives Bernie some momentum. But 26% of the vote is a long way off from <a href="https://www.nytimes.com/elections/2016/results/primaries/new-hampshire">the 60% he won last time around</a>. Yeah, that was a two-way fight against Hillary Clinton – but when presented with more alternatives on his home turf, over half of Bernie’s supporters jumped ship. </p> 
+         <p>If Sanders does pick up most of Elizabeth Warren’s supporters when she drops out, that may put him over the top. But considering <a href="https://www.cnn.com/2020/01/15/politics/bernie-sanders-elizabeth-warren-debate-2020/index.html">their recent history,</a> I’m not sure that’s going to happen.</p> 
+         <p>It’s the surging Amy Klobuchar whom I can see benefiting the most from an Elizabeth Warren withdrawal. A large piece of the Democratic electorate, not unreasonably, wants to see a female President in their lifetime – especially after Hillary Clinton was so cruelly denied victory by the intricacies of the electoral college in 2016. And all of a sudden, Klobuchar is the woman with the best chance of winning this thing.</p> 
+         <p>If she does pull this off, I think this might be seen as a turning point:</p> 
+         <figure class="wp-block-embed-twitter wp-block-embed is-type-rich">
+          <div class="wp-block-embed__wrapper"> 
+           <div class="embed-twitter">
+            <blockquote class="twitter-tweet" data-width="550" data-dnt="true">
+             <p lang="en" dir="ltr">Today I asked <a href="https://twitter.com/amyklobuchar?ref_src=twsrc%5Etfw">@amyklobuchar</a> if there is room in her coalition for pro-life people. She said yes of course. I asked if she’d try to find common ground on bringing down the number of abortions. <br><br>She said “Yes. Yes.” And told me about her work in the adoption caucus in the Senate. <a href="https://t.co/CIvfMSulEE">pic.twitter.com/CIvfMSulEE</a></p>— Chris Crawford (@CrawfordStuff) <a href="https://twitter.com/CrawfordStuff/status/1226976994866405377?ref_src=twsrc%5Etfw">February 10, 2020</a>
+            </blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+           </div> 
+          </div>
+         </figure> 
+         <p>The Democratic Party is devoutly pro-choice (the days of anti-abortion Democrats and pro-choice Republicans are long gone) but only Klobuchar appears to realize that if you want to win the White House, you have to at least make an attempt to peel off support from the other side.</p> 
+        </div><!-- .entry-content --> 
+       </div><!-- .entry-body --> 
+      </article><!-- #post-## --> 
+      <nav class="navigation paging-navigation" role="navigation"> 
+       <h1 class="screen-reader-text">Posts navigation</h1> 
+       <div class="nav-links"> 
+        <div class="nav-previous">
+         <a href="https://damianpenny.com/blog/page/2/"><span class="meta-nav"></span> Older posts</a>
+        </div> 
+       </div><!-- .nav-links --> 
+      </nav><!-- .navigation --> 
+     </main><!-- #main --> 
+    </div><!-- #primary --> 
+    <div id="secondary" class="widget-area sidebar-widget-area" role="complementary"> 
+     <aside id="widget_contact_info-11" class="widget widget_contact_info">
+      <h3 class="widget-title">Where to find me</h3>
+      <div itemscope itemtype="http://schema.org/LocalBusiness">
+       <div class="contact-map-container">
+        <iframe width="600" height="216" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=50+Eileen+Stubbs+Ave.Unit+130Dartmouth%2C+NSB3B+0M7&amp;key=AIzaSyCq4vWNv6eCGe2uvhPRGWQlv80IQp8dwTE" class="contact-map"></iframe>
+        <div class="contact-map-distractor"></div>
+       </div>
+       <div class="confit-address" itemscope itemtype="http://schema.org/PostalAddress" itemprop="address">
+        <a href="http://maps.google.com/maps?z=16&amp;q=50%2Beileen%2Bstubbs%2Bave.%2Bunit%2B130%2Bdartmouth%2C%2Bns%2Bb3b%2B0m7" target="_blank">50 Eileen Stubbs Ave. <br>Unit 130 <br>Dartmouth, NS <br>B3B 0M7</a>
+       </div>
+       <div class="confit-phone">
+        <span itemprop="telephone">902-497-1973</span>
+       </div>
+      </div>
+     </aside>
+     <aside id="facebook-likebox-6" class="widget widget_facebook_likebox">
+      <h3 class="widget-title"><a href="https://www.facebook.com/damianpennylegal/">Facebook</a></h3> 
+      <div id="fb-root"></div> 
+      <div class="fb-page" data-href="https://www.facebook.com/damianpennylegal/" data-width="340" data-height="432" data-hide-cover="false" data-show-facepile="true" data-tabs="false" data-hide-cta="false" data-small-header="false"> 
+       <div class="fb-xfbml-parse-ignore">
+        <blockquote cite="https://www.facebook.com/damianpennylegal/">
+         <a href="https://www.facebook.com/damianpennylegal/">Facebook</a>
+        </blockquote>
+       </div> 
+      </div> 
+     </aside> 
+    </div><!-- #secondary --> 
+   </div><!-- #content --> 
+   <div id="tertiary" class="widget-area footer-widget-area" role="complementary"> 
+    <div id="widget-area-2" class="widget-area"> 
+     <aside id="blog_subscription-3" class="widget widget_blog_subscription jetpack_subscription_widget">
+      <h3 class="widget-title"><label for="subscribe-field">Follow Blog via Email</label></h3> 
+      <form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="subscribe-blog"> 
+       <p>Enter your email address to follow this blog and receive notifications of new posts by email.</p> 
+       <p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Enter your email address" value="" id="subscribe-field"></p> 
+       <p> <input type="hidden" name="action" value="subscribe"> <input type="hidden" name="blog_id" value="18876614"> <input type="hidden" name="source" value="https://damianpenny.com/blog/"> <input type="hidden" name="sub-type" value="widget"> <input type="hidden" name="redirect_fragment" value="blog_subscription-3"> <input type="hidden" id="_wpnonce" name="_wpnonce" value="d6d1284520"> <button type="submit"> Follow </button> </p> 
+      </form> 
+     </aside> 
+    </div><!-- #widget-area-2 --> 
+    <div id="widget-area-3" class="widget-area"> 
+     <aside id="rss_links-4" class="widget widget_rss_links">
+      <p class="size-small"><a class="feed-image-link" href="https://damianpenny.com/feed/" title="Subscribe to Posts"><img src="https://damianpenny.com/i/rss/red-small.png" alt="RSS Feed"></a>&nbsp;<a href="https://damianpenny.com/feed/" title="Subscribe to Posts">RSS - Posts</a></p> 
+     </aside> 
+    </div><!-- #widget-area-3 --> 
+    <div id="widget-area-4" class="widget-area"> 
+     <aside id="archives-6" class="widget widget_archive">
+      <h3 class="widget-title">Archives</h3> <label class="screen-reader-text" for="archives-dropdown-6">Archives</label> <select id="archives-dropdown-6" name="archive-dropdown"> <option value="">Select Month</option> <option value="https://damianpenny.com/2020/03/"> March 2020 &nbsp;(3)</option> <option value="https://damianpenny.com/2020/02/"> February 2020 &nbsp;(12)</option> <option value="https://damianpenny.com/2020/01/"> January 2020 &nbsp;(12)</option> <option value="https://damianpenny.com/2019/12/"> December 2019 &nbsp;(4)</option> <option value="https://damianpenny.com/2019/10/"> October 2019 &nbsp;(2)</option> <option value="https://damianpenny.com/2019/09/"> September 2019 &nbsp;(3)</option> <option value="https://damianpenny.com/2019/07/"> July 2019 &nbsp;(8)</option> <option value="https://damianpenny.com/2019/05/"> May 2019 &nbsp;(3)</option> <option value="https://damianpenny.com/2019/03/"> March 2019 &nbsp;(4)</option> <option value="https://damianpenny.com/2019/02/"> February 2019 &nbsp;(2)</option> <option value="https://damianpenny.com/2019/01/"> January 2019 &nbsp;(6)</option> <option value="https://damianpenny.com/2018/12/"> December 2018 &nbsp;(4)</option> <option value="https://damianpenny.com/2018/11/"> November 2018 &nbsp;(1)</option> <option value="https://damianpenny.com/2018/10/"> October 2018 &nbsp;(10)</option> <option value="https://damianpenny.com/2018/09/"> September 2018 &nbsp;(1)</option> <option value="https://damianpenny.com/2018/07/"> July 2018 &nbsp;(7)</option> <option value="https://damianpenny.com/2018/06/"> June 2018 &nbsp;(4)</option> <option value="https://damianpenny.com/2018/05/"> May 2018 &nbsp;(5)</option> <option value="https://damianpenny.com/2018/04/"> April 2018 &nbsp;(2)</option> <option value="https://damianpenny.com/2018/03/"> March 2018 &nbsp;(19)</option> <option value="https://damianpenny.com/2018/02/"> February 2018 &nbsp;(10)</option> <option value="https://damianpenny.com/2018/01/"> January 2018 &nbsp;(2)</option> <option value="https://damianpenny.com/2017/12/"> December 2017 &nbsp;(3)</option> <option value="https://damianpenny.com/2017/11/"> November 2017 &nbsp;(1)</option> <option value="https://damianpenny.com/2017/10/"> October 2017 &nbsp;(4)</option> <option value="https://damianpenny.com/2017/08/"> August 2017 &nbsp;(6)</option> <option value="https://damianpenny.com/2017/06/"> June 2017 &nbsp;(2)</option> <option value="https://damianpenny.com/2017/05/"> May 2017 &nbsp;(3)</option> <option value="https://damianpenny.com/2017/04/"> April 2017 &nbsp;(3)</option> <option value="https://damianpenny.com/2017/03/"> March 2017 &nbsp;(3)</option> <option value="https://damianpenny.com/2017/02/"> February 2017 &nbsp;(2)</option> <option value="https://damianpenny.com/2017/01/"> January 2017 &nbsp;(4)</option> <option value="https://damianpenny.com/2016/12/"> December 2016 &nbsp;(1)</option> <option value="https://damianpenny.com/2016/11/"> November 2016 &nbsp;(5)</option> <option value="https://damianpenny.com/2016/10/"> October 2016 &nbsp;(7)</option> <option value="https://damianpenny.com/2016/09/"> September 2016 &nbsp;(5)</option> <option value="https://damianpenny.com/2016/07/"> July 2016 &nbsp;(6)</option> <option value="https://damianpenny.com/2016/06/"> June 2016 &nbsp;(2)</option> <option value="https://damianpenny.com/2016/05/"> May 2016 &nbsp;(3)</option> <option value="https://damianpenny.com/2016/04/"> April 2016 &nbsp;(5)</option> <option value="https://damianpenny.com/2015/04/"> April 2015 &nbsp;(3)</option> <option value="https://damianpenny.com/2015/02/"> February 2015 &nbsp;(2)</option> <option value="https://damianpenny.com/2015/01/"> January 2015 &nbsp;(6)</option> <option value="https://damianpenny.com/2014/12/"> December 2014 &nbsp;(2)</option> <option value="https://damianpenny.com/2014/10/"> October 2014 &nbsp;(8)</option> <option value="https://damianpenny.com/2014/08/"> August 2014 &nbsp;(1)</option> <option value="https://damianpenny.com/2014/07/"> July 2014 &nbsp;(6)</option> <option value="https://damianpenny.com/2014/06/"> June 2014 &nbsp;(6)</option> <option value="https://damianpenny.com/2014/05/"> May 2014 &nbsp;(1)</option> <option value="https://damianpenny.com/2014/04/"> April 2014 &nbsp;(2)</option> <option value="https://damianpenny.com/2014/03/"> March 2014 &nbsp;(4)</option> <option value="https://damianpenny.com/2014/02/"> February 2014 &nbsp;(13)</option> <option value="https://damianpenny.com/2014/01/"> January 2014 &nbsp;(17)</option> <option value="https://damianpenny.com/2013/12/"> December 2013 &nbsp;(1)</option> <option value="https://damianpenny.com/2013/10/"> October 2013 &nbsp;(1)</option> <option value="https://damianpenny.com/2013/09/"> September 2013 &nbsp;(2)</option> <option value="https://damianpenny.com/2013/08/"> August 2013 &nbsp;(6)</option> <option value="https://damianpenny.com/2013/07/"> July 2013 &nbsp;(1)</option> <option value="https://damianpenny.com/2013/06/"> June 2013 &nbsp;(3)</option> <option value="https://damianpenny.com/2013/05/"> May 2013 &nbsp;(3)</option> <option value="https://damianpenny.com/2013/04/"> April 2013 &nbsp;(11)</option> <option value="https://damianpenny.com/2013/03/"> March 2013 &nbsp;(7)</option> <option value="https://damianpenny.com/2013/02/"> February 2013 &nbsp;(9)</option> <option value="https://damianpenny.com/2013/01/"> January 2013 &nbsp;(6)</option> <option value="https://damianpenny.com/2012/11/"> November 2012 &nbsp;(1)</option> <option value="https://damianpenny.com/2012/10/"> October 2012 &nbsp;(3)</option> <option value="https://damianpenny.com/2012/09/"> September 2012 &nbsp;(1)</option> <option value="https://damianpenny.com/2012/08/"> August 2012 &nbsp;(2)</option> <option value="https://damianpenny.com/2012/07/"> July 2012 &nbsp;(8)</option> <option value="https://damianpenny.com/2012/06/"> June 2012 &nbsp;(5)</option> <option value="https://damianpenny.com/2012/05/"> May 2012 &nbsp;(10)</option> <option value="https://damianpenny.com/2012/04/"> April 2012 &nbsp;(17)</option> <option value="https://damianpenny.com/2012/03/"> March 2012 &nbsp;(12)</option> <option value="https://damianpenny.com/2012/02/"> February 2012 &nbsp;(2)</option> <option value="https://damianpenny.com/2012/01/"> January 2012 &nbsp;(9)</option> <option value="https://damianpenny.com/2011/12/"> December 2011 &nbsp;(9)</option> <option value="https://damianpenny.com/2011/11/"> November 2011 &nbsp;(9)</option> <option value="https://damianpenny.com/2011/10/"> October 2011 &nbsp;(10)</option> <option value="https://damianpenny.com/2011/09/"> September 2011 &nbsp;(4)</option> <option value="https://damianpenny.com/2011/08/"> August 2011 &nbsp;(5)</option> <option value="https://damianpenny.com/2011/07/"> July 2011 &nbsp;(2)</option> <option value="https://damianpenny.com/2011/06/"> June 2011 &nbsp;(6)</option> <option value="https://damianpenny.com/2011/05/"> May 2011 &nbsp;(12)</option> <option value="https://damianpenny.com/2011/04/"> April 2011 &nbsp;(15)</option> <option value="https://damianpenny.com/2011/03/"> March 2011 &nbsp;(16)</option> <option value="https://damianpenny.com/2011/02/"> February 2011 &nbsp;(14)</option> <option value="https://damianpenny.com/2011/01/"> January 2011 &nbsp;(18)</option> <option value="https://damianpenny.com/2010/12/"> December 2010 &nbsp;(6)</option> <option value="https://damianpenny.com/2010/11/"> November 2010 &nbsp;(17)</option> <option value="https://damianpenny.com/2010/10/"> October 2010 &nbsp;(21)</option> <option value="https://damianpenny.com/2010/09/"> September 2010 &nbsp;(17)</option> <option value="https://damianpenny.com/2010/08/"> August 2010 &nbsp;(22)</option> <option value="https://damianpenny.com/2010/07/"> July 2010 &nbsp;(11)</option> <option value="https://damianpenny.com/2010/06/"> June 2010 &nbsp;(5)</option> <option value="https://damianpenny.com/2010/05/"> May 2010 &nbsp;(1)</option> <option value="https://damianpenny.com/2010/04/"> April 2010 &nbsp;(1)</option> <option value="https://damianpenny.com/2010/03/"> March 2010 &nbsp;(7)</option> <option value="https://damianpenny.com/2010/02/"> February 2010 &nbsp;(1)</option> <option value="https://damianpenny.com/2010/01/"> January 2010 &nbsp;(14)</option> <option value="https://damianpenny.com/2009/11/"> November 2009 &nbsp;(23)</option> <option value="https://damianpenny.com/2009/10/"> October 2009 &nbsp;(35)</option> <option value="https://damianpenny.com/2009/09/"> September 2009 &nbsp;(49)</option> <option value="https://damianpenny.com/2009/07/"> July 2009 &nbsp;(1)</option> <option value="https://damianpenny.com/2009/05/"> May 2009 &nbsp;(1)</option> <option value="https://damianpenny.com/2009/04/"> April 2009 &nbsp;(38)</option> <option value="https://damianpenny.com/2009/03/"> March 2009 &nbsp;(169)</option> <option value="https://damianpenny.com/2009/02/"> February 2009 &nbsp;(130)</option> <option value="https://damianpenny.com/2009/01/"> January 2009 &nbsp;(155)</option> <option value="https://damianpenny.com/2008/12/"> December 2008 &nbsp;(151)</option> <option value="https://damianpenny.com/2008/11/"> November 2008 &nbsp;(135)</option> <option value="https://damianpenny.com/2008/10/"> October 2008 &nbsp;(141)</option> <option value="https://damianpenny.com/2008/09/"> September 2008 &nbsp;(168)</option> <option value="https://damianpenny.com/2008/08/"> August 2008 &nbsp;(157)</option> <option value="https://damianpenny.com/2008/07/"> July 2008 &nbsp;(139)</option> <option value="https://damianpenny.com/2008/06/"> June 2008 &nbsp;(123)</option> <option value="https://damianpenny.com/2008/05/"> May 2008 &nbsp;(96)</option> <option value="https://damianpenny.com/2008/04/"> April 2008 &nbsp;(124)</option> <option value="https://damianpenny.com/2008/03/"> March 2008 &nbsp;(147)</option> <option value="https://damianpenny.com/2008/02/"> February 2008 &nbsp;(144)</option> <option value="https://damianpenny.com/2008/01/"> January 2008 &nbsp;(157)</option> <option value="https://damianpenny.com/2007/12/"> December 2007 &nbsp;(145)</option> <option value="https://damianpenny.com/2007/11/"> November 2007 &nbsp;(147)</option> <option value="https://damianpenny.com/2007/10/"> October 2007 &nbsp;(137)</option> <option value="https://damianpenny.com/2007/09/"> September 2007 &nbsp;(111)</option> <option value="https://damianpenny.com/2007/08/"> August 2007 &nbsp;(123)</option> <option value="https://damianpenny.com/2007/07/"> July 2007 &nbsp;(125)</option> <option value="https://damianpenny.com/2007/06/"> June 2007 &nbsp;(106)</option> <option value="https://damianpenny.com/2007/05/"> May 2007 &nbsp;(187)</option> <option value="https://damianpenny.com/2007/04/"> April 2007 &nbsp;(182)</option> <option value="https://damianpenny.com/2007/03/"> March 2007 &nbsp;(204)</option> <option value="https://damianpenny.com/2007/02/"> February 2007 &nbsp;(163)</option> <option value="https://damianpenny.com/2007/01/"> January 2007 &nbsp;(241)</option> <option value="https://damianpenny.com/2006/12/"> December 2006 &nbsp;(226)</option> <option value="https://damianpenny.com/2006/11/"> November 2006 &nbsp;(282)</option> <option value="https://damianpenny.com/2006/10/"> October 2006 &nbsp;(293)</option> <option value="https://damianpenny.com/2006/09/"> September 2006 &nbsp;(276)</option> <option value="https://damianpenny.com/2006/08/"> August 2006 &nbsp;(240)</option> <option value="https://damianpenny.com/2006/07/"> July 2006 &nbsp;(297)</option> <option value="https://damianpenny.com/2006/06/"> June 2006 &nbsp;(247)</option> <option value="https://damianpenny.com/2006/05/"> May 2006 &nbsp;(249)</option> <option value="https://damianpenny.com/2006/04/"> April 2006 &nbsp;(227)</option> <option value="https://damianpenny.com/2006/03/"> March 2006 &nbsp;(380)</option> <option value="https://damianpenny.com/2006/02/"> February 2006 &nbsp;(297)</option> <option value="https://damianpenny.com/2005/11/"> November 2005 &nbsp;(37)</option> <option value="https://damianpenny.com/2005/10/"> October 2005 &nbsp;(186)</option> <option value="https://damianpenny.com/2005/09/"> September 2005 &nbsp;(176)</option> <option value="https://damianpenny.com/2005/08/"> August 2005 &nbsp;(127)</option> <option value="https://damianpenny.com/2005/07/"> July 2005 &nbsp;(105)</option> <option value="https://damianpenny.com/2005/06/"> June 2005 &nbsp;(132)</option> <option value="https://damianpenny.com/2005/05/"> May 2005 &nbsp;(150)</option> <option value="https://damianpenny.com/2005/04/"> April 2005 &nbsp;(157)</option> <option value="https://damianpenny.com/2005/03/"> March 2005 &nbsp;(128)</option> <option value="https://damianpenny.com/2005/02/"> February 2005 &nbsp;(108)</option> <option value="https://damianpenny.com/2005/01/"> January 2005 &nbsp;(155)</option> <option value="https://damianpenny.com/2004/12/"> December 2004 &nbsp;(121)</option> <option value="https://damianpenny.com/2004/11/"> November 2004 &nbsp;(152)</option> <option value="https://damianpenny.com/2004/10/"> October 2004 &nbsp;(139)</option> <option value="https://damianpenny.com/2004/09/"> September 2004 &nbsp;(140)</option> <option value="https://damianpenny.com/2004/08/"> August 2004 &nbsp;(124)</option> <option value="https://damianpenny.com/2004/07/"> July 2004 &nbsp;(134)</option> <option value="https://damianpenny.com/2004/06/"> June 2004 &nbsp;(133)</option> <option value="https://damianpenny.com/2004/05/"> May 2004 &nbsp;(131)</option> <option value="https://damianpenny.com/2004/04/"> April 2004 &nbsp;(95)</option> <option value="https://damianpenny.com/2004/03/"> March 2004 &nbsp;(128)</option> <option value="https://damianpenny.com/2004/02/"> February 2004 &nbsp;(149)</option> <option value="https://damianpenny.com/2004/01/"> January 2004 &nbsp;(119)</option> <option value="https://damianpenny.com/2003/12/"> December 2003 &nbsp;(130)</option> <option value="https://damianpenny.com/2003/11/"> November 2003 &nbsp;(156)</option> <option value="https://damianpenny.com/2003/10/"> October 2003 &nbsp;(161)</option> <option value="https://damianpenny.com/2003/09/"> September 2003 &nbsp;(153)</option> <option value="https://damianpenny.com/2003/08/"> August 2003 &nbsp;(96)</option> <option value="https://damianpenny.com/2003/07/"> July 2003 &nbsp;(191)</option> <option value="https://damianpenny.com/2003/06/"> June 2003 &nbsp;(147)</option> <option value="https://damianpenny.com/2003/05/"> May 2003 &nbsp;(186)</option> <option value="https://damianpenny.com/2003/04/"> April 2003 &nbsp;(175)</option> <option value="https://damianpenny.com/2003/03/"> March 2003 &nbsp;(226)</option> <option value="https://damianpenny.com/2003/02/"> February 2003 &nbsp;(172)</option> <option value="https://damianpenny.com/2003/01/"> January 2003 &nbsp;(188)</option> <option value="https://damianpenny.com/2002/12/"> December 2002 &nbsp;(120)</option> <option value="https://damianpenny.com/2002/11/"> November 2002 &nbsp;(10)</option> </select> 
+      <script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-6" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script> 
+     </aside> 
+    </div><!-- #widget-area-4 --> 
+   </div><!-- #tertiary --> 
+   <footer id="colophon" class="site-footer"> 
+    <div class="site-info" role="contentinfo"> <a href="https://wordpress.com/?ref=footer_custom_powered" rel="nofollow">Powered by WordPress.com</a>. 
+    </div><!-- .site-info --> 
+   </footer><!-- #colophon --> 
+  </div><!-- #page --> 
+  <script type="text/javascript">
+		//<![CDATA[
+		var infiniteScroll = JSON.parse( decodeURIComponent( '%7B%22settings%22%3A%7B%22id%22%3A%22main%22%2C%22ajaxurl%22%3A%22https%3A%5C%2F%5C%2Fdamianpenny.com%5C%2F%3Finfinity%3Dscrolling%22%2C%22type%22%3A%22click%22%2C%22wrapper%22%3Atrue%2C%22wrapper_class%22%3A%22infinite-wrap%22%2C%22footer%22%3A%22content%22%2C%22click_handle%22%3A%221%22%2C%22text%22%3A%22Older%20posts%22%2C%22totop%22%3A%22Scroll%20back%20to%20top%22%2C%22currentday%22%3A%2212.02.20%22%2C%22order%22%3A%22DESC%22%2C%22scripts%22%3A%5B%5D%2C%22styles%22%3A%5B%5D%2C%22google_analytics%22%3Afalse%2C%22offset%22%3A0%2C%22history%22%3A%7B%22host%22%3A%22damianpenny.com%22%2C%22path%22%3A%22%5C%2Fblog%5C%2Fpage%5C%2F%25d%5C%2F%22%2C%22use_trailing_slashes%22%3Atrue%2C%22parameters%22%3A%22%22%7D%2C%22query_args%22%3A%7B%22page%22%3A0%2C%22pagename%22%3A%22blog%22%2C%22error%22%3A%22%22%2C%22m%22%3A%22%22%2C%22p%22%3A0%2C%22post_parent%22%3A%22%22%2C%22subpost%22%3A%22%22%2C%22subpost_id%22%3A%22%22%2C%22attachment%22%3A%22%22%2C%22attachment_id%22%3A0%2C%22name%22%3A%22%22%2C%22page_id%22%3A0%2C%22second%22%3A%22%22%2C%22minute%22%3A%22%22%2C%22hour%22%3A%22%22%2C%22day%22%3A0%2C%22monthnum%22%3A0%2C%22year%22%3A0%2C%22w%22%3A0%2C%22category_name%22%3A%22%22%2C%22tag%22%3A%22%22%2C%22cat%22%3A%22%22%2C%22tag_id%22%3A%22%22%2C%22author%22%3A%22%22%2C%22author_name%22%3A%22%22%2C%22feed%22%3A%22%22%2C%22tb%22%3A%22%22%2C%22paged%22%3A0%2C%22meta_key%22%3A%22%22%2C%22meta_value%22%3A%22%22%2C%22preview%22%3A%22%22%2C%22s%22%3A%22%22%2C%22sentence%22%3A%22%22%2C%22title%22%3A%22%22%2C%22fields%22%3A%22%22%2C%22menu_order%22%3A%22%22%2C%22embed%22%3A%22%22%2C%22category__in%22%3A%5B%5D%2C%22category__not_in%22%3A%5B%5D%2C%22category__and%22%3A%5B%5D%2C%22post__in%22%3A%5B%5D%2C%22post__not_in%22%3A%5B%5D%2C%22post_name__in%22%3A%5B%5D%2C%22tag__in%22%3A%5B%5D%2C%22tag__not_in%22%3A%5B%5D%2C%22tag__and%22%3A%5B%5D%2C%22tag_slug__in%22%3A%5B%5D%2C%22tag_slug__and%22%3A%5B%5D%2C%22post_parent__in%22%3A%5B%5D%2C%22post_parent__not_in%22%3A%5B%5D%2C%22author__in%22%3A%5B%5D%2C%22author__not_in%22%3A%5B%5D%2C%22posts_per_page%22%3A10%2C%22ignore_sticky_posts%22%3Afalse%2C%22suppress_filters%22%3Afalse%2C%22cache_results%22%3Afalse%2C%22update_post_term_cache%22%3Atrue%2C%22lazy_load_term_meta%22%3Atrue%2C%22update_post_meta_cache%22%3Atrue%2C%22post_type%22%3A%22%22%2C%22nopaging%22%3Afalse%2C%22comments_per_page%22%3A%2250%22%2C%22no_found_rows%22%3Afalse%2C%22order%22%3A%22DESC%22%7D%2C%22last_post_date%22%3A%222020-02-12%2009%3A52%3A24%22%2C%22stats%22%3A%22blog%3D18876614%26v%3Dwpcom%26tz%3D-3%26user_id%3D0%26subd%3Ddamianpenny%26x_pagetype%3Dinfinite-click%22%7D%7D' ) );
+		//]]>
+		</script> <!--  --> 
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+  </div> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="18876614"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://damianpenny.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="Damian J. Penny"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/blog/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s2.wp.com/_static/??-eJx9jVEKwjAQRC/kGqQW6od4ljTZhrVpErKblt7eCFYsSD9nhvdGLQlMDIJBVPLFUWDlSo09Zge9j2Zk9URJ2ozg9RqLgMtk1WcacoXPhvmkfkxTgU1mdI6F0X8lW3EEZeQUA9OMMJPF+Kc5wheyDqV+10kbAQpD3AWYdDoSCHm04LT3mNd9emOP6X5pu6Zrrre2fb4Adnl56A==?cssminify=yes" type="text/css" media="all"> 
+  <script>
+var jpfbembed = {"appid":"249643311490","locale":"en_US"};
+</script> 
+  <script>
+var actionbardata = {"siteID":"18876614","siteName":"Damian J. Penny","siteURL":"https:\/\/damianpenny.com","icon":"<img alt='' src='https:\/\/s2.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/sela","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fdamianpenny.com%2F2020%2F03%2F27%2Fcovid-19-and-the-courts%2F&signup_flow=account&domain=damianpenny.com","themeURL":"","xhrURL":"https:\/\/damianpenny.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"d6d1284520\" \/>","referer":"https:\/\/damianpenny.com\/blog\/","canFollow":"1","feedID":"96412491","statusMessage":"","customizeLink":"https:\/\/damianpenny.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fdamianpenny.wordpress.com%2Fblog%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Sela","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 122 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fdamianpenny.com%2F2020%2F03%2F27%2Fcovid-19-and-the-courts%2F&signup_flow=account&domain=damianpenny.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/damianpenny.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/damianpenny.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fdamianpenny.com%2F2020%2F03%2F27%2Fcovid-19-and-the-courts%2F","blog_id":"18876614","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=18876614&v=wpcom&tz=-3&user_id=0&subd=damianpenny","is_public":"1","reblog_enabled":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJydU9tugzAM/aFlUVu1XR+mfcoUEsMMIYliA+vfz1RQtR1D217At3N8jR6SsjEwBNY1aQc9WkifzzU96RtX26nkuwoDaQwlBuTzVZhjMVjfOaALDxLrHoKLeXSl6M8lev/cYniknnnLzntFyKDAIWOopoz6sNvsjoftSRc+ijESkxLRNlMWhOH/nCBFsuC6wC4OYSK+fOnR+ZiFP6CVdlNXaAJvxr6D6bEyjPE3wdRgUh5Do8poO1Ilfpv7Ekr+K+upgZORFt5lHbo0FooYGwVtAW4FZZxsRhUm69YQQxZJxR5yxnGhV9sfGThLJbQGsuOoRtBVWom2JsdO2p97VLNhBZOBUgyEPaheeokLlqWjvGEY0FXAkl1cUqWceRnvFNWatPQGaChjUYPln67zkl4bopG+nvQk9a2NjNGDU5XxHvL5XhPUW/u62b/sd9vT8XiqvwAkjHHQ"></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script type="text/javascript">
+			jQuery.extend( infiniteScroll.settings.scripts, ["jquery-core","jquery-migrate","jquery","postmessage","mobile-useragent-info","spin","jquery.spin","grofiles-cards","wpgroho","devicepx","the-neverending-homepage","wp-polyfill","blog-posts-block-view","event-countdown-js","sela-navigation","sela-skip-link-focus-fix","sela-script","jetpack-facebook-embed","wpcom-masterbar-js","wpcom-masterbar-tracks-js","wpcom-actionbar-bar","jetpack-carousel","jetpack-responsive-videos-min-script","contact-info-map-js","swfobject","videopress","tiled-gallery"] );
+			jQuery.extend( infiniteScroll.settings.styles, ["wpcom-smileys","the-neverending-homepage","wp-block-library","jetpack-layout-grid","jetpack-ratings","jetpack-event-countdown","jetpack-timeline","blog-posts-block-view","coblocks-frontend","posts-list-block-style","wpcom-core-compat-playlist-styles","wpcom-bbpress2-staff-css","genericons","sela-style","sela-wpcom","jetpack_facebook_likebox","geo-location-flair","reblogging","a8c-global-print","wpcom-actionbar-bar","jetpack-global-styles-frontend-style","h4-global","wpcom-layout-grid-front","jetpack-carousel","jetpack-responsive-videos-style","contact-info-map-css","tiled-gallery"] );
+		</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'18876614','blog_tz':'-3','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'18876614','v':'wpcom','tz':'-3','user_id':'0','subd':'damianpenny'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGNrd29+Smw0TDhnZmRTK0hlRi9QSGh6bi9GXVhBJWIlZlR5U1JMLU8/MkNtblkvY1dDdGwyXVU0dy1VaHpRTEdubHdNTzhpeE5bfDdOVkxjJmp4Z3hOLW5pOXFNaVpxRXklSS1Rb2JvTWFCbmRTS21pSUN1R2dRQnxINVp8JTJfYkFBakZJQ1k5NzdBd2d1d2FjTEYuM1I0ODdBWDl2cE5QJVRbWGJqa3NRfjI9fGJFcFY/WFtCWzh0Lj9UU01raUJaVVlpQlo1UTVZaz1oQ2o5aj0raUZ1SnA1MTEmSS0zMnBINW1ZdkpwVlVkQl9jSzgudnwtOFhFfGZoOWF3RUNiLT1QK2ttb0lxRV9nUHR3eHRycGYmLw=='}]);
+_stq.push([ 'clickTrackerInit', '18876614', '0' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>  
+ </body>
+</html>

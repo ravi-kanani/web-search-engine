@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="utf-8"> 
+  <title>Froxlor Server Management Panel </title> 
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" async> 
+  <link rel="stylesheet" type="text/css" href="assets/css/main-fonts.css"> 
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css"> 
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> 
+  <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+  <link rel="icon" type="image/png" href="assets/img/wrench.png"> 
+  <meta name="google-site-verification" content="zT53mcgmHFiBWKp-6jWwt68C0IWBDl9liJSgnbQu6sI"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+  <meta name="Content-Type" content="text/html;charset=UTF-8"> 
+  <meta name="keywords" content="froxlor servermanagement administrator debian ubuntu api letsencrypt domain mail ftp mysql mariadb forum github"> 
+  <meta name="description" content="Froxlor: The server administration software for your needs. Lightweight and fast - manage customers, ips, domains, ssl, emails, databases, ftp accounts and more"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:url" content="https://froxlor.org/"> 
+  <meta property="og:image" content="https://froxlor.org/assets/images/logo.png"> 
+  <meta property="og:title" content="Froxlor: The server administration software for your needs."> 
+  <meta property="og:site_name" content="Froxlor Website"> <!--
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-1370115651636128",
+          enable_page_level_ads: true
+     });
+</script>
+--> 
+ </head> 
+ <body data-target="#navigation" id="top"> 
+  <div class="navbar navbar-default navbar-fixed-top"> 
+   <div class="container"> 
+    <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a data-scroll class="navbar-brand" href="#top"> <img src="assets/img/wrench.png" alt="froxor logo"> <b>froxlor</b> </a> 
+    </div> 
+    <div class="navbar-collapse collapse" id="bs-navbar-collapse-1"> 
+     <ul class="nav navbar-nav navbar-right"> 
+      <li><a data-scroll href="#top">Home</a></li> 
+      <li class="dropdown"> <a class="dropdown-toggle" id="dropAbout" data-toggle="dropdown" href="#"> About <span class="caret"></span> </a> 
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropAbout"> 
+        <li role="menuitem"><a href="index.php#features">Features</a></li> 
+        <li role="menuitem"><a href="/screenshots/">Screenshots</a></li> 
+        <li role="menuitem"><a href="index.php#donate">Donate</a></li> 
+        <li role="menuitem" class="divider"></li> 
+        <li role="menuitem"><a href="team.php">Team</a></li> 
+        <li role="menuitem"><a tabindex="-1" href="legal.php">Legal / Disclaimer</a></li> 
+       </ul> </li> 
+      <li><a href="/download/">Download</a></li> 
+      <li class="dropdown"> <a class="dropdown-toggle" id="dropDev" data-toggle="dropdown" href="#"> Development <span class="caret"></span> </a> 
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropDev"> 
+        <li role="menuitem"><a tabindex="-1" href="https://forum.froxlor.org/" target="_blank">Forum</a></li> 
+        <li role="menuitem"><a tabindex="-1" href="https://github.com/Froxlor/Froxlor/issues" target="_blank">Bugtracker</a></li> 
+        <li role="menuitem" class="divider"></li> 
+        <li role="menuitem"><a tabindex="-1" href="https://github.com/Froxlor/Froxlor" target="_blank">froxlor on github</a></li> 
+       </ul> </li> 
+      <li class="dropdown"> <a class="dropdown-toggle" id="dropDoc" data-toggle="dropdown" href="#"> Documentation <span class="caret"></span> </a> 
+       <ul class="dropdown-menu" role="menu" aria-labelledby="dropDoc"> 
+        <li role="menuitem"><a tabindex="-1" href="https://api.froxlor.org/doc/" target="_blank">API Documentation</a></li> 
+        <li role="menuitem"><a tabindex="-1" href="https://github.com/Froxlor/Froxlor/wiki" target="_blank">Wiki</a></li> 
+        <li role="menuitem"><a tabindex="-1" href="https://config.froxlor.org/" target="_blank">Config-changes</a></li> 
+       </ul> </li> 
+     </ul> 
+    </div><!--/.nav-collapse --> 
+   </div> 
+  </div> 
+  <section id="home" name="home"></section> 
+  <div id="headerwrap"> 
+   <div class="container"> 
+    <div class="row centered"> 
+     <div class="col-lg-12"> 
+      <h1><b>froxlor</b> Server Management Panel</h1> 
+      <h3 class="centered">The lightweight server management software for your needs.</h3> 
+      <p>Developed by experienced server administrators, this open source (GPL) panel simplifies the effort of managing your hosting platform.</p> 
+      <p> <a href="/download/" class="btn btn-success btn-lg"> <span class="glyphicon glyphicon-download"></span> Download 0.10.15 </a>&nbsp; <a href="https://demo.froxlor.org" class="btn btn-danger btn-lg" target="_blank"> <span class="glyphicon glyphicon-eye-open"></span> Live Demo </a> <br><small><a href="/download/">More downloads »</a></small> </p> 
+     </div> 
+    </div> 
+    <div class="row centered"> 
+     <div class="col-lg-10 col-lg-offset-1"> 
+      <img class="img-responsive" src="assets/img/froxlor_hero.png" alt="froxlor server management interface"> 
+     </div> 
+    </div> 
+   </div><!--/ .container --> 
+  </div><!--/ #headerwrap —>
+
+    <section id="desc" name="desc"></section><!-- INTRO WRAP --> 
+  <div id="features"> 
+   <div class="container"> 
+    <div class="row centered"> 
+     <h2>Features</h2>
+     <br> 
+     <br> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-th glyphicon-lg"></span> 
+      <h3>True Multistack</h3> 
+      <p>Choose per domain which IPv4 and/or IPv6 addresses and which ports should be used.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-lock glyphicon-lg"></span> 
+      <h3>Advanced SSL</h3> 
+      <p>Determine which ports should use SSL and allow customers to store certificates per domain.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-wrench glyphicon-lg"></span> 
+      <h3>PHP-configuration</h3> 
+      <p>Save different PHP-configurations and choose per domain which php.ini should be used (FCGI/FPM only).</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-user glyphicon-lg"></span> 
+      <h3>Resellers &amp; Customers</h3> 
+      <p>Manage reseller ressources and limit what the customers may use in the dedicated customerpanel.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-stats glyphicon-lg"></span> 
+      <h3>Trafficcalculation</h3> 
+      <p>Store dedicated HTTP, FTP and Mail traffic and view it in interactive graphs.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-flash glyphicon-lg"></span> 
+      <h3>API based</h3> 
+      <p>Access all major functions via API to gain full control over your hosting. See <a href="https://api.froxlor.org/" title="Froxlor API documentation and more">https://api.froxlor.org/</a> for more information.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-dashboard glyphicon-lg"></span> 
+      <h3>Themeable interface</h3> 
+      <p>Style froxlor by overwriting the basis CSS or create your complete own theme.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-certificate glyphicon-lg"></span> 
+      <h3>Let's Encrypt</h3> 
+      <p>Use free certificates from Let's Encrypt directly from within froxlor.</p> 
+     </div> 
+     <div class="col-lg-4 col-md-4 col-sm-6"> <span class="glyphicon glyphicon-tasks glyphicon-lg"></span> 
+      <h3>Other Features</h3> 
+      <p> MySQL management<br> Directory protection &amp; settings<br> Quota management </p> 
+     </div> 
+    </div> 
+   </div><!--/ .container --> 
+  </div><!--/ #introwrap --> 
+  <section id="donate" name="donate"></section> 
+  <div id="footerwrap"> 
+   <div class="container"> 
+    <div class="row"> 
+     <div class="col-lg-12"> 
+      <h3>Say thanks</h3> 
+      <p>Any contribution helps us to improve froxlor, if you want to help us too but don't want to get into coding, we won't say no to a PayPal donation. If you intend to sponsor us don't hesitate to contact us at <a href="mailto:team@froxlor.org">team@froxlor.org</a></p> 
+      <div class="row"> 
+       <div class="col-lg-4"> 
+        <form style="display: inline;" action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+         <input type="hidden" name="cmd" value="_s-xclick"> 
+         <input type="hidden" name="hosted_button_id" value="7HAW3XVXJFJNN"> 
+         <input type="submit" name="submit" title="Jetzt einfach, schnell und sicher online bezahlen ? mit PayPal." value="Donate in EUR" class="btn btn-warning"> 
+        </form> 
+        <form style="display: inline;" action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+         <input type="hidden" name="cmd" value="_s-xclick"> 
+         <input type="hidden" name="hosted_button_id" value="736NR35GDHYH4"> 
+         <input type="submit" name="submit" title="PayPal - The safer, easier way to pay online!" value="Donate in USD" class="btn btn-warning"> 
+        </form> 
+       </div> 
+       <div class="col-lg-4"> 
+       </div> 
+       <div class="col-lg-4"> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <div class="col-lg-12"> 
+      <h3>Supporters</h3> 
+      <div class="row" id="sponsors"> 
+       <div class="col-lg-3">
+        <div class="list-group"> <a href="https://meridianthemes.net/" class="list-group-item" title="MeridianThemes" target="_blank" data-sid="5"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/md-logo.jpg" alt="MeridianThemes" style="height:50px;"> 
+          </div> </a> <a href="https://www.yahire.com/chair-hire" class="list-group-item" title="Yahire - Chair Rental In London" target="_blank" data-sid="19"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/rent-chairs-in-london.png" alt="Yahire - Chair Rental In London" style="height:50px;"> 
+          </div> </a> <a href="https://www.xn--forbruksln-95a.com/" class="list-group-item" title="forbrukslån.com" target="_blank" data-sid="32"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/forbrukslan.png" alt="forbrukslån.com" style="height:35px;"> 
+          </div> </a> <a href="http://theyesmenfixtheworld.com/  " class="list-group-item" title="The Yes Men Fix The World" target="_blank" data-sid="46"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/yes_men_fix_world_logo-1.png" alt="The Yes Men Fix The World" style="height:40px;"> 
+          </div> </a> <a href="https://www.matkassen247.se/" class="list-group-item" title="matkassen247.se" target="_blank" data-sid="51"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/matkassen-1.png" alt="matkassen247.se" style="height:50px;"> 
+          </div> </a> <a href="https://insigniaseo.com/" class="list-group-item" title="Insignia SEO" target="_blank" data-sid="76"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/Insignia-SEO-Agency-Logo-for-Mobile.png" alt="Insignia SEO" style="height:100px;"> 
+          </div> </a> <a href="https://www.bobsseo.net/" class="list-group-item" title="Bobs SEO company" target="_blank" data-sid="86"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/bobseologo.jpg" alt="Bobs SEO company" style="height:50px;"> 
+          </div> </a> <a href="https://craftresumes.com/  " class="list-group-item" title="resume service" target="_blank" data-sid="91"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/craftresumes.png" alt="resume service" style="height:50px;"> 
+          </div> </a> <a href="https://vpn.surf/buy-vpn/" class="list-group-item" title="buy vpn service" target="_blank" data-sid="104"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/VPlogo.png" alt="buy vpn service" style="height:50px;"> 
+          </div> </a> <a href="https://fair-laan.dk/" class="list-group-item" title="fair-laan.dk" target="_blank" data-sid="123"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/Fair-laan.dk_logo.jpg" alt="fair-laan.dk" style="height:50px;"> 
+          </div> </a> <a href="https://compett.org/utvs-called-side-by-sides/" class="list-group-item" title="Compett.com | Your #1 UTV Resource" target="_blank" data-sid="138"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/compett_logo.png" alt="Compett.com | Your #1 UTV Resource" style="height:50px;"> 
+          </div> </a> <a href="https://cordlessdrillguide.com/best/cordless-drill/" class="list-group-item" title="cordless drill reviews" target="_blank" data-sid="143"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/Cordlessdrill_logo.png" alt="cordless drill reviews" style="height:50px;"> 
+          </div> </a> <a href="https://portablebeasts.com/" class="list-group-item" title="PortableBeasts" target="_blank" data-sid="149"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/PortableBeasts.jpg" alt="PortableBeasts" style="height:50px;"> 
+          </div> </a> <a href="https://paynplaybonus.com" class="list-group-item" title="Trustly PaynPlay Casinos" target="_blank" data-sid="153"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/paynplaylogo.png" alt="Trustly PaynPlay Casinos" style="height:50px;"> 
+          </div> </a> 
+        </div>
+       </div>
+       <div class="col-lg-3">
+        <div class="list-group"> <a href="https://superkredit.net/" class="list-group-item" title="Superkredit.net" target="_blank" data-sid="58"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/laan-penge.png" alt="Superkredit.net" style="height:50px;"> 
+          </div> </a> <a href="https://jeopardyquestions.com/" class="list-group-item" title="Jeopardy Questions Archive" target="_blank" data-sid="20"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/jeopardybanner.png" alt="Jeopardy Questions Archive" style="height:50px;"> 
+          </div> </a> <a href="http://dinstorbyferie.no/" class="list-group-item" title="storbyferie tips" target="_blank" data-sid="37"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/storbyferie-logo.png" alt="storbyferie tips" style="height:35px;"> 
+          </div> </a> <a href="https://echt-groene-stroom.nl" class="list-group-item" title="echt groene stroom / energie" target="_blank" data-sid="47"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/echt-groene-stroom-logo.png" alt="echt groene stroom / energie" style="height:50px;"> 
+          </div> </a> <a href="https://finansagent.no/" class="list-group-item" title="Finansagent.no" target="_blank" data-sid="53"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/finansagent-no-logo-ny.png" alt="Finansagent.no" style="height:30px;"> 
+          </div> </a> <a href="https://wofanswers.com" class="list-group-item" title="https://wofanswers.com" target="_blank" data-sid="81"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/wof_logo.png" alt="https://wofanswers.com" style="height:50px;"> 
+          </div> </a> <a href="https://dts-net.com/whmcs/link.php?id=48" class="list-group-item" title="Since 1997 Affordable &amp; Reliable Hosting &amp; Servers" target="_blank" data-sid="87"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/dts-net.com.jpg" alt="Since 1997 Affordable &amp; Reliable Hosting &amp; Servers" style="height:50px;"> 
+          </div> </a> <a href="https://teamnijhuis.com/nl/" class="list-group-item" title="Online marketing bureau" target="_blank" data-sid="92"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/logo-TN_FC_220x50.png" alt="Online marketing bureau" style="height:50px;"> 
+          </div> </a> <a href="https://www.topglas.de/" class="list-group-item" title="TOPGLAS - Optiker für Neuverglasung" target="_blank" data-sid="105"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/topglas-logo.jpg" alt="TOPGLAS - Optiker für Neuverglasung" style="height:50px;"> 
+          </div> </a> <a href="https://norske-kredittkort.no/" class="list-group-item" title="Norske kredittkort" target="_blank" data-sid="135"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/kredittkort-logo.png" alt="Norske kredittkort" style="height:30px;"> 
+          </div> </a> <a href="https://www.bonusfinder.com/uk/ " class="list-group-item" title="BonusFinder UK" target="_blank" data-sid="140"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/bf_banner-190x50-uk@2x.png" alt="BonusFinder UK" style="height:50px;"> 
+          </div> </a> <a href="https://newzealandcasinos.nz/" class="list-group-item" title="newzealandcasinos " target="_blank" data-sid="146"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/newzealandcasinos_logo.jpg" alt="newzealandcasinos " style="height:50px;"> 
+          </div> </a> <a href="https://bedsteonlinecasinoer.dk/" class="list-group-item" title="BedsteOnlineCasinoer" target="_blank" data-sid="150"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/bedsteonlinecasinoer.png" alt="BedsteOnlineCasinoer" style="height:50px;"> 
+          </div> </a> <a href="https://newbitcoincasinos.com" class="list-group-item" title="New Bitcoin Casino Reviews" target="_blank" data-sid="154"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/newbitcoincasinoslogo.png" alt="New Bitcoin Casino Reviews" style="height:50px;"> 
+          </div> </a> 
+        </div>
+       </div>
+       <div class="col-lg-3">
+        <div class="list-group"> <a href="https://www.itcares.de/" class="list-group-item" title="itcares.de" target="_blank" data-sid="16"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/itc.png" alt="itcares.de" style="height:50px;"> 
+          </div> </a> <a href="https://simonfieber.it/" class="list-group-item" title="Simon Fieber IT-Services" target="_blank" data-sid="21"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/sfit.png" alt="Simon Fieber IT-Services" style="height:50px;"> 
+          </div> </a> <a href="https://monovm.com/vps/" class="list-group-item" title="buy vps" target="_blank" data-sid="39"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/mono-01.png" alt="buy vps" style="height:50px;"> 
+          </div> </a> <a href="https://gorillasports.no/produktkategori/styrketrening/kettlebells/" class="list-group-item" title="Gorilla Sports kettlebells" target="_blank" data-sid="48"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/gorillasports-logo-revised.png" alt="Gorilla Sports kettlebells" style="height:50px;"> 
+          </div> </a> <a href="http://www.sexuallysecure.com/" class="list-group-item" title="Sexually Secure" target="_blank" data-sid="56"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/ssecure.png" alt="Sexually Secure" style="height:50px;"> 
+          </div> </a> <a href="https://trivia.net" class="list-group-item" title="https://trivia.net" target="_blank" data-sid="82"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/trivia_logo.png" alt="https://trivia.net" style="height:50px;"> 
+          </div> </a> <a href="https://edureviewer.com/tutoring/wyzant-com-review/ " class="list-group-item" title="wyzant reviews" target="_blank" data-sid="89"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/edureviewer.jpg" alt="wyzant reviews" style="height:100px;"> 
+          </div> </a> <a href="https://teamnijhuis.com/nl/seo-specialist/" class="list-group-item" title="SEO specialist
+" target="_blank" data-sid="93"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/logo-TN_FC_220x50.png" alt="SEO specialist
+" style="height:50px;"> 
+          </div> </a> <a href="https://www.banksecrets.eu/" class="list-group-item" title="https://www.banksecrets.eu/" target="_blank" data-sid="106"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/banklogosimple.png" alt="https://www.banksecrets.eu/" style="height:50px;"> 
+          </div> </a> <a href="https://pengebloggen.com/" class="list-group-item" title="Pengebloggen.com" target="_blank" data-sid="136"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/pengebloggen-logo-ny.png" alt="Pengebloggen.com" style="height:40px;"> 
+          </div> </a> <a href="https://www.bonusfinder.com/" class="list-group-item" title="BonusFinder New Jersey" target="_blank" data-sid="141"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/bf_banner-190x50-us@2x.png" alt="BonusFinder New Jersey" style="height:50px;"> 
+          </div> </a> <a href="https://www.casinopro.se/" class="list-group-item" title="casinopro " target="_blank" data-sid="147"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/casinopro_logo.jpg" alt="casinopro " style="height:50px;"> 
+          </div> </a> <a href="https://casinoutanreg.com/" class="list-group-item" title="CasinoUtanReg" target="_blank" data-sid="151"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/casinoutanreg-150.png" alt="CasinoUtanReg" style="height:100px;"> 
+          </div> </a> <a href="https://www.casablancahire.com/" class="list-group-item" title="Casablanca Marquee, Furniture and Catering Hire" target="_blank" data-sid="155"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/Casablanca-marquee-furniture-catering-hire.png" alt="Casablanca Marquee, Furniture and Catering Hire" style="height:75px;"> 
+          </div> </a> 
+        </div>
+       </div>
+       <div class="col-lg-3">
+        <div class="list-group"> <a href="https://meridianthemes.net/deals/" class="list-group-item" title="MeridianThemes Deals" target="_blank" data-sid="18"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/md-logo.jpg" alt="MeridianThemes Deals" style="height:50px;"> 
+          </div> </a> <a href="https://www.xn--forbruksln-95a.com/refinansiering" class="list-group-item" title="Refinansiering" target="_blank" data-sid="28"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/forbukslan.com_v2-1.png" alt="Refinansiering" style="height:35px;"> 
+          </div> </a> <a href="https://treesaverjs.com/" class="list-group-item" title="Treesaver js" target="_blank" data-sid="45"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/treesaverjs.png" alt="Treesaver js" style="height:40px;"> 
+          </div> </a> <a href="https://wordunscrambler.org" class="list-group-item" title="https://wordunscrambler.org" target="_blank" data-sid="49"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/wordunscrambler.png" alt="https://wordunscrambler.org" style="height:50px;"> 
+          </div> </a> <a href="https://www.aliternetworks.com/" class="list-group-item" title="aliternetworks.com" target="_blank" data-sid="75"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/aliter-logo.png" alt="aliternetworks.com" style="height:70px;"> 
+          </div> </a> <a href="https://tierlists.com" class="list-group-item" title="https://tierlists.com" target="_blank" data-sid="83"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/tierlists_logo.png" alt="https://tierlists.com" style="height:50px;"> 
+          </div> </a> <a href="https://paperleaf.ca/essay-help/ " class="list-group-item" title="help with essay writing in Canada
+
+" target="_blank" data-sid="90"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/paperleaf.jpg" alt="help with essay writing in Canada
+
+" style="height:100px;"> 
+          </div> </a> <a href="https://1gbits.com" class="list-group-item" title="Dedicated Server" target="_blank" data-sid="103"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/1gbits.jpg" alt="Dedicated Server" style="height:50px;"> 
+          </div> </a> <a href="https://www.vpnwiki.de/" class="list-group-item" title="VPNwiki" target="_blank" data-sid="113"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/VPNwiki.jpg" alt="VPNwiki" style="height:50px;"> 
+          </div> </a> <a href="https://daenemarkheiraten.de" class="list-group-item" title="Heiraten in Dänemark" target="_blank" data-sid="137"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/heiraten-in-danemark.png" alt="Heiraten in Dänemark" style="height:38px;"> 
+          </div> </a> <a href="https://moneybanker.dk/laan-penge/" class="list-group-item" title="Lån penge online nu - MONEYBANKER" target="_blank" data-sid="142"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/laan-penge-online-nu-moneybanker-logo.png" alt="Lån penge online nu - MONEYBANKER" style="height:60px;"> 
+          </div> </a> <a href="https://thebeastreviews.com/" class="list-group-item" title="https://thebeastreviews.com/" target="_blank" data-sid="148"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/thebeastreviews.com.jpg" alt="https://thebeastreviews.com/" style="height:50px;"> 
+          </div> </a> <a href="https://moneyarcher.com" class="list-group-item" title="MoneyArcher.com" target="_blank" data-sid="152"> 
+          <div class="list-group-item-heading text-center"> 
+           <img src="assets/images/money-archer-logo.png" alt="MoneyArcher.com" style="height:50px;"> 
+          </div> </a> 
+        </div>
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <div class="col-xs-12">
+      <h3>Donators</h3>
+     </div> 
+     <div> 
+      <ul> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Felix Lautenschläger</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Vitaly Pashkov (<strong>3x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Roland Fenster</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Bedios eBusiness Solutions</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Maximilian Schirmer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Chris Vigelius</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Sven Trautwein</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Tobias Irlinger (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Sven Rothe</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Holger Schüma</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Jens Jäger</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Ulf Reimers</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Thorsten Oechsler</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Hosting Coupon (Orange Web Solutions)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Hubert Pluta</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Felix Schröter (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Matthias Diehl</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Thomas Flad</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Sebastian Pohl (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Fabian Schütze (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Michael Fritscher</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Aureli.us - Ben Graepel</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Elisabeth Mohammad</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Markus Maurer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Stephan Huke</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Stefan Sorge</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">RC-Gameserver.at</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Domenik Niemietz</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Daniel Münnemann (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><strong>Johan Draaisma (6x)</strong></li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Felix Herzog (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><strong style="color:#ff6666;">Christian Rilke / MvHost (10x)</strong></li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Max Merz (<strong>3x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Gernot Frisch</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Falco Kleinschmidt (<strong>4x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Frank Koeppert</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Nico Donath (<strong>3x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Andreas Ruttkamp (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Patrick Fischer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Richard R.</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">BrightByte Ltd</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Purebytes</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Simon Schiefer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Claudio Hediger</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Matthias Thunack</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Jakob Beclin (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Tobias Mücksch</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><strong style="color:#ff6666;">Patrik Kernstock (16x)</strong></li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Tobias Peter (<strong>3x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Stefano Marelli</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Florian Scholz</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Hendrik Hagendorn</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Crafted Media</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Helge Sverre</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Patrick Scott Timmins</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Maximilian Hill</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><strong>Dennis Brieke (6x)</strong></li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Daniel Seuffer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">demlak</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Luca Steinke</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Robert Resch (<strong>4x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Stefan Oswald</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Simon Fieber IT-Services</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Andreas Blatter (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">secept Menges &amp; Vigelius GbR</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Julian Wilhelm (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Andreas Grundler</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Ulf Klose</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Markus Heinze</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">ProgramCore</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Lubos Magat</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Kenneth Wußmann (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Pathompong Peckongtong</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Daniel Schmitz (<strong>4x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Muhammet Ali Bekiroglu</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">JABA e.K. (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Ricardo Mieres</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Lukas Schauer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">曾 炜煜 (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Pascal Querner</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Alexandru Ciobanu</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">A-Working GmbH</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Sebastian Trella</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Tino</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Urs-Peter Krämer</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><strong>Dominik Tugend (9x)</strong></li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Jasper Golze</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">asado GmbH</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Christian Schoenmottel</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Simon Thomann</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Grigory Morozov</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Marco Vogt (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Köhler - Secure IT</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Marin Schutz</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Thomas Bille</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Lluc Pallejà (<strong>3x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Florian Kimmerl - Spacekoeln</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Valentin Dauth</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Sören Helms</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">ZARk.be</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Daniel Drexlmaier</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Torsten Friedrich</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Kieron Boswell</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Lars Dietrich</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Ryo Kato</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Benjamin Veitschegger</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Arturas Vinckevicius</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Bärbel Winkler</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Richard Reiber (<strong>2x</strong>)</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">webspace24.de</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Matthias Gmeiner</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">SEVENFACTS</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">AnzahCraft</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">ender informatics GmbH</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Christoph Kunkel</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Ronny Seffner</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12">Pandaen</li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><a href="https://www.routerhosting.com/" rel="external" target="_new" title="RouterHosting.com" data-sid="78">RouterHosting.com</a></li> 
+       <li class="col-lg-4 col-sm-6 col-xs-12"><a href="https://bonuspanda.com/" rel="external" target="_new" title="BonusPanda.com" data-sid="139">BonusPanda.com</a></li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="c"> 
+   <div class="container"> 
+    <p>froxlor © 2009 - 2020 by the <a href="team.php">Froxlor Team</a></p> 
+   </div> 
+  </div> 
+  <script src="assets/js/jquery.min.js"></script> <!-- Bootstrap core JavaScript
+    ================================================== --> <!-- Placed at the end of the document so the pages load faster --> 
+  <script src="assets/js/smooth-scroll.js"></script> 
+  <script src="assets/js/bootstrap.min.js" type="text/javascript"></script> 
+  <script type="text/javascript">
+		$(document).ready(function ($) {
+			$("#sponsors a").click(function() {
+				$.get( "o.php?i=" + $(this).data("sid"), function() {});
+			});
+		});
+    </script> <!-- Matomo --> 
+  <script type="text/javascript">
+  var _paq = window._paq || [];
+  _paq.push(["setCookieDomain", "*.www.froxlor.org"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://stats.nutime.de/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script> <!-- End Matomo Code -->  
+ </body>
+</html>

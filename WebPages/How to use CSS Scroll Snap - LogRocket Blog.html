@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="pingback" href="https://blog.logrocket.com/xmlrpc.php"> 
+  <title>How to use CSS Scroll Snap - LogRocket Blog</title> <!-- Jetpack Site Verification Tags --> <!-- This site is optimized with the Yoast SEO plugin v13.3 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="This simple, straightforward tutorial shows you how to add a scroll to your page without having to rely on JavaScript libraries."> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://blog.logrocket.com/how-to-use-css-scroll-snap/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="How to use CSS Scroll Snap - LogRocket Blog"> 
+  <meta property="og:description" content="This simple, straightforward tutorial shows you how to add a scroll to your page without having to rely on JavaScript libraries."> 
+  <meta property="og:url" content="https://blog.logrocket.com/how-to-use-css-scroll-snap/"> 
+  <meta property="og:site_name" content="LogRocket Blog"> 
+  <meta property="article:tag" content="css"> 
+  <meta property="article:section" content="Featured Posts"> 
+  <meta property="article:published_time" content="2020-03-09T16:00:53+00:00"> 
+  <meta property="article:modified_time" content="2020-03-09T16:01:17+00:00"> 
+  <meta property="og:updated_time" content="2020-03-09T16:01:17+00:00"> 
+  <meta property="og:image" content="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1"> 
+  <meta property="og:image:secure_url" content="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1"> 
+  <meta property="og:image:width" content="730"> 
+  <meta property="og:image:height" content="487"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="This simple, straightforward tutorial shows you how to add a scroll to your page without having to rely on JavaScript libraries."> 
+  <meta name="twitter:title" content="How to use CSS Scroll Snap - LogRocket Blog"> 
+  <meta name="twitter:image" content="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://blog.logrocket.com/#website","url":"https://blog.logrocket.com/","name":"LogRocket Blog","inLanguage":"en-US","description":"For Frontend Developers and Web App Engineers","potentialAction":[{"@type":"SearchAction","target":"https://blog.logrocket.com/?s={search_term_string}","query-input":"required name=search_term_string"}]},{"@type":"ImageObject","@id":"https://blog.logrocket.com/how-to-use-css-scroll-snap/#primaryimage","inLanguage":"en-US","url":"https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&ssl=1","width":730,"height":487,"caption":"An image illustrating CSS scroll snap."},{"@type":"WebPage","@id":"https://blog.logrocket.com/how-to-use-css-scroll-snap/#webpage","url":"https://blog.logrocket.com/how-to-use-css-scroll-snap/","name":"How to use CSS Scroll Snap - LogRocket Blog","isPartOf":{"@id":"https://blog.logrocket.com/#website"},"inLanguage":"en-US","primaryImageOfPage":{"@id":"https://blog.logrocket.com/how-to-use-css-scroll-snap/#primaryimage"},"datePublished":"2020-03-09T16:00:53+00:00","dateModified":"2020-03-09T16:01:17+00:00","author":{"@id":"https://blog.logrocket.com/#/schema/person/d20daa1f5d49ee80cb01e9f5d8d6b833"},"description":"This simple, straightforward tutorial shows you how to add a scroll to your page without having to rely on JavaScript libraries.","potentialAction":[{"@type":"ReadAction","target":["https://blog.logrocket.com/how-to-use-css-scroll-snap/"]}]},{"@type":["Person"],"@id":"https://blog.logrocket.com/#/schema/person/d20daa1f5d49ee80cb01e9f5d8d6b833","name":"Nada Rifki","image":{"@type":"ImageObject","@id":"https://blog.logrocket.com/#authorlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/3981ed4d6ff3e21f338e01ce053ea6c3?s=96&d=mm&r=g","caption":"Nada Rifki"},"description":"Nada is a JavaScript developer who likes to play with UI components to create interfaces with great UX. She specialises in Vue.js and loves sharing anything and everything that could help her fellow front-end web developers. Nada also dabbles in digital marketing, dance and Chinese.","sameAs":[]}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com"> 
+  <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link href="https://fonts.gstatic.com" crossorigin rel="preconnect"> 
+  <link rel="alternate" type="application/rss+xml" title="LogRocket Blog » Feed" href="https://blog.logrocket.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="LogRocket Blog » Comments Feed" href="https://blog.logrocket.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="LogRocket Blog » How to use CSS Scroll Snap Comments Feed" href="https://blog.logrocket.com/how-to-use-css-scroll-snap/feed/"> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blog.logrocket.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3.2"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="wp-block-library-css" href="https://c0.wp.com/c/5.3.2/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style> 
+  <link rel="stylesheet" id="wp-block-library-theme-css" href="https://c0.wp.com/c/5.3.2/wp-includes/css/dist/block-library/theme.min.css" type="text/css" media="all"> 
+  <link rel="stylesheet" id="github-embed-css" href="https://blog.logrocket.com/wp-content/plugins/github-embed/css/github-embed.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="bootstrap4-css" href="https://blog.logrocket.com/wp-content/themes/mediumish/assets/css/bootstrap.min.css" type="text/css" media="all"> 
+  <link rel="stylesheet" id="fontawesome-css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" media="all"> 
+  <link rel="stylesheet" id="mediumish-style-css" href="https://blog.logrocket.com/wp-content/themes/mediumish/style.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="social-logos-css" href="https://c0.wp.com/p/jetpack/8.3/_inc/social-logos/social-logos.min.css" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jetpack_css-css" href="https://c0.wp.com/p/jetpack/8.3/css/jetpack.css" type="text/css" media="all"> 
+  <script type="text/javascript" src="https://blog.logrocket.com/wp-content/plugins/jquery-updater/js/jquery-3.4.1.min.js?ver=3.4.1"></script> 
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> 
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/_inc/build/postmessage.min.js"></script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/_inc/build/jquery.jetpack-resize.min.js"></script> 
+  <link rel="https://api.w.org/" href="https://blog.logrocket.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.logrocket.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blog.logrocket.com/wp-includes/wlwmanifest.xml"> 
+  <link rel="shortlink" href="https://wp.me/paUW9B-3UC"> 
+  <link rel="alternate" type="application/json+oembed" href="https://blog.logrocket.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://blog.logrocket.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F&amp;format=xml"> 
+  <script>
+if (typeof jQuery == 'undefined') {
+var script = document.createElement("SCRIPT");
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js';
+script.type = 'text/javascript';
+script.onload = function() {
+var $ = window.jQuery;
+// LogRocket.captureMessage('jQuery failed to load and triggered catch');
+};
+document.getElementsByTagName("head")[0].appendChild(script);
+}</script> 
+  <meta name="theme-color" content="#764abc"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" media="none" onload="if(media!='all')media='all'"> 
+  <script>
+        /*! Raven.js 3.12.1 (d84f21c) | github.com/getsentry/raven-js */
+!function(a){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=a();else if("function"==typeof define&&define.amd)define([],a);else{var b;b="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,b.Raven=a()}}(function(){return function a(b,c,d){function e(g,h){if(!c[g]){if(!b[g]){var i="function"==typeof require&&require;if(!h&&i)return i(g,!0);if(f)return f(g,!0);var j=new Error("Cannot find module '"+g+"'");throw j.code="MODULE_NOT_FOUND",j}var k=c[g]={exports:{}};b[g][0].call(k.exports,function(a){var c=b[g][1][a];return e(c?c:a)},k,k.exports,a,b,c,d)}return c[g].exports}for(var f="function"==typeof require&&require,g=0;g<d.length;g++)e(d[g]);return e}({1:[function(a,b,c){function d(a,b,c,d){return JSON.stringify(a,e(b,d),c)}function e(a,b){var c=[],d=[];return null==b&&(b=function(a,b){return c[0]===b?"[Circular ~]":"[Circular ~."+d.slice(0,c.indexOf(b)).join(".")+"]"}),function(e,f){if(c.length>0){var g=c.indexOf(this);~g?c.splice(g+1):c.push(this),~g?d.splice(g,1/0,e):d.push(e),~c.indexOf(f)&&(f=b.call(this,e,f))}else c.push(f);return null==a?f:a.call(this,e,f)}}c=b.exports=d,c.getSerialize=e},{}],2:[function(a,b,c){"use strict";function d(a){this.name="RavenConfigError",this.message=a}d.prototype=new Error,d.prototype.constructor=d,b.exports=d},{}],3:[function(a,b,c){"use strict";var d=function(a,b,c){var d=a[b],e=a;if(b in a){var f="warn"===b?"warning":b;a[b]=function(){var a=[].slice.call(arguments),b=""+a.join(" "),g={level:f,logger:"console",extra:{arguments:a}};c&&c(b,g),d&&Function.prototype.apply.call(d,e,a)}}};b.exports={wrapMethod:d}},{}],4:[function(a,b,c){(function(c){"use strict";function d(){return+new Date}function e(){this.a=!("object"!=typeof JSON||!JSON.stringify),this.b=!f(H),this.c=!f(I),this.d=null,this.e=null,this.f=null,this.g=null,this.h=null,this.i=null,this.j={},this.k={logger:"javascript",ignoreErrors:[],ignoreUrls:[],whitelistUrls:[],includePaths:[],crossOrigin:"anonymous",collectWindowErrors:!0,maxMessageLength:0,stackTraceLimit:50,autoBreadcrumbs:!0},this.l=0,this.m=!1,this.n=Error.stackTraceLimit,this.o=G.console||{},this.p={},this.q=[],this.r=d(),this.s=[],this.t=[],this.u=null,this.v=G.location,this.w=this.v&&this.v.href,this.x();for(var a in this.o)this.p[a]=this.o[a]}function f(a){return void 0===a}function g(a){return"function"==typeof a}function h(a){return"[object String]"===J.toString.call(a)}function i(a){for(var b in a)return!1;return!0}function j(a,b){var c,d;if(f(a.length))for(c in a)m(a,c)&&b.call(null,c,a[c]);else if(d=a.length)for(c=0;c<d;c++)b.call(null,c,a[c])}function k(a,b){return b?(j(b,function(b,c){a[b]=c}),a):a}function l(a,b){return!b||a.length<=b?a:a.substr(0,b)+"…"}function m(a,b){return J.hasOwnProperty.call(a,b)}function n(a){for(var b,c=[],d=0,e=a.length;d<e;d++)b=a[d],h(b)?c.push(b.replace(/([.*+?^=!:${}()|\[\]\/\\])/g,"\\$1")):b&&b.source&&c.push(b.source);return new RegExp(c.join("|"),"i")}function o(a){var b=[];return j(a,function(a,c){b.push(encodeURIComponent(a)+"="+encodeURIComponent(c))}),b.join("&")}function p(a){var b=a.match(/^(([^:\/?#]+):)?(\/\/([^\/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$/);if(!b)return{};var c=b[6]||"",d=b[8]||"";return{protocol:b[2],host:b[4],path:b[5],relative:b[5]+c+d}}function q(){var a=G.crypto||G.msCrypto;if(!f(a)&&a.getRandomValues){var b=new Uint16Array(8);a.getRandomValues(b),b[3]=4095&b[3]|16384,b[4]=16383&b[4]|32768;var c=function(a){for(var b=a.toString(16);b.length<4;)b="0"+b;return b};return c(b[0])+c(b[1])+c(b[2])+c(b[3])+c(b[4])+c(b[5])+c(b[6])+c(b[7])}return"xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g,function(a){var b=16*Math.random()|0,c="x"===a?b:3&b|8;return c.toString(16)})}function r(a){for(var b,c=5,d=80,e=[],f=0,g=0,h=" > ",i=h.length;a&&f++<c&&(b=s(a),!("html"===b||f>1&&g+e.length*i+b.length>=d));)e.push(b),g+=b.length,a=a.parentNode;return e.reverse().join(h)}function s(a){var b,c,d,e,f,g=[];if(!a||!a.tagName)return"";if(g.push(a.tagName.toLowerCase()),a.id&&g.push("#"+a.id),b=a.className,b&&h(b))for(c=b.split(/\s+/),f=0;f<c.length;f++)g.push("."+c[f]);var i=["type","name","title","alt"];for(f=0;f<i.length;f++)d=i[f],e=a.getAttribute(d),e&&g.push("["+d+'="'+e+'"]');return g.join("")}function t(a,b){return!!(!!a^!!b)}function u(a,b){return!t(a,b)&&(a=a.values[0],b=b.values[0],a.type===b.type&&a.value===b.value&&v(a.stacktrace,b.stacktrace))}function v(a,b){if(t(a,b))return!1;var c=a.frames,d=b.frames;if(c.length!==d.length)return!1;for(var e,f,g=0;g<c.length;g++)if(e=c[g],f=d[g],e.filename!==f.filename||e.lineno!==f.lineno||e.colno!==f.colno||e["function"]!==f["function"])return!1;return!0}function w(a,b,c,d){var e=a[b];a[b]=c(e),d&&d.push([a,b,e])}var x=a(7),y=a(2),z=a(6),A=z.isError,B=z.isObject,C=a(1),D=a(3).wrapMethod,E="source protocol user pass host port path".split(" "),F=/^(?:(\w+):)?\/\/(?:(\w+)(:\w+)?@)?([\w\.-]+)(?::(\d+))?(\/.*)/,G="undefined"!=typeof window?window:"undefined"!=typeof c?c:"undefined"!=typeof self?self:{},H=G.document,I=G.navigator;e.prototype={VERSION:"3.12.1",debug:!1,TraceKit:x,config:function(a,b){var c=this;if(c.g)return this.y("error","Error: Raven has already been configured"),c;if(!a)return c;var d=c.k;b&&j(b,function(a,b){"tags"===a||"extra"===a||"user"===a?c.j[a]=b:d[a]=b}),c.setDSN(a),d.ignoreErrors.push(/^Script error\.?$/),d.ignoreErrors.push(/^Javascript error: Script error\.? on line 0$/),d.ignoreErrors=n(d.ignoreErrors),d.ignoreUrls=!!d.ignoreUrls.length&&n(d.ignoreUrls),d.whitelistUrls=!!d.whitelistUrls.length&&n(d.whitelistUrls),d.includePaths=n(d.includePaths),d.maxBreadcrumbs=Math.max(0,Math.min(d.maxBreadcrumbs||100,100));var e={xhr:!0,console:!0,dom:!0,location:!0},f=d.autoBreadcrumbs;return"[object Object]"==={}.toString.call(f)?f=k(e,f):f!==!1&&(f=e),d.autoBreadcrumbs=f,x.collectWindowErrors=!!d.collectWindowErrors,c},install:function(){var a=this;return a.isSetup()&&!a.m&&(x.report.subscribe(function(){a.z.apply(a,arguments)}),a.A(),a.k.autoBreadcrumbs&&a.B(),a.C(),a.m=!0),Error.stackTraceLimit=a.k.stackTraceLimit,this},setDSN:function(a){var b=this,c=b.D(a),d=c.path.lastIndexOf("/"),e=c.path.substr(1,d);b.E=a,b.h=c.user,b.F=c.pass&&c.pass.substr(1),b.i=c.path.substr(d+1),b.g=b.G(c),b.H=b.g+"/"+e+"api/"+b.i+"/store/",this.x()},context:function(a,b,c){return g(a)&&(c=b||[],b=a,a=void 0),this.wrap(a,b).apply(this,c)},wrap:function(a,b,c){function d(){var d=[],f=arguments.length,h=!a||a&&a.deep!==!1;for(c&&g(c)&&c.apply(this,arguments);f--;)d[f]=h?e.wrap(a,arguments[f]):arguments[f];try{return b.apply(this,d)}catch(i){throw e.I(),e.captureException(i,a),i}}var e=this;if(f(b)&&!g(a))return a;if(g(a)&&(b=a,a=void 0),!g(b))return b;try{if(b.J)return b;if(b.K)return b.K}catch(h){return b}for(var i in b)m(b,i)&&(d[i]=b[i]);return d.prototype=b.prototype,b.K=d,d.J=!0,d.L=b,d},uninstall:function(){return x.report.uninstall(),this.M(),Error.stackTraceLimit=this.n,this.m=!1,this},captureException:function(a,b){if(!A(a))return this.captureMessage(a,k({trimHeadFrames:1,stacktrace:!0},b));this.d=a;try{var c=x.computeStackTrace(a);this.N(c,b)}catch(d){if(a!==d)throw d}return this},captureMessage:function(a,b){if(!this.k.ignoreErrors.test||!this.k.ignoreErrors.test(a)){b=b||{};var c=k({message:a+""},b);if(this.k.stacktrace||b&&b.stacktrace){var d;try{throw new Error(a)}catch(e){d=e}d.name=null,b=k({fingerprint:a,trimHeadFrames:(b.trimHeadFrames||0)+1},b);var f=x.computeStackTrace(d),g=this.O(f,b);c.stacktrace={frames:g.reverse()}}return this.P(c),this}},captureBreadcrumb:function(a){var b=k({timestamp:d()/1e3},a);if(g(this.k.breadcrumbCallback)){var c=this.k.breadcrumbCallback(b);if(B(c)&&!i(c))b=c;else if(c===!1)return this}return this.t.push(b),this.t.length>this.k.maxBreadcrumbs&&this.t.shift(),this},addPlugin:function(a){var b=[].slice.call(arguments,1);return this.q.push([a,b]),this.m&&this.C(),this},setUserContext:function(a){return this.j.user=a,this},setExtraContext:function(a){return this.Q("extra",a),this},setTagsContext:function(a){return this.Q("tags",a),this},clearContext:function(){return this.j={},this},getContext:function(){return JSON.parse(C(this.j))},setEnvironment:function(a){return this.k.environment=a,this},setRelease:function(a){return this.k.release=a,this},setDataCallback:function(a){var b=this.k.dataCallback;return this.k.dataCallback=g(a)?function(c){return a(c,b)}:a,this},setBreadcrumbCallback:function(a){var b=this.k.breadcrumbCallback;return this.k.breadcrumbCallback=g(a)?function(c){return a(c,b)}:a,this},setShouldSendCallback:function(a){var b=this.k.shouldSendCallback;return this.k.shouldSendCallback=g(a)?function(c){return a(c,b)}:a,this},setTransport:function(a){return this.k.transport=a,this},lastException:function(){return this.d},lastEventId:function(){return this.f},isSetup:function(){return!!this.a&&(!!this.g||(this.ravenNotConfiguredError||(this.ravenNotConfiguredError=!0,this.y("error","Error: Raven has not been configured.")),!1))},afterLoad:function(){var a=G.RavenConfig;a&&this.config(a.dsn,a.config).install()},showReportDialog:function(a){if(H){a=a||{};var b=a.eventId||this.lastEventId();if(!b)throw new y("Missing eventId");var c=a.dsn||this.E;if(!c)throw new y("Missing DSN");var d=encodeURIComponent,e="";e+="?eventId="+d(b),e+="&dsn="+d(c);var f=a.user||this.j.user;f&&(f.name&&(e+="&name="+d(f.name)),f.email&&(e+="&email="+d(f.email)));var g=this.G(this.D(c)),h=H.createElement("script");h.async=!0,h.src=g+"/api/embed/error-page/"+e,(H.head||H.body).appendChild(h)}},I:function(){var a=this;this.l+=1,setTimeout(function(){a.l-=1})},R:function(a,b){var c,d;if(this.b){b=b||{},a="raven"+a.substr(0,1).toUpperCase()+a.substr(1),H.createEvent?(c=H.createEvent("HTMLEvents"),c.initEvent(a,!0,!0)):(c=H.createEventObject(),c.eventType=a);for(d in b)m(b,d)&&(c[d]=b[d]);if(H.createEvent)H.dispatchEvent(c);else try{H.fireEvent("on"+c.eventType.toLowerCase(),c)}catch(e){}}},S:function(a){var b=this;return function(c){if(b.T=null,b.u!==c){b.u=c;var d;try{d=r(c.target)}catch(e){d="<unknown>"}b.captureBreadcrumb({category:"ui."+a,message:d})}}},U:function(){var a=this,b=1e3;return function(c){var d;try{d=c.target}catch(e){return}var f=d&&d.tagName;if(f&&("INPUT"===f||"TEXTAREA"===f||d.isContentEditable)){var g=a.T;g||a.S("input")(c),clearTimeout(g),a.T=setTimeout(function(){a.T=null},b)}}},V:function(a,b){var c=p(this.v.href),d=p(b),e=p(a);this.w=b,c.protocol===d.protocol&&c.host===d.host&&(b=d.relative),c.protocol===e.protocol&&c.host===e.host&&(a=e.relative),this.captureBreadcrumb({category:"navigation",data:{to:b,from:a}})},A:function(){function a(a){return function(b,d){for(var e=new Array(arguments.length),f=0;f<e.length;++f)e[f]=arguments[f];var h=e[0];return g(h)&&(e[0]=c.wrap(h)),a.apply?a.apply(this,e):a(e[0],e[1])}}function b(a){var b=G[a]&&G[a].prototype;b&&b.hasOwnProperty&&b.hasOwnProperty("addEventListener")&&(w(b,"addEventListener",function(b){return function(d,f,g,h){try{f&&f.handleEvent&&(f.handleEvent=c.wrap(f.handleEvent))}catch(i){}var j,k,l;return e&&e.dom&&("EventTarget"===a||"Node"===a)&&(k=c.S("click"),l=c.U(),j=function(a){if(a){var b;try{b=a.type}catch(c){return}return"click"===b?k(a):"keypress"===b?l(a):void 0}}),b.call(this,d,c.wrap(f,void 0,j),g,h)}},d),w(b,"removeEventListener",function(a){return function(b,c,d,e){try{c=c&&(c.K?c.K:c)}catch(f){}return a.call(this,b,c,d,e)}},d))}var c=this,d=c.s,e=this.k.autoBreadcrumbs;w(G,"setTimeout",a,d),w(G,"setInterval",a,d),G.requestAnimationFrame&&w(G,"requestAnimationFrame",function(a){return function(b){return a(c.wrap(b))}},d);for(var f=["EventTarget","Window","Node","ApplicationCache","AudioTrackList","ChannelMergerNode","CryptoOperation","EventSource","FileReader","HTMLUnknownElement","IDBDatabase","IDBRequest","IDBTransaction","KeyOperation","MediaController","MessagePort","ModalWindow","Notification","SVGElementInstance","Screen","TextTrack","TextTrackCue","TextTrackList","WebSocket","WebSocketWorker","Worker","XMLHttpRequest","XMLHttpRequestEventTarget","XMLHttpRequestUpload"],h=0;h<f.length;h++)b(f[h])},B:function(){function a(a,c){a in c&&g(c[a])&&w(c,a,function(a){return b.wrap(a)})}var b=this,c=this.k.autoBreadcrumbs,d=b.s;if(c.xhr&&"XMLHttpRequest"in G){var e=XMLHttpRequest.prototype;w(e,"open",function(a){return function(c,d){return h(d)&&d.indexOf(b.h)===-1&&(this.W={method:c,url:d,status_code:null}),a.apply(this,arguments)}},d),w(e,"send",function(c){return function(d){function e(){if(f.W&&(1===f.readyState||4===f.readyState)){try{f.W.status_code=f.status}catch(a){}b.captureBreadcrumb({type:"http",category:"xhr",data:f.W})}}for(var f=this,h=["onload","onerror","onprogress"],i=0;i<h.length;i++)a(h[i],f);return"onreadystatechange"in f&&g(f.onreadystatechange)?w(f,"onreadystatechange",function(a){return b.wrap(a,void 0,e)}):f.onreadystatechange=e,c.apply(this,arguments)}},d)}c.xhr&&"fetch"in G&&w(G,"fetch",function(a){return function(c,d){for(var e=new Array(arguments.length),f=0;f<e.length;++f)e[f]=arguments[f];var g="GET";e[1]&&e[1].method&&(g=e[1].method);var h={method:g,url:e[0],status_code:null};return b.captureBreadcrumb({type:"http",category:"fetch",data:h}),a.apply(this,e).then(function(a){return h.status_code=a.status,a})}},d),c.dom&&this.b&&(H.addEventListener?(H.addEventListener("click",b.S("click"),!1),H.addEventListener("keypress",b.U(),!1)):(H.attachEvent("onclick",b.S("click")),H.attachEvent("onkeypress",b.U())));var f=G.chrome,i=f&&f.app&&f.app.runtime,k=!i&&G.history&&history.pushState;if(c.location&&k){var l=G.onpopstate;G.onpopstate=function(){var a=b.v.href;if(b.V(b.w,a),l)return l.apply(this,arguments)},w(history,"pushState",function(a){return function(){var c=arguments.length>2?arguments[2]:void 0;return c&&b.V(b.w,c+""),a.apply(this,arguments)}},d)}if(c.console&&"console"in G&&console.log){var m=function(a,c){b.captureBreadcrumb({message:a,level:c.level,category:"console"})};j(["debug","info","warn","error","log"],function(a,b){D(console,b,m)})}},M:function(){for(var a;this.s.length;){a=this.s.shift();var b=a[0],c=a[1],d=a[2];b[c]=d}},C:function(){var a=this;j(this.q,function(b,c){var d=c[0],e=c[1];d.apply(a,[a].concat(e))})},D:function(a){var b=F.exec(a),c={},d=7;try{for(;d--;)c[E[d]]=b[d]||""}catch(e){throw new y("Invalid DSN: "+a)}if(c.pass&&!this.k.allowSecretKey)throw new y("Do not specify your secret key in the DSN. See: http://bit.ly/raven-secret-key");return c},G:function(a){var b="//"+a.host+(a.port?":"+a.port:"");return a.protocol&&(b=a.protocol+":"+b),b},z:function(){this.l||this.N.apply(this,arguments)},N:function(a,b){var c=this.O(a,b);this.R("handle",{stackInfo:a,options:b}),this.X(a.name,a.message,a.url,a.lineno,c,b)},O:function(a,b){var c=this,d=[];if(a.stack&&a.stack.length&&(j(a.stack,function(a,b){var e=c.Y(b);e&&d.push(e)}),b&&b.trimHeadFrames))for(var e=0;e<b.trimHeadFrames&&e<d.length;e++)d[e].in_app=!1;return d=d.slice(0,this.k.stackTraceLimit)},Y:function(a){if(a.url){var b={filename:a.url,lineno:a.line,colno:a.column,"function":a.func||"?"};return b.in_app=!(this.k.includePaths.test&&!this.k.includePaths.test(b.filename)||/(Raven|TraceKit)\./.test(b["function"])||/raven\.(min\.)?js$/.test(b.filename)),b}},X:function(a,b,c,d,e,f){var g;if((!this.k.ignoreErrors.test||!this.k.ignoreErrors.test(b))&&(b+="",e&&e.length?(c=e[0].filename||c,e.reverse(),g={frames:e}):c&&(g={frames:[{filename:c,lineno:d,in_app:!0}]}),(!this.k.ignoreUrls.test||!this.k.ignoreUrls.test(c))&&(!this.k.whitelistUrls.test||this.k.whitelistUrls.test(c)))){var h=k({exception:{values:[{type:a,value:b,stacktrace:g}]},culprit:c},f);this.P(h)}},Z:function(a){var b=this.k.maxMessageLength;if(a.message&&(a.message=l(a.message,b)),a.exception){var c=a.exception.values[0];c.value=l(c.value,b)}return a},$:function(){if(this.c||this.b){var a={};return this.c&&I.userAgent&&(a.headers={"User-Agent":navigator.userAgent}),this.b&&(H.location&&H.location.href&&(a.url=H.location.href),H.referrer&&(a.headers||(a.headers={}),a.headers.Referer=H.referrer)),a}},x:function(){this._=0,this.aa=null},ba:function(){return this._&&d()-this.aa<this._},ca:function(a){var b=this.e;return!(!b||a.message!==b.message||a.culprit!==b.culprit)&&(a.stacktrace||b.stacktrace?v(a.stacktrace,b.stacktrace):!a.exception&&!b.exception||u(a.exception,b.exception))},da:function(a){if(!this.ba()){var b=a.status;if(400===b||401===b||429===b){var c;try{c=a.getResponseHeader("Retry-After"),c=1e3*parseInt(c,10)}catch(e){}this._=c?c:2*this._||1e3,this.aa=d()}}},P:function(a){var b=this.k,c={project:this.i,logger:b.logger,platform:"javascript"},e=this.$();if(e&&(c.request=e),a.trimHeadFrames&&delete a.trimHeadFrames,a=k(c,a),a.tags=k(k({},this.j.tags),a.tags),a.extra=k(k({},this.j.extra),a.extra),a.extra["session:duration"]=d()-this.r,this.t&&this.t.length>0&&(a.breadcrumbs={values:[].slice.call(this.t,0)}),i(a.tags)&&delete a.tags,this.j.user&&(a.user=this.j.user),b.environment&&(a.environment=b.environment),b.release&&(a.release=b.release),b.serverName&&(a.server_name=b.serverName),g(b.dataCallback)&&(a=b.dataCallback(a)||a),a&&!i(a)&&(!g(b.shouldSendCallback)||b.shouldSendCallback(a)))return this.ba()?void this.y("warn","Raven dropped error due to backoff: ",a):void this.ea(a)},fa:function(){return q()},ea:function(a,b){var c=this,d=this.k;if(this.isSetup()){if(this.f=a.event_id||(a.event_id=this.fa()),a=this.Z(a),!this.k.allowDuplicates&&this.ca(a))return void this.y("warn","Raven dropped repeat event: ",a);this.e=a,this.y("debug","Raven about to send:",a);var e={sentry_version:"7",sentry_client:"raven-js/"+this.VERSION,sentry_key:this.h};this.F&&(e.sentry_secret=this.F);var f=a.exception&&a.exception.values[0];this.captureBreadcrumb({category:"sentry",message:f?(f.type?f.type+": ":"")+f.value:a.message,event_id:a.event_id,level:a.level||"error"});var g=this.H;(d.transport||this.ga).call(this,{url:g,auth:e,data:a,options:d,onSuccess:function(){c.x(),c.R("success",{data:a,src:g}),b&&b()},onError:function(d){c.y("error","Raven transport failed to send: ",d),d.request&&c.da(d.request),c.R("failure",{data:a,src:g}),d=d||new Error("Raven send failed (no additional details provided)"),b&&b(d)}})}},ga:function(a){function b(){if(200===c.status)a.onSuccess&&a.onSuccess();else if(a.onError){var b=new Error("Sentry error code: "+c.status);b.request=c,a.onError(b)}}var c=new XMLHttpRequest,d="withCredentials"in c||"undefined"!=typeof XDomainRequest;if(d){var e=a.url;"withCredentials"in c?c.onreadystatechange=function(){4===c.readyState&&b()}:(c=new XDomainRequest,e=e.replace(/^https?:/,""),c.onload=b),c.open("POST",e+"?"+o(a.auth)),c.send(C(a.data))}},y:function(a){this.p[a]&&this.debug&&Function.prototype.apply.call(this.p[a],this.o,[].slice.call(arguments,1))},Q:function(a,b){f(b)?delete this.j[a]:this.j[a]=k(this.j[a]||{},b)}};var J=Object.prototype;e.prototype.setUser=e.prototype.setUserContext,e.prototype.setReleaseContext=e.prototype.setRelease,b.exports=e}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{1:1,2:2,3:3,6:6,7:7}],5:[function(a,b,c){(function(c){"use strict";var d=a(4),e="undefined"!=typeof window?window:"undefined"!=typeof c?c:"undefined"!=typeof self?self:{},f=e.Raven,g=new d;g.noConflict=function(){return e.Raven=f,g},g.afterLoad(),b.exports=g}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{4:4}],6:[function(a,b,c){"use strict";function d(a){return"object"==typeof a&&null!==a}function e(a){var b={}.toString.call(a);return d(a)&&"[object Error]"===b||"[object Exception]"===b||a instanceof Error}b.exports={isObject:d,isError:e}},{}],7:[function(a,b,c){(function(c){"use strict";function d(){return"undefined"==typeof document||"undefined"==typeof document.location?"":document.location.href}var e=a(6),f={collectWindowErrors:!0,debug:!1},g="undefined"!=typeof window?window:"undefined"!=typeof c?c:"undefined"!=typeof self?self:{},h=[].slice,i="?",j=/^(?:[Uu]ncaught (?:exception: )?)?(?:((?:Eval|Internal|Range|Reference|Syntax|Type|URI|)Error): )?(.*)$/;f.report=function(){function a(a){m(),s.push(a)}function b(a){for(var b=s.length-1;b>=0;--b)s[b]===a&&s.splice(b,1)}function c(){n(),s=[]}function k(a,b){var c=null;if(!b||f.collectWindowErrors){for(var d in s)if(s.hasOwnProperty(d))try{s[d].apply(null,[a].concat(h.call(arguments,2)))}catch(e){c=e}if(c)throw c}}function l(a,b,c,g,h){var l=null;if(v)f.computeStackTrace.augmentStackTraceWithInitialElement(v,b,c,a),o();else if(h&&e.isError(h))l=f.computeStackTrace(h),k(l,!0);else{var m,n={url:b,line:c,column:g},p=void 0,r=a;if("[object String]"==={}.toString.call(a)){var m=a.match(j);m&&(p=m[1],r=m[2])}n.func=i,l={name:p,message:r,url:d(),stack:[n]},k(l,!0)}return!!q&&q.apply(this,arguments)}function m(){r||(q=g.onerror,g.onerror=l,r=!0)}function n(){r&&(g.onerror=q,r=!1,q=void 0)}function o(){var a=v,b=t;t=null,v=null,u=null,k.apply(null,[a,!1].concat(b))}function p(a,b){var c=h.call(arguments,1);if(v){if(u===a)return;o()}var d=f.computeStackTrace(a);if(v=d,u=a,t=c,setTimeout(function(){u===a&&o()},d.incomplete?2e3:0),b!==!1)throw a}var q,r,s=[],t=null,u=null,v=null;return p.subscribe=a,p.unsubscribe=b,p.uninstall=c,p}(),f.computeStackTrace=function(){function a(a){if("undefined"!=typeof a.stack&&a.stack){for(var b,c,e=/^\s*at (.*?) ?\(((?:file|https?|blob|chrome-extension|native|eval|<anonymous>).*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i,f=/^\s*(.*?)(?:\((.*?)\))?(?:^|@)((?:file|https?|blob|chrome|resource|\[native).*?)(?::(\d+))?(?::(\d+))?\s*$/i,g=/^\s*at (?:((?:\[object object\])?.+) )?\(?((?:file|ms-appx|https?|blob):.*?):(\d+)(?::(\d+))?\)?\s*$/i,h=a.stack.split("\n"),j=[],k=(/^(.*) is undefined$/.exec(a.message),0),l=h.length;k<l;++k){if(b=e.exec(h[k])){var m=b[2]&&b[2].indexOf("native")!==-1;c={url:m?null:b[2],func:b[1]||i,args:m?[b[2]]:[],line:b[3]?+b[3]:null,column:b[4]?+b[4]:null}}else if(b=g.exec(h[k]))c={url:b[2],func:b[1]||i,args:[],line:+b[3],column:b[4]?+b[4]:null};else{if(!(b=f.exec(h[k])))continue;c={url:b[3],func:b[1]||i,args:b[2]?b[2].split(","):[],line:b[4]?+b[4]:null,column:b[5]?+b[5]:null}}!c.func&&c.line&&(c.func=i),j.push(c)}return j.length?(j[0].column||"undefined"==typeof a.columnNumber||(j[0].column=a.columnNumber+1),{name:a.name,message:a.message,url:d(),stack:j}):null}}function b(a,b,c,d){var e={url:b,line:c};if(e.url&&e.line){if(a.incomplete=!1,e.func||(e.func=i),a.stack.length>0&&a.stack[0].url===e.url){if(a.stack[0].line===e.line)return!1;if(!a.stack[0].line&&a.stack[0].func===e.func)return a.stack[0].line=e.line,!1}return a.stack.unshift(e),a.partial=!0,!0}return a.incomplete=!0,!1}function c(a,g){for(var h,j,k=/function\s+([_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*)?\s*\(/i,l=[],m={},n=!1,o=c.caller;o&&!n;o=o.caller)if(o!==e&&o!==f.report){if(j={url:null,func:i,line:null,column:null},o.name?j.func=o.name:(h=k.exec(o.toString()))&&(j.func=h[1]),"undefined"==typeof j.func)try{j.func=h.input.substring(0,h.input.indexOf("{"))}catch(p){}m[""+o]?n=!0:m[""+o]=!0,l.push(j)}g&&l.splice(0,g);var q={name:a.name,message:a.message,url:d(),stack:l};return b(q,a.sourceURL||a.fileName,a.line||a.lineNumber,a.message||a.description),q}function e(b,e){var g=null;e=null==e?0:+e;try{if(g=a(b))return g}catch(h){if(f.debug)throw h}try{if(g=c(b,e+1))return g}catch(h){if(f.debug)throw h}return{name:b.name,message:b.message,url:d()}}return e.augmentStackTraceWithInitialElement=b,e.computeStackTraceFromStackProp=a,e}(),b.exports=f}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{6:6}]},{},[5])(5)});
+    </script> 
+  <script>
+    window.Raven && window.Raven.config('https://98e0ea7c6f2e492d94439ad5aaea48dd@e.logrocket.com/4').install()
+    </script> 
+  <script type="text/javascript">
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+        }
+
+        var LOCAL = false;
+
+        function transformURL(
+            baseURL,
+            rootDomain,
+            path
+        ) {
+            if (LOCAL) {
+                return baseURL
+                    .replace(rootDomain, 'localhost:8080' + path)
+                    .replace('https://', 'http://');
+            } else {
+                return baseURL.replace(rootDomain, 'log.logicanalytics.io' + path);
+            }
+        }
+
+        function setWithDescriptor(descriptor, arg) {
+            var transformedURL = arg;
+
+            if (transformedURL.indexOf('cdn.heapanalytics.com') !== -1) {
+              return descriptor.set.call(this, transformURL(transformedURL, 'cdn.heapanalytics.com', ''))
+            }
+
+            if (transformedURL.indexOf('marketo.net') !== -1) {
+              return descriptor.set.call(this, transformURL(transformedURL, 'munchkin.marketo.net', '/munchkin'))
+            }
+            if (transformedURL.indexOf('api.segment.io') !== -1) {
+              return descriptor.set.call(this, transformURL(transformedURL, 'api.segment.io', '/seg-api'))
+            }
+
+            if (transformedURL.indexOf('heapanalytics.com') !== -1) {
+              return descriptor.set.call(this, transformURL(transformedURL, 'heapanalytics.com', '/heap'))
+            }
+
+            if (transformedURL.indexOf('dev.visualwebsiteoptimizer.com') !== -1) {
+              return descriptor.set.call(this, transformURL(transformedURL, 'dev.visualwebsiteoptimizer.com', '/vwo'))
+            }
+
+            return descriptor.set.call(this, arg);
+        }
+
+        /* HEAP */
+        const scriptDescriptor = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
+        Object.defineProperty(HTMLScriptElement.prototype, 'src', {
+          set: function set(arg) {
+            return setWithDescriptor.call(this, scriptDescriptor, arg);
+          },
+          get: function get() {
+            return scriptDescriptor.get.call(this);
+          },
+        });
+
+        const imageDescriptor = Object.getOwnPropertyDescriptor(Image.prototype, 'src');
+        if (imageDescriptor) {
+            Object.defineProperty(Image.prototype, 'src', {
+              set: function set(arg) {
+                return setWithDescriptor.call(this, imageDescriptor, arg);
+              },
+              get: function get() {
+                return imageDescriptor.get.call(this);
+              },
+            });
+        }
+
+      /* Segment */
+
+      var _XHR = XMLHttpRequest;
+      // eslint-disable-next-line no-native-reassign
+      XMLHttpRequest = function XMLHttpRequest(mozAnon, mozSystem) {
+        var xhrObject = new _XHR(mozAnon, mozSystem);
+
+        var origOpen = xhrObject.open.bind(xhrObject);
+        xhrObject.open = function open(method, url) {
+            if (url.indexOf('api.segment.io') !== -1) {
+                origOpen(method, url.replace('api.segment.io', 'log.logicanalytics.io'));
+                return;
+            }
+
+            if (url.indexOf('740-LKM-263.mktoresp.com') !== -1) {
+                var url2 = url
+                    .replace('740-LKM-263.mktoresp.com', 'log.logicanalytics.io/mkto')
+                    .replace(/visitWebPage/g, 'GMdE84QYc83vZT7')
+                    .replace(/clickLink/g, '746qbsNH3kGcEr4')
+                    .replace(/associateLead/g, 'CUaGm438zqN32Qi');
+                origOpen(method, url2);
+                return;
+            }
+            origOpen(method, url);
+        };
+
+        return xhrObject;
+      };
+
+      // this allows "instanceof XMLHttpRequest" to work
+      XMLHttpRequest.prototype = _XHR.prototype;
+
+      // Persist the static variables.
+      ['UNSENT', 'OPENED', 'HEADERS_RECEIVED', 'LOADING', 'DONE'].forEach(function (variable) {
+        XMLHttpRequest[variable] = _XHR[variable];
+      });
+
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"log.logicanalytics.io/a.js/v1/"+t+"/a.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+
+    analytics.load("hn3yvJCms37nkkjrwDQ08PuKJKydGtAZ");
+
+
+    var utmMedium = getQueryVariable('utm_medium');
+    if (utmMedium) {
+        var queryString = window.location.search.substring(1);
+        window.location.hash = encodeURI(queryString);
+    }
+    analytics.page();
+
+
+    }}();
+    </script> <!-- Start VWO Async Smartcode --> 
+  <script type="text/javascript">
+window._vwo_code = window._vwo_code || (function(){
+var account_id=338524,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+is_spa=1,
+hide_element='body',
+
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,d=document,code={use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){
+settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+(+is_spa)+'&r='+Math.random());return settings_timer; }};window._vwo_settings_timer = code.init(); return code; }());
+</script> <!-- End VWO Async Smartcode --> 
+  <script src="https://cdn.logrocket.com/LogRocket.min.js"></script> 
+  <script>
+        if (window.LogRocket) {
+            window.LogRocket.init('apphub/logrocket-website',{
+                dashboardHost: "https://staging.logrocket.com",
+                serverURL: "https://staging-i.logrocket.com/i",
+            });
+        }
+
+        fetch('https://ga.clearbit.com/v1/ga.js?authorization=pk_66a3fd2085d9f04c4d4b68a62b70ed7e').then(function(res){
+            res.text().then(function(val){
+                var regex = /this.done((.*)}})/;
+                var regexVal = regex.exec(val);
+                if (!regexVal) {
+                    return;
+                }
+
+                var dict = regexVal[0].replace('this.done(', '');
+
+                var clearbitData = JSON.parse(dict);
+                window.clearbitData = clearbitData;
+
+                window._vis_opt_queue = window._vis_opt_queue || [];
+                window._vis_opt_queue.push(function() {_vis_opt_goal_conversion(202);});
+
+                window.LogRocket && window.LogRocket.identify(Math.random().toString(36).substring(7), {
+                    company: clearbitData.company.name,
+                    email: 'anonymous@' + clearbitData.company.domain,
+                });
+                if (clearbitData.company.domain && window.location.pathname != "/") {
+                    var demoButton = document.getElementById("blog-personalized-demo-link");
+                    var personalizeImage = document.getElementById("blog-personalized-demo-thumbnail");
+                    var companyName = document.getElementById("personalized-company-account-name");
+                    var perUrl = "https://us-central1-logrocket-com.cloudfunctions.net/findPersonalization?targetDomain=" + clearbitData.company.domain;
+                    fetch(perUrl)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(data => {
+                            var imageReturn = data.image_url;
+                            var linkReturn = data.link_url;
+                            if (imageReturn.includes("not-found") || linkReturn.includes("not-found")) {
+                                return "not-found";
+                            } else {
+                                personalizeImage.src = imageReturn;
+                                demoButton.href = linkReturn;
+                                companyName.innerHTML = clearbitData.company.name;
+var intersectionOptions = {
+root: null,  // use the viewport
+rootMargin: '-240px',
+threshold: 1.0
+}
+function intersectionCallback(entries, observer) {
+entries.forEach(entry => {
+ if (entry.intersectionRatio >= 1) {
+   jQuery('.inline-demo').slideDown(1500);
+ //  jQuery('.crp-list-item-image img').delay(550).fadeIn(1000);
+     observer.unobserve(target);
+ } else {
+ }
+});
+}
+var observer = new IntersectionObserver(intersectionCallback, intersectionOptions);
+var target = document.querySelector('.code-block-28');
+observer.observe(target);
+
+                                analytics.track('Personalization-deployed-blog', {
+                                    'Domain': clearbitData.company.domain
+                                });
+                                LogRocket.track('post-personalized-blog');
+                            }
+                        })
+                        .catch(err => {
+                            analytics.track("personalization-failed");
+                            throw err;
+                        })
+                };
+
+                _linkedin_partner_id = "1468257";
+                window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+                window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+                (function(){var s = document.getElementsByTagName("script")[0];
+                var b = document.createElement("script");
+                b.type = "text/javascript";b.async = true;
+                b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+                s.parentNode.insertBefore(b, s);})();
+
+                var linkedIn_img = document.createElement("img");
+                linkedIn_img.src = "https://px.ads.linkedin.com/collect/?pid=1468257&fmt=gif";
+                document.getElementsByTagName('head')[0].appendChild( linkedIn_img );
+
+                window.analytics && window.analytics.track('clearbit domain', { domain: clearbitData.company.domain });
+            });
+        })
+    </script> 
+  <link rel="dns-prefetch" href="//widgets.wp.com"> 
+  <link rel="dns-prefetch" href="//jetpack.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//public-api.wordpress.com"> 
+  <link rel="dns-prefetch" href="//0.gravatar.com"> 
+  <link rel="dns-prefetch" href="//1.gravatar.com"> 
+  <link rel="dns-prefetch" href="//2.gravatar.com"> 
+  <link rel="dns-prefetch" href="//c0.wp.com"> 
+  <link rel="dns-prefetch" href="//v0.wordpress.com"> 
+  <link rel="dns-prefetch" href="//i0.wp.com"> 
+  <link rel="dns-prefetch" href="//i1.wp.com"> 
+  <link rel="dns-prefetch" href="//i2.wp.com"> 
+  <style type="text/css">img#wpstats{display:none}</style> 
+  <style type="text/css">
+				/* If html does not have either class, do not show lazy loaded images. */
+				html:not( .jetpack-lazy-images-js-enabled ):not( .js ) .jetpack-lazy-image {
+					display: none;
+				}
+			</style> 
+  <script>
+				document.documentElement.classList.add(
+					'jetpack-lazy-images-js-enabled'
+				);
+			</script> 
+  <link rel="icon" href="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/06/cropped-cropped-favicon-196x196.png?fit=32%2C32&amp;ssl=1" sizes="32x32"> 
+  <link rel="icon" href="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/06/cropped-cropped-favicon-196x196.png?fit=192%2C192&amp;ssl=1" sizes="192x192"> 
+  <link rel="apple-touch-icon-precomposed" href="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/06/cropped-cropped-favicon-196x196.png?fit=180%2C180&amp;ssl=1"> 
+  <meta name="msapplication-TileImage" content="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/06/cropped-cropped-favicon-196x196.png?fit=270%2C270&amp;ssl=1"> 
+  <link rel="stylesheet" type="text/css" id="wp-custom-css" href="https://blog.logrocket.com/?custom-css=262685436a"> 
+  <style id="kirki-inline-styles">.btn-simple{background-color:#764abc;border-color:#764abc;}.prevnextlinks a, .article-post a, .post .btn.follow, .post .post-top-meta .author-description a, article.page a, .alertbar a{color:#764abc;}.post .btn.follow, .alertbar input[type="submit"]{border-color:#764abc;}blockquote{border-color:#764abc;}.entry-content input[type=submit], .alertbar input[type="submit"]{background-color:#764abc;border-color:#764abc;}p.sharecolour{color:#999999;}.shareitnow ul li a svg, .shareitnow a{fill:#b3b3b3;}.shareitnow li a{color:#b3b3b3;border-color:#d2d2d2;}#comments a{color:#764abc;}.comment-form input.submit{background-color:#764abc;border-color:#764abc;}footer.footer a{color:#764abc;}.carousel-excerpt .fontlight,body{font-family:PT Sans;font-size:15px;font-weight:400;line-height:1.5;color:#666666;}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{font-family:PT Sans;font-weight:700;color:#111111;}.carousel-excerpt .title{font-family:PT Sans;font-size:30px;font-weight:700;text-transform:none;color:#ffffff;}.carousel-excerpt .fontlight{font-size:18px;font-weight:400;color:#ffffff;}.mediumnavigation .navbar-brand{font-family:Merriweather;font-size:26px;font-weight:700;}.navbar-toggleable-md .navbar-collapse{font-family:PT Sans;font-weight:400;}.article-post{font-family:Merriweather;font-weight:400;line-height:1.8;color:#222222;}.mediumnavigation, .dropdown-menu, .dropdown-item{background-color:#ffffff;}.mediumnavigation, .mediumnavigation a, .navbar-light .navbar-nav .nav-link{color:#764abc;}.navbar-light .navbar-brand{color:#111111;}.navbar-light .navbar-brand:hover{color:#02b875;}.customarea .btn.follow{border-color:#ffffff;color:#ffffff;}@media (max-width: 767px){.navbar-collapse{background-color:#ffffff;}}/* cyrillic-ext */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizaRExUiTo99u79D0-Ew8OPIDUg-g.woff) format('woff');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizaRExUiTo99u79D0aEw8OPIDUg-g.woff) format('woff');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizaRExUiTo99u79D0yEw8OPIDUg-g.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizaRExUiTo99u79D0KEw8OPIDU.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizfRExUiTo99u79B_mh0OOtKx8a8zILig.woff) format('woff');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizfRExUiTo99u79B_mh0OqtKx8a8zILig.woff) format('woff');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizfRExUiTo99u79B_mh0OCtKx8a8zILig.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(https://blog.logrocket.com/wp-content/fonts/pt-sans/jizfRExUiTo99u79B_mh0O6tKx8a8zI.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Merriweather Regular'), local('Merriweather-Regular'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-440qyriQwlOrhSvowK_l5-cSZKdeX3rsHo.woff) format('woff');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Merriweather Regular'), local('Merriweather-Regular'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-440qyriQwlOrhSvowK_l5-eCZKdeX3rsHo.woff) format('woff');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Merriweather Regular'), local('Merriweather-Regular'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-440qyriQwlOrhSvowK_l5-cyZKdeX3rsHo.woff) format('woff');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Merriweather Regular'), local('Merriweather-Regular'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-440qyriQwlOrhSvowK_l5-ciZKdeX3rsHo.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Merriweather Regular'), local('Merriweather-Regular'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-440qyriQwlOrhSvowK_l5-fCZKdeX3rg.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Merriweather Bold'), local('Merriweather-Bold'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-4n0qyriQwlOrhSvowK_l52xwNZVcf8hPvhPUWH.woff) format('woff');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Merriweather Bold'), local('Merriweather-Bold'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-4n0qyriQwlOrhSvowK_l52xwNZXMf8hPvhPUWH.woff) format('woff');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Merriweather Bold'), local('Merriweather-Bold'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-4n0qyriQwlOrhSvowK_l52xwNZV8f8hPvhPUWH.woff) format('woff');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Merriweather Bold'), local('Merriweather-Bold'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-4n0qyriQwlOrhSvowK_l52xwNZVsf8hPvhPUWH.woff) format('woff');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Merriweather Bold'), local('Merriweather-Bold'), url(https://blog.logrocket.com/wp-content/fonts/merriweather/u-4n0qyriQwlOrhSvowK_l52xwNZWMf8hPvhPQ.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}</style>
+ </head> 
+ <body class="post-template-default single single-post postid-15042 single-format-standard"> 
+  <style>
+    </style> 
+  <header class="navbar-light bg-white fixed-top mediumnavigation"> 
+   <div class="container"> 
+    <div class="navarea"> 
+     <div class="nav-left"> <a class="blog-logo" href="https://logrocket.com" rel="home"><img class="lozad" src="https://blog.logrocket.com/wp-content/uploads/2020/01/logrocket-blog-logo.png" alt="LogRocket Blog"></a> 
+      <nav class="menu-container"> 
+       <div class="menu-primary-container">
+        <ul id="menu-primary" class="">
+         <li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6 nav-item"><a href="/" class="nav-link">Blog</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </div> 
+     <div class="nav-right"> 
+      <div class="menu-container"> 
+       <div id="right-hand-nav" class="menu-right-hand-menu-container">
+        <ul id="menu-right-hand-menu" class="">
+         <li id="menu-item-877" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-877"><a href="https://app.logrocket.com">Sign In</a></li> 
+         <li id="menu-item-878" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-878"><a href="https://logrocket.com/signup/">Free Trial</a></li> 
+        </ul>
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </header> <!-- Begin site-content
+		================================================== --> 
+  <div class="site-content"> 
+   <div class="container"> 
+    <div class="row"> 
+     <div class=" col-md-2 "> 
+      <div class="share"> 
+       <div class="sidebarapplause"> 
+       </div> 
+       <p class="sharecolour"> Share </p> 
+       <ul class="shareitnow">
+        <li> <a target="_blank" href="https://twitter.com/intent/tweet?text=How%20to%20use%20CSS%20Scroll%20Snap&amp;url=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F"> <i class="fa fa-twitter"></i> </a> </li>
+        <li> <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F"> <i class="fa fa-facebook"></i> </a> </li>
+        <li> <a target="_blank" href="https://plus.google.com/share?url=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F"> <i class="fa fa-google"></i> </a> </li>
+        <li> <a target="_blank" href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F&amp;media=https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1&amp;description=How%20to%20use%20CSS%20Scroll%20Snap"> <i class="fa fa-pinterest"></i> </a> </li>
+        <li> <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F&amp;title=How%20to%20use%20CSS%20Scroll%20Snap"> <i class="fa fa-linkedin"></i> </a> </li>
+       </ul> 
+       <div class="sep"></div> 
+       <div class="hidden-xs-down"> 
+        <p> Reply </p> 
+        <ul> 
+         <li> <a class="smoothscroll" href="#comments">0<br> 
+           <svg class="svgIcon-use" width="29" height="29" viewbox="0 0 29 29">
+            <path d="M21.27 20.058c1.89-1.826 2.754-4.17 2.754-6.674C24.024 8.21 19.67 4 14.1 4 8.53 4 4 8.21 4 13.384c0 5.175 4.53 9.385 10.1 9.385 1.007 0 2-.14 2.95-.41.285.25.592.49.918.7 1.306.87 2.716 1.31 4.19 1.31.276-.01.494-.14.6-.36a.625.625 0 0 0-.052-.65c-.61-.84-1.042-1.71-1.282-2.58a5.417 5.417 0 0 1-.154-.75zm-3.85 1.324l-.083-.28-.388.12a9.72 9.72 0 0 1-2.85.424c-4.96 0-8.99-3.706-8.99-8.262 0-4.556 4.03-8.263 8.99-8.263 4.95 0 8.77 3.71 8.77 8.27 0 2.25-.75 4.35-2.5 5.92l-.24.21v.32c0 .07 0 .19.02.37.03.29.1.6.19.92.19.7.49 1.4.89 2.08-.93-.14-1.83-.49-2.67-1.06-.34-.22-.88-.48-1.16-.74z"></path>
+           </svg> </a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="col-md-8 flex-first flex-md-unordered post-15042 post type-post status-publish format-standard has-post-thumbnail hentry category-featured tag-css" id="post-15042"> 
+      <div class="mainheading"> <!-- Begin Author box --> 
+       <div class="row post-top-meta hidden-md-down"> 
+        <div class="col-md-2 col-xs-12"> <a href="https://blog.logrocket.com/author/rifkinada/"> <img alt src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/01/author-photo_nada-rifki.png?resize=150%2C150&amp;ssl=1" class="avatar avatar-72 photo jetpack-lazy-image" height="72" width="72" data-lazy-src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/01/author-photo_nada-rifki.png?resize=150%2C150&amp;ssl=1&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+          <noscript>
+           <img alt="" src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/01/author-photo_nada-rifki.png?resize=150%2C150&amp;ssl=1" class="avatar avatar-72 photo" height="72" width="72">
+          </noscript> </a> 
+        </div> 
+        <div class="col-md-10 col-xs-12"> <a class="text-capitalize link-dark" href="https://blog.logrocket.com/author/rifkinada/"> Nada Rifki <span class="btn follow">Follow</span></a> <span class="author-description d-block">Nada is a JavaScript developer who likes to play with UI components to create interfaces with great UX. She specialises in Vue.js and loves sharing anything and everything that could help her fellow front-end web developers. Nada also dabbles in digital marketing, dance and Chinese.</span> 
+        </div> 
+       </div> 
+       <h1 class="posttitle">How to use CSS Scroll Snap</h1> 
+       <h2 class="post-subtitle"></h2> 
+       <p> <span class="post-date"><time class="post-date"> March 9, 2020 </time></span> <span class="dot"></span> <span class="readingtime">2 min read</span> <span class="wordcount">837</span> </p> 
+      </div> 
+      <img width="730" height="487" src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1" class="featured-image img-fluid wp-post-image jetpack-lazy-image" alt="An image illustrating CSS scroll snap." data-attachment-id="15176" data-permalink="https://blog.logrocket.com/how-to-use-css-scroll-snap/how_to_use_css_scroll_snap_web/" data-orig-file="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1" data-orig-size="730,487" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="how_to_use_css_scroll_snap_web" data-image-description="" data-medium-file="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=300%2C200&amp;ssl=1" data-large-file="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1" data-lazy-srcset="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?w=730&amp;ssl=1 730w, https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?resize=300%2C200&amp;ssl=1 300w" data-lazy-sizes="(max-width: 730px) 100vw, 730px" data-lazy-src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/how_to_use_css_scroll_snap_web.png?fit=730%2C487&amp;ssl=1&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"> 
+      <article class="article-post"> 
+       <p>The idea of only needing CSS to customize your scroll instead of playing with JavaScript sounds great, doesn’t it?</p> 
+       <p>Today, I’m going to show you how CSS Scroll Snap helps you do just that.</p> 
+       <h2>So what does CSS Scroll Snap do?</h2> 
+       <p>I bet you’ve used some libraries to control the scrolling behavior of your website. I have, and I had a terrible time with some of them.</p> 
+       <p>Some of these libraries can drag your page’s performance and user experience way down.</p> 
+       <p>Not to mention that it’s a real pain to deal with all the bugs they sometimes generate as you add more complexity with your new design updates.</p> 
+       <p>That’s why I prefer to use this simple CSS feature that allows me to get a beautiful scroll through my page without having to rely on JavaScript libraries.</p> 
+       <p>These properties also help me save a ton of time.</p> 
+       <p>In simple terms, CSS Scroll Snap makes the scroll snap, locking the viewport at a specific point (that you indicate) with each scroll.</p> 
+       <p>A linear scroll, on the other hand, moves according to the rate of the controller — whether that be a mouse, touch gesture, or arrow keys.</p> 
+       <p>Now, let’s see how CSS Scroll Snap works.</p>
+       <div class="code-block code-block-28" style="margin: 8px 0; clear: both;"> <a id="blog-personalized-demo-link" href=""> 
+         <div class="inline-demo"> 
+          <h2 style="color: #ffffff;">We made a custom demo for <span id="personalized-company-account-name"></span>.<br>No really. <span style="text-decoration:underline">Click here to check it out</span>.</h2> 
+          <img id="blog-personalized-demo-thumbnail" src>
+          <noscript>
+           <img id="blog-personalized-demo-thumbnail" src="">
+          </noscript> <button class="personalize-button">Click here to see the full demo with network requests</button> 
+         </div></a> 
+        <style>.inline-demo {width: 100%; max-width:700px;display:none;margin-bottom: 2rem;transition: filter 0.5s ease;padding: 1.5rem;border-radius: 5px;filter: drop-shadow(5px 0px 15px #afafaf); 	background: linear-gradient(-45deg, #764abc, #7a49a5, #4974a5,#4A4A4A);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;} .inline-demo:hover{filter:drop-shadow(1px 0px 5px #d7d7d7) !important;}@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}#blog-personalized-demo-link:hover{text-decoration:none;}
+.personalize-button {background: #4ABC76;
+    width: 35%;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #fff;
+    line-height: 18px;
+    display: block;
+    margin: 20px auto 5px auto;
+    border:0px;
+    padding: 20px;
+    letter-spacing: 0.1px;
+    box-shadow: 0px 0px 50px 10px rgba(0,0,0,0.3);
+    transition: all 0.25s linear;}
+  .personalize-button:hover{
+  color: #4ABC76;
+  background: #fff !important;
+  cursor:pointer;
+}</style> 
+       </div> 
+       <p>If you want to go straight to a real-life example, head over to the third section where I’ve built the Instagram carousel with a few lines of CSS code.</p> 
+       <p>Let’s get started.</p> 
+       <h3>&nbsp;How CSS Scroll Snap works</h3> 
+       <p>CSS Scroll Snap works by applying two primary properties: <code>scroll-snap-type</code> and <code>scroll-snap-align</code>.</p> 
+       <p>Here is what you need to know about each:</p> 
+       <ul> 
+        <li>The first one, <code>scroll-snap-type</code>, is applied to the parent container. It accepts two arguments: the snap direction and the snap behavior:</li> 
+       </ul> 
+       <pre>.container {
+ scroll-snap-type: [ x | y | block | inline | both ] [ mandatory | proximity ];
+}</pre> 
+       <p>About the snap behavior arguments: choosing <code>proximity</code> makes the snap only appear at the nearest point to where the user stopped scrolling.</p> 
+       <p>On the other hand, <code>mandatory</code> makes the snap happen at the specific position you choose when the user is scrolling.</p> 
+       <ul> 
+        <li>The second one, <code>scroll-snap-align</code>, is applied to the container’s children.</li> 
+       </ul> 
+       <p>This is where you specify the snap point for the x-axis and the y-axis:</p> 
+       <pre>.children {
+ scroll-snap-align: [ none | start | end | center ]{1,2};
+}</pre> 
+       <p>Before we continue, it’s important to note that none of this is going to work unless you specify the container’s overflow and give it a fixed height.</p> 
+       <p>Additionally, you should never use mandatory if the content inside one of your child elements is longer than the parent container. If you do, the user won’t be able to see that content.</p> 
+       <p>There are two more properties we need to familiarize ourselves with:</p> 
+       <ol> 
+        <li><code>scroll-padding</code> (applied to the parent container) is pretty much like the CSS padding property and acts as the offset. You also have <code>scroll-padding-top</code>, <code>scroll-padding-bottom</code>, <code>scroll-padding-left</code> and <code>scroll-padding-right</code>.</li> 
+        <li><code>scroll-margin</code> (applied to the container’s children) is also like the CSS margin property and serves as the outset. You also have <code>scroll-margin-top</code>, <code>scroll-margin-bottom</code>, <code>scroll-margin-left</code> and <code>scroll-margin-right</code>.</li> 
+       </ol> 
+       <p>If you are interested in learning more about all scroll snap properties and future ones, the <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Scroll_Snap" target="_blank" rel="noopener noreferrer">Mozilla documentation</a> is always a good place to start.</p> 
+       <h3>How to use CSS Scroll Snap to create an Instagram-like carousel</h3> 
+       <p>To help you get a better grasp on this concept, I made a little Instagram-like carousel on <a href="https://codepen.io/nrifki/pen/LYVygxW" target="_blank" rel="noopener noreferrer">codepen</a>.</p> 
+       <p>See the live demo here:</p> 
+       <blockquote class="embedly-card" data-card-controls="1" data-card-align="center" data-card-theme="light"> 
+        <h4><a href="https://codepen.io/nrifki/pen/LYVygxW">CSS Scroll Snap – Instagram-like Carousel</a></h4> 
+        <p>No Description</p> 
+       </blockquote> 
+       <p><script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p> 
+       <p>As you can see, it includes seven boxes with different sizes.</p> 
+       <p>What amazes me is that we don’t have anything else to do other than add the CSS lines below to automatically make the scroll snap to each box.</p> 
+       <pre>&lt;style&gt;
+.container {
+    width: 60vw;
+    height: 70vh;
+    margin: 15vh auto;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    color: white;
+    background-color: oldlace;
+    display: flex;
+    align-items: center;
+}
+
+.child {
+    margin-left: 0.5rem;
+    height: 90%;
+    scroll-snap-align: start;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.child:nth-child(1n) {
+    background-color: darkorchid;
+    flex: 0 0 80%;
+}
+
+.child:nth-child(2n) {
+    background-color: indigo;
+    flex: 0 0 60%;
+}
+
+.child:nth-child(3n) {
+    background-color: navy;
+    flex: 0 0 40%;
+}
+
+.child:nth-child(4n) {
+    background-color: palegreen;
+    flex: 0 0 50%;
+}
+
+.child:nth-child(5n) {
+    background-color: yellow;
+    flex: 0 0 80%;
+}
+
+.child:nth-child(6n) {
+    background-color: orange;
+    flex: 0 0 60%;
+}
+
+.child:nth-child(7n) {
+    background-color: tomato;
+    flex: 0 0 80%;
+}
+&lt;/style&gt;</pre> 
+       <p>Solving this issue with only JavaScript would have required a lot of extra work.</p> 
+       <h3>Is CSS Scroll Snap supported cross-browser?</h3> 
+       <p>Okay, now let’s get to the million-dollar question: cross-browser support.</p> 
+       <p>As you can see <a href="https://caniuse.com/#feat=css-snappoints" target="_blank" rel="noopener noreferrer">here</a>, the CSS Scroll Snap functionality is well supported across modern browsers.</p> 
+       <p>The only issue you’ll encounter is with Internet Explorer and Firefox, which require an older version of the specs that you can find <a href="https://www.w3.org/TR/2015/WD-css-snappoints-1-20150326/" target="_blank" rel="noopener noreferrer">here</a>.</p> 
+       <p>Also, I would advise you to add the property <code>-webkit-overflow-scrolling: touch;</code> to your container to support iOS devices.</p> 
+       <h3>Conclusion</h3> 
+       <p>That’s pretty much it!</p> 
+       <p>It’s so simple, but there were times where this could have saved me hours of code. Try to implement a scroll snap using JavaScript and recalculate the snap point with each child element with different widths, and you’ll see what I mean.</p> 
+       <p>If you have any questions or remarks, please feel free to let me know in the comments or to ping me on Twitter <a href="https://twitter.com/rifkinada" target="_blank" rel="noopener noreferrer">@RifkiNada</a>. I always reply.</p>
+       <div class="code-block code-block-26" style="margin: 8px 0; clear: both;"> 
+        <div class="inline-plug css-plug">
+         <h2>Is your frontend hogging your users' CPU?</h2>As web frontends get increasingly complex, resource-greedy features demand more and more from the browser. If you’re interested in monitoring and tracking client-side CPU usage, memory usage, and more for all of your users in production, <a href="https://logrocket.com/signup/">try LogRocket</a>.<a class="signup" href="https://logrocket.com/signup/" target="_blank" rel="noopener noreferrer"><img class="alignnone size-full wp-image-46 jetpack-lazy-image" src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2019/12/cpu-memory-usage.png?resize=1200%2C677&amp;ssl=1" alt="LogRocket Dashboard Free Trial Banner" width="1200" height="677" data-recalc-dims="1" data-lazy-src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2019/12/cpu-memory-usage.png?resize=1200%2C677&amp;is-pending-load=1#038;ssl=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+          <noscript>
+           <img class="alignnone size-full wp-image-46" src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2019/12/cpu-memory-usage.png?resize=1200%2C677&amp;ssl=1" alt="LogRocket Dashboard Free Trial Banner" width="1200" height="677" data-recalc-dims="1">
+          </noscript></a><a href="https://logrocket.com/signup/" target="_blank" rel="noopener noreferrer">https://logrocket.com/signup/</a>
+         <p style="margin-top: 15px;"><a href="https://logrocket.com/signup/" target="_blank" rel="noopener noreferrer">LogRocket</a> is like a DVR for web apps, recording everything that happens in your web app or site. Instead of guessing why problems happen, you can aggregate and report on key frontend performance metrics, replay user sessions along with application state, log network requests, and automatically surface all errors.</p>
+         <p>Modernize how you debug web apps — <a class="signup" href="https://logrocket.com/signup/" target="_blank" rel="noopener noreferrer">Start monitoring for free</a>.</p>
+        </div>
+       </div> 
+       <div class="sharedaddy sd-sharing-enabled">
+        <div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing">
+         <h3 class="sd-title">Share this:</h3>
+         <div class="sd-content">
+          <ul>
+           <li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-15042" class="share-twitter sd-button share-icon" href="https://blog.logrocket.com/how-to-use-css-scroll-snap/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li>
+           <li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon" href="https://blog.logrocket.com/how-to-use-css-scroll-snap/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li>
+           <li class="share-linkedin"><a rel="nofollow noopener noreferrer" data-shared="sharing-linkedin-15042" class="share-linkedin sd-button share-icon" href="https://blog.logrocket.com/how-to-use-css-scroll-snap/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li>
+           <li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-15042" class="share-facebook sd-button share-icon" href="https://blog.logrocket.com/how-to-use-css-scroll-snap/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li>
+           <li class="share-end"></li>
+          </ul>
+         </div>
+        </div>
+       </div> 
+       <div class="clearfix"></div> 
+       <div class="clearfix"></div> 
+      </article> <!-- Begin Author box --> 
+      <div class="row post-top-meta hidden-lg-up"> 
+       <div class="col-md-2 col-xs-4"> 
+        <img alt src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/01/author-photo_nada-rifki.png?resize=150%2C150&amp;ssl=1" class="avatar avatar-72 photo jetpack-lazy-image" height="72" width="72" data-lazy-src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/01/author-photo_nada-rifki.png?resize=150%2C150&amp;ssl=1&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+        <noscript>
+         <img alt="" src="https://i2.wp.com/blog.logrocket.com/wp-content/uploads/2020/01/author-photo_nada-rifki.png?resize=150%2C150&amp;ssl=1" class="avatar avatar-72 photo" height="72" width="72">
+        </noscript> 
+       </div> 
+       <div class="col-md-10 col-xs-8"> <a class="text-capitalize link-dark" href="https://blog.logrocket.com/author/rifkinada/"> Nada Rifki <span class="btn follow">Follow</span></a> <span class="author-description d-block">Nada is a JavaScript developer who likes to play with UI components to create interfaces with great UX. She specialises in Vue.js and loves sharing anything and everything that could help her fellow front-end web developers. Nada also dabbles in digital marketing, dance and Chinese.</span> 
+       </div> 
+      </div> 
+      <div class="after-post-tags"> 
+       <ul class="post-categories"> 
+        <li><a href="https://blog.logrocket.com/category/featured/" rel="category tag">Featured Posts</a></li>
+       </ul> 
+       <ul class="post-categories aretags"> 
+        <li><a href="https://blog.logrocket.com/tag/css/">#css</a></li> 
+       </ul> 
+      </div> 
+      <div class="row mb-5 prevnextlinks justify-content-center align-items-center"> 
+       <div class="col-md-6 col-xs-12 rightborder pl-0">
+        <div class="thepostlink">
+         « <a href="https://blog.logrocket.com/when-css-doesnt-do-anything/" rel="prev">When CSS doesn’t do anything</a>
+        </div>
+       </div> 
+       <div class="col-md-6 col-xs-12 text-right pr-0">
+        <div class="thepostlink">
+         <a href="https://blog.logrocket.com/the-complete-guide-to-publishing-a-react-package-to-npm/" rel="next">The complete guide to publishing a React package to npm</a> »
+        </div>
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="hideshare"></div> 
+   <div class="graybg"> 
+    <div class="container"> 
+     <div class="row justify-content-center listrecent listrelated"> 
+      <div class="col-lg-4 col-md-4 col-sm-4"> 
+       <div class="card post height262"> <a class="thumbimage" href="https://blog.logrocket.com/creative-text-flows-using-css-shapes/" style="background-image:url(https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/creative_text_flows_using_css_shapes_web.png?fit=730%2C487&amp;ssl=1);"></a>
+        <div class="card-block"> 
+         <h2 class="card-title"> <a href="https://blog.logrocket.com/creative-text-flows-using-css-shapes/">Creative text flows using CSS shapes</a> </h2> 
+         <div class="metafooter"> 
+          <div class="wrapfooter"> <span class="meta-footer-thumb"> <a href="https://blog.logrocket.com/author/abbeyjfitzgerald/"> <img alt src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/abbeyfitgerald.jpg?resize=150%2C150&amp;ssl=1" class="avatar avatar-40 photo jetpack-lazy-image" height="40" width="40" data-lazy-src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/abbeyfitgerald.jpg?resize=150%2C150&amp;ssl=1&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+             <noscript>
+              <img alt="" src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/abbeyfitgerald.jpg?resize=150%2C150&amp;ssl=1" class="avatar avatar-40 photo" height="40" width="40">
+             </noscript> </a> </span> <span class="author-meta"> <span class="post-name"> <a href="https://blog.logrocket.com/author/abbeyjfitzgerald/">Abbey Fitzgerald</a></span><br> <span class="post-date">Mar 25, 2020</span> <span class="dot"></span> <span class="readingtime">5 min read</span> </span> <span class="post-read-more"> <a href="https://blog.logrocket.com/creative-text-flows-using-css-shapes/" title=""> 
+             <svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"> <path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path> 
+             </svg> </a> </span> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="col-lg-4 col-md-4 col-sm-4"> 
+       <div class="card post height262"> <a class="thumbimage" href="https://blog.logrocket.com/how-to-handle-pii-websites-web-apps/" style="background-image:url(https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/handle-pii-websites-web-apps.jpg?fit=730%2C487&amp;ssl=1);"></a>
+        <div class="card-block"> 
+         <h2 class="card-title"> <a href="https://blog.logrocket.com/how-to-handle-pii-websites-web-apps/">How to handle PII in websites and web apps</a> </h2> 
+         <div class="metafooter"> 
+          <div class="wrapfooter"> <span class="meta-footer-thumb"> <a href="https://blog.logrocket.com/author/dannyguo/"> <img alt src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2019/08/danny-guo.jpeg?resize=150%2C150&amp;ssl=1" class="avatar avatar-40 photo jetpack-lazy-image" height="40" width="40" data-lazy-src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2019/08/danny-guo.jpeg?resize=150%2C150&amp;ssl=1&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+             <noscript>
+              <img alt="" src="https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2019/08/danny-guo.jpeg?resize=150%2C150&amp;ssl=1" class="avatar avatar-40 photo" height="40" width="40">
+             </noscript> </a> </span> <span class="author-meta"> <span class="post-name"> <a href="https://blog.logrocket.com/author/dannyguo/">Danny Guo</a></span><br> <span class="post-date">Mar 18, 2020</span> <span class="dot"></span> <span class="readingtime">4 min read</span> </span> <span class="post-read-more"> <a href="https://blog.logrocket.com/how-to-handle-pii-websites-web-apps/" title=""> 
+             <svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"> <path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path> 
+             </svg> </a> </span> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="col-lg-4 col-md-4 col-sm-4"> 
+       <div class="card post height262"> <a class="thumbimage" href="https://blog.logrocket.com/whats-new-in-typescript-3-8/" style="background-image:url(https://i1.wp.com/blog.logrocket.com/wp-content/uploads/2020/03/whats_new_in_typescript_38_web.png?fit=730%2C487&amp;ssl=1);"></a>
+        <div class="card-block"> 
+         <h2 class="card-title"> <a href="https://blog.logrocket.com/whats-new-in-typescript-3-8/">What’s new in TypeScript 3.8</a> </h2> 
+         <div class="metafooter"> 
+          <div class="wrapfooter"> <span class="meta-footer-thumb"> <a href="https://blog.logrocket.com/author/ehrrera/"> <img alt src="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/04/1_xGADvHCM7grRqCt5TVZ-TA.jpeg?resize=150%2C150&amp;ssl=1" class="avatar avatar-40 photo jetpack-lazy-image" height="40" width="40" data-lazy-src="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/04/1_xGADvHCM7grRqCt5TVZ-TA.jpeg?resize=150%2C150&amp;ssl=1&amp;is-pending-load=1" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+             <noscript>
+              <img alt="" src="https://i0.wp.com/blog.logrocket.com/wp-content/uploads/2019/04/1_xGADvHCM7grRqCt5TVZ-TA.jpeg?resize=150%2C150&amp;ssl=1" class="avatar avatar-40 photo" height="40" width="40">
+             </noscript> </a> </span> <span class="author-meta"> <span class="post-name"> <a href="https://blog.logrocket.com/author/ehrrera/">Esteban Herrera</a></span><br> <span class="post-date">Mar 11, 2020</span> <span class="dot"></span> <span class="readingtime">6 min read</span> </span> <span class="post-read-more"> <a href="https://blog.logrocket.com/whats-new-in-typescript-3-8/" title=""> 
+             <svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"> <path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path> 
+             </svg> </a> </span> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="clearfix"></div> 
+     <div class="row justify-content-center"> 
+      <div class="col-md-8"> 
+       <div id="comments" class="comments-area"> 
+        <div id="respond" class="comment-respond"> 
+         <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/how-to-use-css-scroll-snap/#respond" style="display:none;">Cancel reply</a></small> </h3> 
+         <form id="commentform" class="comment-form"> <iframe title="Comment Form" src="https://jetpack.wordpress.com/jetpack-comment/?blogid=161333275&amp;postid=15042&amp;comment_registration=0&amp;require_name_email=1&amp;stc_enabled=1&amp;stb_enabled=1&amp;show_avatars=1&amp;avatar_default=mystery&amp;greeting=Leave+a+Reply&amp;greeting_reply=Leave+a+Reply+to+%25s&amp;color_scheme=light&amp;lang=en_US&amp;jetpack_version=8.3&amp;show_cookie_consent=10&amp;has_cookie_consent=0&amp;token_key=%3Bnormal%3B&amp;sig=a5eaa6a7df5fcde822317a6634df32beea112cdf#parent=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F" style="width:100%; height: 430px; border:0;" name="jetpack_remote_comment" class="jetpack_remote_comment" id="jetpack_remote_comment" sandbox="allow-same-origin allow-top-navigation allow-scripts allow-forms allow-popups"></iframe> <!--[if !IE]><!--> 
+          <script>
+						document.addEventListener('DOMContentLoaded', function () {
+							var commentForms = document.getElementsByClassName('jetpack_remote_comment');
+							for (var i = 0; i < commentForms.length; i++) {
+								commentForms[i].allowTransparency = false;
+								commentForms[i].scrolling = 'no';
+							}
+						});
+					</script> <!--<![endif]--> 
+         </form> 
+        </div> 
+        <input type="hidden" name="comment_parent" id="comment_parent" value=""> 
+       </div><!-- #comments --> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="alertbar"> 
+    <div class="container text-center"> 
+    </div> 
+   </div> 
+  </div><!-- /.site-content --> 
+  <div class="container"> 
+   <footer class="footer"> 
+    <div class="pull-left">
+      We just moved our blog! Does something seem off? Email <a>support@logrocket.com</a> 
+    </div> 
+    <div class="pull-right"> 
+     <div class="footerRight"> 
+      <div id="jetpack-search-filters-2-wrapper"> 
+       <div class="jetpack-search-form">
+        <form role="search" method="get" class="search-form" action="https://blog.logrocket.com/"> 
+         <input type="hidden" name="post_type" value="post"> 
+         <input type="search" class="search-field" placeholder="Search..." value="" name="s" title="Search for:"> <button type="submit" class="search-submit"> <i class="fa fa-search"></i> </button> 
+         <input type="hidden" name="orderby" value="relevance">
+         <input type="hidden" name="order" value="DESC">
+         <input type="hidden" name="post_type" value="post">
+        </form>
+       </div>
+      </div>
+     </div> 
+    </div> 
+    <div class="clearfix"></div> <a href="" class="back-to-top hidden-md-down"> <i class="fa fa-angle-up"></i> </a> 
+   </footer> 
+  </div> <!--  --> 
+  <script>window.onload = function() {
+    if (window.jQuery) {
+      jQuery(document).ready(function() {
+        if(jQuery(('.text-capitalize').length) && (typeof heap !== 'undefined'))
+        {
+         var postLength = jQuery('.wordcount').text();
+         var postAuthor = jQuery('.text-capitalize').first().text();
+         var postAuthorclean = postAuthor.replace(' Follow','').replace('                                ','');
+         heap.track('Post Author', {'Author': postAuthorclean});
+         heap.track('Post Length', {'Length': postLength});
+       }
+       if (typeof hljs !== 'undefined')
+       {
+       document.querySelectorAll('pre').forEach((block) => {
+         hljs.highlightBlock(block);
+       });
+       }
+      });
+    } else {
+      return;
+    }
+}
+</script> 
+  <script>if (typeof jQuery !== 'undefined') {
+    jQuery(function(){
+      jQuery('a[href*="/signup/"]').each(function(){
+            jQuery(this).addClass('signup-blog');
+          });    });    }</script> 
+  <script>jQuery(document).ready(function() {
+        if(typeof heap !== 'undefined')
+        {
+          setTimeout(function(){
+            heap.track('View Greater 30s', '> 30s');
+          },30000);
+             }
+      });</script> 
+  <div style="display:none"> 
+   <div class="grofile-hash-map-3981ed4d6ff3e21f338e01ce053ea6c3"> 
+   </div> 
+   <div class="grofile-hash-map-466ce5773d5034c5278d65bb556bb786"> 
+   </div> 
+   <div class="grofile-hash-map-0722b51c563a749e426a78b0c4b11d1b"> 
+   </div> 
+   <div class="grofile-hash-map-0ca97e4de56c3b7beeae6546e4d74ab5"> 
+   </div> 
+  </div> 
+  <script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/blog.logrocket.com\/how-to-use-css-scroll-snap\/":15042};
+	</script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/_inc/build/photon/photon.min.js"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var codePrettifyLoaderBaseUrl = "https:\/\/blog.logrocket.com\/wp-content\/plugins\/code-prettify\/prettify";
+/* ]]> */
+</script> 
+  <script type="text/javascript" async src="https://blog.logrocket.com/wp-content/plugins/code-prettify/prettify/run_prettify.js?ver=1.4.0"></script> 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> 
+  <script type="text/javascript" async src="https://blog.logrocket.com/wp-content/themes/mediumish/assets/js/bootstrap.min.js"></script> 
+  <script type="text/javascript" async src="https://blog.logrocket.com/wp-content/themes/mediumish/assets/js/ie10-viewport-bug-workaround.js"></script> 
+  <script type="text/javascript" async src="https://blog.logrocket.com/wp-content/themes/mediumish/assets/js/masonry.pkgd.min.js"></script> 
+  <script type="text/javascript" async src="https://blog.logrocket.com/wp-content/themes/mediumish/assets/js/mediumish.js"></script> 
+  <script type="text/javascript" async src="https://c0.wp.com/c/5.3.2/wp-includes/js/comment-reply.min.js"></script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/modules/widgets/search/js/search-widget.js"></script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/_inc/build/lazy-images/js/lazy-images.min.js"></script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/_inc/build/likes/queuehandler.min.js"></script> 
+  <script type="text/javascript" async src="https://c0.wp.com/c/5.3.2/wp-includes/js/wp-embed.min.js"></script> 
+  <script async type="text/javascript" src="https://blog.logrocket.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.4"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://c0.wp.com/p/jetpack/8.3/_inc/build/sharedaddy/sharing.min.js"></script> 
+  <script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script> <!--[if IE]>
+		<script type="text/javascript">
+			if ( 0 === window.location.hash.indexOf( '#comment-' ) ) {
+				// window.location.reload() doesn't respect the Hash in IE
+				window.location.hash = window.location.hash;
+			}
+		</script>
+		<![endif]--> 
+  <script type="text/javascript">
+			(function () {
+				var comm_par_el = document.getElementById( 'comment_parent' ),
+					comm_par = ( comm_par_el && comm_par_el.value ) ? comm_par_el.value : '',
+					frame = document.getElementById( 'jetpack_remote_comment' ),
+					tellFrameNewParent;
+
+				tellFrameNewParent = function () {
+					if ( comm_par ) {
+						frame.src = "https://jetpack.wordpress.com/jetpack-comment/?blogid=161333275&postid=15042&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=mystery&greeting=Leave+a+Reply&greeting_reply=Leave+a+Reply+to+%25s&color_scheme=light&lang=en_US&jetpack_version=8.3&show_cookie_consent=10&has_cookie_consent=0&token_key=%3Bnormal%3B&sig=a5eaa6a7df5fcde822317a6634df32beea112cdf#parent=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F" + '&replytocom=' + parseInt( comm_par, 10 ).toString();
+					} else {
+						frame.src = "https://jetpack.wordpress.com/jetpack-comment/?blogid=161333275&postid=15042&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=mystery&greeting=Leave+a+Reply&greeting_reply=Leave+a+Reply+to+%25s&color_scheme=light&lang=en_US&jetpack_version=8.3&show_cookie_consent=10&has_cookie_consent=0&token_key=%3Bnormal%3B&sig=a5eaa6a7df5fcde822317a6634df32beea112cdf#parent=https%3A%2F%2Fblog.logrocket.com%2Fhow-to-use-css-scroll-snap%2F";
+					}
+				};
+
+				
+				if ( 'undefined' !== typeof addComment ) {
+					addComment._Jetpack_moveForm = addComment.moveForm;
+
+					addComment.moveForm = function ( commId, parentId, respondId, postId ) {
+						var returnValue = addComment._Jetpack_moveForm( commId, parentId, respondId, postId ),
+							cancelClick, cancel;
+
+						if ( false === returnValue ) {
+							cancel = document.getElementById( 'cancel-comment-reply-link' );
+							cancelClick = cancel.onclick;
+							cancel.onclick = function () {
+								var cancelReturn = cancelClick.call( this );
+								if ( false !== cancelReturn ) {
+									return cancelReturn;
+								}
+
+								if ( ! comm_par ) {
+									return cancelReturn;
+								}
+
+								comm_par = 0;
+
+								tellFrameNewParent();
+
+								return cancelReturn;
+							};
+						}
+
+						if ( comm_par == parentId ) {
+							return returnValue;
+						}
+
+						comm_par = parentId;
+
+						tellFrameNewParent();
+
+						return returnValue;
+					};
+				}
+
+				
+				// Do the post message bit after the dom has loaded.
+				document.addEventListener( 'DOMContentLoaded', function () {
+					var iframe_url = "https:\/\/jetpack.wordpress.com";
+					if ( window.postMessage ) {
+						if ( document.addEventListener ) {
+							window.addEventListener( 'message', function ( event ) {
+								var origin = event.origin.replace( /^http:\/\//i, 'https://' );
+								if ( iframe_url.replace( /^http:\/\//i, 'https://' ) !== origin ) {
+									return;
+								}
+								jQuery( frame ).height( event.data );
+							});
+						} else if ( document.attachEvent ) {
+							window.attachEvent( 'message', function ( event ) {
+								var origin = event.origin.replace( /^http:\/\//i, 'https://' );
+								if ( iframe_url.replace( /^http:\/\//i, 'https://' ) !== origin ) {
+									return;
+								}
+								jQuery( frame ).height( event.data );
+							});
+						}
+					}
+				})
+
+			})();
+		</script> 
+  <script type="text/javascript" src="https://stats.wp.com/e-202013.js" async defer></script> 
+  <script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.3',blog:'161333275',post:'15042',tz:'-4',srv:'blog.logrocket.com'} ]);
+	_stq.push([ 'clickTrackerInit', '161333275', '15042' ]);
+</script>  <!--
+	generated 47 seconds ago
+	generated in 0.256 seconds
+	served from batcache in 0.002 seconds
+	expires in 253 seconds
+-->
+ </body>
+</html>

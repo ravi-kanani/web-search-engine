@@ -1,0 +1,978 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en-US" lang="en-US" class=""> 
+ <head> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"c7ef7cdc84",applicationID:"297629790"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="yandex-verification" content="57829ddf2ef58d33"> 
+  <link rel="canonical" href="https://www.twinkl.com/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-GB" href="https://www.twinkl.co.uk/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-NZ" href="https://www.twinkl.co.nz/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-AU" href="https://www.twinkl.com.au/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-AE" href="https://www.twinkl.ae/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="de" href="https://www.twinkl.de/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="es" href="https://www.twinkl.es/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="fr" href="https://www.twinkl.fr/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-US" href="https://www.twinkl.com/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en" href="https://www.twinkl.com/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="x-default" href="https://www.twinkl.com/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-IE" href="https://www.twinkl.ie/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-IN" href="https://www.twinkl.co.in/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-CA" href="https://www.twinkl.ca/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-ZA" href="https://www.twinkl.co.za/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="ro" href="https://www.twinkl.ro/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-CH" href="https://www.twinkl.ch/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="zh" href="https://www.twinkl.com.cn/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-SG" href="https://www.twinkl.com.sg/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-HK" href="https://www.twinkl.com.hk/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-VN" href="https://www.twinkl.com.vn/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-TH" href="https://www.twinkl.co.th/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-KW" href="https://www.twinkl.com.kw/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-QA" href="https://www.twinkl.com.qa/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-BR" href="https://www.twinkl.com.br/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-JP" href="https://www.twinkl.jp/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-MT" href="https://www.twinkl.com.mt/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-NG" href="https://www.twinkl.com.ng/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-PL" href="https://www.twinkl.pl/blog/twinkls-top-us-education-blogs"> 
+  <link rel="alternate" hreflang="en-PT" href="https://www.twinkl.pt/blog/twinkls-top-us-education-blogs"> 
+  <title>Twinkl's Top US Education Blogs</title> 
+  <link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/screen-097db71b0b.min.css" media="screen, all" type="text/css"> 
+  <link rel="stylesheet" id="responsiveStylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/responsive-be6e8aaae0.min.css" media="screen, all" type="text/css"> 
+  <link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/print-f9bb8d167a.min.css" media="print" type="text/css"> <!--[if lte IE 9]>
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie-1-e74e636999.min.css" media="screen" type="text/css" />
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie-2-61f32720f5.min.css" media="screen" type="text/css" />
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie-3-91f4528da4.min.css" media="screen" type="text/css" />
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie-4-6e6dba0747.min.css" media="screen" type="text/css" />
+<![endif]--> <!--[if IE]>
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie-b605119c20.min.css" media="screen" type="text/css" />
+<![endif]--> <!--[if IE 7]>
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie7-16c3ce213e.min.css" media="screen" type="text/css" />
+<![endif]--> <!--[if IE 8]>
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie8-89f8873e5a.min.css" media="screen" type="text/css" />
+<![endif]--> <!--[if IE 9]>
+<link rel="stylesheet" href="https://images.twinkl.co.uk/tr/raw/upload/t/css/ie9-40cc935e26.min.css" media="screen" type="text/css" />
+<![endif]--> 
+  <link rel="apple-touch-icon" href="https://images.twinkl.co.uk/tr/raw/upload/t/images/apple-touch-icon.png"> 
+  <link rel="icon" type="image/png" href="https://images.twinkl.co.uk/tr/raw/upload/t/images/favicon-32x32-3.png" sizes="32x32"> 
+  <link rel="icon" type="image/png" href="https://images.twinkl.co.uk/tr/raw/upload/t/images/favicon-16x16-3.png" sizes="16x16"> 
+  <link rel="manifest" href="/images/manifest.json"> 
+  <link rel="mask-icon" href="https://images.twinkl.co.uk/tr/raw/upload/t/images/safari-pinned-tab.svg" color="#23a7f9"> 
+  <link rel="shortcut icon" href="https://images.twinkl.co.uk/tr/raw/upload/t/images/fav-icon-3.png" type="image/x-icon">
+  <link rel="author" href="https://plus.google.com/+twinkl"> 
+  <link rel="alternate" type="application/rss+xml" title="Twinkl Resources RSS Feed" href="https://www.twinkl.co.uk/resources.rss"> 
+  <base href="https://www.twinkl.com"> 
+  <script>
+            dataLayer = [{"user":{"twinklid":0,"loggedIn":false,"type":"","subscription":[],"schoolAccount":0,"career_id":0,"country_id":37,"county_id":0,"language_id":1,"user_profile":false,"offers":[]},"bannerText":{"offerOfHelp":"Coronavirus offer of help","clickHere":"click here","enterCode":"Enter your code"}}];
+        </script> <!-- Page hiding snippet (recommended)  --> 
+  <style>.async-hide { opacity: 0 !important} </style> 
+  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+            h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+            (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+            })(window,document.documentElement,'async-hide','dataLayer',4000,
+            {'GTM-N7SJHV4':true});
+            </script> <!-- Modified Google Analytics tracking code with Optimize plugin --> 
+  <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+              ga('create', 'UA-13151934-8', {useAmpClientId: true, siteSpeedSampleRate: '10', cookieDomain: 'auto'});
+              ga('require', 'displayfeatures');
+              ga('require', 'GTM-N7SJHV4');
+              
+            </script> <!-- End Google Analytics --> <!-- Google Tag Manager --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NLLTPGS');</script> <!-- End Google Tag Manager -->
+  <meta name="p:domain_verify" content="63d141bc5a8842a295706dea6311ac2b">
+  <script src="https://images.twinkl.co.uk/tr/raw/upload/t/js/polyfill-0c8df2bd84.min.js"></script> 
+  <script id="gtmEvtJs">
+
+                
+            if (typeof initTwinklVar !== "function") {
+                function initTwinklVar(twklData, scope) {
+                    scope = (scope || window);
+                    if ((typeof scope.twinkl === "undefined")
+                        || (scope.twinkl == null)
+                    ) {
+                        scope.twinkl = (twklData || {});
+                    } else if (typeof scope.twinkl !== "object") {
+                        scope.twinkl = (twklData || {});
+                    } else if (twklData != null) {
+                        scope.twinkl = Object.assign(scope.twinkl, twklData);
+                    }
+                    
+                    return twinkl;
+                }
+            }
+        ;
+                initTwinklVar();
+                twinkl.gtmEvtsMap = {};
+                // remove element from page
+                var tempElem = document.getElementById('gtmEvtJs');
+                if (tempElem != null) {
+                    tempElem.remove()
+                }
+                tempElem = undefined;
+</script> 
+  <meta name="description" content="Instant access to inspirational lesson plans, schemes of work, assessment, interactive activities, resource packs, PowerPoints, teaching ideas at Twinkl!"> 
+  <meta name="msapplication-TileColor" content="#23a7f9"> 
+  <meta name="msapplication-TileImage" content="https://images.twinkl.co.uk/tr/raw/upload/t/images/mstile-144x144.png"> 
+  <meta name="msapplication-config" content="/images/browserconfig.xml"> 
+  <meta name="theme-color" content="#ffffff"> 
+  <meta name="apple-itunes-app" content="app-id=1277635867, app-argument=/"> 
+  <meta name="twitter:site" content="@twinklusa"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:title" content="Twinkl's Top US Education Blogs"> 
+  <meta name="twitter:description" content="There is an incredible amount of brilliant education blogging content coming out of the US. From educators, to parents, to commentators and beyond, there is an incredibly wide array of voices motivated to share their knowledge, opinion and insights to the wider education community."> 
+  <meta name="twitter:image" content="https://content.twinkl.co.uk/website/uploaded/statue-of-liberty-267948-1920-1565624147.jpg"> 
+  <meta name="p:domain_verify" content="63d141bc5a8842a295706dea6311ac2b"> 
+  <meta property="og:url" content="https://www.twinkl.com/blog/twinkls-top-us-education-blogs"> 
+  <meta property="og:title" content="Twinkl's Top US Education Blogs"> 
+  <meta property="og:description" content="Instant access to inspirational lesson plans, schemes of work, assessment, interactive activities, resource packs, PowerPoints, teaching ideas at Twinkl!"> 
+  <meta property="og:image" content="https://content.twinkl.co.uk/website/uploaded/statue-of-liberty-267948-1920-1565624147.jpg"> 
+  <meta property="og:site_name" content="Twinkl"> 
+ </head> 
+ <body class="is-desktop-device no-js country-37" itemscope itemtype="https://schema.org/WebPage"> <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NLLTPGS" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> <!-- End Google Tag Manager (noscript) --> 
+  <div id="google-translate-wrapper">
+   <div id="google_translate_element">
+    <img class="translateTempImage" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/google_translate_icon.png">
+   </div>
+  </div> 
+  <div id="sky_background"></div> 
+  <div id="overlay"></div> 
+  <div class="whiteStretch menu_background"></div>
+  <div id="container" class="frontPage container"> 
+   <div id="" class="clearfix frontPage"> 
+    <div data-template="funcs-components" id="header"> <a class="" href="/" title="Return to home page"> <img src="https://images.twinkl.co.uk/tr/raw/upload/t/images/icons/twinkl_logo_cropped_300px.png" alt="Teaching Resources, Primary Resources, Twinkl, Primary School Resources" id="logo" class="twinkl-header-logo" width="75" height="48"> </a> 
+     <div id="login_options"> <a href="/sign-up" id="join" class="button">Join</a> <a href="/sign-in" id="login" class="button">Sign In</a> 
+     </div>
+     <img alt="Canada flag" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/flag/Canada.png" class="" id="countryFlag" width="64" height="22" data-formtypeid="1"> 
+     <div class="wrapperSearch " id="sticky-header" style=""> <a class="" href="/" title="Return to home page"> <img src="https://images.twinkl.co.uk/tr/raw/upload/t/images/icons/twinkl_logo_cropped_300px.png" alt="Teaching Resources, Primary Resources, Twinkl, Primary School Resources" id="logo" class="twinkl-header-logo" width="75" height="48"> </a> 
+      <div id="search_box" data-fancy="0" data-elastic="1"> 
+       <form action="/search" name="search_form" id="search_form" method="post"> 
+        <input type="hidden" name="search_origin" id="search_origin" value="1"> 
+        <input type="hidden" name="action_type" value="startSearch"> 
+        <input type="text" id="phrase" name="term" placeholder="Search 500,000+ resources" value="" data-autocomplete="1" autocomplete="off" data-fancy="0" data-elastic="1" maxlength="500"> <button title="Click to search" type="submit"><img class="searchIcon" alt="Search Icon" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/twinkl-icons/search-icon-white.svg"></button> 
+       </form>
+      </div> 
+     </div> 
+     <ul class="menuTab">
+      <li class="curriculum2014Tab lightPurple"><a href="/resources/canada-teaching-resources">Canada Teaching Resources</a></li>
+      <li><a href="/resources/home-early-years">Age 0-5</a><span>$nbsp;</span>
+       <ul class="tabMenu firstTab" id="tab_menu_1">
+        <li> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/early-years-new-primary-topic-resources" class="subTitle topOfCol">Twinkl Recommends...</a> <a href="/resources/early-years-new-primary-topic-resources/free-taster-packs-twinkl-recommends-early-years" class="menuItem">* Free Taster Packs</a> <a href="/resources/early-years-new-primary-topic-resources/early-years-youll-love-assessment" class="menuItem">* Assessment</a> <a href="/resources/early-years-new-primary-topic-resources/early-years-youll-love-planning" class="menuItem">* Planning</a> <a href="/resources/early-years-new-primary-topic-resources/early-years-valentines-day-teaching-resources" class="menuItem">* Valentine's Day</a> <a href="/resources/early-years-new-primary-topic-resources/early-years-winter-primary-resources" class="menuItem">* Winter</a> <a href="/resources/early-years-new-primary-topic-resources/early-years-dinosaurs-primary-resources" class="menuItem">* Dinosaurs</a> <a href="/resources/home-early-years-planning" class="subTitle">Foundation Planning</a> <a href="/resources/home-early-years-planning/large-activity-tray-plans-foundation-planning-eyfs-early-years" class="menuItem">Large Activity Tray Plans</a> <a href="/resources/home-early-years-planning/planning-webs-foundation-planning-eyfs-early-years" class="menuItem">Planning Webs</a> <a href="/resources/home-early-years-planning/activity-planning-and-continuous-provision-ideas-foundation-planning-early-years" class="menuItem">Activity Planning and Continuous Provision Ideas</a> <a href="/resources/home-early-years-planning/maths-mastery-foundation-planning-early-years" class="menuItem">Maths Mastery</a> <a href="/resources/home-early-years-planning/eyfs-ks1-planning-and-assessment-adult-led-focus-plans" class="menuItem">EYFS Adult Input Plans</a> <a href="/resources/home-early-years-planning/eyfs-lesson-planning-lesson-plan-ideas" class="menuItem">Lesson Plan and Enhancement Ideas</a> <a href="/resources/home-early-years-planning/eyfs-lesson-planning-continuous-provision-plans" class="menuItem">Continuous Provision Plans</a> <a href="/resources/home-early-years-planning/home-early-years-planning-eyfs-bumper-planning-packs" class="menuItem">EYFS Bumper Planning Packs</a> <a href="/resources/home-early-years-planning/home-early-years-planning-eyfs-adult-input-planning-packs" class="menuItem">EYFS Adult Input Planning Packs</a> <a href="/resources/home-early-years-planning/home-early-years-planning-planning-templates" class="menuItem">Planning Templates</a> <a href="/resources/home-early-years-planning/home-early-years-planning-foundation-pe-planning-scheme" class="menuItem">Foundation PE Planning Scheme</a> <a href="/resources/home-early-years-planning/home-early-years-planning-finger-gym" class="menuItem">Finger Gym Plans</a> <a href="/resources/home-early-years-planning/home-early-years-planning-busy-bag-plans" class="menuItem">Busy Bag Plans</a> <a href="/resources/home-early-years-planning/home-early-years-planning-interactive-poster-plans" class="menuItem">Interactive Poster Plans</a> <a href="/resources/home-early-years-planning/early-years-class-management-discovery-sacks" class="menuItem">Discovery Sacks</a> <a href="/resources/home-early-years-planning/home-early-years-planning-mud-kitchen-plans" class="menuItem">Mud Kitchen Plans</a> <a href="/resources/home-early-years-planning/eyfs-lesson-planning-messy-play-plans" class="menuItem">Messy Play Plans</a> <a href="/resources/home-early-years-assessment" class="subTitle">Foundation Assessment</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/home-early-years-assessment/assessment-targets-eyfs-assessment-eyfs-tracking-sheets" class="menuItem topOfCol">EYFS Tracking Sheets</a> <a href="/resources/home-early-years-assessment/assessment-targets-eyfs-assessment-early-years-outcomes" class="menuItem">Early Years Outcomes</a> <a href="/resources/home-early-years-assessment/assessment-targets-eyfs-assessment-early-learning-goals" class="menuItem">Early Learning Goals</a> <a href="/resources/home-early-years-assessment/assessment-targets-eyfs-assessment-characteristics-of-effective-learning" class="menuItem">Characteristics of Effective Learning</a> <a href="/resources/home-early-years-assessment/home-early-years-assessment-report-writing" class="menuItem">Report Writing and Summative Assessment</a> <a href="/resources/home-early-years-assessment/early-years-assessment-targets-next-steps" class="menuItem">Next Steps</a> <a href="/resources/home-early-years-assessment/home-early-years-assessment-on-entry-assessments" class="menuItem">On Entry Assessments</a> <a href="/resources/home-early-years-assessment/assessment-targets-eyfs-assessment-observation-templates" class="menuItem">Observation Templates</a> <a href="/resources/home-early-years-assessment/home-early-years-assessment-learning-journeys" class="menuItem">Learning Journeys</a> <a href="/resources/home-early-years-assessment/early-years-assessment-targets-the-leuven-scales" class="menuItem">The Leuven Scales</a> <a href="/resources/home-early-years-assessment/the-eyfs-profile-foundation-assessment-early-years" class="menuItem">The EYFS Profile</a> <a href="/resources/home-early-years-birth-to-twos" class="subTitle">Birth to Twos</a> <a href="/resources/home-early-years-birth-to-twos/paperwork-birth-to-twos-early-years" class="menuItem">Paperwork</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-can-you-find-posters" class="menuItem">Can You Find Posters</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-small-world-play" class="menuItem">Small World Play</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-baby-signing" class="menuItem">Baby Signing</a> <a href="/resources/home-early-years-birth-to-twos/early-concepts-birth-to-twos-early-years" class="menuItem">Early Concepts</a> <a href="/resources/home-early-years-birth-to-twos/visual-stimulation-for-babies-home-early-years-birth-to-twos" class="menuItem">Visual Stimulation for Babies</a> <a href="/resources/home-early-years-birth-to-twos/behaviour-resources-birth-to-twos-early-years" class="menuItem">Behaviour Resources</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-assessment" class="menuItem">Assessment</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-playdough-recipes" class="menuItem">Playdough Recipes</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-editable-play-recipes" class="menuItem">Edible Play Recipes</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-busy-bags" class="menuItem">Busy Bags</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-treasure-baskets" class="menuItem">Treasure Baskets</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-circle-time-games" class="menuItem">Circle Time Games</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-schema-resources" class="menuItem">Schema Resources</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-sensory-play" class="menuItem topOfCol">Sensory Play</a> <a href="/resources/home-early-years-birth-to-twos/home-early-years-birth-to-twos-cloud-dough-recipes" class="menuItem">Cloud Dough Recipes</a> <a href="/resources/early-years-personal-social-and-emotional-development" class="subTitle">Personal, Social and Emotional Development</a> <a href="/resources/early-years-personal-social-and-emotional-development/early-years-relationships" class="menuItem">Relationships</a> <a href="/resources/early-years-personal-social-and-emotional-development/early-years-safety" class="menuItem">Safety</a> <a href="/resources/early-years-personal-social-and-emotional-development/early-years-seal" class="menuItem">SEAL</a> <a href="/resources/early-years-personal-social-and-emotional-development/early-years-pshe-storybooks" class="menuItem">Story Books</a> <a href="/resources/early-years-personal-social-and-emotional-development/early-years-personal-social-and-emotional-development-circle-time-primary-resource" class="menuItem">Circle Time</a> <a href="/resources/early-years-personal-social-and-emotional-development/changes-and-new-beginnings-early-years-personal-social-and-emotional-development" class="menuItem">Changes and New Beginnings</a> <a href="/resources/early-years-personal-social-and-emotional-development/effective-learning-personal-social-and-emotional-development-early-years" class="menuItem">Effective Learning</a> <a href="/resources/early-years-personal-social-and-emotional-development/early-years-personal-social-and-emotional-development-british-values" class="menuItem">British Values</a> <a href="/resources/early-years-personal-social-and-emotional-development/values-and-ideals-early-years-personal-social-and-emotional-development" class="menuItem">Values and Ideals</a> <a href="/resources/early-years-physical-development" class="subTitle">Physical Development</a> <a href="/resources/early-years-physical-development/early-years-physical-development-motor-skills" class="menuItem">Fine Motor Skills</a> <a href="/resources/early-years-physical-development/early-years-physical-development-gross-motor-skills" class="menuItem">Gross Motor Skills</a> <a href="/resources/early-years-physical-development/early-years-healthy-living" class="menuItem">Healthy Living</a> <a href="/resources/early-years-physical-development/early-years-physical-development-outdoor-area" class="menuItem">Outdoor Area</a> <a href="/resources/early-years-physical-development/early-years-pe-and-sports" class="menuItem">PE and Sports</a> <a href="/resources/early-years-communication-and-language-and-literacy" class="subTitle">Communication, Language and Literacy</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-communication-and-language-and-literacy-phonics" class="menuItem">Phonics</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-nursery-rhyme" class="menuItem">Song and Rhymes</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-writing" class="menuItem">Writing</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-display-letters-and-words" class="menuItem">Display Letters and Words</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-story-sack-resource-packs" class="menuItem">Story Sack Resource Packs</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-story-resources-story-stones" class="menuItem">Story Stones</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-reading" class="menuItem">Reading</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-story-resources-book-lists" class="menuItem topOfCol">Book Lists</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-alphabet" class="menuItem">Alphabet</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-stories-display" class="menuItem">Display</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-words-and-vocab" class="menuItem">Words and Vocab</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-playdough-mats-literacy" class="menuItem">Playdough Mats</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-literacy-certificates-and-awards" class="menuItem">Literacy Certificates &amp; Awards</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-story-resources" class="menuItem">Story Resources</a> <a href="/resources/early-years-communication-and-language-and-literacy/early-years-word-rhyme" class="menuItem">Rhyme</a> <a href="/resources/early-years-mathematics" class="subTitle">EYFS Mathematics</a> <a href="/resources/early-years-mathematics/number-mathematics-early-years" class="menuItem">Number</a> <a href="/resources/early-years-mathematics/early-years-numeracy-maths-maths-challenge-area" class="menuItem">Maths Challenge Area</a> <a href="/resources/early-years-mathematics/early-years-shape-spaces-and-measures" class="menuItem">Shape, Space &amp; Measures</a> <a href="/resources/early-years-mathematics/white-rose-maths-supporting-resources-eyfs-mathematics-eyfs-early-years" class="menuItem">White Rose Maths Supporting Resources</a> <a href="/resources/early-years-understanding-the-world" class="subTitle">Understanding the World Resources</a> <a href="/resources/early-years-understanding-the-world/early-years-understanding-the-world-eyfs-science-experiments" class="menuItem">EYFS Science Experiments</a> <a href="/resources/early-years-understanding-the-world/early-years-everyday-life" class="menuItem">Everyday Life</a> <a href="/resources/early-years-understanding-the-world/early-years-weather-and-seasons" class="menuItem">Weather and Seasons</a> <a href="/resources/early-years-understanding-the-world/early-years-festivals-and-cultural-celebrations" class="menuItem">Festivals &amp; Cultural Celebrations</a> <a href="/resources/early-years-understanding-the-world/early-years-places" class="menuItem">Places</a> <a href="/resources/early-years-understanding-the-world/early-years-science-investigation" class="menuItem">Science &amp; Investigation</a> <a href="/resources/early-years-understanding-the-world/early-years-ict" class="menuItem">ICT</a> <a href="/resources/early-years-understanding-the-world/early-years-languages" class="menuItem">Languages</a> <a href="/resources/early-years-expressive-arts-and-design" class="subTitle">Expressive Arts and Design</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-expressive-arts-and-design-small-world-play" class="menuItem">Small World Play</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-drama" class="menuItem">Drama</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-craft-activities" class="menuItem">Craft Activities</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/early-years-expressive-arts-and-design/early-years-music" class="menuItem topOfCol">Music</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-fantasy" class="menuItem">Fantasy and Adventure</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-role-play" class="menuItem">Role Play</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-art-and-design" class="menuItem">Art</a> <a href="/resources/early-years-expressive-arts-and-design/early-years-design-and-technology" class="menuItem">Design &amp; Technology</a> <a href="/resources/home-early-years-home-learning" class="subTitle">Home Learning</a> <a href="/resources/home-early-years-home-learning/home-early-years-home-learning-phonics" class="menuItem">Phonics</a> <a href="/resources/home-early-years-home-learning/home-early-years-home-learning-mathematics" class="menuItem">Mathematics</a> <a href="/resources/home-early-years-home-learning/home-early-years-home-learning-topics" class="menuItem">Topics</a> <a href="/resources/home-early-years-home-learning/home-early-years-home-learning-story-books" class="menuItem">Story Books</a> <a href="/resources/home-early-years-home-learning/home-early-years-home-learning-traditional-tales" class="menuItem">Traditional Tales</a> <a href="/resources/home-early-years-home-learning/home-early-years-home-learning-pse" class="menuItem">PSE</a> <a href="/resources/early-years-topics" class="subTitle">Topics</a> <a href="/resources/outdoor-and-woodland-learning-early-years" class="subTitle">Take it Outside</a> <a href="/resources/outdoor-and-woodland-learning-early-years/stem-outdoors-outdoor-and-woodland-learning-early-years" class="menuItem">STEM Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-early-years/take-it-outside-outdoor-and-woodland-learning-early-years" class="menuItem">The Seasons</a> <a href="/resources/outdoor-and-woodland-learning-early-years/inspiring-maths-outdoors-outdoor-and-woodland-learning-early-years" class="menuItem">Maths Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-early-years/inspiring-literacy-outdoors-outdoor-and-woodland-learning-early-years" class="menuItem">Literacy Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-early-years/inspiring-creativity-outdoors-outdoor-and-woodland-learning-early-years" class="menuItem">Creativity Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-early-years/inspiring-investigation-outdoors-outdoor-and-woodland-learning-early-years" class="menuItem">Investigation Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-early-years/inspiring-social-skills-outdoors-outdoor-and-woodland-learning-early-years" class="menuItem">Social Skills Outdoors</a> <a href="/resources/early-years-classroom-signs-and-labels" class="subTitle">Classroom Signs and Labels</a> <a href="/resources/early-years-classroom-signs-and-labels/early-years-classroom-signs-and-labels-ready-made-display-packs" class="menuItem">Ready Made Display Packs</a> <a href="/resources/early-years-classroom-signs-and-labels/early-years-classroom-signs" class="menuItem">Classroom Signs</a> <a href="/resources/early-years-classroom-signs-and-labels/early-years-classroom-labels" class="menuItem">Classroom Labels</a> <a href="/resources/early-years-classroom-signs-and-labels/early-years-classroom-areas" class="menuItem">Early Years Classroom Areas</a> </li> 
+         </ul> 
+         <ul class="subMenu lastSubMenu"> 
+          <li> <a href="/resources/early-years-classroom-signs-and-labels/early-years-themed-signs-and-labels" class="menuItem topOfCol">Themed Signs and Labels</a> <a href="/resources/early-years-classroom-signs-and-labels/early-years-general-display-resources" class="menuItem">General Display Resources</a> <a href="/resources/early-years-class-management" class="subTitle">Classroom Management</a> <a href="/resources/early-years-class-management/early-years-class-management-pastoral-support-and-well-being" class="menuItem">Pastoral Support and Well-Being</a> <a href="/resources/early-years-class-management/early-years-teacher-organisation" class="menuItem">Teacher Organisation</a> <a href="/resources/early-years-class-management/early-years-class-management-golden-time" class="menuItem">Golden Time</a> <a href="/resources/early-years-class-management/early-years-class-management-staff-room" class="menuItem">Staff Room</a> <a href="/resources/early-years-class-management/early-years-rules-and-behaviour" class="menuItem">Rules and Behaviour</a> <a href="/resources/early-years-class-management/early-years-certificates-and-awards" class="menuItem">Certificates and Awards</a> <a href="/resources/early-years-class-management/early-years-calendars" class="menuItem">Calendars</a> <a href="/resources/early-years-class-management/early-years-daily-routine" class="menuItem">Daily Routine</a> <a href="/resources/early-years-class-management/early-years-back-to-school" class="menuItem">Back to School</a> <a href="/resources/early-years-class-management/early-years-transition" class="menuItem">Transition</a> <a href="/resources/early-years-class-management/early-years-starter-and-plenary-activities" class="menuItem">Starter and Plenary Resources</a> <a href="/resources/early-years-ks1-teaching-assistants" class="subTitle">EYFS Teaching Assistants</a> <a href="/resources/early-years-extra-curricular" class="subTitle">Extra Curricular</a> <a href="/resources/early-years-extra-curricular/early-years-extra-curricular-clubs" class="menuItem">Clubs</a> <a href="/resources/early-years-extra-curricular/early-years-extra-curricular-eco-club" class="menuItem">Eco Club</a> <a href="/resources/early-years-organised-events" class="subTitle">Organised Events &amp; Awareness Days/Weeks</a> <a href="/resources/nqt-early-years-teacher-organisation" class="subTitle">NQT</a> <a href="/resources/senior-leadership-team-slt" class="subTitle">Senior Leadership Team</a> </li> 
+         </ul></li>
+       </ul></li> 
+      <li><a href="/resources">Age 5-7</a><span>$nbsp;</span>
+       <ul class="tabMenu firstTab" id="tab_menu_1">
+        <li> <a class="green button nationalCurricButton" href="/resources/new-2014-curriculum-resources">Click Here For New National Curriculum Resources</a> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/new-primary-topic-resources" class="subTitle topOfCol">Twinkl Recommends... </a> <a href="/resources/new-primary-topic-resources/free-taster-packs-twinkl-recommends-key-stage-1" class="menuItem">Free Taster Packs</a> <a href="/resources/new-primary-topic-resources/diving-into-mastery-twinkl-recommends-key-stage-1-year-1-year-2" class="menuItem">* Diving into Mastery</a> <a href="/resources/new-primary-topic-resources/valentines-day-teaching-resources" class="menuItem">* Valentine's Day</a> <a href="/resources/new-primary-topic-resources/space-teaching-resources" class="menuItem">* Space</a> <a href="/resources/keystage1-ks1-assessment-tests" class="subTitle">Assessment Tests</a> <a href="/resources/keystage1-ks1-assessment-tests/keystage1-ks1-assessment-tests-spag" class="menuItem">SPaG</a> <a href="/resources/keystage1-ks1-assessment-tests/keystage1-ks1-assessment-tests-reading" class="menuItem">Reading</a> <a href="/resources/keystage1-ks1-assessment-tests/keystage1-ks1-assessment-tests-maths" class="menuItem">Maths</a> <a href="/resources/eyfs-ks1-planning-and-assessment" class="subTitle">Planning and Assessment</a> <a href="/resources/eyfs-ks1-planning-and-assessment/early-years-ks1-lesson-planning-adult-led-focus-plans" class="menuItem">Adult Led Focus Plans</a> <a href="/resources/eyfs-ks1-planning-and-assessment/english-revision-planning-and-assessment-key-stage-1" class="menuItem">English Revision</a> <a href="/resources/eyfs-ks1-planning-and-assessment/eyfs-ks1-lesson-planning" class="menuItem">Lesson Planning</a> <a href="/resources/eyfs-ks1-planning-and-assessment/starter-and-plenary-activities" class="menuItem">Starter and Plenary Resources</a> <a href="/resources/eyfs-ks1-planning-and-assessment/assessment-targets" class="menuItem">Assessment &amp; Targets</a> <a href="/resources/eyfs-ks1-planning-and-assessment/eyfs-ks1-planning-and-assessment-sats-survival" class="menuItem">SATs Survival</a> <a href="/resources/eyfs-ks1-planning-and-assessment/phonics-screening-survival" class="menuItem">Phonics Screening Survival</a> <a href="/resources/literacy" class="subTitle">English</a> <a href="/resources/literacy/speaking-and-listening-literacy" class="menuItem">Spoken Language and Listening</a> <a href="/resources/literacy/literacy-phonics" class="menuItem">KS1 Phonics Activities and Games</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/literacy/spelling" class="menuItem topOfCol">Spelling</a> <a href="/resources/literacy/grammar-spag" class="menuItem">Vocabulary, Grammar &amp; Punctuation</a> <a href="/resources/literacy/reading" class="menuItem">Reading</a> <a href="/resources/literacy/writing-and-grammar" class="menuItem">Writing Composition</a> <a href="/resources/literacy/story-resources" class="menuItem">Story Resources</a> <a href="/resources/literacy/nursery-rhyme" class="menuItem">Nursery Rhymes</a> <a href="/resources/literacy/word-rhyme" class="menuItem">Letter Rhymes</a> <a href="/resources/literacy/playdough-mats-literacy" class="menuItem">Playdough Mats</a> <a href="/resources/literacy/display-letters-and-words" class="menuItem">Display </a> <a href="/resources/numeracy-maths" class="subTitle">Maths</a> <a href="/resources/numeracy-maths/ks1-white-rose-maths-maths-key-stage-1-year-1-year-2" class="menuItem">White Rose Maths Supporting Resources</a> <a href="/resources/numeracy-maths/kirfs-maths-key-stage-1" class="menuItem">KIRFs</a> <a href="/resources/numeracy-maths/interactive-maths-games-maths-key-stage-1-year-1-year-2" class="menuItem">Interactive Maths Games</a> <a href="/resources/numeracy-maths/learning-aids-and-maths-equipment-support-materials-maths-key-stage-1" class="menuItem">Learning Aids and Maths Equipment Support Materials</a> <a href="/resources/numeracy-maths/times-tables" class="menuItem">Times Tables Resources</a> <a href="/resources/numeracy-maths/display-maths-key-stage-1" class="menuItem">Display</a> <a href="/resources/numeracy-maths/numbers-number-system" class="menuItem">Number and Place Value</a> <a href="/resources/numeracy-maths/fractions" class="menuItem">Fractions</a> <a href="/resources/numeracy-maths/shape-spaces-and-measures" class="menuItem">Measurement</a> <a href="/resources/numeracy-maths/position" class="menuItem">Position and Direction</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/numeracy-maths/properties-of-shape-geomoetry-maths-key-stage-1" class="menuItem topOfCol">Properties of Shape</a> <a href="/resources/numeracy-maths/data-analysis" class="menuItem">Statistics</a> <a href="/resources/numeracy-maths/numeracy-maths-maths-challenge-area" class="menuItem">Mastery - Fluency, Reasoning and Problem Solving</a> <a href="/resources/numeracy-maths/playdough-mats-numeracy" class="menuItem">Playdough Mats</a> <a href="/resources/numeracy-maths/numeracy-maths-maths-warm-ups" class="menuItem">Maths Warm-Ups</a> <a href="/resources/numeracy-maths/numeracy-assessment-and-targets" class="menuItem">Assessment</a> <a href="/resources/numeracy-maths/maths-vocab-cards" class="menuItem">Vocab Cards</a> <a href="/resources/numeracy-maths/counting" class="menuItem">Counting</a> <a href="/resources/numeracy-maths/calculating" class="menuItem">Calculation</a> <a href="/resources/home-key-stage-1-subjects" class="subTitle">Subjects</a> <a href="/resources/home-key-stage-1-subjects/science-investigation" class="menuItem">Science</a> <a href="/resources/home-key-stage-1-subjects/history" class="menuItem">History</a> <a href="/resources/home-key-stage-1-subjects/geography" class="menuItem">Geography</a> <a href="/resources/home-key-stage-1-subjects/ict" class="menuItem">Computing</a> <a href="/resources/home-key-stage-1-subjects/pe-and-sports" class="menuItem">PE</a> <a href="/resources/home-key-stage-1-subjects/pshe" class="menuItem">PSHCE</a> <a href="/resources/home-key-stage-1-subjects/music" class="menuItem">Music</a> <a href="/resources/home-key-stage-1-subjects/religion" class="menuItem">RE</a> <a href="/resources/home-key-stage-1-subjects/art-and-design" class="menuItem">Art</a> <a href="/resources/home-key-stage-1-subjects/design-and-technology" class="menuItem">Design &amp; Technology</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/home-key-stage-1-subjects/languages" class="menuItem topOfCol">Languages</a> <a href="/resources/topics" class="subTitle">Topics</a> <a href="/resources/topics/eco-recycling-environment" class="menuItem">Eco, Recycling and Environment</a> <a href="/resources/topics/castles-knights-1" class="menuItem">Castles &amp; Knights</a> <a href="/resources/topics/class-management-morning-activities-imagin" class="menuItem">Imagine</a> <a href="/resources/topics/topics-black-history" class="menuItem">Black History</a> <a href="/resources/topics/fairtrade-topics" class="menuItem">Fairtrade</a> <a href="/resources/topics/food-topics" class="menuItem">Food</a> <a href="/resources/topics/ourselves-all-about-me" class="menuItem">Ourselves - All About Me</a> <a href="/resources/topics/fantasy" class="menuItem">Fantasy</a> <a href="/resources/topics/places" class="menuItem">Places</a> <a href="/resources/topics/everyday-life" class="menuItem">Everyday Life</a> <a href="/resources/topics/pirates" class="menuItem">Pirates</a> <a href="/resources/topics/dinosaurs" class="menuItem">Dinosaurs</a> <a href="/resources/topics/weather-and-seasons" class="menuItem">Weather and Seasons</a> <a href="/resources/topics/festivals-and-cultural-celebrations" class="menuItem">Festivals &amp; Cultural Celebrations</a> <a href="/resources/topics/topics-organised-events" class="menuItem">Organised Events &amp; Awareness Days/Weeks</a> <a href="/resources/topics/extra-curricular" class="menuItem">Extra Curricular</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1" class="subTitle">Take It Outside</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/protecting-our-outdoors-outdoor-and-woodland-learning-key-stage-1" class="menuItem">Protecting Our Outdoors</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/stem-outdoors-outdoor-and-woodland-learning-key-stage-1-home-key-stage-1" class="menuItem topOfCol">STEM Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/inspiring-english-outdoors-outdoor-and-woodland-learning-key-stage-1" class="menuItem">English Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/take-it-outside-outdoor-and-woodland-learning-key-stage-1" class="menuItem">The Seasons</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/inspiring-maths-outdoors-outdoor-and-woodland-learning-key-stage-1" class="menuItem">Maths Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/inspiring-creativity-outdoors-outdoor-and-woodland-learning-key-stage-1" class="menuItem">Creativity Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/inspiring-social-skills-outdoors-outdoor-and-woodland-learning-key-stage-1" class="menuItem">Social Skills Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-1-home-key-stage-1/inspiring-investigation-outdoors-outdoor-and-woodland-learning-key-stage-1" class="menuItem">Investigation Outdoors</a> <a href="/resources/class-management" class="subTitle">Classroom Management</a> <a href="/resources/class-management/class-management-pastoral-support-and-well-being" class="menuItem">Pastoral Support and Well-Being</a> <a href="/resources/class-management/class-management-supply" class="menuItem">Supply</a> <a href="/resources/class-management/class-management-morning-activities" class="menuItem">Morning Activities</a> <a href="/resources/class-management/retrieval-practice-activities-classroom-management-key-stage-1-year-1-year-2" class="menuItem">Retrieval Practice Activities</a> <a href="/resources/class-management/class-management-young-people-and-families-support" class="menuItem">Young People and Families Support</a> <a href="/resources/class-management/teacher-organisation" class="menuItem">Teacher Organisation</a> <a href="/resources/class-management/class-management-golden-time" class="menuItem">Golden Time Activities</a> <a href="/resources/class-management/class-management-growth-mindset" class="menuItem">Growth Mindset</a> <a href="/resources/class-management/class-management-staff-room" class="menuItem">Staff Room</a> <a href="/resources/class-management/class-management-fundraising-and-charity-resources" class="menuItem">Fundraising and Charity Resources</a> <a href="/resources/class-management/memory-activities-classroom-management-key-stage-1" class="menuItem">Memory Activities</a> <a href="/resources/class-management/class-management-staff-room-top-tips" class="menuItem">Top Tips</a> </li> 
+         </ul> 
+         <ul class="subMenu lastSubMenu"> 
+          <li> <a href="/resources/class-management/class-assemblies-class-management" class="menuItem topOfCol">Class Assemblies</a> <a href="/resources/class-management/school-twinning-resources-classroom-management-key-stage-1-year-1-year-2" class="menuItem">School Twinning Resources</a> <a href="/resources/class-management/rules-and-behaviour" class="menuItem">Rules and Behaviour</a> <a href="/resources/class-management/certificates-and-awards" class="menuItem">Certificates and Awards</a> <a href="/resources/class-management/calendars" class="menuItem">Calendars</a> <a href="/resources/class-management/daily-routine" class="menuItem">Daily Routine</a> <a href="/resources/class-management/back-to-school" class="menuItem">Back to School Resources</a> <a href="/resources/class-management/transition" class="menuItem">Transition</a> <a href="/resources/classroom-signs-and-labels" class="subTitle">Classroom Signs and Labels Primary Resources</a> <a href="/resources/classroom-signs-and-labels/ready-made-display-packs" class="menuItem">Display Packs</a> <a href="/resources/classroom-signs-and-labels/classroom-signs" class="menuItem">Classroom Signs</a> <a href="/resources/classroom-signs-and-labels/classroom-labels" class="menuItem">Classroom Labels</a> <a href="/resources/classroom-signs-and-labels/classroom-areas" class="menuItem">Classroom Areas</a> <a href="/resources/classroom-signs-and-labels/themed-signs-and-labels" class="menuItem">Themed Signs and Labels</a> <a href="/resources/classroom-signs-and-labels/general-display-resources" class="menuItem">General Classroom Display Resources</a> <a href="/resources/craft-activities" class="subTitle">Crafts Activities</a> <a href="/resources/craft-activities/craft-activities-cone-people" class="menuItem">Cone People</a> <a href="/resources/craft-activities/max-mcmurdo-upcycling-resources" class="menuItem">Max McMurdo &amp; Twinkl Upcycling Teaching Resources</a> <a href="/resources/ks1-teaching-assistants" class="subTitle">Teaching Assistants</a> <a href="/resources/senior-leadership-team-slt" class="subTitle">Senior Leadership Team</a> </li> 
+         </ul></li>
+       </ul></li> 
+      <li><a href="/resources/keystage2-ks2">Age 7-11</a><span>$nbsp;</span>
+       <ul class="tabMenu firstTab" id="tab_menu_1">
+        <li> <a class="green button nationalCurricButton" href="/resources/new-2014-curriculum-resources">Click Here For New National Curriculum Resources</a> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/ks2-new-primary-topic-resources" class="subTitle topOfCol">Twinkl Recommends...</a> <a href="/resources/ks2-new-primary-topic-resources/free-taster-packs-twinkl-recommends-key-stage-2" class="menuItem">* Free Taster Packs</a> <a href="/resources/ks2-new-primary-topic-resources/times-tables-twinkl-recommends-key-stage-2-year-3-4-5-6" class="menuItem">* Times Tables</a> <a href="/resources/ks2-new-primary-topic-resources/sats-survival-twinkl-recommends-key-stage-2-year-3-4-5-6" class="menuItem">* SATs Survival</a> <a href="/resources/ks2-new-primary-topic-resources/ks2-new-primary-topic-resources-valentines-day" class="menuItem">* Valentine's Day</a> <a href="/resources/keystage2-ks2-assessment-tests" class="subTitle">Assessment Tests</a> <a href="/resources/keystage2-ks2-assessment-tests/keystage2-ks2-assessment-tests-maths" class="menuItem">Maths</a> <a href="/resources/keystage2-ks2-assessment-tests/keystage2-ks2-assessment-tests-spag" class="menuItem">SPaG</a> <a href="/resources/keystage2-ks2-assessment-tests/keystage2-ks2-assessment-tests-reading" class="menuItem">Reading</a> <a href="/resources/ks2-planning-and-assessment" class="subTitle">Planning and Assessment</a> <a href="/resources/ks2-planning-and-assessment/english-revision-ks2-planning-and-assessment" class="menuItem">English Revision</a> <a href="/resources/ks2-planning-and-assessment/ks2-assessment-and-targets" class="menuItem">Assessment &amp; Targets</a> <a href="/resources/ks2-planning-and-assessment/ks2-lesson-planning" class="menuItem">Lesson Planning</a> <a href="/resources/ks2-planning-and-assessment/ks2-planning-and-assessment-sats-survival" class="menuItem">SATs Survival</a> <a href="/resources/ks2-english" class="subTitle">English</a> <a href="/resources/ks2-english/ks2-english-spag" class="menuItem">KS2 SPaG Resources - Spelling Punctuation and Grammar</a> <a href="/resources/ks2-english/non-fiction-english-key-stage-2" class="menuItem">Non-Fiction</a> <a href="/resources/ks2-english/speaking-listening-english-key-stage-2-year-3-4-5-6" class="menuItem">Speaking &amp; Listening</a> <a href="/resources/ks2-english/sound-stories-ks2-english" class="menuItem">Sound Stories</a> <a href="/resources/ks2-english/ks2-english-theatre-and-film" class="menuItem">Theatre and Film</a> <a href="/resources/ks2-english/ks2-writing" class="menuItem">KS2 Writing Primary Resources</a> <a href="/resources/ks2-english/ks2-english-handwriting" class="menuItem">Handwriting Primary Resources - KS2 </a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/ks2-english/ks2-reading" class="menuItem topOfCol">KS2 Reading</a> <a href="/resources/ks2-english/ks2-words-and-vocabulary" class="menuItem">Words and Vocabulary</a> <a href="/resources/ks2-english/ks2-stories" class="menuItem">KS2 Stories Primary Resources</a> <a href="/resources/ks2-english/ks2-english-display" class="menuItem">Display</a> <a href="/resources/ks2-maths" class="subTitle">Maths</a> <a href="/resources/ks2-maths/ks2-white-rose-maths-maths-key-stage-2-year-3-4-5-6" class="menuItem">White Rose Maths Supporting Resources</a> <a href="/resources/ks2-maths/kirfs-maths-key-stage-2" class="menuItem">KIRFs</a> <a href="/resources/ks2-maths/interactive-maths-games-maths-key-stage-2-year-3-4-5-6" class="menuItem">Interactive Maths Games</a> <a href="/resources/ks2-maths/ks2-maths-maths-warm-ups" class="menuItem">Maths Warm-Ups Primary Resources</a> <a href="/resources/ks2-maths/ks2-numbers-and-the-number-system" class="menuItem">KS2 Number and Place Value</a> <a href="/resources/ks2-maths/ks2-calculations" class="menuItem">Calculation</a> <a href="/resources/ks2-maths/ks2-shape-space-measure" class="menuItem">Properties of Shapes </a> <a href="/resources/ks2-maths/ks2-fractions-percentages-and-ratio" class="menuItem">Fractions, Decimals and Percentages</a> <a href="/resources/ks2-maths/measurement-maths-key-stage-2" class="menuItem">Measurement</a> <a href="/resources/ks2-maths/position-and-direction-maths-key-stage-2" class="menuItem">Position and Direction</a> <a href="/resources/ks2-maths/ks2-handling-data" class="menuItem">KS2 Data Handling &amp; Statistics</a> <a href="/resources/ks2-maths/ks2-maths-algebra" class="menuItem">KS2 Algebra</a> <a href="/resources/ks2-maths/ratio-and-proportion-maths-key-stage-2" class="menuItem">Ratio and Proportion</a> <a href="/resources/ks2-maths/ks2-calculations-times-tables" class="menuItem">Times Tables</a> <a href="/resources/ks2-maths/ks2-problem-solving" class="menuItem">Mastery - Fluency, Reasoning and Problem Solving</a> <a href="/resources/ks2-maths/learning-aids-and-maths-equipment-support-materials-maths-key-stage-2" class="menuItem">Learning Aids and Maths Equipment Support Materials</a> <a href="/resources/ks2-maths/ks2-maths-certificates-and-awards" class="menuItem">Certificates and Awards</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/ks2-maths/ks2-maths-display" class="menuItem topOfCol">KS2 Maths Displays</a> <a href="/resources/ks2-maths/ks2-maths-assessment" class="menuItem">KS2 Maths Tests and Assessments</a> <a href="/resources/ks2-science" class="subTitle">Science</a> <a href="/resources/ks2-science/ks2-science-life-processes-and-living-things" class="menuItem">Life Processes and Living Things</a> <a href="/resources/ks2-science/ks2-science-the-earth-and-beyond" class="menuItem">Earth and Space</a> <a href="/resources/ks2-science/ks2-science-physical-processes" class="menuItem">Physical Processes</a> <a href="/resources/ks2-science/ks2-science-materials-and-their-properties" class="menuItem">Materials and their Properties</a> <a href="/resources/ks2-science/ks2-science-investigation" class="menuItem">Science Investigation</a> <a href="/resources/ks2-science/ks2-science-assessments" class="menuItem">Science Assessments</a> <a href="/resources/ks2-science/ks2-science-display" class="menuItem">Science Displays</a> <a href="/resources/ks2-science/ks2-science-writing-frames-and-worksheets" class="menuItem">Writing Frames and Activity Sheets</a> <a href="/resources/ks2-science/ks2-science-powerpoints" class="menuItem">Powerpoints</a> <a href="/resources/ks2-science/ks2-science-signs-and-labels" class="menuItem">Signs and Labels</a> <a href="/resources/ks2-science/knowledge-organisers-science-key-stage-2" class="menuItem">Knowledge Organisers</a> <a href="/resources/ks2-science/ks2-science-certificates-and-awards" class="menuItem">Certificates and Awards</a> <a href="/resources/ks2-subjects" class="subTitle">Subjects</a> <a href="/resources/ks2-subjects/ks2-history" class="menuItem">History</a> <a href="/resources/ks2-subjects/ks2-geography" class="menuItem">Geography</a> <a href="/resources/ks2-subjects/ks2-ict" class="menuItem">Computing</a> <a href="/resources/ks2-subjects/ks2-pe" class="menuItem">PE</a> <a href="/resources/ks2-subjects/ks2-pshe" class="menuItem">PSHCE</a> <a href="/resources/ks2-subjects/ks2-music" class="menuItem">Music</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/ks2-subjects/ks2-religious-education" class="menuItem topOfCol">RE</a> <a href="/resources/ks2-subjects/ks2-art" class="menuItem">KS2 Art</a> <a href="/resources/ks2-subjects/ks2-design-and-technology" class="menuItem">Design and Technology</a> <a href="/resources/ks2-subjects/ks2-languages" class="menuItem">Languages</a> <a href="/resources/ks2-topics" class="subTitle">Topics</a> <a href="/resources/ks2-topics/ks2-the-environment" class="menuItem">The Environment</a> <a href="/resources/ks2-topics/ks2-food" class="menuItem">Food</a> <a href="/resources/ks2-topics/ks2-staying-healthy" class="menuItem">Staying Healthy</a> <a href="/resources/ks2-topics/ks2-topics-the-rainforest" class="menuItem">The Rainforest</a> <a href="/resources/ks2-topics/ks2-water" class="menuItem">Water</a> <a href="/resources/ks2-topics/ks2-topics-black-history" class="menuItem">Black History</a> <a href="/resources/ks2-topics/ks2-pirate-resources" class="menuItem">Pirates</a> <a href="/resources/ks2-topics/ks2-topics-british-values" class="menuItem">British Values</a> <a href="/resources/ks2-topics/ks2-current-affairs" class="menuItem">Current Affairs</a> <a href="/resources/ks2-topics/animals-ks2-topics" class="menuItem">Animals</a> <a href="/resources/ks2-topics/ks2-inventors-and-inventions" class="menuItem">Inventors and Inventions</a> <a href="/resources/ks2-topics/ks2-the-seaside" class="menuItem">The Seaside</a> <a href="/resources/ks2-topics/ks2-class-management-morning-activities-imagine" class="menuItem">Imagine</a> <a href="/resources/ks2-topics/ks2-topics-project-packs" class="menuItem">Project Packs</a> <a href="/resources/ks2-topics/ks2-festivals-and-celebrations" class="menuItem">Festivals and Celebrations</a> <a href="/resources/ks2-topics/ks2-topics-organised-events-and-awareness-days-weeks" class="menuItem">Organised Events and Awareness Days/Weeks</a> <a href="/resources/ks2-topics/ks2-topics-extra-curricular-clubs" class="menuItem">Extra Curricular</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/outdoor-and-woodland-learning-key-stage-2" class="subTitle topOfCol">Take It Outside</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/stem-outdoors-outdoor-and-woodland-learning-key-stage-2" class="menuItem">STEM Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/protecting-our-outdoors-outdoor-and-woodland-learning-key-stage-2" class="menuItem">Protecting Our Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/take-it-outside-outdoor-and-woodland-learning-key-stage-2" class="menuItem">The Seasons</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/inspiring-maths-outdoors-outdoor-and-woodland-learning-key-stage-2" class="menuItem">Maths Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/inspiring-english-outdoors-outdoor-and-woodland-learning-key-stage-2" class="menuItem">English Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/inspiring-creativity-outdoors-outdoor-and-woodland-learning-key-stage-2" class="menuItem">Creativity Outdoors</a> <a href="/resources/outdoor-and-woodland-learning-key-stage-2/inspiring-social-skills-outdoors-outdoor-and-woodland-learning-key-stage-2" class="menuItem">Social Skills Outdoors</a> <a href="/resources/ks2-class-management" class="subTitle">Classroom Management</a> <a href="/resources/ks2-class-management/keystage2-ks2-pastoral-support-and-well-being" class="menuItem">Pastoral Support and Well-Being</a> <a href="/resources/ks2-class-management/ks2-daily-routine" class="menuItem">Daily Routine</a> <a href="/resources/ks2-class-management/ks2-teacher-organisation-supply" class="menuItem">Supply</a> <a href="/resources/ks2-class-management/ks2-class-management-young-people-and-families-support" class="menuItem">Young People and Families Support</a> <a href="/resources/ks2-class-management/ks2-class-management-morning-activities" class="menuItem">Morning Activities</a> <a href="/resources/ks2-class-management/retrieval-practice-activities-classroom-management-key-stage-2-year-3-4-5-6" class="menuItem">Retrieval Practice Activities</a> <a href="/resources/ks2-class-management/ks2-certificates-and-awards" class="menuItem">Certificates and Awards</a> <a href="/resources/ks2-class-management/ks2-rules-and-behaviour" class="menuItem">Rules and Behaviour</a> <a href="/resources/ks2-class-management/ks2-golden-time" class="menuItem">Golden Time</a> <a href="/resources/ks2-class-management/ks2-back-to-school" class="menuItem">Back to School</a> <a href="/resources/ks2-class-management/ks2-calendars" class="menuItem">Calendars</a> <a href="/resources/ks2-class-management/keystage2-ks2-transition" class="menuItem">Transition</a> <a href="/resources/ks2-class-management/ks2-teacher-organisation" class="menuItem">Teacher Organisation</a> </li> 
+         </ul> 
+         <ul class="subMenu lastSubMenu"> 
+          <li> <a href="/resources/ks2-class-management/ks2-class-management-staff-room" class="menuItem topOfCol">Staff Room</a> <a href="/resources/ks2-class-management/ks2-class-management-fundraising-and-charity-resources" class="menuItem">Fundraising and Charity Resources</a> <a href="/resources/ks2-class-management/ks2-class-management-staff-room-top-tips" class="menuItem">Top Tips</a> <a href="/resources/ks2-classroom-signs-and-labels" class="subTitle">Classroom Signs and Labels</a> <a href="/resources/ks2-classroom-signs-and-labels/ks2-general-display-resources" class="menuItem">General Display Resources</a> <a href="/resources/ks2-classroom-signs-and-labels/ks2-classroom-labels" class="menuItem">Classroom Labels</a> <a href="/resources/ks2-classroom-signs-and-labels/ks2-classroom-signs" class="menuItem">Classroom Signs</a> <a href="/resources/ks2-classroom-signs-and-labels/ks2-classroom-signs-and-labels-display-packs" class="menuItem">Display Packs</a> <a href="/resources/ks2-classroom-signs-and-labels/ks2-themed-signs-and-labels" class="menuItem">Themed Signs and Labels</a> <a href="/resources/ks2-learning-aids" class="subTitle">Learning Aids</a> <a href="/resources/ks2-learning-aids/ks2-learning-aids-growth-mindset" class="menuItem">Growth Mindset Primary Resources</a> <a href="/resources/ks2-learning-aids/ks2-learning-aids-interactive-visual-aids" class="menuItem">Interactive Visual Aids</a> <a href="/resources/ks2-learning-aids/ks2-learning-aids-blooms-taxonomy" class="menuItem">Blooms Taxonomy Primary Resources </a> <a href="/resources/ks2-learning-aids/ks2-learning-aids-socratic-questioning" class="menuItem">Socratic Questioning</a> <a href="/resources/ks2-learning-aids/ks2-learning-aids-memory-workouts" class="menuItem">Memory Workouts</a> <a href="/resources/ks2-teaching-assistants" class="subTitle">Teaching Assistants</a> <a href="/resources/nqt-keystage2-ks2-pastoral-support-and-well-being-staff-well-being-managing-your-own-professional-development" class="subTitle">NQT</a> <a href="/resources/senior-leadership-team-slt" class="subTitle">Senior Leadership Team</a> </li> 
+         </ul></li>
+       </ul></li> 
+      <li><a href="/resources/keystage3-ks3">Age 11-18</a><span>$nbsp;</span>
+       <ul class="tabMenu firstTab" id="tab_menu_1">
+        <li> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/free-taster-packs-secondary" class="subTitle topOfCol">Free Taster Packs</a> <a href="/resources/keystage3-ks3-english" class="subTitle">English </a> <a href="/resources/keystage3-ks3-english/keystage3-ks3-english-ks3" class="menuItem">KS3 English</a> <a href="/resources/keystage3-ks3-english/keystage3-ks3-english-gcse" class="menuItem">Key Stage 4/GCSE English</a> <a href="/resources/keystage3-ks3-maths" class="subTitle">Maths</a> <a href="/resources/keystage3-ks3-maths/ks3-maths-secondary" class="menuItem">KS3 Maths</a> <a href="/resources/keystage3-ks3-maths/ks4-gcse-maths-maths-ks3-ks4" class="menuItem">KS4/GCSE Maths</a> <a href="/resources/keystage3-ks3-maths/keystage3-ks3-maths-ks5" class="menuItem">KS5 Maths</a> <a href="/resources/keystage3-ks3-science" class="subTitle">Science</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/keystage3-ks3-science/keystage3-ks3-science-ks3" class="menuItem topOfCol">KS3 Science</a> <a href="/resources/keystage3-ks3-science/keystage3-ks3-science-ks4" class="menuItem">KS4/GCSE Science</a> <a href="/resources/keystage3-ks3-geography" class="subTitle">Geography</a> <a href="/resources/keystage3-ks3-geography/keystage3-ks3-geography-ks3" class="menuItem">KS3 Geography</a> <a href="/resources/keystage3-ks3-geography/keystage3-ks3-geography-gcse" class="menuItem">KS4/GCSE Geography</a> <a href="/resources/keystage3-ks3-history" class="subTitle">History</a> <a href="/resources/keystage3-ks3-history/keystage3-ks3-history-ks3" class="menuItem">KS3 History</a> <a href="/resources/keystage3-ks3-history/keystage3-ks3-history-ks4" class="menuItem">KS4/GCSE History</a> <a href="/resources/keystage3-ks3-religious-studies" class="subTitle">Religion</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/keystage3-ks3-religious-studies/keystage3-ks3-religious-studies-ks3" class="menuItem topOfCol">KS3 Religious Studies</a> <a href="/resources/keystage3-ks3-religious-studies/keystage3-ks3-religious-studies-ks4" class="menuItem">KS4/GCSE Religious Studies</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-french" class="subTitle">French</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-french/keystage3-ks3-modern-foreign-languages-french-ks3" class="menuItem">KS3 French</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-french/keystage3-ks3-modern-foreign-languages-french-gcse" class="menuItem">KS4/GCSE French</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-spanish" class="subTitle">Spanish</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-spanish/keystage3-ks3-modern-foreign-languages-spanish-ks3" class="menuItem">KS3 Spanish</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-spanish/keystage3-ks3-modern-foreign-languages-spanish-gcse" class="menuItem">KS4/GCSE Spanish</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-german" class="subTitle">German</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/keystage3-ks3-modern-foreign-languages-german/keystage3-ks3-modern-foreign-languages-german-ks3" class="menuItem topOfCol">KS3 German</a> <a href="/resources/keystage3-ks3-modern-foreign-languages-german/keystage3-ks3-modern-foreign-languages-german-ks4" class="menuItem">KS4/GCSE German</a> <a href="/resources/keystage3-ks3-design-and-technology" class="subTitle">Design &amp; Technology</a> <a href="/resources/keystage3-ks3-design-and-technology/keystage3-ks3-design-and-technology-ks3" class="menuItem">KS3 Design &amp; Technology</a> <a href="/resources/keystage3-ks3-design-and-technology/keystage3-ks3-design-and-technology-ks4" class="menuItem">KS4/GCSE Design &amp; Technology</a> <a href="/resources/food-nutrition-hospitality-catering-secondary" class="subTitle">Food, Nutrition, Hospitality &amp; Catering</a> <a href="/resources/food-nutrition-hospitality-catering-secondary/ks4-food-nutrition-hospitality-catering-food-nutrition-hospitality-catering-secondary" class="menuItem">KS4 Food, Nutrition, Hospitality &amp; Catering</a> <a href="/resources/keystage3-ks3-art-and-design" class="subTitle">Art &amp; Design</a> <a href="/resources/keystage3-ks3-art-and-design/ks3-art-and-design-secondary" class="menuItem">KS3 Art &amp; Design</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/keystage3-ks3-art-and-design/ks4-art-and-design-secondary" class="menuItem topOfCol">KS4/GCSE Art &amp; Design</a> <a href="/resources/keystage3-ks3-physical-education" class="subTitle">Physical Education</a> <a href="/resources/keystage3-ks3-physical-education/keystage3-ks3-physical-education-ks3" class="menuItem">KS3 PE</a> <a href="/resources/keystage3-ks3-physical-education/keystage3-ks3-physical-education-ks4" class="menuItem">KS4/GCSE PE</a> <a href="/resources/keystage3-ks3-ict" class="subTitle">Computing</a> <a href="/resources/keystage3-ks3-music" class="subTitle">Music</a> <a href="/resources/keystage3-ks3-music/keystage3-ks3-music-ks3" class="menuItem">KS3 Music</a> <a href="/resources/keystage3-ks3-music/keystage3-ks3-music-ks4" class="menuItem">KS4/GCSE Music</a> <a href="/resources/keystage3-ks3-citizenship" class="subTitle">PSHE</a> </li> 
+         </ul> 
+         <ul class="subMenu lastSubMenu"> 
+          <li> <a href="/resources/citizenship-secondary" class="subTitle topOfCol">Citizenship</a> <a href="/resources/daily-debate-pshe-citizenship-secondary" class="subTitle">Form Time Ideas</a> <a href="/resources/keystage3-ks3-festivals-and-events" class="subTitle">Festivals and Events</a> <a href="/resources/keystage3-ks3-teachers-toolbox" class="subTitle">Teacher Toolbox</a> <a href="/resources/senior-leadership-team-slt" class="subTitle">Senior Leadership Team</a> </li> 
+         </ul></li>
+       </ul></li> 
+      <li><a href="/resources/specialeducationalneeds-sen">SEND</a><span>$nbsp;</span>
+       <ul class="tabMenu firstTab" id="tab_menu_1">
+        <li> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/pastoral-send" class="subTitle topOfCol">Pastoral</a> <a href="/resources/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties" class="subTitle">Social, Emotional and Mental Health Difficulties</a> <a href="/resources/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties/sen-friendship-and-social-skills" class="menuItem">Friendship and Social Skills</a> <a href="/resources/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties/sen-emotions" class="menuItem">Emotions</a> <a href="/resources/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties-visual-timetables-and-routine" class="menuItem">Visual Timetables and Routine</a> <a href="/resources/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties-social-stories" class="menuItem">Social Situations</a> <a href="/resources/specialeducationalneeds-sen-social-emotional-and-mental-health-difficulties/sen-behaviour-management" class="menuItem">Behaviour Management</a> <a href="/resources/specialeducationalneeds-sen-cognition-and-learning" class="subTitle">Cognition and Learning</a> <a href="/resources/specialeducationalneeds-sen-cognition-and-learning/working-memory-cognition-and-learning-sen" class="menuItem">Working Memory</a> <a href="/resources/specialeducationalneeds-sen-cognition-and-learning/sen-specific-learning-difficulties" class="menuItem">Specific Learning Difficulties</a> <a href="/resources/specialeducationalneeds-sen-cognition-and-learning/sen-visual-timetables-and-routine" class="menuItem">Visual Timetables and Routine</a> <a href="/resources/specialeducationalneeds-sen-curriculum-support" class="subTitle">Curriculum Support</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/specialeducationalneeds-sen-curriculum-support/specialeducationalneeds-sen-curriculum-support-foundation-subjects" class="menuItem topOfCol">Foundation Subjects</a> <a href="/resources/specialeducationalneeds-sen-curriculum-support/specialeducationalneeds-sen-p-scales" class="menuItem">P Scales</a> <a href="/resources/specialeducationalneeds-sen-curriculum-support/sen-literacy" class="menuItem">English</a> <a href="/resources/specialeducationalneeds-sen-curriculum-support/sen-numeracy-maths" class="menuItem">Maths</a> <a href="/resources/specialeducationalneeds-sen-curriculum-support/sen-storybooks" class="menuItem">Storybooks</a> <a href="/resources/specialeducationalneeds-sen-curriculum-support/sen-traditional-tales" class="menuItem">Traditional Tales</a> <a href="/resources/specialeducationalneeds-sen-sensory-and-physical-needs" class="subTitle">Sensory and Physical Needs</a> <a href="/resources/specialeducationalneeds-sen-sensory-and-physical-needs/sen-sensory" class="menuItem">Sensory</a> <a href="/resources/specialeducationalneeds-sen-sensory-and-physical-needs/sen-visual-impairment" class="menuItem">Visual Impairment</a> <a href="/resources/specialeducationalneeds-sen-sensory-and-physical-needs/sen-motor-skills" class="menuItem">Motor Skills</a> <a href="/resources/specialeducationalneeds-sen-senco" class="subTitle">SENCo</a> <a href="/resources/specialeducationalneeds-sen-senco/specialeducationalneeds-sen-teacher-organisation" class="menuItem">Teacher Organisation</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/specialeducationalneeds-sen-senco/specialeducationalneeds-sen-senco-staff-training" class="menuItem topOfCol">Staff Training</a> <a href="/resources/specialeducationalneeds-sen-senco/specialeducationalneeds-sen-handouts-and-information-transition" class="menuItem">Transition</a> <a href="/resources/specialeducationalneeds-sen-senco/specialeducationalneeds-sen-senco-person-centred-reviews" class="menuItem">Person Centred Reviews</a> <a href="/resources/specialeducationalneeds-sen-senco/specialeducationalneeds-sen-senco-supporting-parents" class="menuItem">Supporting Parents</a> <a href="/resources/specialeducationalneeds-sen-parents" class="subTitle">Parents</a> <a href="/resources/specialeducationalneeds-sen-parents/specialeducationalneeds-sen-parents-organisation-at-home" class="menuItem">Organisation at Home</a> <a href="/resources/specialeducationalneeds-sen-parents/specialeducationalneeds-sen-parents-rewards" class="menuItem">Rewards</a> <a href="/resources/specialeducationalneeds-sen-parents/specialeducationalneeds-sen-parents-individual-needs" class="menuItem">Individual Needs</a> <a href="/resources/specialeducationalneeds-sen-parents/specialeducationalneeds-sen-parents-useful-forms-and-information" class="menuItem">Useful Forms and Information</a> <a href="/resources/specialeducationalneeds-sen-parents/specialeducationalneeds-sen-parents-curriculum-support" class="menuItem">Curriculum Support</a> <a href="/resources/specialeducationalneeds-sen-parents/specialeducationalneeds-sen-parents-back-to-school" class="menuItem">Back to School</a> <a href="/resources/specialeducationalneeds-sen-communication-and-interaction" class="subTitle">Communication and Interaction</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/specialeducationalneeds-sen-communication-and-interaction/specialeducationalneeds-sen-speech-language-therapy" class="menuItem topOfCol">Speech, Language and Communication Needs </a> <a href="/resources/specialeducationalneeds-sen-communication-and-interaction/specialeducationalneeds-sen-communication-and-interaction-staff-training" class="menuItem">Staff Training</a> <a href="/resources/specialeducationalneeds-sen-communication-and-interaction/sen-autism-spectrum-disorders" class="menuItem">Autism Spectrum Disorders</a> <a href="/resources/sen-pshe" class="subTitle">PSHCE</a> <a href="/resources/specialeducationalneeds-sen-sign-language" class="subTitle">British Sign Language</a> <a href="/resources/specialeducationalneeds-sen-sign-language/bsl-club-british-sign-language-send" class="menuItem">BSL Club</a> <a href="/resources/specialeducationalneeds-sen-sign-language/activities-sign-language-communication-and-interaction-send" class="menuItem">Activities and Games</a> <a href="/resources/specialeducationalneeds-sen-sign-language/specialeducationalneeds-sen-sign-language-alphabet-and-finger-spelling" class="menuItem">Alphabet, Number and Fingerspelling</a> <a href="/resources/specialeducationalneeds-sen-sign-language/classroom-management-sign-language-communication-and-interaction-send" class="menuItem">Classroom Management</a> <a href="/resources/specialeducationalneeds-sen-sign-language/specialeducationalneeds-sen-sign-language-left-handed" class="menuItem">Left Handed</a> <a href="/resources/specialeducationalneeds-sen-sign-language/specialeducationalneeds-sen-sign-language-topics" class="menuItem">Topics</a> <a href="/resources/specialeducationalneeds-sen-sign-language/specialeducationalneeds-sen-sign-language-video-clips" class="menuItem">Video Clips</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen" class="subTitle topOfCol">Deaf Education</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/events-deaf-education-send" class="menuItem">Events</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/activities-and-games-teacher-of-the-deaf-send" class="menuItem">Activities and Games</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/audiology-teacher-of-the-deaf-send" class="menuItem">Audiology</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/british-sign-language-teacher-of-the-deaf-send" class="menuItem">British Sign Language</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/class-management-teacher-of-the-deaf-send" class="menuItem">Classroom Management </a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/cognition-and-learning-teacher-of-the-deaf-send" class="menuItem">Cognition and Learning</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/communication-teacher-of-the-deaf-send" class="menuItem">Communication</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/deaf-culture-teacher-of-the-deaf-send" class="menuItem">Deaf Culture</a> <a href="/resources/teacher-of-the-deaf-category-sensory-and-physical-needs-sen/fine-motor-skills-teacher-of-the-deaf-send" class="menuItem">Fine Motor Skills</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4" class="subTitle">KS3/KS4</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-maths" class="menuItem">Maths</a> </li> 
+         </ul> 
+         <ul class="subMenu lastSubMenu"> 
+          <li> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-english" class="menuItem topOfCol">English</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-senco-information-and-useful-forms" class="menuItem">SENCO Information and Useful Forms</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-social-skills" class="menuItem">KS3/ KS4 Social Skills Secondary Resources</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-classroom-management" class="menuItem">Classroom Management</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-asd" class="menuItem">Autism Spectrum Disorders</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-pshe" class="menuItem">PSHE</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-speech-language-and-communication-needs" class="menuItem">Speech, Language and Communication Needs</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-visual-timetables-and-routines" class="menuItem">Visual Timetables and Routines</a> <a href="/resources/specialeducationalneeds-sen-ks3-ks4/specialeducationalneeds-sen-ks3-ks4-transition" class="menuItem">Transition</a> <a href="/resources/senior-leadership-team-slt" class="subTitle">Senior Leadership Team</a> </li> 
+         </ul></li>
+       </ul></li> 
+      <li><a href="/resources/english-as-an-additional-language-eal">EAL</a><span>$nbsp;</span>
+       <ul class="tabMenu firstTab" id="tab_menu_1">
+        <li> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/english-as-an-additional-language-eal-writing" class="subTitle topOfCol">Writing</a> <a href="/resources/english-as-an-additional-language-eal-writing/english-as-an-additional-language-eal-writing-grammar" class="menuItem">Grammar</a> <a href="/resources/english-as-an-additional-language-eal-writing/english-as-an-additional-language-eal-writing-sentence-construction" class="menuItem">Sentence Construction</a> <a href="/resources/english-as-an-additional-language-eal-writing/spelling-english-as-an-additional-language-eal-writing" class="menuItem">Spelling</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources" class="subTitle">Dual Language Resources</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/afrikaans-dual-language-resources-eal" class="menuItem">Afrikaans</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-arabic" class="menuItem">Arabic</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-french" class="menuItem">French</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-irish" class="menuItem">Gaeilge</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-german" class="menuItem">German</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/greek-translated-resources-eal" class="menuItem">Greek</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-hindi" class="menuItem">Hindi</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-hungarian" class="menuItem">Hungarian</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-italian" class="menuItem">Italian</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-chinese-mandarin" class="menuItem">Mandarin Chinese</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-polish" class="menuItem topOfCol">Polish</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-portuguese" class="menuItem">Portuguese</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-romanian" class="menuItem">Romanian</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-spanish" class="menuItem">Spanish</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/spanish-latin-dual-language-resources-eal" class="menuItem">Spanish (Latin)</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/english-as-an-additional-language-eal-translated-resources-urdu" class="menuItem">Urdu</a> <a href="/resources/english-as-an-additional-language-eal-translated-resources/british-sign-language-dual-language-resources-eal" class="menuItem">British Sign Language</a> <a href="/resources/eal-classroom-organisation" class="subTitle">Classroom Organisation</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-daily-routine" class="menuItem">Daily Routine</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-graphic-organisers" class="menuItem">Graphic Organisers</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-rules-behaviour" class="menuItem">Rules and Behaviour</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-object-place-labelling" class="menuItem">Object/Place Labelling</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-planning-and-assessment" class="menuItem">Planning and Assessment</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-back-to-school" class="menuItem">Back to School</a> <a href="/resources/eal-classroom-organisation/eal-classroom-organisation-pupil-information" class="menuItem">Pupil Information</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/english-as-an-additional-language-eal-reading" class="subTitle topOfCol">Reading</a> <a href="/resources/english-as-an-additional-language-eal-reading/cvc-words-reading-eal" class="menuItem">CVC Words</a> <a href="/resources/english-as-an-additional-language-eal-reading/english-as-an-additional-language-eal-reading-reading-pictures" class="menuItem">Reading Pictures</a> <a href="/resources/english-as-an-additional-language-eal-reading/eal-stories-traditional-tales" class="menuItem">Traditional Tales</a> <a href="/resources/english-as-an-additional-language-eal-reading/english-as-an-additional-language-eal-reading-sequencing-everyday-events" class="menuItem">Sequencing Everyday Events</a> <a href="/resources/english-as-an-additional-language-eal-reading/eal-stories-storybooks" class="menuItem">Storybooks</a> <a href="/resources/english-as-an-additional-language-eal-reading/read-and-draw-reading-eal" class="menuItem">Read and Draw</a> <a href="/resources/eal-speaking-and-listening" class="subTitle">Speaking and Listening</a> <a href="/resources/eal-speaking-and-listening/eal-speaking-and-listening-sentence-building" class="menuItem">Sentence Building</a> <a href="/resources/eal-speaking-and-listening/eal-speaking-and-listening-pronunciation" class="menuItem">Pronunciation</a> <a href="/resources/eal-speaking-and-listening/eal-speaking-and-listening-photo-packs" class="menuItem">Photo Packs</a> <a href="/resources/eal-speaking-and-listening/eal-speaking-and-listening-audio-resources" class="menuItem">Audio Resources</a> <a href="/resources/eal-speaking-and-listening/eal-speaking-and-listening-concept-maps" class="menuItem">Concept Maps</a> <a href="/resources/eal-pshe" class="subTitle">EAL PSHE</a> <a href="/resources/eal-pshe/eal-pshe-relationships" class="menuItem">Relationships</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/eal-pshe/eal-pshe-healthy-living" class="menuItem topOfCol">Healthy Living</a> <a href="/resources/eal-pshe/eal-pshe-safety" class="menuItem">Safety</a> <a href="/resources/eal-pshe/eal-pshe-circle-time" class="menuItem">Circle Time</a> <a href="/resources/eal-all-about-me" class="subTitle">All About Me</a> <a href="/resources/eal-all-about-me/eal-all-about-me-emotions" class="menuItem">Emotions</a> <a href="/resources/eal-all-about-me/eal-all-about-me-self-introduction" class="menuItem">Self-Introduction Resources</a> <a href="/resources/eal-all-about-me/eal-all-about-me-my-body" class="menuItem">My Body</a> <a href="/resources/eal-non-verbal-resources-communication" class="subTitle">Non Verbal Resources and Communication</a> <a href="/resources/eal-non-verbal-resources-communication/eal-non-verbal-resource-communication-visual-timetable" class="menuItem">Visual Timetables</a> <a href="/resources/eal-non-verbal-resources-communication/eal-non-verbal-resources-communication-word-cards-and-mats" class="menuItem">Word Cards</a> <a href="/resources/eal-non-verbal-resources-communication/eal--non-verbal-resources-communication-communication-fans" class="menuItem">Communication Fans</a> <a href="/resources/eal-non-verbal-resources-communication/eal--non-verbal-resources-communication-word-mats" class="menuItem">Word Mats</a> <a href="/resources/english-as-an-additional-language-eal-topics-at-home" class="subTitle">Topics</a> <a href="/resources/english-as-an-additional-language-eal-topics-at-home/english-as-an-additional-language-eal-topics-at-home-at-home" class="menuItem">Everyday Life</a> <a href="/resources/english-as-an-additional-language-eal-topics-at-home/weather-and-seasons-topics-eal" class="menuItem">Weather and Seasons</a> </li> 
+         </ul> 
+         <ul class="subMenu"> 
+          <li> <a href="/resources/english-as-an-additional-language-eal-topics-at-home/places-topics-eal" class="menuItem topOfCol">Places</a> <a href="/resources/english-as-an-additional-language-eal-topics-at-home/festivals-and-celebrations-topics-eal" class="menuItem">Festivals and Celebrations</a> <a href="/resources/eal-games" class="subTitle">Games</a> <a href="/resources/eal-games/eal-games-language-games" class="menuItem">Language Games</a> <a href="/resources/eal-games/eal-games-pshce-games" class="menuItem">PSHCE Games</a> <a href="/resources/eal-new-eal-starter" class="subTitle">New EAL Starter</a> <a href="/resources/eal-new-eal-starter/eal-transition" class="menuItem">Transition</a> <a href="/resources/eal-new-eal-starter/eal-new-eal-starter-basic-english" class="menuItem">Basic English </a> <a href="/resources/eal-new-eal-starter/eal-new-eal-starter-display" class="menuItem">Display</a> <a href="/resources/eal-useful-eal-packs" class="subTitle">Useful EAL Packs</a> <a href="/resources/eal-country-of-origin" class="subTitle">Country Information</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-china" class="menuItem">China</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-russia" class="menuItem">Russia</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-poland" class="menuItem">Poland</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-lithuania" class="menuItem">Lithuania</a> </li> 
+         </ul> 
+         <ul class="subMenu lastSubMenu"> 
+          <li> <a href="/resources/eal-country-of-origin/eal-country-of-origin-turkey" class="menuItem topOfCol">Turkey</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-uae" class="menuItem">UAE</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-romania" class="menuItem">Romania</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-albania" class="menuItem">Albania</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-somalia" class="menuItem">Somalia</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-slovakia" class="menuItem">Slovakia</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-latvia" class="menuItem">Latvia</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-czech-republic" class="menuItem">Czech Republic</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-india" class="menuItem">India</a> <a href="/resources/eal-country-of-origin/eal-country-of-origin-pakistan" class="menuItem">Pakistan</a> <a href="/resources/eal-songs-and-rhymes" class="subTitle">Songs and rhymes</a> <a href="/resources/english-as-an-additional-language-eal-eal-intervention-resources" class="subTitle">EAL Intervention Programme</a> <a href="/resources/senior-leadership-team-slt" class="subTitle">Senior Leadership Team</a> </li> 
+         </ul></li>
+       </ul></li>
+      <li title="Create your own learning materials with our quick online tool"><a href="/create">Create</a></li>
+      <li class="homeLearning"> <a href="/resources/parents" class="homeLearningLink showMenu">Home Learning</a> 
+       <ul class="homeLearningLinks">
+        <li><a href="/resources/parents">Parents</a></li>
+        <li><a href="/resources/home-education">Home Education</a></li>
+        <li><a href="/resources/childminders">Childminders</a></li>
+       </ul></li> 
+      <li id="packages-menu"> <a href="/products" id="packages-dropdown-button">Resources <i class="fas fa-chevron-down"></i></a> </li>
+     </ul> 
+     <ul id="premiumMiniMenu"> 
+      <li class="premiumMiniMenu"><a href="/premium" class="button button-outline-blue-link">Membership</a> 
+       <ul class="premium_menu"> 
+        <li class="individual"><a href="/premium/individual">
+          <div class="arrowUp arrowUpLeft"></div>Individual</a></li> 
+        <li class="line"></li> 
+        <li class="organisation"><a href="/premium/school">School &amp; Organisations</a></li> 
+       </ul> </li> 
+     </ul> 
+    </div> 
+    <div class="display-none container-fluid w-100 z-index-280" data-cached="true" id="packages-dropdown"> 
+     <div class="position-relative row"> 
+      <div class="border-top-3px-solid-brand-blue-dark bg-aliceblue container l-0 max-w-71-25rem mx-auto pb-3 
+            position-absolute r-0 rounded-bottom shadow-glow w-100" id="packages-dropdown-inner"> 
+       <div class="row"> 
+        <div class="bundle-column col-4 px-4"> 
+         <div class="row"> 
+          <div class="border-bottom-4px-solid-brand- col-12 py-2"> 
+           <h3 class="font-size-1-5rem my-0 position-relative text-brand-black"> <span class="d-block d-xl-inline font-family-robotoregular font-size-0-75rem font-weight-normal"></span> </h3> 
+          </div> 
+         </div> 
+         <div class="h-20rem pt-3 row" data-simplebar data-simplebar-auto-hide="false"> 
+          <div class="col-12"> <a class="pb-3 row" href="/twinklcares"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/cares-1564138463.png" alt="Twinkl TwinklCares Logo" class="bg-teal rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>TwinklCares</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">24/7 Support. Customised resources for you.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/classic-1564138474.png" alt="Twinkl Classic Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Classic</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Discover a huge collection of <b>500,000+</b> teaching materials for birth to 18!</span> 
+            </div> </a> <a class="pb-3 row" href="/create"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/create-1564138487-1578398004.png" alt="Twinkl Create Logo" class="bg-create-orange rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Create</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Personalize your resources with <b>Twinkl Create!</b></span> 
+            </div> </a> <a class="pb-3 row" href="/resources/twinkl-originals"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/originals-1564138641.png" alt="Twinkl Originals Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Originals</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Our <b>original digital story books</b> and teaching materials.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/inclusion-teaching-resources"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/inclusion-1564138581.png" alt="Twinkl Inclusion Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Inclusion</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Supportive materials for children with individualised needs.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/home-early-years/home-early-years-planning-and-assessment"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/foundation-1564138520.png" alt="Twinkl Foundation Logo" class="bg-pink rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Foundation</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Early Childhood <b>planning and assessment materials</b> to innovate and inspire.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/planit-primary-teaching-resources"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/planit-1564138669.png" alt="Twinkl PlanIt Logo" class="bg-planit-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>PlanIt</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Our <b>award winning scheme of work</b>, developed to provide engaging lesson and unit plans.</span> 
+            </div> </a> <a class="pb-3 row" href="/imagine"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/imagine-1564138563.png" alt="Twinkl Imagine Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Imagine</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">A daily photo to enhance your teaching with inspiring activities for a wide range of themes</span> 
+            </div> </a> <a class="pb-3 row" href="/boost"> 
+            <div class="l-5px mr-0 overhang-ribbon overhang-xsmall px-1 top-minus-10px ">
+              * New! * 
+            </div> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/boost-1564138448.png" alt="Twinkl Boost Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Boost</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five"><p>Same-Day Maths interventions, 1:1 60-Second Reading sessions, handwriting interventions and <strong>SATs</strong> and Phonics Screening Survival tools.</p></span> 
+            </div> </a> <a class="pb-3 row" href="/resources/twinkl-handwriting-resources"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/handwriting-1564138549.png" alt="Twinkl Handwriting Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Handwriting</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Twinkl's <b>Handwriting Scheme.</b> - a revolutionary approach to handwriting.</span> 
+            </div> </a> <a class="pb-3 row" href="/newsroom"> 
+            <div class="l-5px mr-0 overhang-ribbon overhang-xsmall px-1 top-minus-10px ">
+              * New! * 
+            </div> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/newsroom-1564138622.png" alt="Twinkl Newsroom Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Newsroom</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">A trusted news feed for young readers, with ready-to-teach National Curriculum resources.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/twinkl-move"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/move-1564138606.png" alt="Twinkl Move Logo" class="bg-green rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Move</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">A complete collection of <b>Physical Education planning</b> for ages 0-11.</span> 
+            </div> </a> <a class="pb-3 row" href="/go"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/go-1564138534.png" alt="Twinkl Go Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Go</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five"><b>Interactive resources</b> for a computer, tablet or mobile.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/twinkl-phonics"> 
+            <div class="l-5px mr-0 overhang-ribbon overhang-xsmall px-1 top-minus-10px ">
+              * New! * 
+            </div> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/phonics-1564149098.png" alt="Twinkl Phonics Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Phonics</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Exclusive! Sample week 1, levels 2 to 6 of Twinkl Phonics for schools.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/twinkl-life"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/life-1564138593.png" alt="Twinkl Life Logo" class="bg-teal rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Life</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Create an environment that puts wellbeing first.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/keystage3-ks3"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/beyond-1576074054.png" alt="Twinkl Beyond English Logo" class="bg-beyond-red rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Beyond English</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">English language planning and teaching materials for ages 11-18.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/keystage3-ks3"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/beyond-1576074072.png" alt="Twinkl Beyond Maths Logo" class="bg-beyond-cerulean rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Beyond Maths</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Math planning and teaching materials for ages 11-18.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/keystage3-ks3"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/beyond-1576074088.png" alt="Twinkl Beyond Science Logo" class="bg-beyond-green rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Beyond Science</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Physics, chemistry and biology planning and teaching materials for ages 11-18.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/daily-debate"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/beyond-1576074031.png" alt="Twinkl Beyond Debate Logo" class="bg-orange-strong rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>Beyond Debate</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Daily discussion topics and accompanying materials, perfect for form time.</span> 
+            </div> </a> <a class="pb-3 row" href="/resources/esl-resources"> 
+            <div class="col-3">
+             <img src="https://images.twinkl.co.uk/tw1n/image/private/t_177/image_repo/packages/twinkl.png" alt="Twinkl ESL/TEFL Logo" class="bg-logo-blue rounded delayed-image-load-off max-w-100">
+            </div> 
+            <div class="col-9 font-size-1rem text-brand-black position-relative"> <strong>ESL/TEFL</strong> 
+             <br> <span class="d-block font-family-robotoregular font-size-0-75rem font-weight-normal line-h-1-25em text-eighty-five">Resources to support teaching English as a second language.</span> 
+            </div> </a> 
+          </div> 
+         </div> 
+        </div><!-- - bundle-column --> 
+       </div> 
+      </div> 
+     </div> 
+    </div>
+    <div id="" class="frontPage"></div><!-- #page_content --> 
+   </div><!-- #main --> 
+  </div><!-- #container --> <!-- d-none d-lg-block --> 
+  <div id="article-nav" class="bg-blog-blue container-fluid position-fixed slide-element-in-on-scroll z-index-270 p-0 d-sm-block" data-hide-initial="true" data-clear-id="sticky-header" data-clear-class="null" data-scroll-divide="2" data-view="blog"> 
+   <div class="row"> 
+    <div class="col-sm-12 col-md-6 align-items-center d-flex py-2"> 
+     <p class="font-size-0-875rem my-auto m-l-1"><a class="hover-text-white text-white-0-75" href="/">Homepage</a> <i class="fas fa-chevron-right text-white-0-75"></i> <a class="hover-text-white text-white-0-75" href="/blog">Twinkl Education Blog</a> <i class="fas fa-chevron-right text-white-0-75"></i> <a class="hover-text-white text-white-0-75" href="/blog/primary">Primary</a> <i class="fas fa-chevron-right text-white-0-75"></i> <strong class="text-white">Twinkl's Top US Education Blogs</strong></p> 
+    </div> 
+    <div class="col-md-6 text-right hidden-sm-down"> 
+     <ul class="d-inline-block li-d-inline-block list-style-none my-0 py-2"> 
+      <li id="article-share-text" class="font-size-0-875rem text-white">Share this blog post:</li> 
+      <li><a href="http://twitter.com/intent/tweet?status=Twinkl%27s+Top+US+Education+Blogshttp%3A%2F%2Fwww.twinkl.com%2Fblog%2Ftwinkls-top-us-education-blogs+%40TwinklResources" title="Share on Twitter"><i class="d-block hover-text-white p-2 fab fa-twitter text-white-0-75"></i></a></li> 
+      <li><a href="http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.twinkl.com%2Fblog%2Ftwinkls-top-us-education-blogs&amp;title=Twinkl%27s+Top+US+Education+Blogs" title="Share on Facebook"><i class="d-block hover-text-white p-2 fab fa-facebook-f text-white-0-75"></i></a></li> 
+      <li><a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.twinkl.com%2Fblog%2Ftwinkls-top-us-education-blogs&amp;description=Twinkl%27s+Top+US+Education+Blogs" title="Share on Pinterest"><i class="d-block hover-text-white p-2 fab fa-pinterest-p text-white-0-75"></i></a></li> 
+      <li><a class="border-1px-solid-white-0-75 d-block font-size-0-875rem hover-border-1px-solid-white hover-text-white mx-2 px-3 py-2 rounded text-white-0-75" href="/blog/how-to-help-my-child-overcome-first-day-nerves-at-primary-school"><i class="fas fa-arrow-left" aria-hidden="true"></i> Prev</a></li> 
+      <li><a class="border-1px-solid-white-0-75 d-block font-size-0-875rem hover-border-1px-solid-white hover-text-white mx-2 px-3 py-2 rounded text-white-0-75" href="/blog/school-summer-holiday-days-out-keeping-kids-busy-and-active">Next <i class="fas fa-arrow-right" aria-hidden="true"></i></a></li> 
+     </ul> 
+    </div> 
+   </div> 
+  </div>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Twinkl's Top US Education Blogs",
+  "image": "https://images.twinkl.co.uk/tw1n/image/private/s--xPc0xfmc--/c_fill,g_face:auto,h_430,w_1600/q_auto:eco/v1/u/blog/statue-of-liberty-267948-1920-1565624339.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Will Bond",
+     "sameAs": [
+           "www.twinkl.ca/blog/author/will-bond"
+          ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Twinkl",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://images.twinkl.co.uk/tr/raw/upload/t/images/icons/twinkl_logo_cropped_300px.png",
+      "width": 75,
+      "height": 48
+    }
+  },
+  "datePublished": "2019-08-13"
+}
+</script> 
+  <div class="container-fluid headers-brand-black position-relative" id="blog"> 
+   <div class="l-0 position-absolute r-0"> 
+    <div class="bg-position-center bg-repeat-no bg-size-cover bg-blue min-h-15rem min-h-xl-18rem" style="background-image:url(https://images.twinkl.co.uk/tw1n/image/private/s--xPc0xfmc--/c_fill,g_face:auto,h_430,w_1600/q_auto:eco/v1/u/blog/statue-of-liberty-267948-1920-1565624339.jpg)"></div> 
+   </div><!-- .col-12 --> 
+  </div><!-- .row --> 
+  <div class="row"> 
+   <div class="container blog-wrapper"> 
+    <div class="row"> 
+     <div class="col-3 d-none d-lg-block pt-lg-5rem pt-xl-7rem"> <!-- Does this blog have an author set? --> 
+      <div class="h-100 mx-0 row"> 
+       <div class="align-self-flex-start col mb-2rem position-sticky top-8rem"> 
+        <div class="bg-white rounded-right row"> 
+         <div class="col-4 my-3 text-right"> 
+          <div class="position-relative"> 
+           <img alt="Will Bond" class="max-w-100 rounded-circle" src="https://images.twinkl.co.uk/tw1n/image/private/t_630/u/blog/me1-1564139719.png" title="Will Bond"> 
+           <div class="bg-blue border-radius-50 b-0 h-1-5rem position-absolute r-0 text-center w-1-5rem">
+            <i class="fas fa-check mt-1 text-white" aria-hidden="true"></i>
+           </div> 
+          </div> 
+         </div><!-- - .col-4--> 
+         <div class="col-8"> 
+          <h4 class="font-size-0-875rem mb-2 mt-3"><a href="/blog/author/will-bond">Will Bond</a></h4> 
+          <p class="font-size-0-875rem mb-2">Content Writer </p> 
+          <p class="font-size-0-875rem"><a class="font-italic" href="/blog/author/will-bond">View more by this author</a></p> 
+         </div><!-- - .col-8 --> 
+        </div><!-- - .row --> 
+       </div><!-- .col --> 
+      </div><!-- - .row --> 
+     </div><!-- - .col-3 --> 
+     <div id="blog-content" class="bg-white col-12 col-lg-6 mt-5rem rounded-top"> 
+      <div class="row"> 
+       <div class="col pt-4 text-center"> 
+        <h1>Twinkl's Top US Education Blogs</h1> 
+       </div><!-- - .col --> 
+      </div><!-- - .row --> 
+      <div class="row"> 
+       <div class="col-6"> 
+        <p><i class="fas fa-clock"></i> 9 min</p> 
+       </div><!-- - .col-6 --> 
+       <div class="col-6 text-right"> 
+        <div data-offset="100" data-scroll-to="true" data-speed="500" data-target="#comments_container" data-template="resource" id="average_rating" title="Not yet rated">
+         <div class="starRating">
+          <div class="starOff"></div>
+          <div class="starOff"></div>
+          <div class="starOff"></div>
+          <div class="starOff"></div>
+          <div class="starOff"></div>
+         </div>
+        </div> 
+       </div><!-- - .col-6 --> 
+      </div><!-- - .row --> 
+      <div class="row"> 
+       <div class="col py-4 text-center"> 
+        <p class="position-relative split-title-lines z-index-1"> <span class="bg-white d-inline-block px-4">13 August 19</span> </p> 
+       </div><!-- - .col --> 
+      </div><!-- - .row --> 
+      <div class="row"> 
+       <div class="col"> 
+        <p>There is an incredible amount of brilliant education blogging content coming out of the US. From educators, to parents, to commentators and beyond, there is an incredibly wide array of voices motivated to share their knowledge, opinion and insights to the wider education community.</p> 
+       </div><!-- - .col --> 
+      </div><!-- - .row --> 
+      <div class="row"> 
+       <div class="col-12 text-center py-4"> 
+        <p class="position-relative split-title-lines text-center z-index-1 w-100"> </p> 
+       </div><!-- - .col-12 .col-lg-6 --> 
+      </div><!-- - .row --> 
+      <div class="row"> 
+       <div class="col img-max-width-100 pb-5"> 
+        <p>We always love seeing education bloggers’ excellent teaching tips, opinions, stories and more online! With such great blog content being created, it’s only fair that these sites receive the recognition they deserve. So without further ado, here’s our list of best US education blogs:</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="http://esheninger.blogspot.com/" target="_blank" rel="noopener">A Principal's Reflections </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/a-principals-reflections-1565624935.png" alt="a principals reflections" width="177">“Eric is a Senior Fellow and Thought Leader on Digital Leadership &amp; Learning with the International Center for Leadership in Education (ICLE). Eric's blog is a blend of research, ideas, and strategies that can help educators transform teaching, learning, and leadership. Many of his writings directly focus on his work with schools across the world to improve outcomes. Learn about him and his work at ericsheninger.com.”&nbsp;</p> 
+        <h2>&nbsp;</h2> 
+        <h2><a href="https://www.emergingedtech.com/" target="_blank" rel="noopener">Emerging EdTech </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/emerging-edtech-1565624983.png" alt="emerging edtech" width="177">“Kelly Walsh joined The College of Westchester in 2008, where he works as Chief Information Officer and teaches as an Assistant Professor. In 2009, Walsh started the education technology web site EmergingEdTech.com, where he and guest writers explore resources, techniques and concepts focused on leveraging digital technologies to support student success and teaching. Walsh also writes regularly for University Business magazine. In May of 2019, Walsh was recognized as a “Top 30 Higher Education IT Influencer” by EdTechMagazine.com.&nbsp; Walsh’s work is recognized often in the press and online.”</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="https://shakeuplearning.com/blog/" target="_blank" rel="noopener">Shake Up Learning </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/shake-up-learning-1565625022.png" alt="shake up learning" width="177">“Kasey Bell is a former middle school teacher turned award-winning digital learning consultant, international speaker, author, blogger and podcaster with a Texas-sized passion for technology and learning. Kasey is the author of the Shake Up Learning blog and book, host of The Shake Up Learning Show Podcast and co-host of The Google Teacher Tribe Podcast. As a skillful facilitator, Google Certified Innovator, and Google Certified Trainer, Kasey has led a variety of digital learning workshops across the globe and helped thousands of educators to transform their classrooms!”</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="http://ditchthattextbook.com/" target="_blank" rel="noopener">Ditch That Textbook </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/ditch-that-textbook-1565625078.png" alt="Ditch that textbook" width="177">“The Ditch That Textbook blog provides tons of practical ideas for using technology in the classroom in meaningful ways. It shares plug-and-play ideas using digital tools like G Suite (Slides, Docs, Drawings), Flipgrid, Pear Deck and more. Tech in the classroom is only as good as how you use it. That's why we infuse our teaching ideas with pedagogy, best practices, brain science and more. You'll get the how-to's as well as they why's for new ideas in the classroom. Plus, when you sign up for the email newsletter, you'll get free ebooks including "101 Practical Ways to Ditch That Textbook." Ditch That Textbook is run by Matt Miller, author of three books: Ditch That Textbook, Ditch That Homework, and Don't Ditch That Tech.”&nbsp;</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="https://catlintucker.com/">Catlin Tucker </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/caitlin-tucker-1565625119.png" alt="Caitlin Tucker" width="177">“Catlin Tucker is a Google Certified Innovator, bestselling author, international trainer, and keynote speaker. She was named Teacher of the Year in 2010 in Sonoma County where she taught for 16 years. Catlin’s books Blended Learning in Grades 4-12 and Blended Learning In Action are bestsellers. Corwin published Catlin's newest book Power Up Blended Learning in fall 2018 and her newest book, Partner with Students and Achieve Balance with Blended Learning will be published fall 2019. Catlin's blog is designed to support teachers using technology and blended learning models with the goal of placing students at the center of learning.”</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="https://www.learnersedge.com/blog" target="_blank" rel="noopener">Learners Edge </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/learners-edge-1565625172.png" alt="learners edge" width="177">“The Learners Edge Chalk Blog focuses on bringing applicable, relevant advice and strategies educators can implement in their classroom right away. Written by teachers who have been in the classroom, we welcome all teachers to join The Chalk Blog community – share insights and learn from fellow educators around the globe! Learners Edge is passionately committed to providing teachers with the kind of continuing education coursework, materials, and tools that will help them succeed in the classroom and in their careers.”</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="https://tskinnersbec.edublogs.org/" target="_blank" rel="noopener">Tammy Skinner </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/tammy-skinner-1565625217.png" alt="Tammy Skinner" width="177">“I teach chemistry, honors chemistry, and honors physics at Northpoint Christian School in Southaven, MS. It all began in 2008 with a huge challenge my students were facing - students gone on mission trips, students out with the flu, students in tournaments, or students who missed the concepts in class and just needed to hear the lesson again. I use it for posting videos of daily lectures, reviews, and help sessions plus it’s a place where my students can access the weekly syllabus, assignments, rubrics, project information, interactive websites, tutorials and more. They also use the comments to ask me (or their classmates) questions they forgot or might have been hesitant to ask in class.”&nbsp;</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="http://educationaltechnologyguy.blogspot.com/" target="_blank" rel="noopener">Educational Technology Guy </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/educational-technology-guy-1565625258.png" alt="Educational Technology Guy" width="177">“David Andrade is a Senior K-12 Education Strategist for CDW-G. An experienced engineer, educator and school district CIO, he works with school districts to assist them with resources, strategic planning and advice for selecting and implementing technology solutions to help them improve teaching and learning. This includes district level vision and goals, curriculum and pedagogy, learning space design, platforms, devices and classroom lessons. His Educational Technology Guy blog is a place to learn about free resources for teachers, educational ideas and tips, educational topics, Personal Learning Networks, Project Based Learning, Google for Education, Evernote, Discovery Education and more.”&nbsp;</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="https://www.smartclassroommanagement.com/" target="_blank" rel="noopener">Smart Classroom Management </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/smart-classroom-management-1565625299.png" alt="smart classroom management" width="177">“Smart Classroom Management was founded in 2009 by Michael Linsin. It's over 500 free articles and resources represent a simplified approach to classroom management that very effectively causes students to be intrinsically motivated to listen, learn, and behave. At the same time, the strategies are designed to not only be best for students, and their long-term social and academic future, but also for teachers and their peace and enjoyment of the job.”</p> 
+        <p>&nbsp;</p> 
+        <h2><a href="http://www.trevormuir.com/new-blog-avenue" target="_blank" rel="noopener">Trevor Muir </a></h2> 
+        <p><img class="float_left" src="https://images.twinkl.co.uk/tw1n/image/private/t_177/website/uploaded/trevor-muir-1565625343.png" alt="trevor muir" width="177">“Trevor is a teacher, author, international speaker, and project based learning expert. He is the author of The Epic Classroom: How to Boost Engagement, Make Learning Memorable, and Transform Lives, a book about using the power of story to make learning engaging and unforgettable. Trevor writes articles and creates videos for fellow teachers that have been viewed over 25 million times on Facebook. Trevor’s blog is about inspiring teachers to push the educational boundaries and explore the different ways that they can engage their students and not burn out while doing so. From sharing techniques for successful student collaboration to giving ideas on how to inspire even the most challenging students, Trevor’s blog is about making learning authentic, and finding ways to thrive as a teacher as well as helping students thrive themselves.”</p> 
+        <p>&nbsp;</p> 
+        <p><span style="font-family: robotobold, Arial, Helvetica, sans-serif;"><span style="color: #e34d7b;"><span style="color: #23a7f9;">97% of teachers agree that Twinkl improves their work/life balance. Inspire your students, improve your wellbeing, and regain control of your time with Twinkl.</span></span></span></p> 
+        <p><span style="font-family: robotobold, Arial, Helvetica, sans-serif;"><span style="color: #e34d7b;">Sign up for a FREE account&nbsp;<a href="https://www.twinkl.co.uk/sign-up" target="_blank" rel="noopener">here.&nbsp;&nbsp;</a></span></span></p> 
+        <p>&nbsp;</p> 
+        <h2>Don’t stop there!</h2> 
+        <p>Our&nbsp;<a href="https://www.twinkl.co.uk/blog" target="_blank" rel="noopener">blog</a>&nbsp;is filled with useful advice, top tips, and expert guides.&nbsp;</p> 
+        <p><a href="https://www.twinkl.co.uk/blog/top-10-end-of-year-gift-ideas-for-your-class" target="_blank" rel="noopener">Top 10 End of Year Gift Ideas for Your Class</a></p> 
+        <p><a href="https://www.twinkl.co.uk/blog/how-to-get-a-free-trial-of-twinkl-go" target="_blank" rel="noopener">How To Get a Free Trial of Twinkl Go</a></p> 
+        <p><a href="https://www.twinkl.co.uk/blog/lovely-assembly-ideas" target="_blank" rel="noopener">Have You Tried Our Lovely Assembly Idea Powerpoints Yet?</a></p> 
+        <p><a href="https://www.twinkl.co.uk/blog/how-to-make-teaching-number-bonds-fun" target="_blank" rel="noopener">How Can You Make Teaching Number Bonds Fun?</a></p> 
+        <p><a href="https://www.twinkl.co.uk/blog/introducing-twinkl-planit-spelling-" target="_blank" rel="noopener">Introducing Twinkl PlanIt SPELLING!</a></p> 
+        <p>&nbsp;</p> 
+       </div><!-- - .col --> 
+      </div><!-- - .row --> 
+     </div><!-- - .col-12 .col-lg-6 --> 
+    </div><!-- - .row --> 
+    <div class="row"> 
+     <div class="col-12 col-lg-6 div-mx-auto mx-lg-auto text-center"> <!--<div class="addthis_sharing_toolbox"></div>--> 
+      <script type="text/javascript">
+			var addthis_share = {
+				email_vars: { 
+						resourceImage: "http://images.twinkl.co.uk/image/upload/twinkl_logo_flat_blue.gif", 
+						resourceTitle: "",
+						fromUser: "Someone"
+				},
+				email_template: "Social_Send_Email"
+			}								
+		</script>
+      <div class="addthis_toolbox addthis_default_style addthis_32x32_style" id="share"> <a title="Send it" class="addthis_button_email"> <!--<span class="imgOverlay"></span>--> <!--<img src="https://images.twinkl.co.uk/tr/raw/upload/t/images/social/send-circular.png" height="30" title="Send it" alt="Send it"/>--> </a><a title="Pin it" class="addthis_button_pinterest_share" width="62" height="30" pi:pinit:media="http://images.twinkl.co.uk/image/upload/twinkl_logo_flat_blue.gif" pi:pinit:url="http://www.twinkl.com/blog/twinkls-top-us-education-blogs" pi:pinit:layout="horizontal"> <!--<span class="imgOverlay"></span>--> <!--<img src="https://images.twinkl.co.uk/tr/raw/upload/t/images/social/pintrest-circular.png" height="30" title="Pin it" alt="Pin it"/>--> </a><a title="Facebook Share" class="addthis_button_facebook"> <!--<span class="imgOverlay"></span>--> <!--<img src="https://images.twinkl.co.uk/tr/raw/upload/t/images/social/facebook-circular.png"  height="30" title="Facebook Share" alt="Facebook Share"/>--> </a> <a title="More sharing options" class="addthis_button_compact"> <!--<span class="imgOverlay"></span>--> <!--<img src="https://images.twinkl.co.uk/tr/raw/upload/t/images/social/more-circular.png"  height="30" title="More sharing options" alt="More sharing options"/>--> </a> 
+      </div> 
+     </div><!-- - .col --> 
+    </div><!-- - .row --> 
+   </div><!-- - .container --> 
+  </div><!-- - .row --> <!-- Does the author have a biography? --> 
+  <div class="row"> 
+   <div class="container py-5"> 
+    <div class="mx-0 row"> 
+     <div class="border-1px-solid-gray-border col-12 col-lg-6 mx-auto py-3 rounded shadow"> 
+      <div class="col-4 col-sm-3 my-3 text-center text-md-right"> 
+       <div class="position-relative"> 
+        <img alt="Will Bond" class="max-w-100 rounded-circle" src="https://images.twinkl.co.uk/tw1n/image/private/t_630/u/blog/me1-1564139719.png" title="Will Bond"> 
+        <div class="bg-blue border-radius-50 b-0 h-1-5rem position-absolute r-0 text-center w-1-5rem"> <i class="fas fa-check mt-1 text-white" aria-hidden="true"></i> 
+        </div> 
+       </div> 
+      </div><!-- - .col-12 .col-lg-3 --> 
+      <div class="col-12 col-md-9"> 
+       <h4 class="d-lg-none font-size-1-125rem mb-2 mt-3"><a href="/blog/author/will-bond">Will Bond</a></h4> 
+       <p class="d-lg-none font-size-1-125rem mb-2">Content Writer </p> 
+       <p class="font-size-1-125rem mb-2"></p>
+       <p><span style="color: #263238; font-family: Roboto, sans-serif; font-size: 13px;">Will is a writer for the Twinkl blog who's always keen to hear and include others' opinions and expertise into his posts. Outside of Twinkl, you'll most likely find him writing about his love of gaming or hip-hop.&nbsp;</span></p>
+       <p></p> 
+       <p class="font-size-1-125rem"><a class="font-italic" href="/blog/author/will-bond">View more by this author</a></p> 
+      </div><!-- - .col-12 col-lg-9 --> 
+     </div><!-- - .col-12 .col-lg-6 --> 
+    </div><!-- - .row --> 
+   </div><!-- - .container --> 
+  </div><!-- - .row --> <!-- Is there a thought title set to trigger the social share? --> 
+  <div class="row"> <!--"popup-bottom-right slideInRight hide"--> 
+   <div id="mailingListSignUpContainer" class="popup-bottom-right slideInRight hide" data-element-slide> 
+    <div class="mailingListText">
+     Get teaching ideas and inspiration - all in one weekly newsletter!
+    </div> <!--<form method='POST' action='<?/*= $action */?>' data-success='hide'>
+        <input type='hidden' id='csrf' value='<?/*= $token */?>'>
+        <div class='form-block'>
+            <input type='email' name='mailing_list_sign_up_email' id='mailing_list_sign_up_email'
+                   placeholder='example@email.com' required>
+            <input type='hidden' name='mailing_list_sign_up_id' id='mailing_list_sign_up_id' value=<?/*= $id */?>>
+            <input type='hidden' name='current_page' id='current_page' value='<?/*= $url */?>'>
+            <input type='submit' class='greenOutlineButton' id='submit_email' value="I'm In">
+        </div>
+        <?/*= $message */?>
+    </form>--> 
+    <form method="POST" id="mailing_sign_up_form" action="/mailing-list/save-user-email" class="form-handle " data-success="replace" data-form-handler>
+     <input type="hidden" id="segment_id" name="segment_id" value="5">
+     <input type="hidden" id="csrf" value="907059c7213be9c4c8ce39326902a7ae004d708102bf23fd25f1946f9d62984f">
+     <div class="form-group form-block m-b-1 "> 
+      <input type="email" id="email" name="email" class="form-control mailing_list_sign_up_email" data-hint="" data-clear="change" value="" placeholder="example@example.com" required> 
+     </div>
+     <div class="form-footer form-group "> <button type="submit" id="submit_email" name="submit_email" class="greenOutlineButton">I'm in</button> 
+     </div><span class="replace mailingListText"></span>
+    </form> <button type="button" class="close popup-close">×</button> 
+   </div> 
+  </div> 
+  <div class="row"> 
+   <div class="container"> 
+    <div class="row"> 
+     <div class="col-12 col-lg-6 mx-lg-auto py-4"> 
+      <div id="comments_container" data-type="blog" class="clearfix"> 
+       <input type="hidden" name="comment_type" id="comment_type" value="blog"> 
+       <input type="hidden" name="comment_item_id" id="comment_item_id" value="2681"> 
+       <div class="comment"> 
+        <div style="text-align:left;margin-bottom: 20px;">
+         <a href="/sign-in">Sign in</a> to leave a review
+        </div> <!--<textarea name="comment" id="comment" class='faded' disabled="disabled">Join Twinkl or Sign In to leave a review.</textarea>--> <!--<a href='/sign-in' id='sign_in_to_comment' class="green button">Sign in</a>
+				<a href='/sign-up' id='join_to_comment' class="button-outline-blue-link">Join</a>-->
+       </div>
+       <ul id="comments-no-comment"> 
+       </ul> 
+      </div> 
+     </div><!-- - .col --> 
+    </div><!-- - .row --> 
+    <div class="row"> 
+     <div class="col-12 col-lg-6 mx-lg-auto"> 
+      <p class="position-relative split-title-lines text-center z-index-1"></p> 
+     </div><!-- - .col-12 .col-lg-6 --> 
+    </div><!-- - .row --> 
+   </div><!-- - .container --> 
+  </div><!-- - .row --> 
+  <div class="bg-whitesmoke pb-5 row"> 
+   <div class="container"> <!-- Does the author have other articles? --> 
+    <div class="row"> 
+     <div class="col-12 pt-4"> 
+      <h3><a href="/blog/author/will-bond">More From This Author</a></h3> 
+     </div> 
+    </div> <!--<div class="clearfix"></div>--> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="col-12 col-sm-6 col-md-3 pb-3"> 
+       <div class="bg-white h-100 mx-0 row" href="/blog/the-best-educational-podcasts"> <a class="d-block rounded shadow-on-hover w-100" href="/blog/the-best-educational-podcasts"> 
+         <div class="bg-blue bg-position-center bg-repeat-no bg-size-cover col-12 min-h-7rem" style="background-image:url(https://images.twinkl.co.uk/tw1n/image/private/t_630/u/blog/education-podcasts-1569239313.jpg)"> 
+         </div> 
+         <div class="col-12 pt-2 px-2"> <span class="d-block font-size-0-875rem mb-2">The Best Education Podcasts</span> 
+         </div> 
+         <div class="col-12"> 
+          <div class="mx-0 row"> 
+           <div class="border-top-2px-solid-gray-border col-12 px-0"></div> 
+          </div> 
+         </div> </a> 
+       </div> 
+      </div> 
+      <div class="col-12 col-sm-6 col-md-3 pb-3"> 
+       <div class="bg-white h-100 mx-0 row" href="/blog/twinkls-top-sen-blogs"> <a class="d-block rounded shadow-on-hover w-100" href="/blog/twinkls-top-sen-blogs"> 
+         <div class="bg-blue bg-position-center bg-repeat-no bg-size-cover col-12 min-h-7rem" style="background-image:url(https://images.twinkl.co.uk/tw1n/image/private/t_630/u/blog/books-1149959-1920-1568043441.jpg)"> 
+         </div> 
+         <div class="col-12 pt-2 px-2"> <span class="d-block font-size-0-875rem mb-2">Twinkl's Top SEN Blogs</span> 
+         </div> 
+         <div class="col-12"> 
+          <div class="mx-0 row"> 
+           <div class="border-top-2px-solid-gray-border col-12 px-0"></div> 
+          </div> 
+         </div> </a> 
+       </div> 
+      </div> 
+      <div class="col-12 col-sm-6 col-md-3 pb-3"> 
+       <div class="bg-white h-100 mx-0 row" href="/blog/twinkls-top-canadian-education-blogs"> <a class="d-block rounded shadow-on-hover w-100" href="/blog/twinkls-top-canadian-education-blogs"> 
+         <div class="bg-blue bg-position-center bg-repeat-no bg-size-cover col-12 min-h-7rem" style="background-image:url(https://images.twinkl.co.uk/tw1n/image/private/t_630/u/blog/education-blogs-1568042381.jpg)"> 
+         </div> 
+         <div class="col-12 pt-2 px-2"> <span class="d-block font-size-0-875rem mb-2">Twinkl’s Top Canadian Education Blogs</span> 
+         </div> 
+         <div class="col-12"> 
+          <div class="mx-0 row"> 
+           <div class="border-top-2px-solid-gray-border col-12 px-0"></div> 
+          </div> 
+         </div> </a> 
+       </div> 
+      </div> 
+      <div class="col-12 col-sm-6 col-md-3 pb-3"> 
+       <div class="bg-white h-100 mx-0 row" href="/blog/30-education-influencers-you-need-to-follow"> <a class="d-block rounded shadow-on-hover w-100" href="/blog/30-education-influencers-you-need-to-follow"> 
+         <div class="bg-blue bg-position-center bg-repeat-no bg-size-cover col-12 min-h-7rem" style="background-image:url(https://images.twinkl.co.uk/tw1n/image/private/t_630/u/blog/education-influencers-1566830808.jpg)"> 
+         </div> 
+         <div class="col-12 pt-2 px-2"> <span class="d-block font-size-0-875rem mb-2">30 Education Influencers You Need To Follow</span> 
+         </div> 
+         <div class="col-12"> 
+          <div class="mx-0 row"> 
+           <div class="border-top-2px-solid-gray-border col-12 px-0"></div> 
+          </div> 
+         </div> </a> 
+       </div> 
+      </div> 
+     </div><!-- - .row --> 
+    </div> 
+   </div><!-- - .container --> 
+  </div><!-- - .row --> <!-- - .container-fluid#blog -->     
+  <div id="footer" class="">
+   <div class="container"> 
+    <div id="footer_inner" class="row">
+     <div class="col-lg-2" id="about-us-footer">
+      <div class="heading">
+       <span>Let us help you</span>
+      </div>
+      <ul> 
+       <li><a href="/help">Help &amp; FAQs</a></li> 
+       <li><a href="/contact-us">Contact</a></li> 
+       <li><a href="/premium">Individual Memberships</a></li> 
+       <li><a href="/premium/school">School Memberships</a></li> 
+       <li><a href="/events">Twinkl Teach Events</a></li> 
+       <li><a href="/wellbeing">Wellbeing Hub</a></li> 
+       <li><a href="/careers">Careers</a></li>
+      </ul> 
+     </div> 
+     <div class="col-lg-2"> 
+      <div class="heading">
+       <span>Resources</span>
+      </div> 
+      <ul> 
+       <li><a href="/teaching-resources">Primary Resources</a></li> 
+       <li><a href="/resources/home-early-years">EYFS Teaching Resources</a></li> 
+       <li><a href="/resources">KS1 Teaching Resources</a></li> 
+       <li><a href="/resources/keystage2-ks2">KS2 Teaching Resources</a></li> 
+       <li><a href="/resources/keystage3-ks3">KS3 &amp; GCSE Teaching Resources</a></li> 
+       <li><a href="/resources/specialeducationalneeds-sen">SEN Teaching Resources</a></li> 
+       <li><a href="/resources/english-as-an-additional-language-eal">EAL Teaching Resources</a></li> 
+       <li><a href="/resources/parents/parents-home-education">Home Education</a></li> 
+       <li><a href="/resources/childminders">Childminders</a></li> 
+       <li><a href="/resources/parents">Parents</a></li> 
+       <li><a href="/resources/planit-primary-teaching-resources">Lesson Plans</a></li> 
+       <li><a href="/resources/twinkl-originals">Twinkl Original Books</a></li> 
+       <li><a href="/book-club">Twinkl Book Club</a></li> 
+       <li><a href="/resources/twinkl-handwriting-resources">Handwriting Schemes</a></li> 
+       <li><a href="/go">Interactive Resources &amp; Games</a></li> 
+       <li><a href="/resources/adult-education">Dementia Support</a></li> 
+       <li><a href="/imagine">Morning Starter Activities</a></li> 
+       <li><a href="/resources/home-early-years/home-early-years-planning-and-assessment">EYFS Planning Materials</a></li> 
+       <li><a href="/newsroom">Children's News</a></li> 
+       <li><a href="/resources/twinkl-move">PE Planning</a></li> 
+       <li><a href="/resources/level-2-twinkl-phonics">Phonics Schemes of Work</a></li> 
+       <li><a href="/resources/twinkl-life">PSHE, RSE &amp; Wellbeing</a></li> 
+       <li><a href="/resources/esl-resources">TEFL &amp; ESL Resources</a></li> 
+       <li><a href="/resources/trainee-teachers">Trainee Teacher Resources</a></li> 
+       <li><a href="/resources/senior-leadership-team-slt">Senior Leadership Team Resources</a></li> 
+      </ul> 
+     </div> 
+     <div class="col-lg-2" id="footer-curriculum-links"> 
+      <div class="heading">
+       <span>Curriculum</span>
+      </div> 
+      <ul> 
+       <li><a href="/resources/international-schools">International School Curriculums</a></li> 
+       <li class="region"><strong>Europe</strong></li>
+       <li><a href="/resources/new-2014-curriculum-resources">English National Curriculum</a></li> 
+       <li><a href="/resources/curriculum-for-excellence">Curriculum For Excellence (CfE)</a></li> 
+       <li><a href="/resources/adnoddau-cymraeg-welsh-resources">Adnoddau Cymraeg / Welsh Resources</a></li> 
+       <li><a href="/resources/northern-ireland-resources">Northern Irish Curriculum</a></li> 
+       <li><a href="https://www.twinkl.ie/resources/roi-resources">Irish Curriculum</a></li> 
+       <li><a href="https://www.twinkl.es/resources/curriculo-espanol-spanish-curriculum">Currículo español</a></li> 
+       <li><a href="https://www.twinkl.fr/resources/programmes-scolaires-francais-french-curriculum">Programmes scolaires français</a></li> 
+       <li><a href="https://www.twinkl.de/resources/materialien-auf-deutsch-resources">Materialien auf Deutsch</a></li> 
+       <li><a href="/resources/risorse-in-italiano">Risorse in Italiano</a></li> 
+       <li><a href="https://www.twinkl.pl/resources/polska-materialy-edukacyjne-dla-szkol-podstawowych">Polska Materiały edukacyjne</a></li> 
+       <li><a href="https://www.twinkl.ro/resources/romania-teaching-resources">Materiale didactice în limba Română</a></li> 
+       <li><a href="/resources/greece-resources">Ελληνικό εκπαιδευτικό υλικό</a></li> 
+       <li><a href="/resources/recursos-de-ensino-portugal">Recursos de Ensino para Portugal</a></li> 
+      </ul> 
+     </div> 
+     <div class="col-lg-2" id="footer-curriculum-links-follow"> 
+      <ul> 
+       <li class="region"><strong>Asia</strong></li> 
+       <li><a href="/resources/middle-east-resources">Middle East Teaching Resources</a></li> 
+       <li><a href="https://www.twinkl.co.in/resources/india-resources">India Teaching Resources</a></li> 
+       <li><a href="https://www.twinkl.com.cn/resources/china-resources">中文教学资源 / Chinese Teaching Resources</a></li> 
+       <li><a href="https://www.twinkl.co.th/resources/thailand-resources">ประเทศไทย/Thailand Curriculum</a></li> 
+       <li><a href="https://www.twinkl.com.sg/resources/singapore-resources">Singapore Teaching Resources</a></li> 
+       <li class="region"><strong>Africa</strong></li> 
+       <li><a href="https://www.twinkl.co.za/resources/south-africa-resources">Suid-Afrika / South Africa Resources</a></li> 
+       <li class="region"><strong>Americas</strong></li> 
+       <li><a href="https://www.twinkl.com/resources/usa-resources">Common Core State Standards</a></li> 
+       <li><a href="https://www.twinkl.ca/resources/canada-teaching-resources">Canada Teaching Resources</a></li> 
+       <li><a href="/resources/america-del-sur-resources">América Latina y el Caribe</a></li> 
+       <li><a href="https://www.twinkl.com.br/resources/recursos-de-ensino-brasil">Recursos de Ensino para o Brasil</a></li> 
+       <li class="region"><strong>Oceania</strong></li> 
+       <li><a href="https://www.twinkl.com.au/resources/australian-resources">Australian Curriculum</a></li> 
+       <li><a href="https://www.twinkl.co.nz/resources/new-zealand-resources">New Zealand Curriculum</a></li> 
+       <li class="line">
+        <hr></li>
+       <li dir="rtl" class="rtl textRight"><a href="/resources/arabic-teaching-materials">مواد تعليمية عربية</a></li> 
+       <li><a href="/resources/internationalprimarycurriculum-ipc">International Primary Curriculum (IPC)</a></li> 
+      </ul> 
+     </div> 
+     <div class="col-lg-2"> 
+      <div class="heading">
+       <span>Tools</span>
+      </div> 
+      <ul> 
+       <li><a href="/create">Twinkl Create</a></li> 
+       <li><a href="/blog">Blog</a></li> 
+       <li><a href="/imagine">Imagine</a></li> 
+       <li><a href="/avatar">Avatar Creator</a></li> 
+       <li><a href="/calendar">Teaching Calendar</a></li> 
+       <li><a href="/teaching-wiki">Teaching Wiki</a></li> 
+       <li><a href="/classroom-display-photos">Classroom Displays</a></li> 
+       <li><a href="/book-list">Booklist</a></li> 
+       <li><a href="/twinkl-font">Twinkl Font</a></li> 
+       <li><a href="/twinkl-handwriting-font">Twinkl Handwriting Font</a></li> 
+       <li><a href="/timer">Twinkl Timer</a></li> 
+       <li><a href="https://shop.twinkl.co.uk" target="_blank">Store</a></li> 
+       <li><a href="/illustrations">Image Library</a></li> 
+       <li><a href="/reality">Augmented Reality Apps</a></li> 
+       <li><a href="/report-writer">Report Writer</a></li> 
+       <li><a target="_blank" href="https://www.onestepcpd.com">OneStep CPD</a></li> 
+       <li><a href="/homework-help">Homework help</a></li> 
+      </ul> 
+     </div> 
+     <div class="lastCol col-lg-2"> 
+      <div class="heading">
+       <span>Get to know us</span>
+      </div> 
+      <ul> 
+       <li><a href="/about-us">About Us</a></li> 
+       <li><a href="/page/press-and-media">Press &amp; Media</a></li> 
+       <li><a href="/partnerships">Corporate &amp; Partnerships</a></li> 
+       <li><a href="/legal">Legal</a></li> 
+       <li><a href="/hive">TwinklHive</a></li> 
+      </ul> 
+     </div> 
+     <div id="footer_box_logos"> 
+      <img class="logo footer-children-in-need" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Children in Need Proud Schools Partner" title="Children in Need Proud Schools Partner" width="80" style="margin-top: -8px;"> 
+      <img class="logo footer-teach-primary-2018" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Teach Primary Finalist Resource Awards 2018" title="Teach Primary Finalist Resource Awards 2018" width="80" style="margin-top: -8px;"> 
+      <img class="logo footer-queen-award" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Queen's Award for Enterprise - International Trade Award" title="Queen's Award for Enterprise - International Trade Award" width="80" style="margin-top: -8px;">
+      <img class="logo footer-aap" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="AAP" alt="AAP" id="aap" width="51" height="69"> 
+      <img class="logo footer-era-2019" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="ERA Awards 2019 Finalist logo" title="ERA Awards 2019 Finalist logo" id="era2018" width="60" height="67"> 
+      <img class="logo footer-era-2018" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="ERA Awards 2018 Finalist logo" title="ERA Awards 2018 Finalist logo" id="era2018" width="60" height="67"> 
+      <img class="logo footer-era-2017" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="ERA Awards 2017 Winner logo" title="ERA Awards 2017 Winner logo" id="era2017" width="60" height="69"> 
+      <img class="logo footer-bett-2019" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Bett Awards 2019 Finalist logo" id="Bett Awards 2019 Finalist logo" title="Bett Awards 2019 Finalist" width="75" height="69"> 
+      <img class="logo footer-bett-2017" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Bett Awards 2017 Finalist logo" id="Bett Awards 2017 Finalist logo" title="Bett Awards 2017 Finalist" width="73" height="68"> 
+      <img class="logo footer-bett-2016" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Bett Awards 2016 Finalist logo" id="Bett Awards 2016 Finalist logo" title="Bett Awards 2016 Finalist" width="71" height="62"> 
+      <img class="logo footer-award" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Twinkl Wins Award logo" id="winsaward" title="Twinkl Wins Award logo" width="80" height="67"> 
+      <img class="logo footer-moms-choice" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="Mom's Choice" alt="Mom's Choice" id="momschoice" width="78" height="66"> 
+      <img class="logo footer-epaa-2017" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" alt="Educational Publishing Awards Australia Finalist" title="Educational Publishing Awards Australia Finalist" id="epaa-2017" width="78" height="66"> 
+      <img class="logo footer-tar" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="The Assignment Report = UK Education Company of the Year 2017" alt="The Assignment Report = UK Education Company of the Year 2017" id="tar" width="240" height="110"> 
+      <img class="logo EYEntrepreneur" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="EY Entrepreneur of the Year - 2018 UK finalist" alt="EY" entrepreneur of the year - 2018 uk finalist id="EYEntrepreneur" width="180" height="62"> 
+      <img class="logo edTechxFinalist" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="edtechx - 2019 Finalist" alt="edtechx" - 2019 finalist id="edTechxFinalist" width="130" height="70"> 
+      <img class="logo edTechxSuperLeagueFinalist" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="edtechx Super League - 2019 Winner" alt="edtechx" super league - 2019 winner id="edTechxSuperLeagueFinalist" width="130" height="70"> <a href="https://www.twinkl.co.uk/press-and-media/press-releases/sheffield-community-world-record"><img class="logo guinnessWorldRecordLogo" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="Guinness World Record" alt="Guinness" world record id="guinnessWorldRecordLogo" width="130" height="70"></a> 
+      <img class="logo gessEducationAward2020" src="https://images.twinkl.co.uk/tr/raw/upload/t/images/1px.png" title="GESS Education Awards" alt="GESS" education awards id="gessEducationAward2020" width="130" height="70"> 
+     </div> 
+    </div><!-- logo box --> 
+    <div class="clear" style="height:100px;"></div> 
+    <script>
+        var inspiration = {"general":[["Remember...\nto take time to be you.","Remember...\nto take time to be you.","Remember...\nyou're doing an amazing job.","Remember...\nwe believe in you.","Remember...\nyou're only human.","Remember...\nyou're doing your best.","Remember...\nyou make a difference every day.","Remember...\nto be ready for anything.","Remember...\nthe difference you make.","Remember...\nthose lightbulb moments.","Remember...\nthe way you make a difference.","Remember...\nbe kind to yourself.","Remember...\nyou're ready for anything.","Remember...\nmake time to be you.","Remember...\nenjoy your weekends.","Remember...\nwe appreciate you.","Remember...\nevery day you make a difference.","Remember...\nbe proud of what you do.","Remember...\nbe proud of who you are.","Remember...\nthere is no better job.","Twinkl... \nhelping you deliver lightbulb moments since 2010."]],"logout":[["Thanks for stopping by - have a lovely day!","See you again soon... \nMake sure you take a break! :)","See you soon!...\nNow take some time to be you..."]],"morning":[["Good morning...\r\nwhat will you discover today?","Welcome to a bright new day.\nYou've got this!"]],"evening":[["Remember...\r\ndon't work too hard.","Remember...\r\nit's important to rest.","Remember...\nto get an early night.","Twinkl...\r\nproviding last minute lesson ideas since 2010."]]};
+        </script><!-- redis -->
+   </div>
+  </div> 
+  <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=e2780d50-5f80-4f6b-88fc-8681d693b795"></script>
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/jquery-1.7.1.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/jquery-ui-1.10.4.custom.min.js"></script> 
+  <script type="text/javascript">function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:"en",autoDisplay:!0,layout:google.translate.TranslateElement.InlineLayout.SIMPLE,gaTrack:!0,gaId:"UA-13151934-8"},"google_translate_element")}</script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/select2-b927306751.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/modernizr-custom-88005f76ed.3.5.0.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/tether-ecdfd3dc46.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/moment-f70c5f8470.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/polyfill-0c8df2bd84.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/utils-2f3cff1c38.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/components-eb9c0b7f21.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/classes-e9f005d3b6.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/jquery-7e95b3af4c.twinkl.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/jquery-69ace21ee8.twinkl.components.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/simplebar-883f11fefd.min.js"></script> 
+  <script type="text/javascript" src="https://images.twinkl.co.uk/tr/raw/upload/t/js/jscript-97a78c6b5b.min.js"></script> <a href="/products" id="packages-tab" class="hidden">Products</a> 
+  <script id="gscLibScript">
+		window.twinklGsc = new TwinklGscClient();
+	setTimeout(function () {		(function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s);})(window, document, '_gscq', 'script', '//widgets.getsitecontrol.com/46708/script.js');
+	$(document).trigger("gscInit", {
+		token: $('#gscLibScript').data('token'),
+		client: _gscq,
+		enabled: true
+	});
+	$('#gscLibScript').removeAttr('data-token');
+	}, 10000);</script> 
+  <script id="gscPushReqs">
+	setTimeout(function () {		var gscPushReqsArr = [{"api":"targeting","key":"enabled","value":"Yes","valueType":1,"callbacks":[],"data":{"rawValue":"Yes"}},{"api":"callback","key":"submit","value":"onWidgetSubmit","valueType":3,"callbacks":[],"data":{"rawValue":"onWidgetSubmit","path":"this.onWidgetSubmit"}},{"api":"user","key":"user_id","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"user","key":"logged_in","value":"No","valueType":1,"callbacks":[],"data":{"rawValue":"No"}},{"api":"user","key":"user_country_id","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"user","key":"user_county_id","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"user","key":"user_career_ids","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"user","key":"user_subscription_name","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"user_id","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"user_email","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"logged_in","value":"No","valueType":1,"callbacks":[],"data":{"rawValue":"No"}},{"api":"targeting","key":"user_country_id","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"user_county_id","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"user_career_ids","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"user_subscription_name","value":"N\/A","valueType":1,"callbacks":[],"data":{"rawValue":"N\/A"}},{"api":"targeting","key":"is_free_user_post_creation_week","value":"No","valueType":1,"callbacks":[],"data":{"rawValue":"No"}}];
+	$(document).trigger("gscPush", [gscPushReqsArr]);
+	$('#gscPushReqs').remove();
+	}, 10000);</script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"c7ef7cdc84","applicationID":"297629790","transactionName":"MlNSYUNYWkJUBkwPWAsZc0BCTVtcGjFPD1kOWh92XldAQ1oJVANFSnRcWlZ6W19BF1cKWwBEH1RfQH1fUQBA","queueTime":0,"applicationTime":118,"atts":"HhRRFwtCSUw=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+  <script async type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&amp;ns=1&amp;cb=1497639231"></script>  
+ </body>
+</html>

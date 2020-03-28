@@ -1,0 +1,1580 @@
+<!doctype html>
+<html lang="en-US">
+ <head>
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQ4GV1dTCBAEVVJXAAgAVVI=",licenseKey:"2dd61cbc72",applicationID:"413579736"};window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o||n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({1:[function(t,n,e){function r(t){try{s.console&&console.log(t)}catch(n){}}var o,i=t("ee"),a=t(21),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,n,e){r(e.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,n){return t}).join(", ")))},{}],2:[function(t,n,e){function r(t,n,e,r,s){try{p?p-=1:o(s||new UncaughtException(t,n,e),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,n,e){this.message=t||"Uncaught error with no additional information",this.sourceURL=n,this.line=e}function o(t,n){var e=n?null:c.now();i("err",[t,e])}var i=t("handle"),a=t(22),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError",p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(9),t(8),"addEventListener"in window&&t(5),c.xhrWrappable&&t(10),d=!0)}s.on("fn-start",function(t,n,e){d&&(p+=1)}),s.on("fn-err",function(t,n,e){d&&!e[l]&&(f(e,l,function(){return!0}),this.thrown=!0,o(e))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})},{}],3:[function(t,n,e){t("loader").features.ins=!0},{}],4:[function(t,n,e){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(9),s=t(8),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",g="pushState",y=t("loader");y.features.stn=!0,t(7),"addEventListener"in window&&t(5);var x=NREUM.o.EV;o.on(m,function(t,n){var e=t[0];e instanceof x&&(this.bstStart=y.now())}),o.on(w,function(t,n){var e=t[0];e instanceof x&&i("bst",[e,n,this.bstStart,y.now()])}),a.on(m,function(t,n,e){this.bstStart=y.now(),this.bstType=e}),a.on(w,function(t,n){i(v,[n,this.bstStart,y.now(),this.bstType])}),s.on(m,function(){this.bstStart=y.now()}),s.on(w,function(t,n){i(v,[n,this.bstStart,y.now(),"requestAnimationFrame"])}),o.on(g+p,function(t){this.time=y.now(),this.startPath=location.pathname+location.hash}),o.on(g+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,n,e){function r(t){for(var n=t;n&&!n.hasOwnProperty(u);)n=Object.getPrototypeOf(n);n&&o(n)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,n){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";n.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,n){var e=t[1],r=c(e,"nr@wrapped",function(){function t(){if("function"==typeof e.handleEvent)return e.handleEvent.apply(e,arguments)}var n={object:t,"function":e}[typeof e];return n?s(n,"fn-",null,n.name||"anonymous"):e});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,n,e){function r(t,n,e){var r=t[n];"function"==typeof r&&(t[n]=function(){var t=i(arguments),n={};o.emit(e+"before-start",[t],n);var a;n[m]&&n[m].dt&&(a=n[m].dt);var s=r.apply(this,t);return o.emit(e+"start",[t,a],s),s.then(function(t){return o.emit(e+"end",[null,t],s),t},function(t){throw o.emit(e+"end",[t],s),t})})}var o=t("ee").get("fetch"),i=t(22),a=t(21);n.exports=o;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,l=s.Response,p=s.fetch,h="prototype",m="nr@context";d&&l&&p&&(a(u,function(t,n){r(d[h],n,f),r(l[h],n,f)}),r(s,"fetch",c),o.on(c+"end",function(t,n){var e=this;if(n){var r=n.headers.get("content-length");null!==r&&(e.rxSize=r),o.emit(c+"done",[null,n],e)}else o.emit(c+"done",[t],e)}))},{}],7:[function(t,n,e){var r=t("ee").get("history"),o=t("wrap-function")(r);n.exports=r;var i=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;i&&i.pushState&&i.replaceState&&(a=i),o.inPlace(a,["pushState","replaceState"],"-")},{}],8:[function(t,n,e){var r=t("ee").get("raf"),o=t("wrap-function")(r),i="equestAnimationFrame";n.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],9:[function(t,n,e){function r(t,n,e){t[0]=a(t[0],"fn-",null,e)}function o(t,n,e){this.method=e,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,e)}var i=t("ee").get("timer"),a=t("wrap-function")(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";n.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],10:[function(t,n,e){function r(t,n){d.inPlace(n,["onreadystatechange"],"fn-",s)}function o(){var t=this,n=u.context(t);t.readyState>3&&!n.resolved&&(n.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,g,"fn-",s)}function i(t){y.push(t),h&&(b?b.then(a):w?w(a):(E=-E,O.data=E))}function a(){for(var t=0;t<y.length;t++)r([],y[t]);y.length&&(y=[])}function s(t,n){return n}function c(t,n){for(var e in t)n[e]=t[e];return n}t(5);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",g=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],y=[];n.exports=u;var x=window.XMLHttpRequest=function(t){var n=new p(t);try{u.emit("new-xhr",[n],n),n.addEventListener(v,o,!1)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}return n};if(c(p,x),x.prototype=p.prototype,d.inPlace(x.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,n){r(t,n),i(n)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!w&&!m){var E=1,O=document.createTextNode(E);new h(a).observe(O,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],11:[function(t,n,e){function r(t){if(!i(t))return null;var n=window.NREUM;if(!n.loader_config)return null;var e=(n.loader_config.accountID||"").toString()||null,r=(n.loader_config.agentID||"").toString()||null,s=(n.loader_config.trustKey||"").toString()||null;if(!e||!r)return null;var c=a.generateCatId(),f=a.generateCatId(),u=Date.now(),d=o(c,f,u,e,r,s);return{header:d,guid:c,traceId:f,timestamp:u}}function o(t,n,e,r,o,i){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:o,id:t,tr:n,ti:e}};return i&&r!==i&&(s.d.tk=i),btoa(JSON.stringify(s))}function i(t){var n=!1,e=!1,r={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(r=NREUM.init.distributed_tracing,e=!!r.enabled),e)if(t.sameOrigin)n=!0;else if(r.allowed_origins instanceof Array)for(var o=0;o<r.allowed_origins.length;o++){var i=s(r.allowed_origins[o]);if(t.hostname===i.hostname&&t.protocol===i.protocol&&t.port===i.port){n=!0;break}}return e&&n}var a=t(19),s=t(13);n.exports={generateTracePayload:r,shouldGenerateTrace:i}},{}],12:[function(t,n,e){function r(t){var n=this.params,e=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(d[r],this.listener,!1);n.aborted||(e.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==n.status&&(n.status=0):i(this,t),e.cbTime=this.cbTime,u.emit("xhr-done",[t],t),s("xhr",[n,e,this.startTime]))}}function o(t,n){var e=c(n),r=t.params;r.host=e.hostname+":"+e.port,r.pathname=e.pathname,t.parsedOrigin=c(n),t.sameOrigin=t.parsedOrigin.sameOrigin}function i(t,n){t.params.status=n.status;var e=w(n,t.lastSize);if(e&&(t.metrics.rxSize=e),t.sameOrigin){var r=n.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable){var s=t("handle"),c=t(13),f=t(11).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(17),m=t(16),w=t(14),v=window.XMLHttpRequest;a.features.xhr=!0,t(10),t(6),u.on("new-xhr",function(t){var n=this;n.totalCbs=0,n.called=0,n.cbTime=0,n.end=r,n.ended=!1,n.xhrGuids={},n.lastSize=null,n.loadCaptureCalled=!1,t.addEventListener("load",function(e){i(n,t)},!1),h&&(h>34||h<10)||window.opera||t.addEventListener("progress",function(t){n.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},o(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,n){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&n.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var e=f(this.parsedOrigin);e&&e.header&&(n.setRequestHeader("newrelic",e.header),this.dt=e)}),u.on("send-xhr-start",function(t,n){var e=this.metrics,r=t[0],o=this;if(e&&r){var i=m(r);i&&(e.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||o.loadCaptureCalled||(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof n.onload))&&o.end(n)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}};for(var s=0;s<l;s++)n.addEventListener(d[s],this.listener,!1)}),u.on("xhr-cb-time",function(t,n,e){this.cbTime+=t,n?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof e.onload||this.end(e)}),u.on("xhr-load-added",function(t,n){var e=""+p(t)+!!n;this.xhrGuids&&!this.xhrGuids[e]&&(this.xhrGuids[e]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,n){var e=""+p(t)+!!n;this.xhrGuids&&this.xhrGuids[e]&&(delete this.xhrGuids[e],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,n){n instanceof v&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],n)}),u.on("removeEventListener-end",function(t,n){n instanceof v&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],n)}),u.on("fn-start",function(t,n,e){n instanceof v&&("onload"===e&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,n){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,n],n)}),u.on("fetch-before-start",function(t){var n,e=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url&&(n=t[0].url),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var r=f(this.parsedOrigin);if(r&&r.header){var o=r.header;if("string"==typeof t[0]){var i={};for(var a in e)i[a]=e[a];i.headers=new Headers(e.headers||{}),i.headers.set("newrelic",o),this.dt=r,t.length>1?t[1]=i:t.push(i)}else t[0]&&t[0].headers&&(t[0].headers.append("newrelic",o),this.dt=r)}})}},{}],13:[function(t,n,e){var r={};n.exports=function(t){if(t in r)return r[t];var n=document.createElement("a"),e=window.location,o={};n.href=t,o.port=n.port;var i=n.href.split("://");!o.port&&i[1]&&(o.port=i[1].split("/")[0].split("@").pop().split(":")[1]),o.port&&"0"!==o.port||(o.port="https"===i[0]?"443":"80"),o.hostname=n.hostname||e.hostname,o.pathname=n.pathname,o.protocol=i[0],"/"!==o.pathname.charAt(0)&&(o.pathname="/"+o.pathname);var a=!n.protocol||":"===n.protocol||n.protocol===e.protocol,s=n.hostname===document.domain&&n.port===e.port;return o.sameOrigin=a&&(!n.hostname||s),"/"===o.pathname&&(r[t]=o),o}},{}],14:[function(t,n,e){function r(t,n){var e=t.responseType;return"json"===e&&null!==n?n:"arraybuffer"===e||"blob"===e||"json"===e?o(t.response):"text"===e||"document"===e||""===e||void 0===e?o(t.responseText):void 0}var o=t(16);n.exports=r},{}],15:[function(t,n,e){function r(){}function o(t,n,e){return function(){return i(t,[f.now()].concat(s(arguments)),n?null:this,e),n?void 0:this}}var i=t("handle"),a=t(21),s=t(22),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,n){u[n]=o(l+n,!0,"api")}),u.addPageAction=o(l+"addPageAction",!0),u.setCurrentRouteName=o(l+"routeName",!0),n.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,n){var e={},r=this,o="function"==typeof n;return i(p+"tracer",[f.now(),t,e],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],e),o)try{return n.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],e),t}finally{c.emit("fn-end",[f.now()],e)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,n){h[n]=o(p+n)}),newrelic.noticeError=function(t,n){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now(),!1,n])}},{}],16:[function(t,n,e){n.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(n){return}}}},{}],17:[function(t,n,e){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),n.exports=r},{}],18:[function(t,n,e){function r(t,n){var e=t.getEntries();e.forEach(function(t){"first-paint"===t.name?c("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&c("timing",["fcp",Math.floor(t.startTime)])})}function o(t,n){var e=t.getEntries();e.length>0&&c("lcp",[e[e.length-1]])}function i(t){if(t instanceof u&&!l){var n,e=Math.round(t.timeStamp);n=e>1e12?Date.now()-e:f.now()-e,l=!0,c("timing",["fi",e,{type:t.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,s,c=t("handle"),f=t("loader"),u=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),s=new PerformanceObserver(o);try{a.observe({entryTypes:["paint"]}),s.observe({entryTypes:["largest-contentful-paint"]})}catch(d){}}if("addEventListener"in document){var l=!1,p=["click","keydown","mousedown","pointerdown","touchstart"];p.forEach(function(t){document.addEventListener(t,i,!1)})}}},{}],19:[function(t,n,e){function r(){function t(){return n?15&n[e++]:16*Math.random()|0}var n=null,e=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(n=r.getRandomValues(new Uint8Array(31)));for(var o,i="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<i.length;s++)o=i[s],"x"===o?a+=t().toString(16):"y"===o?(o=3&t()|8,a+=o.toString(16)):a+=o;return a}function o(){function t(){return n?15&n[e++]:16*Math.random()|0}var n=null,e=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&Uint8Array&&(n=r.getRandomValues(new Uint8Array(31)));for(var o=[],i=0;i<16;i++)o.push(t().toString(16));return o.join("")}n.exports={generateUuid:r,generateCatId:o}},{}],20:[function(t,n,e){function r(t,n){if(!o)return!1;if(t!==o)return!1;if(!n)return!0;if(!i)return!1;for(var e=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==e[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(o="Safari",i=c[1])}n.exports={agent:o,version:i,match:r}},{}],21:[function(t,n,e){function r(t,n){var e=[],r="",i=0;for(r in t)o.call(t,r)&&(e[i]=n(r,t[r]),i+=1);return e}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],22:[function(t,n,e){function r(t,n,e){n||(n=0),"undefined"==typeof e&&(e=t?t.length:0);for(var r=-1,o=e-n||0,i=Array(o<0?0:o);++r<o;)i[r]=t[n+r];return i}n.exports=r},{}],23:[function(t,n,e){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,n,e){function r(){}function o(t){function n(t){return t&&t instanceof r?t:t?c(t,s,i):i()}function e(e,r,o,i){if(!l.aborted||i){t&&t(e,r,o);for(var a=n(o),s=m(e),c=s.length,f=0;f<c;f++)s[f].apply(a,r);var d=u[y[e]];return d&&d.push([x,e,r,a]),a}}function p(t,n){g[t]=m(t).concat(n)}function h(t,n){var e=g[t];if(e)for(var r=0;r<e.length;r++)e[r]===n&&e.splice(r,1)}function m(t){return g[t]||[]}function w(t){return d[t]=d[t]||o(e)}function v(t,n){f(t,function(t,e){n=n||"feature",y[e]=n,n in u||(u[n]=[])})}var g={},y={},x={on:p,addEventListener:p,removeEventListener:h,emit:e,get:w,listeners:m,context:n,buffer:v,abort:a,aborted:!1};return x}function i(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var s="nr@context",c=t("gos"),f=t(21),u={},d={},l=n.exports=o();l.backlog=u},{}],gos:[function(t,n,e){function r(t,n,e){if(o.call(t,n))return t[n];var r=e();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(t,n,e){function r(t,n,e,r){o.buffer([t],r),o.emit(t,n,e)}var o=t("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(t,n,e){function r(t){var n=typeof t;return!t||"object"!==n&&"function"!==n?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");n.exports=r},{}],loader:[function(t,n,e){function r(){if(!E++){var t=b.info=NREUM.info,n=p.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&n))return u.abort();f(y,function(n,e){t[n]||(t[n]=e)}),c("mark",["onload",a()+b.offset],null,"api");var e=p.createElement("script");e.src="https://"+t.agent,n.parentNode.insertBefore(e,n)}}function o(){"complete"===p.readyState&&i()}function i(){c("mark",["domContent",a()+b.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(s=Math.max((new Date).getTime(),s))-b.offset}var s=(new Date).getTime(),c=t("handle"),f=t(21),u=t("ee"),d=t(20),l=window,p=l.document,h="addEventListener",m="attachEvent",w=l.XMLHttpRequest,v=w&&w.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:w,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var g=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},x=w&&v&&v[h]&&!/CriOS/.test(navigator.userAgent),b=n.exports={offset:s,now:a,origin:g,features:{},xhrWrappable:x,userAgent:d};t(15),t(18),p[h]?(p[h]("DOMContentLoaded",i,!1),l[h]("load",r,!1)):(p[m]("onreadystatechange",o),l[m]("onload",r)),c("mark",["firstbyte",s],null,"api");var E=0,O=t(23)},{}],"wrap-function":[function(t,n,e){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(22),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;n.exports=function(t,n){function e(t,n,e,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof e?e(r,a):e||{}}catch(f){l([f,"",[r,a,o],s])}u(n+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(d){throw u(n+"err",[r,a,d],s),d}finally{u(n+"end",[r,a,c],s)}}return r(t)?t:(n||(n=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function u(e,r,o){if(!c||n){var i=c;c=!0;try{t.emit(e,r,o,n)}catch(a){l([a,e,r,o])}c=i}}function d(t,n){if(Object.defineProperty&&Object.keys)try{var e=Object.keys(t);return e.forEach(function(e){Object.defineProperty(n,e,{get:function(){return t[e]},set:function(n){return t[e]=n,n}})}),n}catch(r){l([r])}for(var o in t)s.call(t,o)&&(n[o]=t[o]);return n}function l(n){try{t.emit("internal-error",n)}catch(e){}}return t||(t=o),e.inPlace=f,e.flag=a,e}},{}]},{},["loader",2,12,4,3]);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link media="all" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_241fbcebf84707edbacec14bce1d0f93.css" rel="stylesheet">
+  <link media="screen" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_079845cf967ee2fd72370ecf80a553ad.css" rel="stylesheet">
+  <title>WPSOLR | WordPress Search Plugin as powerful as a hosted search</title> 
+  <script>/* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
+                            if ( typeof WebFontConfig === "undefined" ) {
+                                WebFontConfig = new Object();
+                            }
+                            WebFontConfig['google'] = {families: ['Open+Sans', 'Raleway:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic']};
+
+                            (function() {
+                                var wf = document.createElement( 'script' );
+                                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js';
+                                wf.type = 'text/javascript';
+                                wf.async = 'true';
+                                var s = document.getElementsByTagName( 'script' )[0];
+                                s.parentNode.insertBefore( wf, s );
+                            })();</script> 
+  <meta property="og:title" content="Home 0">
+  <meta property="og:description" content="Self-Hosted WordPress Search Save up to thousands each month compared to some hosted search solution  Download the plugin, fix your search, save big money">
+  <meta property="og:url" content="https://www.wpsolr.com/">
+  <meta property="og:image" content="http://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Home 0">
+  <meta name="twitter:description" content="Self-Hosted WordPress Search Save up to thousands each month compared to some hosted search solution  Download the plugin, fix your search, save big money">
+  <meta name="twitter:image" content="http://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png">
+  <meta name="author" content="wpsolr">
+  <meta name="description" content="Get the power of a hosted search, at the price of a WordPress search plugin. Install Elasticsearch or Solr for free on your WordPress instance. The plugin takes care of the rest.">
+  <link rel="canonical" href="https://www.wpsolr.com/"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.wpsolr.com/#organization","name":"Eostis SARL","url":"https://www.wpsolr.com/","sameAs":["https://www.facebook.com/wpsolr","https://twitter.com/wpsolr"]},{"@type":"WebSite","@id":"https://www.wpsolr.com/#website","url":"https://www.wpsolr.com/","name":"WPSOLR","publisher":{"@id":"https://www.wpsolr.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.wpsolr.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://www.wpsolr.com/#webpage","url":"https://www.wpsolr.com/","inLanguage":"en-US","name":"WPSOLR | WordPress Search Plugin as powerful as a hosted search","isPartOf":{"@id":"https://www.wpsolr.com/#website"},"about":{"@id":"https://www.wpsolr.com/#organization"},"image":{"@type":"ImageObject","@id":"https://www.wpsolr.com/#primaryimage","url":"https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png","width":212,"height":58},"primaryImageOfPage":{"@id":"https://www.wpsolr.com/#primaryimage"},"datePublished":"2019-12-05T21:49:23+00:00","dateModified":"2020-03-27T16:42:37+00:00","description":"Get the power of a hosted search, at the price of a WordPress search plugin. Install Elasticsearch or Solr for free on your WordPress instance. The plugin takes care of the rest."}]}</script> 
+  <link rel="dns-prefetch" href="//www.google.com">
+  <link rel="dns-prefetch" href="//js.hs-scripts.com">
+  <link rel="dns-prefetch" href="//oss.maxcdn.com">
+  <link rel="dns-prefetch" href="//s.w.org">
+  <link rel="alternate" type="application/rss+xml" title="WPSOLR » Feed" href="https://www.wpsolr.com/feed/">
+  <link rel="alternate" type="application/rss+xml" title="WPSOLR » Comments Feed" href="https://www.wpsolr.com/comments/feed/"> 
+  <script type="text/javascript">window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.wpsolr.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=b74c21b4538b1d45489ccc19a0cdf951"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);</script> 
+  <link rel="stylesheet" id="elementor-global-css" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_single_d2b4adf7d371e15d66c0a13b7f6aa7f4.css?ver=1585150721" type="text/css" media="all">
+  <link rel="stylesheet" id="elementor-post-15753-css" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_single_42a34805b8891eff07e2e3ef8ad0d04d.css?ver=1585327377" type="text/css" media="all">
+  <link rel="stylesheet" id="elementor-post-18637-css" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_single_33feed1000084ee4f8b458fe8649b37b.css?ver=1584826640" type="text/css" media="all">
+  <link rel="stylesheet" id="elementor-post-7605-css" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_single_3270cd1b2d5d24c7528ef321186ff30f.css?ver=1583514149" type="text/css" media="all">
+  <link rel="stylesheet" id="csshero-main-stylesheet-css" href="https://www.wpsolr.com/wp-content/cache/autoptimize/css/autoptimize_single_b9988dcd1eb3b31eed8a6e98676bee70.css?ver=31" type="text/css" media="all"> 
+  <script type="text/javascript" src="https://www.wpsolr.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script> 
+  <script type="text/javascript">var objectL10n = {"yopPollParams":{"urlParams":{"ajax":"https:\/\/www.wpsolr.com\/wp-admin\/admin-ajax.php","wpLogin":"https:\/\/www.wpsolr.com\/wp-login.php?redirect_to=https%3A%2F%2Fwww.wpsolr.com%2Fwp-admin%2Fadmin-ajax.php%3Faction%3Dyop_poll_record_wordpress_vote"},"apiParams":{"reCaptcha":{"siteKey":""},"reCaptchaV2Invisible":{"siteKey":""},"facebook":{"appId":""},"google":{"clientId":""}},"captchaParams":{"imgPath":"https:\/\/www.wpsolr.com\/wp-content\/plugins\/yop-poll\/public\/assets\/img\/","url":"https:\/\/www.wpsolr.com\/wp-content\/plugins\/yop-poll\/app.php","accessibilityAlt":"Sound icon","accessibilityTitle":"Accessibility option: listen to a question and answer it!","accessibilityDescription":"Type below the <strong>answer<\/strong> to what you hear. Numbers or words:","explanation":"Click or touch the <strong>ANSWER<\/strong>","refreshAlt":"Refresh\/reload icon","refreshTitle":"Refresh\/reload: get new images and accessibility option!"},"voteParams":{"invalidPoll":"Invalid Poll","noAnswersSelected":"No answer selected","minAnswersRequired":"At least {min_answers_allowed} answer(s) required","maxAnswersRequired":"A max of {max_answers_allowed} answer(s) accepted","noAnswerForOther":"No other answer entered","answerForOtherTooLong":"The answer you have provided is too long","noValueForCustomField":"{custom_field_name} is required","consentNotChecked":"You must agree to our terms and conditions","noCaptchaSelected":"Captcha is required","thankYou":"Thank you for your vote"},"resultsParams":{"singleVote":"vote","multipleVotes":"votes","singleAnswer":"answer","multipleAnswers":"answers"}}};</script> <!--[if lt IE 9]> <script type='text/javascript' src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js?ver=3.7.3'></script> <![endif]--> <!--[if lt IE 9]> <script type='text/javascript' src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js?ver=1.4.2'></script> <![endif]-->
+  <link rel="https://api.w.org/" href="https://www.wpsolr.com/wp-json/">
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.wpsolr.com/xmlrpc.php?rsd">
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.wpsolr.com/wp-includes/wlwmanifest.xml">
+  <link rel="shortlink" href="https://www.wpsolr.com/">
+  <link rel="alternate" type="application/json+oembed" href="https://www.wpsolr.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wpsolr.com%2F">
+  <link rel="alternate" type="text/xml+oembed" href="https://www.wpsolr.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wpsolr.com%2F&amp;format=xml"> 
+  <script>(function (m, a, i, l, e, r) {
+            m['MailerLiteObject'] = e;
+
+            function f() {
+                var c = {a: arguments, q: []};
+                var r = this.push(c);
+                return "number" != typeof r ? r : f.bind(c.q);
+            }
+
+            f.q = f.q || [];
+            m[e] = m[e] || f.bind(f.q);
+            m[e].q = m[e].q || f.q;
+            r = a.createElement(i);
+            var _ = a.getElementsByTagName(i)[0];
+            r.async = 1;
+            r.src = l + '?' + (~~(new Date().getTime() / 10000000));
+            _.parentNode.insertBefore(r, _);
+        })(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+
+        var ml_account = ml('accounts', '1908904', 'y7f7g0s0u6', 'load');</script> 
+  <script>wpsolr_globalError = [];
+            window.onerror = function (msg, url, line, col, error) {
+                wpsolr_globalError.push({msg: msg, url: url, line: line, error: error});
+            };</script> 
+  <script type="text/javascript">var _hsq = _hsq || [];
+				_hsq.push(["setContentType", "standard-page"]);</script> 
+  <link href="http://www.wpsolr.com/wp-content/uploads/2014/03/WPSOLRDashicon.png" rel="shortcut icon"> 
+  <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;
+        h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);
+    })(window,document.documentElement,'async-hide','dataLayer',4000,{'GTM-PCSKGRK':true});</script> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PCSKGRK');</script> 
+  <link rel="icon" href="https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern-150x58.png" sizes="32x32">
+  <link rel="icon" href="https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png" sizes="192x192">
+  <link rel="apple-touch-icon-precomposed" href="https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png">
+  <meta name="msapplication-TileImage" content="https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png">
+ </head>
+ <body class="home page-template page-template-elementor_header_footer page page-id-15753 elementor-default elementor-template-full-width elementor-page elementor-page-15753"> <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PCSKGRK" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> <!-- End Google Tag Manager (noscript) -->
+  <div data-elementor-type="wp-post" data-elementor-id="15753" class="elementor elementor-15753" data-elementor-settings="[]">
+   <div class="elementor-inner">
+    <div class="elementor-section-wrap">
+     <section class="elementor-element elementor-element-e225e0d elementor-section-full_width elementor-section-content-top elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="e225e0d" data-element_type="section">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-fd5bf4d elementor-column elementor-col-100 elementor-top-column" data-id="fd5bf4d" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <section class="elementor-element elementor-element-3e9389e elementor-section-content-top elementor-section-full_width elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="3e9389e" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-db3e161 elementor-column elementor-col-33 elementor-inner-column" data-id="db3e161" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-7d3d633 elementor-widget elementor-widget-image" data-id="7d3d633" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="/"> <img width="212" height="58" src="https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png" class="attachment-medium size-medium" alt="Image logo-wpsolr-modern.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern.png 212w, https://www.wpsolr.com/wp-content/uploads/2018/09/logo-wpsolr-modern-20x5.png 20w" sizes="(max-width: 212px) 100vw, 212px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-d3d626e elementor-column elementor-col-33 elementor-inner-column" data-id="d3d626e" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-8f9fbe4 elementor-nav-menu__align-right elementor-nav-menu--stretch elementor-nav-menu__text-align-center elementor-nav-menu--indicator-chevron elementor-nav-menu--dropdown-tablet elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu" data-id="8f9fbe4" data-element_type="widget" data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;toggle&quot;:&quot;burger&quot;}" data-widget_type="nav-menu.default">
+                  <div class="elementor-widget-container">
+                   <nav role="navigation" class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-underline e--animation-fade">
+                    <ul id="menu-1-8f9fbe4" class="elementor-nav-menu">
+                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17876"><a href="/feature-elasticsearch/" class="elementor-item">Features</a>
+                      <ul class="sub-menu elementor-nav-menu--dropdown">
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17879"><a href="https://www.wpsolr.com/feature-elasticsearch/" class="elementor-sub-item">Elasticsearch</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17877"><a href="https://www.wpsolr.com/feature-solr/" class="elementor-sub-item">Solr</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17878"><a href="https://www.wpsolr.com/feature-algolia/" class="elementor-sub-item">Algolia</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17918"><a href="https://www.wpsolr.com/feature-hosting/" class="elementor-sub-item">Hosting</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17997"><a href="https://www.wpsolr.com/integrated-add-ons-and-services/" class="elementor-sub-item">Plugins &amp; themes</a></li>
+                      </ul></li>
+                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7077"><a href="/pricing/" class="elementor-item">Pricing</a></li>
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11341"><a href="https://www.wpsolr.com/demos-wordpress-woocommerce-search-product-filters-100ks-products/" class="elementor-item">Showcase</a></li>
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17696"><a href="https://www.wpsolr.com/blog/" class="elementor-item">Blog</a></li>
+                     <li class="menu-item menu-item-type-post_type_archive menu-item-object-forum menu-item-has-children menu-item-6375"><a href="https://www.wpsolr.com/forums/" class="elementor-item">More</a>
+                      <ul class="sub-menu elementor-nav-menu--dropdown">
+                       <li class="menu-item menu-item-type-post_type_archive menu-item-object-forum menu-item-10829"><a href="https://www.wpsolr.com/forums/" class="elementor-sub-item">Forums</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12930"><a href="/guide/configuration-step-by-step-schematic/" class="elementor-sub-item">Documentation</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12931"><a href="/guide-category/wpsolr-video-gallery/" class="elementor-sub-item">Videos</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7762"><a href="https://www.wpsolr.com/integrated-add-ons-and-services/" class="elementor-sub-item">Add-ons</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7073"><a href="/knowledgebase/" class="elementor-sub-item">Knowledge base</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7162"><a href="https://www.wpsolr.com/guides/" class="elementor-sub-item">Guides</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13685"><a href="https://admin.wpsolr.com/#/signin" class="elementor-sub-item elementor-item-anchor">My account</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-forum menu-item-10338"><a href="https://www.wpsolr.com/forums/forum/licenses-and-billing/wpsolr-releases/" class="elementor-sub-item">Releases</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13541"><a href="https://www.wpsolr.com/affiliates-signup/" class="elementor-sub-item">Become an affiliate</a></li>
+                      </ul></li>
+                    </ul>
+                   </nav>
+                   <div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false"> <i class="eicon-menu-bar" aria-hidden="true"></i> <span class="elementor-screen-only">Menu</span>
+                   </div>
+                   <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" role="navigation" aria-hidden="true">
+                    <ul id="menu-2-8f9fbe4" class="elementor-nav-menu">
+                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17876"><a href="/feature-elasticsearch/" class="elementor-item">Features</a>
+                      <ul class="sub-menu elementor-nav-menu--dropdown">
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17879"><a href="https://www.wpsolr.com/feature-elasticsearch/" class="elementor-sub-item">Elasticsearch</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17877"><a href="https://www.wpsolr.com/feature-solr/" class="elementor-sub-item">Solr</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17878"><a href="https://www.wpsolr.com/feature-algolia/" class="elementor-sub-item">Algolia</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17918"><a href="https://www.wpsolr.com/feature-hosting/" class="elementor-sub-item">Hosting</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17997"><a href="https://www.wpsolr.com/integrated-add-ons-and-services/" class="elementor-sub-item">Plugins &amp; themes</a></li>
+                      </ul></li>
+                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7077"><a href="/pricing/" class="elementor-item">Pricing</a></li>
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11341"><a href="https://www.wpsolr.com/demos-wordpress-woocommerce-search-product-filters-100ks-products/" class="elementor-item">Showcase</a></li>
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17696"><a href="https://www.wpsolr.com/blog/" class="elementor-item">Blog</a></li>
+                     <li class="menu-item menu-item-type-post_type_archive menu-item-object-forum menu-item-has-children menu-item-6375"><a href="https://www.wpsolr.com/forums/" class="elementor-item">More</a>
+                      <ul class="sub-menu elementor-nav-menu--dropdown">
+                       <li class="menu-item menu-item-type-post_type_archive menu-item-object-forum menu-item-10829"><a href="https://www.wpsolr.com/forums/" class="elementor-sub-item">Forums</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12930"><a href="/guide/configuration-step-by-step-schematic/" class="elementor-sub-item">Documentation</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12931"><a href="/guide-category/wpsolr-video-gallery/" class="elementor-sub-item">Videos</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7762"><a href="https://www.wpsolr.com/integrated-add-ons-and-services/" class="elementor-sub-item">Add-ons</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7073"><a href="/knowledgebase/" class="elementor-sub-item">Knowledge base</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7162"><a href="https://www.wpsolr.com/guides/" class="elementor-sub-item">Guides</a></li>
+                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13685"><a href="https://admin.wpsolr.com/#/signin" class="elementor-sub-item elementor-item-anchor">My account</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-forum menu-item-10338"><a href="https://www.wpsolr.com/forums/forum/licenses-and-billing/wpsolr-releases/" class="elementor-sub-item">Releases</a></li>
+                       <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-13541"><a href="https://www.wpsolr.com/affiliates-signup/" class="elementor-sub-item">Become an affiliate</a></li>
+                      </ul></li>
+                    </ul>
+                   </nav>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-784636c elementor-column elementor-col-33 elementor-inner-column" data-id="784636c" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-22411ac wpsolr-suggest-content-group1 elementor-search-form--skin-full_screen elementor-widget elementor-widget-search-form" data-id="22411ac" data-element_type="widget" data-settings="{&quot;skin&quot;:&quot;full_screen&quot;}" data-widget_type="search-form.default">
+                  <div class="elementor-widget-container">
+                   <form class="elementor-search-form" role="search" action="https://www.wpsolr.com" method="get">
+                    <div class="elementor-search-form__toggle"> <i aria-hidden="true" class="fas fa-search"></i> <span class="elementor-screen-only">Search</span>
+                    </div>
+                    <div class="elementor-search-form__container"> 
+                     <input placeholder="" class="elementor-search-form__input" type="search" name="s" title="Search" value="">
+                     <div class="dialog-lightbox-close-button dialog-close-button"> <i class="eicon-close" aria-hidden="true"></i> <span class="elementor-screen-only">Close</span>
+                     </div>
+                    </div>
+                   </form>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <div class="elementor-element elementor-element-5045f4a elementor-widget elementor-widget-spacer" data-id="5045f4a" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-62b352e elementor-section-full_width elementor-section-content-middle elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="62b352e" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-7352342 elementor-column elementor-col-50 elementor-inner-column" data-id="7352342" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-ce4f346 elementor-widget elementor-widget-spacer" data-id="ce4f346" data-element_type="widget" data-widget_type="spacer.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-spacer">
+                    <div class="elementor-spacer-inner"></div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-bddd561 elementor-widget elementor-widget-heading" data-id="bddd561" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                   <h1 class="elementor-heading-title elementor-size-default">Looking for the perfect WooCommerce search without breaking the bank?</h1>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-79786c5 elementor-widget elementor-widget-heading" data-id="79786c5" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                   <h2 class="elementor-heading-title elementor-size-default">Unfortunately, the best search solutions are hosted and can cost thousands a month.</h2>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-6dab46e elementor-widget elementor-widget-spacer" data-id="6dab46e" data-element_type="widget" data-widget_type="spacer.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-spacer">
+                    <div class="elementor-spacer-inner"></div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-55b066c elementor-widget elementor-widget-heading" data-id="55b066c" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container"> <span class="elementor-heading-title elementor-size-default">WPSOLR is different from everything you know: <br>
+                    <ul>
+                     <li>It is a self-hosted plugin</li>
+                     <li>It scales up to millions of products</li>
+                     <li>It is infinitely configurable</li>
+                     <li>It is cheap as a plugin</li>
+                    </ul> </span>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-bfe4bca elementor-widget elementor-widget-spacer" data-id="bfe4bca" data-element_type="widget" data-widget_type="spacer.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-spacer">
+                    <div class="elementor-spacer-inner"></div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-74293bb elementor-column elementor-col-50 elementor-inner-column" data-id="74293bb" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-de2ddda elementor-widget elementor-widget-spacer" data-id="de2ddda" data-element_type="widget" data-widget_type="spacer.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-spacer">
+                    <div class="elementor-spacer-inner"></div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-4442568 elementor-widget elementor-widget-spacer" data-id="4442568" data-element_type="widget" data-widget_type="spacer.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-spacer">
+                    <div class="elementor-spacer-inner"></div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-dff9cc6 elementor-aspect-ratio-169 elementor-widget elementor-widget-video" data-id="dff9cc6" data-element_type="widget" data-settings="{&quot;lightbox&quot;:&quot;yes&quot;,&quot;aspect_ratio&quot;:&quot;169&quot;}" data-widget_type="video.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-wrapper elementor-open-lightbox">
+                    <div class="elementor-custom-embed-image-overlay" data-elementor-open-lightbox="yes" data-elementor-lightbox="{&quot;type&quot;:&quot;video&quot;,&quot;videoType&quot;:&quot;youtube&quot;,&quot;url&quot;:&quot;https:\/\/www.youtube.com\/embed\/41neqY5s1_U?feature=oembed&amp;start&amp;end&amp;wmode=opaque&amp;loop=0&amp;controls=1&amp;mute=0&amp;rel=0&amp;modestbranding=0&quot;,&quot;modalOptions&quot;:{&quot;id&quot;:&quot;elementor-lightbox-dff9cc6&quot;,&quot;entranceAnimation&quot;:&quot;&quot;,&quot;entranceAnimation_tablet&quot;:&quot;&quot;,&quot;entranceAnimation_mobile&quot;:&quot;&quot;,&quot;videoAspectRatio&quot;:&quot;169&quot;}}"> 
+                     <img width="1206" height="385" src="https://www.wpsolr.com/wp-content/uploads/2018/11/wpsolr-header-solr-elasticsearch.png" class="attachment-full size-full" alt="Image wpsolr-header-solr-elasticsearch.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2018/11/wpsolr-header-solr-elasticsearch.png 1206w, https://www.wpsolr.com/wp-content/uploads/2018/11/wpsolr-header-solr-elasticsearch-300x96.png 300w, https://www.wpsolr.com/wp-content/uploads/2018/11/wpsolr-header-solr-elasticsearch-768x245.png 768w, https://www.wpsolr.com/wp-content/uploads/2018/11/wpsolr-header-solr-elasticsearch-1024x327.png 1024w, https://www.wpsolr.com/wp-content/uploads/2018/11/wpsolr-header-solr-elasticsearch-20x6.png 20w" sizes="(max-width: 1206px) 100vw, 1206px">
+                     <div class="elementor-custom-embed-play" role="button"> <i class="eicon-play" aria-hidden="true"></i> <span class="elementor-screen-only">Play Video</span>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-835b4dc elementor-widget elementor-widget-spacer" data-id="835b4dc" data-element_type="widget" data-widget_type="spacer.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-spacer">
+                    <div class="elementor-spacer-inner"></div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-75203c9 elementor-widget elementor-widget-heading" data-id="75203c9" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                   <p class="elementor-heading-title elementor-size-default"><a href="#elementor-action%3Aaction%3Dpopup%3Aopen%20settings%3DeyJpZCI6IjE4NjM3IiwidG9nZ2xlIjpmYWxzZX0%3D">Yes, I want to test my self-hosted unbreakable WooCommerce search</a></p>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <div class="elementor-element elementor-element-9b043d1 elementor-widget elementor-widget-spacer" data-id="9b043d1" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-f704fe9 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="f704fe9" data-element_type="widget" data-widget_type="divider.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">We are mentioned by</span> </span>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-cc8b249 elementor-widget elementor-widget-spacer" data-id="cc8b249" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-f8a5fd7 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="f8a5fd7" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-f01896c elementor-column elementor-col-14 elementor-inner-column" data-id="f01896c" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-9345573 elementor-widget elementor-widget-image" data-id="9345573" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://www.cloudways.com/blog/elasticsearch-on-wordpress/" target="_blank"> <img width="280" height="150" src="https://www.wpsolr.com/wp-content/uploads/2019/09/cloudways.png" class="attachment-medium size-medium" alt="Image cloudways.png of Home 0"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-37aea0a elementor-column elementor-col-14 elementor-inner-column" data-id="37aea0a" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-82a6204 elementor-widget elementor-widget-image" data-id="82a6204" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://wpengine.com/resources/wordpress-site-search-plugins/" target="_blank"> <img width="300" height="79" src="https://www.wpsolr.com/wp-content/uploads/2019/09/wp-engine-logo-570x151-300x79.png" class="attachment-medium size-medium" alt="Image wp-engine-logo-570x151-300x79.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/09/wp-engine-logo-570x151-300x79.png 300w, https://www.wpsolr.com/wp-content/uploads/2019/09/wp-engine-logo-570x151.png 570w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-1fee5b5 elementor-column elementor-col-14 elementor-inner-column" data-id="1fee5b5" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-fcc754c elementor-widget elementor-widget-image" data-id="fcc754c" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://colorlib.com/wp/search-plugins-for-wordpress/" target="_blank"> <img width="300" height="73" src="https://www.wpsolr.com/wp-content/uploads/2019/09/colorlib-logo-top-300x73.png" class="attachment-medium size-medium" alt="Image colorlib-logo-top-300x73.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/09/colorlib-logo-top-300x73.png 300w, https://www.wpsolr.com/wp-content/uploads/2019/09/colorlib-logo-top-768x186.png 768w, https://www.wpsolr.com/wp-content/uploads/2019/09/colorlib-logo-top.png 895w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-2cf9bb9 elementor-column elementor-col-14 elementor-inner-column" data-id="2cf9bb9" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-b85f06d elementor-widget elementor-widget-image" data-id="b85f06d" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://www.linode.com/docs/websites/cms/turbocharge-wordpress-search-with-solr/" target="_blank"> <img width="300" height="117" src="https://www.wpsolr.com/wp-content/uploads/2020/03/linode-logo1-300x117.png" class="attachment-medium size-medium" alt="Image linode-logo1-300x117.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2020/03/linode-logo1-300x117.png 300w, https://www.wpsolr.com/wp-content/uploads/2020/03/linode-logo1.png 359w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-3c091f5 elementor-column elementor-col-14 elementor-inner-column" data-id="3c091f5" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-e85ab8d elementor-widget elementor-widget-image" data-id="e85ab8d" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://wpmagazine.fr/10-meilleurs-plugins-de-recherche-pour-wordpress/"> <img width="194" height="45" src="https://www.wpsolr.com/wp-content/uploads/2020/03/wpmagazine-logo.png" class="attachment-medium size-medium" alt="Image wpmagazine-logo.png of Home 0"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-4d3a373 elementor-column elementor-col-14 elementor-inner-column" data-id="4d3a373" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-a51c100 elementor-widget elementor-widget-image" data-id="a51c100" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://winningwp.com/best-wordpress-search-plugins/" target="_blank"> <img width="300" height="215" src="https://www.wpsolr.com/wp-content/uploads/2020/03/WinningWP-logo-300x215.png" class="attachment-medium size-medium" alt="Image WinningWP-logo-300x215.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2020/03/WinningWP-logo-300x215.png 300w, https://www.wpsolr.com/wp-content/uploads/2020/03/WinningWP-logo.png 380w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-942d64f elementor-column elementor-col-14 elementor-inner-column" data-id="942d64f" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-aae82b3 elementor-widget elementor-widget-image" data-id="aae82b3" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://www.practicalecommerce.com/15-plugins-to-improve-wordpress-search" target="_blank"> <img width="700" height="310" src="https://www.wpsolr.com/wp-content/uploads/2020/03/practical-ecommerce1-768x340.jpg" class="attachment-medium_large size-medium_large" alt="Image practical-ecommerce1-768x340.jpg of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2020/03/practical-ecommerce1-768x340.jpg 768w, https://www.wpsolr.com/wp-content/uploads/2020/03/practical-ecommerce1-300x133.jpg 300w, https://www.wpsolr.com/wp-content/uploads/2020/03/practical-ecommerce1.jpg 920w" sizes="(max-width: 700px) 100vw, 700px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <section class="elementor-element elementor-element-2257a46 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="2257a46" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-4b23513 elementor-column elementor-col-14 elementor-inner-column" data-id="4b23513" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-b8f2ed8 elementor-widget elementor-widget-text-editor" data-id="b8f2ed8" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“How to Configure Elasticsearch on WordPress on Cloudways”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-18fd3a8 elementor-column elementor-col-14 elementor-inner-column" data-id="18fd3a8" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-0a606c8 elementor-widget elementor-widget-text-editor" data-id="0a606c8" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“Guide To WordPress Site Search Plugins”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-c5faf5e elementor-column elementor-col-14 elementor-inner-column" data-id="c5faf5e" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-3c99c0c elementor-widget elementor-widget-text-editor" data-id="3c99c0c" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“15 Best Search Plugins for WordPress To Make The Most Out Of Search 2020”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-020868f elementor-column elementor-col-14 elementor-inner-column" data-id="020868f" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-4de24d8 elementor-widget elementor-widget-text-editor" data-id="4de24d8" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“Turbocharge Your WordPress Search Using Solr”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-9484199 elementor-column elementor-col-14 elementor-inner-column" data-id="9484199" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-39c7b61 elementor-widget elementor-widget-text-editor" data-id="39c7b61" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“10+ meilleurs plugins de recherche pour WordPress”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-8bf2a28 elementor-column elementor-col-14 elementor-inner-column" data-id="8bf2a28" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-9271b39 elementor-widget elementor-widget-text-editor" data-id="9271b39" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“The Top Nine Plugins for Improving the Default WordPress Search Functionality (2020)”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-9bb4a58 elementor-column elementor-col-14 elementor-inner-column" data-id="9bb4a58" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-deff585 elementor-widget elementor-widget-text-editor" data-id="deff585" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>“15 Plugins to Improve WordPress Search”</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="elementor-element elementor-element-b565d7b elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="b565d7b" data-element_type="section">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-1618d4e elementor-column elementor-col-100 elementor-top-column" data-id="1618d4e" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <section class="elementor-element elementor-element-ffb7feb elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="ffb7feb" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-845faad elementor-column elementor-col-100 elementor-inner-column" data-id="845faad" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-4b79763 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="4b79763" data-element_type="widget" data-widget_type="divider.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">10x times faster? This is a big claim. But who are we?</span> </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-fe18290 elementor-widget elementor-widget-heading" data-id="fe18290" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container"> <span class="elementor-heading-title elementor-size-default">We are developers on the shoulders of giants: WordPress, Solr, Elasticsearch.</span>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-4884672 elementor-widget elementor-widget-heading" data-id="4884672" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container"> <span class="elementor-heading-title elementor-size-default">The full (complicated) history of our plugin in 6 steps:</span>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <section class="elementor-element elementor-element-4084e43 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="4084e43" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-d68416a elementor-column elementor-col-33 elementor-inner-column" data-id="d68416a" data-element_type="column" data-settings="{&quot;motion_fx_motion_fx_scrolling&quot;:&quot;yes&quot;,&quot;motion_fx_devices&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;]}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-5d9e0d9 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="5d9e0d9" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     1. Years ago, we managed a classified ads website with 50 million ads.
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-642f1dd elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="642f1dd" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     4. Our Solr was hosted at that time, but was not satisfying. We therefore built our own Solr hosting service, that other users could also hire.
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-19883a4 elementor-column elementor-col-33 elementor-inner-column" data-id="19883a4" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-db3fb94 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="db3fb94" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     2. We got stuck with the standard search technology provided by SQL.
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-026512d elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="026512d" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     5. We then built a small WordPress plugin to ease WordPress users that wanted to use our Solr hosting service. WPSOLR was born!
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-1f04d30 elementor-column elementor-col-33 elementor-inner-column" data-id="1f04d30" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-3ee8344 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="3ee8344" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     3. We developed our own plugin to replace SQL by Solr. Just to be able to reach a great and fast search. Which we achieved.
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-8d3d695 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="8d3d695" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     6. We extended WPSOLR to Elasticsearch, then to Algolia. And also developed extensions for every possible major plugins and themes.
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <div class="elementor-element elementor-element-455539e elementor-widget elementor-widget-spacer" data-id="455539e" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="elementor-element elementor-element-6095efb elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="6095efb" data-element_type="section">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-9c1ba15 elementor-column elementor-col-100 elementor-top-column" data-id="9c1ba15" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-d796b40 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="d796b40" data-element_type="widget" data-widget_type="divider.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">Showcase: huge sites powered by us</span> </span>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-2fe74e3 elementor-widget elementor-widget-spacer" data-id="2fe74e3" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-1fbcd5d elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="1fbcd5d" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-301f357 elementor-column elementor-col-25 elementor-inner-column" data-id="301f357" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-4671e0d elementor-widget elementor-widget-image" data-id="4671e0d" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://www.cartochrome.com/" target="_blank"> <img width="300" height="154" src="https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-300x154.png" class="attachment-medium size-medium" alt="cartochrome mylisting 800,000 listings" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-300x154.png 300w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-1024x526.png 1024w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-768x394.png 768w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-1536x789.png 1536w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-1320x678.png 1320w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting.png 1875w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-639d9c2 elementor-column elementor-col-25 elementor-inner-column" data-id="639d9c2" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-bddffd3 elementor-widget elementor-widget-image" data-id="bddffd3" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://www.oemperformance.com/home/?s=&amp;post_type=product" target="_blank"> <img width="300" height="169" src="https://www.wpsolr.com/wp-content/uploads/2018/11/oemperformance-300x169.png" class="attachment-medium size-medium" alt="Image oemperformance-300x169.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2018/11/oemperformance-300x169.png 300w, https://www.wpsolr.com/wp-content/uploads/2018/11/oemperformance-768x432.png 768w, https://www.wpsolr.com/wp-content/uploads/2018/11/oemperformance-1024x576.png 1024w, https://www.wpsolr.com/wp-content/uploads/2018/11/oemperformance.png 1366w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-7a65554 elementor-column elementor-col-25 elementor-inner-column" data-id="7a65554" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-09d2879 elementor-widget elementor-widget-image" data-id="09d2879" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://foorum.perekool.ee/otsing/" target="_blank"> <img width="300" height="169" src="https://www.wpsolr.com/wp-content/uploads/2018/07/foorum.perekool.ee-home-300x169.png" class="attachment-medium size-medium" alt="WPSOLR - Estonian Midwives Organization bbPress Forum – Search in 2,5 million topics/replies under 100ms" srcset="https://www.wpsolr.com/wp-content/uploads/2018/07/foorum.perekool.ee-home-300x169.png 300w, https://www.wpsolr.com/wp-content/uploads/2018/07/foorum.perekool.ee-home-768x433.png 768w, https://www.wpsolr.com/wp-content/uploads/2018/07/foorum.perekool.ee-home-1024x578.png 1024w, https://www.wpsolr.com/wp-content/uploads/2018/07/foorum.perekool.ee-home.png 1734w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-92496fc elementor-column elementor-col-25 elementor-inner-column" data-id="92496fc" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-05c32d3 elementor-widget elementor-widget-image" data-id="05c32d3" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> <a data-elementor-open-lightbox="" href="https://smallmolecules.com/" target="_blank"> <img width="300" height="168" src="https://www.wpsolr.com/wp-content/uploads/2018/07/smallmolecules-home-300x168.png" class="attachment-medium size-medium" alt="WPSOLR - smallmolecules.com search powered by WPSOLR" srcset="https://www.wpsolr.com/wp-content/uploads/2018/07/smallmolecules-home-300x168.png 300w, https://www.wpsolr.com/wp-content/uploads/2018/07/smallmolecules-home-768x431.png 768w, https://www.wpsolr.com/wp-content/uploads/2018/07/smallmolecules-home-1024x575.png 1024w, https://www.wpsolr.com/wp-content/uploads/2018/07/smallmolecules-home.png 1743w" sizes="(max-width: 300px) 100vw, 300px"> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <section class="elementor-element elementor-element-c414f63 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="c414f63" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-94b4718 elementor-column elementor-col-25 elementor-inner-column" data-id="94b4718" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-5c746c1 elementor-widget elementor-widget-text-editor" data-id="5c746c1" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>MyListing directory search with <strong>1 million</strong> listings</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-3efe1ce elementor-column elementor-col-25 elementor-inner-column" data-id="3efe1ce" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-c6242fe elementor-widget elementor-widget-text-editor" data-id="c6242fe" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>WooCommerce search with <strong>500,000</strong> products</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-55b5a35 elementor-column elementor-col-25 elementor-inner-column" data-id="55b5a35" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-ca2e62b elementor-widget elementor-widget-text-editor" data-id="ca2e62b" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>bbPress forum search with <strong>3 millions</strong> discussions</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-89720c2 elementor-column elementor-col-25 elementor-inner-column" data-id="89720c2" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-a45cafc elementor-widget elementor-widget-text-editor" data-id="a45cafc" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>E-commerce search with <strong>1,5 millions</strong> products</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="elementor-element elementor-element-356f0cc elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="356f0cc" data-element_type="section">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-44fa51c elementor-column elementor-col-100 elementor-top-column" data-id="44fa51c" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <section class="elementor-element elementor-element-416c6f1 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="416c6f1" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-045c7a0 elementor-column elementor-col-100 elementor-inner-column" data-id="045c7a0" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-0f44c89 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="0f44c89" data-element_type="widget" data-widget_type="divider.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">Already 1000 users have boosted their search with our plugin</span> </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-9bf1112 elementor-widget elementor-widget-heading" data-id="9bf1112" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container"> <span class="elementor-heading-title elementor-size-default">Testimonials from wordpress.org (when we used to have a free plugin)</span>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <section class="elementor-element elementor-element-d0b99a8 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="d0b99a8" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-754d7c7 elementor-column elementor-col-33 elementor-inner-column" data-id="754d7c7" data-element_type="column" data-settings="{&quot;motion_fx_motion_fx_scrolling&quot;:&quot;yes&quot;,&quot;motion_fx_devices&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;]}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-8ab2045 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="8ab2045" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     "Great plugin! Have used it to index over 1 million data in a custom WP application and the results have been fantastic. The support too, even though it is free, is very responsive and if there is a feature request it is for sure added in next releases of the plugin.“ Overall, kudos to your team for bringing out such a plugin and making Solr integration with WP such a breeze!"
+                    </div>
+                    <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+                     <div class="elementor-testimonial-meta-inner">
+                      <div class="elementor-testimonial-image"> 
+                       <img width="870" height="635" src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png" class="attachment-full size-full" alt="Image undraw_chat_1wo5.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png 870w, https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5-300x219.png 300w" sizes="(max-width: 870px) 100vw, 870px">
+                      </div>
+                      <div class="elementor-testimonial-details">
+                       <div class="elementor-testimonial-name">
+                        @amathur
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-b4e35a9 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="b4e35a9" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     "I experience WPSolr as a highly valuable search plugin. I have a website with over 6000 products and this plugin enables my customer to execute a fast and proper search. The support team of WPSolr even helped me setup a cloud server support me when installing their plugin. All by all very satisfied about this plugin, excellent work! P.S. I never write reviews unless I am really impressed."
+                    </div>
+                    <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+                     <div class="elementor-testimonial-meta-inner">
+                      <div class="elementor-testimonial-image"> 
+                       <img width="870" height="635" src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png" class="attachment-full size-full" alt="Image undraw_chat_1wo5.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png 870w, https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5-300x219.png 300w" sizes="(max-width: 870px) 100vw, 870px">
+                      </div>
+                      <div class="elementor-testimonial-details">
+                       <div class="elementor-testimonial-name">
+                        @jorisadriaans
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-461a34f elementor-column elementor-col-33 elementor-inner-column" data-id="461a34f" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-665ffb2 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="665ffb2" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     "This plugin make working with solr very easy. The plugin is often updated, and the plugin author is excellent with support and new features"
+                    </div>
+                    <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+                     <div class="elementor-testimonial-meta-inner">
+                      <div class="elementor-testimonial-image"> 
+                       <img width="870" height="635" src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png" class="attachment-full size-full" alt="Image undraw_chat_1wo5.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png 870w, https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5-300x219.png 300w" sizes="(max-width: 870px) 100vw, 870px">
+                      </div>
+                      <div class="elementor-testimonial-details">
+                       <div class="elementor-testimonial-name">
+                        @sasdts
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-b84dc13 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="b84dc13" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     "Just wanted to say thanks for such an awesome plugin. It's a well written plugin and configurable. Using the actions and filters I'm able to add more fields to filter on and more fields to index without hacking the core of the plugin. Read the documentation for the plugin on their site."
+                    </div>
+                    <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+                     <div class="elementor-testimonial-meta-inner">
+                      <div class="elementor-testimonial-image"> 
+                       <img width="870" height="635" src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png" class="attachment-full size-full" alt="Image undraw_chat_1wo5.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png 870w, https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5-300x219.png 300w" sizes="(max-width: 870px) 100vw, 870px">
+                      </div>
+                      <div class="elementor-testimonial-details">
+                       <div class="elementor-testimonial-name">
+                        @flacoman91
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-e68ed07 elementor-column elementor-col-33 elementor-inner-column" data-id="e68ed07" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-b91cb9c elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="b91cb9c" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     "Outstanding plugin. Been using WordPress for a long time now, but never commented on any plugin. I created a account WordPress.org just to give this plugin a 5 star review. Not just because the plugin works as advertised, but also because of the outstanding support given by the author. Great job."
+                    </div>
+                    <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+                     <div class="elementor-testimonial-meta-inner">
+                      <div class="elementor-testimonial-image"> 
+                       <img width="870" height="635" src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png" class="attachment-full size-full" alt="Image undraw_chat_1wo5.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png 870w, https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5-300x219.png 300w" sizes="(max-width: 870px) 100vw, 870px">
+                      </div>
+                      <div class="elementor-testimonial-details">
+                       <div class="elementor-testimonial-name">
+                        @wietzej89
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-9f23858 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="9f23858" data-element_type="widget" data-widget_type="testimonial.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+                    <div class="elementor-testimonial-content">
+                     "Flexible, well thinked and designed. Great plugin implementation. Great maintainance. I do not know if it’s clear enough: great!"
+                    </div>
+                    <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+                     <div class="elementor-testimonial-meta-inner">
+                      <div class="elementor-testimonial-image"> 
+                       <img width="870" height="635" src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png" class="attachment-full size-full" alt="Image undraw_chat_1wo5.png of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5.png 870w, https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_chat_1wo5-300x219.png 300w" sizes="(max-width: 870px) 100vw, 870px">
+                      </div>
+                      <div class="elementor-testimonial-details">
+                       <div class="elementor-testimonial-name">
+                        @vcapoccia
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <div class="elementor-element elementor-element-1207066 elementor-widget elementor-widget-spacer" data-id="1207066" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="elementor-element elementor-element-3fad766 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="3fad766" data-element_type="section">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-968f667 elementor-column elementor-col-100 elementor-top-column" data-id="968f667" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-0b2e8d9 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="0b2e8d9" data-element_type="widget" data-widget_type="divider.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">How is WPSOLR different from other plugins or SaaS hosted search?</span> </span>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-16512fa elementor-widget elementor-widget-heading" data-id="16512fa" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+             <h3 class="elementor-heading-title elementor-size-default">You don't have to trade off quality for quantity! Our search technology brings great results, at any scale. <br>Multi-language stemming, stopwords, synonyms, fuzzy. <br>All the features of a great search that works with millions of posts, products, listings, or topics.</h3>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-ebf09f5 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="ebf09f5" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-4018717 elementor-column elementor-col-33 elementor-inner-column" data-id="4018717" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-86b9365 elementor-flip-box--effect-zoom-out elementor-widget elementor-widget-flip-box" data-id="86b9365" data-element_type="widget" data-widget_type="flip-box.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-flip-box">
+                    <div class="elementor-flip-box__layer elementor-flip-box__front">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <div class="elementor-flip-box__image"> 
+                        <img src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_online_resume_qyys.png" title="undraw_online_resume_qyys" alt="undraw_online_resume_qyys">
+                       </div>
+                       <h3 class="elementor-flip-box__layer__title"> Secure</h3>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="elementor-flip-box__layer elementor-flip-box__back">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <h3 class="elementor-flip-box__layer__title"> Keep your data in place</h3>
+                       <div class="elementor-flip-box__layer__description">
+                         Install Elasticsearch, Solr, or RediSearch on your secured and private server.
+                       </div> <a class="elementor-flip-box__button elementor-button elementor-size-md" href="/pricing"> Free Consultation </a>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-ef5aa45 elementor-flip-box--effect-zoom-out elementor-widget elementor-widget-flip-box" data-id="ef5aa45" data-element_type="widget" data-widget_type="flip-box.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-flip-box">
+                    <div class="elementor-flip-box__layer elementor-flip-box__front">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <div class="elementor-flip-box__image"> 
+                        <img src="https://www.wpsolr.com/wp-content/uploads/2019/12/envelope.png" title="envelope" alt="envelope">
+                       </div>
+                       <h3 class="elementor-flip-box__layer__title"> Search anything</h3>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="elementor-flip-box__layer elementor-flip-box__back">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <h3 class="elementor-flip-box__layer__title"> No stone unturned</h3>
+                       <div class="elementor-flip-box__layer__description">
+                         Every bit of information in your system can be indexed and searched. Post types, custom fields, taxonomies, pdf files, .docx files ...
+                       </div> <a class="elementor-flip-box__button elementor-button elementor-size-md" href="/pricing"> Free Consultation </a>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-ef3fcf0 elementor-column elementor-col-33 elementor-inner-column" data-id="ef3fcf0" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-5b6c6eb elementor-flip-box--effect-zoom-out elementor-widget elementor-widget-flip-box" data-id="5b6c6eb" data-element_type="widget" data-widget_type="flip-box.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-flip-box">
+                    <div class="elementor-flip-box__layer elementor-flip-box__front">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <div class="elementor-flip-box__image"> 
+                        <img src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_online_organizer_ofxm-3.png" title="undraw_online_organizer_ofxm" alt="undraw_online_organizer_ofxm">
+                       </div>
+                       <h3 class="elementor-flip-box__layer__title"> No admin</h3>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="elementor-flip-box__layer elementor-flip-box__back">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <h3 class="elementor-flip-box__layer__title"> Simple</h3>
+                       <div class="elementor-flip-box__layer__description">
+                         We've done the hard work. Our plugin connects seamlessly to the most powerful search engines ever. No dirty hands.
+                       </div> <a class="elementor-flip-box__button elementor-button elementor-size-md" href="/pricing"> Free Consultation </a>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-1b13bb5 elementor-flip-box--effect-zoom-out elementor-widget elementor-widget-flip-box" data-id="1b13bb5" data-element_type="widget" data-widget_type="flip-box.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-flip-box">
+                    <div class="elementor-flip-box__layer elementor-flip-box__front">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <div class="elementor-flip-box__image"> 
+                        <img src="https://www.wpsolr.com/wp-content/uploads/2019/12/screenlock.png" title="screenlock" alt="screenlock">
+                       </div>
+                       <h3 class="elementor-flip-box__layer__title"> Unlock all your plugins</h3>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="elementor-flip-box__layer elementor-flip-box__back">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <h3 class="elementor-flip-box__layer__title"> More than 20 add-ons</h3>
+                       <div class="elementor-flip-box__layer__description">
+                         WordPress greatness comes from its plugins. Be assured your search will work great with yours: WooCommerce, bbPress, WPML, Listify, Jobify, MyListing and many more.
+                       </div> <a class="elementor-flip-box__button elementor-button elementor-size-md" href="/pricing"> Free Consultation </a>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-b545b3e elementor-column elementor-col-33 elementor-inner-column" data-id="b545b3e" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-6809038 elementor-flip-box--effect-zoom-out elementor-widget elementor-widget-flip-box" data-id="6809038" data-element_type="widget" data-widget_type="flip-box.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-flip-box">
+                    <div class="elementor-flip-box__layer elementor-flip-box__front">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <div class="elementor-flip-box__image"> 
+                        <img src="https://www.wpsolr.com/wp-content/uploads/2019/12/undraw_financial_data_es63.png" title="undraw_financial_data_es63" alt="undraw_financial_data_es63">
+                       </div>
+                       <h3 class="elementor-flip-box__layer__title"> Grow in confidence</h3>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="elementor-flip-box__layer elementor-flip-box__back">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <h3 class="elementor-flip-box__layer__title"> Unbreakable</h3>
+                       <div class="elementor-flip-box__layer__description">
+                         A Black Friday surge can hurt your WooCommerce sells. Our technology is scalable virtually to any stress levels, so you don’t need to worry.
+                       </div> <a class="elementor-flip-box__button elementor-button elementor-size-md" href="/pricing"> Free Consultation </a>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-dec1920 elementor-flip-box--effect-zoom-out elementor-widget elementor-widget-flip-box" data-id="dec1920" data-element_type="widget" data-widget_type="flip-box.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-flip-box">
+                    <div class="elementor-flip-box__layer elementor-flip-box__front">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <div class="elementor-flip-box__image"> 
+                        <img src="https://www.wpsolr.com/wp-content/uploads/2019/12/visit2.png" title="visit2" alt="visit2">
+                       </div>
+                       <h3 class="elementor-flip-box__layer__title"> Human support</h3>
+                      </div>
+                     </div>
+                    </div>
+                    <div class="elementor-flip-box__layer elementor-flip-box__back">
+                     <div class="elementor-flip-box__layer__overlay">
+                      <div class="elementor-flip-box__layer__inner">
+                       <h3 class="elementor-flip-box__layer__title"> No horrid Bots to answer</h3>
+                       <div class="elementor-flip-box__layer__description">
+                         Plain human expertise answering quickly and swiftly.
+                       </div> <a class="elementor-flip-box__button elementor-button elementor-size-md" href="/pricing"> Free Consultation </a>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="elementor-element elementor-element-5351994 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="5351994" data-element_type="section" id="stephen">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-34fd212 elementor-column elementor-col-100 elementor-top-column" data-id="34fd212" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-f0397b4 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="f0397b4" data-element_type="widget" data-widget_type="divider.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">Cartochrome had disastrous conversions and SEO due to its slow 1 million listings search</span> </span>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-bf9d69c elementor-widget elementor-widget-heading" data-id="bf9d69c" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+             <h2 class="elementor-heading-title elementor-size-default">Now, displaying <b>one million</b> search results is more than <b>10x times faster.</b></h2>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-205397c elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="205397c" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-19f7bbd elementor-column elementor-col-50 elementor-inner-column" data-id="19f7bbd" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-21f87fe elementor-widget elementor-widget-heading" data-id="21f87fe" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container"> <span class="elementor-heading-title elementor-size-default"><a href="https://www.cartochrome.com/" target="_blank">Stephen Umunna - CEO, cartochrome</a></span>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-025b8a2 elementor-widget elementor-widget-image" data-id="025b8a2" data-element_type="widget" data-widget_type="image.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-image"> 
+                    <img width="200" height="200" src="https://www.wpsolr.com/wp-content/uploads/2020/01/Stephen_Umunna_cartochrome_photo.jpg" class="attachment-full size-full" alt="Image Stephen_Umunna_cartochrome_photo.jpg of Home 0" srcset="https://www.wpsolr.com/wp-content/uploads/2020/01/Stephen_Umunna_cartochrome_photo.jpg 200w, https://www.wpsolr.com/wp-content/uploads/2020/01/Stephen_Umunna_cartochrome_photo-150x150.jpg 150w" sizes="(max-width: 200px) 100vw, 200px">
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-9a3fd80 elementor-shape-circle elementor-widget elementor-widget-social-icons" data-id="9a3fd80" data-element_type="widget" data-widget_type="social-icons.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-social-icons-wrapper"> <a href="https://www.linkedin.com/in/stephenumunna/" class="elementor-icon elementor-social-icon elementor-social-icon-linkedin elementor-repeater-item-c14d7f3" target="_blank"> <span class="elementor-screen-only">Linkedin</span> <i class="fab fa-linkedin"></i> </a> <a href="https://www.facebook.com/cartochrome/" class="elementor-icon elementor-social-icon elementor-social-icon-facebook elementor-repeater-item-adc0f3d" target="_blank"> <span class="elementor-screen-only">Facebook</span> <i class="fab fa-facebook"></i> </a> <a href="https://twitter.com/cartochrome?lang=en" class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-repeater-item-80d4032" target="_blank"> <span class="elementor-screen-only">Twitter</span> <i class="fab fa-twitter"></i> </a>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-44d556f elementor-column elementor-col-50 elementor-inner-column" data-id="44d556f" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-f2baafa elementor-widget elementor-widget-heading" data-id="f2baafa" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container"> <span class="elementor-heading-title elementor-size-default"><a href="https://www.cartochrome.com/" target="_blank"><u>www.cartochrome.com</u> <br>1 million listings search</a></span>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-e609d34 elementor-aspect-ratio-169 elementor-invisible elementor-widget elementor-widget-video" data-id="e609d34" data-element_type="widget" data-settings="{&quot;lightbox&quot;:&quot;yes&quot;,&quot;_animation&quot;:&quot;bounceIn&quot;,&quot;aspect_ratio&quot;:&quot;169&quot;}" data-widget_type="video.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-wrapper elementor-open-lightbox">
+                    <div class="elementor-custom-embed-image-overlay" data-elementor-open-lightbox="yes" data-elementor-lightbox="{&quot;type&quot;:&quot;video&quot;,&quot;videoType&quot;:&quot;youtube&quot;,&quot;url&quot;:&quot;https:\/\/www.youtube.com\/embed\/uX1440rOlzg?feature=oembed&amp;start&amp;end&amp;wmode=opaque&amp;loop=0&amp;controls=1&amp;mute=0&amp;rel=0&amp;modestbranding=0&quot;,&quot;modalOptions&quot;:{&quot;id&quot;:&quot;elementor-lightbox-e609d34&quot;,&quot;entranceAnimation&quot;:&quot;&quot;,&quot;entranceAnimation_tablet&quot;:&quot;&quot;,&quot;entranceAnimation_mobile&quot;:&quot;&quot;,&quot;videoAspectRatio&quot;:&quot;169&quot;}}"> 
+                     <img width="1875" height="963" src="https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting.png" class="attachment-full size-full" alt="cartochrome mylisting 800,000 listings" srcset="https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting.png 1875w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-300x154.png 300w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-1024x526.png 1024w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-768x394.png 768w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-1536x789.png 1536w, https://www.wpsolr.com/wp-content/uploads/2019/12/cartochrome-mylisting-1320x678.png 1320w" sizes="(max-width: 1875px) 100vw, 1875px">
+                     <div class="elementor-custom-embed-play" role="button"> <i class="eicon-play" aria-hidden="true"></i> <span class="elementor-screen-only">Play Video</span>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-96ffe58 elementor-widget elementor-widget-text-editor" data-id="96ffe58" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>Watch our tutorial above on how to setup <b>WPSOLR</b> with <b>Elasticsearch</b> and the MyListing theme, exactly as Cartochrome did.</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <div class="elementor-element elementor-element-4e1708e elementor-widget elementor-widget-spacer" data-id="4e1708e" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-1f0ffa2 elementor-widget elementor-widget-heading" data-id="1f0ffa2" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+             <p class="elementor-heading-title elementor-size-default">Cartochrome's search went down <br>from <b style="color:red">60</b> to <b style="color:#009FCF">3</b> seconds.</p>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-0c60b47 elementor-widget elementor-widget-text-editor" data-id="0c60b47" data-element_type="widget" data-widget_type="text-editor.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-text-editor elementor-clearfix">
+              <p>We started to solve a simple problem: searching 50 million documents with Solr.&nbsp;</p>
+              <p>We liked the end result so much, we built a universal search plugin for WordPress with Solr, Elasticsearch, Algolia, and RediSearch.&nbsp;</p>
+              <p>It was quite a journey!</p>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section class="elementor-element elementor-element-49ea462 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="49ea462" data-element_type="section">
+      <div class="elementor-background-overlay"></div>
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-bdf111e elementor-column elementor-col-100 elementor-top-column" data-id="bdf111e" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-b4f234f elementor-widget elementor-widget-spacer" data-id="b4f234f" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-2903f38 elementor-widget-divider--view-line_text elementor-widget-divider--element-align-center elementor-widget elementor-widget-divider" data-id="2903f38" data-element_type="widget" data-widget_type="divider.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-divider"> <span class="elementor-divider-separator"> <span class="elementor-divider__text elementor-divider__element">We are here to support you</span> </span>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-248893a elementor-widget elementor-widget-heading" data-id="248893a" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+             <h3 class="elementor-heading-title elementor-size-default">We are proud of our support: always fast and human.</h3>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-2e6f08d elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="2e6f08d" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-2c922a4 elementor-column elementor-col-50 elementor-inner-column" data-id="2c922a4" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-3cbf587 elementor-view-default elementor-widget elementor-widget-icon" data-id="3cbf587" data-element_type="widget" data-widget_type="icon.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-icon-wrapper">
+                    <div class="elementor-icon"> <i aria-hidden="true" class="far fa-life-ring"></i>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-5a6a8a9 elementor-widget elementor-widget-heading" data-id="5a6a8a9" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                   <h3 class="elementor-heading-title elementor-size-default">more than 500 answers already</h3>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-1a2a9ef elementor-widget elementor-widget-text-editor" data-id="1a2a9ef" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>Read other user answers. Your problem probably has already been solved.</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+              <div class="elementor-element elementor-element-1eebbab elementor-column elementor-col-50 elementor-inner-column" data-id="1eebbab" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-0343680 elementor-view-default elementor-widget elementor-widget-icon" data-id="0343680" data-element_type="widget" data-widget_type="icon.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-icon-wrapper">
+                    <div class="elementor-icon"> <i aria-hidden="true" class="fas fa-headphones"></i>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-1e9a280 elementor-widget elementor-widget-heading" data-id="1e9a280" data-element_type="widget" data-widget_type="heading.default">
+                  <div class="elementor-widget-container">
+                   <h3 class="elementor-heading-title elementor-size-default">The human touch</h3>
+                  </div>
+                 </div>
+                 <div class="elementor-element elementor-element-8698893 elementor-widget elementor-widget-text-editor" data-id="8698893" data-element_type="widget" data-widget_type="text-editor.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-text-editor elementor-clearfix">
+                    <p>We do not believe in bots for support.</p>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+           <div class="elementor-element elementor-element-50da4d7 elementor-widget elementor-widget-spacer" data-id="50da4d7" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </div>
+  </div>
+  <div data-elementor-type="footer" data-elementor-id="7605" class="elementor elementor-7605 elementor-location-footer" data-elementor-settings="[]">
+   <div class="elementor-inner">
+    <div class="elementor-section-wrap">
+     <section class="elementor-element elementor-element-e538b5d elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-id="e538b5d" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+      <div class="elementor-container elementor-column-gap-default">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-670d094 elementor-column elementor-col-50 elementor-top-column" data-id="670d094" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-06c280e elementor-align-left elementor-widget elementor-widget-button" data-id="06c280e" data-element_type="widget" data-widget_type="button.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-button-wrapper"> <a href="https://admin.wpsolr.com/#/signin" class="elementor-button-link elementor-button elementor-size-xs" role="button"> <span class="elementor-button-content-wrapper"> <span class="elementor-button-icon elementor-align-icon-left"> <i aria-hidden="true" class="fas fa-angle-right"></i> </span> <span class="elementor-button-text">Login</span> </span> </a>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-f3799f8 elementor-align-left elementor-widget elementor-widget-button" data-id="f3799f8" data-element_type="widget" data-widget_type="button.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-button-wrapper"> <a href="https://www.iubenda.com/privacy-policy/36871114" class="elementor-button-link elementor-button elementor-size-xs" role="button"> <span class="elementor-button-content-wrapper"> <span class="elementor-button-text">Privacy policy</span> </span> </a>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="elementor-element elementor-element-534a608 elementor-column elementor-col-50 elementor-top-column" data-id="534a608" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-279996a elementor-align-left animated-fast elementor-icon-list--layout-traditional elementor-invisible elementor-widget elementor-widget-icon-list" data-id="279996a" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}" data-widget_type="icon-list.default">
+            <div class="elementor-widget-container">
+             <ul class="elementor-icon-list-items">
+              <li class="elementor-icon-list-item"> <a href="/terms-and-conditions/"> <span class="elementor-icon-list-text"> <span style="text-decoration:underline">Terms and Conditions</span></span> </a></li>
+              <li class="elementor-icon-list-item"> <span class="elementor-icon-list-text">© 2020 wpsolr.com. All Rights Reserved.</span></li>
+             </ul>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </div>
+  </div> 
+  <input type="hidden" id="wpsolr_autocomplete_nonce" value="817f600a95"> 
+  <script type="text/javascript">var sticky_menu = 2;
+    var manual_searchmsg = 'With extensions to manage WooCommerce, ACF, WPML, Polylang, s2Member ...';
+	
+	var owlCarousel_item = 3;
+		var live_search_active = 2;
+	var live_search_url = '';
+		
+	/**** DOCUMENTATION  ****/
+		var doc_catpage_hash = 2;
+	var doc_catpage_active = 2;
+	var doc_cookie_sh = 2;
+	var doc_scroll_menu_define_height = '845px';
+	var go_up_icon = 'fa fa-arrow-up';
+    var execute_js_after_ajax_call_pg_doc = '2';
+	var kb_display_feedback_form_onclick_thumbsdown = '2';
+	/*** FAQ ***/
+			var faq_search_id = '';</script> 
+  <div data-elementor-type="popup" data-elementor-id="18637" class="elementor elementor-18637 elementor-location-popup" data-elementor-settings="{&quot;entrance_animation&quot;:&quot;fadeIn&quot;,&quot;entrance_animation_duration&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:1.2,&quot;sizes&quot;:[]},&quot;triggers&quot;:{&quot;exit_intent&quot;:&quot;yes&quot;},&quot;timing&quot;:{&quot;times_times&quot;:1,&quot;times_count&quot;:&quot;close&quot;,&quot;times&quot;:&quot;yes&quot;}}">
+   <div class="elementor-inner">
+    <div class="elementor-section-wrap">
+     <section class="elementor-element elementor-element-b5763df elementor-section-full_width elementor-section-height-full elementor-section-items-stretch elementor-section-content-top elementor-reverse-mobile elementor-section-height-default elementor-section elementor-top-section" data-id="b5763df" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;}">
+      <div class="elementor-container elementor-column-gap-no">
+       <div class="elementor-row">
+        <div class="elementor-element elementor-element-e432e67 elementor-column elementor-col-50 elementor-top-column" data-id="e432e67" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-b60480b elementor-widget elementor-widget-spacer" data-id="b60480b" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-ddb5d85 elementor-widget__width-initial elementor-widget elementor-widget-testimonial" data-id="ddb5d85" data-element_type="widget" data-widget_type="testimonial.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-testimonial-wrapper elementor-testimonial-text-align-left">
+              <div class="elementor-testimonial-content">
+               <b>More than a million pages ! </b> 
+               <br>
+               <br>CartoChrome has been transformed because of the scalability WPSOLR has made it. 
+               <br>
+               <br>Their customer service is amicable. 
+               <br>
+               <br>Right now, CartoChrome has more than a million pages and we are working on scaling it more thanks to WPSOLR. 
+               <br>
+               <br>I recommend WPSOLR to anyone trying to take their search website to the next level! Thanks, Patrice!
+              </div>
+              <div class="elementor-testimonial-meta elementor-has-image elementor-testimonial-image-position-aside">
+               <div class="elementor-testimonial-meta-inner">
+                <div class="elementor-testimonial-image"> <a href="https://www.cartochrome.com" target="_blank"><img width="200" height="200" src="https://www.wpsolr.com/wp-content/uploads/2020/01/Stephen_Umunna_cartochrome_photo.jpg" class="attachment-medium size-medium" alt="" srcset="https://www.wpsolr.com/wp-content/uploads/2020/01/Stephen_Umunna_cartochrome_photo.jpg 200w, https://www.wpsolr.com/wp-content/uploads/2020/01/Stephen_Umunna_cartochrome_photo-150x150.jpg 150w" sizes="(max-width: 200px) 100vw, 200px"></a>
+                </div>
+                <div class="elementor-testimonial-details"> <a class="elementor-testimonial-name" href="https://www.cartochrome.com" target="_blank">Stephen Umunna</a> <a class="elementor-testimonial-job" href="https://www.cartochrome.com" target="_blank">Founder of CartoChrome.com</a>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="elementor-element elementor-element-fac3b26 elementor-column elementor-col-50 elementor-top-column" data-id="fac3b26" data-element_type="column">
+         <div class="elementor-column-wrap  elementor-element-populated">
+          <div class="elementor-widget-wrap">
+           <div class="elementor-element elementor-element-ebccc9c elementor-widget elementor-widget-spacer" data-id="ebccc9c" data-element_type="widget" data-widget_type="spacer.default">
+            <div class="elementor-widget-container">
+             <div class="elementor-spacer">
+              <div class="elementor-spacer-inner"></div>
+             </div>
+            </div>
+           </div>
+           <div class="elementor-element elementor-element-a37fe90 elementor-widget elementor-widget-heading" data-id="a37fe90" data-element_type="widget" data-widget_type="heading.default">
+            <div class="elementor-widget-container">
+             <h2 class="elementor-heading-title elementor-size-default">Receive our plugin, and test it for free!</h2>
+            </div>
+           </div>
+           <section class="elementor-element elementor-element-7303165 elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-inner-section" data-id="7303165" data-element_type="section">
+            <div class="elementor-container elementor-column-gap-default">
+             <div class="elementor-row">
+              <div class="elementor-element elementor-element-4bdcdb3 elementor-column elementor-col-100 elementor-inner-column" data-id="4bdcdb3" data-element_type="column">
+               <div class="elementor-column-wrap  elementor-element-populated">
+                <div class="elementor-widget-wrap">
+                 <div class="elementor-element elementor-element-21bd603 elementor-widget elementor-widget-shortcode" data-id="21bd603" data-element_type="widget" data-widget_type="shortcode.default">
+                  <div class="elementor-widget-container">
+                   <div class="elementor-shortcode">
+                    <script type="text/javascript" src="https://app.mailerlite.com/data/webforms/1829490/w6l9h2.js?v=1585328700"></script>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+           </section>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div>
+   </div>
+  </div> 
+  <script type="text/javascript">var AjaxPostSearch = {"ajaxUrl":"https:\/\/www.wpsolr.com\/wp-admin\/admin-ajax.php"};</script> 
+  <script type="text/javascript">var ParticleThemesData = {"11":"{\n        \"particles\": {\n          \"number\": {\n            \"value\": 160,\n            \"density\": {\n              \"enable\": true,\n              \"value_area\": 800\n            }\n          },\n          \"color\": {\n            \"value\": \"#ffffff\"\n          },\n          \"shape\": {\n            \"type\": \"circle\",\n            \"stroke\": {\n              \"width\": 0,\n              \"color\": \"#000000\"\n            },\n            \"polygon\": {\n              \"nb_sides\": 5\n            },\n            \"image\": {\n              \"src\": \"img\/github.svg\",\n              \"width\": 100,\n              \"height\": 100\n            }\n          },\n          \"opacity\": {\n            \"value\": 0.5,\n            \"random\": false,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 1,\n              \"opacity_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"size\": {\n            \"value\": 3,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 40,\n              \"size_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"line_linked\": {\n            \"enable\": true,\n            \"distance\": 150,\n            \"color\": \"#ffffff\",\n            \"opacity\": 0.4,\n            \"width\": 1\n          },\n          \"move\": {\n            \"enable\": true,\n            \"speed\": 6,\n            \"direction\": \"none\",\n            \"random\": false,\n            \"straight\": false,\n            \"out_mode\": \"out\",\n            \"bounce\": false,\n            \"attract\": {\n              \"enable\": false,\n              \"rotateX\": 600,\n              \"rotateY\": 1200\n            }\n          }\n        },\n        \"interactivity\": {\n          \"detect_on\": \"canvas\",\n          \"events\": {\n            \"onhover\": {\n              \"enable\": true,\n              \"mode\": \"repulse\"\n            },\n            \"onclick\": {\n              \"enable\": true,\n              \"mode\": \"push\"\n            },\n            \"resize\": true\n          },\n          \"modes\": {\n            \"grab\": {\n              \"distance\": 400,\n              \"line_linked\": {\n                \"opacity\": 1\n              }\n            },\n            \"bubble\": {\n              \"distance\": 400,\n              \"size\": 40,\n              \"duration\": 2,\n              \"opacity\": 8,\n              \"speed\": 3\n            },\n            \"repulse\": {\n              \"distance\": 200,\n              \"duration\": 0.4\n            },\n            \"push\": {\n              \"particles_nb\": 4\n            },\n            \"remove\": {\n              \"particles_nb\": 2\n            }\n          }\n        },\n        \"retina_detect\": true\n    }","nasa":"{\n        \"particles\": {\n          \"number\": {\n            \"value\": 250,\n            \"density\": {\n              \"enable\": true,\n              \"value_area\": 800\n            }\n          },\n          \"color\": {\n            \"value\": \"#ffffff\"\n          },\n          \"shape\": {\n            \"type\": \"circle\",\n            \"stroke\": {\n              \"width\": 0,\n              \"color\": \"#000000\"\n            },\n            \"polygon\": {\n              \"nb_sides\": 5\n            },\n            \"image\": {\n              \"src\": \"img\/github.svg\",\n              \"width\": 100,\n              \"height\": 100\n            }\n          },\n          \"opacity\": {\n            \"value\": 1,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": true,\n              \"speed\": 1,\n              \"opacity_min\": 0,\n              \"sync\": false\n            }\n          },\n          \"size\": {\n            \"value\": 3,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 4,\n              \"size_min\": 0.3,\n              \"sync\": false\n            }\n          },\n          \"line_linked\": {\n            \"enable\": false,\n            \"distance\": 150,\n            \"color\": \"#ffffff\",\n            \"opacity\": 0.4,\n            \"width\": 1\n          },\n          \"move\": {\n            \"enable\": true,\n            \"speed\": 1,\n            \"direction\": \"none\",\n            \"random\": true,\n            \"straight\": false,\n            \"out_mode\": \"out\",\n            \"bounce\": false,\n            \"attract\": {\n              \"enable\": false,\n              \"rotateX\": 600,\n              \"rotateY\": 600\n            }\n          }\n        },\n        \"interactivity\": {\n          \"detect_on\": \"canvas\",\n          \"events\": {\n            \"onhover\": {\n              \"enable\": true,\n              \"mode\": \"bubble\"\n            },\n            \"onclick\": {\n              \"enable\": true,\n              \"mode\": \"repulse\"\n            },\n            \"resize\": true\n          },\n          \"modes\": {\n            \"grab\": {\n              \"distance\": 400,\n              \"line_linked\": {\n                \"opacity\": 1\n              }\n            },\n            \"bubble\": {\n              \"distance\": 250,\n              \"size\": 0,\n              \"duration\": 2,\n              \"opacity\": 0,\n              \"speed\": 3\n            },\n            \"repulse\": {\n              \"distance\": 400,\n              \"duration\": 0.4\n            },\n            \"push\": {\n              \"particles_nb\": 4\n            },\n            \"remove\": {\n              \"particles_nb\": 2\n            }\n          }\n        },\n        \"retina_detect\": true\n    }","bubble":"{\n        \"particles\": {\n          \"number\": {\n            \"value\": 15,\n            \"density\": {\n              \"enable\": true,\n              \"value_area\": 800\n            }\n          },\n          \"color\": {\n            \"value\": \"#1b1e34\"\n          },\n          \"shape\": {\n            \"type\": \"polygon\",\n            \"stroke\": {\n              \"width\": 0,\n              \"color\": \"#000\"\n            },\n            \"polygon\": {\n              \"nb_sides\": 6\n            },\n            \"image\": {\n              \"src\": \"img\/github.svg\",\n              \"width\": 100,\n              \"height\": 100\n            }\n          },\n          \"opacity\": {\n            \"value\": 0.3,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 1,\n              \"opacity_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"size\": {\n            \"value\": 50,\n            \"random\": false,\n            \"anim\": {\n              \"enable\": true,\n              \"speed\": 10,\n              \"size_min\": 40,\n              \"sync\": false\n            }\n          },\n          \"line_linked\": {\n            \"enable\": false,\n            \"distance\": 200,\n            \"color\": \"#ffffff\",\n            \"opacity\": 1,\n            \"width\": 2\n          },\n          \"move\": {\n            \"enable\": true,\n            \"speed\": 8,\n            \"direction\": \"none\",\n            \"random\": false,\n            \"straight\": false,\n            \"out_mode\": \"out\",\n            \"bounce\": false,\n            \"attract\": {\n              \"enable\": false,\n              \"rotateX\": 600,\n              \"rotateY\": 1200\n            }\n          }\n        },\n        \"interactivity\": {\n          \"detect_on\": \"canvas\",\n          \"events\": {\n            \"onhover\": {\n              \"enable\": false,\n              \"mode\": \"grab\"\n            },\n            \"onclick\": {\n              \"enable\": false,\n              \"mode\": \"push\"\n            },\n            \"resize\": true\n          },\n          \"modes\": {\n            \"grab\": {\n              \"distance\": 400,\n              \"line_linked\": {\n                \"opacity\": 1\n              }\n            },\n            \"bubble\": {\n              \"distance\": 400,\n              \"size\": 40,\n              \"duration\": 2,\n              \"opacity\": 8,\n              \"speed\": 3\n            },\n            \"repulse\": {\n              \"distance\": 200,\n              \"duration\": 0.4\n            },\n            \"push\": {\n              \"particles_nb\": 4\n            },\n            \"remove\": {\n              \"particles_nb\": 2\n            }\n          }\n        },\n        \"retina_detect\": true\n    }","snow":"{\n        \"particles\": {\n          \"number\": {\n            \"value\": 450,\n            \"density\": {\n              \"enable\": true,\n              \"value_area\": 800\n            }\n          },\n          \"color\": {\n            \"value\": \"#fff\"\n          },\n          \"shape\": {\n            \"type\": \"circle\",\n            \"stroke\": {\n              \"width\": 0,\n              \"color\": \"#000000\"\n            },\n            \"polygon\": {\n              \"nb_sides\": 5\n            },\n            \"image\": {\n              \"src\": \"img\/github.svg\",\n              \"width\": 100,\n              \"height\": 100\n            }\n          },\n          \"opacity\": {\n            \"value\": 0.5,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 1,\n              \"opacity_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"size\": {\n            \"value\": 5,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 40,\n              \"size_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"line_linked\": {\n            \"enable\": false,\n            \"distance\": 500,\n            \"color\": \"#ffffff\",\n            \"opacity\": 0.4,\n            \"width\": 2\n          },\n          \"move\": {\n            \"enable\": true,\n            \"speed\": 6,\n            \"direction\": \"bottom\",\n            \"random\": false,\n            \"straight\": false,\n            \"out_mode\": \"out\",\n            \"bounce\": false,\n            \"attract\": {\n              \"enable\": false,\n              \"rotateX\": 600,\n              \"rotateY\": 1200\n            }\n          }\n        },\n        \"interactivity\": {\n          \"detect_on\": \"canvas\",\n          \"events\": {\n            \"onhover\": {\n              \"enable\": true,\n              \"mode\": \"bubble\"\n            },\n            \"onclick\": {\n              \"enable\": true,\n              \"mode\": \"repulse\"\n            },\n            \"resize\": true\n          },\n          \"modes\": {\n            \"grab\": {\n              \"distance\": 400,\n              \"line_linked\": {\n                \"opacity\": 0.5\n              }\n            },\n            \"bubble\": {\n              \"distance\": 400,\n              \"size\": 4,\n              \"duration\": 0.3,\n              \"opacity\": 1,\n              \"speed\": 3\n            },\n            \"repulse\": {\n              \"distance\": 200,\n              \"duration\": 0.4\n            },\n            \"push\": {\n              \"particles_nb\": 4\n            },\n            \"remove\": {\n              \"particles_nb\": 2\n            }\n          }\n        },\n        \"retina_detect\": true\n    }","nyan_cat":"{\n        \"particles\": {\n          \"number\": {\n            \"value\": 150,\n            \"density\": {\n              \"enable\": false,\n              \"value_area\": 800\n            }\n          },\n          \"color\": {\n            \"value\": \"#ffffff\"\n          },\n          \"shape\": {\n            \"type\": \"star\",\n            \"stroke\": {\n              \"width\": 0,\n              \"color\": \"#000000\"\n            },\n            \"polygon\": {\n              \"nb_sides\": 5\n            },\n            \"image\": {\n              \"src\": \"http:\/\/wiki.lexisnexis.com\/academic\/images\/f\/fb\/Itunes_podcast_icon_300.jpg\",\n              \"width\": 100,\n              \"height\": 100\n            }\n          },\n          \"opacity\": {\n            \"value\": 0.5,\n            \"random\": false,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 1,\n              \"opacity_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"size\": {\n            \"value\": 4,\n            \"random\": true,\n            \"anim\": {\n              \"enable\": false,\n              \"speed\": 40,\n              \"size_min\": 0.1,\n              \"sync\": false\n            }\n          },\n          \"line_linked\": {\n            \"enable\": false,\n            \"distance\": 150,\n            \"color\": \"#ffffff\",\n            \"opacity\": 0.4,\n            \"width\": 1\n          },\n          \"move\": {\n            \"enable\": true,\n            \"speed\": 14,\n            \"direction\": \"left\",\n            \"random\": false,\n            \"straight\": true,\n            \"out_mode\": \"out\",\n            \"bounce\": false,\n            \"attract\": {\n              \"enable\": false,\n              \"rotateX\": 600,\n              \"rotateY\": 1200\n            }\n          }\n        },\n        \"interactivity\": {\n          \"detect_on\": \"canvas\",\n          \"events\": {\n            \"onhover\": {\n              \"enable\": false,\n              \"mode\": \"grab\"\n            },\n            \"onclick\": {\n              \"enable\": true,\n              \"mode\": \"repulse\"\n            },\n            \"resize\": true\n          },\n          \"modes\": {\n            \"grab\": {\n              \"distance\": 200,\n              \"line_linked\": {\n                \"opacity\": 1\n              }\n            },\n            \"bubble\": {\n              \"distance\": 400,\n              \"size\": 40,\n              \"duration\": 2,\n              \"opacity\": 8,\n              \"speed\": 3\n            },\n            \"repulse\": {\n              \"distance\": 200,\n              \"duration\": 0.4\n            },\n            \"push\": {\n              \"particles_nb\": 4\n            },\n            \"remove\": {\n              \"particles_nb\": 2\n            }\n          }\n        },\n        \"retina_detect\": true\n    }"};</script> 
+  <script type="text/javascript">var wp_localize_script_autocomplete = {"data":{"ajax_url":"https:\/\/www.wpsolr.com\/wp-admin\/admin-ajax.php","is_show_url_parameters":true,"is_ajax":true,"SEARCH_PARAMETER_S":"s","SEARCH_PARAMETER_SEARCH":"search","SEARCH_PARAMETER_Q":"wpsolr_q","SEARCH_PARAMETER_FQ":"wpsolr_fq","SEARCH_PARAMETER_SORT":"wpsolr_sort","SEARCH_PARAMETER_PAGE":"wpsolr_page","SORT_CODE_BY_RELEVANCY_DESC":"sort_by_relevancy_desc","css_ajax_container_page_title":".inner-header-color","css_ajax_container_page_sort":".woocommerce-ordering","css_ajax_container_results":".elementor-posts-container ","css_ajax_container_pagination":".elementor-pagination","css_ajax_container_pagination_page":"a.page-numbers,a.paginate","css_ajax_container_results_count":".woocommerce-result-count,.res_info","ajax_delay_ms":"200","redirect_search_home":"wpsolr\/search\/s-","suggestions_icon":"https:\/\/www.wpsolr.com\/wp-content\/plugins\/wpsolr-pro\/wpsolr\/core\/images\/wpsolr-ajax-loader.gif","wpsolr_autocomplete_is_active":true,"wpsolr_autocomplete_selector":[{"suggestion_uuid":"89388625A54C9E1FA925A78FBBDF8521","suggestion_class":"c89388625A54C9E1FA925A78FBBDF8521","jquery_selector":".manual-forum input[type='text'][name='s']","url_parameters":""},{"suggestion_uuid":"0378F7D49AC0AEF33BCD1338A6C4FDCF","suggestion_class":"c0378F7D49AC0AEF33BCD1338A6C4FDCF","jquery_selector":".wpsolr-suggest-content-flat1 input[type='search'][name='s']","url_parameters":""},{"suggestion_uuid":"BC41CAD1A462B03B62FAFB758CDC0AB9","suggestion_class":"cBC41CAD1A462B03B62FAFB758CDC0AB9","jquery_selector":".wpsolr-suggest-keywords1 input[type='search'][name='s']","url_parameters":""},{"suggestion_uuid":"83951802A439D49FFED0FE2D943810D9","suggestion_class":"c83951802A439D49FFED0FE2D943810D9","jquery_selector":".wpsolr-suggest-content-group1 input[type='search'][name='s']","url_parameters":""}],"wpsolr_autocomplete_action":"wdm_return_solr_rows","wpsolr_autocomplete_nonce_selector":"#wpsolr_autocomplete_nonce","wpsolr_is_search_admin":false}};</script> 
+  <script type="text/javascript">var renderInvisibleReCaptcha = function() {
+
+    for (var i = 0; i < document.forms.length; ++i) {
+        var form = document.forms[i];
+        var holder = form.querySelector('.inv-recaptcha-holder');
+
+        if (null === holder) continue;
+		holder.innerHTML = '';
+
+         (function(frm){
+			var cf7SubmitElm = frm.querySelector('.wpcf7-submit');
+            var holderId = grecaptcha.render(holder,{
+                'sitekey': '6LdN8rUUAAAAAC71D70J66DM_4lY-eQjcOkGY-Yw', 'size': 'invisible', 'badge' : 'bottomright',
+                'callback' : function (recaptchaToken) {
+					if((null !== cf7SubmitElm) && (typeof jQuery != 'undefined')){jQuery(frm).submit();grecaptcha.reset(holderId);return;}
+					 HTMLFormElement.prototype.submit.call(frm);
+                },
+                'expired-callback' : function(){grecaptcha.reset(holderId);}
+            });
+
+			if(null !== cf7SubmitElm && (typeof jQuery != 'undefined') ){
+				jQuery(cf7SubmitElm).off('click').on('click', function(clickEvt){
+					clickEvt.preventDefault();
+					grecaptcha.execute(holderId);
+				});
+			}
+			else
+			{
+				frm.onsubmit = function (evt){evt.preventDefault();grecaptcha.execute(holderId);};
+			}
+
+
+        })(form);
+    }
+};</script> 
+  <script type="text/javascript" async defer src="https://www.google.com/recaptcha/api.js?onload=renderInvisibleReCaptcha&amp;render=explicit"></script> 
+  <script type="text/javascript">var leadin_wordpress = {"userRole":"visitor","pageType":"home","leadinPluginVersion":"7.18.81"};</script> 
+  <script async defer id="hs-script-loader" type="text/javascript" src="//js.hs-scripts.com/6955683.js?integration=WordPress"></script> 
+  <script type="text/javascript">var doc_ajax_var = {"url":"https:\/\/www.wpsolr.com\/wp-admin\/admin-ajax.php","nonce":"36db87e8f4"};</script> 
+  <script type="text/javascript">var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/www.wpsolr.com\/wp-admin\/admin-ajax.php","nonce":"14f9bef7ef","shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"google":{"title":"Google+","has_counter":true},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"delicious":{"title":"Delicious"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"}},"facebook_sdk":{"lang":"en_US","app_id":""}};</script> 
+  <script type="text/javascript">var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"version":"2.8.5","urls":{"assets":"https:\/\/www.wpsolr.com\/wp-content\/plugins\/elementor\/assets\/"},"settings":{"page":[],"general":{"elementor_global_image_lightbox":"yes"},"editorPreferences":[]},"post":{"id":15753,"title":"Home 0","excerpt":""}};</script> 
+  <script defer src="https://www.wpsolr.com/wp-content/cache/autoptimize/js/autoptimize_e772ab378d48adda9524bbe247db7d47.js"></script>
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"2dd61cbc72","applicationID":"413579736","transactionName":"NAYAMRFWXkpUAEBeCw1MIwYXXl9XGgtRVgAGEU8DDFhEXEc=","queueTime":0,"applicationTime":2457,"atts":"GEEDR1lMTUQ=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+ </body>
+</html>

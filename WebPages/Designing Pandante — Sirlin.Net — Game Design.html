@@ -1,0 +1,744 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US"> 
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- This is Squarespace. --><!-- sirlin --> 
+  <base href=""> 
+  <meta charset="utf-8"> 
+  <title>Designing Pandante — Sirlin.Net — Game Design</title> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1407150974055-CY221FA56K86CJUX44RL/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico?format="> 
+  <link rel="canonical" href="http://www.sirlin.net/articles/designing-pandante"> 
+  <meta property="og:site_name" content="Sirlin.Net — Game Design"> 
+  <meta property="og:title" content="Designing Pandante — Sirlin.Net — Game Design"> 
+  <meta property="og:latitude" content="40.68640015743611"> 
+  <meta property="og:longitude" content="-74.02857044306643"> 
+  <meta property="og:url" content="http://www.sirlin.net/articles/designing-pandante"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:description" content="I didn’t intend for  Pandante  to be “Poker 2” but a lot of people, including semi-pro poker players, have told me they see it as exactly that. The original point of making Pandante was to design a game around the fun idea that if you claim something is true and no one challenges you, then it is!  I"> 
+  <meta property="og:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff398e4b0bbe0fce8a3a4/1442986740002/?format=1500w"> 
+  <meta property="og:image:width" content="545"> 
+  <meta property="og:image:height" content="306"> 
+  <meta itemprop="name" content="Designing Pandante — Sirlin.Net — Game Design"> 
+  <meta itemprop="url" content="http://www.sirlin.net/articles/designing-pandante"> 
+  <meta itemprop="description" content="I didn’t intend for  Pandante  to be “Poker 2” but a lot of people, including semi-pro poker players, have told me they see it as exactly that. The original point of making Pandante was to design a game around the fun idea that if you claim something is true and no one challenges you, then it is!  I"> 
+  <meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff398e4b0bbe0fce8a3a4/1442986740002/?format=1500w"> 
+  <link rel="image_src" href="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff398e4b0bbe0fce8a3a4/1442986740002/?format=1500w"> 
+  <meta itemprop="image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff398e4b0bbe0fce8a3a4/1442986740002/?format=1500w"> 
+  <meta itemprop="author" content="David Sirlin"> 
+  <meta itemprop="datePublished" content="2014-09-03T18:07:35-0700"> 
+  <meta itemprop="headline" content="Designing Pandante"> 
+  <meta itemprop="publisher" content="Sirlin.Net — Game Design"> 
+  <meta name="twitter:title" content="Designing Pandante — Sirlin.Net — Game Design"> 
+  <meta name="twitter:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff398e4b0bbe0fce8a3a4/1442986740002/?format=1500w"> 
+  <meta name="twitter:url" content="http://www.sirlin.net/articles/designing-pandante"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="I didn’t intend for  Pandante  to be “Poker 2” but a lot of people, including semi-pro poker players, have told me they see it as exactly that. The original point of making Pandante was to design a game around the fun idea that if you claim something is true and no one challenges you, then it is!  I"> 
+  <meta name="description" content=""> 
+  <script type="text/javascript" src="//use.typekit.net/ik/au4t79rroqWoEa7xdWAV5Rg1u2QKPWEFWo-obOQO2nMfel92fFHN4UJLFRbh52jhWD93ZRIXZ2wuZQsKwebaweBKFAZRFejkFgT0HKoD-W4C-At0SaBujW48Sagyjh90jhNlOeUzjhBC-eNDifUD-W4C-At0dcmXOYFTScUTdKoDSWmyScmDSeBRZPoRdhXCiaiaO1FTScUTdKo0ZWbCiaiaO1FTScUTdKoDSWmyScmDSeBRZPoRdhXK2YgkdayTdAIldcNhjPJ4Z1mXiW4yOWgXH6qJ73IbMg6gJMJ7fbKCMsMMeMC6MKG4f5J7IMMjMkMfH6qJtkGbMg6FJMJ7fbKzMsMMeMb6MKG4fOMgIMMj2KMfH6GJCwbgIMMjgPMfH6GJCSbgIMMj2kMfH6qJnbIbMg6eJMJ7fbK0MsMMegM6MKG4fJCgIMMjgkMfH6qJRMIbMg6sJMJ7fbKTMsMMeM66MKG4fHGgIMMjIKMfH6qJKbIbMg64JMJ7fbKHMsMMegw6MKG4fJZmIMIjMkMfH6qJ6u9bMs6FJMJ7fbKImsMgeMb6MKG4fJmmIMIj2KMfH6qJxubbMs6BJMJ7fbKMmsMgeMv6MKG4fJBmIMIjgkMfH6qJ689bMs6sJMJ7fbKYmsMgeM66MKG4fJymIMIjIKMfqMYEhzRggb.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin:700,700italic|Oswald:400|Rosarivo:400italic"> 
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script> 
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].css = ["//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css">
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/performance-05c26a7ba97ad91a6081b-min.en-US.js" defer></script>
+  <script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/announcement-bar-e2fbe92a3604cd7ec3932-min.en-US.js"},"squarespace-audio-player":{"css":"//assets.squarespace.com/universal/styles-compressed/audio-player-52bdd87acccf92a19703e60e09c654bd-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/audio-player-991e7e1c1b3308738ed15-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-342036262b204974aa269-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-4d22db9ba7880e24bcd44-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-51aceea076ad0ff8aa83b-min.en-US.js"},"squarespace-comments":{"css":"//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/comments-e64031ca98dbe63037354-min.en-US.js"},"squarespace-commerce-cart":{"js":"//assets.squarespace.com/universal/scripts-compressed/commerce-cart-574df707b74266010398b-min.en-US.js"},"squarespace-dialog":{"css":"//assets.squarespace.com/universal/styles-compressed/dialog-afeb96ba160fb642a2d98c892a956065-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/dialog-bec10fad5a854d9b8562f-min.en-US.js"},"squarespace-events-collection":{"css":"//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/events-collection-f75316a66b099d806a536-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-fde3933cf0271ba5b3f63-min.en-US.js"},"squarespace-forms":{"css":"//assets.squarespace.com/universal/styles-compressed/forms-d21f3e517c32f4caba9f220beea0666d-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/forms-24ee632e09d923de05536-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-e23ee315df466f1dba9ec-min.en-US.js"},"squarespace-image-zoom":{"css":"//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/image-zoom-5a660e03e667b16c7a076-min.en-US.js"},"squarespace-pinterest":{"css":"//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/pinterest-4725f00d98ee2610ca950-min.en-US.js"},"squarespace-popup-overlay":{"css":"//assets.squarespace.com/universal/styles-compressed/popup-overlay-e984c5797664760d617b07bce15392a1-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/popup-overlay-08ddb1d2260e55deba97d-min.en-US.js"},"squarespace-product-quick-view":{"css":"//assets.squarespace.com/universal/styles-compressed/product-quick-view-3fa8fd4df0755e7a7878e60166ca3d61-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/product-quick-view-cc9a2874f8c4b6a3f27e6-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-828c2fbae302bd3e4fe16-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-f260a4594424060b57c10-min.en-US.js"},"squarespace-search-page":{"css":"//assets.squarespace.com/universal/styles-compressed/search-page-207da8872118254c0a795bf9b187c205-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/search-page-a3d76808795360256a5a6-min.en-US.js"},"squarespace-search-preview":{"js":"//assets.squarespace.com/universal/scripts-compressed/search-preview-9acb915547fb6c41d5a99-min.en-US.js"},"squarespace-share-buttons":{"js":"//assets.squarespace.com/universal/scripts-compressed/share-buttons-b7c8ee26ec3639fa3da50-min.en-US.js"},"squarespace-simple-liking":{"css":"//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/simple-liking-89bbd9e8e108b969eb994-min.en-US.js"},"squarespace-social-buttons":{"css":"//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/social-buttons-547a9a0004ff7f9768043-min.en-US.js"},"squarespace-tourdates":{"css":"//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/tourdates-69d260a4100c302369d4e-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-43724a83fe4cb8b953146-min.en-US.js"}},"pageType":50,"website":{"id":"50f14d35e4b0d70ab5fc4f24","identifier":"sirlin","websiteType":1,"contentModifiedOn":1564017090920,"cloneable":false,"siteStatus":{},"language":"en-US","timeZone":"America/Los_Angeles","machineTimeZoneOffset":-25200000,"timeZoneOffset":-25200000,"timeZoneAbbr":"PDT","siteTitle":"Sirlin.Net \u2014 Game Design","fullSiteTitle":"Designing Pandante \u2014 Sirlin.Net \u2014 Game Design","siteDescription":"<p>Site description goes here.</p>","location":{"mapZoom":11.0,"mapLat":40.68640015743611,"mapLng":-74.02857044306641,"addressTitle":"","addressLine1":"","addressLine2":"","addressCountry":""},"logoImageId":"538a6c53e4b07541307ca12b","shareButtonOptions":{},"logoImageUrl":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","authenticUrl":"http://www.sirlin.net","internalUrl":"http://sirlin.squarespace.com","baseUrl":"http://www.sirlin.net","primaryDomain":"www.sirlin.net","socialAccounts":[{"serviceId":2,"userId":"759231843","userName":"david.sirlin","screenname":"Sirlin Games","addedOn":1401585908216,"profileUrl":"http://www.facebook.com/SirlinGames","iconUrl":"http://graph.facebook.com/759231843/picture?type=square","metaData":{"service":"facebook"},"iconEnabled":true,"serviceName":"facebook"},{"serviceId":4,"userId":"64127998","userName":"Sirlin","screenname":"David Sirlin","addedOn":1416883541216,"profileUrl":"https://twitter.com/Sirlin","iconUrl":"http://pbs.twimg.com/profile_images/2194481794/pic4b_normal.jpg","collectionId":"5473ed55e4b029492ac9d740","iconEnabled":true,"serviceName":"twitter"}],"typekitId":"","statsMigrated":true,"imageMetadataProcessingEnabled":false,"screenshotId":"57e6e910","showOwnerLogin":false},"websiteSettings":{"id":"50f14d35e4b0d70ab5fc4f25","websiteId":"50f14d35e4b0d70ab5fc4f24","type":"Business","subjects":[{"systemSubject":"other","otherSubject":"Design/Art"},{"systemSubject":"design"}],"country":"US","state":"CA","simpleLikingEnabled":true,"mobileInfoBarSettings":{"style":1,"isContactEmailEnabled":true,"isContactPhoneNumberEnabled":true,"isLocationEnabled":true,"isBusinessHoursEnabled":true},"announcementBarSettings":{"style":1,"text":"<p>test announcement is&nbsp;here, this is it.</p>","clickthroughUrl":{"url":"http://www.cnn.com","newWindow":true}},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":true,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":false,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"storeSettings":{"returnPolicy":"","termsOfService":"","privacyPolicy":"","expressCheckout":true,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"currenciesSupported":["USD","AUD","CAD","CHF","EUR","GBP"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"orderConfirmationInjectCode":"","showCustomCheckoutForm":false,"enableMailingListOptInByDefault":true,"sameAsRetailLocation":false,"merchandisingSettings":{"scarcityEnabledOnProductItems":false,"scarcityEnabledOnProductBlocks":false,"scarcityMessageType":"DEFAULT_SCARCITY_MESSAGE","scarcityThreshold":10,"multipleQuantityAllowedForServices":true,"restockNotificationsEnabled":false,"restockNotificationsMailingListSignUpEnabled":false,"relatedProductsEnabled":false,"relatedProductsOrdering":"random","soldOutVariantsDropdownDisabled":false},"isLive":true,"multipleQuantityAllowedForServices":true},"useEscapeKeyToLogin":true,"trialAssistantEnabled":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled","size":"small","shape":"rect","color":"white"},"ampEnabled":false},"cookieSettings":{"isCookieBannerEnabled":false,"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false,"cookieBannerText":"","cookieBannerTheme":"","cookieBannerVariant":"","cookieBannerPosition":"","cookieBannerCtaVariant":"","cookieBannerCtaText":""},"websiteCloneable":false,"collection":{"title":"Articles","id":"53ded0ace4b0ec2792626d72","fullUrl":"/articles","type":1},"item":{"title":"Designing Pandante","id":"53fff398e4b0bbe0fce8a3a4","fullUrl":"/articles/designing-pandante","publicCommentCount":0,"commentState":2,"recordType":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"TGutter":"3%","TMaxWidth":"300","TPerRow":"3","gallery-auto-play":"false","galleryPlaySpeed":"3.0","hide-thumbnail-titles":"true","outerPadding":"75px","pagePadding":"30px","product-gallery-auto-crop":"false","product-image-auto-crop":"true","thumbnail-layout":"Basic Grid","topPadding":"10px","tweak-v1-related-products-title-spacing":"50px"},"templateId":"4fd11f32c4aad9b01c9e624c","templateVersion":"7","pageFeatures":[1,2,4],"gmRenderKey":"QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4","betaFeatureFlags":["ORDERS-SERVICE-check-digital-good-access-with-service","ORDERS-SERVICE-reset-digital-goods-access-with-service","ORDER_SERVICE-submit-subscription-order-through-service","ORDER_SERVICE-submit-reoccurring-subscription-order-through-service","dg_downloads_from_fastly","generic_iframe_loader_for_campaigns","donations_customer_accounts","product-retriever-v2-enabled","domain_registration_via_registrar_service","domain_locking_via_registrar_service","domain_deletion_via_registrar_service","domain_info_via_registrar_service","content_item_settings","demo_content_improvement","seven_one_image_overlay_opacity","commerce_restock_notifications","newsletter_block_captcha","new_billing_system","gallery_settings_71","commerce_onboarding_wizard","seven_one_portfolio_hover_layouts","commerce_onboarding_wizard_phase_two","domains_allow_async_gsuite"],"yuiEliminationExperimentList":[{"name":"statsMigrationJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"ContributionConfirmed-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"TextPusher-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MenuItemWithProgress-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"billingNewsletters-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"imageProcJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"QuantityChangePreview-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CompositeModel-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"HasPusherMixin-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"INACTIVE"},{"name":"ProviderList-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MediaTracker-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"pushJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"internal-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"BillingPanel-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"PopupOverlayEditor-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CoverPagePicker-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"}],"impersonatedSession":false,"tzData":{"zones":[[-480,"US","P%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}}};</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://www.sirlin.net/articles?format=rss"> 
+  <script type="application/ld+json">{"url":"http://www.sirlin.net","name":"Sirlin.Net \u2014 Game Design","description":"<p>Site description goes here.</p>","image":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <script type="application/ld+json">{"name":"Designing Pandante \u2014 Sirlin.Net \u2014 Game Design","url":"http://www.sirlin.net/articles/designing-pandante","datePublished":"2014-09-03T18:07:35-0700","headline":"Designing Pandante","author":"David Sirlin","publisher":{"name":"Sirlin.Net \u2014 Game Design","logo":{"@type":"ImageObject","url":"https://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/"},"@context":"http://schema.org","@type":"Organization"},"image":"http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff398e4b0bbe0fce8a3a4/1442986740002/?format=1500w","@context":"http://schema.org","@type":"Article"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=4"/><![endif]--> <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]--> <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&amp;filterFeatures=false"><!-- <![endif]--> 
+  <script type="text/javascript">
+  var ShopifyStoreConfig = {shop:"sirlin.myshopify.com", collections:[8156021]};
+  (function() {
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; 
+    s.src = "http://widgets.shopifyapps.com/assets/shopifystore.js";
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();  
+</script> 
+  <noscript>
+   Please enable javascript, visit the &lt;a href="http://sirlin.myshopify.com"&gt;Sirlin Games Tabletop Store.
+  </noscript> <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53dddd843aed3211"></script> <!--Share This --> 
+  <script type="text/javascript">var switchTo5x=true;</script> 
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script> 
+  <script type="text/javascript">stLight.options({publisher: "63e23d4f-8cab-4d21-ba0d-bbfb30801340", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script> <!--Shareaholic
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+    var shr = document.createElement('script');
+    shr.setAttribute('data-cfasync', 'false');
+    shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+    shr.type = 'text/javascript'; shr.async = 'true';
+    shr.onload = shr.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      var site_id = 'f85ba2f3bf2982871221fa38b75a6419';
+      try { Shareaholic.init(site_id); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(shr, s);
+  })();
+//]]>
+</script>
+-->
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script> 
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-776666-1', 'auto');ga('send', 'pageview');</script><!-- End of Squarespace Headers --> 
+ </head> 
+ <body class="blog-sidebar-display-right index-thumb-title-position-below index-item-layout-auto thumbnail-layout-basic-grid thumbnails-on-open-page-show-all hide-thumbnail-titles  layout-style-center page-borders-dotted  gallery-page-controls-tiny-thumbnails  social-icon-style-normal  hide-social-icons     event-thumbnails event-thumbnail-size-32-standard event-date-label event-date-label-time event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts  event-item-back-link    product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing tweak-v1-related-products-image-aspect-ratio-11-square tweak-v1-related-products-details-alignment-center newsletter-style-dark  opentable-style-light small-button-style-solid small-button-shape-rounded medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-square tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd collection-53ded0ace4b0ec2792626d72 view-item collection-type-blog collection-layout-default mobile-style-available logo-image has-primary-nav" id="item-53fff398e4b0bbe0fce8a3a4"> 
+  <div id="canvas"> 
+   <div id="mobileNav" class=""> 
+    <div id="mobileNavWrapper" class="wrapper"> 
+     <nav class="main-nav mobileNav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=" external-link"> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </div> 
+   <div id="mobileMenuLink">
+    <a>Menu</a>
+   </div> 
+   <header id="header"> 
+    <div id="logo" data-content-field="site-title"> 
+     <h1 class="logo"><a href="/"><img src="//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/?format=1000w" alt="Sirlin.Net — Game Design"></a></h1> 
+    </div> 
+    <script>
+        Y.use('squarespace-ui-base', function(Y) {
+          Y.all("#header .logo, #header .logo-subtitle").each(function (text) {
+            text.plug(Y.Squarespace.TextShrink, {
+              parentEl: Y.one('#header'),
+              triggerWidth: 750
+            });
+          });
+        });
+
+        // Show spinner on page load if loading bookmarked url
+        if (window.location.hash && window.location.hash !== '#') {
+          document.querySelector('body').className += ' index-loading';
+        }
+      </script> 
+    <div id="topNav" data-content-field="navigation"> 
+     <nav class="main-nav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=""> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </header> 
+   <div class="page-divider"></div> 
+   <div class="extra-wrapper page-header"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Header Content: Articles" data-type="block-field" id="page-header-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <section id="page" role="main" data-content-field="main-content"> <!-- CATEGORY NAV --> 
+    <div class="article-wrapper"> 
+     <article class="hentry tag-set1 author-david-sirlin post-type-text" id="article-53fff398e4b0bbe0fce8a3a4" data-item-id="53fff398e4b0bbe0fce8a3a4"> <!--SPECIAL CONTENT--> <!--POST HEADER--> 
+      <header> 
+       <h1 class="entry-title"> <a href="/articles/designing-pandante" data-content-field="title">Designing Pandante</a> </h1> 
+       <div class="meta"> <span class="date"><time class="published" datetime="2014-09-03">September 3, 2014</time></span> 
+       </div> 
+      </header> <!--POST BODY--> 
+      <div class="body entry-content">
+       <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1409283300031" id="item-53fff398e4b0bbe0fce8a3a4">
+        <div class="row sqs-row">
+         <div class="col sqs-col-12 span-12">
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-5eb38b1e22c5f66f32c0">
+           <div class="sqs-block-content">
+            <p>I didn’t intend for <a href="http://www.sirlingames.com/pages/pandante">Pandante</a> to be “Poker 2” but a lot of people, including semi-pro poker players, have told me they see it as exactly that. The original point of making Pandante was to design a game around the fun idea that if you claim something is true and no one challenges you, then it is!</p>
+            <p>It sure would be fun to do that in real life. You could claim that you’re an airline pilot, then if no one calls you out, <em>you are</em>. Or claim that you have diamonds in your pocket. If people believe you, then <em>you do</em>. The downside is that you if people do call you out, you’ll have to pay them off if you were lying, but that’s a small matter given the potential upside.</p>
+            <p>A gambling game is a natural foundation to explore this mechanic, so that’s why Pandante has a similar skeleton as Texas Holdem. In both games, you get two private cards and all players share a set of five community cards. You try to make a good hand out of some combination of your private cards and the public cards.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_20734">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:700.0px;"> 
+              <div style="padding-bottom:155.85714721679688%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425621684077-4IF8BX88KJYCD8KQESUH/ke17ZwdGBToddI8pDm48kJXDKNRnHu8YdI758k9BQJwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdLKH7z_kYk2-t_PijjI58tLlAHK3fDQ41LI5FT7wh4uH-7cE8eG0HngTYvMd7CoR8c/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425621684077-4IF8BX88KJYCD8KQESUH/ke17ZwdGBToddI8pDm48kJXDKNRnHu8YdI758k9BQJwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdLKH7z_kYk2-t_PijjI58tLlAHK3fDQ41LI5FT7wh4uH-7cE8eG0HngTYvMd7CoR8c/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425621684077-4IF8BX88KJYCD8KQESUH/ke17ZwdGBToddI8pDm48kJXDKNRnHu8YdI758k9BQJwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdLKH7z_kYk2-t_PijjI58tLlAHK3fDQ41LI5FT7wh4uH-7cE8eG0HngTYvMd7CoR8c/image-asset.jpeg" data-image-dimensions="700x1091" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54f942b3e4b05dba9d8ef0cc" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409785160513_40755">
+           <div class="sqs-block-content">
+            <h2>Player Elimination and Folding</h2>
+            <p>Poker has player elimination, meaning that if you go down to $0, you’re eliminated from the game. That makes sense for a gambling game and Pandante does have a mode that lets you play that way, but it’s a really undesirable quality when it comes to fun factor. It’s a more social and fun experience if everyone is involved in the game.</p>
+            <p>Folding is when you give up on the current hand and sit the rest of it out, but you’re still in the game for the next hand. It makes sense for this option to exist, but if it’s smart play to fold a huge percentage of the time, like way over 50% of the time, then it’s problematic for the same reason as player elimination: there’s too much time over the course of a game where you’re not involved.</p>
+            <p>Removing player elimination and greatly reducing folding are good design goals in and of themselves. For Pandante, these design goals were much more important than usual though. Remember, the core concept is that you can claim things to be true and they become true unless someone calls you out. That concept doesn’t actually work if too many other players have already folded this hand or if too many players were eliminated from the game. We want everyone involved and still playing so that everyone can participate in calling out your lies, or in choosing to let you get away with them. That’s the fun!</p>
+            <p>Pandante doesn’t have player elimination unless you play the seriousface gambling mode. In the regular mode though, the game ends when any player ends a gambit (that’s what each round of play is called) with more than X gold. X depends on how many players are in the game. No matter how little gold you have, you always still have a chance of winning. If you win several gambits in a row, you’re denying the leading player from getting any more gold and you can always make a comeback. In words, Pandante has no lame duck situation: a situation where you're so far behind that you can't win the game, yet you're still stuck playing it. That's an important thing to avoid in game design.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409785160513_23538">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:980.0px;"> 
+              <div style="padding-bottom:25.20408058166504%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409785246906-8KIMNOVBLNA5GS5PVAYR/ke17ZwdGBToddI8pDm48kMgaz-78BmoxzPCHst0njApZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIU-OJVVl9PXONoi8tOCLRDhzSzgmgi2eZuL80Ur4uL-MKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409785246906-8KIMNOVBLNA5GS5PVAYR/ke17ZwdGBToddI8pDm48kMgaz-78BmoxzPCHst0njApZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIU-OJVVl9PXONoi8tOCLRDhzSzgmgi2eZuL80Ur4uL-MKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409785246906-8KIMNOVBLNA5GS5PVAYR/ke17ZwdGBToddI8pDm48kMgaz-78BmoxzPCHst0njApZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIU-OJVVl9PXONoi8tOCLRDhzSzgmgi2eZuL80Ur4uL-MKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image-dimensions="980x247" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54079d9ee4b07c6dcb6e92d8" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409785160513_23760">
+           <div class="sqs-block-content">
+            <h3>Eliminating Player Elimination</h3>
+            <p>If you go below 20 gold, then a magic fairy will refill you back to 20 next gambit. How fun! If you go below 0, the fairy will pay off all your debts and refill you back to 20 gold, but there’s a catch. If the fairy has to pay any of your debts (meaning you went below 0), then you have to spend the next gambit frolicing with the fairy. You don’t get to play that gambit at all, then the following gambit you return to play. This is a big enough disincentive that it prevents players from playing too recklessly where they throw all their money away on obviously stupid bets.</p>
+            <p>This rule has worked out really well, partly because it's fun and flavorful and people like to joke about frolicing with the fairy. It rarely actually happens though. It exists as a deterrent to keep your incentives aligned correctly, and to make sure that even players who are almost out of gold still have real decisions about whether they should lie or not.&nbsp;</p>
+            <h3>Reducing Folding</h3>
+            <p>There’s a lot of things in Pandante that all work together to reduce the percentage of times you should fold. The first and simplest is that you literally aren’t even allowed to fold right away in a gambit.</p>
+            <p><strong>Can't Fold Early</strong></p>
+            <p>In Texas Holdem, you have a chance to bet before you see any community cards, and the only thing you have to go on is your two private cards. This is a bad time to even have bets happen, so so-called pre-flop bets don’t exist in Pandante. Whenever you bet, you have more to go on which is both better for skill and better for fun. It also means you can’t fold at that point.</p>
+            <p>When the first three community cards are revealed, it's called the splash. The fourth card is called the paws, and the fifth is called the tail. Players can bet or fold after the splash, after the paws, and after the tail. After the splash and and after the paws, they also have a chance to buy snacks.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_97599">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:980.0px;"> 
+              <div style="padding-bottom:38.57143020629883%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425625649965-MG75NDP5YWGVYRQGOPMB/ke17ZwdGBToddI8pDm48kMcvFgKmxSEUF-qN_r7AxZVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI5dqP8txBaJeNsGhERaMZnS-xweGp4aC6eknvSs0u43AKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425625649965-MG75NDP5YWGVYRQGOPMB/ke17ZwdGBToddI8pDm48kMcvFgKmxSEUF-qN_r7AxZVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI5dqP8txBaJeNsGhERaMZnS-xweGp4aC6eknvSs0u43AKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425625649965-MG75NDP5YWGVYRQGOPMB/ke17ZwdGBToddI8pDm48kMcvFgKmxSEUF-qN_r7AxZVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI5dqP8txBaJeNsGhERaMZnS-xweGp4aC6eknvSs0u43AKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image-dimensions="980x378" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54f95231e4b0b71dbd658a40" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-4 span-4 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1409783159452_38647">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:183.0px;"> 
+              <div style="padding-bottom:150.27322387695312%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409784950351-7YMORFXA9C2HGUQV2VX8/ke17ZwdGBToddI8pDm48kOInazlQmoSuxeQE3OynLxxZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vLRlm3xqykicnpuwIf7_1T4rqIeR_j1jS8RtrMMQ2TIg/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409784950351-7YMORFXA9C2HGUQV2VX8/ke17ZwdGBToddI8pDm48kOInazlQmoSuxeQE3OynLxxZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vLRlm3xqykicnpuwIf7_1T4rqIeR_j1jS8RtrMMQ2TIg/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409784950351-7YMORFXA9C2HGUQV2VX8/ke17ZwdGBToddI8pDm48kOInazlQmoSuxeQE3OynLxxZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vLRlm3xqykicnpuwIf7_1T4rqIeR_j1jS8RtrMMQ2TIg/image-asset.jpeg" data-image-dimensions="183x275" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54079c76e4b0c4c091c9f97d" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409783159452_43419">
+           <div class="sqs-block-content">
+            <p><strong>Snacks</strong></p>
+            <p>Another Pandante feature called snacks greatly reduces your need to fold and also increases the skill ceiling and fun factor of the game. After the splash and paws, you can buy snacks if you want. If you do, you get to draw a card, then discard a card. Because it’s possible to improve your hand this way, many more opening hands are reasonable to keep that you’d otherwise have to fold on if snacks didn’t exist.</p>
+            <p>Whether it’s worth it to buy snacks is often a tough call. During each of the three betting rounds (after the splash, paws, and tail), you put your bet on your board on the space corresponding to the hand you’re <em>claiming</em> to have. As the gambit goes on, you cannot claim a lower hand later; you must either maintain your claim or raise to a higher hand each time. The higher your claim, the cheaper your snacks will be. If you claim to have a better hand than anyone at the table (or tied for highest), you get snacks <em>for free</em>. This baits you into lying about your hand, which is a fun dynamic. Because you can’t actually get called out for lying until the end of the gambit, this feels a lot like buying things with a credit card. Lying about your hand now gives you a great benefit <em>now:</em> snacks (draw a card, then discard a card). You won’t have to “pay for it” until the end of the gambit when people might realize you didn’t actually make that hand. But if you DO make it, then you don’t have to pay that credit card bill after all!</p>
+            <p>If you aren’t the highest claimed hand, snacks costs 2 gold per space below the highest (see the board below). So the worse you claim your hand is, the more you’ll have to pay for snacks to improve it, but at least you’re safer from being called out at the end.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_92920">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:781.0px;"> 
+              <div style="padding-bottom:51.47247314453125%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425624591416-IEZ47NNB1QLBX6YZZK0A/ke17ZwdGBToddI8pDm48kMbBXGv31uav_TcEcm3hxopZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI9vdZmjlRj2ZwXOje0NomIZ0Fi8buSM3qSslDi-ZS95c/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425624591416-IEZ47NNB1QLBX6YZZK0A/ke17ZwdGBToddI8pDm48kMbBXGv31uav_TcEcm3hxopZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI9vdZmjlRj2ZwXOje0NomIZ0Fi8buSM3qSslDi-ZS95c/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425624591416-IEZ47NNB1QLBX6YZZK0A/ke17ZwdGBToddI8pDm48kMbBXGv31uav_TcEcm3hxopZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI9vdZmjlRj2ZwXOje0NomIZ0Fi8buSM3qSslDi-ZS95c/image-asset.png" data-image-dimensions="781x402" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54f94e0ee4b0a50e0976a5b3" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1410733092887_41113">
+           <div class="sqs-block-content">
+            <p>The Sleep&nbsp;ability is another factor that reduces the amount of folding, but lets cover that when we get to the rest of the abilities in Pandante.</p>
+            <p>All of these factors work together such that skilled play involves far less folding than in Poker.</p>
+            <h2>The Possible Hands</h2>
+            <p>Early in development, the possible hands you could get in Pandante were more similar to the hands in poker. There was a big opportunity for improvement here though. The problem with using a standard set of poker hands was that the set of “interesting hands” was way too small. Pandante has 10 spaces on the board to represent 10 possible hands, and too many of those were either way too easy to get or way too hard.</p>
+            <p>Having straight flush and five of a kind are fun things to have, and they should be there, but they are very very difficult to get. Most games you play, these hands won’t come up. So in practical terms, we’re down to 8 spaces now. On the opposite end of the board, we had “high card (meaning no pair) and two pair as spaces. You always have at least high card though. And having spaces for high card, pair, two pair, and three of kind was really a waste. ALL of those are so easy to get that they kind of aren’t even real choices.</p>
+            <p>What we need are more hands that are slightly hard to get, but that still come up frequently. Full house and 4 of a kind are both already in that good zone. The final version of Pandante adds two more hands special to Pandante that are also in that good, common probability zone: the floosh and the rainbow straight. A floosh is a miniature flush, only 4 cards of a single color rather than 5. A rainbow straight is a straight where each card is a different color (note that there are 6 colors in Pandante).</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_94199">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1056.0px;"> 
+              <div style="padding-bottom:47.253787994384766%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425625074727-U4XD1F2RI27UAXU85Q4L/ke17ZwdGBToddI8pDm48kCABfUsJZC4tVp_HNNEhtf8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcb3e-0on8_1xVKaT2Gv03XrCXJVbxv-X1QGh1kdAqqpEcBQVPPAcYhsGePyVUjCk4/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425625074727-U4XD1F2RI27UAXU85Q4L/ke17ZwdGBToddI8pDm48kCABfUsJZC4tVp_HNNEhtf8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcb3e-0on8_1xVKaT2Gv03XrCXJVbxv-X1QGh1kdAqqpEcBQVPPAcYhsGePyVUjCk4/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425625074727-U4XD1F2RI27UAXU85Q4L/ke17ZwdGBToddI8pDm48kCABfUsJZC4tVp_HNNEhtf8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcb3e-0on8_1xVKaT2Gv03XrCXJVbxv-X1QGh1kdAqqpEcBQVPPAcYhsGePyVUjCk4/image-asset.jpeg" data-image-dimensions="1056x499" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54f94ff2e4b0ab37e7019581" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409783159452_22212">
+           <div class="sqs-block-content">
+            <p>Having more hands in the “slightly difficult, but still possible” probability zone not only adds more fun, but it also reduces folding. Imagine if the only possible hands were either ridiculously easy to get or way below 1%. In that case, having an easy hand is useless because everyone has it. And the hard hands are so hard to get that you immediately see you don’t have them and won’t have them so you might as well give up now. Pandante gets a lot of fun factor out of having several realistically achievable hands, plus the ability to actually make those hands by getting more cards from snacks and more cards from abilities.</p>
+            <p>Another interesting property of the list of possible hands in Pandante is that improving your hand tends to let you jump ahead more than one space in the list. For example, three-of-a-kind is hand #2 on the board, and it's natural to upgrade that hand to a full house. But full house isn't hand #3; it's actually #4. This lets you skip past players who claimed a straight (hand #3) if you upgrade your hand. But then straight, #3 in the list, can sometimes be upgraded to rainbow straight, which is #6. Doing that lets the straight player leapfrog past full house and floosh players. People claiming floosh can leapfrog too though! Anyone with a floosh is in a position to possibly upgrade to a flush, and that would let them skip past players claiming rainbows straight or four-of-a-kind.</p>
+            <p>The careful ordering of hands creates interesting dynamics where even players with worse hands are usually able to represent that they can beat players with slightly better hands.&nbsp;</p>
+            <h2>Abilities</h2>
+            <p>Special abilities are important to have because they raise the skill ceiling of the game. They give you even more room than you have in Human Poker to outplay worse players. They also add enough mischief to be fun, and&nbsp;&nbsp;Each one does a fairly simple thing and they cover the various kinds of actions you really <em>want</em> to do.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_40156">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:825.0px;"> 
+              <div style="padding-bottom:72.7272720336914%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425623009432-HTKUXCJA0Y6OQMLD4AO3/ke17ZwdGBToddI8pDm48kClsBG4O4qbu0RgmEXKxwEZZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIUf9bvq-ZTJmaDBuNMn9bsq7AqBBT6TGpEiuC_cEDCLcKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425623009432-HTKUXCJA0Y6OQMLD4AO3/ke17ZwdGBToddI8pDm48kClsBG4O4qbu0RgmEXKxwEZZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIUf9bvq-ZTJmaDBuNMn9bsq7AqBBT6TGpEiuC_cEDCLcKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425623009432-HTKUXCJA0Y6OQMLD4AO3/ke17ZwdGBToddI8pDm48kClsBG4O4qbu0RgmEXKxwEZZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIUf9bvq-ZTJmaDBuNMn9bsq7AqBBT6TGpEiuC_cEDCLcKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image-dimensions="825x600" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54f947e0e4b02621403af8de" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_2_1425621902132_54703">
+           <div class="sqs-block-content">
+            <p>The RAISE&nbsp;<span>ability is scary because it can force people out of the gambit, but it doesn’t improve your hand.</span></p>
+            <p><span>The DRAW, NEW HAND, and ADD</span>&nbsp;abilities are important because they’re the ones that change what hand you have. Players who use those abilities are likely trying to make a hand they claimed to have, but didn’t. That’s a tell, so keep an eye people who use those. NEW HAND in particular is a pretty desperate move!</p>
+            <p>The PEEK ability is a good finesse move. Often you really really need to know if the highest claimed hand is real or fake and this gives you a good clue about that.</p>
+            <p>The SLEEP ability is basically a "super fold." You get a head start on the next gambit, but you can only do SLEEP if you stayed in the current gambit until you reached the ability phase. The existence of SLEEP means you're more likely to stay in the gambit to see if things work out, since you have a safety net to fall back on if they don't.</p>
+            <p>That’s only the surface of how you can use these abilities. There’s a lot of nuance and tricks to it.</p>
+            <h2>Golden Panda Coin</h2>
+            <p>Some of the most exciting moments in poker are when you do a huge bluff and actually get away with it. You feel like a rock star. The problem is that not only is this moment not celebrated by the game system, it’s actually suppressed. In this amazing situation, your best move is to keep it secret that you bluffed. That’s the opposite of hype. It would be so much better if your strategically best move here was to throw it in everyone’s faces that you bluffed and got away with it, and for something amazing to happen. In Pandante, it does.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_32828">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:980.0px;"> 
+              <div style="padding-bottom:78.57142639160156%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425622510232-L1MCCKRYVXWXQYD3QXQQ/ke17ZwdGBToddI8pDm48kLYrC8Ylib_ZDNsalzIsXPNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIMLt4G3DOquRLi1nUunwhFwcK4Atqr1eOmfT4-l6k-OMKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425622510232-L1MCCKRYVXWXQYD3QXQQ/ke17ZwdGBToddI8pDm48kLYrC8Ylib_ZDNsalzIsXPNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIMLt4G3DOquRLi1nUunwhFwcK4Atqr1eOmfT4-l6k-OMKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425622510232-L1MCCKRYVXWXQYD3QXQQ/ke17ZwdGBToddI8pDm48kLYrC8Ylib_ZDNsalzIsXPNZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIMLt4G3DOquRLi1nUunwhFwcK4Atqr1eOmfT4-l6k-OMKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image-dimensions="980x770" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54f945ede4b00ac690bddfcd" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409778976786_33487">
+           <div class="sqs-block-content">
+            <p>When you win a hand by lying, you get the Golden Panda Coin. The coin is a one-time use powerup that lets you draw 5 cards and discard 5 cards as an ability on a future gambit. It's fun and exciting to get&nbsp;and when you do, you better use it soon; if another player wins by lying, they steal the coin from you if you didn't use it yet.&nbsp;When you do the most fun thing in the game (lying and getting away with it), you get to make it public and have the most fun.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409778976786_36215">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:614.0px;"> 
+              <div style="padding-bottom:68.40391540527344%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409780511798-XZSOD4X6O6DHTSMEPA0R/ke17ZwdGBToddI8pDm48kNFFgcVqqTsnY9Ix797I9-5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpzEOKU3ynhxGCOkjkiI2jkNFGNtSiU_DHJLwS-ImCdcZBjHxYwulktk84pWvw4zn_c/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409780511798-XZSOD4X6O6DHTSMEPA0R/ke17ZwdGBToddI8pDm48kNFFgcVqqTsnY9Ix797I9-5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpzEOKU3ynhxGCOkjkiI2jkNFGNtSiU_DHJLwS-ImCdcZBjHxYwulktk84pWvw4zn_c/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409780511798-XZSOD4X6O6DHTSMEPA0R/ke17ZwdGBToddI8pDm48kNFFgcVqqTsnY9Ix797I9-5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpzEOKU3ynhxGCOkjkiI2jkNFGNtSiU_DHJLwS-ImCdcZBjHxYwulktk84pWvw4zn_c/image-asset.jpeg" data-image-dimensions="614x420" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54078b1fe4b0d384103b8506" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409778976786_36441">
+           <div class="sqs-block-content">
+            <h2>Joy</h2>
+            <p>A lot of the details that went into Pandante’s design are mathy things that make sure the incentives of how you SHOULD play line up with what’s really fun to do. I also needed to make sure the game isn’t degenerate somehow, that it's rock-solid enough to play with real money, and that at high level it’s a strategically interesting game. It has a skill ceiling quite a bit higher than poker because there are more kinds of decisions you can make, so there’s more ways to show you’re skilled and separate yourself from bad players.</p>
+            <p>That said, Pandante had one of the most pleasant surprises I’ve encountered playing games. After all those geeky details were hammered out, it created an experience that non-experts REALLY enjoy. At least half the people are lying at least half the time, and everyone kind of knows it. That creates a light-hearted feel that’s very much unlike the psychological warfare of poker. Everyone is involved for most of the game, and players are usually laughing and smiling, far moreso than in any of my other games.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409778976786_21766">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:2500.0px;"> 
+              <div style="padding-bottom:72.75999450683594%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409779538653-AF38KB8QTPO0CCL0S3TV/ke17ZwdGBToddI8pDm48kEMJMojxCT-3OtVg5r8BbsF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iFM4UXs_XXzzXpw5S7bmKNGWUSryiEPU3QMbTZLdmCplCIx5QvCsJlcOkjWgausgQ/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409779538653-AF38KB8QTPO0CCL0S3TV/ke17ZwdGBToddI8pDm48kEMJMojxCT-3OtVg5r8BbsF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iFM4UXs_XXzzXpw5S7bmKNGWUSryiEPU3QMbTZLdmCplCIx5QvCsJlcOkjWgausgQ/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409779538653-AF38KB8QTPO0CCL0S3TV/ke17ZwdGBToddI8pDm48kEMJMojxCT-3OtVg5r8BbsF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iFM4UXs_XXzzXpw5S7bmKNGWUSryiEPU3QMbTZLdmCplCIx5QvCsJlcOkjWgausgQ/image-asset.png" data-image-dimensions="2500x1819" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="54078752e4b05b809960fd2f" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409778976786_21984">
+           <div class="sqs-block-content">
+            <p>Pandante seems to bring joy to players in a way that I haven’t achieved in my other games. I usually focus on strategy that holds up during high level play, but I sort of stumbled upon that lining up with happiness in Pandante. So it really has two very different demographics: those who want a fun social, laughy game and those who want a serious, real-money gambling game that’s more fun and has a higher skill ceiling than poker.</p>
+            <p>You can get Pandante <a href="http://www.sirlingames.com/collections/pandante">here</a>. (The deluxe version is super nice and comes with professional grade, clay poker chips.)</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_2_1425621902132_36714">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1920.0px;"> 
+              <div style="padding-bottom:56.25%;" class="
+                image-block-wrapper
+                lightbox
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-lightbox-theme="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425622679570-JD9J6IVF6CNFYTXP88JZ/ke17ZwdGBToddI8pDm48kNvT88LknE-K9M4pGNO0Iqd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UbeDbaZv1s3QfpIA4TYnL5Qao8BosUKjCVjCf8TKewJIH3bqxw7fF48mhrq5Ulr0Hg/pandante_deluxe05-final.png" alt="pandante_deluxe05-final.png">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425622679570-JD9J6IVF6CNFYTXP88JZ/ke17ZwdGBToddI8pDm48kNvT88LknE-K9M4pGNO0Iqd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UbeDbaZv1s3QfpIA4TYnL5Qao8BosUKjCVjCf8TKewJIH3bqxw7fF48mhrq5Ulr0Hg/pandante_deluxe05-final.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1425622679570-JD9J6IVF6CNFYTXP88JZ/ke17ZwdGBToddI8pDm48kNvT88LknE-K9M4pGNO0Iqd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UbeDbaZv1s3QfpIA4TYnL5Qao8BosUKjCVjCf8TKewJIH3bqxw7fF48mhrq5Ulr0Hg/pandante_deluxe05-final.png" data-image-dimensions="1920x1080" data-image-focal-point="0.5,0.5" alt="pandante_deluxe05-final.png" data-load="false" data-image-id="54f94694e4b04dc2c5dd0d4b" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409778976786_24791">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1500.0px;"> <a class="
+                sqs-block-image-link
+                
+          
+        
+              " href="http://www.sirlingames.com/collections/pandante"> 
+               <div style="padding-bottom:82.33333587646484%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+                <noscript>
+                 <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409780071411-ZCUSCYJ60XKG15X9DFK7/ke17ZwdGBToddI8pDm48kPhC8SzhqdDp9tUyw2UZPYV7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UYN2FYEE4DNO2akGb8KZHrm-aoVttqaQxnwKxU7WvY6OgvfXeFkqR2XURoQScuJivA/pandante_luxbox_reboot1_web_large.jpg" alt="pandante_luxbox_reboot1_web_large.jpg">
+                </noscript>
+                <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409780071411-ZCUSCYJ60XKG15X9DFK7/ke17ZwdGBToddI8pDm48kPhC8SzhqdDp9tUyw2UZPYV7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UYN2FYEE4DNO2akGb8KZHrm-aoVttqaQxnwKxU7WvY6OgvfXeFkqR2XURoQScuJivA/pandante_luxbox_reboot1_web_large.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409780071411-ZCUSCYJ60XKG15X9DFK7/ke17ZwdGBToddI8pDm48kPhC8SzhqdDp9tUyw2UZPYV7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UYN2FYEE4DNO2akGb8KZHrm-aoVttqaQxnwKxU7WvY6OgvfXeFkqR2XURoQScuJivA/pandante_luxbox_reboot1_web_large.jpg" data-image-dimensions="1500x1235" data-image-focal-point="0.5,0.5" alt="pandante_luxbox_reboot1_web_large.jpg" data-load="false" data-image-id="54078967e4b0c09ea24820a6" data-type="image"> 
+               </div> </a> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div> <!--POST FOOTER--> 
+      <footer> 
+       <div class="meta"> 
+        <div class="first meta-row"> <span class="tags"><span class="tags-title">Tags</span> <a href="/articles/tag/set1" rel="tag">set1</a></span> 
+        </div> 
+        <div class="second meta-row"> <span class="sqs-simple-like" data-item-id="53fff398e4b0bbe0fce8a3a4" data-like-count="18"> <span class="like-icon"></span> <span class="like-count"></span> </span> 
+        </div> 
+       </div> 
+      </footer> 
+     </article> <!--PAGINATION--> 
+     <nav class="pagination clear"> <a class="prev-item" href="/articles/solvability">← Solvability</a><a class="next-item" href="/articles/blivand-design">Blivand Design →</a> 
+     </nav> <!-- COMMENTS --> 
+     <section id="comments-" class="comments-wrapper"> 
+      <div class="squarespace-comments" id="comments-53fff398e4b0bbe0fce8a3a4" data-item-id="53fff398e4b0bbe0fce8a3a4" data-public-comment-count="0" data-comment-state="2"></div> 
+     </section> 
+    </div> 
+    <aside id="sidebar">
+     <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Blog Sidebar" data-type="block-field" data-updated-on="1491168332520" id="sidebarBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1">
+        <div class="sqs-block search-block sqs-block-search" data-block-type="33" id="block-yui_3_10_1_1_1401522710068_7239">
+         <div class="sqs-block-content"> 
+          <div class="sqs-search-ui-text-input sqs-search-ui-button-wrapper color-dark" data-source="block" data-preview="false" data-collection=""> 
+           <div class="spinner-wrapper"></div> 
+           <input type="search" class="search-input" value="" placeholder="Search"> 
+          </div> 
+         </div>
+        </div>
+        <div class="sqs-block markdown-block sqs-block-markdown" data-block-type="44" id="block-yui_3_17_2_1_1406864496533_163579">
+         <div class="sqs-block-content">
+          <h4 data-preserve-html-node="true">Best of Sirlin.net</h4>
+         </div>
+        </div>
+        <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1406864496533_163676">
+         <div class="sqs-block-content">
+          <p><a href="/ptw">Playing to Win book</a></p>
+          <p><a href="/codex">Codex Design (23 Articles)</a><br><a href="/articles/designing-pandante">Designing Pandante</a><br><a href="/articles/blivand-design">Blivand Design</a><br><a href="/articles/designing-yomi">Designing Yomi</a><br><a href="/articles/game-balance-and-yomi">Game Balance and Yomi</a><br><a href="/articles/designing-puzzle-strike">Designing Puzzle Strike</a></p>
+          <p><a href="/articles/sf">Street Fighter HDR Articles</a><br><a href="/articles/balancing-puzzle-fighter">Balancing Puzzle Fighter</a></p>
+          <p><a href="/articles/solvability">Solvability</a><br><a href="/articles/slippery-slope-and-perpetual-comeback">Slippery Slope</a><br><a href="/articles/subtractive-design">Subtractive Design</a></p>
+          <p><span style="font-size:15px">Multiplayer Game Balance:</span><br><a href="/articles/balancing-multiplayer-games-part-1-definitions">Part 1: Definitions</a><br><a href="/articles/balancing-multiplayer-games-part-2-viable-options">Part 2: Viable Options</a><br><a href="/articles/balancing-multiplayer-games-part-3-fairness">Part 3: Fairness</a><br><a href="/articles/balancing-multiplayer-games-part-4-intuition">Part 4: Intuition</a><br><a target="_blank" href="/s/GDC-2009-sirlin-handout6.pdf"><span style="font-size:15px">Game Balance Handout</span></a></p>
+          <p>Tutorial Videos:<br><a href="/articles/street-fighter-tutorial-videos">Street Fighter Tutorial</a><br><a href="/articles/smash-bros-brawl-tutorial-videos">Smash Bros. Brawl Tutorial</a></p>
+          <p><a href="/article-archive">More articles...</a></p>
+         </div>
+        </div>
+        <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_2_1491167759049_17133">
+         <div class="sqs-block-content">
+          <!--
+<div class="section" id="chatbutton">
+                    <a class="btn btnChat" href='/' 
+ onclick='window.open("http://widget.mibbit.com/?channel=%23sirlin&nick=LameGuest_%3F%3F%3F&settings=84a6b1d147e4438f1f78873d04c9ebd4&customloading=waiting%20for%20the%20IRC-server%20...&autoConnect=0","","status=no, toolbar=no, menubar=no, location=no, width=999,height=555")' title="Stop by the community chat room">Chat</a>
+</div>
+--> 
+          <div class="section" id="chatbutton"> <a class="btn btnChat" href="https://discord.gg/Q3qrGUq" title="Stop by the community chat room">Chat</a> 
+          </div> 
+          <p> </p>
+          <div class="section" id="stayConnected"> 
+           <ul> 
+            <li><a class="btn btnTwt" href="http://twitter.com/SirlinGames" title="Follow Sirlin Games on Twitter"></a></li> 
+            <li><a class="btn btnFb" href="http://www.facebook.com/SirlinGames" title="Like Sirlin Games on Facebook"></a></li> 
+            <li><a class="btn btnTwitch" href="http://www.twitch.tv/sirlingames" title="Watch Sirlin Games on Twitch TV"></a></li> 
+            <li><a class="btn btnRss" href="http://sirlin.squarespace.com/?format=rss" title="Subscribe to the Sirlin.net RSS"></a></li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </aside> 
+   </section> 
+   <div class="extra-wrapper page-footer"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Footer Content: Articles" data-type="block-field" data-updated-on="1408693965564" id="page-footer-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <div class="page-divider"></div> 
+   <footer id="footer"> 
+    <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1410685816526" id="footerBlock">
+     <div class="row sqs-row">
+      <div class="col sqs-col-1 span-1">
+       <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-d3a95877fceaec72ddc3">
+        <div class="sqs-block-content">
+         <pre class="text-align-center"><a target="_blank" href="http://www.sirlingames.com">My tabletop games</a> | <a href="http://www.fantasystrike.com">My online games</a> | <a href="/ptw">Playing to Win</a> | <a href="/recommended-books">Recommended Books</a> | <a href="/about">About</a> | <a href="/contact">Contact</a></pre>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div id="socialLinks" class="social-links sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://www.facebook.com/SirlinGames" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+       </svg> 
+      </div> </a> <a href="https://twitter.com/Sirlin" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+       </svg> 
+      </div> </a> 
+    </div> 
+   </footer> 
+  </div> 
+  <div></div> 
+  <script src="https://static1.squarespace.com/static/ta/4fd1028ee4b02be53c65dfb3/1353/scripts/site-bundle.js" type="text/javascript"></script> 
+  <script type="text/javascript" data-sqs-type="imageloader-bootstrapper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none" data-usage="social-icons-svg">
+   <symbol id="facebook-icon" viewbox="0 0 64 64">
+    <path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+   </symbol><symbol id="facebook-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+   </symbol><symbol id="twitter-icon" viewbox="0 0 64 64">
+    <path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" />
+   </symbol><symbol id="twitter-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z" />
+   </symbol>
+  </svg>  
+ </body>
+</html>

@@ -1,0 +1,611 @@
+<html> 
+ <head> 
+  <title>CMI Email Updates</title> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta name="og:title" content="CMI Email Updates"> 
+  <meta http-equiv="expires" value="Sat, 1 Jan 2000 11:00:00 GMT"> 
+  <meta http-equiv="pragma" content="no-cache"> 
+  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE"> 
+  <meta name="viewport" content="width=device-width"> 
+  <link rel="shortcut icon" type="image/x-icon" href="http://contentmarketinginstitute.com/wp-content/themes/cmi/images/favicon.ico"> 
+  <link rel="icon" type="image/x-icon" href="http://contentmarketinginstitute.com/wp-content/themes/cmi/images/favicon.ico"> 
+  <link rel="stylesheet" type="text/css" href="/acton/form.css"> 
+  <link rel="stylesheet" type="text/css" href="/acton/formNegCap.css"> 
+  <script src="//www.google.com/recaptcha/api.js" async defer></script> 
+  <script type="text/javascript" src="/acton/prototype.js"></script> 
+  <script type="text/javascript" src="/acton/form/5141/0022/form.js"></script> 
+  <script type="text/javascript">
+			var requiredFields 		= new Array();		//	[id]
+			var requiredFieldGroups = new Array();		//	[id,count]
+			function addRequiredField (id)
+				{
+				requiredFields.push (id);
+				}
+			function addRequiredFieldGroup (id, count)
+				{
+				requiredFieldGroups.push ([id, count]);
+				}
+			function missing (fieldName)
+				{
+				var f = document.getElementById (fieldName);
+				var v = $F(fieldName);
+				if (v)
+					{
+					//	Trim
+					v = v.replace (/^\s*(.*)/,  "$1");
+					v = v.replace (/(.*?)\s*$/, "$1");
+					}
+				if (!v)
+					{
+					f.style.backgroundColor = '#FFFFCC';
+					return 1;
+					}
+				else
+					{
+					f.style.backgroundColor = '';
+					return 0;
+					}
+				}
+			function missingGroup (fieldName, count)
+				{
+				var found = false;
+				for (var i = 0; i < count; i++)
+					{
+					if (document.getElementById(fieldName+'-'+i).checked)
+						{
+						found = true;
+						break;
+						}
+					}
+				if (found)
+					{
+					for (var i = 0; i < count; i++)
+						document.getElementById(fieldName+'-'+i).parentNode.style.backgroundColor = '';
+					return 0;
+					}
+				else
+					{
+					for (var i = 0; i < count; i++)
+						document.getElementById(fieldName+'-'+i).parentNode.style.backgroundColor = '#FFFFCC';
+					return 1;
+					}
+				}
+			var validatedFields = new Array();
+			function addFieldToValidate (id, validationType, arg1, arg2)
+				{
+				validatedFields.push (
+					[ id, validationType, arg1, arg2 ]
+					);
+				}
+			function validateField (id, fieldValidationValue, arg1, arg2)
+				{
+				var field = document.getElementById(id);
+				var name  = field.name;
+				var value = $F(id);
+				for (var i = 0; i < validators.length; i++)
+					{
+					var validationDisplay   = validators[i][3];
+					var validationValue 	= validators[i][1];
+					var validationFunction	= validators[i][2];
+					if (validationValue === fieldValidationValue)
+						{
+						if (!validationFunction (value,arg1,arg2,id))
+							{							
+							field.style.backgroundColor = '#FFFFCC';
+							// alert (name + ': ' + validationDisplay);
+							alert (validationDisplay);
+							return false;
+							}
+						else
+							{
+							field.style.backgroundColor = '';
+							}
+						break;
+						}
+					}
+				for (var i = 0; i < implicitValidators.length; i++)
+					{
+					var validationDisplay   = implicitValidators[i][0];
+					var validationValue 	= implicitValidators[i][1];
+					var validationFunction	= implicitValidators[i][2];
+					if (validationValue === fieldValidationValue)
+						{
+						if (!validationFunction (value,arg1,arg2,id))
+							{							
+							field.style.backgroundColor = '#FFFFCC';
+							// alert (name + ': ' + validationDisplay);
+							alert (validationDisplay);
+							return false;
+							}
+						else
+							{
+							field.style.backgroundColor = '';
+							}
+						break;
+						}
+					}
+				return true;
+				}
+			var r = '';
+			var doPrefill = 0;
+			function doPrefillOnloadDone(ajax){}
+			function doPrefillOnload()
+				{
+				if( r && r.length > 0 && doPrefill)
+					{
+					var parms = 'a=5141&id=0022&r='+r+'&did=0022:d-0001&ts='+(new Date().getTime()) + '&sid=TV2:McryisGii';
+					new Ajax.Updater (
+						'prefillDiv',
+						'/acton/forms/prefillAjax.jsp',
+						{
+							method:			'get',
+							parameters:		parms,
+							evalScripts:	true,
+							onComplete:		doPrefillOnloadDone
+						}
+						);
+					}
+				}
+			getParameter = function (parameterName) 
+				{
+				var search = window.location.search;
+				var queryString = search != null && search.length > 0 ? window.location.search.substring(1) : '';
+				if (queryString.length == 0) 
+					return null;
+				var begin = queryString.indexOf (parameterName+"=");
+				if (begin == -1)
+					return null;
+				begin += parameterName.length+1;
+				var end = queryString.indexOf ("&", begin);
+				if (end == -1) 
+					end = queryString.length
+				return unescape (queryString.substring (begin, end));
+				}
+			if(getParameter("validRecaptcha")){
+                alert("The Captcha value entered was incorrect.  Please try again.");
+			}
+			function doOnLoad ()
+				{
+				document.getElementById("ao_jstzo").value = new Date().getTimezoneOffset();
+				var refURL = document.referrer;		
+				if ( window.location.href.indexOf('embedded=1') !== -1 )
+					{
+					try 
+						{
+						var parentReferrer = parent.getReferrerHeader();
+						if ( ! parentReferrer || parentReferrer == '' )
+							refURL = getParameter( "refUrl" );
+						else refURL = parentReferrer;
+						}
+					catch(e)
+						{
+						refURL = getParameter( "refUrl" );
+						}
+					}
+				if ( refURL != null )
+					document.getElementById("ao_refurl").value = refURL;
+				doPrefillOnload();
+				}
+			function doSubmit(form)
+				{
+				try {
+					if (typeof(customSubmitProcessing) === "function")
+						customSubmitProcessing();
+					}
+				catch (err) { }
+				var submitButton = document.getElementById (form.id+'_ao_submit_button');
+				submitButton.style.visibility = 'hidden';
+				//	Check required fields
+				var missingCount = 0;
+				for (var i = 0; i < requiredFields.length; i++)
+					missingCount += missing (requiredFields[i]);
+				for (var i = 0; i < requiredFieldGroups.length; i++)
+					missingCount += missingGroup (requiredFieldGroups[i][0], requiredFieldGroups[i][1]);
+				if (missingCount > 0)
+					{
+					alert ('Please fill all required (*) fields. ');
+					submitButton.style.visibility = 'visible';
+					return;
+					}
+				//	Validate all fields
+				for (var i = 0; i < validatedFields.length; i++)
+					{
+					var ff = validatedFields[i];
+					if (!validateField (ff[0], ff[1], ff[2], ff[3]))
+						{
+						document.getElementById(ff[0]).focus();
+						submitButton.style.visibility = 'visible';
+						return;
+						}
+					}
+				//	Make sure it is not a preview situation
+				if (document.getElementById('ao_p').value === '1')
+					{
+					submitButton.style.visibility = 'visible';
+					return;
+					}
+				// Enable the form handler
+				document.getElementById('ao_bot').value = 'nope';
+                try{
+                // Save the parent href if the form is in an iframe
+                document.getElementById('ao_iframe').value = window.parent ? window.parent.location.href : "";
+                }catch(xxx){}
+				// Submit
+				form.submit();
+				}
+		</script> 
+  <title></title> 
+  <style type="text/css">BODY {
+        font-family:Verdana;
+        font-size:11px;
+        color:#000000;
+        }
+        TABLE, TR, TD, P, DIV, UL, OL {
+        font-family:Verdana;
+        font-size:11px;
+        color:#000000;
+        }
+        </style> 
+ </head> 
+ <body onload="doOnLoad()"> 
+  <form id="form_0022" method="post" enctype="multipart/form-data" action="https://info.contentmarketinginstitute.com/acton/forms/userSubmit.jsp" accept-charset="UTF-8" target="_self"> 
+   <input type="hidden" name="ao_a" value="5141"> 
+   <input type="hidden" name="ao_f" value="0022"> 
+   <input type="hidden" name="ao_d" value="0022:d-0001"> 
+   <input type="hidden" name="ao_p" id="ao_p" value="0"> 
+   <input type="hidden" name="ao_jstzo" id="ao_jstzo" value=""> 
+   <input type="hidden" name="ao_refurl" id="ao_refurl" value=""> 
+   <input type="hidden" name="ao_cuid" value=""> 
+   <input type="hidden" name="ao_srcid" value=""> 
+   <input type="hidden" name="ao_nc" value=""> 
+   <input type="hidden" name="ao_pf" value="0"> 
+   <input type="hidden" name="ao_bot" id="ao_bot" value="yes"> 
+   <input type="hidden" name="ao_iframe" id="ao_iframe" value=""> 
+   <input type="hidden" name="ao_camp" value=""> 
+   <input type="hidden" name="ao_campid" value=""> <!-- -------------------------------------------------------------------------------------------- --> 
+   <style type="text/css">BODY { 
+	font-family:Verdana; 
+	font-size:11px; 
+	color:#000000; 
+	} 
+TABLE, TR, TD, P, DIV, UL, OL { 
+	font-family:Verdana; 
+	font-size:11px; 
+	color:#000000; 
+	} 
+</style> 
+   <table id="layout" width="100%" height="100%" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF"> 
+    <tbody>
+     <tr> 
+      <td align="center" valign="top"> 
+       <div id="topspacer" style="height:15px; width:10px; overflow:hidden">
+        &nbsp;
+       </div> 
+       <div id="header" style="font-family:Verdana;font-size:10px;color:#000000;"> 
+       </div> 
+       <div id="headerspacer" style="height:5px; width:10px; overflow:hidden">
+        &nbsp;
+       </div> 
+       <table id="content" width="600" cellpadding="0" cellspacing="0" border="0"> 
+        <tbody>
+         <tr>
+          <td id="logotdcontainer" align="center" valign="middle" style="background-color:#FFFFFF;border-left: #FF9900 solid 100px; border-top: #FF9900 solid 100px; border-right: #FF9900 solid 100px;">
+           <div id="logocontainer" style="padding: 2px; background-color:#FFFFFF;"> <a href="http://contentmarketinginstitute.com/" target="_blank"><img id="r-2945464" border="0" style="font-size: 12px;" src="https://info.contentmarketinginstitute.com/acton/cx/1415/logo9.jpg" alt="CMI Logo"></a> 
+           </div></td>
+         </tr> 
+         <tr>
+          <td id="contenttdcontainer" align="left" valign="middle" bgcolor="#FFFFFF" style="background-color:#FFFFFF;border-left:#FF9900 solid 100px; border-right: #FF9900 solid 100px; border-bottom: #FF9900 solid 100px"> 
+           <table width="100%" cellpadding="0" cellspacing="0" border="0"> 
+            <tbody>
+             <tr>
+              <td colspan="3">
+               <div style="background-color:#FFFFFF; height:15px; width:1px; overflow: hidden">
+                &nbsp;
+               </div></td>
+             </tr> 
+             <tr> 
+              <td>
+               <div style="background-color:#FFFFFF; width:15px; height:1px; overflow: hidden">
+                &nbsp;
+               </div></td> 
+              <td>
+               <div id="contentcontainer" style="background-color:#FFFFFF;font-size:11px;font-family:Verdana;color:#000000;"> 
+                <style type="text/css">
+					table, tr, td, body, p, div, span, textarea, input, select, a, ul, ol {
+							font-family: arial,helvetica neue,helvetica,sans-serif !important;
+							font-size: 12pt !important;
+					}
+				</style> 
+                <link rel="stylesheet" type="text/css" href="/acton/form/5141/0022/form.css"> 
+                <div id="ao_alignment_container" class="aoFormContainer" align="center"> 
+                 <table class="ao_tbl_container" border="0" cellspacing="0" cellpadding="0"> 
+                  <tbody>
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formField"> 
+                      <div class="formSectionDescription">
+                       <p><span style="font-size: 12pt; font-family: arial, 'helvetica neue', helvetica, sans-serif;">Get email updates from the Content Marketing Institute and stay up-to-date on all aspects of content marketing.</span><br><br><span style="font-size: 12pt; font-family: arial, 'helvetica neue', helvetica, sans-serif;">Check the box next to the item(s) you would like to receive. You will get a confirmation e-mail for your subscription(s). You can unsubscribe at anytime.</span></p>
+                      </div> 
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <table cellspacing="0" cellpadding="0"> 
+                         <tbody>
+                          <tr> 
+                           <td class="sideBySideCell formFieldLabel"><label for="form_0022_fld_1_fn">First Name</label><b style="color: #FF0000; cursor: default" title="Required Field">*</b></td> 
+                           <td class="sideBySideCell formFieldLabel" style="padding-left: 5px"><label for="form_0022_fld_1_ln">Last Name</label><b style="color: #FF0000; cursor: default" title="Required Field">*</b></td> 
+                          </tr> 
+                          <tr> 
+                           <td class="sideBySideCell"><input type="text" class="l6e formFieldText formFieldMediumLeft" id="form_0022_fld_1_fn" name="First Name" value=""></td> 
+                           <td class="sideBySideCell" style="padding-left: 5px"><input type="text" class="l6e formFieldText formFieldMediumRight" id="form_0022_fld_1_ln" name="Last Name" value=""></td> 
+                          </tr> 
+                          <tr>
+                           <td>&nbsp;</td>
+                          </tr> 
+                          <tr> 
+                           <td class="formFieldLabel sideBySideCell"><label for="form_0022_fld_1_em">Email Address</label><b style="color: #FF0000; cursor: default" title="Required Field">*</b></td> 
+                          </tr> 
+                          <tr> 
+                           <td colspan="2"><input type="Email" class="l6e formFieldText formFieldLarge" id="form_0022_fld_1_em" name="E-mail Address" value=""></td> 
+                          </tr> 
+                         </tbody>
+                        </table> 
+                       </div> 
+                       <script type="text/javascript">
+		if (typeof(addRequiredField) != 'undefined')
+			{
+			addRequiredField ('form_0022_fld_1_fn');
+			addRequiredField ('form_0022_fld_1_ln');
+			addRequiredField ('form_0022_fld_1_em');
+			}
+		if (typeof(addFieldToValidate) != 'undefined')
+			{
+			addFieldToValidate ('form_0022_fld_1_em', 'EMAIL');
+			}
+	</script> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <div class="formFieldLabel" id="form_0022_fld_2-Label">
+                         <label for="form_0022_fld_2">Company</label><b style="color: #FF0000; cursor: default" title="Required Field">*</b>
+                        </div> 
+                        <input type="text" class="formFieldText formFieldLarge" id="form_0022_fld_2" name="Company"> 
+                       </div> 
+                       <script type="text/javascript">
+		if (typeof(addRequiredField) != 'undefined')
+			{
+			addRequiredField ('form_0022_fld_2');
+			}
+	</script> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <div class="formFieldLabel">
+                         Country<b style="color: #FF0000; cursor: default" title="Required Field">*</b>
+                        </div> <select size="1" id="form_0022_fld_3" name="Mailing Country" class="formFieldLarge"> <option value=""></option> <option id="form_0022_fld_3-0" value="AF">Afghanistan</option> <option id="form_0022_fld_3-1" value="AL">Albania</option> <option id="form_0022_fld_3-2" value="DZ">Algeria</option> <option id="form_0022_fld_3-3" value="AS">American Samoa</option> <option id="form_0022_fld_3-4" value="AD">Andorra</option> <option id="form_0022_fld_3-5" value="AO">Angola</option> <option id="form_0022_fld_3-6" value="AI">Anguilla</option> <option id="form_0022_fld_3-7" value="AQ">Antarctica</option> <option id="form_0022_fld_3-8" value="AG">Antigua and Barbuda</option> <option id="form_0022_fld_3-9" value="AR">Argentina</option> <option id="form_0022_fld_3-10" value="AM">Armenia</option> <option id="form_0022_fld_3-11" value="AW">Aruba</option> <option id="form_0022_fld_3-12" value="AU">Australia</option> <option id="form_0022_fld_3-13" value="AT">Austria</option> <option id="form_0022_fld_3-14" value="AZ">Azerbaijan</option> <option id="form_0022_fld_3-15" value="BS">Bahamas</option> <option id="form_0022_fld_3-16" value="BH">Bahrain</option> <option id="form_0022_fld_3-17" value="BD">Bangladesh</option> <option id="form_0022_fld_3-18" value="BB">Barbados</option> <option id="form_0022_fld_3-19" value="BY">Belarus</option> <option id="form_0022_fld_3-20" value="BE">Belgium</option> <option id="form_0022_fld_3-21" value="BZ">Belize</option> <option id="form_0022_fld_3-22" value="BJ">Benin</option> <option id="form_0022_fld_3-23" value="BM">Bermuda</option> <option id="form_0022_fld_3-24" value="BT">Bhutan</option> <option id="form_0022_fld_3-25" value="BO">Bolivia</option> <option id="form_0022_fld_3-26" value="BQ">Bonaire</option> <option id="form_0022_fld_3-27" value="BA">Bosnia</option> <option id="form_0022_fld_3-28" value="BW">Botswana</option> <option id="form_0022_fld_3-29" value="BV">Bouvet Island</option> <option id="form_0022_fld_3-30" value="BR">Brazil</option> <option id="form_0022_fld_3-31" value="IO">British Indian Ocean Territory</option> <option id="form_0022_fld_3-32" value="BN">Brunei</option> <option id="form_0022_fld_3-33" value="BG">Bulgaria</option> <option id="form_0022_fld_3-34" value="BF">Burkina Faso</option> <option id="form_0022_fld_3-35" value="BI">Burundi</option> <option id="form_0022_fld_3-36" value="KH">Cambodia</option> <option id="form_0022_fld_3-37" value="CM">Cameroon</option> <option id="form_0022_fld_3-38" value="CA">Canada</option> <option id="form_0022_fld_3-39" value="CV">Cape Verde</option> <option id="form_0022_fld_3-40" value="KY">Cayman Islands</option> <option id="form_0022_fld_3-41" value="CF">Central African Republic</option> <option id="form_0022_fld_3-42" value="TD">Chad</option> <option id="form_0022_fld_3-43" value="CL">Chile</option> <option id="form_0022_fld_3-44" value="CN">China</option> <option id="form_0022_fld_3-45" value="CX">Christmas Island</option> <option id="form_0022_fld_3-46" value="CC">Cocos Islands</option> <option id="form_0022_fld_3-47" value="CO">Colombia</option> <option id="form_0022_fld_3-48" value="KM">Comoros</option> <option id="form_0022_fld_3-49" value="CG">Congo</option> <option id="form_0022_fld_3-50" value="CD">Congo, Dem. Rep.</option> <option id="form_0022_fld_3-51" value="CK">Cook Islands</option> <option id="form_0022_fld_3-52" value="CR">Costa Rica</option> <option id="form_0022_fld_3-53" value="HR">Croatia</option> <option id="form_0022_fld_3-54" value="CU">Cuba</option> <option id="form_0022_fld_3-55" value="CW">Curaçao</option> <option id="form_0022_fld_3-56" value="CY">Cyprus</option> <option id="form_0022_fld_3-57" value="CZ">Czech Republic</option> <option id="form_0022_fld_3-58" value="DK">Denmark</option> <option id="form_0022_fld_3-59" value="DJ">Djibouti</option> <option id="form_0022_fld_3-60" value="DM">Dominica</option> <option id="form_0022_fld_3-61" value="DO">Dominican Republic</option> <option id="form_0022_fld_3-62" value="EC">Ecuador</option> <option id="form_0022_fld_3-63" value="EG">Egypt</option> <option id="form_0022_fld_3-64" value="SV">El Salvador</option> <option id="form_0022_fld_3-65" value="GQ">Equatorial Guinea</option> <option id="form_0022_fld_3-66" value="ER">Eritrea</option> <option id="form_0022_fld_3-67" value="EE">Estonia</option> <option id="form_0022_fld_3-68" value="ET">Ethiopia</option> <option id="form_0022_fld_3-69" value="FK">Falkland Islands (Malvinas)</option> <option id="form_0022_fld_3-70" value="FO">Faroe Islands</option> <option id="form_0022_fld_3-71" value="FJ">Fiji</option> <option id="form_0022_fld_3-72" value="FI">Finland</option> <option id="form_0022_fld_3-73" value="FR">France</option> <option id="form_0022_fld_3-74" value="GF">French Guiana</option> <option id="form_0022_fld_3-75" value="PF">French Polynesia</option> <option id="form_0022_fld_3-76" value="TF">French Southern Territories</option> <option id="form_0022_fld_3-77" value="GA">Gabon</option> <option id="form_0022_fld_3-78" value="GM">Gambia</option> <option id="form_0022_fld_3-79" value="GE">Georgia</option> <option id="form_0022_fld_3-80" value="DE">Germany</option> <option id="form_0022_fld_3-81" value="GH">Ghana</option> <option id="form_0022_fld_3-82" value="GI">Gibraltar</option> <option id="form_0022_fld_3-83" value="GR">Greece</option> <option id="form_0022_fld_3-84" value="GL">Greenland</option> <option id="form_0022_fld_3-85" value="GD">Grenada</option> <option id="form_0022_fld_3-86" value="GP">Guadeloupe</option> <option id="form_0022_fld_3-87" value="GU">Guam</option> <option id="form_0022_fld_3-88" value="GT">Guatemala</option> <option id="form_0022_fld_3-89" value="GG">Guernsey</option> <option id="form_0022_fld_3-90" value="GN">Guinea</option> <option id="form_0022_fld_3-91" value="GW">Guinea-Bissau</option> <option id="form_0022_fld_3-92" value="GY">Guyana</option> <option id="form_0022_fld_3-93" value="HT">Haiti</option> <option id="form_0022_fld_3-94" value="HM">Heard Island</option> <option id="form_0022_fld_3-95" value="HN">Honduras</option> <option id="form_0022_fld_3-96" value="HK">Hong Kong</option> <option id="form_0022_fld_3-97" value="HU">Hungary</option> <option id="form_0022_fld_3-98" value="IS">Iceland</option> <option id="form_0022_fld_3-99" value="IN">India</option> <option id="form_0022_fld_3-100" value="ID">Indonesia</option> <option id="form_0022_fld_3-101" value="IR">Iran</option> <option id="form_0022_fld_3-102" value="IQ">Iraq</option> <option id="form_0022_fld_3-103" value="IE">Ireland</option> <option id="form_0022_fld_3-104" value="IM">Isle of Man</option> <option id="form_0022_fld_3-105" value="IL">Israel</option> <option id="form_0022_fld_3-106" value="IT">Italy</option> <option id="form_0022_fld_3-107" value="CI">Ivory Coast</option> <option id="form_0022_fld_3-108" value="JM">Jamaica</option> <option id="form_0022_fld_3-109" value="JP">Japan</option> <option id="form_0022_fld_3-110" value="JE">Jersey</option> <option id="form_0022_fld_3-111" value="JO">Jordan</option> <option id="form_0022_fld_3-112" value="KZ">Kazakhstan</option> <option id="form_0022_fld_3-113" value="KE">Kenya</option> <option id="form_0022_fld_3-114" value="KI">Kiribati</option> <option id="form_0022_fld_3-115" value="KR">Korea</option> <option id="form_0022_fld_3-116" value="KP">Korea, DPRK</option> <option id="form_0022_fld_3-117" value="XK">Kosovo</option> <option id="form_0022_fld_3-118" value="KW">Kuwait</option> <option id="form_0022_fld_3-119" value="KG">Kyrgyzstan</option> <option id="form_0022_fld_3-120" value="LA">Laos</option> <option id="form_0022_fld_3-121" value="LV">Latvia</option> <option id="form_0022_fld_3-122" value="LB">Lebanon</option> <option id="form_0022_fld_3-123" value="LS">Lesotho</option> <option id="form_0022_fld_3-124" value="LR">Liberia</option> <option id="form_0022_fld_3-125" value="LY">Libya</option> <option id="form_0022_fld_3-126" value="LI">Liechtenstein</option> <option id="form_0022_fld_3-127" value="LT">Lithuania</option> <option id="form_0022_fld_3-128" value="LU">Luxembourg</option> <option id="form_0022_fld_3-129" value="MO">Macao</option> <option id="form_0022_fld_3-130" value="MK">Macedonia</option> <option id="form_0022_fld_3-131" value="MG">Madagascar</option> <option id="form_0022_fld_3-132" value="MW">Malawi</option> <option id="form_0022_fld_3-133" value="MY">Malaysia</option> <option id="form_0022_fld_3-134" value="MV">Maldives</option> <option id="form_0022_fld_3-135" value="ML">Mali</option> <option id="form_0022_fld_3-136" value="MT">Malta</option> <option id="form_0022_fld_3-137" value="MH">Marshall Islands</option> <option id="form_0022_fld_3-138" value="MQ">Martinique</option> <option id="form_0022_fld_3-139" value="MR">Mauritania</option> <option id="form_0022_fld_3-140" value="MU">Mauritius</option> <option id="form_0022_fld_3-141" value="YT">Mayotte</option> <option id="form_0022_fld_3-142" value="MX">Mexico</option> <option id="form_0022_fld_3-143" value="FM">Micronesia, Fed.</option> <option id="form_0022_fld_3-144" value="MD">Moldova</option> <option id="form_0022_fld_3-145" value="MC">Monaco</option> <option id="form_0022_fld_3-146" value="MN">Mongolia</option> <option id="form_0022_fld_3-147" value="ME">Montenegro</option> <option id="form_0022_fld_3-148" value="MS">Montserrat</option> <option id="form_0022_fld_3-149" value="MA">Morocco</option> <option id="form_0022_fld_3-150" value="MZ">Mozambique</option> <option id="form_0022_fld_3-151" value="MM">Myanmar</option> <option id="form_0022_fld_3-152" value="NA">Namibia</option> <option id="form_0022_fld_3-153" value="NR">Nauru</option> <option id="form_0022_fld_3-154" value="NP">Nepal</option> <option id="form_0022_fld_3-155" value="NL">Netherlands</option> <option id="form_0022_fld_3-156" value="NC">New Caledonia</option> <option id="form_0022_fld_3-157" value="NZ">New Zealand</option> <option id="form_0022_fld_3-158" value="NI">Nicaragua</option> <option id="form_0022_fld_3-159" value="NE">Niger</option> <option id="form_0022_fld_3-160" value="NG">Nigeria</option> <option id="form_0022_fld_3-161" value="NU">Niue</option> <option id="form_0022_fld_3-162" value="NF">Norfolk Island</option> <option id="form_0022_fld_3-163" value="MP">Northern Marianas</option> <option id="form_0022_fld_3-164" value="NO">Norway</option> <option id="form_0022_fld_3-165" value="OM">Oman</option> <option id="form_0022_fld_3-166" value="PK">Pakistan</option> <option id="form_0022_fld_3-167" value="PW">Palau</option> <option id="form_0022_fld_3-168" value="PS">Palestinian Terr.</option> <option id="form_0022_fld_3-169" value="PA">Panama</option> <option id="form_0022_fld_3-170" value="PG">Papua New Guinea</option> <option id="form_0022_fld_3-171" value="PY">Paraguay</option> <option id="form_0022_fld_3-172" value="PE">Peru</option> <option id="form_0022_fld_3-173" value="PH">Philippines</option> <option id="form_0022_fld_3-174" value="PN">Pitcairn</option> <option id="form_0022_fld_3-175" value="PL">Poland</option> <option id="form_0022_fld_3-176" value="PT">Portugal</option> <option id="form_0022_fld_3-177" value="PR">Puerto Rico</option> <option id="form_0022_fld_3-178" value="QA">Qatar</option> <option id="form_0022_fld_3-179" value="RO">Romania</option> <option id="form_0022_fld_3-180" value="RU">Russia</option> <option id="form_0022_fld_3-181" value="RW">Rwanda</option> <option id="form_0022_fld_3-182" value="RE">Réunion</option> <option id="form_0022_fld_3-183" value="BL">Saint Barthélemy</option> <option id="form_0022_fld_3-184" value="SH">Saint Helena</option> <option id="form_0022_fld_3-185" value="KN">Saint Kitts and Nevis</option> <option id="form_0022_fld_3-186" value="LC">Saint Lucia</option> <option id="form_0022_fld_3-187" value="MF">Saint Martin (French)</option> <option id="form_0022_fld_3-188" value="PM">Saint Pierre and Miquelon</option> <option id="form_0022_fld_3-189" value="VC">Saint Vincent</option> <option id="form_0022_fld_3-190" value="WS">Samoa</option> <option id="form_0022_fld_3-191" value="SM">San Marino</option> <option id="form_0022_fld_3-192" value="ST">Sao Tome &amp; Principe</option> <option id="form_0022_fld_3-193" value="SA">Saudi Arabia</option> <option id="form_0022_fld_3-194" value="SN">Senegal</option> <option id="form_0022_fld_3-195" value="RS">Serbia</option> <option id="form_0022_fld_3-196" value="SC">Seychelles</option> <option id="form_0022_fld_3-197" value="SL">Sierra Leone</option> <option id="form_0022_fld_3-198" value="SG">Singapore</option> <option id="form_0022_fld_3-199" value="SX">Sint Maarten (Dutch)</option> <option id="form_0022_fld_3-200" value="SK">Slovakia</option> <option id="form_0022_fld_3-201" value="SI">Slovenia</option> <option id="form_0022_fld_3-202" value="SB">Solomon Islands</option> <option id="form_0022_fld_3-203" value="SO">Somalia</option> <option id="form_0022_fld_3-204" value="ZA">South Africa</option> <option id="form_0022_fld_3-205" value="GS">South Georgia and the South Sandwich Islands</option> <option id="form_0022_fld_3-206" value="SS">South Sudan</option> <option id="form_0022_fld_3-207" value="ES">Spain</option> <option id="form_0022_fld_3-208" value="LK">Sri Lanka</option> <option id="form_0022_fld_3-209" value="SD">Sudan</option> <option id="form_0022_fld_3-210" value="SR">Suriname</option> <option id="form_0022_fld_3-211" value="SJ">Svalbard</option> <option id="form_0022_fld_3-212" value="SZ">Swaziland</option> <option id="form_0022_fld_3-213" value="SE">Sweden</option> <option id="form_0022_fld_3-214" value="CH">Switzerland</option> <option id="form_0022_fld_3-215" value="SY">Syria</option> <option id="form_0022_fld_3-216" value="TW">Taiwan</option> <option id="form_0022_fld_3-217" value="TJ">Tajikistan</option> <option id="form_0022_fld_3-218" value="TZ">Tanzania</option> <option id="form_0022_fld_3-219" value="TH">Thailand</option> <option id="form_0022_fld_3-220" value="TL">Timor-Leste</option> <option id="form_0022_fld_3-221" value="TG">Togo</option> <option id="form_0022_fld_3-222" value="TK">Tokelau</option> <option id="form_0022_fld_3-223" value="TO">Tonga</option> <option id="form_0022_fld_3-224" value="TT">Trinidad and Tobago</option> <option id="form_0022_fld_3-225" value="TN">Tunisia</option> <option id="form_0022_fld_3-226" value="TR">Turkey</option> <option id="form_0022_fld_3-227" value="TM">Turkmenistan</option> <option id="form_0022_fld_3-228" value="TC">Turks and Caicos</option> <option id="form_0022_fld_3-229" value="TV">Tuvalu</option> <option id="form_0022_fld_3-230" value="AE">U.A.E.</option> <option id="form_0022_fld_3-231" value="UG">Uganda</option> <option id="form_0022_fld_3-232" value="UA">Ukraine</option> <option id="form_0022_fld_3-233" value="GB">United Kingdom</option> <option id="form_0022_fld_3-234" value="US">United States</option> <option id="form_0022_fld_3-235" value="UM">United States Minor Outlying Islands</option> <option id="form_0022_fld_3-236" value="UY">Uruguay</option> <option id="form_0022_fld_3-237" value="UZ">Uzbekistan</option> <option id="form_0022_fld_3-238" value="VU">Vanuatu</option> <option id="form_0022_fld_3-239" value="VA">Vatican City</option> <option id="form_0022_fld_3-240" value="VE">Venezuela</option> <option id="form_0022_fld_3-241" value="VN">Viet Nam</option> <option id="form_0022_fld_3-242" value="VG">Virgin Islands, British</option> <option id="form_0022_fld_3-243" value="VI">Virgin Islands, U.S.</option> <option id="form_0022_fld_3-244" value="WF">Wallis and Futuna</option> <option id="form_0022_fld_3-245" value="EH">Western Sahara</option> <option id="form_0022_fld_3-246" value="YE">Yemen</option> <option id="form_0022_fld_3-247" value="ZM">Zambia</option> <option id="form_0022_fld_3-248" value="ZW">Zimbabwe</option> <option id="form_0022_fld_3-249" value="AX">Åland Islands</option> </select> 
+                       </div> 
+                       <script type="text/javascript">
+			if (typeof(addRequiredField) != 'undefined')
+				{
+				addRequiredField ('form_0022_fld_3');
+				}
+		</script> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formField"> 
+                      <div class="formSectionDescription">
+                       <p><span style="font-family: arial, 'helvetica neue', helvetica, sans-serif; font-size: 10pt;">Choose All That Apply<span style="color: #ff0000;"><strong title="Required Field">*</strong></span></span></p>
+                      </div> 
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <div class="l6e formFieldLabel">
+                         Today in Content Marketing
+                        </div> 
+                        <table cellspacing="0" cellpadding="0"> 
+                         <tbody>
+                          <tr> 
+                           <td> 
+                            <div class="formField1Column" style="overflow: hidden"> 
+                             <table cellspacing="0" cellpadding="1" class="formField1Column">
+                              <tbody>
+                               <tr> 
+                                <td width="20" align="left"><input type="checkbox" name="Daily Alert" id="form_0022_fld_5-0" value="True"></td> 
+                                <td width="*" align="left" style="padding-top: 3px; padding-right: 10px"><label for="form_0022_fld_5-0" class="formFieldLabel checkboxFieldLabel">Daily notifications of the latest content marketing news and insights.</label></td> 
+                               </tr>
+                              </tbody>
+                             </table> 
+                            </div> </td> 
+                          </tr> 
+                         </tbody>
+                        </table> 
+                       </div> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <div class="l6e formFieldLabel">
+                         This Week in Content Marketing
+                        </div> 
+                        <table cellspacing="0" cellpadding="0"> 
+                         <tbody>
+                          <tr> 
+                           <td> 
+                            <div class="formField1Column" style="overflow: hidden"> 
+                             <table cellspacing="0" cellpadding="1" class="formField1Column">
+                              <tbody>
+                               <tr> 
+                                <td width="20" align="left"><input type="checkbox" name="Weekly News" id="form_0022_fld_6-0" value="True"></td> 
+                                <td width="*" align="left" style="padding-top: 3px; padding-right: 10px"><label for="form_0022_fld_6-0" class="formFieldLabel checkboxFieldLabel">A summary of the week’s content marketing articles, news and current job listings.</label></td> 
+                               </tr>
+                              </tbody>
+                             </table> 
+                            </div> </td> 
+                          </tr> 
+                         </tbody>
+                        </table> 
+                       </div> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <div class="l6e formFieldLabel">
+                         CMI Promotions
+                        </div> 
+                        <table cellspacing="0" cellpadding="0"> 
+                         <tbody>
+                          <tr> 
+                           <td> 
+                            <div class="formField1Column" style="overflow: hidden"> 
+                             <table cellspacing="0" cellpadding="1" class="formField1Column">
+                              <tbody>
+                               <tr> 
+                                <td width="20" align="left"><input type="checkbox" name="CMI Promotions" id="form_0022_fld_7-0" value="True"></td> 
+                                <td width="*" align="left" style="padding-top: 3px; padding-right: 10px"><label for="form_0022_fld_7-0" class="formFieldLabel checkboxFieldLabel">Event discounts, webinar, e-books, research</label></td> 
+                               </tr>
+                              </tbody>
+                             </table> 
+                            </div> </td> 
+                          </tr> 
+                         </tbody>
+                        </table> 
+                       </div> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <div class="l6e formFieldLabel">
+                         CMI Partner E-Mails
+                        </div> 
+                        <table cellspacing="0" cellpadding="0"> 
+                         <tbody>
+                          <tr> 
+                           <td> 
+                            <div class="formField1Column" style="overflow: hidden"> 
+                             <table cellspacing="0" cellpadding="1" class="formField1Column">
+                              <tbody>
+                               <tr> 
+                                <td width="20" align="left"><input type="checkbox" name="CMI Partner E-Mails" id="form_0022_fld_8-0" value="True"></td> 
+                                <td width="*" align="left" style="padding-top: 3px; padding-right: 10px"><label for="form_0022_fld_8-0" class="formFieldLabel checkboxFieldLabel">Trusted third-party sponsors</label></td> 
+                               </tr>
+                              </tbody>
+                             </table> 
+                            </div> </td> 
+                          </tr> 
+                         </tbody>
+                        </table> 
+                       </div> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <div class="formField"> 
+                        <table width="100%">
+                         <tbody>
+                          <tr>
+                           <td align="middle" id="form_0022_ao_captcha"> 
+                            <div class="g-recaptcha" data-sitekey="6LctqAsUAAAAAK3jaxOkexQ-5vz4zpy0oMlFhWOv"></div><input type="hidden" name="captcha_v2" value="true"> </td>
+                          </tr>
+                         </tbody>
+                        </table> 
+                       </div> 
+                      </div>
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formField"> 
+                      <div class="formSectionDescription">
+                       <p style="text-align: center;"><span style="font-size: 8pt;">CMI, a UBM Company, 2 Penn Plaza, 15th Floor New York, NY 10121, 1-888-554-2024 | Information about UBM entities and its affiliates can be found <a href="http://reg.ubmamevents.com/UBMLegalEntities">here</a>.</span></p>
+                      </div> 
+                     </div> </td> 
+                   </tr> 
+                   <tr> 
+                    <td class="ao_tbl_cell" style="padding-left: 10px; padding-right: 10px" align="center"> 
+                     <div class="formInputBlock">
+                      <div align="left"> 
+                       <input type="hidden" id="form_0022_fld_11" name="Original Source" value="Website - Subscription Sign-up"> 
+                      </div>
+                     </div> </td> 
+                   </tr> <!-- BUTTONS --> 
+                   <tr>
+                    <td>&nbsp;</td>
+                   </tr> 
+                   <tr>
+                    <td style="padding-bottom: 5px" align="center" id="form_0022_ao_submit_button"> <a id="form_0022_ao_submit_href" href="javascript: doSubmit(document.getElementById('form_0022'))"><img src="//info.contentmarketinginstitute.com/acton/attachment/5141/f-0113/1/-/-/-/-/image.jpg" border="0"></a> </td>
+                   </tr> 
+                   <tr class="formNegCap">
+                    <td> <input type="text" id="ao_form_neg_cap" name="ao_form_neg_cap" value=""> </td>
+                   </tr> 
+                  </tbody>
+                 </table> 
+                </div> <!-- -------------------------------------------------------------------------------------------- --> 
+               </div></td> 
+              <td>
+               <div style="background-color:#FFFFFF; width:15px; height:1px; overflow: hidden">
+                &nbsp;
+               </div></td> 
+             </tr> 
+             <tr>
+              <td colspan="3">
+               <div style="background-color:#FFFFFF; height:15px; width:1px; overflow: hidden">
+                &nbsp;
+               </div></td>
+             </tr> 
+            </tbody>
+           </table> </td>
+         </tr> 
+        </tbody>
+       </table> 
+       <div id="footerspacer" style="height:5px;width:10px; overflow: hidden">
+        &nbsp;
+       </div> 
+       <div id="footer" style="font-family:Verdana;font-size:10px;color:#000000;"> <!-- -------------------------------------------------------------------------------------------- --> <!-- -------------------------------------------------------------------------------------------- --> 
+       </div> 
+       <div id="bottomspacer" style="height:15px;width:10px; overflow: hidden">
+        &nbsp;
+       </div> </td> 
+     </tr> 
+    </tbody>
+   </table> <!-- -------------------------------------------------------------------------------------------- --> 
+  </form> 
+  <div id="prefillDiv" style="display: none"></div> 
+  <script>/*<![CDATA[*/(function(w,a,b,d,s){w[a]=w[a]||{};w[a][b]=w[a][b]||{q:[],track:function(r,e,t){this.q.push({r:r,e:e,t:t||+new Date});}};var e=d.createElement(s);var f=d.getElementsByTagName(s)[0];e.async=1;e.src='//info.contentmarketinginstitute.com/cdnr/37/acton/bn/tracker/5141';f.parentNode.insertBefore(e,f);})(window,'ActOn','Beacon',document,'script');ActOn.Beacon.track();/*]]>*/</script>  
+ </body>
+</html>

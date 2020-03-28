@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en"> 
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article:
+http://ogp.me/ns/article#"> <!-- Global stuff --> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="theme-color" content="#dd7eb4"> 
+  <link rel="manifest" href="/manifest.json"> <!-- Robots & indexing --> 
+  <meta name="robots" content="index,follow"> 
+  <meta name="revisit-after" content="1 days"> <!-- Page specific content --> 
+  <title>Making sense out of Node | Hugo Giraudel</title> 
+  <meta name="description" content="My partner has started getting into test automation and has had fun playing with Cypress, Backstop and Faker recently. However, the whole Node/npm/npx jargon..."> 
+  <meta name="keywords" content="node,npm,tutorial"> 
+  <meta name="author" content="Hugo Giraudel"> 
+  <link rel="canonical" href="https://hugogiraudel.com/2020/03/14/making-sense-out-of-node/"> <!-- Stylesheets --> 
+  <link rel="stylesheet" href="https://d33wubrfki0l68.cloudfront.net/css/4fdfc2be7b9472562e93093a1bf4c4ab116e1dcb/assets/css/main.css"> <!-- JS utilities --> 
+  <script>
+  function loadJS(e,t){"use strict";var n=document.getElementsByTagName("script")[0],r=document.createElement("script");return r.src=e,r.async=!0,n.parentNode.insertBefore(r,n),t&&"function"==typeof t&&(r.onload=t),r}
+
+  </script> <!-- RSS --> 
+  <link rel="alternate" type="application/rss+xml" title="Hugo Giraudel" href="https://hugogiraudel.com/rss"> <!-- Favicon --> 
+  <link rel="shortcut icon" href="/assets/images/favicon.png"> <!-- Open Graph data --> 
+  <meta property="og:title" content="Making sense out of Node"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:url" content="https://hugogiraudel.com/2020/03/14/making-sense-out-of-node/"> 
+  <meta property="og:description" content="My partner has started getting into test automation and has had fun playing with Cypress, Backstop and Faker recently. However, the whole Node/npm/npx jargon..."> 
+  <meta property="og:site_name" content="HugoGiraudel.com"> <!-- Twitter Card data --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="@HugoGiraudel"> 
+  <meta name="twitter:title" content="Making sense out of Node"> 
+  <meta name="twitter:description" content="My partner has started getting into test automation and has had fun playing with Cypress, Backstop and Faker recently. However, the whole Node/npm/npx jargon..."> 
+  <meta name="twitter:creator" content="@HugoGiraudel"> 
+ </head> 
+ <body> 
+  <div class="container"> <a href="#main" class="SkipLink">Skip to main content</a> 
+   <header class="Header" role="banner"> 
+    <h1 class="Title" itemprop="title" lang=""> <a href="/" class="Title__link">Making sense out of Node</a> </h1> 
+    <nav class="Navigation" role="navigation"> 
+     <ul class="Navigation__list DottedList"> 
+      <li class="Navigation__item"> <a class="Navigation__link" href="/blog/">Writing</a> </li> 
+      <li class="Navigation__item"> <a class="Navigation__link" href="/projects/">Coding</a> </li> 
+      <li class="Navigation__item"> <a class="Navigation__link" href="/speaking/">Speaking</a> </li> 
+      <li class="Navigation__item"> <a class="Navigation__link" href="/about/">About</a> </li> 
+      <li class="Navigation__item"> <a class="Navigation__link" href="/guest/">Guests</a> </li> 
+      <li class="Navigation__item"> <a class="Navigation__link" href="/search/">Search</a> </li> 
+     </ul> 
+    </nav> 
+    <div class="Ad" id="carbonads-container"> 
+     <div class="Ad__container carbonad"> 
+      <div id="azcarbon"></div> 
+     </div> 
+    </div> 
+   </header> 
+   <main class="Main" role="main" id="main"> 
+    <article itemscope itemtype="https://schema.org/Article" class="Post" lang=""> 
+     <p itemprop="datePublished" class="PostDate"><time datetime="2020-03-14T00:00:00+00:00">March 14, 2020</time> · <span itemtype="timeRequired"><span class="ReadingTime" title="Estimated read time"> ~4 minutes </span></span></p> 
+     <div itemtype="articleBody"> 
+      <p>My partner has started getting into test automation and has had fun playing with Cypress, Backstop and Faker recently. However, the whole Node/npm/npx jargon was very obscure to them, so I wrote the little beginner’s guide you can find below.</p> 
+      <h2 id="the-jargon">The jargon</h2> 
+      <p><strong><a href="http://jargon.js.org/_glossary/NODEJS.md">Node</a>:</strong> Node (or Node.js) is a “runtime environment”. It’s a server-side environment that runs JavaScript code. The same way your browser has a JavaScript engine, well Node has one as well. This allows you to execute JavaScript code, like scripts, outside of a browser environment.</p> 
+      <p><strong><a href="http://jargon.js.org/_glossary/NPM.md">npm</a>:</strong> npm is the package manager for Node (despite claims it doesn’t stand for “Node Package Manager”). All languages have a package manager (Java has Maven, PHP has Composer, Ruby has RubyGems, etc.). Npm allows you to manage Node dependencies (packages), such as installing and removing them. Npm comes bundled with Node by default, so you don’t have to install it yourself.</p> 
+      <p><strong>Packages:</strong> Packages are versioned little bundles of code that people write and publish for other to use. Cypress and Faker, amongst many many others, are packages (and big ones at that).</p> 
+      <p><strong><a href="https://www.npmjs.com/package/npx">npx</a>:</strong> npx is another command-line utility provided by npm. It’s a bit of an all-in-one command to execute the binary (see <a href="#using-dependencies">below</a>) of the given package name. It will try within the local project if installed, or globally on your machine if installed, or it will temporarily install it otherwise.</p> 
+      <h2 id="managing-dependencies">Managing dependencies</h2> 
+      <p>When you want to use a package, such as Cypress or Faker, you need to install it. There are two ways to do that: you can install it globally on your machine (with the <code class="highlighter-rouge">-g</code> option) which is usually discouraged because a little obscure and not very manageable. Or you can install locally for your project. This is the recommended option.</p> 
+      <p>When you do <code class="highlighter-rouge">npm install &lt;package&gt;</code> in a directory that has a <code class="highlighter-rouge">package.json</code> file, it will do 3 things:</p> 
+      <ol> 
+       <li> <p>It will add a line inside your <code class="highlighter-rouge">package.json</code> file to note that the package you just installed is now a dependency of your project. That means your project relies on it.</p> </li> 
+       <li> <p>It will add the package’s code, as well as the code of all the dependencies of that package (and their dependencies, and so on and so forth) into a directory called <code class="highlighter-rouge">node_modules</code>. This automatically-generated directory contains the source code of all the dependencies of your project. It is usually listed in <code class="highlighter-rouge">.gitignore</code> so that it doesn’t get committed (as it’s freaking huge and not your own code). You can safely delete this directory and reinstall all the dependencies of your project with <code class="highlighter-rouge">npm install</code> at any time. “Have you tried reinstalling your node_modules?” is basically the debug-101 of projects using Node. 😅</p> </li> 
+       <li> <p>It will generate (or update) a file called <code class="highlighter-rouge">package-lock.json</code>. This is an automatically generated file that should never be updated by hand. It contains the version of all your dependencies (as well as their dependencies, and the dependencies of your dependencies, and so on and so forth). This file is a manifest that makes it possible for someone to come after you (or yourself), run <code class="highlighter-rouge">npm install</code>, and have the exact same packages as you did. Think of it as a snapshot of all your project’s dependencies.</p> </li> 
+      </ol> 
+      <h2 id="using-dependencies">Using dependencies</h2> 
+      <p>Alright, so let’s recap a little bit what we just learnt.</p> 
+      <ol> 
+       <li> <p>Node is an environment to execute JavaScript code. It has a package manager called npm, which is used to install (and reinstall) packages.</p> </li> 
+       <li> <p>A project usually has dependencies, because not everything should be coded from scratch. These dependencies are installed through npm, and listed in the <code class="highlighter-rouge">package.json</code> file. When installed, their code is in <code class="highlighter-rouge">node_modules</code>.</p> </li> 
+      </ol> 
+      <p>Okay, so now that we have dependencies installed for our project, how do we use them? Well, that depends what these dependencies do. Let’s take two different examples: <code class="highlighter-rouge">cypress</code> and <code class="highlighter-rouge">faker</code>.</p> 
+      <p><a href="https://cypress.io">Cypress</a> is a tool. It gives you commands like <code class="highlighter-rouge">cypress open</code> and <code class="highlighter-rouge">cypress run</code>. That’s what we call a “binary”. Basically it means it gives you something you can execute from your terminal. This executable is exposed by Cypress in the <code class="highlighter-rouge">node_modules/.bin</code> folder. Any package that provides an executable will be located in that folder. That’s why you can run <code class="highlighter-rouge">./node_modules/.bin/cypress</code> (or <code class="highlighter-rouge">$(npm bin)/cypress</code> which is the exact same thing).</p> 
+      <p><a href="https://github.com/marak/Faker.js/">Faker</a>, on the other hand, does not provide an executable. It gives you JavaScript utilities you can import in your JavaScript code. You import that dependency doing <code class="highlighter-rouge">import faker from 'faker'</code> in your JavaScript files. Node can magically resolve <code class="highlighter-rouge">from 'faker'</code> by going into <code class="highlighter-rouge">node_modules/faker</code> and finding the relevant files. That’s pretty handy so you don’t have to do <code class="highlighter-rouge">import faker from './node_modules/faker/lib/something/specific/to/faker/index.js</code>.</p> 
+      <h2 id="wrapping-up">Wrapping up</h2> 
+      <p>Alright, so let’s sum up what we just learnt:</p> 
+      <p>Some packages provide executables, some don’t. All packages providing an executable can be executed with <code class="highlighter-rouge">./node_modules/.bin/&lt;package&gt;</code>.</p> 
+      <p>Most packages do not provide a command-line executable, and are made to be imported within a JavaScript file. This can be done with <code class="highlighter-rouge">import something from '&lt;package&gt;'</code>. What is being imported depends on the package and can be figured out by reading its documentation.</p> 
+      <p>I hope this helps!</p> 
+     </div> 
+    </article> 
+    <div class="PostNavigation  "> 
+     <p class="PostNavigation__item PostNavigation__item--previous
+    "> Read previous post: <a class="PostNavigation__link " href="/2020/02/03/lessons-from-building-n26-for-web/" title="Lessons from building “N26 for Web”"> Lessons from building “N26 for Web” </a> </p> 
+     <p class="PostNavigation__item PostNavigation__item--next"> Read next post: <a class="PostNavigation__link" href="/2020/03/15/account-handling-with-cypress/" title="Account handling with Cypress"> Account handling with Cypress </a> </p> 
+    </div> 
+   </main> 
+  </div> 
+  <footer class="Footer" role="contentinfo"> 
+   <div class="container"> 
+    <p class="Footer__copy">©&nbsp;2012-2020 Hugo Giraudel</p><!--
+    -->
+    <ul class="Footer__list avigation__list DottedList"> 
+     <li class="Navigation__item"> <a class="Navigation__link" href="/rss/">RSS</a> </li> 
+     <li class="Navigation__item"> <a class="Navigation__link" href="https://github.com/HugoGiraudel" target="_blank" rel="noopener noreferrer">GitHub</a> </li> 
+     <li class="Navigation__item"> <a class="Navigation__link" href="https://twitter.com/HugoGiraudel" target="_blank" rel="noopener noreferrer">Twitter</a> </li> 
+    </ul> 
+   </div> 
+  </footer> 
+  <script src="https://d33wubrfki0l68.cloudfront.net/js/0194d36ef9ead94abfceb25b3a2561f298264061/assets/js/main.js"></script> 
+  <script>
+document.addEventListener('DOMContentLoaded', loadApp)
+</script> 
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/service-worker.js', { scope: '/' })
+    .then(function (registration) {
+      console.log(
+        '%cserviceworker:registration', 'color:green',
+        'successful with scope: ' + registration.scope
+      )
+    })
+    .catch(function (error) {
+      console.error(
+        '%cserviceworker:registration', 'color:red',
+        'failed: ', error
+      )
+    })
+}
+</script>  
+ </body>
+</html>

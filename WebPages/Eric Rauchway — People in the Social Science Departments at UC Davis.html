@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+ <!-- #BeginTemplate "/Templates/bio.dwt" --> 
+ <head>
+  <script type="text/javascript">//<!--
+(window.NREUM||(NREUM={})).loader_config={licenseKey:"bb2a18434c",applicationID:"16354137"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);
+//--></script>
+  <base href="https://history.ucdavis.edu/people/rauchway/">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta content="2020-02-26T13:50:58-07:00" name="DC.date.modified">
+  <meta content="text/plain" name="DC.format">
+  <meta content="Person" name="DC.type">
+  <meta content="2016-03-10T15:49:13-07:00" name="DC.date.created">
+  <meta content="en" name="DC.language">
+  <meta name="viewport" content="width=device-width, initial-scale=0.6666, maximum-scale=1.0, minimum-scale=0.6666">
+  <meta name="generator" content="Plone - http://plone.org"> 
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width"> 
+  <meta name="description" content=""> 
+  <meta name="author" content=""> <!-- #BeginEditable "title" --> 
+  <title>Eric Rauchway — People in the Social Science Departments at UC Davis</title> <!-- #EndEditable --> 
+  <link type="text/css" href="/++theme++dssweb.theme.magic/assets/vendor/reset.css" rel="stylesheet"> 
+  <link type="text/css" href="/++theme++dssweb.theme.magic/assets/vendor/topbar.css" rel="stylesheet"> 
+  <link type="text/css" href="/++theme++dssweb.theme.magic/bower_components/Wallpaper/jquery.fs.wallpaper.css" rel="stylesheet"> 
+  <link type="text/css" href="/++theme++dssweb.theme.magic/assets/styles.css" rel="stylesheet"> 
+  <link type="text/css" href="/++theme++dssweb.theme.magic/assets/sub-org.css" rel="stylesheet"> 
+  <link type="text/css" href="/++theme++dssweb.theme.magic/assets/sections/bio.css" rel="stylesheet"> <!-- #BeginEditable "header" --> <!-- #EndEditable --> <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --> <!--[if lt IE 9]>
+	    <script src="/++theme++dssweb.theme.magic/js/contrib/html5shiv.min.js"></script>
+	    <script src="/++theme++dssweb.theme.magic/js/contrib/respond.min.js"></script>
+		<![endif]--> 
+  <script type="text/javascript" src="https://history.ucdavis.edu/portal_javascripts/Sunburst%20Theme/resourceplone.app.jquery-cachekey-39612751207eacb6bc8ab2c746ae9be4.js"></script>
+  <script type="text/javascript" src="https://history.ucdavis.edu/portal_javascripts/Sunburst%20Theme/resourcecollective.js.fullcalendarfullcalendar.min-cachekey-48ef04bbbe1ed9e42705e37f01b52051.js"></script>
+  <script type="text/javascript" src="https://history.ucdavis.edu/portal_javascripts/Sunburst%20Theme/resourcecollective.js.colorpicker.jseye-cachekey-be01fb548b4407a4f4db6c8c8ec411ce.js"></script>
+  <script type="text/javascript" src="https://history.ucdavis.edu/portal_javascripts/Sunburst%20Theme/resourcecollective.tinyaccordionplomino_accordionaccordion-cachekey-dddf1fb48b7fbdadecd0d4afc6c98008.js"></script>
+  <script type="text/javascript" src="https://history.ucdavis.edu/portal_javascripts/Sunburst%20Theme/resourcedropdown-menu-cachekey-43460dca990d78609c4f11498ea093ca.js"></script>
+  <script type="text/javascript" src="https://history.ucdavis.edu/portal_javascripts/Sunburst%20Theme/resourceplone.formwidget.autocompletejquery.autocomplete.min-cachekey-b6f098d5fb3d1ce3156fbcb155379673.js"></script>
+  <script type="text/javascript">
+        jQuery(function($){
+            if (typeof($.datepicker) != "undefined"){
+              $.datepicker.setDefaults(
+                jQuery.extend($.datepicker.regional[''],
+                {dateFormat: 'mm/dd/yy'}));
+            }
+        });
+        </script>
+ </head> <!-- #BeginEditable "body-tag" --> 
+ <body class="bio template-person_view portaltype-fsdperson site-DSS-Master section-people subsection-rauchway userrole-anonymous">
+  <!-- #EndEditable -->
+  <div id="skip-link">
+   <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+  </div>
+  <div class="row jumbotron"> 
+   <div class="siders"> 
+    <div class="wall shadow-graphic">
+      &nbsp; 
+    </div> 
+   </div> 
+  </div>
+  <div id="main-container" class="container"> 
+   <div id="util-bar-wrap" class="row"> 
+    <nav aria-label="utility-menu" class="util-bar"> 
+     <ul> 
+      <li class="hidden-xs" id="uti-home"> <a href="https://history.ucdavis.edu"> <img src="/++theme++dssweb.theme.magic/images/icons/home.png" alt="Home"> </a> </li> 
+      <li class="hidden-xs" id="uti-contact"> <a href="https://history.ucdavis.edu/contact" class="mainTabContent">Contact</a> </li> 
+      <li class="hidden-xs" id="uti-news"> <a href="https://history.ucdavis.edu/news" class="mainTabContent">News</a> </li> 
+      <li class="hidden-xs" id="uti-events"> <a href="https://history.ucdavis.edu/events" class="mainTabContent" title="Events Listings">Events</a> </li> 
+      <li class="hidden-xs" id="uti-give"> <a href="https://history.ucdavis.edu/give">Give</a> </li> 
+      <li class="hidden-xs" id="uti-search">
+       <div id="portal-searchbox"> 
+        <form id="nolivesearchGadget_form" action="https://history.ucdavis.edu/@@search"> 
+         <div class="LSBox"> <label class="hiddenStructure" for="nolivesearchGadget">Search Site</label> 
+          <input name="SearchableText" type="text" size="18" title="Search Site" placeholder="Search Site" accesskey="4" class="searchField" id="nolivesearchGadget"> 
+          <input value="GO" class="searchButton" type="submit"> 
+          <div class="LSResult" id="LSResult">
+           <div class="LSShadow" id="LSShadow"></div>
+          </div> 
+         </div> 
+        </form> 
+        <div id="portal-advanced-search" class="hiddenStructure"> <a href="https://history.ucdavis.edu/@@search" accesskey="5"> Advanced Search… </a> 
+        </div> 
+       </div></li> 
+      <li id="uti-logo"> <a href="http://www.ucdavis.edu"> <img src="/++theme++dssweb.theme.magic/images/logos/nav-logo.png" alt="UC Davis"> </a> </li> 
+     </ul> 
+    </nav> 
+   </div> 
+   <div id="top-bar-wrap" class="row"> 
+    <nav aria-label="main-menu" class="top-bar" data-topbar=""> <!-- Title --> 
+     <ul class="title-area"> 
+      <li class="name"><a id="portal-logo" accesskey="1" href="https://history.ucdavis.edu" class="subsiteLogo" title="History"> <img src="https://history.ucdavis.edu/@@images/1d0b4e95-c006-4c35-98e3-ce99e3f37e89.png" alt="History" title="History" height="80" width="370"></a></li> <!--li id="logosm" class="justname">
+ 				   <h1>
+ 				     <a id="portal-logo">
+ 				 </h1>
+ 			  </li--> 
+      <li id="toggle-topbar-item"> <!-- Mobile Menu Toggle --> 
+       <div class="toggle-topbar menu-icon"> <a href="#"> <span></span> </a> 
+       </div> </li> 
+     </ul> <!-- Top Bar Section --> 
+     <section aria-label="top-bar" class="top-bar-section"> <!-- Top Bar Right Nav Elements --> 
+      <ul class="left"> 
+       <li id="portaltab-undergraduate" class="plain has-dropdown not-click"> <a href="https://history.ucdavis.edu/undergraduate" class="mainTabContent">Undergraduate</a> 
+        <ul class="dropdown" style="margin-top: 0px;"> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/undergraduate/major-in-history-1" class="state-published hasDropDown"> Major in History </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/major-in-history-1/why-study-history-at-uc-davis" class="state-published"> Why Study History at UC Davis? </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/major-in-history-1/common-career-paths-for-history-majors" class="state-published"> Common Career Paths for History Majors </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/major-in-history-1/history-major-requirements" class="state-published"> History Major Requirements </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/major-in-history-1/history-minor-requirements" class="state-published"> History Minor Requirements </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/major-in-history-1/learning-outcomes" class="state-published"> Learning Outcomes </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/undergraduate/advising" class="state-published hasDropDown"> Advising </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/advising/advising-center" class="state-published"> Advising Center </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/advising/peer-advisors" class="state-published"> Peer Advisors </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/advising/undergrad-prep-for-grad-school" class="state-published"> Preparation for Graduate School </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/undergraduate/planning-the-degree" class="state-published hasDropDown"> Planning the Degree - Your Time at UC Davis </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/planning-the-degree/undergrad-potential-students" class="state-published"> Potential students </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/planning-the-degree/undergrad-first-year-experience" class="state-published"> First-year experience </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/planning-the-degree/undergrad-second-year-experience" class="state-published"> Second-year experience </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/planning-the-degree/undergrad-third-year-experience" class="state-published"> Third-year experience </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/planning-the-degree/undergrad-final-year-experience" class="state-published"> Final-year experience </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities" class="state-published hasDropDown"> Honors &amp; Opportunities </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class="has-dropdown"> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/honors-program" class="state-published hasDropDown"> Honors Program </a> 
+            <ul class="dropdown" style="margin-top: 0px;"> 
+             <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/honors-program/undergrad-honors-curriculum" class="state-published"> Honors Curriculum </a> </li> 
+             <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/honors-program/undergrad-honors-program-faqs" class="state-published"> Frequently Asked Questions </a> </li> 
+            </ul> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/undergrad-study-abroad" class="state-published"> Study Abroad </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/undergrad-research-and-internships" class="state-published"> Research and Internships </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/undergrad-scholarships" class="state-published"> Scholarships </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/undergrad-honor-society" class="state-published"> Phi Alpha Theta Honor Society </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/undergraduate/honors-opportunities/undergrad-dept-citations" class="state-published"> Department Citations </a> </li> 
+          </ul> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/undergraduate/alumni-placement-and-news" class="state-published"> Alumni Placement and News </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/undergraduate/featured-alumni" class="state-published"> Featured Alumni </a> </li> 
+        </ul> </li> 
+       <li id="portaltab-graduate" class="plain has-dropdown not-click"> <a href="https://history.ucdavis.edu/graduate" class="mainTabContent">Graduate</a> 
+        <ul class="dropdown" style="margin-top: 0px;"> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/grad-curriculum" class="state-published hasDropDown"> Curriculum </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-curriculum/graduate-degree-requirements" class="state-published"> Degree Requirements </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-curriculum/ccwgh-minor-field" class="state-published"> WgH Minor Field </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-curriculum/grad-faq" class="state-published"> FAQs </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/advising" class="state-published hasDropDown"> Advising </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/advising/grad-program-committee" class="state-published"> Graduate Program Committee </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/advising/grad-handbook" class="state-published"> Grad Handbook </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/advising/grad-advising-and-mentorship" class="state-published"> Advising Sequence </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/advising/external-research-fellowships" class="state-published"> External Research Fellowships </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/apply-to-grad-program" class="state-published hasDropDown"> Apply </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/apply-to-grad-program/apply-now" class="state-published"> Apply Now! </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/apply-to-grad-program/grad-admission-requirements" class="state-published"> Admission Requirements </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/apply-to-grad-program/financial-aid" class="state-published"> Financial Aid </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/apply-to-grad-program/fees" class="state-published"> Tuition and Fees </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/apply-to-grad-program/admission-tips" class="state-published"> Admission Tips </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/graduate-courses" class="state-published hasDropDown"> Courses </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/graduate-courses/grad-courses-comprehensive" class="state-published"> Course Descriptions </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/graduate-courses/grad-courses-current" class="state-published"> Current Courses (Spring 2020) </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/graduate-courses/2019-20-seminar-schedule" class="state-published"> 2019-20 Seminar Schedule </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/grad-students" class="state-published hasDropDown"> Students </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-students/grad-awards-fellowships" class="state-published"> Awards and Fellowships </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-students/scholz-prize" class="state-published"> Scholz Prize </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-students/marchand-fellowship" class="state-published"> Marchand Fellowship </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/grad-students/student-spotlight-1" class="state-published"> Student Spotlight </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/graduate-alumni" class="state-published hasDropDown"> Alumni </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/graduate-alumni/grad-alumni-mail-form" class="state-published"> Graduate Alumni </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/graduate-alumni/alum-placement-news" class="state-published"> History Alumni Placement </a> </li> 
+          </ul> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/graduate/news" class="state-published"> News </a> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/graduate/career-diversity-resources" class="state-published hasDropDown"> Professionalization </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/graduate/career-diversity-resources/workshops-and-discussions" class="state-published"> Calendar </a> </li> 
+          </ul> </li> 
+        </ul> </li> 
+       <li id="portaltab-directory-of-people" class="plain has-dropdown not-click"> <a href="https://history.ucdavis.edu/directory-of-people" class="mainTabContent">People</a> 
+        <ul class="dropdown" style="margin-top: 0px;"> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/his-all" class="state-published"> All People </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/his-faculty" class="state-published"> Faculty </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/his-grads" class="state-published"> Graduate Students </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/his-staff" class="state-published"> Staff </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/his-instructors" class="state-published"> Instructors </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/his-emeriti" class="state-published"> Emeriti </a> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/directory-of-people/featured-faculty" class="state-published hasDropDown"> Featured Faculty </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/featured-faculty/ali-anooshahr" class="state-published"> Ali Anooshahr </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/featured-faculty/jose-juan-perez-melendez" class="state-published"> Jose Juan Perez Melendez </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/featured-faculty/a-chat-with-eric-rauchway" class="state-published"> A Chat with Eric Rauchway </a> </li> 
+          </ul> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/directory-of-people/featured-graduate-students" class="state-published"> Featured Graduate Students </a> </li> 
+        </ul> </li> 
+       <li id="portaltab-affiliates" class="plain has-dropdown not-click"> <a href="https://history.ucdavis.edu/affiliates" class="mainTabContent">Affiliates</a> 
+        <ul class="dropdown" style="margin-top: 0px;"> 
+         <li class=""> <a href="https://history.ucdavis.edu/affiliates/affiliates-and-outreach" class="state-published"> Affiliates and Outreach </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/affiliates/womens-and-gender-history" class="state-published"> Women's and Gender History </a> </li> 
+        </ul> </li> 
+       <li id="portaltab-courses" class="plain has-dropdown not-click"> <a href="https://history.ucdavis.edu/courses" class="mainTabContent">Courses</a> 
+        <ul class="dropdown" style="margin-top: 0px;"> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/courses/course-listings" class="state-published hasDropDown"> Course Listings </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/course-listings/spring-2020" class="state-published"> Spring 2020 </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/course-listings/copy_of_2017-2018-tentative-schedule-1" class="state-published"> 2020-2021 Tentative Schedule </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/course-listings/copy3_of_2017-2018-tentative-schedule-1" class="state-published"> 2019-2020 Tentative Schedule </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/course-listings/copy2_of_2017-2018-tentative-schedule-1" class="state-published"> Summer 2020 Tentative Schedule </a> </li> 
+          </ul> </li> 
+         <li class="has-dropdown"> <a href="https://history.ucdavis.edu/courses/featured-courses" class="state-published hasDropDown"> Featured Courses </a> 
+          <ul class="dropdown" style="margin-top: 0px;"> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/featured-courses/intro-history" class="state-published"> HIS 80: United States in the Middle East </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/featured-courses/teaching-history" class="state-published"> HIS 102E: Charles Darwin and His World: Social Life of Science in the Nineteenth Century </a> </li> 
+           <li class=""> <a href="https://history.ucdavis.edu/courses/featured-courses/conspiracy-theories" class="state-published"> HIS 157: Latin American Environmental History </a> </li> 
+          </ul> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/courses/course-catalog" class="state-published"> Course Catalog </a> </li> 
+         <li class=""> <a href="https://history.ucdavis.edu/courses/copy_of_undergrad-course-descriptions" class="state-published"> Expanded Course Descriptions Spring 2020 </a> </li> 
+        </ul> </li> 
+       <li id="portaltab-history-department-statement-on-cola-strikes" class="plain has-dropdown not-click"> <a href="https://history.ucdavis.edu/history-department-statement-on-cola-strikes" class="mainTabContent">History Department Statement on COLA Movement</a> </li> 
+      </ul> 
+     </section> 
+    </nav> 
+   </div> <!-- #BeginEditable "content" --> 
+   <div id="content-row" class="row no-gutter-md">
+    <div id="viewlet-above-content">
+     <div id="portal-breadcrumbs"> <span id="breadcrumbs-home"> <a href="https://history.ucdavis.edu">Home</a> <span class="bread-divider">|</span> </span> <span id="breadcrumbs-1" dir="ltr"> <a href="https://history.ucdavis.edu/people">People</a> <span class="bread-divider">|</span> <!--span id="breadcrumbs-current"
+                  tal:condition="is_last"
+                  tal:content="title">crumb</span--> </span> <span id="breadcrumbs-2" dir="ltr"> <!--span id="breadcrumbs-current"
+                  tal:condition="is_last"
+                  tal:content="title">crumb</span--> </span> 
+     </div>
+    </div>
+    <div id="content" class="col-xs-12 col-sm-12 col-md-8 col-lg-8"> 
+     <div id="viewlet-above-content-title"></div> 
+     <h1 class="content-title"> <span class="given-name">Eric</span> <span class="additional-name"></span> <span class="family-name">Rauchway</span> <span class="honorific-suffix"></span> </h1> 
+     <div id="viewlet-below-content-title"> 
+     </div> 
+     <div id="viewlet-above-content-body"></div> 
+     <div id="content-core"> 
+      <div id="hcard" class="vcard facultyStaffDirectory personView"> 
+       <div class="inviso"> 
+       </div> <!--inviso--> 
+       <div id="summary" class="clearfix"> 
+        <div id="jumplinks" class="left hidden-xs hidden-sm"> 
+         <ul id="jumplinks-anchors"> 
+          <li class="leaf hidden-sm hidden-xs"> <a class="anchor-link" href="#about">About</a> </li> 
+          <li class="leaf hidden-sm hidden-xs"> <a class="anchor-link" href="#research">Research Focus</a> </li> 
+          <li class="leaf hidden-sm hidden-xs"> <a href="#pubs">Selected Publications</a> </li> 
+          <li class="leaf hidden-sm hidden-xs"> <a href="#teaching">Teaching</a> </li> 
+          <li class="leaf hidden-sm hidden-xs"> <a href="#awards">Awards</a> </li> 
+         </ul> 
+        </div> <!--jumplinks --> 
+        <div id="education"> 
+         <h4 class="uc">Education</h4> 
+         <ul class="content-items education-items"> 
+          <li> <span>Ph.D., History, Stanford University, 1996</span> </li> 
+          <li> <span>M.A., History, Stanford University, 1993</span> </li> 
+          <li> <span>B.A., Cum Laude in History and with Distinction in All Subjects, Cornell University, 1991</span> </li> 
+          <li> <span>M.A., History, University of Oxford (by special resolution of congregation), 1998</span> </li> 
+         </ul> 
+        </div><!--education --> 
+       </div> 
+       <div class="visualClear">
+        <!-- -->
+       </div> <!--div tal:condition="python: showExpired and context.getEducation()" class="education">
+              <h3 i18n:translate="FacultyStaffDirectory_label_education_heading">Education:</h3>
+              <ol>
+                <li tal:repeat="degree context/getEducation">
+                  <span tal:content="degree" />
+                </li>
+              </ol>
+            </div>
+			<div id="cv file" tal:define="cv context/getCv"
+			     tal:condition="python: cv.get_size() > 0"> 
+			    <a class="item-label" tal:attributes="href string:${context/absolute_url}/cv">CV</a>
+			</div--> 
+       <div id="cm-section"> 
+        <section title="about" role="contentinfo" aria-label="About"> <a name="about" id="about"> <h2>About</h2> </a> 
+         <div id="inline-content">
+          <p class="Bodytext">Eric Rauchway has expertise on U.S. policy, social, and economic history from the Civil War through the Second World War. He has consulted for government and private agencies, including the U.S. Department of Justice and a major Hollywood studio, and in addition to his books, has written about history for a variety of publications, including the <i>Times Literary Supplement</i> and the <i>New York Times</i>.</p>
+         </div> 
+        </section> 
+        <section title="research" role="contentinfo" aria-label="Research"> <a name="research" id="research"> <h2>Research Focus</h2></a> 
+         <div class="inline-content" title="research">
+          <p class="Bodytext">Professor Rauchway's recent research focuses on the New Deal and the Second World War. He has written several books on how federal policy affects the US economy, and how the economy—international and domestic—influences U.S. policy. His research has been featured in the <i>New York Times</i> and on National Public Radio. His newest book, <em>Winter War: Hoover, Roosevelt, and the First Clash Over the New Deal</em>, was published in 2018.</p>
+         </div> 
+        </section> 
+        <section title="publications" role="contentinfo" aria-label="publications"> <a name="pubs" id="pubs"> <h2>Selected Publications</h2></a> 
+         <div class="inline-content">
+          <ul> 
+           <li><span>Rauchway, E. (2018)&nbsp;<em>Winter War: Hoover, Roosevelt, and the First Clash Over the New Deal.&nbsp;</em>Basic Books.</span></li> 
+           <li><span>Rauchway, E. (2015) </span><i>The Money Makers: How Roosevelt and Keynes Ended the Depression, Defeated Fascism, and Secured a Prosperous Peace.</i><span>&nbsp;Basic Books.</span></li> 
+           <li><span>Rauchway, E. (2008) </span><i>The Great Depression and the New Deal: A Very Short Introduction</i><span>. Oxford University Press.&nbsp;</span></li> 
+           <li><span>Rauchway, E. (2006) </span><i>Blessed Among Nations: How the World Made America</i><span>. Hill &amp; Wang.&nbsp;</span></li> 
+           <li><span>Rauchway, E. (2003) </span><i>Murdering McKinley: The Making of Theodore Roosevelt's America</i><span>. Hill &amp; Wang.</span></li> 
+           <li><span>Rauchway, E. (2001) </span><i>The Refuge of Affections: Family and American Reform Politics, 1900-1920</i><span>. Columbia University Press.</span></li> 
+          </ul>
+         </div> 
+        </section> 
+        <section title="teaching" role="contentinfo" aria-label="Teaching"> <a name="teaching" id="teaching"> <h2>Teaching</h2></a> 
+         <div class="inline-content">
+          <p class="Bodytext">17B: Introduction to US History since 1865; 119: World War I; 120: World War II; 174A: The Gilded Age and Progressive Era; 174B: The US 1917-1945; 175: American Intellectual History; 187: US Foreign Relations in the Twentieth Cenutry; 188: America in the Sixties; 201L or 202H: Graduate seminar in modern US history; 204: Historiography</p>
+         </div> 
+        </section> 
+        <section title="awards" role="contentinfo" aria-label="Awards"> <a name="awards" id="awards"> <h2>Awards</h2> </a> 
+         <div class="inline-content">
+          <ul> 
+           <li><span>Visiting Fellow, Corpus Christi College, Oxford, Trinity Term, 2011</span></li> 
+           <li><span>Distinguished Lecturer, Organization of American Historians, 2010-2016</span></li> 
+           <li><span>Distinguished Teaching Award, Academic Senate, UC Davis, 2010</span></li> 
+           <li><span>Chancellor's Fellow, UC Davis, 2003-2008</span></li> 
+           <li><span>M.A. by special resolution of congregation, Oxford University, 1998</span></li> 
+          </ul>
+         </div> 
+        </section> <!--require editor-->
+       </div> 
+      </div> 
+     </div> 
+     <div id="viewlet-below-content-body"> 
+      <div class="visualClear">
+       <!-- -->
+      </div> 
+      <div class="documentActions"> 
+      </div> 
+     </div> 
+    </div><!-- /#content --><!-- #EndEditable --><!-- Sidebar right -->
+    <article role="article"> 
+     <div class="sidebar sidebar-right col-xs-12 col-sm-12 col-md-4 col-lg-4"> 
+      <div data-portlethash="706c6f6e652e7269676874636f6c756d6e0a636f6e74656e745f747970650a465344506572736f6e0a636f6e74616374" id="portletwrapper-706c6f6e652e7269676874636f6c756d6e0a636f6e74656e745f747970650a465344506572736f6e0a636f6e74616374" class="portletWrapper kssattr-portlethash-706c6f6e652e7269676874636f6c756d6e0a636f6e74656e745f747970650a465344506572736f6e0a636f6e74616374"> 
+       <div class="nothing"> 
+        <div class="portlet portletPerson bio-card default-color"> 
+         <h3 class="hidden-md hidden-lg">Contact</h3> 
+         <dd class="portlet-content"> 
+          <div class="vcard"> 
+           <div class="photo"> 
+            <img src="https://history.ucdavis.edu/people/rauchway/image_normal" alt="Eric Rauchway" title="Eric Rauchway" height="200" width="198" class="img-responsive photo"> 
+           </div> 
+           <h4 class="fn"> <span class="firstname">Eric</span> <span class="additional-name"></span> <span class="family-name">Rauchway</span> <span class="honorific-suffix"></span> </h4> 
+           <div class="title org"> <!--p tal:condition="python: context.getJobTitles()"
+					  	       class="category title"
+					  	        tal:repeat="jobTitle context/getJobTitles"
+					  	        tal:content="jobTitle"><tal:comment replace="nothing">[job title]</tal:comment>
+					  	     </p--> 
+            <div> 
+             <p class="org follow"> Distinguished Professor <br> <span class="org"><span>Department of History</span></span></p> 
+            </div> 
+           </div> <!--title org --> 
+           <h4 class="fn">Websites</h4> 
+           <ul> 
+            <li> <a class="org follow" href="http://www.ericrauchway.com/">http://www.ericrauchway.com/</a> </li> 
+           </ul> 
+           <ul class="portlet-items clearfix"> 
+            <li> <span class="email-bio"> <a href="mailto:earauchway@ucdavis.edu"> <span class="item-label">EMAIL</span></a> </span> </li> 
+            <li> <span class="cv file"><a class="item-label" href="https://history.ucdavis.edu/people/rauchway/cv">CV</a></span> </li> 
+            <li><span class="vcard-file file"><a href="https://history.ucdavis.edu/people/rauchway/vCard"><span class="item-label">vCARD</span></a></span></li> 
+            <li class="hidden-lg hidden-md"><span class="office"><a href="#ady_anchor"><span class="item-label">OFFICE</span></a></span></li> 
+           </ul> 
+          </div> <!--portlet content--> 
+         </dd> 
+        </div> 
+       </div> 
+      </div> 
+      <div data-portlethash="706c6f6e652e7269676874636f6c756d6e0a636f6e74656e745f747970650a465344506572736f6e0a6f66666963652d6c616273" id="portletwrapper-706c6f6e652e7269676874636f6c756d6e0a636f6e74656e745f747970650a465344506572736f6e0a6f66666963652d6c616273" class="portletWrapper kssattr-portlethash-706c6f6e652e7269676874636f6c756d6e0a636f6e74656e745f747970650a465344506572736f6e0a6f66666963652d6c616273"> 
+       <dl class="portlet portletPersonAddress default-color dont-close"> 
+        <dt class="portletHeader dont-close"> <span class="portletTopLeft"></span> <span id="ady_anchor">Offices &amp; Labs</span> <span class="portletTopRight"></span> 
+        </dt> 
+        <div class="portlet-content inline-content dont-close"> 
+         <div class="vcard office"> <!--dd to avoid previous css rules --> 
+          <dd class="departments"> 
+           <div> 
+            <h4 class="org"><a class="url" href=""> <span>Department of History</span> </a></h4> 
+            <div class="adr"> 
+             <ul> 
+              <li class="street-address"> SSH 3202 </li> 
+              <li class="street-address"> </li> 
+              <li class="street-address">Davis, CA 95616</li> 
+              <li class="street-address"> 530-754-1646 </li>
+             </ul> 
+            </div> 
+            <div class="office-hours adr"> <span class="bold">Office Hours for Fall 2019 <span> 
+               <ul> 
+                <li class="day-time-row">W 2-4</li> 
+               </ul></span> </span>
+            </div> 
+           </div> 
+          </dd> 
+         </div> 
+         <div class="vcard office"> 
+         </div> 
+        </div> 
+       </dl> 
+      </div> 
+     </div> 
+    </article>
+   </div> 
+  </div><!-- /.sidebar-right --><!-- /#content-row -->
+  <div id="footer" class="row footer-processed"> 
+   <div class="foot-wrap container clearfix">
+    <div id="doormat-container" class="columns-3"> 
+     <div class="doormatColumn column-0"> 
+      <h3>Department of History</h3> 
+      <dl class="doormatSection"> 
+       <dd class="doormatSectionBody"> 
+        <div class="history"> 
+         <p>University of California, Davis<br>2216 Social Science and Humanities Building<br>1 Shields Avenue<br>Davis, CA 95616<br><span><a class="email-link" href="mailto:hisugadvisor@ucdavis.edu" target="_self" title="">hisugadvisor@ucdavis.edu</a></span></p> 
+         <p><a class="external-link left" href="https://www.google.com/maps/place/Social+Sciences+%26+Humanities+Building/@38.542992,-121.747913,16z/data=!4m5!3m4!1s0x0:0x4990151e47434742!8m2!3d38.5429923!4d-121.7479134?hl=en-US" target="_blank" title="google map">map</a></p> 
+        </div> 
+       </dd> 
+      </dl> 
+     </div> 
+     <div class="doormatColumn column-1"> 
+      <dl class="doormatSection"> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/undergraduate" class="">Undergraduate</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="/sitemap" class="external-link">Sitemap</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/graduate" class="">Graduate</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/directory-of-people" class="">People</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/events/eugene-lunn-memorial-lecture-series" class="">Lunn Lecture</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/news" class="">News</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/undergraduate/advising" class="">Advising</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://history.ucdavis.edu/give" class="">Give</a> 
+       </dd> 
+       <dd class="doormatSectionBody"> <a href="https://historyedit.dss.ucdavis.edu" class="external-link">Log In</a> 
+       </dd> 
+      </dl> 
+     </div> 
+     <div class="doormatColumn column-2"> 
+      <dl class="doormatSection"> 
+       <dd class="doormatSectionBody"> 
+        <ul id="foot-social"> 
+         <li class="first"><span class="text-hide"><a class="external-link" href="https://www.facebook.com/UC-Davis-Department-of-History-146493640805/?fref=nf" id="facebook-icon" target="_blank" title="UC Davis History on Facebook"><span class="text-hide">Facebook</span></a></span></li> 
+         <li><span class="text-hide"><a class="external-link" href="https://twitter.com/History_UCDavis" id="twitter-icon" target="_blank" title="Department of History Twitter"><span class="text-hide">Twitter</span></a></span></li> 
+         <li><a class="external-link" href="https://www.youtube.com/user/UCDavis" id="youtube-icon" target="_blank" title="UCDavis YouTube"><span class="text-hide">YouTube</span></a></li> 
+         <li class="last"><a class="external-link" href="https://www.linkedin.com/edu/university-of-california-davis-17942" id="linkedin-icon" target="_blank" title="UC Davis LinkedIn"><span class="text-hide">LinkedIn</span></a></li> 
+        </ul> 
+       </dd> 
+      </dl> 
+     </div> 
+    </div>
+   </div>
+   <div id="portal-footer" class="foot-wrap-0 foot-wrap"> 
+    <div id="L&amp;SLogo" class="LSLogo"> <a href="https://lettersandscience.ucdavis.edu" title="College of Letters and Science"> <img src="lslogo.png" alt="College of Letters and Science"> </a> 
+    </div> 
+    <p> <acronym title="Copyright">©</acronym> 2000-2020 by the Regents of the University of California, Davis Campus. All Rights Reserved. </p> 
+   </div> 
+  </div><!-- /#footer -->
+  <div class="sticky hidden-lg hidden-md hidden-sm"> 
+   <nav aria-label="mobile-utility-menu" class="util-nav"> 
+    <ul class="util"> 
+     <li> 
+      <div id="search-util-btn" class="util-btn "> <a href="#"> <img src="/++theme++dssweb.theme.magic/images/icons/m-btn-search.png" alt="Search"> </a> 
+       <p> <a href="/@@search">Search</a> </p> 
+      </div> </li> 
+     <li> 
+      <div id="location-util-btn" class="util-btn hidden-lg hidden-md"> <a href="#"> <img src="/++theme++dssweb.theme.magic/images/icons/mobile-btn-location.png" alt="Directions"> </a> 
+       <p> <a href="/map">Map</a> </p> 
+      </div> </li> 
+     <li> 
+      <div id="share-util-btn" class="util-btn hidden-lg hidden-md"> <a class="addthis_button"> <img src="/++theme++dssweb.theme.magic/images/icons/mobile-btn-share.png" alt="Share this page"> <p> Share </p> </a> 
+      </div> </li> 
+     <li> 
+      <div id="email-util-btn" class="util-btn hidden-lg hidden-md"> <a href="#"> <img src="/++theme++dssweb.theme.magic/images/icons/mobile-btn-email.png" alt="Email"> </a> 
+       <p> <a href="/contact">contact</a> </p> 
+      </div> </li> 
+    </ul> 
+   </nav> 
+  </div><!-- /sticky --><!-- /container --><!-- Bootstrap core JavaScript
+	      ================================================== --><!-- Placed at the end of the document so the pages load faster --><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/contrib/jquery.min.js"></script>
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/bootstrap/dropdown.js"></script>
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/bootstrap/collapse.js"></script>
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/bootstrap/transition.js"></script>
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/foundation/js/foundation/foundation.js"></script>
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/foundation/js/foundation/foundation.topbar.js"></script><!--[if lt IE 9]>
+	                 <script src="/++theme++dssweb.theme.magic/js/contrib/respond.min.js"></script>
+	           <![endif]--><!-- #BeginEditable "custom-footer-js" -->
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/bower_components/Wallpaper/jquery.fs.wallpaper.js"></script>
+  <script id="wallpaper_fix">
+           $(".wall").wallpaper({
+               source: "@@banner-image"
+           });
+		  
+		     
+         </script>
+  <script type="text/javascript" src="/++theme++dssweb.theme.magic/js/jquery.cf.main.js"></script><!--script type="text/javascript" src="js/jumplinks.js"></script--><!-- #EndEditable --><!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55401c7c42ec2563" async></script>
+  <script type="text/javascript">//<!--
+window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","queueTime":0,"licenseKey":"bb2a18434c","agent":"","transactionName":"M1UDZ0pUC0UDBUQKXQofO1xIUFcZMhRfB0cHRBIdaFQCUzYDXRNeBUQEQBZvCkYHNlEEVzBVDENUVBFTTDxfE1c0UQZWbFAIRg4HRAY=","applicationID":"16354137","errorBeacon":"bam.nr-data.net","applicationTime":652}
+//--></script> <!-- #EndTemplate --> 
+ </body>
+</html>

@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <link rel="pingback" href="https://jackiedanicki.com/xmlrpc.php"> 
+  <title>Jackie Danicki – Remember when blogs were a thing?</title> 
+  <script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Karla:r:latin,latin-ext","Noto+Sans:r,i,b,bi:latin,latin-ext"]}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://s0.wp.com/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script>
+  <style id="jetpack-custom-fonts-css">.wf-active body, .wf-active button, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Noto Sans",sans-serif}.wf-active blockquote:not(.contact-form-submission) cite{font-family:"Noto Sans",sans-serif}.wf-active div.sharedaddy h3.sd-title, .wf-active div#jp-relatedposts h3.jp-relatedposts-headline{font-family:"Noto Sans",sans-serif}.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active h6{font-family:"Karla",sans-serif;font-weight:400;font-style:normal}.wf-active h1{font-style:normal;font-weight:400}.wf-active h2{font-style:normal;font-weight:400}.wf-active h3{font-style:normal;font-weight:400}.wf-active h4{font-style:normal;font-weight:400}.wf-active h5, .wf-active h6{font-style:normal;font-weight:400}.wf-active blockquote:not(.contact-form-submission){font-family:"Karla",sans-serif;font-style:normal;font-weight:400}.wf-active .widget-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:400}.wf-active .site-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:400}.wf-active .site-description{font-family:"Karla",sans-serif;font-style:normal;font-weight:400}.wf-active .entry-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:400}.wf-active .page-title, .wf-active .page-title, .wf-active .single .entry-title{font-family:"Karla",sans-serif;font-style:normal;font-weight:400}.wf-active .project-title{font-family:"Karla",sans-serif;font-weight:400;font-style:normal}</style> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9qYWNraWVkYW5pY2tpLmNvbQ%3D%3D"
+		+ "&wpcomid=1213939"
+		+ "&time=1585342393";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//jackiedanicki.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="alternate" type="application/rss+xml" title="Jackie Danicki » Feed" href="https://jackiedanicki.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Jackie Danicki » Comments Feed" href="https://jackiedanicki.com/comments/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s0.wp.com/_static/??-eJylU+1uwjAMfKGlXqmg48e0Z0la0xnypcSh6tsvbQAh2Ng0/kTx5e58ShwYveicZbQMJgmv00A2wug7Z0Q0pHG6qaouxhf4XqbpgBH2yF52B7FUj+hkd2SJp8vmjnxmDimXCsOQTwJCW7VVDSqR7kFpt/RSQYYJIk8a/2CzqK6iysklFkOg/r8WQTLZIf4i3yWtRSRGgT3NgtNlwKapm3az2gIeMz/rkuXejba0edr1nJLJoCaLTxvmWBl0keMpYU+R4Ug4/mjaudOV1dXqtarFMlZFVw6qEmp51yeilVQ6+15Hu0UfDeY8ZBk3XvLMMLmTRI0m0x7Jyj9RygeMUeTVUDKCP7Pw/h8UGHxSIMMwI5cn+TDv9fpt3ay2bbvdfwFd01lU?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <style id="argent-style-inline-css">
+.site-branding { background-image: url(https://jackiedanicki.files.wordpress.com/2017/12/cropped-jackie-danick-moon-hawaii.jpg); }
+</style> 
+  <link crossorigin="anonymous" rel="stylesheet" id="argent-fonts-css" href="https://fonts.googleapis.com/css?family=Cabin%3A500%2C700%2C500italic%2C700italic%7CAlegreya%3A400%2C700%2C400italic%2C700italic&amp;subset=latin%2Clatin-ext" media="all"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s1.wp.com/_static/??-eJx9jcEOAiEMRH9IbFbX9WT8FsSK1UIJlBD/XtbTGuPeZjp9M9CScRIVo0KoJnH1FAt4jJipB3/k1pWygQWrdwxYINUL2OznC0UHRV+MpiUn4YdYrDW6etQCWHsqT0LDtoFiSGy1t35q1go8imFxVknilzE3tpTX0IwXFt+lh/61sDN0DqfhsDtO+3EYp8cbSG1wdQ==?cssminify=yes" type="text/css" media="all"> 
+  <link rel="stylesheet" id="print-css-3-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-4-1" href="https://s0.wp.com/_static/??-eJx9jtEOgjAMRX/I2Uwc4oPxW8Yco1o2spYY/96ZQMSQ+NQ2Off2wHNULkXxUWCY1EhTwMhgnWCKrc3fbe+Yd7DCF7abiBSjeOVvKBjD3AJ1patTfThDoNTawsiLPAOLFXTQko2PTenKYUwsqiOLGbi3uRQv81+Kk8Pyi1JIv8cmJL0fik5/nP0+wHW4aNMYbUyj6/sbZOVojw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s2.wp.com/_static/??-eJzTLy/QzcxLzilNSS3WzwKiwtLUokoopZdVrKOPT4FubmZ6UWJJql5uZh5McXJ+XklqXglIbW5+UmZOqm5pcWpRYjpQDGhQWj42Q4sLEPpxuwaqyj7X1tDU1MLY1MzM1DgLAIGFRto="></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://jackiedanicki.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="shortlink" href="https://wp.me/55NF"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Jackie Danicki"> 
+  <meta property="og:description" content="Remember when blogs were a thing?"> 
+  <meta property="og:url" content="https://jackiedanicki.com/"> 
+  <meta property="og:site_name" content="Jackie Danicki"> 
+  <meta property="og:image" content="https://s0.wp.com/i/blank.jpg"> 
+  <meta property="og:locale" content="en_US"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="apple-touch-icon" href="https://s2.wp.com/i/webclip.png"> 
+  <link rel="openid.server" href="https://jackiedanicki.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://jackiedanicki.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://jackiedanicki.com/osd.xml" title="Jackie Danicki"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style> 
+  <script type="text/javascript">
+		function __ATA_CC() {var v = document.cookie.match('(^|;) ?personalized-ads-consent=([^;]*)(;|$)');return v ? 1 : 0;}
+		var __ATA_PP = { pt: 0, ht: 0, tn: 'argent', amp: false, siteid: 8982, blogid: 1213939, consent: __ATA_CC(), flag: 3 };
+		</script> 
+  <script type="text/javascript">
+		!function(t){var n={};function e(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,e),o.l=!0,o.exports}e.m=t,e.c=n,e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{enumerable:!0,get:r})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,n){if(1&n&&(t=e(t)),8&n)return t;if(4&n&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(e.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&n&&"string"!=typeof t)for(var o in t)e.d(r,o,function(n){return t[n]}.bind(null,o));return r},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,n){return Object.prototype.hasOwnProperty.call(t,n)},e.p="https://c0.pubmine.com/2.6.01584004761084/",e(e.s=184)}({0:function(t,n){t.exports=function(t,n,e){return n in t?Object.defineProperty(t,n,{value:e,enumerable:!0,configurable:!0,writable:!0}):t[n]=e,t}},1:function(t,n){t.exports=function(t,n){if(!(t instanceof n))throw new TypeError("Cannot call a class as a function")}},10:function(t,n,e){"use strict";var r=e(50),o=e(17),i=e(23);t.exports=function(t,n,e){if(!r(t))return e;if(!o(n))return e;try{var u=n.split(".").reduce((function(t,n){return t[n]}),t);return i(u)?e:u}catch(t){return e}}},12:function(t,n){function e(n){return"function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?t.exports=e=function(t){return typeof t}:t.exports=e=function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},e(n)}t.exports=e},14:function(t,n,e){"use strict";t.exports=function(t){return"function"==typeof t}},15:function(t,n,e){"use strict";t.exports=function(){}},17:function(t,n,e){"use strict";t.exports=function(t){return"string"==typeof t}},184:function(t,n,e){"use strict";e.r(n);var r=e(0),o=e.n(r),i=e(12),u=e.n(i),c=e(32),f=e.n(c),s=e(15),a=e.n(s),p=e(37),l=e.n(p),d=e(52),v=e(53),m=e(28);function y(t,n){var e=Object.keys(t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(t);n&&(r=r.filter((function(n){return Object.getOwnPropertyDescriptor(t,n).enumerable}))),e.push.apply(e,r)}return e}function b(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},n={};"object"===u()(window.__ATA_PP)&&null!==window.__ATA_PP&&(n=window.__ATA_PP);var e=function(t){for(var n=1;n<arguments.length;n++){var e=null!=arguments[n]?arguments[n]:{};n%2?y(Object(e),!0).forEach((function(n){o()(t,n,e[n])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(e)):y(Object(e)).forEach((function(n){Object.defineProperty(t,n,Object.getOwnPropertyDescriptor(e,n))}))}return t}({r:(new Date).getTime()},n,{},Object(d.a)(t),{ref:window.top!==window?document.referrer:window.location.href,us_privacy:Object(v.a)()}),r=l()("//s.pubmine.com/mhead.js",e);f()(r,a.a)}Object(m.b)()?Object(m.a)().then(b,b):b()},2:function(t,n){function e(t,n){for(var e=0;e<n.length;e++){var r=n[e];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,r.key,r)}}t.exports=function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}},21:function(t,n,e){"use strict";t.exports=function(t){return"string"==typeof t&&t.length>0}},23:function(t,n,e){"use strict";t.exports=function(t){return void 0===t}},24:function(t,n,e){"use strict";t.exports=function(t,n){return t.indexOf(n)>-1}},28:function(t,n,e){"use strict";e.d(n,"a",(function(){return p})),e.d(n,"b",(function(){return l}));var r=e(38),o=e.n(r),i=e(10),u=e.n(i),c=e(14),f=e.n(c),s=e(4);function a(t){var n=Date.now();return function(t){return new o.a((function(n,e){var r;window.setTimeout((function(){clearTimeout(r),e&&e("cmp ping timeout")}),t),function t(){window.__cmp?window.__cmp("ping",null,(function(o,i){i&&o.cmpLoaded?n():i?r=window.setTimeout(t,50):e&&e("cmp ping returned error with data: ".concat(JSON.stringify(o)))})):e&&e("CMP is not defined")}()}))}(t).then((function(){var e=Date.now()-n,r=t-e;return new o.a((function(t,n){window.__cmp?(window.__cmp("getConsentData",null,(function(e,r){r?t(e):n&&n("cmp getConsentData returned error with data: ".concat(JSON.stringify(e)))})),setTimeout((function(){n&&n("cmp getConsentData timeout")}),r)):n&&n("CMP is not defined")}))}))}function p(){return a(arguments.length>0&&void 0!==arguments[0]?arguments[0]:500).catch((function(t){return s.a.error(t),"boolean"==typeof(n=u()(window,"__ATA_PP.gdpr_applies"))?{gdprApplies:n}:{};var n}))}function l(){return f()(window.__cmp)}},29:function(t,n,e){"use strict";t.exports=function(t,n){for(var e=0,r=t.length;e<r;e++){var o=t[e];if(n(o,e))return o}return null}},30:function(t,n,e){"use strict";var r=e(29),o=e(24);t.exports=function(t,n){void 0===n&&(n=document.cookie);var e=n.split("; "),i=r(e,(function(n){return o(n,t+"=")}));return i?i.split("=")[1]:""}},32:function(t,n,e){"use strict";var r=e(15),o=e(14);t.exports=function(t,n,e){var i,u,c=document.createElement("script"),f=n instanceof HTMLElement&&n;if(i=o(n)?n:o(e)?e:r,c.src=t,c.onload=function(){i(void 0)},c.onerror=function(){i("error")},f)u=f;else{var s=document.getElementsByTagName("head");u=s&&0!==s.length?s[0]:document.documentElement}u.appendChild(c)}},37:function(t,n,e){"use strict";var r=e(24),o=e(89);t.exports=function(t,n){var e=o(n);return 0===e.length?t:t+(r(t,"?")?"&":"?")+e}},38:function(t,n,e){"use strict";var r,o=e(51),i=e(14);!function(t){t.REJECTED="rejected",t.RESOLVED="resolved",t.PENDING="pending"}(r||(r={}));var u=function(){function t(t,n){var e=this;this.status=r.PENDING,this.emitter=new o,this.onFulfilled=function(t){e.status===r.PENDING&&(e.status=r.RESOLVED,e.emitter.emit(r.RESOLVED,[t]))},this.onRejected=function(t){e.status===r.PENDING&&(e.status=r.REJECTED,e.emitter.emit(r.REJECTED,[t]))};var i=function(){return t(e.onFulfilled,e.onRejected)};n?i():setTimeout(i,0)}return t.resolve=function(n){return new t((function(t){t(n)}))},t.reject=function(n){return new t((function(t,e){e(n)}))},t.prototype.then=function(n,e){var o=this;return new t((function(u,c){o.emitter.on(r.RESOLVED,(function(e){if(i(n)){var r=n(e);r instanceof t?r.then(u,c):u(r)}else u(e)})),o.emitter.on(r.REJECTED,(function(n){if(i(e)){var r=e(n);r instanceof t?r.then(u,c):u(r)}else c(n)}))}),!0)},t.prototype.catch=function(n){var e=this;return new t((function(o){i(n)&&e.emitter.on(r.REJECTED,(function(e){var r=n(e);r instanceof t?r.then(o):o(r)})),e.emitter.on(r.RESOLVED,o)}),!0)},t}();t.exports=u},4:function(t,n,e){"use strict";var r=e(1),o=e.n(r),i=e(2),u=e.n(i),c=e(0),f=e.n(c),s=function(){function t(){o()(this,t)}return u()(t,null,[{key:"configure",value:function(n){t.config=n}},{key:"error",value:function(t){function n(n,e){return t.apply(this,arguments)}return n.toString=function(){return t.toString()},n}((function(t,n){this.config&&this.config.onError?this.config.onError(t,n):window.console&&console.log(t,n)}))}]),t}();f()(s,"config",void 0),n.a=s},50:function(t,n,e){"use strict";t.exports=function(t){var n=typeof t;return"object"===n&&null!=t||"function"===n}},51:function(t,n,e){"use strict";var r=function(){function t(){this.events={}}return t.prototype.on=function(t,n){if(this.events[t]){if(-1!==(e=this.events[t]).indexOf(n))throw new Error('This handler has already been subcribed for "'+t+'" event');e.push(n)}else{var e;(e=[]).push(n),this.events[t]=e}},t.prototype.off=function(t,n){var e=this.events[t],r=e.indexOf(n);-1!==r&&e.splice(r,1)},t.prototype.emit=function(t,n){void 0===n&&(n=[]);var e=this.events[t];e&&e.map((function(t){n?t.apply(void 0,n):t()}))},t}();t.exports=r},52:function(t,n,e){"use strict";e.d(n,"a",(function(){return i}));var r=e(17),o=e.n(r);function i(t){var n=t.gdprApplies,e=t.consentData;return{gdpr:"boolean"==typeof n?Number(n):void 0,gdpr_consent:o()(e)?e:void 0}}},53:function(t,n,e){"use strict";e.d(n,"a",(function(){return f}));var r=e(30),o=e.n(r),i=e(21),u=e.n(i),c="usprivacy";function f(){var t=o()(c);return u()(t)?t:null}},62:function(t,n,e){"use strict";t.exports=function(t){return null===t}},89:function(t,n,e){"use strict";var r=e(62),o=e(23);t.exports=function(t){var n=Object.keys(t),e=[];return n.forEach((function(n){var i=t[n];r(i)||o(i)||e.push(n+"="+encodeURIComponent(t[n]))})),e.join("&")}}});
+		</script>
+  <meta name="application-name" content="Jackie Danicki">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="Remember when blogs were a thing?">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://jackiedanicki.com/feed/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Remember when blogs were a thing?"> 
+ </head> 
+ <body class="home blog customizer-styles-applied highlander-enabled highlander-light infinite-scroll neverending"> 
+  <div id="page" class="hfeed site"> <a class="skip-link screen-reader-text" href="#content">Skip to content</a> 
+   <header id="masthead" class="site-header" role="banner"> 
+    <nav id="site-navigation" class="main-navigation" role="navigation"> <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button> 
+     <div id="primary-menu" class="menu"></div> 
+    </nav><!-- #site-navigation --> 
+    <div class="site-branding"> 
+     <h1 class="site-title"><a href="https://jackiedanicki.com/" rel="home">Jackie Danicki</a></h1> 
+     <h2 class="site-description">Remember when blogs were a thing?</h2> 
+    </div><!-- .site-branding --> 
+   </header><!-- #masthead --> 
+   <div id="content" class="site-content"> 
+    <div id="primary" class="content-area"> 
+     <main id="main" class="site-main" role="main"> 
+      <article id="post-9963" class="post-9963 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/09/04/la-tristesse-durera/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=300&amp;h=199&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9964" data-permalink="https://jackiedanicki.com/2018/09/04/la-tristesse-durera/i-meant-it/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg" data-orig-size="1280,941" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="i meant it" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/09/i-meant-it.jpg?w=780"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/09/04/la-tristesse-durera/" rel="bookmark">La tristesse durera</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/09/04/la-tristesse-durera/" rel="bookmark"><time class="entry-date published" datetime="2018-09-04T21:24:47+00:00">2018</time><time class="updated" datetime="2018-09-04T21:27:20+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>I’ve got to hand one thing to contemporary commies: Many of them put out some decent records. Because I am… <a class="read-more" href="https://jackiedanicki.com/2018/09/04/la-tristesse-durera/">Read more <span class="screen-reader-text">La tristesse durera</span></a></p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <article id="post-9949" class="post-9949 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/08/29/sukkah-sparks/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=300&amp;h=199&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9951" data-permalink="https://jackiedanicki.com/2018/08/29/sukkah-sparks/sukkah-layout/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg" data-orig-size="563,371" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="sukkah layout" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/08/sukkah-layout.jpg?w=563"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/08/29/sukkah-sparks/" rel="bookmark">Sukkah Sparks</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/08/29/sukkah-sparks/" rel="bookmark"><time class="entry-date published" datetime="2018-08-29T20:05:47+00:00">2018</time><time class="updated" datetime="2018-08-29T20:09:19+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>Having been blessed with a rather large sukkah on the back deck of this new house, I am in Sukkot… <a class="read-more" href="https://jackiedanicki.com/2018/08/29/sukkah-sparks/">Read more <span class="screen-reader-text">Sukkah Sparks</span></a></p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <article id="post-9943" class="post-9943 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/08/05/jd-for-jj/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=300&amp;h=200&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9944" data-permalink="https://jackiedanicki.com/2018/08/05/jd-for-jj/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg" data-orig-size="1600,1066" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Photo 2 – Robert Meeropol Jewish National Retreat Bar Mitzvah" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/08/photo-2-robert-meeropol-jewish-national-retreat-bar-mitzvah.jpeg?w=780"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/08/05/jd-for-jj/" rel="bookmark">JD for JJ</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/08/05/jd-for-jj/" rel="bookmark"><time class="entry-date published" datetime="2018-08-05T03:21:11+00:00">2018</time><time class="updated" datetime="2018-08-05T05:39:36+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>Here’s something I wrote last week for the Jewish Journal:&nbsp;Julius and Ethel Rosenberg’s son, one of the Cold War’s most… <a class="read-more" href="https://jackiedanicki.com/2018/08/05/jd-for-jj/">Read more <span class="screen-reader-text">JD for JJ</span></a></p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <article id="post-9938" class="post-9938 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/07/30/maybe-its-a-trick-of-the-light/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=300&amp;h=200&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9939" data-permalink="https://jackiedanicki.com/2018/07/30/maybe-its-a-trick-of-the-light/gomez/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg" data-orig-size="1000,1000" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="gomez" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/07/gomez.jpeg?w=780"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/07/30/maybe-its-a-trick-of-the-light/" rel="bookmark">Maybe It’s a Trick of the&nbsp;Light</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/07/30/maybe-its-a-trick-of-the-light/" rel="bookmark"><time class="entry-date published updated" datetime="2018-07-30T02:38:44+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>This, from 19 years ago (OMG), has aged very well.</p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <article id="post-9935" class="post-9935 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/07/29/juxtaposition/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=300&amp;h=199&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9934" data-permalink="https://jackiedanicki.com/img_20180711_195030_864/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg" data-orig-size="1564,1564" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="IMG_20180711_195030_864" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/07/img_20180711_195030_864.jpg?w=780"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/07/29/juxtaposition/" rel="bookmark">Juxtaposition</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/07/29/juxtaposition/" rel="bookmark"><time class="entry-date published" datetime="2018-07-29T07:30:39+00:00">2018</time><time class="updated" datetime="2018-07-29T07:31:43+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>Presented without comment: These are right next to each other on Pico Boulevard.</p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <article id="post-9932" class="post-9932 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/07/29/judged/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=300&amp;h=200&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9931" data-permalink="https://jackiedanicki.com/suissa-shabbos-oxnard/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg" data-orig-size="3320,2988" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="suissa shabbos oxnard" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/07/suissa-shabbos-oxnard.jpg?w=780"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/07/29/judged/" rel="bookmark">Judged</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/07/29/judged/" rel="bookmark"><time class="entry-date published updated" datetime="2018-07-29T07:28:50+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>Stopped for Shabbat supplies en route to the beach. The cashier at the Mexican food warehouse was visibly unimpressed with… <a class="read-more" href="https://jackiedanicki.com/2018/07/29/judged/">Read more <span class="screen-reader-text">Judged</span></a></p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <article id="post-9928" class="post-9928 post type-post status-publish format-standard has-post-thumbnail hentry category-whatever"> <a class="post-thumbnail" href="https://jackiedanicki.com/2018/07/29/not-selfies/"> <img width="200" height="133" src="https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=200&amp;h=133&amp;crop=1" class="attachment-argent-blog-thumbnail size-argent-blog-thumbnail wp-post-image" alt="" srcset="https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=200&amp;h=133&amp;crop=1 200w, https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=400&amp;h=266&amp;crop=1 400w, https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=150&amp;h=100&amp;crop=1 150w, https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=300&amp;h=199&amp;crop=1 300w" sizes="(max-width: 200px) 100vw, 200px" data-attachment-id="9929" data-permalink="https://jackiedanicki.com/2018/07/29/not-selfies/jackie-suissa-santa-monica/" data-orig-file="https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg" data-orig-size="1564,1564" data-comments-opened="0" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="jackie suissa santa monica" data-image-description="" data-medium-file="https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=300" data-large-file="https://jackiedanicki.files.wordpress.com/2018/07/jackie-suissa-santa-monica.jpg?w=780"> </a> 
+       <header class="entry-header"> 
+        <h1 class="entry-title"><a href="https://jackiedanicki.com/2018/07/29/not-selfies/" rel="bookmark">Not-Selfies</a></h1> 
+        <div class="entry-meta"> <span class="posted-on">Posted on <a href="https://jackiedanicki.com/2018/07/29/not-selfies/" rel="bookmark"><time class="entry-date published updated" datetime="2018-07-29T07:23:26+00:00">2018</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://jackiedanicki.com/author/healthkick/">Jackie D</a></span></span> 
+        </div><!-- .entry-meta --> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <p>What’s it called when it’s a selfie someone else is taking of you both? Whatever those are called, I always… <a class="read-more" href="https://jackiedanicki.com/2018/07/29/not-selfies/">Read more <span class="screen-reader-text">Not-Selfies</span></a></p> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <nav class="navigation posts-navigation" role="navigation" aria-label="Posts"> 
+       <h2 class="screen-reader-text">Posts navigation</h2> 
+       <div class="nav-links">
+        <div class="nav-previous">
+         <a href="https://jackiedanicki.com/page/2/">Older posts</a>
+        </div>
+       </div> 
+      </nav> 
+     </main><!-- #main --> 
+    </div><!-- #primary --> 
+   </div><!-- #content --> 
+   <footer id="colophon" class="site-footer" role="contentinfo"> 
+    <div class="site-info"> 
+    </div><!-- .site-info --> 
+   </footer><!-- #colophon --> 
+  </div><!-- #page --> 
+  <script type="text/javascript">
+		//<![CDATA[
+		var infiniteScroll = JSON.parse( decodeURIComponent( '%7B%22settings%22%3A%7B%22id%22%3A%22main%22%2C%22ajaxurl%22%3A%22https%3A%5C%2F%5C%2Fjackiedanicki.com%5C%2F%3Finfinity%3Dscrolling%22%2C%22type%22%3A%22scroll%22%2C%22wrapper%22%3Afalse%2C%22wrapper_class%22%3A%22infinite-wrap%22%2C%22footer%22%3A%22page%22%2C%22click_handle%22%3A%221%22%2C%22text%22%3A%22Older%20posts%22%2C%22totop%22%3A%22Scroll%20back%20to%20top%22%2C%22currentday%22%3A%2229.07.18%22%2C%22order%22%3A%22DESC%22%2C%22scripts%22%3A%5B%5D%2C%22styles%22%3A%5B%5D%2C%22google_analytics%22%3Afalse%2C%22offset%22%3A0%2C%22history%22%3A%7B%22host%22%3A%22jackiedanicki.com%22%2C%22path%22%3A%22%5C%2Fpage%5C%2F%25d%5C%2F%22%2C%22use_trailing_slashes%22%3Atrue%2C%22parameters%22%3A%22%22%7D%2C%22query_args%22%3A%7B%22error%22%3A%22%22%2C%22m%22%3A%22%22%2C%22p%22%3A0%2C%22post_parent%22%3A%22%22%2C%22subpost%22%3A%22%22%2C%22subpost_id%22%3A%22%22%2C%22attachment%22%3A%22%22%2C%22attachment_id%22%3A0%2C%22name%22%3A%22%22%2C%22pagename%22%3A%22%22%2C%22page_id%22%3A0%2C%22second%22%3A%22%22%2C%22minute%22%3A%22%22%2C%22hour%22%3A%22%22%2C%22day%22%3A0%2C%22monthnum%22%3A0%2C%22year%22%3A0%2C%22w%22%3A0%2C%22category_name%22%3A%22%22%2C%22tag%22%3A%22%22%2C%22cat%22%3A%22%22%2C%22tag_id%22%3A%22%22%2C%22author%22%3A%22%22%2C%22author_name%22%3A%22%22%2C%22feed%22%3A%22%22%2C%22tb%22%3A%22%22%2C%22paged%22%3A0%2C%22meta_key%22%3A%22%22%2C%22meta_value%22%3A%22%22%2C%22preview%22%3A%22%22%2C%22s%22%3A%22%22%2C%22sentence%22%3A%22%22%2C%22title%22%3A%22%22%2C%22fields%22%3A%22%22%2C%22menu_order%22%3A%22%22%2C%22embed%22%3A%22%22%2C%22category__in%22%3A%5B%5D%2C%22category__not_in%22%3A%5B%5D%2C%22category__and%22%3A%5B%5D%2C%22post__in%22%3A%5B%5D%2C%22post__not_in%22%3A%5B%5D%2C%22post_name__in%22%3A%5B%5D%2C%22tag__in%22%3A%5B%5D%2C%22tag__not_in%22%3A%5B%5D%2C%22tag__and%22%3A%5B%5D%2C%22tag_slug__in%22%3A%5B%5D%2C%22tag_slug__and%22%3A%5B%5D%2C%22post_parent__in%22%3A%5B%5D%2C%22post_parent__not_in%22%3A%5B%5D%2C%22author__in%22%3A%5B%5D%2C%22author__not_in%22%3A%5B%5D%2C%22posts_per_page%22%3A7%2C%22ignore_sticky_posts%22%3Afalse%2C%22suppress_filters%22%3Afalse%2C%22cache_results%22%3Afalse%2C%22update_post_term_cache%22%3Atrue%2C%22lazy_load_term_meta%22%3Atrue%2C%22update_post_meta_cache%22%3Atrue%2C%22post_type%22%3A%22%22%2C%22nopaging%22%3Afalse%2C%22comments_per_page%22%3A%2250%22%2C%22no_found_rows%22%3Afalse%2C%22order%22%3A%22DESC%22%7D%2C%22last_post_date%22%3A%222018-07-29%2007%3A23%3A26%22%2C%22stats%22%3A%22blog%3D1213939%26v%3Dwpcom%26tz%3D0%26user_id%3D0%26subd%3Djackiedanicki%26x_pagetype%3Dinfinite%22%7D%7D' ) );
+		//]]>
+		</script> <!--  --> 
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+  </div> 
+  <div id="infinite-footer"> 
+   <div class="container"> 
+    <div class="blog-info"> <a id="infinity-blog-title" href="https://jackiedanicki.com/" rel="home"> Jackie Danicki </a> 
+    </div> 
+    <div class="blog-credits"> 
+    </div> 
+   </div> 
+  </div><!-- #infinite-footer --> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="1213939"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://jackiedanicki.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="Jackie Danicki"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <div class="widget widget_eu_cookie_law_widget">
+   <div class="hide-on-button ads-active" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law"> 
+    <form method="post"> 
+     <input type="submit" value="Close and accept" class="accept"> Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+     <br> To find out more, including how to control cookies, see here: <a href="https://automattic.com/cookies"> Cookie Policy </a> 
+    </form> 
+   </div> 
+  </div>
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/_static/??-eJx9jlEKwjAQRC/kukgt1A/xLGmyhrTbbMgmld7eClYUpJ/zhjcMPhJYiYViwcTVh6jo6xp7yh56FjsqDlSSsSOwWaQW8Dk4fFf3vMpHq3rAr6WpwjaWSZNEDTPBHBzJH7KnW5OlKvHnwwb2pBKYHHjDTHn5TS/tNl1Pbdd0zfnStsMTODFhTg==?cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"1213939","siteName":"Jackie Danicki","siteURL":"https:\/\/jackiedanicki.com","icon":"<img alt='' src='https:\/\/s2.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/argent","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fjackiedanicki.com%2F2018%2F09%2F04%2Fla-tristesse-durera%2F&signup_flow=account&domain=jackiedanicki.com","themeURL":"https:\/\/wordpress.com\/theme\/argent\/","xhrURL":"https:\/\/jackiedanicki.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"9d546f8e2a\" \/>","referer":"https:\/\/jackiedanicki.com\/","canFollow":"1","feedID":"51176338","statusMessage":"","customizeLink":"https:\/\/jackiedanicki.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fjackiedanicki.wordpress.com%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Argent","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fjackiedanicki.com%2F2018%2F09%2F04%2Fla-tristesse-durera%2F&signup_flow=account&domain=jackiedanicki.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/jackiedanicki.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"1","require_name_email":"1","login_url":"https:\/\/jackiedanicki.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fjackiedanicki.com%2F2018%2F08%2F29%2Fsukkah-sparks%2F","blog_id":"1213939","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<p id=\"jp-carousel-commenting-as\">You must be <a href=\"#\" class=\"jp-carousel-comment-login\">logged in<\/a> to post a comment.<\/p>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=1213939&v=wpcom&tz=0&user_id=0&subd=jackiedanicki","is_public":"1","reblog_enabled":""};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJyVU9tSwyAQ/SEpo51a++D4LRQ2cZMNILsk1q+XaNLRNhPrCyx7OXs5ix6issELeNENawc9Wojvm4bv9G9TDCwdMJsaFqzNW4Z0mq4N+h5h+NOtAYnGtioB48cVapdVpFyjZ03YAusSlOHVeEeQVpzRV+hRTmdh9kVvKbsCNDaKLLoH70IaTTHQqUKiTYf+EnrGrTKRYhRQ4FDQ11NG/bi93+4fHw76SKEoy5xYFdG2U5aFUdyOCaVIKXHZiwuDn4C/Tr40XmaRVyiM6ZiP2qR6ouBbusnVmx5rIxhuQ+YWoyL0raqCzawqvNqjHzQN6GqQ0kMu1tAiKDKDFugiGYEL/QqOcYUzdTRJd4YFUpFU6CElHKk+6/6JIKksJq8F2XEuY9BZWvEuGx6DZ+xB9aWusKBZWr0fCNakkBlIz59mVixtNw9VODZgr2ie0b5SasM8MtBM71hqWmtZkMCp2hCNf/jXq0S9dM/3u6fd9uGw3x+aT1rfoWI="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script type="text/javascript">
+			jQuery.extend( infiniteScroll.settings.scripts, ["jquery-core","jquery-migrate","jquery","mobile-useragent-info","spin","jquery.spin","grofiles-cards","wpgroho","devicepx","postmessage","jquery_inview","jetpack_resize","jetpack_likes_queuehandler","the-neverending-homepage","wp-polyfill","blog-posts-block-view","event-countdown-js","argent-js","argent-navigation","argent-skip-link-focus-fix","eu-cookie-law-script","wpcom-masterbar-js","wpcom-masterbar-tracks-js","wpcom-actionbar-bar","jetpack-responsive-videos-min-script","jetpack-carousel","swfobject","videopress","tiled-gallery"] );
+			jQuery.extend( infiniteScroll.settings.styles, ["wpcom-smileys","jetpack_likes","the-neverending-homepage","wp-block-library","jetpack-layout-grid","jetpack-ratings","jetpack-event-countdown","jetpack-timeline","blog-posts-block-view","coblocks-frontend","posts-list-block-style","wpcom-core-compat-playlist-styles","wpcom-bbpress2-staff-css","argent-style","genericons","argent-wpcom","eu-cookie-law-style","geo-location-flair","reblogging","a8c-global-print","wpcom-actionbar-bar","jetpack-global-styles-frontend-style","sharedaddy","social-logos","h4-global","argent-fonts","wpcom-layout-grid-front","jetpack-responsive-videos-style","jetpack-carousel","tiled-gallery"] );
+		</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'1213939','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'1213939','v':'wpcom','tz':'0','user_id':'0','subd':'jackiedanicki'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1oMUpKVjdLUHY1WldoajE/MT9jXTVxa1MyMC4wRSx6c0k0VD0zQmxBSm1WZjJIPW1LRXdBR0tVOS13ekNoZUlGT2R+VXNmM3xVflA0X254PXM/JWhaPXRUUXFLanh+VUI2Zyt4a0JLT0dQRjlaMTRIQmJqdFdPZzBuclRYZU58fl9IbDZ4cVp6bXlDdTh3WHhPZyZfTl0yOFQxaTNHfEktXUt+dmZXQmR4UXxDYktFY2pLR3o2UGJ2YlVoUmNkREdoJWV6JXl+N2ppemFiNi40aGE1L3QxeTA1ckNLJmYzSU5FOUN3V3AxUyZLelBTNzh+MkJ4Rk9VdTZXWVNLQQ=='}]);
+_stq.push([ 'clickTrackerInit', '1213939', '0' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>  <!--
+	generated in 0.184 seconds
+	63055 bytes batcached for 300 seconds
+-->
+ </body>
+</html>

@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>Dating Sims on the Holodeck</title> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <link rel="pingback" href="https://datingsimsontheholodeck.home.blog/xmlrpc.php"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9kYXRpbmdzaW1zb250aGVob2xvZGVjay5ob21lLmJsb2c%3D"
+		+ "&wpcomid=164830304"
+		+ "&time=1585339409";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//datingsimsontheholodeckhome.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//wordpress.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.pubmine.com"> 
+  <link rel="dns-prefetch" href="//x.bidswitch.net"> 
+  <link rel="dns-prefetch" href="//static.criteo.net"> 
+  <link rel="dns-prefetch" href="//ib.adnxs.com"> 
+  <link rel="dns-prefetch" href="//aax.amazon-adsystem.com"> 
+  <link rel="dns-prefetch" href="//bidder.criteo.com"> 
+  <link rel="dns-prefetch" href="//cas.criteo.com"> 
+  <link rel="dns-prefetch" href="//gum.criteo.com"> 
+  <link rel="dns-prefetch" href="//ads.pubmatic.com"> 
+  <link rel="dns-prefetch" href="//gads.pubmatic.com"> 
+  <link rel="dns-prefetch" href="//tpc.googlesyndication.com"> 
+  <link rel="dns-prefetch" href="//ad.doubleclick.net"> 
+  <link rel="dns-prefetch" href="//googleads.g.doubleclick.net"> 
+  <link rel="dns-prefetch" href="//www.googletagservices.com"> 
+  <link rel="dns-prefetch" href="//cdn.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//delivery.g.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//delivery.swid.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//a.teads.tv"> 
+  <link rel="dns-prefetch" href="//prebid.media.net"> 
+  <link rel="dns-prefetch" href="//adserver-us.adtech.advertising.com"> 
+  <link rel="dns-prefetch" href="//fastlane.rubiconproject.com"> 
+  <link rel="dns-prefetch" href="//prebid-server.rubiconproject.com"> 
+  <link rel="dns-prefetch" href="//hb-api.omnitagjs.com"> 
+  <link rel="dns-prefetch" href="//mtrx.go.sonobi.com"> 
+  <link rel="dns-prefetch" href="//apex.go.sonobi.com"> 
+  <link rel="dns-prefetch" href="//u.openx.net"> 
+  <link rel="alternate" type="application/rss+xml" title="Dating Sims on the Holodeck » Feed" href="https://datingsimsontheholodeck.home.blog/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Dating Sims on the Holodeck » Comments Feed" href="https://datingsimsontheholodeck.home.blog/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Dating Sims on the Holodeck » Dating Sims on the&nbsp;Holodeck Comments Feed" href="https://datingsimsontheholodeck.home.blog/blog/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s1.wp.com/_static/??-eJylk9tuwyAMhl9ohNEqaXcx7Vkg8ZhbDhGGRnn7QWirHrRuWm+iYPv7/XMwn0bWexfBRW4TG03S6IhPY+8tI4sG5ptV0xO98AtMGa/PoJVhDxGdZkoGnkuvI4/hyYdBDsS18Uqau9pTmU55qSDonAnAN82mEVwlNEOR6/fMoAoyzJzibOAPMgtFfAdxlAWXs0+R6YDDfyWCLDumX/DPZAwjjMBgwOWIaoZ3a7HedKs3Dodcn7nk4uAnV9s8rXpyGdGCQQdPC9Zb9BTp6HBAivyAMP0o2vvjkYlm9doItryxytVEU00t9/qEterKZN1La7fRuwYXs1AeWY7bUcZSYXMnCQZsLnuE1aFRagxAxPLXYrIsfmXwfoau2tkinc3tgZYJuopUFLnzETNN55+S+LDvot22om23ott9A08Ebp0=?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link crossorigin="anonymous" rel="stylesheet" id="wilson-raleway-css" href="https://fonts.googleapis.com/css?family=Raleway%3A400%2C700&amp;ver=5.4-RC1-47426" media="all"> 
+  <link crossorigin="anonymous" rel="stylesheet" id="wilson-latos-css" href="https://fonts.googleapis.com/css?family=Lato%3A400%2C700%2C400italic%2C700italic&amp;subset=latin%2Clatin-ext&amp;ver=5.4-RC1-47426" media="all"> 
+  <link rel="stylesheet" id="all-css-4-1" href="https://s2.wp.com/_static/??-eJyNj00OQiEMhC8kNv6vjGd5YMVqoYSCxNvLixuN8emuk5np10JLxkksGAuUMwZUSNVCI1aJoOXOOHeqM3jJhWoSV09RwWPETN34Mn50PxkU3ZNjWnISpmharbpMqdBIOQmztKn8WW6Yja3Wcmf+fKbR0WNRwNpduRIaHhoUDImH8s8Cj2JY3DDe9ybMiQfKU9WMlsX30UNPvcixdAj7xWa5267Wi/X28gC6MqRR?cssminify=yes" type="text/css" media="all"> 
+  <link rel="stylesheet" id="print-css-5-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-6-1" href="https://s1.wp.com/_static/??-eJyNjt2ugkAMhF/o9DSooF6cnGdZlmWpli2hJcS3d00g/iXGq84kM18H5wG8JAvJsJ9g4ClSUnTeSFLtxrv69ao/+BBfs+3EDEoWIDRklOJCwWpbbPfV5oiRpXY5YxcOimrOyGPNLp3foA8bBlGDlh2NqJ0bM3i9n1oqnvIvlijP5q1kXejznG637PtEnamJwRRzZNEQR2rApQaY1L7p1nmGAkErzDK/2Bvgv/8rykNZlOWhqE5X55eXnA==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s2.wp.com/_static/??-eJx9ztsKwzAIANAfWhpGSdnL2Lf0YoMliVnUlf790l1exigIKh5Ru2aDaQw6Adulxl2hbJ/ULHyyR8BE9KUXaCKmLx4pCSTZbSaWCMy9hz/TSAMGMMpQKkhSz8z066KaHNRjYss68FgwC1LtZgqB1gO+4uRBXj+/SzNozOaBsG/d4vXs3KV1Xefa5Qn5TmGt"></script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/wp-content/mu-plugins/highlander-comments/style.css?m=1530132353h&amp;cssminify=yes" type="text/css" media="all"> <!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' media='all' />
+<![endif]--> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://datingsimsontheholodeckhome.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="canonical" href="https://datingsimsontheholodeck.home.blog/"> 
+  <link rel="shortlink" href="https://wp.me/Pb9BTi-4"> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fdatingsimsontheholodeck.home.blog%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fdatingsimsontheholodeck.home.blog%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Dating Sims on the Holodeck"> 
+  <meta property="og:url" content="https://datingsimsontheholodeck.home.blog/"> 
+  <meta property="og:site_name" content="Dating Sims on the Holodeck"> 
+  <meta property="og:image" content="https://s0.wp.com/i/blank.jpg"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> 
+  <meta name="twitter:text:title" content="Dating Sims on the&nbsp;Holodeck"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Visit the post for more."> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="apple-touch-icon" href="https://s2.wp.com/i/webclip.png"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://datingsimsontheholodeck.home.blog/osd.xml" title="Dating Sims on the Holodeck"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <meta name="application-name" content="Dating Sims on the Holodeck">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://datingsimsontheholodeck.home.blog/feed/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Dating Sims on the Holodeck Kusoge for kusonin, and other fine beings such as yourself. Follow My Blog Get new content delivered directly to your inbox."> 
+  <script type="text/javascript">
+
+			window.doNotSellCallback = function( $ ) {
+
+				var linkElements = [
+					'a[href="https://wordpress.com/?ref=footer_blog"]',
+					'a[href="https://wordpress.com/?ref=footer_website"]',
+					'a[href="https://wordpress.com/?ref=vertical_footer"]',
+					'a[href^="https://wordpress.com/?ref=footer_segment_"]',
+				].join(',');
+
+				var dnsLink = $( '<a href="https://wordpress.com/advertising-program-optout" rel="nofollow" style="margin-left: 0.5em;">Do Not Sell My Personal Information</a>' );
+				var creditLinks = $( linkElements );
+
+				if ( 0 === creditLinks.length ) {
+					return false;
+				}
+
+				creditLinks.after(dnsLink);
+				return true;
+			};
+		</script> 
+  <script type="text/javascript">
+		function __ATA_CC() {var v = document.cookie.match('(^|;) ?personalized-ads-consent=([^;]*)(;|$)');return v ? 1 : 0;}
+		var __ATA_PP = { pt: 0, ht: 0, tn: 'wilson', amp: false, siteid: 8982, blogid: 164830304, consent: __ATA_CC() };
+		var __ATA = __ATA || {};
+		__ATA.cmd = __ATA.cmd || [];
+		__ATA.criteo = __ATA.criteo || {};
+		__ATA.criteo.cmd = __ATA.criteo.cmd || [];
+		</script> 
+  <script type="text/javascript">
+		(function(){var g=Date.now||function(){return+new Date};function h(a,b){a:{for(var c=a.length,d="string"==typeof a?a.split(""):a,e=0;e<c;e++)if(e in d&&b.call(void 0,d[e],e,a)){b=e;break a}b=-1}return 0>b?null:"string"==typeof a?a.charAt(b):a[b]};function k(a,b,c){c=null!=c?"="+encodeURIComponent(String(c)):"";if(b+=c){c=a.indexOf("#");0>c&&(c=a.length);var d=a.indexOf("?");if(0>d||d>c){d=c;var e=""}else e=a.substring(d+1,c);a=[a.substr(0,d),e,a.substr(c)];c=a[1];a[1]=b?c?c+"&"+b:b:c;a=a[0]+(a[1]?"?"+a[1]:"")+a[2]}return a};var l=0;function m(a,b){var c=document.createElement("script");c.src=a;c.onload=function(){b&&b(void 0)};c.onerror=function(){b("error")};a=document.getElementsByTagName("head");var d;a&&0!==a.length?d=a[0]:d=document.documentElement;d.appendChild(c)}function n(a){var b=void 0===b?document.cookie:b;return(b=h(b.split("; "),function(c){return-1!=c.indexOf(a+"=")}))?b.split("=")[1]:""}function p(a){return"string"==typeof a&&0<a.length}
+		function r(a,b,c){b=void 0===b?"":b;c=void 0===c?".":c;var d=[];Object.keys(a).forEach(function(e){var f=a[e],q=typeof f;"object"==q&&null!=f||"function"==q?d.push(r(f,b+e+c)):null!==f&&void 0!==f&&(e=encodeURIComponent(b+e),d.push(e+"="+encodeURIComponent(f)))});return d.filter(p).join("&")}function t(a,b){a||((window.__ATA||{}).config=b.c,m(b.url))}var u=Math.floor(1E13*Math.random()),v=window.__ATA||{};window.__ATA=v;v.rid=u;v.createdAt=g();var w=window.__ATA||{},x="s.pubmine.com";
+		w&&w.serverDomain&&(x=w.serverDomain);var y="//"+x+"/conf",z=window.top===window,A=window.__ATA_PP&&window.__ATA_PP.gdpr_applies,B="boolean"===typeof A?Number(A):null,C=window.__ATA_PP||null,D=z?document.referrer?document.referrer:null:null,E=z?window.location.href:document.referrer?document.referrer:null,F,G=n("__ATA_tuuid");F=G?G:null;var H=window.innerWidth+"x"+window.innerHeight,I=n("usprivacy"),J=r({gdpr:B,pp:C,rid:u,src:D,ref:E,tuuid:F,vp:H,us_privacy:I?I:null},"",".");
+		(function(a){var b=void 0===b?"cb":b;l++;var c="callback__"+g().toString(36)+"_"+l.toString(36);a=k(a,b,c);window[c]=function(d){t(void 0,d)};m(a,function(d){d&&t(d)})})(y+"?"+J);}).call(this);
+		</script>
+  <script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script> 
+  <script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script> 
+ </head> 
+ <body class="home page-template-default page page-id-4 customizer-styles-applied individual-blog admin-bar highlander-enabled highlander-light"> 
+  <div id="page" class="hfeed site"> <a class="skip-link screen-reader-text" href="#content">Skip to content</a> 
+   <header id="masthead" class="site-header" role="banner"> 
+    <div class="site-branding"> <a href="https://datingsimsontheholodeck.home.blog/" class="site-logo-link" rel="home" itemprop="url"></a> 
+     <h1 class="site-title"><a href="https://datingsimsontheholodeck.home.blog/" rel="home">Dating Sims on the Holodeck</a></h1> 
+     <h2 class="site-description"></h2> 
+    </div> 
+    <nav id="site-navigation" class="main-navigation" role="navigation"> 
+     <h1><span class="screen-reader-text">Primary Menu</span></h1> <button class="menu-toggle"><span class="genericon genericon-menu"></span><span class="screen-reader-text">Menu</span></button> 
+     <div class="menu">
+      <ul> 
+       <li class="current_page_item"><a href="https://datingsimsontheholodeck.home.blog/">Home</a></li>
+       <li class="page_item page-item-2"><a href="https://datingsimsontheholodeck.home.blog/blog-feed/">Blog Feed</a></li> 
+      </ul>
+     </div> 
+    </nav><!-- #site-navigation --> 
+   </header><!-- #masthead --> 
+   <div id="content" class="site-content"> 
+    <div id="primary" class="content-area"> 
+     <main id="main" class="site-main" role="main"> 
+      <article id="post-4" class="post-4 page type-page status-publish hentry"> 
+       <header class="entry-header"> 
+        <h1 class="entry-title">Dating Sims on the&nbsp;Holodeck</h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <div style="height:20px;" aria-hidden="true" class="wp-block-spacer"></div> 
+        <div class="wp-block-cover alignfull" style="background-image:url('https://datingsimsontheholodeckhome.files.wordpress.com/2019/07/mountaindawn.jpg');background-position:50% 50%;">
+         <div class="wp-block-cover__inner-container"> 
+          <h1 class="has-text-align-center">Dating Sims on the Holodeck</h1> 
+          <p>Kusoge for kusonin, and other fine beings such as yourself.</p> 
+         </div>
+        </div> 
+        <div class="a8c-posts-list"> 
+         <ul class="a8c-posts-list__listing"> 
+          <li class="a8c-posts-list__item"> 
+           <article id="post-824" class="post-824 post type-post status-publish format-standard hentry category-uncategorized tag-elder-scrolls-online tag-fallout-shelter tag-gaming tag-granblue-fantasy tag-princess-connect-redive tag-star-trek-picard"> 
+            <h2 class="a8c-posts-list-item__title"><a href="https://datingsimsontheholodeck.home.blog/2020/02/29/february-in-review-march-anticipated/" rel="bookmark">February in Review, March&nbsp;Anticipated</a></h2> 
+            <div class="a8c-posts-list-item__meta"> <span class="a8c-posts-list-item__datetime">February 29, 2020</span> <span class="a8c-posts-list-item__author">by <a href="https://datingsimsontheholodeck.home.blog/author/theroyalfamilyi/" title="Posts by TheRoyalFamily" rel="author">TheRoyalFamily</a> </span> 
+            </div> 
+            <div class="a8c-posts-list-item__excerpt"> 
+             <p>Pretty boring month, I’d say. At least for gaming, for me. Only two posts the entire month! What did I even do? Murkmire event in ESO. In anticipation, I got my newest character (a Nord nightblade) all the way through the faction story, up to the point where the faction stories merged. I’m not doing… <a href="https://datingsimsontheholodeck.home.blog/2020/02/29/february-in-review-march-anticipated/" title="Continue reading February in Review, March&nbsp;Anticipated" class="a8c-posts-list-item__read-more">Read more</a></p> 
+            </div> 
+           </article> </li> 
+          <li class="a8c-posts-list__item"> 
+           <article id="post-811" class="post-811 post type-post status-publish format-standard hentry category-uncategorized tag-gaming tag-love-your-backlog tag-state-of-the-gamer"> 
+            <h2 class="a8c-posts-list-item__title"><a href="https://datingsimsontheholodeck.home.blog/2020/02/12/loving-the-backlog-2020/" rel="bookmark">Loving The Backlog&nbsp;2020</a></h2> 
+            <div class="a8c-posts-list-item__meta"> <span class="a8c-posts-list-item__datetime">February 12, 2020</span> <span class="a8c-posts-list-item__author">by <a href="https://datingsimsontheholodeck.home.blog/author/theroyalfamilyi/" title="Posts by TheRoyalFamily" rel="author">TheRoyalFamily</a> </span> 
+            </div> 
+            <div class="a8c-posts-list-item__excerpt"> 
+             <p>According to Later Levels, this week is Love Your Backlog week. And I so do love my backlog. I love it so much, I just keep making it bigger and bigger! But just how big is big? Well, I just don’t know! Or rather, I didn’t know up through last night. As I mentioned I… <a href="https://datingsimsontheholodeck.home.blog/2020/02/12/loving-the-backlog-2020/" title="Continue reading Loving The Backlog&nbsp;2020" class="a8c-posts-list-item__read-more">Read more</a></p> 
+            </div> 
+           </article> </li> 
+          <li class="a8c-posts-list__item"> 
+           <article id="post-806" class="post-806 post type-post status-publish format-standard hentry category-uncategorized tag-gaming tag-star-trek tag-star-trek-picard tag-state-of-the-blog"> 
+            <h2 class="a8c-posts-list-item__title"><a href="https://datingsimsontheholodeck.home.blog/2020/02/11/a-quick-update/" rel="bookmark">A Quick Update</a></h2> 
+            <div class="a8c-posts-list-item__meta"> <span class="a8c-posts-list-item__datetime">February 11, 2020</span> <span class="a8c-posts-list-item__author">by <a href="https://datingsimsontheholodeck.home.blog/author/theroyalfamilyi/" title="Posts by TheRoyalFamily" rel="author">TheRoyalFamily</a> </span> 
+            </div> 
+            <div class="a8c-posts-list-item__excerpt"> 
+             <p>Just a quick update, since I’m not dead. January gaming was just basically ESO, with dailies in Dragalia Lost and playing the events in STO and Granblue Fantasy. Made a new character in ESO (2H/S+B Nightblade Tank), kinda on a whim (since some bloggers I knew were talking about how ESO’s combat was kinda not… <a href="https://datingsimsontheholodeck.home.blog/2020/02/11/a-quick-update/" title="Continue reading A Quick Update" class="a8c-posts-list-item__read-more">Read more</a></p> 
+            </div> 
+           </article> </li> 
+          <li class="a8c-posts-list__item"> 
+           <article id="post-797" class="post-797 post type-post status-publish format-standard hentry category-uncategorized tag-star-trek tag-star-trek-picard"> 
+            <h2 class="a8c-posts-list-item__title"><a href="https://datingsimsontheholodeck.home.blog/2020/01/25/star-trek-picard-ep-1-review/" rel="bookmark">Star Trek Picard: Ep 1&nbsp;Review</a></h2> 
+            <div class="a8c-posts-list-item__meta"> <span class="a8c-posts-list-item__datetime">January 25, 2020</span> <span class="a8c-posts-list-item__author">by <a href="https://datingsimsontheholodeck.home.blog/author/theroyalfamilyi/" title="Posts by TheRoyalFamily" rel="author">TheRoyalFamily</a> </span> 
+            </div> 
+            <div class="a8c-posts-list-item__excerpt"> 
+             <p>To put it right at the front: I didn’t like it. I’m going to put a short version of my review that I’ve placed elsewhere (I believe in recycling!), then go into more detail: In short, if you’re looking for a generic sci-fi show, this isn’t too bad. Not good either, but not terrible. 4/10,… <a href="https://datingsimsontheholodeck.home.blog/2020/01/25/star-trek-picard-ep-1-review/" title="Continue reading Star Trek Picard: Ep 1&nbsp;Review" class="a8c-posts-list-item__read-more">Read more</a></p> 
+            </div> 
+           </article> </li> 
+          <li class="a8c-posts-list__item"> 
+           <article id="post-788" class="post-788 post type-post status-publish format-standard hentry category-uncategorized tag-gaming"> 
+            <h2 class="a8c-posts-list-item__title"><a href="https://datingsimsontheholodeck.home.blog/2020/01/18/my-perfect-video-games/" rel="bookmark">My Perfect Video&nbsp;Games</a></h2> 
+            <div class="a8c-posts-list-item__meta"> <span class="a8c-posts-list-item__datetime">January 18, 2020</span> <span class="a8c-posts-list-item__author">by <a href="https://datingsimsontheholodeck.home.blog/author/theroyalfamilyi/" title="Posts by TheRoyalFamily" rel="author">TheRoyalFamily</a> </span> 
+            </div> 
+            <div class="a8c-posts-list-item__excerpt"> 
+             <p>Way back a month ago, Kim over at Later Levels made a post about their perfect video game. I’ve been thinking about this post a lot (I was thinking about posting what you see today since that day), but here it is now. This is obviously a complicated question, and I didn’t really think a… <a href="https://datingsimsontheholodeck.home.blog/2020/01/18/my-perfect-video-games/" title="Continue reading My Perfect Video&nbsp;Games" class="a8c-posts-list-item__read-more">Read more</a></p> 
+            </div> 
+           </article> </li> 
+         </ul> <a href="https://datingsimsontheholodeck.home.blog/blog-feed/" class="a8c-posts-list__view-all"> View all posts </a> 
+        </div> 
+        <div style="height:20px;" aria-hidden="true" class="wp-block-spacer"></div> 
+        <hr class="wp-block-separator is-style-wide"> 
+        <h3 class="has-text-align-left">Follow My Blog</h3> 
+        <p style="text-align:left;">Get new content delivered directly to your inbox.</p> 
+        <div class="wp-block-jetpack-subscriptions">
+         <div class="jetpack_subscription_widget"> 
+          <form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="subscribe-blog"> 
+           <p><input type="text" name="email" style="width: 95%; padding: 1px 2px" placeholder="Enter your email address" value="" id="subscribe-field"></p> 
+           <p> <input type="hidden" name="action" value="subscribe"> <input type="hidden" name="blog_id" value="164830304"> <input type="hidden" name="source" value="https://datingsimsontheholodeck.home.blog/"> <input type="hidden" name="sub-type" value="widget"> <input type="hidden" name="redirect_fragment" value="537"> <input type="hidden" id="_wpnonce" name="_wpnonce" value="5dbfcb20c5"> <button type="submit" class="undefined" style="background-color: undefined; color: undefined;"> Subscribe </button> </p> 
+          </form> 
+         </div>
+        </div> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-## --> 
+      <div id="comments" class="comments-area"> 
+       <div id="respond" class="comment-respond"> 
+        <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/#respond" style="display:none;">Cancel reply</a></small></h3>
+        <form action="https://datingsimsontheholodeck.home.blog/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+         <input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="c1eb107ea2">
+         <input type="hidden" name="_wp_http_referer" value="/"> 
+         <input type="hidden" name="hc_post_as" id="hc_post_as" value="guest"> 
+         <div class="comment-form-field comment-textarea"> <label for="comment">Enter your comment here...</label> 
+          <div id="comment-form-comment">
+           <textarea id="comment" name="comment" title="Enter your comment here..."></textarea>
+          </div> 
+         </div> 
+         <div id="comment-form-identity"> 
+          <div id="comment-form-nascar"> 
+           <p>Fill in your details below or click an icon to log in:</p> 
+           <ul> 
+            <li class="selected" style="display:none;"> <a href="#comment-form-guest" id="postas-guest" class="nascar-signin-link" title="Login via Guest"> </a> </li> 
+            <li> <a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" class="nascar-signin-link" title="Login via WordPress.com"> 
+              <svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewbox="0 0 24 24">
+               <rect x="0" fill="none" width="24" height="24" /><g>
+                <path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
+               </g>
+              </svg> </a> </li> 
+            <li> <a href="#comment-form-load-service:Twitter" id="postas-twitter" class="nascar-signin-link" title="Login via Twitter"> 
+              <svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewbox="0 0 24 24">
+               <rect x="0" fill="none" width="24" height="24" /><g>
+                <path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z" />
+               </g>
+              </svg> </a> </li> 
+            <li> <a href="#comment-form-load-service:Facebook" id="postas-facebook" class="nascar-signin-link" title="Login via Facebook"> 
+              <svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewbox="0 0 24 24">
+               <rect x="0" fill="none" width="24" height="24" /><g>
+                <path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z" />
+               </g>
+              </svg> </a> </li> 
+           </ul> 
+          </div> 
+          <div id="comment-form-guest" class="comment-form-service selected"> 
+           <div class="comment-form-padder"> 
+            <div class="comment-form-avatar"> <a href="https://gravatar.com/site/signup/" target="_blank"> <img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Gravatar" width="25" class="no-grav"> </a> 
+            </div> 
+            <div class="comment-form-fields"> 
+             <div class="comment-form-field comment-form-email"> <label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label> 
+              <div class="comment-form-input">
+               <input id="email" name="email" type="email" value="">
+              </div> 
+             </div> 
+             <div class="comment-form-field comment-form-author"> <label for="author">Name <span class="required">(required)</span></label> 
+              <div class="comment-form-input">
+               <input id="author" name="author" type="text" value="">
+              </div> 
+             </div> 
+             <div class="comment-form-field comment-form-url"> <label for="url">Website</label> 
+              <div class="comment-form-input">
+               <input id="url" name="url" type="url" value="">
+              </div> 
+             </div> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="comment-form-wordpress" class="comment-form-service"> 
+           <div class="comment-form-padder"> 
+            <div class="comment-form-avatar"> 
+             <img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="WordPress.com Logo" width="25" class="no-grav"> 
+            </div> 
+            <div class="comment-form-fields"> 
+             <input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value=""> 
+             <input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value=""> 
+             <input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value=""> 
+             <p class="comment-form-posting-as pa-wordpress"> <strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out"> (&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp; <a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;) </span> <span class="pa-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewbox="0 0 24 24">
+                <rect x="0" fill="none" width="24" height="24" /><g>
+                 <path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" />
+                </g>
+               </svg></span> </p> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="comment-form-googleplus" class="comment-form-service"> 
+           <div class="comment-form-padder"> 
+            <div class="comment-form-avatar"> 
+             <img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Google photo" width="25" class="no-grav"> 
+            </div> 
+            <div class="comment-form-fields"> 
+             <input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value=""> 
+             <input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value=""> 
+             <input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value=""> 
+             <p class="comment-form-posting-as pa-googleplus"> <strong></strong> You are commenting using your Google account. <span class="comment-form-log-out"> (&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp; <a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;) </span> <span class="pa-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" role="presentation" x="0px" y="0px" viewbox="0 0 60 60">
+                <path fill="#519bf7" d="M56.3,30c0,-1.6 -0.2,-3.4 -0.6,-5h-3.1H42.2H30v10.6h14.8C44,39.3 42,42 39.1,43.9l8.8,6.8C53,46 56.3,39 56.3,30z" /><path fill="#3db366" d="M30,57.5c6.7,0 13.1,-2.4 17.9,-6.8l-8.8,-6.8c-2.5,1.6 -5.6,2.4 -9.1,2.4c-7.2,0 -13.3,-4.7 -15.4,-11.2l-9.3,7.1C9.8,51.3 19.1,57.5 30,57.5z" /><path fill="#fdc600" d="M5.3,42.2l9.3,-7.1c-0.5,-1.6 -0.8,-3.3 -0.8,-5.1s0.3,-3.5 0.8,-5.1l-9.3,-7.1C3.5,21.5 2.5,25.6 2.5,30S3.5,38.5 5.3,42.2z" /><path fill="#f15b44" d="M40.1,17.4l8,-8C43.3,5.1 37,2.5 30,2.5C19.1,2.5 9.8,8.7 5.3,17.8l9.3,7.1c2.1,-6.5 8.2,-11.1 15.4,-11.1C33.9,13.7 37.4,15.1 40.1,17.4z" />
+               </svg></span> </p> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="comment-form-twitter" class="comment-form-service"> 
+           <div class="comment-form-padder"> 
+            <div class="comment-form-avatar"> 
+             <img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Twitter picture" width="25" class="no-grav"> 
+            </div> 
+            <div class="comment-form-fields"> 
+             <input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value=""> 
+             <input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value=""> 
+             <input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value=""> 
+             <p class="comment-form-posting-as pa-twitter"> <strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out"> (&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp; <a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;) </span> <span class="pa-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewbox="0 0 24 24">
+                <rect x="0" fill="none" width="24" height="24" /><g>
+                 <path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z" />
+                </g>
+               </svg></span> </p> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="comment-form-facebook" class="comment-form-service"> 
+           <div class="comment-form-padder"> 
+            <div class="comment-form-avatar"> 
+             <img src="https://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=25&amp;d=identicon&amp;forcedefault=y&amp;r=G" alt="Facebook photo" width="25" class="no-grav"> 
+            </div> 
+            <div class="comment-form-fields"> 
+             <input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value=""> 
+             <input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value=""> 
+             <input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value=""> 
+             <p class="comment-form-posting-as pa-facebook"> <strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out"> (&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp; <a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;) </span> <span class="pa-icon">
+               <svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewbox="0 0 24 24">
+                <rect x="0" fill="none" width="24" height="24" /><g>
+                 <path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z" />
+                </g>
+               </svg></span> </p> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="comment-form-load-service" class="comment-form-service"> 
+           <div class="comment-form-posting-as-cancel">
+            <a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a>
+           </div> 
+           <p>Connecting to %s</p> 
+          </div> 
+         </div> 
+         <script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script> 
+         <div id="comment-form-subscribe"> 
+          <p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p>
+          <p class="post-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog" style="display: inline;">Notify me of new posts via email.</label></p>
+         </div> 
+         <p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="4" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"> </p>
+         <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="cccfb3492e"></p> 
+         <input type="hidden" name="genseq" value="1585339409"> 
+         <p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="69"></p>
+        </form> 
+       </div><!-- #respond --> 
+       <div style="clear: both"></div> 
+      </div><!-- #comments --> 
+     </main><!-- #main --> 
+    </div><!-- #primary --> 
+    <div id="secondary" class="widget-area" role="complementary"> 
+     <aside id="search-3" class="widget widget_search">
+      <form role="search" method="get" class="search-form" action="https://datingsimsontheholodeck.home.blog/"> <label> <span class="screen-reader-text">Search for:</span> <input type="search" class="search-field" placeholder="Search …" value="" name="s"> </label> 
+       <input type="submit" class="search-submit" value="Search"> <span class="genericon genericon-search"></span> 
+      </form> 
+     </aside>
+     <aside id="follow_button_widget-3" class="widget widget_follow_button_widget"> <a class="wordpress-follow-button" href="https://datingsimsontheholodeck.home.blog" data-blog="164830304" data-lang="en">Follow Dating Sims on the Holodeck on WordPress.com</a> 
+      <script type="text/javascript">(function(d){var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//widgets.wp.com/platform.js';f.parentNode.insertBefore(p,f);}(document));</script> 
+     </aside>
+     <aside id="rss_links-3" class="widget widget_rss_links">
+      <h1 class="widget-title">RSS Feed</h1>
+      <ul>
+       <li><a href="https://datingsimsontheholodeck.home.blog/feed/" title="Subscribe to Posts">RSS - Posts</a></li>
+      </ul> 
+     </aside>
+     <aside id="twitter_timeline-3" class="widget widget_twitter_timeline">
+      <h1 class="widget-title">Follow me on Twitter</h1><a class="twitter-timeline" data-theme="light" data-border-color="#e8e8e8" data-tweet-limit="3" data-lang="EN" data-partner="jetpack" href="https://twitter.com/@SimsHolodeck">My Tweets</a>
+     </aside>
+     <aside id="jp_blogs_i_follow-3" class="widget widget_jp_blogs_i_follow">
+      <h1 class="widget-title">Blogs I Follow</h1>
+      <ul>
+       <li><a href="http://gamergirlconfessions.com/" class="bump-view" data-bump-view="bif">Gamer Girl Confessions</a></li>
+       <li><a href="http://moegamer.net" class="bump-view" data-bump-view="bif">MoeGamer</a></li>
+       <li><a href="http://whyigame.wordpress.com" class="bump-view" data-bump-view="bif">Why I Game</a></li>
+       <li><a href="http://adventurerules.blog" class="bump-view" data-bump-view="bif">Adventure Rules</a></li>
+       <li><a href="http://joeandsto.wordpress.com" class="bump-view" data-bump-view="bif">Joe and STO</a></li>
+       <li><a href="http://spawnyspace.wordpress.com" class="bump-view" data-bump-view="bif">Spawny's Space</a></li>
+       <li><a href="http://mmojuggler.wordpress.com" class="bump-view" data-bump-view="bif">MMO Juggler</a></li>
+       <li><a href="http://pushingrubberdownhill.com/" class="bump-view" data-bump-view="bif">Adam Piggott</a></li>
+       <li><a href="http://accordingtohoyt.com" class="bump-view" data-bump-view="bif">According To Hoyt</a></li>
+       <li><a href="http://honestgamer.blog" class="bump-view" data-bump-view="bif">Honest Gamer</a></li>
+       <li><a href="http://nerdgirlthoughts.game.blog" class="bump-view" data-bump-view="bif">Nerd Girl Thoughts</a></li>
+       <li><a href="http://unidentifiedsignalsource.wordpress.com" class="bump-view" data-bump-view="bif">Unidentified Signal Source</a></li>
+       <li><a href="http://canecaldo.wordpress.com" class="bump-view" data-bump-view="bif">Things that We have Heard and Known</a></li>
+       <li><a href="http://themmoist.wordpress.com" class="bump-view" data-bump-view="bif">The MMOist</a></li>
+       <li><a href="http://shadowmmorpg.sadesignz.org/" class="bump-view" data-bump-view="bif">Shadowz Abstract Gaming Blog</a></li>
+       <li><a href="http://mailvaltar.wordpress.com" class="bump-view" data-bump-view="bif">Mailvaltar</a></li>
+       <li><a href="http://leeksplays.wordpress.com" class="bump-view" data-bump-view="bif">LeeksPlays</a></li>
+       <li><a href="http://laterlevels.com" class="bump-view" data-bump-view="bif">Later Levels</a></li>
+       <li><a href="http://imnotsquishy.wordpress.com" class="bump-view" data-bump-view="bif">I'm Not Squishy</a></li>
+       <li><a href="http://caniplaytooblog.wordpress.com" class="bump-view" data-bump-view="bif">Can I Play Too?</a></li>
+      </ul>
+     </aside>
+     <aside id="media_image-3" class="widget widget_media_image">
+      <h1 class="widget-title">Blaugust Gold 2019</h1>
+      <style>.widget.widget_media_image { overflow: hidden; }.widget.widget_media_image img { height: auto; max-width: 100%; }</style><a href="https://aggronaut.com/2019/09/03/blaugust-2019-wrap-up/"><img width="500" height="515" src="https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png?w=500" class="image wp-image-373  attachment-500x515 size-500x515" alt="" style="max-width: 100%; height: auto;" srcset="https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png 500w, https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png?w=146 146w, https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png?w=291 291w" sizes="(max-width: 500px) 100vw, 500px" data-attachment-id="373" data-permalink="https://datingsimsontheholodeck.home.blog/blaugust2019-awards-gold/" data-orig-file="https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png" data-orig-size="500,515" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="blaugust2019-awards-gold" data-image-description="" data-medium-file="https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png?w=291" data-large-file="https://datingsimsontheholodeckhome.files.wordpress.com/2019/09/blaugust2019-awards-gold.png?w=500"></a>
+     </aside>
+     <aside id="media_image-5" class="widget widget_media_image">
+      <style>.widget.widget_media_image { overflow: hidden; }.widget.widget_media_image img { height: auto; max-width: 100%; }</style><a href="https://laterlevels.com/2020/02/10/loveyourbacklog-week-2020/"><img width="150" height="150" src="https://datingsimsontheholodeckhome.files.wordpress.com/2020/02/loveyourbacklog-week-2020-3.jpg" class="image wp-image-815  attachment-full size-full" alt="" style="max-width: 100%; height: auto;" data-attachment-id="815" data-permalink="https://datingsimsontheholodeck.home.blog/loveyourbacklog-week-2020-3/" data-orig-file="https://datingsimsontheholodeckhome.files.wordpress.com/2020/02/loveyourbacklog-week-2020-3.jpg" data-orig-size="150,150" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="loveyourbacklog-week-2020-3" data-image-description="" data-medium-file="https://datingsimsontheholodeckhome.files.wordpress.com/2020/02/loveyourbacklog-week-2020-3.jpg?w=150" data-large-file="https://datingsimsontheholodeckhome.files.wordpress.com/2020/02/loveyourbacklog-week-2020-3.jpg?w=150"></a>
+     </aside>
+     <aside id="jetpack_posts_i_like-3" class="widget widget_jetpack_posts_i_like">
+      <h1 class="widget-title">Posts I Like</h1>
+      <div class="widgets-grid-layout no-grav">
+       <div class="widget-grid-view-image">
+        <a href="https://aggronaut.com/2020/03/05/geforce-now-and-my-anger/" title="GeForce Now and My Anger on Tales of the Aggronaut" class="bump-view" data-bump-view="pil"><img src="https://i0.wp.com/aggronaut.com/wp-content/uploads/2020/03/geforce-now-scaled-1.jpg?resize=200%2C200&amp;ssl=1"></a>
+       </div>
+       <div class="widget-grid-view-image">
+        <a href="https://laterlevels.com/2020/02/10/loveyourbacklog-week-2020/" title="#LoveYourBacklog Week 2020… on Later Levels" class="bump-view" data-bump-view="pil"><img src="https://laterlevels.files.wordpress.com/2019/01/generic-featured-image-3.jpg?w=800&amp;resize=200%2C200"></a>
+       </div>
+       <div class="widget-grid-view-image">
+        <a href="https://www.timetoloot.com/game/elder-scrolls-online/restarting-in-tamriel-again/" title="Restarting in Tamriel - Again on Time to Loot" class="bump-view" data-bump-view="pil"><img src="https://i2.wp.com/www.timetoloot.com/wp-content/uploads/2020/01/20200121225025_1.jpg?resize=200%2C200&amp;ssl=1"></a>
+       </div>
+      </div>
+     </aside>
+     <aside id="calendar-3" class="widget widget_calendar">
+      <div id="calendar_wrap" class="calendar_wrap">
+       <table id="wp-calendar" class="wp-calendar-table"> 
+        <caption>
+         March 2020
+        </caption> 
+        <thead> 
+         <tr> 
+          <th scope="col" title="Sunday">S</th> 
+          <th scope="col" title="Monday">M</th> 
+          <th scope="col" title="Tuesday">T</th> 
+          <th scope="col" title="Wednesday">W</th> 
+          <th scope="col" title="Thursday">T</th> 
+          <th scope="col" title="Friday">F</th> 
+          <th scope="col" title="Saturday">S</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td> 
+         </tr> 
+         <tr> 
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+          <td>11</td>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td> 
+         </tr> 
+         <tr> 
+          <td>15</td>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td> 
+         </tr> 
+         <tr> 
+          <td>22</td>
+          <td>23</td>
+          <td>24</td>
+          <td>25</td>
+          <td>26</td>
+          <td id="today">27</td>
+          <td>28</td> 
+         </tr> 
+         <tr> 
+          <td>29</td>
+          <td>30</td>
+          <td>31</td> 
+          <td class="pad" colspan="4">&nbsp;</td> 
+         </tr> 
+        </tbody> 
+       </table>
+       <nav aria-label="Previous and next months" class="wp-calendar-nav"> <span class="wp-calendar-nav-prev"><a href="https://datingsimsontheholodeck.home.blog/2020/02/">« Feb</a></span> <span class="pad">&nbsp;</span> <span class="wp-calendar-nav-next">&nbsp;</span> 
+       </nav>
+      </div>
+     </aside> 
+    </div><!-- #secondary --> 
+   </div><!-- #content --> 
+   <footer id="colophon" class="site-footer" role="contentinfo"> 
+    <div id="tertiary" class="widget-areas clear" role="complementary"> 
+     <div class="widget-area"> 
+      <aside id="archives-3" class="widget widget_archive">
+       <h1 class="widget-title">Archives</h1> 
+       <ul> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2020/02/">February 2020</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2020/01/">January 2020</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2019/12/">December 2019</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2019/11/">November 2019</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2019/10/">October 2019</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2019/09/">September 2019</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2019/08/">August 2019</a></li> 
+        <li><a href="https://datingsimsontheholodeck.home.blog/2019/07/">July 2019</a></li> 
+       </ul> 
+      </aside> 
+     </div> 
+    </div><!-- #tertiary --> 
+    <div class="site-info"> <a href="https://wordpress.com/?ref=footer_segment_blog" rel="nofollow">Blog at WordPress.com.</a> 
+    </div><!-- .site-info --> 
+   </footer><!-- #colophon --> 
+  </div><!-- #page --> <!--  --> 
+  <div id="wpcom-follow-bubbles-jp_blogs_i_follow-3" class="wpcom-follow-bubbles">
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-1" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://gamergirlconfessions.com/" class="bump-view" data-bump-view="bif">Gamer Girl Confessions</a>
+     <p><small>Where games and geekdom unite.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-2" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://moegamer.net" class="bump-view" data-bump-view="bif">MoeGamer</a>
+     <p><small>The best of overlooked and underappreciated computer and video games, from yesterday and today</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-3" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://whyigame.wordpress.com" class="bump-view" data-bump-view="bif">Why I Game</a>
+     <p><small>Wandering worlds, wondering words...</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-4" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://adventurerules.blog" class="bump-view" data-bump-view="bif">Adventure Rules</a>
+     <p><small>The Essential Companion of Heroic Adventurers</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-5" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://joeandsto.wordpress.com" class="bump-view" data-bump-view="bif">Joe and STO</a>
+     <p><small>Navigating the STO Quadrant of Star Trek Gaming</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-6" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://spawnyspace.wordpress.com" class="bump-view" data-bump-view="bif">Spawny's Space</a>
+     <p><small>The place where threads are born off-topic</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-7" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://mmojuggler.wordpress.com" class="bump-view" data-bump-view="bif">MMO Juggler</a>
+     <p><small>Playing multiple MMOs and trying to keep sane.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-8" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://pushingrubberdownhill.com/" class="bump-view" data-bump-view="bif">Adam Piggott</a>
+     <p><small>Gentleman adventurer</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-9" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://accordingtohoyt.com" class="bump-view" data-bump-view="bif">According To Hoyt</a>
+     <p><small>Taking over the world and leaving it ruthlessly alone</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-10" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://honestgamer.blog" class="bump-view" data-bump-view="bif">Honest Gamer</a>
+     <p><small>Providing honest opinions, reviews, thoughtful essays and other content on all things gaming.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-11" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://nerdgirlthoughts.game.blog" class="bump-view" data-bump-view="bif">Nerd Girl Thoughts</a>
+     <p><small>Gaming &amp; Other Geekery</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-12" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://unidentifiedsignalsource.wordpress.com" class="bump-view" data-bump-view="bif">Unidentified Signal Source</a>
+     <p><small>A blog about life, gaming, and everything.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-13" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://canecaldo.wordpress.com" class="bump-view" data-bump-view="bif">Things that We have Heard and Known</a>
+     <p><small>Uttering dark sayings from of old.</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-14" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://themmoist.wordpress.com" class="bump-view" data-bump-view="bif">The MMOist</a>
+     <p><small>It's The MMOest. </small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-15" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://shadowmmorpg.sadesignz.org/" class="bump-view" data-bump-view="bif">Shadowz Abstract Gaming Blog</a>
+     <p><small>Real Life and Gaming Collide</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-16" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://mailvaltar.wordpress.com" class="bump-view" data-bump-view="bif">Mailvaltar</a>
+     <p><small>MMORPGs and other stuff</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-17" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://leeksplays.wordpress.com" class="bump-view" data-bump-view="bif">LeeksPlays</a>
+     <p><small>Video Games, Technology &amp; More</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-18" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://laterlevels.com" class="bump-view" data-bump-view="bif">Later Levels</a>
+     <p><small>XP comes with age</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-19" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://imnotsquishy.wordpress.com" class="bump-view" data-bump-view="bif">I'm Not Squishy</a>
+     <p><small>Games, MMOs, and Whatever else strikes my fancy</small></p>
+    </div>
+   </div>
+   <div id="wpcom-bubble-jp_blogs_i_follow-3-20" class="wpcom-bubble wpcom-follow-bubble">
+    <div class="bubble-txt">
+     <a href="http://caniplaytooblog.wordpress.com" class="bump-view" data-bump-view="bif">Can I Play Too?</a>
+     <p><small>Insert funny thing here - LoL</small></p>
+    </div>
+   </div>
+  </div>
+  <div id="wpadminbar" class="marketing-bar">
+   <div class="marketing-bar-text">
+    Create your website at WordPress.com
+   </div><a class="marketing-bar-button" href="https://wordpress.com/?ref=marketing_bar">Get started</a>
+  </div>
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+  </div> 
+  <script>
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/datingsimsontheholodeckhome.wordpress.com\/public.api\/connect\/?action=request&domain=datingsimsontheholodeck.home.blog","logoutURL":"https:\/\/datingsimsontheholodeckhome.wordpress.com\/wp-login.php?action=logout&_wpnonce=800df7e55e","homeURL":"https:\/\/datingsimsontheholodeck.home.blog\/","postID":"4","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1573483029j"></script> <!-- CCPA [start] --> 
+  <script type="text/javascript">
+				( function () {
+
+					var setupPrivacy = function() {
+
+						var $ = window.jQuery;
+						if ( ! $ ) return; // jQuery required
+
+						$( document ).ready( function() {
+
+							// Minimal Mozilla Cookie library
+							// https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+							var cookieLib = {getItem:function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},setItem:function(e,o,n,t,r,i){if(!e||/^(?:expires|max\-age|path|domain|secure)$/i.test(e))return!1;var c="";if(n)switch(n.constructor){case Number:c=n===1/0?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+n;break;case String:c="; expires="+n;break;case Date:c="; expires="+n.toUTCString()}return"rootDomain"!==r&&".rootDomain"!==r||(r=(".rootDomain"===r?".":"")+document.location.hostname.split(".").slice(-2).join(".")),document.cookie=encodeURIComponent(e)+"="+encodeURIComponent(o)+c+(r?"; domain="+r:"")+(t?"; path="+t:"")+(i?"; secure":""),!0}};
+
+							var setDefaultOptInCookie = function() {
+								var value = '1YNN';
+								cookieLib.setItem( 'usprivacy', value, 365 * 24 * 60 * 60, '/', '.rootDomain' );
+							};
+
+							var setCcpaAppliesCookie = function( value ) {
+								cookieLib.setItem( 'ccpa_applies', value, 24 * 60 * 60, '/', '.rootDomain' );
+							}
+
+							var maybeCallDoNotSellCallback = function() {
+								if ( 'function' === typeof window.doNotSellCallback ) {
+									return window.doNotSellCallback( $ );
+								}
+
+								return false;
+							}
+
+							var usprivacyCookie = cookieLib.getItem( 'usprivacy' );
+
+							if ( null !== usprivacyCookie ) {
+								maybeCallDoNotSellCallback();
+								return;
+							}
+
+							var ccpaCookie = cookieLib.getItem( 'ccpa_applies' );
+
+							if ( null === ccpaCookie ) {
+								$.ajax({
+									type: 'GET',
+									dataType: "json",
+									cache: false,
+									url: 'https://public-api.wordpress.com/geo/',
+									success: function( data ) {
+										var ccpa_applies = data['region'] && data['region'].toLowerCase() === 'california';
+
+										setCcpaAppliesCookie( ccpa_applies );
+
+										if ( ccpa_applies ) {
+											if ( maybeCallDoNotSellCallback() ) {
+												setDefaultOptInCookie();
+											}
+										}
+									},
+									error: function() {
+										setCcpaAppliesCookie( true );
+										if ( maybeCallDoNotSellCallback() ) {
+											setDefaultOptInCookie();
+										}
+									},
+								} );
+							} else {
+								if ( ccpaCookie === 'true' ) {
+									if ( maybeCallDoNotSellCallback() ) {
+										setDefaultOptInCookie();
+									}
+								}
+							}
+						} );
+					};
+
+					if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+						defQueue.items.push( setupPrivacy );
+					} else {
+						setupPrivacy();
+					}
+
+				} )();
+			</script> <!-- CCPA [end] --> 
+  <script type="text/javascript">
+			( function( $ ) {
+				$( document.body ).on( 'post-load', function () {
+					if ( typeof __ATA.insertInlineAds === 'function' ) {
+						__ATA.insertInlineAds();
+					}
+				} );
+			} )( jQuery );
+			</script>
+  <div class="widget widget_eu_cookie_law_widget">
+   <div class="hide-on-button ads-active" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law"> 
+    <form method="post"> 
+     <input type="submit" value="Close and accept" class="accept"> Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+     <br> To find out more, including how to control cookies, see here: <a href="https://automattic.com/cookies"> Cookie Policy </a> 
+    </form> 
+   </div> 
+  </div>
+  <link rel="stylesheet" id="all-css-0-3" href="https://s2.wp.com/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css?m=1583834955h&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var comment_like_text = {"loading":"Loading..."};
+</script> 
+  <script>
+var actionbardata = {"siteID":"164830304","siteName":"Dating Sims on the Holodeck","siteURL":"https:\/\/datingsimsontheholodeck.home.blog","icon":"<img alt='' src='https:\/\/s2.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/wilson","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fdatingsimsontheholodeck.home.blog%2F&signup_flow=account&domain=datingsimsontheholodeck.home.blog","themeURL":"https:\/\/wordpress.com\/theme\/wilson\/","xhrURL":"https:\/\/datingsimsontheholodeck.home.blog\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"5dbfcb20c5\" \/>","referer":"https:\/\/datingsimsontheholodeck.home.blog\/","canFollow":"1","feedID":"98399127","statusMessage":"","customizeLink":"https:\/\/datingsimsontheholodeckhome.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fdatingsimsontheholodeckhome.wordpress.com%2F","postID":"4","shortlink":"https:\/\/wp.me\/Pb9BTi-4","canEditPost":"","editLink":"https:\/\/wordpress.com\/page\/datingsimsontheholodeck.home.blog\/4","statsLink":"https:\/\/wordpress.com\/stats\/post\/4\/datingsimsontheholodeck.home.blog","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Wilson","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fdatingsimsontheholodeck.home.blog%2F&signup_flow=account&domain=datingsimsontheholodeck.home.blog\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJydUu1OwzAMfCGyUKaO8QPxKChN3eI2X4rdhr096bZO0E3Vxp/I8fkuZzsyBaG9Y3AsO5I1jKghfG86epIZQqfNUAMdMSSWI7jaxwkK3hwaNGZj0c3ls1IwQ4uOZDMYIwgZBNTI6FpxQuRuW2xfdy9vsjI+Jz0xiRzq/vwKQlpq2kHMstpbm1PCYH+yZrCSlDDAI6Q/if93AOMkov3guPbJnds4nrQEl6/wF9hsJgyVTGjIu8mXUyO2itHfV049htyD60Xj9UCiwZvbm7uNEMzh1s6uxTNdko4YWKSQ+SvDTVi3wHRcJwnMVozxaXG9gw9DRn2PIIxKksEGoxgW+RWdDjioPP7PyTsnZIYoGC3kAa19DlXniYhKRWkVZU6OhB8hRpzGd8k9qMAxe7n6Wr9JelrzRLpEa9U9kgUW283zqcHGx2kpH/a9KPdlUZb7Ytf9ALfobDE="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'164830304','blog_tz':'-6','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'164830304','v':'wpcom','tz':'-6','user_id':'0','post':'4','subd':'datingsimsontheholodeckhome'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWFnNncxc1tjZG9XVXhRPUJGYUFhNUdZYm9Db0NMM2lWTV04djRHZi1MNEpvQ1UvYXZrX2JuTHUwVD8zZHNkVjdbdnZIYmZ3TjB0JVlIR3Fwa2hwMy4vRjlFUls0dEhPVF89QXU2Zi13U1BnZGMsYy96R01rTWYlNXBFPzBBWnkra1tySmk3OGlualFENEVHY2RWfHBdajR4JTZ3V3MxLGExLlJtT213NFovRFlJS3VOLnw3bjM3eXg9LmI1V3RlQ0J6SFFUSWpYUi5uQVtKMltoQXQwMXIlW0JvTltbOW9vfHBpSFd5ZjJOVH51bmlTTUd0eUp4Wj9WVExhMFsySnItTEZCJVs0Y0o0dCtERGFbb09yTWVLVCZpKzZOVms3Nk1DK0pYJg=='}]);
+_stq.push([ 'clickTrackerInit', '164830304', '4' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>  <!--
+	generated in 0.265 seconds
+	77986 bytes batcached for 300 seconds
+-->
+ </body>
+</html>

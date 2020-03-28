@@ -1,0 +1,465 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+ <head> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge"> 
+  <title>DirectAdmin Web Control Panel Features</title> 
+  <meta name="description" content=""> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
+  <link rel="icon" href="/favicon.png" type="image/png"> 
+  <link rel="stylesheet" href="/css/screen.css?v1.5"> 
+  <script src="/vendor/modernizr/modernizr-2.8.3.min.js"></script> 
+  <script type="text/javascript">
+		var CaptchaCallback = function(){
+			if ($('#g-recaptcha-id').length != 0) {
+				grecaptcha.render('g-recaptcha-id', {	'sitekey' : '6LdrYA0TAAAAAPwRep6hT-sNsw9W0tK3a44WWBV1',
+														'size' : 'compact'
+													});
+			}
+			if ($('#g-recaptcha-id2').length != 0) {
+				grecaptcha.render('g-recaptcha-id2', {	'sitekey' : '6LdrYA0TAAAAAPwRep6hT-sNsw9W0tK3a44WWBV1',
+														'size' : 'compact'
+													});
+			}
+			if ($('#g-recaptcha-id3').length != 0) {
+				grecaptcha.render('g-recaptcha-id3', {	'sitekey' : '6LdrYA0TAAAAAPwRep6hT-sNsw9W0tK3a44WWBV1',
+														'size' : 'compact'
+													});
+			}
+		};
+	</script> 
+  <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&amp;render=explicit" async defer></script> 
+ </head> 
+ <body class="tpl-default"> <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]--> <!-- Modal - What's next? begin - - - - - - - - - - - - --> 
+  <div class="modal" id="modal-orderNow" tabindex="-1" role="dialog" aria-labelledby="modalOrderNowLabel" aria-hidden="true"> 
+   <div class="modal-dialog"> 
+    <div class="modal-content"> 
+     <div class="modal-header"> <button type="button" class="close bgn bn p0" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="sprite cmn-close-silver-wide"><!-- --></i></span></button> 
+      <h4 class="modal-title c7 fw700" id="modalOrderNowLabel">What's next?..</h4> 
+     </div> 
+     <div class="modal-body"> 
+      <p class="c7 fs18 fw500">A Client Account is required for purchasing licenses. To <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal-register" class="a4">create</a> an account, please fill out the registration form completely and accurately. You will then receive an e-mail message with the sign in information.<br> If you already have a registered account, please <a href="#" data-toggle="modal" data-target="#modal-login" class="a4">sign in</a> to the Client Area.</p> 
+     </div> 
+     <div class="modal-footer pt0"> 
+      <div class="row"> 
+       <div class="col-sm-6 col-xs-12"> <button type="button" class="btn btn-primary btn-type2 fs20 btn-block mb20" data-toggle="modal" data-target="#modal-login">Sign in</button> 
+       </div> 
+       <div class="col-sm-6 col-xs-12"> <button type="button" class="btn btn-primary btn-type2 fs20 btn-block bg3 mb20" data-dismiss="modal" data-toggle="modal" data-target="#modal-register">Register</button> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> <!-- Modal - What's next? end - - - - - - - - - - - - --> <!-- Modal - Login form begin - - - - - - - - - - - - --> 
+  <div class="modal" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modalLoginLabel" aria-hidden="true"> 
+   <div class="modal-dialog"> 
+    <div class="modal-content"> 
+     <div class="modal-header"> <button type="button" class="close bgn bn p0" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="sprite cmn-close-silver-wide"><!-- --></i></span></button> 
+      <h4 class="modal-title c7 fw700" id="modalLoginLabel">Hello...</h4> 
+     </div> 
+     <div class="modal-body"> 
+      <form id="login-form" class="form-type2" method="post" action="clients/index.php"> 
+       <div class="form-inline mt20"> 
+        <div class="radio type1 mr40"> <label> <input type="radio" name="optionsRadios" value="option1" checked> <span><!-- --></span>Client area </label> 
+        </div> 
+       </div> 
+       <div class="form-group mt20">
+        <!-- has-error, has-success --> 
+        <input type="text" autofocus id="client_id" class="form-control" placeholder="Login"> 
+       </div> 
+       <div class="form-group"> 
+        <input type="password" id="client_password" class="form-control" placeholder="Password"> 
+       </div> 
+      </form> 
+      <div id="login_message"></div> 
+     </div> 
+     <div class="modal-footer pt0"> 
+      <div class="row"> 
+       <div class="col-xs-12"> <button type="button" id="submitLogin" class="jsSubmitLogin btn btn-primary btn-type2 fs20 btn-block mtn5 mb20"><span class="spinning"></span><span class="sign-in-text">Sign in</span></button> 
+       </div> 
+      </div> 
+      <div class="row"> 
+       <div class="col-sm-6 col-xs-12 mb10 text-center text-left-sm"> <a class="a2 fs18 fw500" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal-register">Register</a> 
+       </div> 
+       <div class="col-sm-6 col-xs-12 mb10 text-center text-right-sm"> <a class="a2 fs18 fw500" href="/clients/lost_password.php">Forgot Password?</a> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> <!-- Modal - login form end - - - - - - - - - - - - --> <!-- Modal - Register form begin - - - - - - - - - - - - --> 
+  <div class="modal" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modalRegisterLabel" aria-hidden="true"> 
+   <div class="modal-dialog"> 
+    <div class="modal-content"> 
+     <div class="modal-header"> <button type="button" class="close bgn bn p0" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="sprite cmn-close-silver-wide"><!-- --></i></span></button> 
+      <h4 class="modal-title c7 fw700" id="modalRegisterLabel">Dear new client...</h4> 
+     </div> 
+     <div class="modal-body pb0"> 
+      <form class="form-type2" id="registrationForm"> 
+       <input type="hidden" name="action" value="post"> 
+       <div class="row"> 
+        <div class="col-sm-6"> 
+         <div class="form-group">
+          <!-- has-error, has-success --> 
+          <input type="text" name="fname" id="fname" class="form-control" placeholder="Name" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="lname" id="lname" class="form-control" placeholder="Last Name" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row"> 
+        <div class="col-sm-12"> 
+         <div class="form-group">
+          <!-- has-error, has-success --> 
+          <input type="text" name="street" id="street" class="form-control" placeholder="Street Address" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row"> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="city" id="city" class="form-control" placeholder="City" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="state" id="state" class="form-control" placeholder="State/Province" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row"> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="zip" id="zip" class="form-control" placeholder="Zip/Postal Code" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> <select class="form-control" name="country" id="country"> <option>Country</option> <!-- List taken from http://www.freeformatter.com/iso-country-list-html-select.html --> <option value="AF">Afghanistan</option> <option value="AX">Åland Islands</option> <option value="AL">Albania</option> <option value="DZ">Algeria</option> <option value="AS">American Samoa</option> <option value="AD">Andorra</option> <option value="AO">Angola</option> <option value="AI">Anguilla</option> <option value="AQ">Antarctica</option> <option value="AG">Antigua and Barbuda</option> <option value="AR">Argentina</option> <option value="AM">Armenia</option> <option value="AW">Aruba</option> <option value="AU">Australia</option> <option value="AT">Austria</option> <option value="AZ">Azerbaijan</option> <option value="BS">Bahamas</option> <option value="BH">Bahrain</option> <option value="BD">Bangladesh</option> <option value="BB">Barbados</option> <option value="BY">Belarus</option> <option value="BE">Belgium</option> <option value="BZ">Belize</option> <option value="BJ">Benin</option> <option value="BM">Bermuda</option> <option value="BT">Bhutan</option> <option value="BO">Bolivia, Plurinational State of</option> <option value="BQ">Bonaire, Sint Eustatius and Saba</option> <option value="BA">Bosnia and Herzegovina</option> <option value="BW">Botswana</option> <option value="BV">Bouvet Island</option> <option value="BR">Brazil</option> <option value="IO">British Indian Ocean Territory</option> <option value="BN">Brunei Darussalam</option> <option value="BG">Bulgaria</option> <option value="BF">Burkina Faso</option> <option value="BI">Burundi</option> <option value="KH">Cambodia</option> <option value="CM">Cameroon</option> <option value="CA">Canada</option> <option value="CV">Cape Verde</option> <option value="KY">Cayman Islands</option> <option value="CF">Central African Republic</option> <option value="TD">Chad</option> <option value="CL">Chile</option> <option value="CN">China</option> <option value="CX">Christmas Island</option> <option value="CC">Cocos (Keeling) Islands</option> <option value="CO">Colombia</option> <option value="KM">Comoros</option> <option value="CG">Congo</option> <option value="CD">Congo, the Democratic Republic of the</option> <option value="CK">Cook Islands</option> <option value="CR">Costa Rica</option> <option value="CI">Côte d'Ivoire</option> <option value="HR">Croatia</option> <option value="CU">Cuba</option> <option value="CW">Curaçao</option> <option value="CY">Cyprus</option> <option value="CZ">Czech Republic</option> <option value="DK">Denmark</option> <option value="DJ">Djibouti</option> <option value="DM">Dominica</option> <option value="DO">Dominican Republic</option> <option value="EC">Ecuador</option> <option value="EG">Egypt</option> <option value="SV">El Salvador</option> <option value="GQ">Equatorial Guinea</option> <option value="ER">Eritrea</option> <option value="EE">Estonia</option> <option value="ET">Ethiopia</option> <option value="FK">Falkland Islands (Malvinas)</option> <option value="FO">Faroe Islands</option> <option value="FJ">Fiji</option> <option value="FI">Finland</option> <option value="FR">France</option> <option value="GF">French Guiana</option> <option value="PF">French Polynesia</option> <option value="TF">French Southern Territories</option> <option value="GA">Gabon</option> <option value="GM">Gambia</option> <option value="GE">Georgia</option> <option value="DE">Germany</option> <option value="GH">Ghana</option> <option value="GI">Gibraltar</option> <option value="GR">Greece</option> <option value="GL">Greenland</option> <option value="GD">Grenada</option> <option value="GP">Guadeloupe</option> <option value="GU">Guam</option> <option value="GT">Guatemala</option> <option value="GG">Guernsey</option> <option value="GN">Guinea</option> <option value="GW">Guinea-Bissau</option> <option value="GY">Guyana</option> <option value="HT">Haiti</option> <option value="HM">Heard Island and McDonald Islands</option> <option value="VA">Holy See (Vatican City State)</option> <option value="HN">Honduras</option> <option value="HK">Hong Kong</option> <option value="HU">Hungary</option> <option value="IS">Iceland</option> <option value="IN">India</option> <option value="ID">Indonesia</option> <option value="IR">Iran, Islamic Republic of</option> <option value="IQ">Iraq</option> <option value="IE">Ireland</option> <option value="IM">Isle of Man</option> <option value="IL">Israel</option> <option value="IT">Italy</option> <option value="JM">Jamaica</option> <option value="JP">Japan</option> <option value="JE">Jersey</option> <option value="JO">Jordan</option> <option value="KZ">Kazakhstan</option> <option value="KE">Kenya</option> <option value="KI">Kiribati</option> <option value="KP">Korea, Democratic People's Republic of</option> <option value="KR">Korea, Republic of</option> <option value="KW">Kuwait</option> <option value="KG">Kyrgyzstan</option> <option value="LA">Lao People's Democratic Republic</option> <option value="LV">Latvia</option> <option value="LB">Lebanon</option> <option value="LS">Lesotho</option> <option value="LR">Liberia</option> <option value="LY">Libya</option> <option value="LI">Liechtenstein</option> <option value="LT">Lithuania</option> <option value="LU">Luxembourg</option> <option value="MO">Macao</option> <option value="MK">Macedonia, the former Yugoslav Republic of</option> <option value="MG">Madagascar</option> <option value="MW">Malawi</option> <option value="MY">Malaysia</option> <option value="MV">Maldives</option> <option value="ML">Mali</option> <option value="MT">Malta</option> <option value="MH">Marshall Islands</option> <option value="MQ">Martinique</option> <option value="MR">Mauritania</option> <option value="MU">Mauritius</option> <option value="YT">Mayotte</option> <option value="MX">Mexico</option> <option value="FM">Micronesia, Federated States of</option> <option value="MD">Moldova, Republic of</option> <option value="MC">Monaco</option> <option value="MN">Mongolia</option> <option value="ME">Montenegro</option> <option value="MS">Montserrat</option> <option value="MA">Morocco</option> <option value="MZ">Mozambique</option> <option value="MM">Myanmar</option> <option value="NA">Namibia</option> <option value="NR">Nauru</option> <option value="NP">Nepal</option> <option value="NL">Netherlands</option> <option value="NC">New Caledonia</option> <option value="NZ">New Zealand</option> <option value="NI">Nicaragua</option> <option value="NE">Niger</option> <option value="NG">Nigeria</option> <option value="NU">Niue</option> <option value="NF">Norfolk Island</option> <option value="MP">Northern Mariana Islands</option> <option value="NO">Norway</option> <option value="OM">Oman</option> <option value="PK">Pakistan</option> <option value="PW">Palau</option> <option value="PS">Palestinian Territory, Occupied</option> <option value="PA">Panama</option> <option value="PG">Papua New Guinea</option> <option value="PY">Paraguay</option> <option value="PE">Peru</option> <option value="PH">Philippines</option> <option value="PN">Pitcairn</option> <option value="PL">Poland</option> <option value="PT">Portugal</option> <option value="PR">Puerto Rico</option> <option value="QA">Qatar</option> <option value="RE">Réunion</option> <option value="RO">Romania</option> <option value="RU">Russian Federation</option> <option value="RW">Rwanda</option> <option value="BL">Saint Barthélemy</option> <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option> <option value="KN">Saint Kitts and Nevis</option> <option value="LC">Saint Lucia</option> <option value="MF">Saint Martin (French part)</option> <option value="PM">Saint Pierre and Miquelon</option> <option value="VC">Saint Vincent and the Grenadines</option> <option value="WS">Samoa</option> <option value="SM">San Marino</option> <option value="ST">Sao Tome and Principe</option> <option value="SA">Saudi Arabia</option> <option value="SN">Senegal</option> <option value="RS">Serbia</option> <option value="SC">Seychelles</option> <option value="SL">Sierra Leone</option> <option value="SG">Singapore</option> <option value="SX">Sint Maarten (Dutch part)</option> <option value="SK">Slovakia</option> <option value="SI">Slovenia</option> <option value="SB">Solomon Islands</option> <option value="SO">Somalia</option> <option value="ZA">South Africa</option> <option value="GS">South Georgia and the South Sandwich Islands</option> <option value="SS">South Sudan</option> <option value="ES">Spain</option> <option value="LK">Sri Lanka</option> <option value="SD">Sudan</option> <option value="SR">Suriname</option> <option value="SJ">Svalbard and Jan Mayen</option> <option value="SZ">Swaziland</option> <option value="SE">Sweden</option> <option value="CH">Switzerland</option> <option value="SY">Syrian Arab Republic</option> <option value="TW">Taiwan, Province of China</option> <option value="TJ">Tajikistan</option> <option value="TZ">Tanzania, United Republic of</option> <option value="TH">Thailand</option> <option value="TL">Timor-Leste</option> <option value="TG">Togo</option> <option value="TK">Tokelau</option> <option value="TO">Tonga</option> <option value="TT">Trinidad and Tobago</option> <option value="TN">Tunisia</option> <option value="TR">Turkey</option> <option value="TM">Turkmenistan</option> <option value="TC">Turks and Caicos Islands</option> <option value="TV">Tuvalu</option> <option value="UG">Uganda</option> <option value="UA">Ukraine</option> <option value="AE">United Arab Emirates</option> <option value="GB">United Kingdom</option> <option value="US">United States</option> <option value="UM">United States Minor Outlying Islands</option> <option value="UY">Uruguay</option> <option value="UZ">Uzbekistan</option> <option value="VU">Vanuatu</option> <option value="VE">Venezuela, Bolivarian Republic of</option> <option value="VN">Viet Nam</option> <option value="VG">Virgin Islands, British</option> <option value="VI">Virgin Islands, U.S.</option> <option value="WF">Wallis and Futuna</option> <option value="EH">Western Sahara</option> <option value="YE">Yemen</option> <option value="ZM">Zambia</option> <option value="ZW">Zimbabwe</option> </select> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row"> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="email" id="email" class="form-control" placeholder="E-mail" data-validation="email"> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row"> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="website" id="website" class="form-control" placeholder="http://Website URL" data-validation="url"> 
+         </div> 
+        </div> 
+        <div class="col-sm-6"> 
+         <div class="form-group"> 
+          <input type="text" name="name" id="name" class="form-control" placeholder="Name in Licences" data-validation="length" data-validation-length="min2"> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row"> 
+        <div class="col-xs-12"> 
+         <div class="form-group"> <textarea class="form-control minh120 rv" name="comments" id="comments" placeholder="Additional Comments"></textarea> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="row mt30"> 
+        <div class="col-sm-6"> 
+         <div class="g-recaptcha pl40" id="g-recaptcha-id" data-sitekey="6LdrYA0TAAAAAPwRep6hT-sNsw9W0tK3a44WWBV1" data-size="compact"></div> 
+        </div> 
+        <div class="col-sm-6"> <button type="button" id="submitRegister" class="jsSubmitRegister btn btn-primary btn-type2 fs20 btn-block mtn5 mb20"><span class="spinning"></span><span class="register-text">Submit</span></button> 
+        </div> 
+       </div> 
+      </form> 
+      <div id="register_message"></div> 
+     </div> 
+     <div class="modal-footer pt0"> 
+      <div class="row"> 
+       <div class="col-sm-offset-6 col-sm-6 col-xs-12 text-center text-left-sm"> <a class="a2 fs18 fw500" href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal-login">Already registered? Sign in</a> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> <!-- Modal - register form end - - - - - - - - - - - - --> <!-- Modal - General Info - - - - - - - - - - - - --> 
+  <div class="modal" id="modal-general" tabindex="-1" role="dialog" aria-labelledby="modalGeneralLabel" aria-hidden="true"> 
+   <div class="modal-dialog"> 
+    <div class="modal-content"> 
+     <div class="modal-header"> <button type="button" class="close bgn bn p0" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="sprite cmn-close-silver-wide"><!-- --></i></span></button> 
+      <h4 class="modal-title c7 fw700" id="modalGeneralLabel"> General Info </h4> 
+     </div> 
+     <div class="modal-body"> 
+      <p class="c7 fs18 fw500" id="general_message"> Message </p> 
+     </div> 
+     <div class="modal-footer pt0"> 
+      <div class="row"> 
+       <div class="col-sm-6 col-sm-6 col-xs-12 text-center text-left-sm" id="no_email_contact_us"> <a class="a2 fs18 fw500" href="/contacts.php">No Email? Contact us.</a> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> <!-- Modal - General Info - - - - - - - - - - - - --> 
+  <div class="container-fluid"> 
+   <header id="header" class="row navbar-fixed-top-non"> 
+    <div class="col-xs-12"> 
+     <div class="container"> 
+      <div class="row"> 
+       <div class="col-xs-12"> 
+        <ul id="header-top-nav" class="list-inline list-unstyled fr mb0"> 
+         <li><a class="fs11" href="/versions.php">Version <span id="current_version">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></a></li> <!-- When logged out - - - - - - - - - - - - --> 
+         <li><a class="fs11" href="#" data-toggle="modal" data-target="#modal-login">Client login</a></li> 
+         <li><a class="fs11" href="/contacts.php">Contacts</a></li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="row"> 
+       <div class="col-xs-12"> 
+        <nav class="navbar navbar-default"> 
+         <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-header-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="/"> <img src="/img/logo/logo_directadmin.svg" width="178px" alt=""> </a> 
+         </div> 
+         <div class="collapse navbar-collapse" id="bs-header-navbar-collapse-1"> 
+          <ul class="nav navbar-nav"> 
+           <li class="active fs17 text-center"><a href="/features_list.php">Features</a></li> 
+           <li class=" fs17 text-center"><a href="/pricing.php">Pricing</a></li> 
+           <li class=" fs17 text-center"><a href="/support.php">Support</a></li> 
+           <li class="fs17 text-center"><a href="https://forum.directadmin.com/">Forum</a></li> 
+           <li class=" fs17 text-center"><a href="/extras-plugins.php">Extras</a></li> 
+          </ul> <!-- When logged out - - - - - - - - - - - - --> 
+          <ul class="nav navbar-nav navbar-right"> 
+           <li><a class="btn btn-primary" href="#" data-toggle="modal" data-target="#modal-orderNow">Order Now</a></li> 
+          </ul> 
+         </div> 
+        </nav> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </header> 
+   <div class="row bg2"> 
+    <div class="col-xs-12"> 
+     <div class="container"> 
+      <div id="main-top-bar" class="row rel"> 
+       <div class="col-lg-10 col-sm-9 col-xs-10"> 
+        <ol class="breadcrumb mb0 pl0"> 
+         <li><a href="index.php">Home</a></li> 
+         <li class="active">Features</li> 
+        </ol> 
+       </div> 
+       <div id="search" class="col-lg-2 col-sm-3 col-xs-2 text-right"> <span class="jsToggle toggle dib mt15 cp c4"><i class="sprite cmn-search-silver topn1"><!-- --></i><span class="hidden-xs ml10">Search</span></span> 
+        <div class="jsSearchForm search-form bg2 rel dn"> 
+         <form action="search_versions.php" method="GET"> 
+          <input type="hidden" name="help" value="yes"> 
+          <input type="hidden" name="versions" value="yes"> 
+          <div class="form-group mb0" id="versionsSearch"> 
+           <input class="form-control bgn bn pl0 typeahead" type="text" name="query" value="" placeholder="Use '%' for wildcards and quotes for &quot;exact phrases&quot;"> 
+          </div> 
+          <div class="buttons text-right"> <button class="btn bgn bn p0 a5"><i class="sprite cmn-search-gray topn1"><!-- --></i></button> <span class="jsToggle cp c4"><i class="sprite cmn-close-silver"><!-- --></i></span> 
+          </div> 
+         </form> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="row bg1"> 
+    <div class="col-xs-12"> 
+     <div class="container"> 
+      <div id="main-heading-bar"> 
+       <div class="row"> 
+        <div class="col-xs-12"> 
+         <h1 class="mt0 c1 fs35r fw700">Features</h1> 
+         <p class="c1 fs18r">Created with love</p> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="row"> 
+    <div class="col-xs-12"> 
+     <div class="container"> <!-- content - - - - - - - - - - - - --> 
+      <div class="content mt55r mb40r"> 
+       <div class="row"> 
+        <div class="col-xs-12"> 
+         <p>DirectAdmin offers 3 access levels: <a class="a4 jsTabTriggerFeatures cp" data-id="#collapse1">Admin</a>, <a class="a4 jsTabTriggerFeatures cp" data-id="#collapse2">Reseller</a>, <a class="a4 jsTabTriggerFeatures cp" data-id="#collapse3">User</a>. You can even add a fourth <a href="https://forum.directadmin.com/showthread.php?t=22715" class="a4" target="blank">e-mail</a> level supported by an official free plugin. Please see below for the features provided by each access level and <a class="a4 jsTabTriggerFeatures cp" data-id="#collapse4">general</a> features of DirectAdmin. For a full list of software which is supported on DirectAdmin servers please visit <a class="a4 cp" href="technologies.php">Supported Services</a> page. </p> 
+         <p class="mt15">To vote on features you'd like to be added, please see <a class="a4 cp" href="https://feedback.directadmin.com/">feedback.directadmin.com</a>.</p> 
+        </div> 
+       </div> 
+       <div class="row mt55r"> 
+        <div class="col-xs-12"> 
+         <div class="panel-group acc-type1 mb0" id="accordion"> 
+          <div class="panel" data-item-id="#collapse1"> 
+           <div class="panel-heading"> 
+            <h3 class="panel-title"> <a class="opened" data-toggle="collapse" data-parent="#accordion" href="#collapse1">Administrator features<i class="sprite cmn-angle-right-black"><!-- --></i></a> </h3> 
+           </div> 
+           <div id="collapse1" class="panel-collapse collapse in"> 
+            <div class="panel-body p0"> 
+             <ul class="list-unstyled list-type1"> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Create / Modify Admins and Resellers</h3> <p class="mt15">Admins can create resellers or extra admins quickly and easily with this feature.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Reseller Packages</h3> <p class="mt15">Admins can create predefined account packages using this feature. When creating an account, the admin simply chooses a package instead of manually setting each account feature.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Show All Users</h3> <p class="mt15">This feature allows the admin to quickly view every single account on the system and sort this list in various ways.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>DNS Administration</h3> <p class="mt15">This feature allows the admin to create, modify, or delete any DNS records on the server.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>IP Manager</h3> <p class="mt15">This is where the admin sets the IP address available to the server. The admin can also allocate IP address to resellers from this menu.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Mail Queue Administration </h3> <p class="mt15">Tool to view mail queue and it's messages. Includes tools to take action on those messages.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>System / Services Info</h3> <p class="mt15">The admin can view, stop, start, and restart services from this menu.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Complete Usage Statistics</h3> <p class="mt15">This feature provides the admin with a complete overview of system usage. Exact input and output from the server's Ethernet card is also monitored.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>DNS Clustering</h3> <p class="mt15">DirectAdmin talks to other DirectAdmin machines to automatically transfer DNS data between them. It also has the ability to check the other server for a domain so as to not allow duplicate domains on your DA network.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>SPAM fighting tools in DirectAdmin</h3> <p class="mt15">A wide varienty of SPAM-fighting tools are provided with DirectAdmin. Please check <a href="http://help.directadmin.com/item.php?id=577">http://help.directadmin.com/item.php?id=577</a> for a full list.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Licensing / Updates</h3> <p class="mt15">The admin can view his or her license status and download the latest DirectAdmin security and software upgrades from this menu.</p> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="panel" data-item-id="#collapse2"> 
+           <div class="panel-heading"> 
+            <h3 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Reseller features<i class="sprite cmn-angle-right-black"><!-- --></i></a> </h3> 
+           </div> 
+           <div id="collapse2" class="panel-collapse collapse"> 
+            <div class="panel-body p0"> 
+             <ul class="list-unstyled list-type1"> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Create / List / Modify Accounts</h3> <p class="mt15">Account creation, listing, modification, and deletion is done quickly and easily.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>User Packages</h3> <p class="mt15">Resellers can create predefined account packages using this feature. When creating an account, the reseller simply chooses a package instead of manually setting each account feature.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Reseller Statistics</h3> <p class="mt15">Resellers are provided with a complete overview of their total usage. Resellers may also sort data by users to quickly assess the overall situation.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Message All Users</h3> <p class="mt15">Resellers can quickly send a message to all their customers by using DirectAdmin's built in ticket support system.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Import / Manage Skins</h3> <p class="mt15">With this menu option, resellers can quickly import and apply new skins with the click of a button.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>IP Assignment</h3> <p class="mt15">Resellers can allocate IP address to their customers by using this menu option.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>System / Services Information</h3> <p class="mt15">By clicking this feature, resellers have instant access to server status and system information.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Name Servers</h3> <p class="mt15">Resellers can create personalized nameservers for their customers from this menu.</p> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="panel" data-item-id="#collapse3"> 
+           <div class="panel-heading"> 
+            <h3 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">User features<i class="sprite cmn-angle-right-black"><!-- --></i></a> </h3> 
+           </div> 
+           <div id="collapse3" class="panel-collapse collapse"> 
+            <div class="panel-body p0"> 
+             <ul class="list-unstyled list-type1"> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>E-mail Administration</h3> <p class="mt15">Users can create POP/IMAP accounts, catch-all e-mail addresses, forwarders, mailing lists, autoresponders, and webmail. Filters allow users to block mail by domain, keyword, and size. Adult Filter is also available.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>FTP Management</h3> <p class="mt15">Users can create FTP accounts and set directory permissions for each account. Anonymous FTP is also supported.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>DNS Menu</h3> <p class="mt15">Users can can add and remove records, change MX settings, and anything else that goes with full DNS control.&nbsp;</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Statistics Menu</h3> <p class="mt15">Users have available every possible statistic about their account. More advanced options and Webalizer are also included.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Subdomains Menu</h3> <p class="mt15">Users can list, create, delete, and get statistics on subdomains.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>File Manager</h3> <p class="mt15">A user-friendly and fast alternative to FTP. Includes every feature needed to build and maintain a web site.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>MySQL Databases</h3> <p class="mt15">Users can easily create, modify, and delete MySQL databases from this menu.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Site Backup</h3> <p class="mt15">Using this powerful tool, users can backup and restore only what they want to. For example, account data but not web site files.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Error Pages</h3> <p class="mt15">Users can create custom messages and outputs for 401, 403, 404, and 500 error codes.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Directory Password Protection</h3> <p class="mt15">Users can password protect any directory with a username and password.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>PHP Selector</h3> <p class="mt15">Allows the client to select which version of PHP should be associated with the .php extension.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Advanced Tools</h3> <p class="mt15">Users can install SSL certificates, view sever information and installed perl modules, set cron jobs, mime types, and apache handlers, and enable site redirection and domain pointers.</p> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="panel" data-item-id="#collapse4"> 
+           <div class="panel-heading"> 
+            <h3 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">General features<i class="sprite cmn-angle-right-black"><!-- --></i></a> </h3> 
+           </div> 
+           <div id="collapse4" class="panel-collapse collapse"> 
+            <div class="panel-body p0"> 
+             <ul class="list-unstyled list-type1"> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Integrated Ticket Support System</h3> <p class="mt15">With DirectAdmin's integrated ticket support system, you'll provide better customer service with less hassle. "You have XX messages waiting" is displayed every time you sign in -- and you can set DirectAdmin to notify you of support requests by e-mail, ensuring that no request will be missed. If you prefer to offer support in a different way, simply turn this feature off.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Two-Factor Authentication</h3> <p class="mt15">Allows any DirectAdmin account to require the Two-Factor Authentication using a time-based code from a smart-phone app.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Plugin System</h3> <p class="mt15">Allows to extend DirectAdmin functionality easily. Plugins support Admin, Reseller and User levels.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Live Updates</h3> <p class="mt15">Server administrators can click the "licensing / updates" button to view the current license and version status. There is no need to manually download, extract, and install - DirectAdmin performs all updates automatically.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Completely Customizable</h3> <p class="mt15">DirectAdmin is designed to be as unique as your business. Every aspect of the DirectAdmin interface can be changed, and new designs are easily imported through the "skins" menu. </p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>Automatic Recovery From Crashes</h3> <p class="mt15">DirectAdmin TaskQueue ensures that all services are up, all of the time. If something crashes, DirectAdmin will attempt to fix the problem by restarting the service. If this fails, DirectAdmin will notify the server administrator immediately.</p> </li> 
+              <li> <i class="sprite indicator green mt6"><!-- --></i> <h3>We Support Your Customers Through <a href="site-helper.php" class="a4">Site-Helper</a></h3> <p class="mt15">Site-Helper is designed to help you and your customers use DirectAdmin. We provide full instructions on every DirectAdmin feature, along with plenty of pictures and examples.</p> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> <a class="jsScrollTop btn scrollTop cp"><i class="sprite cmn-angle-up-gray mt10"><!-- --></i></a> 
+      </div> <!-- content end - - - - - - - - - - - - --> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="bottom-order" class="row bg1"> 
+    <div class="col-xs-12"> 
+     <div class="container"> 
+      <div class="row"> 
+       <div class="col-lg-9 col-xs-12"> 
+        <h2 class="mt33 mb0 fs30 c1">Interested to try <strong>DirectAdmin</strong>? Get a 30-day Free Trial!</h2> 
+       </div> 
+       <div class="col-lg-3 col-xs-12 text-left text-right-lg"> <a href="#" data-toggle="modal" data-target="#modal-orderNow" class="btn btn-info btn-lg btn-invert mt25 mb25">Order now</a> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <footer id="footer" class="row bts0"> 
+    <div class="col-xs-12"> 
+     <div class="container"> 
+      <div class="row mt20"> 
+       <div class="col-lg-9"> 
+        <ul class="nav nav-pills footer-nav mt15"> 
+         <li><a href="/versions.php">Versions</a></li> 
+         <li><a href="https://help.directadmin.com/">Knowledge Base</a></li> 
+         <li><a href="https://forum.directadmin.com/">Forum</a></li> 
+         <li><a href="http://www.site-helper.com/">Site-Helper</a></li> 
+         <li><a href="https://forum.directadmin.com/forumdisplay.php?f=77">Translations</a></li> 
+         <li><a href="/policies.php">Policies</a></li> 
+         <li><a href="/support.php">Support</a></li> 
+         <li><a href="/contacts.php">Contacts</a></li> 
+        </ul> 
+       </div> 
+       <div class="col-lg-3"> 
+        <ul class="footer-bnk list-inline list-unstyled mt20 mb20"> 
+         <li><i class="sprite cmn-bnk-paypal-gray"><!-- --></i></li> 
+         <li><i class="sprite cmn-bnk-visa-gray"><!-- --></i></li> 
+         <li><i class="sprite cmn-bnk-mastercard-gray"><!-- --></i></li> 
+         <li><i class="sprite cmn-bnk-dec-gray"><!-- --></i></li> 
+         <li><i class="sprite cmn-bnk-americanexpress-gray"><!-- --></i></li> 
+        </ul> 
+       </div> 
+      </div> 
+      <div class="row mt5"> 
+       <div class="col-md-12"> 
+        <p class="powerBy mb45r c4 fs13">2016 JBMC Software, Suite 173 3-11 Bellerose Drive, St Albert, AB T8N 1P7 Canada. Mon - Fri 9AM - 5PM MST</p> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </footer> 
+  </div> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+  <script>window.jQuery || document.write('<script src="vendor/jquery/jquery-1.12.0.min.js"><\/script>')</script> 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.43/jquery.form-validator.min.js"></script> 
+  <script> $.validate(); </script> 
+  <script src="/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script> 
+  <script src="/vendor/chosen/chosen.jquery.min.js"></script> 
+  <script src="/vendor/twitter-typeahead/typeahead.bundle.js"></script> <!-- JS files needed for invoices datepicker --> <!-- - - - - - - - - - - - - --> 
+  <script src="/js/plugins.js"></script> 
+  <script src="/js/main.js?v1.1"></script> 
+  <script type="text/javascript">
+	if ($('#current_version').length != 0) {
+			$.ajax({
+				type: 'GET',
+				url: '/ver.php',
+				async: true,
+				cache: true,
+				success: function (html, textStatus, jqXHR) {
+					var ver = parseFloat(html);
+					$('#current_version').text(ver.toString());
+				}
+			});
+		}
+</script>  
+ </body>
+</html>

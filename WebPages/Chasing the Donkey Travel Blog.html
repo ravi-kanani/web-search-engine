@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"073b4df364",applicationID:"170911749"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="profile" href="https://gmpg.org/xfn/11"> 
+  <title>Chasing the Donkey Travel Blog</title> <!-- This site is optimized with the Yoast SEO plugin v13.3 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="All the info you need to travel Croatia, the Balkans, the Caucasus &amp; beyond.These comprehensive travel guides will help you save time travel planning &amp; travel like a local."> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.chasingthedonkey.com/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Chasing the Donkey Travel Blog"> 
+  <meta property="og:description" content="All the info you need to travel Croatia, the Balkans, the Caucasus &amp; beyond.These comprehensive travel guides will help you save time travel planning &amp; travel like a local."> 
+  <meta property="og:url" content="https://www.chasingthedonkey.com/"> 
+  <meta property="og:site_name" content="Chasing the Donkey"> 
+  <meta property="fb:app_id" content="116819921676221"> 
+  <meta property="og:image" content="https://s27412.pcdn.co/wp-content/uploads/2019/04/LAUNCH-DAY.png"> 
+  <meta property="og:image:secure_url" content="https://s27412.pcdn.co/wp-content/uploads/2019/04/LAUNCH-DAY.png"> 
+  <meta property="og:image:width" content="1986"> 
+  <meta property="og:image:height" content="914"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="All the info you need to travel Croatia, the Balkans, the Caucasus &amp; beyond.These comprehensive travel guides will help you save time travel planning &amp; travel like a local."> 
+  <meta name="twitter:title" content="Chasing the Donkey Travel Blog"> 
+  <meta name="twitter:site" content="@chasethedonkey"> 
+  <meta name="twitter:image" content="https://s27412.pcdn.co/wp-content/uploads/2019/04/LAUNCH-DAY.png"> 
+  <meta name="twitter:creator" content="@chaseTHEdonkey"> 
+  <meta name="msvalidate.01" content="937B075A2B22F96B863CFC2D00BCB52F"> 
+  <meta name="google-site-verification" content="6_4gfpsGoEBjVDgzWM5DQRDMky4TIlsUy0GUmU83TJI"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.chasingthedonkey.com/#organization","name":"Chasing the Donkey","url":"https://www.chasingthedonkey.com/","sameAs":["https://www.facebook.com/chasingthedonkey","http://instagram.com/chasing_the_donkey","http://www.pinterest.com/chasethedonkey/","https://twitter.com/chasethedonkey"],"logo":{"@type":"ImageObject","@id":"https://www.chasingthedonkey.com/#logo","inLanguage":"en-US","url":"https://s27412.pcdn.co/wp-content/uploads/2019/11/BLACK_NOV-CTD_1000x-500px-logo.png","width":1000,"height":500,"caption":"Chasing the Donkey"},"image":{"@id":"https://www.chasingthedonkey.com/#logo"}},{"@type":"WebSite","@id":"https://www.chasingthedonkey.com/#website","url":"https://www.chasingthedonkey.com/","name":"Chasing the Donkey","inLanguage":"en-US","description":"Balkans &amp; Croatia Travel Blog","publisher":{"@id":"https://www.chasingthedonkey.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.chasingthedonkey.com/?s={search_term_string}","query-input":"required name=search_term_string"}]},{"@type":"ImageObject","@id":"https://www.chasingthedonkey.com/#primaryimage","inLanguage":"en-US","url":"https://s27412.pcdn.co/wp-content/uploads/2019/04/LAUNCH-DAY.png","width":1986,"height":914,"caption":"NEW LOOK HOME PAGE 25 APRIL"},{"@type":"WebPage","@id":"https://www.chasingthedonkey.com/#webpage","url":"https://www.chasingthedonkey.com/","name":"Chasing the Donkey Travel Blog","isPartOf":{"@id":"https://www.chasingthedonkey.com/#website"},"inLanguage":"en-US","about":{"@id":"https://www.chasingthedonkey.com/#organization"},"primaryImageOfPage":{"@id":"https://www.chasingthedonkey.com/#primaryimage"},"datePublished":"2014-02-26T20:33:55+00:00","dateModified":"2020-03-17T08:39:40+00:00","description":"All the info you need to travel Croatia, the Balkans, the Caucasus & beyond.These comprehensive travel guides will help you save time travel planning & travel like a local.","potentialAction":[{"@type":"ReadAction","target":["https://www.chasingthedonkey.com/"]}]}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//www.chasingthedonkey.com"> 
+  <link rel="dns-prefetch" href="//scripts.mediavine.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="Chasing the Donkey » Feed" href="https://www.chasingthedonkey.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Chasing the Donkey » Comments Feed" href="https://www.chasingthedonkey.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Chasing the Donkey » Balkans &amp; Croatia Travel Blog: Chasing the Donkey Comments Feed" href="https://www.chasingthedonkey.com/balkans-croatia-travel-blog-chasing-the-donkey/feed/"> 
+  <link id="menu-icons-extra-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/menu-icons/css/extra.min.css?ver=0.12.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="wp-block-library-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-includes/css/dist/block-library/style.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="fgx-foundry-block-post-grid-style-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/gutenberg-blocks/assets/css/dist/blocks/foundry-block-post-grid/style.css?ver=1579610981" type="text/css" media="none" onload="this.media='all'">
+  <link id="fgx-foundry-container-style-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/gutenberg-blocks/assets/css/dist/blocks/foundry-container/style.css?ver=1579610981" type="text/css" media="none" onload="this.media='all'">
+  <link id="fgx-foundry-variable-columns-style-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/gutenberg-blocks/assets/css/dist/blocks/foundry-variable-columns/style.css?ver=1579610981" type="text/css" media="none" onload="this.media='all'">
+  <link id="pfbs-style-css" rel="stylesheet" href="//s27412.pcdn.co/wp-content/plugins/gutenberg-blocks/assets/css/dist/../pfbs.css?ver=1579610981" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundry-fontawesome-css-css" rel="stylesheet" href="//s27412.pcdn.co/wp-content/plugins/gutenberg-blocks/assets/css/dist/../fontawesome.min.css?ver=1579610981" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundry-lazy-load-style-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/mu-plugins/foundry-mu/inc/performance/assets/css/lazy-load.min.css?ver=1.9.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="contact-form-7-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/cache/css/6f290effdef47c668506c8592a7f40e6.min.css" type="text/css" media="none" onload="this.media='all'">
+  <link id="ssb-front-css-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/cache/css/8cba19212fc80ce33e2aa1272d0653ee.min.css" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundrysl-css-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/social-networks-links-by-performance-foundry/assets/css/foundrysl.css?ver=0.1.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="ez-icomoon-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/easy-table-of-contents/vendor/icomoon/style.min.css?ver=2.0.4" type="text/css" media="none" onload="this.media='all'">
+  <link id="ez-toc-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/plugins/easy-table-of-contents/assets/css/screen.min.css?ver=2.0.4" type="text/css" media="none" onload="this.media='all'">
+  <style id="ez-toc-inline-css" type="text/css">
+div#ez-toc-container p.ez-toc-title {font-size: 100%;}div#ez-toc-container p.ez-toc-title {font-weight: 400;}div#ez-toc-container ul li {font-size: 100%;}div#ez-toc-container {background: #fff;border: 1px solid #ffffff;}div#ez-toc-container p.ez-toc-title {color: #00aaa4;}div#ez-toc-container ul.ez-toc-list a {color: #00aaa4;}div#ez-toc-container ul.ez-toc-list a:hover {color: #938d8e;}div#ez-toc-container ul.ez-toc-list a:visited {color: #00aaa4;}
+</style> 
+  <link id="easyazonpro-popovers-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/cache/css/9b4fcdf7ef1238f2e11da1ff479c5594.min.css" type="text/css" media="none" onload="this.media='all'">
+  <link id="ctd-style-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/cache/css/06374ac926f75d8f411349333c18306d.min.css" type="text/css" media="all">
+  <link id="quicksand-css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand%3A400%2C500%2C600%2C700&amp;display=swap&amp;ver=1.0" type="text/css" media="none" onload="this.media='all'">
+  <link id="righteous-css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous&amp;display=swap&amp;ver=1.0" type="text/css" media="none" onload="this.media='all'">
+  <link id="easy_table_style-css" rel="stylesheet" href="https://s27412.pcdn.co/wp-content/cache/css/5c7368daedf6ca540a8b14f5aaf50744.min.css" type="text/css" media="none" onload="this.media='all'">
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script>
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" defer></script>
+  <script type="text/javascript" async data-noptimize="1" data-cfasync="false" src="https://scripts.mediavine.com/tags/chasing-the-donkey.js?ver=5.3.2" defer></script>
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/cache/js/8245bc669bf2a0aaad2f441e3b5ae166.min.js" defer></script>
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/cache/js/d6f0a3fd76737b8e7323483b8c1a5488.min.js" defer></script>
+  <link rel="https://api.w.org/" href="https://www.chasingthedonkey.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.chasingthedonkey.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s27412.pcdn.co/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 5.3.2"> 
+  <link rel="shortlink" href="https://www.chasingthedonkey.com/"> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.chasingthedonkey.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.chasingthedonkey.com%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.chasingthedonkey.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.chasingthedonkey.com%2F&amp;format=xml"> <!-- Facebook Pixel Code --> 
+  <script>
+			!function(f,b,e,v,n,t,s)
+			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+			n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+			n.queue=[];t=b.createElement(e);t.async=!0;
+			t.src=v;s=b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t,s)}(window,document,'script',
+			'https://connect.facebook.net/en_US/fbevents.js');
+			 fbq('init', '175095259508518'); 
+			fbq('track', 'PageView');
+			</script> 
+  <noscript> &lt;img height="1" width="1" src="https://www.facebook.com/tr?id=175095259508518&amp;amp;ev=PageView &amp;amp;noscript=1"&gt; 
+  </noscript> <!-- End Facebook Pixel Code --> <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42429337-1"></script> 
+  <script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-42429337-1', {'anonymize_ip': true, 'allow_display_features': false });
+		</script> <!-- Foundry Adds ga ends --> 
+  <meta name="google-site-verification" content="oz6DWiQuRrLswUPlCxyDKPRBNFMk0DVlsI8CyDaWFGc"> 
+  <meta name="tradetracker-site-verification" content="81376bd312abfcf16f8e1503cfb4633856cec120"> 
+  <script async defer src="https://widget.getyourguide.com/v2/widget.js"></script> 
+  <style>
+				:root {
+					--mv-create-radius: 0;
+				}
+			</style> 
+  <style media="screen">
+
+		.simplesocialbuttons.simplesocialbuttons_inline .ssb-fb-like {
+	  margin: ;
+	}
+		 /*inline margin*/
+	
+	
+		.simplesocialbuttons.simplesocialbuttons_inline.simplesocial-round-txt button{
+	  margin: ;
+	}
+	
+	
+	
+	
+			 /*margin-digbar*/
+
+	
+	
+	
+	
+	
+	
+	
+</style> <!-- Open Graph Meta Tags generated by Simple Social Buttons 3.1.1 --> 
+  <meta property="og:title" content="Balkans &amp; Croatia Travel Blog: Chasing the Donkey - Chasing the Donkey"> 
+  <meta property="og:description" content="WELCOME TO
+
+
+
+CHASING THE DONKEY
+
+
+
+All the information you need to travel to Croatia, the Balkans &amp; beyond.
+
+
+
+
+
+
+
+
+
+
+SJ'S MUSINGS FROM CROATIA
+
+
+
+
+
+
+See All
+
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+
+
+
+CROATIAN COOKING RECIPES
+
+
+
+
+
+
+See All
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+&nbsp;
+
+
+
+
+
+
+BOSNIA-HERZEGOVINA TRAVEL
+
+
+
+
+
+
+See All
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+
+
+
+
+SLOVENIA TRAVEL
+
+
+
+
+
+
+See All"> 
+  <meta property="og:url" content="https://www.chasingthedonkey.com/"> 
+  <meta property="og:site_name" content="Chasing the Donkey"> 
+  <meta property="og:image" content="https://s27412.pcdn.co/wp-content/uploads/2019/04/LAUNCH-DAY.png"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="WELCOME TO
+
+
+
+CHASING THE DONKEY
+
+
+
+All the information you need to travel to Croatia, the Balkans &amp; beyond.
+
+
+
+
+
+
+
+
+
+
+SJ'S MUSINGS FROM CROATIA
+
+
+
+
+
+
+See All
+
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+
+
+
+CROATIAN COOKING RECIPES
+
+
+
+
+
+
+See All
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+&nbsp;
+
+
+
+
+
+
+BOSNIA-HERZEGOVINA TRAVEL
+
+
+
+
+
+
+See All
+
+
+
+
+
+
+
+&nbsp;
+
+
+
+
+
+
+
+SLOVENIA TRAVEL
+
+
+
+
+
+
+See All"> 
+  <meta name="twitter:title" content="Balkans &amp; Croatia Travel Blog: Chasing the Donkey - Chasing the Donkey"> 
+  <meta property="twitter:image" content="https://s27412.pcdn.co/wp-content/uploads/2019/04/LAUNCH-DAY.png"> 
+  <script id="wpcp_disable_selection" type="text/javascript">
+//<![CDATA[
+var image_save_msg='You Can Not Save images!';
+	var no_menu_msg='Context Menu disabled!';
+	var smessage = "No. Sorry. ";
+
+function disableEnterKey(e)
+{
+	if (e.ctrlKey){
+     var key;
+     if(window.event)
+          key = window.event.keyCode;     //IE
+     else
+          key = e.which;     //firefox (97)
+    //if (key != 17) alert(key);
+     if (key == 97 || key == 65 || key == 67 || key == 99 || key == 88 || key == 120 || key == 26 || key == 85  || key == 86 || key == 83 || key == 43)
+     {
+          show_wpcp_message('You are not allowed to copy content or view source');
+          return false;
+     }else
+     	return true;
+     }
+}
+
+function disable_copy(e)
+{	
+	var elemtype = e.target.nodeName;
+	var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+	elemtype = elemtype.toUpperCase();
+	var checker_IMG = '';
+	if (elemtype == "IMG" && checker_IMG == 'checked' && e.detail >= 2) {show_wpcp_message(alertMsg_IMG);return false;}
+	if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED")
+	{
+		if (smessage !== "" && e.detail == 2)
+			show_wpcp_message(smessage);
+		
+		if (isSafari)
+			return true;
+		else
+			return false;
+	}	
+}
+function disable_copy_ie()
+{
+	var elemtype = window.event.srcElement.nodeName;
+	elemtype = elemtype.toUpperCase();
+	if (elemtype == "IMG") {show_wpcp_message(alertMsg_IMG);return false;}
+	if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED")
+	{
+		//alert(navigator.userAgent.indexOf('MSIE'));
+			//if (smessage !== "") show_wpcp_message(smessage);
+		return false;
+	}
+}	
+function reEnable()
+{
+	return true;
+}
+document.onkeydown = disableEnterKey;
+document.onselectstart = disable_copy_ie;
+if(navigator.userAgent.indexOf('MSIE')==-1)
+{
+	document.onmousedown = disable_copy;
+	document.onclick = reEnable;
+}
+function disableSelection(target)
+{
+    //For IE This code will work
+    if (typeof target.onselectstart!="undefined")
+    target.onselectstart = disable_copy_ie;
+    
+    //For Firefox This code will work
+    else if (typeof target.style.MozUserSelect!="undefined")
+    {target.style.MozUserSelect="none";}
+    
+    //All other  (ie: Opera) This code will work
+    else
+    target.onmousedown=function(){return false}
+    target.style.cursor = "default";
+}
+//Calling the JS function directly just after body load
+window.onload = function(){disableSelection(document.body);};
+//]]>
+</script> 
+  <script id="wpcp_disable_Right_Click" type="text/javascript">
+	//<![CDATA[
+	document.ondragstart = function() { return false;}
+	/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	Disable context menu on images by GreenLava Version 1.0
+	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+	    function nocontext(e) {
+	       return false;
+	    }
+	    document.oncontextmenu = nocontext;
+	//]]>
+	</script> 
+  <style>
+.unselectable
+{
+-moz-user-select:none;
+-webkit-user-select:none;
+cursor: default;
+}
+html
+{
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+</style> 
+  <script id="wpcp_css_disable_selection" type="text/javascript">
+var e = document.getElementsByTagName('body')[0];
+if(e)
+{
+	e.setAttribute('unselectable',on);
+}
+</script> 
+  <link rel="pingback" href="https://www.chasingthedonkey.com/xmlrpc.php"> 
+  <style type="text/css">
+		/*.textcolor h1, .textcolor h2, .textcolor h3, .textcolor h4, .textcolor h5 {
+			color: #ffffff !important;
+		}*/
+	</style> 
+  <style type="text/css" id="menu-hover-styles"></style> 
+  <style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url("https://s27412.pcdn.co/wp-content/uploads/2019/04/footer-bg.jpg.optimal.jpg"); background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style> 
+  <link rel="icon" href="https://s27412.pcdn.co/wp-content/uploads/2019/04/cropped-donkey-32x32.png" sizes="32x32"> 
+  <link rel="icon" href="https://s27412.pcdn.co/wp-content/uploads/2019/04/cropped-donkey-192x192.png" sizes="192x192"> 
+  <link rel="apple-touch-icon-precomposed" href="https://s27412.pcdn.co/wp-content/uploads/2019/04/cropped-donkey-180x180.png"> 
+  <meta name="msapplication-TileImage" content="https://s27412.pcdn.co/wp-content/uploads/2019/04/cropped-donkey-270x270.png"> 
+  <style type="text/css" id="wp-custom-css">
+			/* social icons css fix */
+#foundry_social_links-2 .foundry-social__link {
+	padding-top: 8px;
+}
+/* Start Mediavine */
+/* correct sidebar width on desktop with adjustments to main content */
+@media only screen and (min-width: 992px) and (max-width: 1151px) {
+  .single-post #primary {
+    width: calc(100% - 320px) !important;
+  }
+
+  .single-post main.site-main {
+    margin-right: 0px !important;
+  }
+
+  .single-post aside#secondary {
+    min-width: 300px !important;
+  }
+}
+
+/* correct content width on mobile */
+@media only screen and (max-width: 379px) {
+  .single-content-area {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .entry-content p {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+}
+
+/* End Mediavine */
+
+
+/* Correct gallery # 51004 */
+.gallery{
+    overflow:hidden;
+}
+.gallery-item{
+    float:left;
+    margin:0 0 28px;
+    text-align:center;
+}
+.gallery-columns-2 .gallery-item{
+    width:50%;
+}
+.gallery-columns-3 .gallery-item{
+    width:33%;
+}
+.gallery-columns-4 .gallery-item{
+    width:25%;
+}
+.gallery-columns-5 .gallery-item{
+    width:20%;
+}
+.gallery-columns-6 .gallery-item{
+    width:16.6666%;
+}
+.gallery-columns-7 .gallery-item{
+    width:14.2857%;
+}
+.gallery-columns-8 .gallery-item{
+    width:12.5%;
+}
+.gallery-columns-9 .gallery-item{
+    width:11.1111%;
+}
+
+.gallery img{
+    border:1px solid #fff;
+    height:auto;
+    padding:4px;
+}
+/* End Correct gallery # 51004 */
+
+		</style> 
+ </head> 
+ <body class="home page-template-default page page-id-7065 custom-background wp-custom-logo unselectable"> 
+  <div id="page" class="site"> <a class="skip-link screen-reader-text" href="#content">Skip to content</a> 
+   <header id="masthead" class="site-header" role="banner" itemscope itemtype="http://schema.org/WPHeader"> 
+    <div id="headerwrap"> 
+     <div class="header-wrap header-wrap__layout-below-logo header-wrap__custom_logo"> 
+      <div class="header-wrap__top-logo-wrapper"> 
+       <div class="header-wrap__logo-below" style="width: 32%"> <a href="https://www.chasingthedonkey.com/" class="custom-logo-link"> <img src="https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white.png" alt="Chasing the Donkey" id="logo"> </a> 
+       </div> 
+       <div class="header-wrap__right-content"> 
+        <div id="top-bar" class="top-menu-bar"> 
+         <div class="topbar-wrap"> 
+          <div class="topbar-wrap__topbar"> 
+           <div class="topbar-wrap__topbar-content"> 
+            <div class="topbar-menu"> 
+             <ul id="primary-menu-top" class="foundry-main-navigation__topbar">
+              <li id="menu-item-51029" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51029"><a href="https://www.chasingthedonkey.com/living-in-croatia-expat-tips/">Living In Croatia</a></li> 
+              <li id="menu-item-47423" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-47423"><a href="https://www.chasingthedonkey.com/balkan-countries-list-balkans-travel-guide/">Balkans</a></li> 
+              <li id="menu-item-51032" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51032"><a href="https://www.chasingthedonkey.com/croatian-recipes-in-english/">Croatian Recipes</a></li> 
+              <li id="menu-item-42597" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-42597"><a href="https://www.chasingthedonkey.com/work-with-us/">Contact</a> 
+               <ul class="sub-menu"> 
+                <li id="menu-item-47595" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-47595"><a href="https://www.chasingthedonkey.com/work-with-us/">Contact</a></li> 
+                <li id="menu-item-42596" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-42596"><a href="https://www.chasingthedonkey.com/about-us/">About</a></li> 
+                <li id="menu-item-44249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44249"><a href="https://www.chasingthedonkey.com/write-for-us/">Write For Us</a></li> 
+               </ul> </li> 
+             </ul> 
+            </div> 
+           </div> 
+           <div class="topbar-wrap__topbar-content topbar-wrap__topbar-content-right"> 
+            <div class="topbar-searchbox"> 
+             <form role="search" method="get" class="search-form" action="https://www.chasingthedonkey.com/"> <label> <span class="screen-reader-text">Search for:</span> <input type="search" class="search-field" placeholder="Search …" value="" name="s"> </label> <button type="submit" class="search-submit"><i class="fas fa-search"></i></button> 
+             </form> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+        </div> <!-- end of top-menu-bar --> 
+       </div> 
+      </div> 
+      <div class="header-wrap__nav nav-wrapper"> 
+       <nav id="site-navigation-main" class="main-navigation foundry-main-navigation"> 
+        <ul id="primary-menu" class="foundry-main-navigation__primary-menu">
+         <li id="menu-item-42601" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42601"><a href="https://www.chasingthedonkey.com/albania-travel-blog/"><span class="visuallyhidden">Albania</span><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Albania-1.png" class="_mi _image" alt="" aria-hidden="true" style="vertical-align:baseline;"></a></li> 
+         <li id="menu-item-42602" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42602"><a href="https://www.chasingthedonkey.com/bosnia-and-herzegovina-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_BiH-2.png" class="_mi _image" alt="" aria-hidden="true" style="vertical-align:text-bottom;"><span class="visuallyhidden">BiH</span></a></li> 
+         <li id="menu-item-42603" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42603"><a href="https://www.chasingthedonkey.com/bulgaria-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Bulgaria-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Bulgaria</span></a></li> 
+         <li id="menu-item-42600" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42600"><a href="https://www.chasingthedonkey.com/croatia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Croatia-2-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Croatia</span></a></li> 
+         <li id="menu-item-51018" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51018"><a href="https://www.chasingthedonkey.com/greece-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Greece-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Greece</span></a></li> 
+         <li id="menu-item-51016" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51016"><a href="https://www.chasingthedonkey.com/kosovo-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Kosovo-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Kosovo</span></a></li> 
+         <li id="menu-item-42609" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42609"><a href="https://www.chasingthedonkey.com/north-macedonia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Macedonia-2.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Macedonia</span></a></li> 
+         <li id="menu-item-42604" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42604"><a href="https://www.chasingthedonkey.com/montenegro-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Montenegro1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Montenegro</span></a></li> 
+         <li id="menu-item-42610" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42610"><a href="https://www.chasingthedonkey.com/romania-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Romania-2.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Romania</span></a></li> 
+         <li id="menu-item-43731" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-43731"><a href="https://www.chasingthedonkey.com/serbia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Serbia-2.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Serbia</span></a></li> 
+         <li id="menu-item-42605" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42605"><a href="https://www.chasingthedonkey.com/slovenia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Slovenia-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Slovenia</span></a></li> 
+         <li id="menu-item-50991" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50991"><a href="https://www.chasingthedonkey.com/turkey-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Turkey-2-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Turkey</span></a></li> 
+         <li id="menu-item-42606" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-42606"><a href="#">Beyond</a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-51039" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51039"><a href="https://www.chasingthedonkey.com/caucasus-travel-guide/">Caucasus</a></li> 
+           <li id="menu-item-51041" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51041"><a href="https://www.chasingthedonkey.com/eastern-europe-travel-blog/">Eastern Europe</a></li> 
+          </ul> </li> 
+        </ul> 
+       </nav><!-- #site-navigation --> 
+      </div> <!-- nav wrapper close --> 
+     </div> <!-- header wrapper --> 
+    </div> <!-- headerwrap --> 
+    <div class="mobile-header"> 
+     <div class="mobile-header__logo"> <a href="https://www.chasingthedonkey.com/" class="custom-logo-link" rel="home"><img width="1000" height="500" src="https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white.png" class="custom-logo" alt="Chasing the Donkey" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white.png 1000w, https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white-250x125.png 250w, https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white-900x450.png 900w, https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white-768x384.png 768w, https://s27412.pcdn.co/wp-content/uploads/2019/11/WHITE_NOV-CTD_1000x-500px-logo-white-735x368.png 735w" sizes="(max-width: 1000px) 100vw, 1000px"></a> 
+     </div> 
+    </div> 
+   </header><!-- #masthead --> 
+   <div id="js-main-navigation"> 
+    <nav id="site-navigation" class="main-navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement"> 
+     <div class="menu-main-menu-container">
+      <ul id="mobile-menu" class="menu">
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42601"><a href="https://www.chasingthedonkey.com/albania-travel-blog/"><span class="visuallyhidden">Albania</span><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Albania-1.png" class="_mi _image" alt="" aria-hidden="true" style="vertical-align:baseline;"></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42602"><a href="https://www.chasingthedonkey.com/bosnia-and-herzegovina-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_BiH-2.png" class="_mi _image" alt="" aria-hidden="true" style="vertical-align:text-bottom;"><span class="visuallyhidden">BiH</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42603"><a href="https://www.chasingthedonkey.com/bulgaria-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Bulgaria-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Bulgaria</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42600"><a href="https://www.chasingthedonkey.com/croatia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Croatia-2-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Croatia</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51018"><a href="https://www.chasingthedonkey.com/greece-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Greece-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Greece</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51016"><a href="https://www.chasingthedonkey.com/kosovo-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Kosovo-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Kosovo</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42609"><a href="https://www.chasingthedonkey.com/north-macedonia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Macedonia-2.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Macedonia</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42604"><a href="https://www.chasingthedonkey.com/montenegro-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Montenegro1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Montenegro</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42610"><a href="https://www.chasingthedonkey.com/romania-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Romania-2.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Romania</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-43731"><a href="https://www.chasingthedonkey.com/serbia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Serbia-2.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Serbia</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-42605"><a href="https://www.chasingthedonkey.com/slovenia-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Slovenia-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Slovenia</span></a></li> 
+       <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-50991"><a href="https://www.chasingthedonkey.com/turkey-travel-blog/"><img width="50" height="50" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/Balkan-Flags_Turkey-2-1.png" class="_mi _image" alt="" aria-hidden="true"><span class="visuallyhidden">Turkey</span></a></li> 
+       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-42606"><a href="#">Beyond</a> 
+        <ul class="sub-menu"> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51039"><a href="https://www.chasingthedonkey.com/caucasus-travel-guide/">Caucasus</a></li> 
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-51041"><a href="https://www.chasingthedonkey.com/eastern-europe-travel-blog/">Eastern Europe</a></li> 
+        </ul> </li> 
+      </ul>
+     </div> 
+    </nav> 
+   </div> 
+   <div id="content" class="site-content"> 
+    <div id="primary" class="full-width"> 
+     <main id="main" class="site-main-full"> 
+      <article id="post-7065" class="post-7065 page type-page status-publish has-post-thumbnail hentry"> 
+       <header class="entry-header"> 
+        <h1 class="entry-title screen-reader-text">Balkans &amp; Croatia Travel Blog: Chasing the Donkey</h1> 
+       </header><!-- .entry-header --> 
+       <div class="entry-content"> 
+        <div style="background-color:#000000;padding-left:0%;padding-right:0%;padding-bottom:5%;padding-top:5%;margin-top:0%;margin-bottom:0%" class="wp-block-fgx-foundry-container hero-section alignfull fgx-block-container">
+         <div class="fgx-container-inside">
+          <div class="fgx-container-image-wrap">
+           <i class="ferrari--spinner"></i>
+           <img class="ferrari__img ferrari--not-loaded fgx-container-image has-background-dim-70 has-background-dim" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/home-hero-img-1.jpg.optimal.jpg" alt="">
+           <noscript>
+            <img class="fgx-container-image has-background-dim-70 has-background-dim" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/home-hero-img-1.jpg.optimal.jpg" alt="">
+           </noscript>
+          </div>
+          <div class="fgx-container-content" style="max-width:1160px"> 
+           <h4 class="has-text-align-center font-welcome">WELCOME TO</h4> 
+           <h2 class="has-text-align-center font-title font-title-yellow">CHASING THE <strong>DONKEY</strong></h2> 
+           <h3 class="has-text-align-center font-subtitle">All the information you need to travel to Croatia, the Balkans &amp; beyond.</h3> 
+          </div>
+         </div>
+        </div> 
+        <div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div> 
+        <h2 style="text-align:center" class="about-heading-welcome">Let us help you find what you need.</h2> 
+        <h1 style="text-align:center" class="about-heading-main">WHERE ARE YOU HEADED?</h1> 
+        <p style="text-align:center" class="about-heading-content">These comprehensive travel guides will help you save time travel planning &amp; travel like a local.</p> 
+        <div class="pfbs"> 
+         <div class="wp-block-fgx-foundry-custom-highlights foundry-custom-highlights pfbs aboutus-slider">
+          <div class="container">
+           <div id="fch-2b184e0d-b73d-41c3-84a0-879da55d0a91" class="carousel slide" data-ride="carousel" data-interval="3500">
+            <div class="carousel-inner">
+             <div class="carousel-item active">
+              <div class="row">
+               <div id="item-croatia-0" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/Croatia-icon.png" alt="" data-media-id="43683">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/Croatia-icon.png" alt="" data-media-id="43683">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Croatia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/croatia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-slovenia-1" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-slovenia.png" alt="" data-media-id="42644">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-slovenia.png" alt="" data-media-id="42644">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Slovenia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/slovenia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-bosnia-hergegovina-2" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-bosnia.png" alt="" data-media-id="42637">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-bosnia.png" alt="" data-media-id="42637">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Bosnia-Hergegovina
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/bosnia-and-herzegovina-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-bulgaria-3" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/Bulgaria-Icon.png" alt="" data-media-id="43682">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/Bulgaria-Icon.png" alt="" data-media-id="43682">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Bulgaria
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/bulgaria-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-albania-4" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-albenia.png" alt="" data-media-id="42635">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-albenia.png" alt="" data-media-id="42635">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Albania
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/albania-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="carousel-item">
+              <div class="row">
+               <div id="item-romania-0" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-romania.png" alt="" data-media-id="42641">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-romania.png" alt="" data-media-id="42641">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Romania
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/romania-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-russia-1" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-russia.png" alt="" data-media-id="42642">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-russia.png" alt="" data-media-id="42642">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Russia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/russia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-serbia-2" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-serbia.png" alt="" data-media-id="42643">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-serbia.png" alt="" data-media-id="42643">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Serbia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/serbia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-georgia-3" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-georgia.png" alt="" data-media-id="42638">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-georgia.png" alt="" data-media-id="42638">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Georgia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/georgia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-azerbaijan-4" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-azerbaijan.png" alt="" data-media-id="42636">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-azerbaijan.png" alt="" data-media-id="42636">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Azerbaijan
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/azerbaijan-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+             <div class="carousel-item">
+              <div class="row">
+               <div id="item-slovenia-0" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-slovenia.png" alt="" data-media-id="42644">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-slovenia.png" alt="" data-media-id="42644">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Slovenia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/slovenia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-macedonia-1" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-macedonia.png" alt="" data-media-id="42639">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-macedonia.png" alt="" data-media-id="42639">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Macedonia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/macedonia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-croatia-2" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/Croatia-icon.png" alt="" data-media-id="43683">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/Croatia-icon.png" alt="" data-media-id="43683">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Croatia
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/croatia-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+               <div id="item-albania-3" class="fch-item col-2.4">
+                <div class="row">
+                 <div class="col-12">
+                  <i class="ferrari--spinner"></i>
+                  <img class="ferrari__img ferrari--not-loaded fch-item-image w-100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-albenia.png" alt="" data-media-id="42635">
+                  <noscript>
+                   <img class="fch-item-image w-100" src="https://s27412.pcdn.co/wp-content/uploads/2019/04/about-slider-icon-albenia.png" alt="" data-media-id="42635">
+                  </noscript>
+                 </div>
+                 <div class="col-12">
+                  <div class="fch-item-title">
+                   Albania
+                  </div>
+                 </div>
+                 <div class="col-12">
+                  <a class="fch-item-btn-link" href="https://www.chasingthedonkey.com/albania-travel-blog/">Explore</a>
+                 </div>
+                </div>
+               </div>
+              </div>
+             </div>
+            </div><a class="carousel-control-prev" href="#fch-2b184e0d-b73d-41c3-84a0-879da55d0a91" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#fch-2b184e0d-b73d-41c3-84a0-879da55d0a91" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>
+           </div>
+          </div>
+         </div> 
+        </div> 
+        <div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div> 
+        <div style="background-color:#f9f9f9;padding-left:0%;padding-right:0%;padding-bottom:5%;padding-top:5%;margin-top:0%;margin-bottom:0%" class="wp-block-fgx-foundry-container alignfull fgx-block-container">
+         <div class="fgx-container-inside">
+          <div class="fgx-container-content" style="max-width:1160px"> 
+           <div class="wp-block-fgx-foundry-variable-columns fgx-var-columns has-2-columns __left80 __right20 category-heading"> 
+            <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+             <div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto">
+              <figure class="wp-block-media-text__media">
+               <i class="ferrari--spinner"></i>
+               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png" alt="" class="ferrari__img ferrari--not-loaded wp-image-42630" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+               <noscript>
+                <img src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png" alt="" class="wp-image-42630" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+               </noscript>
+              </figure>
+              <div class="wp-block-media-text__content"> 
+               <p class="has-large-font-size">SJ’S MUSINGS FROM CROATIA</p> 
+              </div>
+             </div> 
+            </div> 
+            <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+             <div class="wp-block-button">
+              <a class="wp-block-button__link" href="/category/croatia-travel-blog/">See All</a>
+             </div> 
+            </div> 
+           </div> 
+           <div class="foundry-block-post-grid aligncenter">
+            <div class="foundry-post-grid-items is-grid columns-2">
+             <article class="has-thumb">
+              <div class="ab-block-post-grid-image">
+               <a href="https://www.chasingthedonkey.com/coronavirus-in-croatia-balkans-covid-19/" rel="bookmark"><i class="ferrari--spinner"></i><img width="999" height="667" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Covid-2019: Should You Cancel Your Trip To Croatia With Coronavirus Now Confirmed - HEADER" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019.jpg.optimal.jpg 999w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-900x601.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-250x167.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-768x513.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-600x400.jpg.optimal.jpg 600w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-735x491.jpg.optimal.jpg 735w" sizes="(max-width: 999px) 100vw, 999px">
+                <noscript>
+                 <img width="999" height="667" src="https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Covid-2019: Should You Cancel Your Trip To Croatia With Coronavirus Now Confirmed - HEADER" srcset="https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019.jpg.optimal.jpg 999w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-900x601.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-250x167.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-768x513.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-600x400.jpg.optimal.jpg 600w, https://s27412.pcdn.co/wp-content/uploads/2020/02/CORONA-VIRUS_Depositphotos_345197516_s-2019-735x491.jpg.optimal.jpg 735w" sizes="(max-width: 999px) 100vw, 999px">
+                </noscript></a>
+              </div>
+              <div class="foundry-block-post-grid-text">
+               <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/coronavirus-in-croatia-balkans-covid-19/" rel="bookmark">Coronavirus In Croatia &amp; The Balkans</a></h2>
+               <div class="foundry-block-post-grid-byline">
+                <div class="foundry-block-post-grid-author">
+                 <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/chasingthedonkey/">SJ Begonja</a>
+                </div><time datetime="2020-03-25T00:00:17+01:00" class="foundry-block-post-grid-date">March 25, 2020</time>
+               </div>
+               <div class="foundry-block-post-grid-excerpt">
+                <p>Coronavirus. A word that has been in the media for a few months. Lots of worrying reports, many good news stories about the healed cases Coronavirus (COVID-2019) cases. But, no denying it continues to spread globally, now including into the Balkans.</p> 
+                <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/coronavirus-in-croatia-balkans-covid-19/" rel="bookmark">Continue Reading</a></p>
+               </div>
+              </div>
+             </article> 
+             <article class="has-thumb">
+              <div class="ab-block-post-grid-image">
+               <a href="https://www.chasingthedonkey.com/coronavirus-lockdown-in-croatia/" rel="bookmark"><i class="ferrari--spinner"></i><img width="800" height="467" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Coronavirus Croatia Lockdown" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019.jpg.optimal.jpg 800w, https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019-250x146.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019-768x448.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019-735x429.jpg.optimal.jpg 735w" sizes="(max-width: 800px) 100vw, 800px">
+                <noscript>
+                 <img width="800" height="467" src="https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Coronavirus Croatia Lockdown" srcset="https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019.jpg.optimal.jpg 800w, https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019-250x146.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019-768x448.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2020/03/Global-pandedmic-coronavirus-flu-outbreak-Croatia_Depositphotos_351804784_s-2019-735x429.jpg.optimal.jpg 735w" sizes="(max-width: 800px) 100vw, 800px">
+                </noscript></a>
+              </div>
+              <div class="foundry-block-post-grid-text">
+               <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/coronavirus-lockdown-in-croatia/" rel="bookmark">Diary Of (Self Imposed) Coronavirus Lockdown In Croatia</a></h2>
+               <div class="foundry-block-post-grid-byline">
+                <div class="foundry-block-post-grid-author">
+                 <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/chasingthedonkey/">SJ Begonja</a>
+                </div><time datetime="2020-03-18T00:00:19+01:00" class="foundry-block-post-grid-date">March 18, 2020</time>
+               </div>
+               <div class="foundry-block-post-grid-excerpt">
+                <p>So, today it begins. Life behind closed doors…well, maybe not all the way closed. Let’s see. But certainly, there will be no traveling, which will hit me the hardest. And, no parties or socializing are in our future.</p> 
+                <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/coronavirus-lockdown-in-croatia/" rel="bookmark">Continue Reading</a></p>
+               </div>
+              </div>
+             </article> 
+            </div>
+           </div>
+          </div>
+         </div>
+        </div> 
+        <div class="wp-block-spacer" style="height: 50px;" aria-hidden="true">
+         &nbsp;
+        </div> 
+        <div class="wp-block-fgx-foundry-variable-columns fgx-var-columns has-2-columns __left80 __right20 category-heading"> 
+         <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+          <div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto">
+           <figure class="wp-block-media-text__media">
+            <i class="ferrari--spinner"></i>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png" alt="" class="ferrari__img ferrari--not-loaded wp-image-42630" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+            <noscript>
+             <img src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png" alt="" class="wp-image-42630" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-croatia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+            </noscript>
+           </figure>
+           <div class="wp-block-media-text__content"> 
+            <p class="has-large-font-size">CROATIAN COOKING RECIPES</p> 
+           </div>
+          </div> 
+         </div> 
+         <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+          <div class="wp-block-button">
+           <a class="wp-block-button__link" href="/category/croatian-recipes-in-english/">See All</a>
+          </div> 
+         </div> 
+        </div> 
+        <div class="foundry-block-post-grid aligncenter">
+         <div class="foundry-post-grid-items is-grid columns-2">
+          <article class="has-thumb">
+           <div class="ab-block-post-grid-image">
+            <a href="https://www.chasingthedonkey.com/croatian-oblatne-s-cokoladnom-karamel-kremom-tort-wafers-cake/" rel="bookmark"><i class="ferrari--spinner"></i><img width="800" height="585" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="How To Make How To Make Oblatne s Čokoladnom Karamel Kremom (Tort Wafers Cake) 27" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27.jpg.optimal.jpg 800w, https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27-250x183.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27-768x562.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27-735x537.jpg.optimal.jpg 735w" sizes="(max-width: 800px) 100vw, 800px">
+             <noscript>
+              <img width="800" height="585" src="https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="How To Make How To Make Oblatne s Čokoladnom Karamel Kremom (Tort Wafers Cake) 27" srcset="https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27.jpg.optimal.jpg 800w, https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27-250x183.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27-768x562.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2020/03/How-To-Make-How-To-Make-Oblatne-s-Čokoladnom-Karamel-Kremom-Tort-Wafers-Cake-27-735x537.jpg.optimal.jpg 735w" sizes="(max-width: 800px) 100vw, 800px">
+             </noscript></a>
+           </div>
+           <div class="foundry-block-post-grid-text">
+            <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/croatian-oblatne-s-cokoladnom-karamel-kremom-tort-wafers-cake/" rel="bookmark">How To Make Oblatne s Čokoladnom Karamel Kremom (Tort Wafers Cake)</a></h2>
+            <div class="foundry-block-post-grid-byline">
+             <div class="foundry-block-post-grid-author">
+              <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/vedranb/">Vedran Bošković</a>
+             </div><time datetime="2020-03-14T00:00:41+01:00" class="foundry-block-post-grid-date">March 14, 2020</time>
+            </div>
+            <div class="foundry-block-post-grid-excerpt">
+             <p>Here is how to make Croatian oblatne – tasty wafers that are filled chocolate dulce de leche filling. Nothing like your Baka makes. These ones are better!!</p> 
+             <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/croatian-oblatne-s-cokoladnom-karamel-kremom-tort-wafers-cake/" rel="bookmark">Read More</a></p>
+            </div>
+           </div>
+          </article> 
+          <article class="has-thumb">
+           <div class="ab-block-post-grid-image">
+            <a href="https://www.chasingthedonkey.com/croatian-easter-bread-recipe-sirnica/" rel="bookmark"><i class="ferrari--spinner"></i><img width="900" height="596" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="How To Make Sirnica Recipe" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17-250x166.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17-768x509.jpg.optimal.jpg 768w" sizes="(max-width: 900px) 100vw, 900px">
+             <noscript>
+              <img width="900" height="596" src="https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="How To Make Sirnica Recipe" srcset="https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17-250x166.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2018/03/How-To-Make-Sirnica-Recipe-17-768x509.jpg.optimal.jpg 768w" sizes="(max-width: 900px) 100vw, 900px">
+             </noscript></a>
+           </div>
+           <div class="foundry-block-post-grid-text">
+            <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/croatian-easter-bread-recipe-sirnica/" rel="bookmark">Croatian Easter Bread Recipe (Sirnica or Pinca)</a></h2>
+            <div class="foundry-block-post-grid-byline">
+             <div class="foundry-block-post-grid-author">
+              <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/vedranb/">Vedran Bošković</a>
+             </div><time datetime="2020-02-16T00:00:55+01:00" class="foundry-block-post-grid-date">February 16, 2020</time>
+            </div>
+            <div class="foundry-block-post-grid-excerpt">
+             <p>Sirnica is a traditional Croatian Easter Bread – here is an easy to follow recipe to make it at home.</p> 
+             <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/croatian-easter-bread-recipe-sirnica/" rel="bookmark">Read More</a></p>
+            </div>
+           </div>
+          </article> 
+         </div>
+        </div> 
+        <div class="wp-block-spacer" style="height: 50px;" aria-hidden="true">
+         &nbsp;
+        </div> 
+        <div class="wp-block-spacer" style="height: 50px;" aria-hidden="true">
+         &nbsp;
+        </div> 
+        <div class="wp-block-fgx-foundry-variable-columns fgx-var-columns has-2-columns __left80 __right20 category-heading"> 
+         <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+          <div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto">
+           <figure class="wp-block-media-text__media">
+            <i class="ferrari--spinner"></i>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-bosnia.png" alt="" class="ferrari__img ferrari--not-loaded wp-image-42629" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-bosnia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-bosnia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+            <noscript>
+             <img src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-bosnia.png" alt="" class="wp-image-42629" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-bosnia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-bosnia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+            </noscript>
+           </figure>
+           <div class="wp-block-media-text__content"> 
+            <p class="has-large-font-size">BOSNIA-HERZEGOVINA TRAVEL</p> 
+           </div>
+          </div> 
+         </div> 
+         <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+          <div class="wp-block-button">
+           <a class="wp-block-button__link" href="/category/bosnia-and-herzegovina-travel-blog/">See All</a>
+          </div> 
+         </div> 
+        </div> 
+        <div class="foundry-block-post-grid aligncenter">
+         <div class="foundry-post-grid-items is-grid columns-2">
+          <article class="has-thumb">
+           <div class="ab-block-post-grid-image">
+            <a href="https://www.chasingthedonkey.com/tipping-in-bosnia-herzegovina/" rel="bookmark"><i class="ferrari--spinner"></i><img width="1000" height="1000" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2.png" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Balkan Flags_Bosnia-Herzegovina 2" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2.png 1000w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-250x250.png 250w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-900x900.png 900w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-768x768.png 768w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-600x600.png 600w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-200x200.png 200w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-320x320.png 320w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-480x480.png 480w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-720x720.png 720w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-735x735.png 735w" sizes="(max-width: 1000px) 100vw, 1000px">
+             <noscript>
+              <img width="1000" height="1000" src="https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2.png" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Balkan Flags_Bosnia-Herzegovina 2" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2.png 1000w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-250x250.png 250w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-900x900.png 900w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-768x768.png 768w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-600x600.png 600w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-200x200.png 200w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-320x320.png 320w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-480x480.png 480w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-720x720.png 720w, https://s27412.pcdn.co/wp-content/uploads/2019/10/Balkan-Flags_BiH-2-735x735.png 735w" sizes="(max-width: 1000px) 100vw, 1000px">
+             </noscript></a>
+           </div>
+           <div class="foundry-block-post-grid-text">
+            <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/tipping-in-bosnia-herzegovina/" rel="bookmark">Tipping In Bosnia &amp; Herzegovina: How To Tip In Bosnia-Herzegovina</a></h2>
+            <div class="foundry-block-post-grid-byline">
+             <div class="foundry-block-post-grid-author">
+              <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/marilyn/">Ana Horvat</a>
+             </div><time datetime="2020-02-11T00:00:38+01:00" class="foundry-block-post-grid-date">February 11, 2020</time>
+            </div>
+            <div class="foundry-block-post-grid-excerpt">
+             <p>Headed to Bosnia-Herzegovina? Then you’ll need to know how to tip. Here in this tipping in Bosnia-Herzegovina guide, we cover hotels, restaurants, tours and taxi drivers.</p> 
+             <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/tipping-in-bosnia-herzegovina/" rel="bookmark">Read More</a></p>
+            </div>
+           </div>
+          </article> 
+          <article class="has-thumb">
+           <div class="ab-block-post-grid-image">
+            <a href="https://www.chasingthedonkey.com/national-parks-in-bosnia-and-herzegovina-guide/" rel="bookmark"><i class="ferrari--spinner"></i><img width="1280" height="960" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Milančev Buk - Una National Park" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2.jpg.optimal.jpg 1280w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-250x188.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-900x675.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-768x576.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-1024x768.jpg.optimal.jpg 1024w" sizes="(max-width: 1280px) 100vw, 1280px">
+             <noscript>
+              <img width="1280" height="960" src="https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="Milančev Buk - Una National Park" srcset="https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2.jpg.optimal.jpg 1280w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-250x188.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-900x675.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-768x576.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2018/07/Milančev-Buk-2-1024x768.jpg.optimal.jpg 1024w" sizes="(max-width: 1280px) 100vw, 1280px">
+             </noscript></a>
+           </div>
+           <div class="foundry-block-post-grid-text">
+            <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/national-parks-in-bosnia-and-herzegovina-guide/" rel="bookmark">National Parks In Bosnia And Herzegovina Guide</a></h2>
+            <div class="foundry-block-post-grid-byline">
+             <div class="foundry-block-post-grid-author">
+              <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/chasingthedonkey/">SJ Begonja</a>
+             </div><time datetime="2020-02-05T00:00:51+01:00" class="foundry-block-post-grid-date">February 5, 2020</time>
+            </div>
+            <div class="foundry-block-post-grid-excerpt">
+             <p>There are three beautiful national parks in Bosnia and Herzegovina: Sutjeska National Park, Kozara National Park and Una National Park.</p> 
+             <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/national-parks-in-bosnia-and-herzegovina-guide/" rel="bookmark">Read More</a></p>
+            </div>
+           </div>
+          </article> 
+         </div>
+        </div> 
+        <div class="wp-block-spacer" style="height: 50px;" aria-hidden="true">
+         &nbsp;
+        </div> 
+        <div style="background-color:#f9f9f9;padding-left:0%;padding-right:0%;padding-bottom:5%;padding-top:5%;margin-top:0%;margin-bottom:0%" class="wp-block-fgx-foundry-container alignfull fgx-block-container">
+         <div class="fgx-container-inside">
+          <div class="fgx-container-content" style="max-width:1160px"> 
+           <div class="wp-block-fgx-foundry-variable-columns fgx-var-columns has-2-columns __left80 __right20 category-heading"> 
+            <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+             <div class="wp-block-media-text alignwide" style="grid-template-columns:10% auto">
+              <figure class="wp-block-media-text__media">
+               <i class="ferrari--spinner"></i>
+               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-slovenia.png" alt="" class="ferrari__img ferrari--not-loaded wp-image-42632" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-slovenia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-slovenia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+               <noscript>
+                <img src="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-slovenia.png" alt="" class="wp-image-42632" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-slovenia.png 93w, https://s27412.pcdn.co/wp-content/uploads/2019/04/map-icon-slovenia-75x75.png 75w" sizes="(max-width: 93px) 100vw, 93px">
+               </noscript>
+              </figure>
+              <div class="wp-block-media-text__content"> 
+               <p class="has-large-font-size">SLOVENIA TRAVEL</p> 
+              </div>
+             </div> 
+            </div> 
+            <div class="wp-block-fgx-foundry-variable-column fgx-col"> 
+             <div class="wp-block-button">
+              <a class="wp-block-button__link" href="/category/slovenia-travel-blog/">See All</a>
+             </div> 
+            </div> 
+           </div> 
+           <div class="foundry-block-post-grid aligncenter">
+            <div class="foundry-post-grid-items is-grid columns-2">
+             <article class="has-thumb">
+              <div class="ab-block-post-grid-image">
+               <a href="https://www.chasingthedonkey.com/best-castles-in-slovenia-travel-blog/" rel="bookmark"><i class="ferrari--spinner"></i><img width="900" height="594" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="lake-bled-castle-slovenia-castles_slovenia-travel-blog" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1-250x165.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1-768x507.jpg.optimal.jpg 768w" sizes="(max-width: 900px) 100vw, 900px">
+                <noscript>
+                 <img width="900" height="594" src="https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="lake-bled-castle-slovenia-castles_slovenia-travel-blog" srcset="https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1-250x165.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2016/11/Lake-Bled-Castle-Slovenia-Castles_Slovenia-Travel-Blog-1-768x507.jpg.optimal.jpg 768w" sizes="(max-width: 900px) 100vw, 900px">
+                </noscript></a>
+              </div>
+              <div class="foundry-block-post-grid-text">
+               <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/best-castles-in-slovenia-travel-blog/" rel="bookmark">Slovenia Travel Blog: Best Castles In Slovenia</a></h2>
+               <div class="foundry-block-post-grid-byline">
+                <div class="foundry-block-post-grid-author">
+                 <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/chasingthedonkey/">SJ Begonja</a>
+                </div><time datetime="2020-02-17T00:00:41+01:00" class="foundry-block-post-grid-date">February 17, 2020</time>
+               </div>
+               <div class="foundry-block-post-grid-excerpt">
+                <p>Wanna be a Princess or a Prince for the day? True castle lovers should definitely head one (or all) of these magnificent castles in Slovenia. </p> 
+                <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/best-castles-in-slovenia-travel-blog/" rel="bookmark">Continue Reading</a></p>
+               </div>
+              </div>
+             </article> 
+             <article class="has-thumb">
+              <div class="ab-block-post-grid-image">
+               <a href="https://www.chasingthedonkey.com/how-to-get-from-ljubljana-to-lake-bled-to-ljubljana-slovenia/" rel="bookmark"><i class="ferrari--spinner"></i><img width="1280" height="853" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015.jpg.optimal.jpg" class="ferrari__img ferrari--not-loaded attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="BEST BALKAN CITIES_Holidays In The Balkans - LAKE BLED" srcset="" data-srcset="https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015.jpg.optimal.jpg 1280w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-250x167.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-900x600.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-768x512.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-1024x682.jpg.optimal.jpg 1024w" sizes="(max-width: 1280px) 100vw, 1280px">
+                <noscript>
+                 <img width="1280" height="853" src="https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015.jpg.optimal.jpg" class="attachment-ab-block-post-grid-landscape size-ab-block-post-grid-landscape" alt="BEST BALKAN CITIES_Holidays In The Balkans - LAKE BLED" srcset="https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015.jpg.optimal.jpg 1280w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-250x167.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-900x600.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-768x512.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2019/01/LAKE-BLED_Depositphotos_61617883_l-2015-1024x682.jpg.optimal.jpg 1024w" sizes="(max-width: 1280px) 100vw, 1280px">
+                </noscript></a>
+              </div>
+              <div class="foundry-block-post-grid-text">
+               <h2 class="foundry-block-post-grid-title"><a href="https://www.chasingthedonkey.com/how-to-get-from-ljubljana-to-lake-bled-to-ljubljana-slovenia/" rel="bookmark">How To Get From Ljubljana To Lake Bled, Slovenia</a></h2>
+               <div class="foundry-block-post-grid-byline">
+                <div class="foundry-block-post-grid-author">
+                 <a class="ab-text-link" href="https://www.chasingthedonkey.com/author/marilyn/">Ana Horvat</a>
+                </div><time datetime="2020-02-11T00:00:02+01:00" class="foundry-block-post-grid-date">February 11, 2020</time>
+               </div>
+               <div class="foundry-block-post-grid-excerpt">
+                <p>This is your comprehensive guide on how to get from Ljubljana to Lake Bled. Bus train and car – all covered for you.</p> 
+                <p><a class="foundry-block-post-grid-link ab-text-link" href="https://www.chasingthedonkey.com/how-to-get-from-ljubljana-to-lake-bled-to-ljubljana-slovenia/" rel="bookmark">Continue Reading</a></p>
+               </div>
+              </div>
+             </article> 
+            </div>
+           </div>
+          </div>
+         </div>
+        </div> 
+       </div><!-- .entry-content --> 
+      </article><!-- #post-7065 --> 
+     </main><!-- #main --> 
+    </div><!-- #primary --> 
+   </div><!-- #content --> 
+   <footer id="colophon" class="site-footer"> 
+    <div class="footer-widgets-wrap"> 
+     <div class="footer-widgets footer-widgets__layout_default"> 
+      <div class="footer-widget-area footer-widget-area__default-flex"> 
+       <div class="footer-widgets__link-boxes"> 
+        <div id="text-2" class="widget widget_text">
+         <h6 class="widget-title">TRAVEL GEAR</h6> 
+         <div class="textwidget">
+          <ul> 
+           <li><a href="https://www.chasingthedonkey.com/croatia-travel-blog/best-packing-cubes-for-travel/">Best Packing Cubes</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/croatia-travel-blog/best-shoes-for-travel-tips-for-picking-the-best-travel-shoes/">Best Shoes For Travel</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/travel-reviews/best-compression-socks-for-flying-socks/">Travel Compression Socks</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/croatia-travel-blog/what-what-to-wear-on-a-longhaul-flight-tips/">What To Wear On Long Flight</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/travel-reviews/best-anti-theft-backpacks-for-travel-anti-theft-bags/">Anti Theft Backpacks For Travel</a></li> 
+          </ul> 
+         </div> 
+        </div>
+        <div id="text-3" class="widget widget_text">
+         <h6 class="widget-title">DRIVING THE BALKANS</h6> 
+         <div class="textwidget">
+          <ul> 
+           <li><a href="https://www.chasingthedonkey.com/car-rental-croatia-driving-in-croatia-travel-blog/" target="_blank" rel="noopener noreferrer">Driving In Croatia</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/rent-a-car-kosovo-driving-in-kosovo/" target="_blank" rel="noopener noreferrer">Driving In Kosovo</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/rent-a-car-albania-driving-in-albania/" target="_blank" rel="noopener noreferrer">Driving In Albania</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/rent-a-car-bulgaria-driving-in-bulgaria/" target="_blank" rel="noopener noreferrer">Driving In Bulgaria</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/driving-in-bosnia-rent-a-car-bosnia-car-hire/" target="_blank" rel="noopener noreferrer">Driving In Bosnia-Herzegovina</a></li> 
+          </ul> 
+         </div> 
+        </div>
+        <div id="text-4" class="widget widget_text">
+         <h6 class="widget-title">GETTING AROUND CROATIA</h6> 
+         <div class="textwidget">
+          <ul id="menu-getting-around-croatia" class="menu"> 
+           <li id="menu-item-35484" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35484"><a href="https://www.chasingthedonkey.com/croatia-transfers-croatia-airport-transfers/">Croatia Airport Private Transfers</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/how-to-get-from-split-to-zadar-croatia/">How To Get From Split To Zadar</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/how-to-get-from-zagreb-to-split-to-zagreb/">How To Get From Zagreb To Split</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/how-to-get-from-split-to-dubrovnik-to-split/">How To Get From Split to Dubrovnik</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/how-to-get-from-zagreb-to-ljubljana-to-zagreb/">How To Get From Zagreb To Ljubljana</a></li> 
+          </ul> 
+         </div> 
+        </div>
+        <div id="text-5" class="widget widget_text">
+         <h6 class="widget-title">TRAVEL WITH KIDS</h6> 
+         <div class="textwidget">
+          <ul> 
+           <li><a href="https://www.chasingthedonkey.com/travel-reviews/best-umbrella-stroller-for-travel-reviews/">Travel Strollers</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/travel-reviews/best-portable-high-chair-reviews/">Portable High Chairs</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/travel-reviews/best-family-passport-holder-multiple-passport-holder-reviews/">Family Travel Wallets</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/croatia-travel-blog/accommodation-in-croatia/family-resorts-hotels/">Kids Hotels In Croatia</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/travel-reviews/best-noise-canceling-headphones-for-kids-reviews-comparison/">Kids Noise Cancelling Headphones</a></li> 
+          </ul> 
+         </div> 
+        </div>
+        <div id="text-6" class="widget widget_text">
+         <h6 class="widget-title">BALKANS ACCOMMODATION</h6> 
+         <div class="textwidget">
+          <ul> 
+           <li><a href="https://www.chasingthedonkey.com/bulgaria-travel-guide/where-to-stay-in-sofia-bulgaria/">Where To Stay In Sofia</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/montenegro-travel-guide/where-to-stay-in-kotor-bay/" target="_blank" rel="noopener noreferrer">Where To Stay In Kotor</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/serbia-travel-guide/where-to-stay-in-belgrade-serbia-accomodation/" target="_blank" rel="noopener noreferrer">Where To Stay In Serbia</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/albania-travel-guide/best-hotels-in-tirana-accommodation/">Where To Stay In Tirana</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/bosnia-and-herzegovina-travel/where-to-stay-in-sarajevo-hotels/">Where To Stay In Sarajevo</a></li> 
+          </ul> 
+         </div> 
+        </div>
+        <div id="text-7" class="widget widget_text">
+         <h6 class="widget-title">CROATIA ACCOMMODATION</h6> 
+         <div class="textwidget">
+          <ul id="menu-accommodation-in-croatia" class="menu"> 
+           <li><a href="https://www.chasingthedonkey.com/croatia-travel-blog/accommodation-in-croatia/where-to-stay-in-hvar-island/">Where To Stay In Hvar</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/where-to-stay-in-split-accommodation/">Where To Stay In Split</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/where-to-stay-in-dubrovnik/">Where To Stay In Dubrovnik</a></li> 
+           <li><a href="https://www.chasingthedonkey.com/croatia-travel-blog/accommodation-in-croatia/all-inclusive-hotels-in-croatia/" target="_blank" rel="noopener noreferrer">All Inclusive Hotels In Croatia</a></li> 
+           <li id="menu-item-25967" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-25967"><a href="https://www.chasingthedonkey.com/croatia-travel-blog/accommodation-in-croatia/family-resorts-hotels/">Croatia Family Resorts &amp; Hotels</a></li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="footer-widgets__bottom-col"> 
+        <div class="footer-widgets__family-img"> 
+         <div id="media_image-2" class="widget widget_media_image">
+          <img width="900" height="600" src="https://s27412.pcdn.co/wp-content/uploads/2018/11/Family-Photo-Shot2-900x600.jpg.optimal.jpg" class="image wp-image-37293  attachment-medium size-medium" alt="Family Photo Shot - Nin Croatia" style="max-width: 100%; height: auto;" srcset="https://s27412.pcdn.co/wp-content/uploads/2018/11/Family-Photo-Shot2-900x600.jpg.optimal.jpg 900w, https://s27412.pcdn.co/wp-content/uploads/2018/11/Family-Photo-Shot2-250x167.jpg.optimal.jpg 250w, https://s27412.pcdn.co/wp-content/uploads/2018/11/Family-Photo-Shot2-768x512.jpg.optimal.jpg 768w, https://s27412.pcdn.co/wp-content/uploads/2018/11/Family-Photo-Shot2-1024x683.jpg.optimal.jpg 1024w, https://s27412.pcdn.co/wp-content/uploads/2018/11/Family-Photo-Shot2.jpg.optimal.jpg 1600w" sizes="(max-width: 900px) 100vw, 900px">
+         </div> 
+        </div> 
+        <div class="footer-widgets__about-ctd"> 
+         <div id="text-8" class="widget widget_text">
+          <h6 class="widget-title">Chasing the Donkey – Croatia &amp; Balkan Travel Blog</h6> 
+          <div class="textwidget">
+           <p>We blog about the best travel destinations in Croatia, Albania, Bosnia-Herzegovina, Bulgaria, Montenegro, Slovenia, Azerbaijan, Georgia, Nth. Macedonia, Romania, Russia and Serbia.</p> 
+           <p>We travel all over seeking out food, accommodation and the best things to do in the Balkans so you’ll save time travel planning &amp; travel like a local.</p> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="footer-widgets__get-social"> 
+         <div id="foundry_social_links-3" class="widget widget_foundry_social_links">
+          <h6 class="widget-title">Let's Get Social</h6> 
+          <div class="foundry-social"> 
+           <div class="foundry-social__wrapper"> <a style="background-color: #3a579a" class="foundry-social__link fab fa-facebook-f  " href="https://www.facebook.com/chasingthedonkey"><i class="fa  foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #bc2a8d" class="foundry-social__link fab fa-instagram  " href="https://www.instagram.com/chasing_the_donkey"><i class="fa  foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #00abf0" class="foundry-social__link fab fa-twitter  " href="https://twitter.com/chasethedonkey"><i class="fa  foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #c92228" class="foundry-social__link fab fa-pinterest-p  " href="https://pinterest.com/chasethedonkey"><i class="fa  foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #0077b5" class="foundry-social__link fab fa-linkedin-in  " href="https://www.linkedin.com/in/sjbegonja"><i class="fa  foundry-social__icon " aria-hidden="true"></i></a> 
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div><!-- .widget-area --> 
+     </div> <!-- end of footer-widgets --> 
+    </div> 
+    <div class="site-info"> 
+     <div class="site-credits"> 
+      <div id="text-9" class="website-by"> 
+       <div class="textwidget">
+        <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to <a href="https://www.chasingthedonkey.com/privacy-policy/">Amazon.com and affiliated sites</a>.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="site-cert"> <span class="copyright"> <span>© </span> <span class="blogname">Chasing the Donkey </span> <span>2020. All Rights Reserved.</span> </span> 
+     </div> 
+    </div><!-- .site-info --> 
+   </footer><!-- #colophon --> 
+  </div><!-- #page --> 
+  <script async src="https://snippet.affilimate.io?apiToken=LOnmmE4j"></script> <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5ZQ65BR" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> <!-- End Google Tag Manager (noscript) --> 
+  <div id="amzn-assoc-ad-a3d72323-b18f-483b-98c9-5152c437470d"></div>
+  <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=a3d72323-b18f-483b-98c9-5152c437470d"></script> 
+  <div id="fb-root"></div> 
+  <script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=116819921676221&autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script> <!-- Foundry Adds ga ends --> 
+  <div id="wpcp-error-message" class="msgmsg-box-wpcp warning-wpcp hideme">
+   <span>error: </span>No. Sorry. 
+  </div> 
+  <script>
+	var timeout_result;
+	function show_wpcp_message(smessage)
+	{
+		if (smessage !== "")
+			{
+			var smessage_text = '<span>Alert: </span>'+smessage;
+			document.getElementById("wpcp-error-message").innerHTML = smessage_text;
+			document.getElementById("wpcp-error-message").className = "msgmsg-box-wpcp warning-wpcp showme";
+			clearTimeout(timeout_result);
+			timeout_result = setTimeout(hide_message, 3000);
+			}
+	}
+	function hide_message()
+	{
+		document.getElementById("wpcp-error-message").className = "msgmsg-box-wpcp warning-wpcp hideme";
+	}
+	</script> 
+  <style type="text/css">
+	#wpcp-error-message {
+	    direction: ltr;
+	    text-align: center;
+	    transition: opacity 900ms ease 0s;
+	    z-index: 99999999;
+	}
+	.hideme {
+    	opacity:0;
+    	visibility: hidden;
+	}
+	.showme {
+    	opacity:1;
+    	visibility: visible;
+	}
+	.msgmsg-box-wpcp {
+		border-radius: 10px;
+		color: #555;
+		font-family: Tahoma;
+		font-size: 11px;
+		margin: 10px;
+		padding: 10px 36px;
+		position: fixed;
+		width: 255px;
+		top: 50%;
+  		left: 50%;
+  		margin-top: -10px;
+  		margin-left: -130px;
+  		-webkit-box-shadow: 0px 0px 34px 2px rgba(242,191,191,1);
+		-moz-box-shadow: 0px 0px 34px 2px rgba(242,191,191,1);
+		box-shadow: 0px 0px 34px 2px rgba(242,191,191,1);
+	}
+	.msgmsg-box-wpcp span {
+		font-weight:bold;
+		text-transform:uppercase;
+	}
+	.error-wpcp {		background:#ffecec url('https://s27412.pcdn.co/wp-content/plugins/wp-content-copy-protector/images/error.png') no-repeat 10px 50%;
+		border:1px solid #f5aca6;
+	}
+	.success {
+		background:#e9ffd9 url('https://s27412.pcdn.co/wp-content/plugins/wp-content-copy-protector/images/success.png') no-repeat 10px 50%;
+		border:1px solid #a6ca8a;
+	}
+	.warning-wpcp {
+		background:#ffecec url('https://s27412.pcdn.co/wp-content/plugins/wp-content-copy-protector/images/warning.png') no-repeat 10px 50%;
+		border:1px solid #f5aca6;
+	}
+	.notice {
+		background:#e3f7fc url('https://s27412.pcdn.co/wp-content/plugins/wp-content-copy-protector/images/notice.png') no-repeat 10px 50%;
+		border:1px solid #8ed9f6;
+	}
+    </style> 
+  <script type="text/javascript" src="//s27412.pcdn.co/wp-content/plugins/gutenberg-blocks/assets/js/dist/../bootstrap.bundle.min.js?ver=1579610981" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var foundryLazySettings = {"aggressive":"true"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/mu-plugins/foundry-mu/inc/performance/assets/js/lazy-load.min.js?ver=1.9.1" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/www.chasingthedonkey.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/cache/js/c527c524609478b4dfc41b058ff822e4.min.js" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var EasyAzonPro_Localize_Links = {"ajaxAction":"easyazonpro_localize","ajaxUrl":"https:\/\/www.chasingthedonkey.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/cache/js/8defbff9b9797ceb6b8a12b6419651d8.min.js" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var EasyAzonPro_Components_Popovers = {"ajaxUrl":"https:\/\/www.chasingthedonkey.com\/wp-admin\/admin-ajax.php","ajaxAction":"easyazon_get_popover_markup","loading":"Loading product data.","placement":"top","template":"<div class=\"popover easyazon-popover\"><div class=\"arrow\"><\/div><h3 class=\"popover-title\"><\/h3><div class=\"popover-content easyazon-popover-content\"><\/div><\/div>","timeout":"750"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/cache/js/94b959542698d222abba27615b60699a.min.js" defer></script>
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/themes/ctd-starter-theme/assets/js/scripts.min.js?ver=201903332" defer></script>
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-includes/js/wp-embed.min.js?ver=5.3.2" defer></script> 
+  <script type="text/javascript" src="https://s27412.pcdn.co/wp-content/themes/ctd-starter-theme/assets/js/theme-async.min.js?ver=201903332" async></script> 
+  <script type="text/javascript">function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"073b4df364","applicationID":"170911749","transactionName":"ZQZWMhBXVxYAUxdYDFxMdQUWX1YLTlYRXg1GTkQHBVM=","queueTime":0,"applicationTime":147,"atts":"SUFVRFhNRBg=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

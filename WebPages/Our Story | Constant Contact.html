@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta name="_csrf" content="69a161de-8e90-4619-a2d0-6fd8a0f53fff"> 
+  <meta name="_csrf_header" content="X-CSRF-TOKEN"> 
+  <link href="https://cdn.optimizely.com/js/2125675982.js?version=1585064634000" rel="prefetch"> 
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UwYAV1BACQUEVVFRDw==",licenseKey:"5ab79a9e36",applicationID:"1641038"};window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o||n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({1:[function(t,n,e){function r(t){try{s.console&&console.log(t)}catch(n){}}var o,i=t("ee"),a=t(21),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,n,e){r(e.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,n){return t}).join(", ")))},{}],2:[function(t,n,e){function r(t,n,e,r,s){try{p?p-=1:o(s||new UncaughtException(t,n,e),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,n,e){this.message=t||"Uncaught error with no additional information",this.sourceURL=n,this.line=e}function o(t,n){var e=n?null:c.now();i("err",[t,e])}var i=t("handle"),a=t(22),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError",p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(9),t(8),"addEventListener"in window&&t(5),c.xhrWrappable&&t(10),d=!0)}s.on("fn-start",function(t,n,e){d&&(p+=1)}),s.on("fn-err",function(t,n,e){d&&!e[l]&&(f(e,l,function(){return!0}),this.thrown=!0,o(e))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})},{}],3:[function(t,n,e){t("loader").features.ins=!0},{}],4:[function(t,n,e){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(9),s=t(8),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",g="pushState",y=t("loader");y.features.stn=!0,t(7),"addEventListener"in window&&t(5);var x=NREUM.o.EV;o.on(m,function(t,n){var e=t[0];e instanceof x&&(this.bstStart=y.now())}),o.on(w,function(t,n){var e=t[0];e instanceof x&&i("bst",[e,n,this.bstStart,y.now()])}),a.on(m,function(t,n,e){this.bstStart=y.now(),this.bstType=e}),a.on(w,function(t,n){i(v,[n,this.bstStart,y.now(),this.bstType])}),s.on(m,function(){this.bstStart=y.now()}),s.on(w,function(t,n){i(v,[n,this.bstStart,y.now(),"requestAnimationFrame"])}),o.on(g+p,function(t){this.time=y.now(),this.startPath=location.pathname+location.hash}),o.on(g+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,n,e){function r(t){for(var n=t;n&&!n.hasOwnProperty(u);)n=Object.getPrototypeOf(n);n&&o(n)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,n){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";n.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,n){var e=t[1],r=c(e,"nr@wrapped",function(){function t(){if("function"==typeof e.handleEvent)return e.handleEvent.apply(e,arguments)}var n={object:t,"function":e}[typeof e];return n?s(n,"fn-",null,n.name||"anonymous"):e});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,n,e){function r(t,n,e){var r=t[n];"function"==typeof r&&(t[n]=function(){var t=i(arguments),n={};o.emit(e+"before-start",[t],n);var a;n[m]&&n[m].dt&&(a=n[m].dt);var s=r.apply(this,t);return o.emit(e+"start",[t,a],s),s.then(function(t){return o.emit(e+"end",[null,t],s),t},function(t){throw o.emit(e+"end",[t],s),t})})}var o=t("ee").get("fetch"),i=t(22),a=t(21);n.exports=o;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,l=s.Response,p=s.fetch,h="prototype",m="nr@context";d&&l&&p&&(a(u,function(t,n){r(d[h],n,f),r(l[h],n,f)}),r(s,"fetch",c),o.on(c+"end",function(t,n){var e=this;if(n){var r=n.headers.get("content-length");null!==r&&(e.rxSize=r),o.emit(c+"done",[null,n],e)}else o.emit(c+"done",[t],e)}))},{}],7:[function(t,n,e){var r=t("ee").get("history"),o=t("wrap-function")(r);n.exports=r;var i=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;i&&i.pushState&&i.replaceState&&(a=i),o.inPlace(a,["pushState","replaceState"],"-")},{}],8:[function(t,n,e){var r=t("ee").get("raf"),o=t("wrap-function")(r),i="equestAnimationFrame";n.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],9:[function(t,n,e){function r(t,n,e){t[0]=a(t[0],"fn-",null,e)}function o(t,n,e){this.method=e,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,e)}var i=t("ee").get("timer"),a=t("wrap-function")(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";n.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],10:[function(t,n,e){function r(t,n){d.inPlace(n,["onreadystatechange"],"fn-",s)}function o(){var t=this,n=u.context(t);t.readyState>3&&!n.resolved&&(n.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,g,"fn-",s)}function i(t){y.push(t),h&&(b?b.then(a):w?w(a):(E=-E,O.data=E))}function a(){for(var t=0;t<y.length;t++)r([],y[t]);y.length&&(y=[])}function s(t,n){return n}function c(t,n){for(var e in t)n[e]=t[e];return n}t(5);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",g=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],y=[];n.exports=u;var x=window.XMLHttpRequest=function(t){var n=new p(t);try{u.emit("new-xhr",[n],n),n.addEventListener(v,o,!1)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}return n};if(c(p,x),x.prototype=p.prototype,d.inPlace(x.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,n){r(t,n),i(n)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!w&&!m){var E=1,O=document.createTextNode(E);new h(a).observe(O,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],11:[function(t,n,e){function r(t){if(!i(t))return null;var n=window.NREUM;if(!n.loader_config)return null;var e=(n.loader_config.accountID||"").toString()||null,r=(n.loader_config.agentID||"").toString()||null,s=(n.loader_config.trustKey||"").toString()||null;if(!e||!r)return null;var c=a.generateCatId(),f=a.generateCatId(),u=Date.now(),d=o(c,f,u,e,r,s);return{header:d,guid:c,traceId:f,timestamp:u}}function o(t,n,e,r,o,i){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:o,id:t,tr:n,ti:e}};return i&&r!==i&&(s.d.tk=i),btoa(JSON.stringify(s))}function i(t){var n=!1,e=!1,r={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(r=NREUM.init.distributed_tracing,e=!!r.enabled),e)if(t.sameOrigin)n=!0;else if(r.allowed_origins instanceof Array)for(var o=0;o<r.allowed_origins.length;o++){var i=s(r.allowed_origins[o]);if(t.hostname===i.hostname&&t.protocol===i.protocol&&t.port===i.port){n=!0;break}}return e&&n}var a=t(19),s=t(13);n.exports={generateTracePayload:r,shouldGenerateTrace:i}},{}],12:[function(t,n,e){function r(t){var n=this.params,e=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(d[r],this.listener,!1);n.aborted||(e.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==n.status&&(n.status=0):i(this,t),e.cbTime=this.cbTime,u.emit("xhr-done",[t],t),s("xhr",[n,e,this.startTime]))}}function o(t,n){var e=c(n),r=t.params;r.host=e.hostname+":"+e.port,r.pathname=e.pathname,t.parsedOrigin=c(n),t.sameOrigin=t.parsedOrigin.sameOrigin}function i(t,n){t.params.status=n.status;var e=w(n,t.lastSize);if(e&&(t.metrics.rxSize=e),t.sameOrigin){var r=n.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable){var s=t("handle"),c=t(13),f=t(11).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(17),m=t(16),w=t(14),v=window.XMLHttpRequest;a.features.xhr=!0,t(10),t(6),u.on("new-xhr",function(t){var n=this;n.totalCbs=0,n.called=0,n.cbTime=0,n.end=r,n.ended=!1,n.xhrGuids={},n.lastSize=null,n.loadCaptureCalled=!1,t.addEventListener("load",function(e){i(n,t)},!1),h&&(h>34||h<10)||window.opera||t.addEventListener("progress",function(t){n.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},o(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,n){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&n.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var e=f(this.parsedOrigin);e&&e.header&&(n.setRequestHeader("newrelic",e.header),this.dt=e)}),u.on("send-xhr-start",function(t,n){var e=this.metrics,r=t[0],o=this;if(e&&r){var i=m(r);i&&(e.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||o.loadCaptureCalled||(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof n.onload))&&o.end(n)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}};for(var s=0;s<l;s++)n.addEventListener(d[s],this.listener,!1)}),u.on("xhr-cb-time",function(t,n,e){this.cbTime+=t,n?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof e.onload||this.end(e)}),u.on("xhr-load-added",function(t,n){var e=""+p(t)+!!n;this.xhrGuids&&!this.xhrGuids[e]&&(this.xhrGuids[e]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,n){var e=""+p(t)+!!n;this.xhrGuids&&this.xhrGuids[e]&&(delete this.xhrGuids[e],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,n){n instanceof v&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],n)}),u.on("removeEventListener-end",function(t,n){n instanceof v&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],n)}),u.on("fn-start",function(t,n,e){n instanceof v&&("onload"===e&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,n){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,n],n)}),u.on("fetch-before-start",function(t){var n,e=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url&&(n=t[0].url),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var r=f(this.parsedOrigin);if(r&&r.header){var o=r.header;if("string"==typeof t[0]){var i={};for(var a in e)i[a]=e[a];i.headers=new Headers(e.headers||{}),i.headers.set("newrelic",o),this.dt=r,t.length>1?t[1]=i:t.push(i)}else t[0]&&t[0].headers&&(t[0].headers.append("newrelic",o),this.dt=r)}})}},{}],13:[function(t,n,e){var r={};n.exports=function(t){if(t in r)return r[t];var n=document.createElement("a"),e=window.location,o={};n.href=t,o.port=n.port;var i=n.href.split("://");!o.port&&i[1]&&(o.port=i[1].split("/")[0].split("@").pop().split(":")[1]),o.port&&"0"!==o.port||(o.port="https"===i[0]?"443":"80"),o.hostname=n.hostname||e.hostname,o.pathname=n.pathname,o.protocol=i[0],"/"!==o.pathname.charAt(0)&&(o.pathname="/"+o.pathname);var a=!n.protocol||":"===n.protocol||n.protocol===e.protocol,s=n.hostname===document.domain&&n.port===e.port;return o.sameOrigin=a&&(!n.hostname||s),"/"===o.pathname&&(r[t]=o),o}},{}],14:[function(t,n,e){function r(t,n){var e=t.responseType;return"json"===e&&null!==n?n:"arraybuffer"===e||"blob"===e||"json"===e?o(t.response):"text"===e||"document"===e||""===e||void 0===e?o(t.responseText):void 0}var o=t(16);n.exports=r},{}],15:[function(t,n,e){function r(){}function o(t,n,e){return function(){return i(t,[f.now()].concat(s(arguments)),n?null:this,e),n?void 0:this}}var i=t("handle"),a=t(21),s=t(22),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,n){u[n]=o(l+n,!0,"api")}),u.addPageAction=o(l+"addPageAction",!0),u.setCurrentRouteName=o(l+"routeName",!0),n.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,n){var e={},r=this,o="function"==typeof n;return i(p+"tracer",[f.now(),t,e],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],e),o)try{return n.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],e),t}finally{c.emit("fn-end",[f.now()],e)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,n){h[n]=o(p+n)}),newrelic.noticeError=function(t,n){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now(),!1,n])}},{}],16:[function(t,n,e){n.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(n){return}}}},{}],17:[function(t,n,e){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),n.exports=r},{}],18:[function(t,n,e){function r(t,n){var e=t.getEntries();e.forEach(function(t){"first-paint"===t.name?c("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&c("timing",["fcp",Math.floor(t.startTime)])})}function o(t,n){var e=t.getEntries();e.length>0&&c("lcp",[e[e.length-1]])}function i(t){if(t instanceof u&&!l){var n,e=Math.round(t.timeStamp);n=e>1e12?Date.now()-e:f.now()-e,l=!0,c("timing",["fi",e,{type:t.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,s,c=t("handle"),f=t("loader"),u=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),s=new PerformanceObserver(o);try{a.observe({entryTypes:["paint"]}),s.observe({entryTypes:["largest-contentful-paint"]})}catch(d){}}if("addEventListener"in document){var l=!1,p=["click","keydown","mousedown","pointerdown","touchstart"];p.forEach(function(t){document.addEventListener(t,i,!1)})}}},{}],19:[function(t,n,e){function r(){function t(){return n?15&n[e++]:16*Math.random()|0}var n=null,e=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(n=r.getRandomValues(new Uint8Array(31)));for(var o,i="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<i.length;s++)o=i[s],"x"===o?a+=t().toString(16):"y"===o?(o=3&t()|8,a+=o.toString(16)):a+=o;return a}function o(){function t(){return n?15&n[e++]:16*Math.random()|0}var n=null,e=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&Uint8Array&&(n=r.getRandomValues(new Uint8Array(31)));for(var o=[],i=0;i<16;i++)o.push(t().toString(16));return o.join("")}n.exports={generateUuid:r,generateCatId:o}},{}],20:[function(t,n,e){function r(t,n){if(!o)return!1;if(t!==o)return!1;if(!n)return!0;if(!i)return!1;for(var e=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==e[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(o="Safari",i=c[1])}n.exports={agent:o,version:i,match:r}},{}],21:[function(t,n,e){function r(t,n){var e=[],r="",i=0;for(r in t)o.call(t,r)&&(e[i]=n(r,t[r]),i+=1);return e}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],22:[function(t,n,e){function r(t,n,e){n||(n=0),"undefined"==typeof e&&(e=t?t.length:0);for(var r=-1,o=e-n||0,i=Array(o<0?0:o);++r<o;)i[r]=t[n+r];return i}n.exports=r},{}],23:[function(t,n,e){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,n,e){function r(){}function o(t){function n(t){return t&&t instanceof r?t:t?c(t,s,i):i()}function e(e,r,o,i){if(!l.aborted||i){t&&t(e,r,o);for(var a=n(o),s=m(e),c=s.length,f=0;f<c;f++)s[f].apply(a,r);var d=u[y[e]];return d&&d.push([x,e,r,a]),a}}function p(t,n){g[t]=m(t).concat(n)}function h(t,n){var e=g[t];if(e)for(var r=0;r<e.length;r++)e[r]===n&&e.splice(r,1)}function m(t){return g[t]||[]}function w(t){return d[t]=d[t]||o(e)}function v(t,n){f(t,function(t,e){n=n||"feature",y[e]=n,n in u||(u[n]=[])})}var g={},y={},x={on:p,addEventListener:p,removeEventListener:h,emit:e,get:w,listeners:m,context:n,buffer:v,abort:a,aborted:!1};return x}function i(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var s="nr@context",c=t("gos"),f=t(21),u={},d={},l=n.exports=o();l.backlog=u},{}],gos:[function(t,n,e){function r(t,n,e){if(o.call(t,n))return t[n];var r=e();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(t,n,e){function r(t,n,e,r){o.buffer([t],r),o.emit(t,n,e)}var o=t("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(t,n,e){function r(t){var n=typeof t;return!t||"object"!==n&&"function"!==n?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");n.exports=r},{}],loader:[function(t,n,e){function r(){if(!E++){var t=b.info=NREUM.info,n=p.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&n))return u.abort();f(y,function(n,e){t[n]||(t[n]=e)}),c("mark",["onload",a()+b.offset],null,"api");var e=p.createElement("script");e.src="https://"+t.agent,n.parentNode.insertBefore(e,n)}}function o(){"complete"===p.readyState&&i()}function i(){c("mark",["domContent",a()+b.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(s=Math.max((new Date).getTime(),s))-b.offset}var s=(new Date).getTime(),c=t("handle"),f=t(21),u=t("ee"),d=t(20),l=window,p=l.document,h="addEventListener",m="attachEvent",w=l.XMLHttpRequest,v=w&&w.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:w,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var g=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},x=w&&v&&v[h]&&!/CriOS/.test(navigator.userAgent),b=n.exports={offset:s,now:a,origin:g,features:{},xhrWrappable:x,userAgent:d};t(15),t(18),p[h]?(p[h]("DOMContentLoaded",i,!1),l[h]("load",r,!1)):(p[m]("onreadystatechange",o),l[m]("onload",r)),c("mark",["firstbyte",s],null,"api");var E=0,O=t(23)},{}],"wrap-function":[function(t,n,e){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(22),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;n.exports=function(t,n){function e(t,n,e,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof e?e(r,a):e||{}}catch(f){l([f,"",[r,a,o],s])}u(n+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(d){throw u(n+"err",[r,a,d],s),d}finally{u(n+"end",[r,a,c],s)}}return r(t)?t:(n||(n=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function u(e,r,o){if(!c||n){var i=c;c=!0;try{t.emit(e,r,o,n)}catch(a){l([a,e,r,o])}c=i}}function d(t,n){if(Object.defineProperty&&Object.keys)try{var e=Object.keys(t);return e.forEach(function(e){Object.defineProperty(n,e,{get:function(){return t[e]},set:function(n){return t[e]=n,n}})}),n}catch(r){l([r])}for(var o in t)s.call(t,o)&&(n[o]=t[o]);return n}function l(n){try{t.emit("internal-error",n)}catch(e){}}return t||(t=o),e.inPlace=f,e.flag=a,e}},{}]},{},["loader",2,12,4,3]);</script>
+  <link rel="preconnect" href="https://logx.optimizely.com"> 
+  <script>
+        window.optimizely = window.optimizely || [];
+        window.optimizely.push({type: "holdEvents"});
+        window.addEventListener("load", function() {
+            window.optimizely.push({type: "sendEvents"});
+        });
+    </script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> 
+  <title>
+        Our Story | Constant Contact</title> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="description" content="When It comes to doing more business, you've got to think big. For us, that means raising our game to help you raise yours. Giving you an all-in-one online marketing platform. Learn more about us."> 
+  <meta name="twitter:account_id" content="25960305"> 
+  <meta name="copyright" content="Copyright Â© 1996-2020 Constant Contact, Inc. All rights reserved. Content and images that appear on this site, may not be reproduced, republished, repurposed, or distributed without prior written consent of Constant Contact, Inc."> 
+  <meta name="google-site-verification" content="aJrrqn64iJupriwWUxLGIgnAwknLKg6erqWf1tdZ_No"> 
+  <meta name="google-translate-customization" content="f7700d7bfd19d8c1-f0d39cb65422570a-g6369dc219f9ad682-17"> 
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
+  <meta name="msapplication-config" content="/IEconfig.xml"> 
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "Constant Contact",
+        "url": "https://www.constantcontact.com/"
+    }
+    </script> 
+  <script type="application/ld+json">
+    {
+        "@context": "http:\/\/schema.org",
+        "@type": "Organization",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Waltham",
+            "postalCode": "02451",
+            "streetAddress": "1601 Trapelo Road",
+            "addressRegion": "MA"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-866-289-2101",
+            "contactType": "Customer Service"
+        },
+        "url": "https://www.constantcontact.com/",
+        "sameAs": ["https://www.facebook.com/constantcontact",
+            "https://twitter.com/constantcontact",
+            "https://plus.google.com/+constantcontact",
+            "https://www.instagram.com/constantcontact/",
+            "https://www.linkedin.com/company/constant-contact"
+        ],
+        "name": "Constant Contact",
+        "logo": "https://static.ctctcdn.com/lp/images/standard/bv2/share/constant-contact-share-logo.gif"
+    }
+    </script> 
+  <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebPage",
+            "url": "http://www.constantcontact.com/ca/about",
+            "description": "When It comes to doing more business, you've got to think big. For us, that means raising our game to help you raise yours. Giving you an all-in-one online marketing platform. Learn more about us.",
+            "name": "Our Story | Constant Contact",
+            "image": ""
+        }
+    </script> 
+  <link rel="canonical" href="https://www.constantcontact.com/ca/about"> 
+  <link rel="alternate" hreflang="en-US" href="https://www.constantcontact.com/about"> 
+  <link rel="alternate" hreflang="es-MX" href="https://www.constantcontact.com/mx/about"> 
+  <link rel="alternate" hreflang="en-GB" href="https://www.constantcontact.com/uk/about"> 
+  <link rel="alternate" hreflang="en-CA" href="https://www.constantcontact.com/ca/about"> 
+  <link rel="alternate" hreflang="en-AU" href="https://www.constantcontact.com/au/about"> 
+  <link rel="alternate" hreflang="en-NZ" href="https://www.constantcontact.com/nz/about"> 
+  <link rel="alternate" hreflang="en-IN" href="https://www.constantcontact.com/in/about"> 
+  <link rel="alternate" hreflang="en-FR" href="https://www.constantcontact.com/fr/about"> 
+  <link rel="alternate" hreflang="en-DE" href="https://www.constantcontact.com/de/about"> 
+  <link rel="alternate" hreflang="es-ES" href="https://www.constantcontact.com/es/about"> 
+  <link rel="alternate" hreflang="es-CO" href="https://www.constantcontact.com/co/about"> 
+  <link rel="alternate" hreflang="x-default" href="https://www.constantcontact.com/global/about"> 
+  <link href="/favicon.ico?version=1585064634000" rel="shortcut icon" type="image/x-icon">
+  <meta property="og:image" content="//static.ctctcdn.com/lp/images/standard/bv2/share/constant-contact-share-logo.gif"> 
+  <meta property="og:image:secure_url" content="//static.ctctcdn.com/lp/images/standard/bv2/share/constant-contact-share-logo.gif"> 
+  <meta property="og:image:type" content="image/gif"> 
+  <meta property="og:image:width" content="300"> 
+  <meta property="og:image:height" content="300"> 
+  <link as="style" href="/site/guide/css/master.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null; this.rel='stylesheet'">
+  <noscript>
+   <link href="/site/guide/css/master.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <link as="style" href="https://static.ctctcdn.com/lp/fonts/roboto/roboto.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+   <link href="https://static.ctctcdn.com/lp/fonts/roboto/roboto.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <link as="style" href="/site/common/_styles/modules/cc-alertbar.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+   <link href="/site/common/_styles/modules/cc-alertbar.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <link as="style" href="/site/common/_styles/modules/cc-alert-modal.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+   <link href="/site/common/_styles/modules/cc-alert-modal.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <link href="/site/guide/css/cookie.css?version=1585064634000" rel="stylesheet" type="text/css">
+  <link href="/site/guide/css/pages/ctctfos12646-about.css?version=1585064634000" rel="stylesheet" type="text/css">
+  <link href="/site/guide/css/modules/navbar/maia.css?version=1585064634000" rel="stylesheet" type="text/css">
+  <link href="/site/guide/css/modules/accordion/corvus.css?version=1585064634000" rel="stylesheet" type="text/css">
+  <link as="style" href="/site/guide/css/pages/web10758-salesforce-chat.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+   <link href="/site/guide/css/pages/web10758-salesforce-chat.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <link as="style" href="/site/guide/css/modules/scroll-indicator/virgo.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+   <link href="/site/guide/css/modules/scroll-indicator/virgo.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <link as="style" href="/site/guide/css/modules/footer/spica.css?version=1585064634000" rel="preload" type="text/css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+   <link href="/site/guide/css/modules/footer/spica.css?version=1585064634000" rel="stylesheet" type="text/css">
+  </noscript> 
+  <script>
+        !function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+    </script> 
+  <script src="https://static.ctctcdn.com/h/jquery/2.1.4/jquery.min.js?version=1585064634000"></script>
+  <script>
+        if (typeof ctct === "undefined") {
+            var ctct = {};
+        }
+
+        if (typeof ctct.souid === "undefined") {
+            ctct.souid = "";
+        }
+    </script> 
+  <script src="/site/common/_script/modules/cc-optimizely.js?version=1585064634000" defer></script>
+  <script>
+            document.addEventListener('DOMContentLoaded', function optimizelyInit() {
+                ctct.optimizely.init({
+                    customTags: {
+                        "partner name": "ROVING",
+                        "campaign code": "",
+                        "relationship marketing code": ""
+                    }
+                }, window.location.hostname, window.location.search);
+            });
+        </script> 
+  <script src="https://cdn.optimizely.com/js/2125675982.js?version=1585064634000"></script>
+ </head> 
+ <body name="top" class="
+    "> 
+  <script>
+    var ctct = window.ctct || {};
+    ctct.isProd = true;
+</script> 
+  <header class="navbar navbar--expanded navbar--sticky" data-sct-link-location="top_nav" role="banner" id="navbar"> 
+   <div class="container container--navbar"> <a href="/index.jsp" class="navbar__logo" title="" data-tracked-action="logo" data-qe-id="logo"> <img src="https://static.ctctcdn.com/lp/images/standard/logos/logo-ctct-color.svg" alt="Constant Contact Logo"> </a> <span class="screen-reader-text" data-nosnippet>If you are using assistive technology and are unable to read any part of the Constant Contact website, or otherwise have difficulties using the Constant Contact website, please call 877-358-5969 and our customer service team will assist you.</span> <a href="#main-navigation" class="navbar__toggle" aria-label="Main Navigation Toggle" aria-expanded="false" data-tracked-action="menu-toggle" id="menu-toggle"> 
+     <div class="navbar__toggle-text">
+      Menu
+     </div> 
+     <div class="navbar__icon"> <span class="bar"></span> <span class="bar"></span> <span class="bar"></span> 
+     </div> </a> 
+    <nav role="navigation" aria-label="Main Navigation" class="navbar__menu" id="main-navigation"> 
+     <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement" class="navbar__global-nav"> 
+      <li class="navbar__item"> <a href="#submenu-back" class="navbar__back js-submenu-back" aria-hidden="true"> 
+        <svg width="8" height="13">
+         <path d="M0 6.5c0-.268.103-.536.308-.74L5.788.307a1.056 1.056 0 0 1 1.487 0c.411.409.411 1.071 0 1.48L2.54 6.5l4.735 4.713c.411.409.411 1.071 0 1.48a1.056 1.056 0 0 1-1.488 0L.308 7.24A1.041 1.041 0 0 1 0 6.5z" fill="#3C4A57" fill-rule="nonzero" />
+        </svg> <span>Back</span> </a> </li> 
+      <li itemprop="name" class="navbar__item "> <a itemprop="url" class="js-active navbar__link js-toggle-submenu" aria-expanded="false" " href="#" data-tracked-action="email marketing"> <span> Email Marketing</span> 
+        <svg width="8" height="13" xmlns="http://www.w3.org/2000/svg">
+         <path d="M7.583 6.5c0-.268-.102-.536-.308-.74L1.796.307a1.056 1.056 0 0 0-1.488 0 1.043 1.043 0 0 0 0 1.48L5.043 6.5.308 11.213a1.043 1.043 0 0 0 0 1.48c.411.41 1.077.41 1.488 0l5.48-5.453c.205-.204.307-.472.307-.74z" fill="#3C4A57" fill-rule="nonzero" />
+        </svg> </a> 
+       <ul class="navbar__submenu" aria-hidden="true"> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/email-marketing" data-tracked-action="email marketing overview"> Email Marketing Overview</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/email-templates" data-tracked-action="email templates" data-active-regex="/email-templates.*"> Email Templates</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/features/email-marketing-automation" data-tracked-action="marketing automation" data-active-regex="/features/email-marketing-automation.*"> Marketing Automation</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/features/facebook-and-instagram-ads" data-tracked-action="facebook and instagram ads"> Facebook &amp; Instagram Ads</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/features/google-ads" data-tracked-action="google ads"> Google Ads</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/features/ecommerce" data-tracked-action="ecommerce"> Ecommerce Integrations</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/email-marketing/email-campaign-ideas" data-tracked-action="email campaign ideas"> Email Campaign Ideas</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/pricing" data-tracked-action="email marketing pricing"> Email Marketing Pricing</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/free-email-marketing-trial" data-tracked-action="free trial"> Free Trial Information</a> </li> 
+       </ul> </li> 
+      <li itemprop="name" class="navbar__item "> <a itemprop="url" class="js-active navbar__link js-toggle-submenu" aria-expanded="false" " href="#" data-tracked-action="websites"> <span> Websites</span> 
+        <svg width="8" height="13" xmlns="http://www.w3.org/2000/svg">
+         <path d="M7.583 6.5c0-.268-.102-.536-.308-.74L1.796.307a1.056 1.056 0 0 0-1.488 0 1.043 1.043 0 0 0 0 1.48L5.043 6.5.308 11.213a1.043 1.043 0 0 0 0 1.48c.411.41 1.077.41 1.488 0l5.48-5.453c.205-.204.307-.472.307-.74z" fill="#3C4A57" fill-rule="nonzero" />
+        </svg> </a> 
+       <ul class="navbar__submenu" aria-hidden="true"> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website" data-tracked-action="websites overview" data-active-regex="/website.*"> Websites Overview</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/builder" data-tracked-action="website builder" data-active-regex="/website/builder.*"> Website Builder</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/ecommerce" data-tracked-action="online store" data-active-regex="/website/ecommerce.*"> Online Store</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/logos" data-tracked-action="logomaker" data-active-regex="/website/logos.*"> LogoMaker</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/pricing" data-tracked-action="website pricing" data-active-regex="/website/pricing.*"> Websites Pricing</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/domain" data-tracked-action="domains" data-active-regex="/website/domain.*"> Domains</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/free-website-builder" data-tracked-action="free website builder" data-active-regex="/website/free-website-builder.*"> Free Website Builder</a> </li> 
+       </ul> </li> 
+      <li itemprop="name" class="navbar__item "> <a itemprop="url" class="js-active navbar__link js-toggle-submenu" aria-expanded="false" " href="#" data-tracked-action="services and help"> <span> Services &amp; Help</span> 
+        <svg width="8" height="13" xmlns="http://www.w3.org/2000/svg">
+         <path d="M7.583 6.5c0-.268-.102-.536-.308-.74L1.796.307a1.056 1.056 0 0 0-1.488 0 1.043 1.043 0 0 0 0 1.48L5.043 6.5.308 11.213a1.043 1.043 0 0 0 0 1.48c.411.41 1.077.41 1.488 0l5.48-5.453c.205-.204.307-.472.307-.74z" fill="#3C4A57" fill-rule="nonzero" />
+        </svg> </a> 
+       <ul class="navbar__submenu" aria-hidden="true"> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/marketing-advisor" data-tracked-action="marketing advisors" data-active-regex="/marketing-advisor.*"> Marketing Advisors</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/services" data-tracked-action="services" data-active-regex="/services.*"> Professional Services</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="https://blogs.constantcontact.com" data-tracked-action="online marketing blog" target="_blank"> Online Marketing Blog</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="https://community.constantcontact.com/help-center" data-tracked-action="product help center" target="_blank"> Product Help Center</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="https://knowledgebase.constantcontact.com" data-tracked-action="knowledge base" target="_blank"> Knowledge Base</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/email-marketing/email-campaign-ideas" data-tracked-action="email campaign ideas" data-active-regex="/email-marketing/email-campaign-ideas.*"> Email Campaign Ideas</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/email-marketing/email-success-stories" data-tracked-action="success stories" data-active-regex="/email-marketing/email-success-stories.*"> Success Stories</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/guides/making-sense-of-online-marketing" data-tracked-action="the download" data-active-regex="/download.*"> The Download</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/about" data-tracked-action="about" data-active-regex="/about.*"> About Constant Contact</a> </li> 
+       </ul> </li> 
+      <li itemprop="name" class="navbar__item "> <a itemprop="url" class="js-active navbar__link js-toggle-submenu" aria-expanded="false" " href="#" data-tracked-action="partner"> <span> Partners</span> 
+        <svg width="8" height="13" xmlns="http://www.w3.org/2000/svg">
+         <path d="M7.583 6.5c0-.268-.102-.536-.308-.74L1.796.307a1.056 1.056 0 0 0-1.488 0 1.043 1.043 0 0 0 0 1.48L5.043 6.5.308 11.213a1.043 1.043 0 0 0 0 1.48c.411.41 1.077.41 1.488 0l5.48-5.453c.205-.204.307-.472.307-.74z" fill="#3C4A57" fill-rule="nonzero" />
+        </svg> </a> 
+       <ul class="navbar__submenu" aria-hidden="true"> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/partners/solution-providers" data-tracked-action="solution provider" data-active-regex="/partners/solution-providers.*"> Agencies</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/partners/technology" data-tracked-action="technology" data-active-regex="/partners/technology.*"> Technology Partners</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/partners/affiliate" data-tracked-action="affiliate" data-active-regex="/partners/affiliate.*"> Affiliates</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/partners/franchise" data-tracked-action="franchise" data-active-regex="/partners/franchise.*"> Franchises</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/partners/association" data-tracked-action="association" data-active-regex="/partners/association.*"> Associations</a> </li> 
+       </ul> </li> 
+      <li itemprop="name" class="navbar__item "> <a itemprop="url" class="js-active navbar__link js-toggle-submenu" aria-expanded="false" " href="#" data-tracked-action="pricing"> <span> Pricing</span> 
+        <svg width="8" height="13" xmlns="http://www.w3.org/2000/svg">
+         <path d="M7.583 6.5c0-.268-.102-.536-.308-.74L1.796.307a1.056 1.056 0 0 0-1.488 0 1.043 1.043 0 0 0 0 1.48L5.043 6.5.308 11.213a1.043 1.043 0 0 0 0 1.48c.411.41 1.077.41 1.488 0l5.48-5.453c.205-.204.307-.472.307-.74z" fill="#3C4A57" fill-rule="nonzero" />
+        </svg> </a> 
+       <ul class="navbar__submenu" aria-hidden="true"> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/pricing" data-tracked-action="email marketing pricing" data-active-regex="/pricing.*"> Email Marketing Pricing</a> </li> 
+        <li itemprop="name" class="navbar__item navbar__item--level-2"> <a itemprop="url" class="navbar__link js-active " href="/website/pricing" data-tracked-action="websites pricing" data-active-regex="/website/pricing.*"> Websites Pricing</a> </li> 
+       </ul> </li> 
+     </ul> 
+     <ul class="navbar__utility-nav"> 
+      <li class="navbar__utility-item"> <a class="navbar__phone-number" href="tel:855-783-2308" data-tracked-action="call-us"> 855-783-2308</a> </li> 
+      <li class="navbar__utility-item"> <a class="navbar__login" href="/login" data-tracked-action="login" title="Log In"> Log In</a> </li> 
+      <li class="navbar__utility-item"> <a class="navbar__signup" href="/signup.jsp" data-tracked-action="sign-up-free" title="Sign Up Free"> Sign Up Free</a> </li> 
+     </ul> 
+    </nav> 
+   </div> 
+  </header> 
+  <div class="navbar__sticky-spacer">
+   &nbsp;
+  </div> 
+  <section class="clm-campaign__hero" data-indicator-name="Top"> 
+   <div class="container hero--container"> 
+    <div class="hero--content text-center"> 
+     <div class="clm-campaign__hero--headline"> 
+      <h1>Let’s grow something great, together.</h1> 
+      <p>With your passion and our online marketing platform, anything is possible. </p> <a data-scroll href="#scroll-to" id="js-icon-scroll" class="icon-scroll" data-tracked-action="down arrow" data-om-config="about-us-hero,down arrow"> 
+       <svg width="35" height="35" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(1 1)" fill="none" fill-rule="evenodd">
+         <circle stroke="#FFF" cx="16.5" cy="16.5" r="16.5" />
+         <path d="M16.775 22.885L26.886 12.67a.395.395 0 0 0 0-.556.386.386 0 0 0-.55 0L16.5 22.052l-9.836-9.937a.386.386 0 0 0-.55 0 .394.394 0 0 0 0 .556l10.111 10.214a.386.386 0 0 0 .55 0" fill="#FFF" />
+        </g> 
+       </svg> </a> 
+     </div> 
+    </div> 
+   </div> 
+  </section> 
+  <section class="partners-technology-refresh__overview" data-indicator-name="History"> 
+   <div class="container partners-technology-refresh__overview-container"> 
+    <div id="scroll-to" class="partners-technology-refresh__overview-text lazyload with-pizzazz"> 
+     <h2>Every business starts with an idea.</h2> 
+     <p>Ours began from a cramped attic in 1995, when Constant Contact’s founders envisioned an online marketing tool that would help small businesses, nonprofits, and individuals reach a wider audience without breaking their marketing budget.</p> 
+     <br> 
+     <p>Since then, we’ve upgraded our attic considerably…now operating out of multiple offices as part of Endurance International Group, which serves over 5 million customers worldwide—each with a unique idea that’s itching to grow into something bigger. </p> 
+    </div> 
+    <div class="partners-technology-refresh__overview-image lazyload with-pizzazz" data-expand="-20"> <picture> 
+      <source media="(min-width: 1200px)" srcset="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/history.jpg"> 
+      <source media="(min-width: 765px)" srcset="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/history_tablet.jpg"> 
+      <img width="807" height="538" class="overview-image lazyload fade-in" src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/history_mobile.jpg" alt="Teamwork is the core of the our white label email marketing product for technology partners"> 
+     </picture> 
+    </div> 
+   </div> 
+  </section> 
+  <section class="about-timeline"> 
+   <div class="container about-timeline-container"> 
+    <ol class="timeline"> 
+     <li class="year"> <h2>1995</h2> <p>Constant Contact <span class="desktop-only"><br></span>is&nbsp;founded</p> </li> 
+     <li class="year"> <h2>2009</h2> <p>We surpass 250,000&nbsp;customers</p> </li> 
+     <li class="year"> <h2>2016</h2> <p>Endurance acquires Constant&nbsp;Contact</p> </li> 
+     <li class="year"> <h2>2019</h2> <p>We expand beyond email with websites, social ads and more</p> </li> 
+    </ol> 
+   </div> 
+  </section> 
+  <div class="home-how-it-works" data-indicator-name="Mission"> 
+   <div class="home-how-it-works-container"> 
+    <div class="home-how-it-works-video lazyload with-pizzazz" data-expand="-20"> 
+     <img width="783" height="586" class="video-static-bg lazyload fade-in" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/overview_video.jpg" alt="Preview of How It Works Video"> 
+     <video width="783" height="auto" class="home-how-it-works-player video-bg-loop lazyload fade-in" autoplay loop muted playsinline data-poster="https://embed-ssl.wistia.com/deliveries/7bce1b1e386f48bf6d51bd3a610ae18d029a8f06.bin" data-expand="-20"> 
+      <source src="https://embed-ssl.wistia.com/deliveries/643fc45ecf02cac37d50f9ce2593f277b5329a24.bin" type="video/mp4"> 
+     </video> <span class="wistia_embed wistia_async_2cx2tr3j6m popover=true popoverContent=link preload=none home-how-it-works-play-button lazyload fade-in"> <a href="#" data-tracked-action="play button">
+       <svg width="83" height="83" viewbox="0 0 83 83" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(1 1)" fill="none" fill-rule="evenodd">
+         <circle stroke="#FFF" fill-opacity=".37" fill="#3C4A57" cx="40.5" cy="40.5" r="40.5" />
+         <path d="M30.742 54.772c-.962.54-1.742.087-1.742-1.015V26.243c0-1.101.779-1.556 1.742-1.015l24.536 13.793c.962.54.963 1.417 0 1.958L30.742 54.772z" fill="#FFF" />
+        </g>
+       </svg><span class="screen-reader-text">See How It Works!</span></a> </span> 
+    </div> 
+    <div class="home-how-it-works-text lazyload with-pizzazz" data-expand="-20" data-script="//fast.wistia.com/assets/external/E-v1.js"> 
+     <h3>Where do we grow from here? </h3> 
+     <p>When it comes to doing more business, you’ve got to think big. For us, that means raising our game to help you raise yours. Moving beyond—but not away from—email marketing. Giving you an all-inclusive online marketing platform that will allow you to do more and grow more than ever before. Most important, it means being a partner you can turn to any time you have questions or even just need a little nudge. </p> <span class="wistia_embed wistia_async_2cx2tr3j6m popover=true popoverContent=link preload=none"> <a href="#" class="home-cta home-cta-blue home-cta-icon">
+       <svg width="25" height="25" viewbox="0 0 25 25">
+        <g fill="none" fill-rule="evenodd">
+         <circle stroke="#FFF" cx="12.5" cy="12.5" r="12" />
+         <path d="M10.7 16.223c-.966.544-1.75.087-1.75-1.007v-5.74c0-1.1.783-1.552 1.75-1.008l5.149 2.894c.966.543.967 1.424 0 1.967L10.7 16.223z" fill="#FFF" />
+        </g>
+       </svg><span>Watch video</span></a> </span> 
+    </div> 
+   </div> 
+  </div> 
+  <section class="partners-technology-refresh__overview" data-indicator-name="Guidance"> 
+   <div class="container partners-technology-refresh__overview-container"> 
+    <div class="partners-technology-refresh__overview-text lazyload with-pizzazz"> 
+     <h2>We’ve got your back. </h2> 
+     <p>Online marketing can get complicated. You're going to have questions and that's perfectly normal. But it’s no cause for panic. That’s because we've staffed hundreds of marketing advisors—real, live experts—who are here to help you however they can. On the phone or online. Our advisors live and breathe this stuff every day, so you don’t have to.</p> <a href="/marketing-advisor" class="home-cta home-cta-blue home-cta-icon js-tracked">Learn More</a> 
+    </div> 
+    <div class="partners-technology-refresh__overview-image lazyload with-pizzazz" data-expand="-20"> <picture> 
+      <source media="(min-width: 1200px)" srcset="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/marketing-advisor.jpg"> 
+      <source media="(min-width: 765px)" srcset="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/marketing-advisor_tablet.jpg"> 
+      <img width="807" height="538" class="overview-image lazyload fade-in" src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/marketing-advisor_mobile.jpg" alt="Teamwork is the core of the our white label email marketing product for technology partners"> 
+     </picture> 
+    </div> 
+   </div> 
+  </section> 
+  <section class="carousel lazyload" data-indicator-name="Features"> 
+   <div class="container carousel__container"> 
+    <div class="services__templates__intro js__intro"> 
+     <h3>Next stop: who said anything about stopping?</h3> 
+     <p>No one comes this far just to come this far. If you have the passion to take your idea to the next level, let’s do it. Whether it’s creating an email marketing campaign, building an awesome website, running Google Ads to get more site traffic, or finding new customers on social media, we’ve got all the tools, features, and expert guidance you need to succeed—all in one place.</p> 
+    </div> 
+    <div class="carousel__images-wrapper lazyload"> 
+     <div class="carousel__images"> 
+      <div class="carousel__images-slides"> 
+       <div class="content"> 
+        <div class="carousel__images-slide active"> 
+         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/email_marketing_1.jpg" alt="Image of Constant Contact's drag and drop templates and two friends having fun" class="lazyload" role="presentation" height="627" width="809"> 
+        </div> 
+        <div class="carousel__images-slide"> 
+         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/websites_2.jpg" alt="Image of a person editing their website and a farmer in his field" class="lazyload" role="presentation" height="627" width="809"> 
+        </div> 
+        <div class="carousel__images-slide"> 
+         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/social_marketing_3.jpg" alt="Image of a business owner and a hand holding a phone" class="lazyload" role="presentation" height="627" width="809"> 
+        </div> 
+        <div class="carousel__images-slide"> 
+         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/and_more_4.jpg" alt="Image of Constant Contact's logo editor and a woman picking out vegetables" class="lazyload" role="presentation" height="627" width="809"> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <ol class="carousel__slider-nav" id="slider-nav"></ol> 
+    </div> 
+    <div class="services__templates"> 
+     <div class="accordion__container"> 
+      <div class="accordion active" collapsible="false"> 
+       <div class="accordion__title"> <span>Email Marketing</span> 
+        <svg width="17" height="17">
+         <g fill-rule="nonzero" stroke="#0078C1" stroke-width="3" fill="none" stroke-linecap="square">
+          <path d="M14.664 8.5H1.5M8 15.164V2" />
+         </g>
+        </svg> 
+       </div> 
+       <div class="accordion__content"> 
+        <p>Our drag-and-drop email editor creates customized templates and beautiful, professional, mobile-responsive email campaigns that look great on every device.</p>
+       </div> 
+      </div> 
+      <div class="accordion " collapsible="false"> 
+       <div class="accordion__title"> <span>Websites</span> 
+        <svg width="17" height="17">
+         <g fill-rule="nonzero" stroke="#0078C1" stroke-width="3" fill="none" stroke-linecap="square">
+          <path d="M14.664 8.5H1.5M8 15.164V2" />
+         </g>
+        </svg> 
+       </div> 
+       <div class="accordion__content"> 
+        <p>Our intelligent website builder makes it simpler than ever to create and publish a professional, mobile-responsive website in minutes—no tech skills required.</p>
+       </div> 
+      </div> 
+      <div class="accordion " collapsible="false"> 
+       <div class="accordion__title"> <span>Social Marketing</span> 
+        <svg width="17" height="17">
+         <g fill-rule="nonzero" stroke="#0078C1" stroke-width="3" fill="none" stroke-linecap="square">
+          <path d="M14.664 8.5H1.5M8 15.164V2" />
+         </g>
+        </svg> 
+       </div> 
+       <div class="accordion__content"> 
+        <p>With our social ad functionality, you can create targeted, professional Facebook and Instagram ads that drive traffic to your website and generate awareness for your brand.</p>
+       </div> 
+      </div> 
+      <div class="accordion " collapsible="false"> 
+       <div class="accordion__title"> <span>And More</span> 
+        <svg width="17" height="17">
+         <g fill-rule="nonzero" stroke="#0078C1" stroke-width="3" fill="none" stroke-linecap="square">
+          <path d="M14.664 8.5H1.5M8 15.164V2" />
+         </g>
+        </svg> 
+       </div> 
+       <div class="accordion__content"> 
+        <p>LogoMaker, Google Ads, expert advice, SEO tools, and more—all in one simplified platform.</p>
+       </div> 
+      </div> 
+     </div> <a href="/email-marketing" class="js-open-modal with-pizzazz unveil lazyload home-cta home-cta-blue">View All Features</a> 
+    </div> 
+   </div> 
+  </section> 
+  <section class="partners-technology-refresh__overview blue" data-indicator-name="Success"> 
+   <div class="container partners-technology-refresh__overview-container"> 
+    <div class="partners-technology-refresh__overview-text lazyload with-pizzazz"> 
+     <h2>“If you can dream it, you can do it.”<br><span class="author">—Walt Disney</span></h2> 
+     <p>You don’t work with as many small businesses and nonprofits as we have over the span of two decades without amassing an impressive collection of success stories. Here are just a few, from customers—past and present—who dreamed big and did even bigger.</p> <a href="/email-marketing/email-success-stories" class="home-cta home-cta-blue home-cta-icon wide js-tracked">Read success stories</a> 
+    </div> 
+    <div class="partners-technology-refresh__overview-image lazyload with-pizzazz" data-expand="-20"> <picture> 
+      <source media="(min-width: 1200px)" srcset="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/luke_adams.jpg"> 
+      <source media="(min-width: 765px)" srcset="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/luke_adams_tablet.jpg"> 
+      <img width="807" height="538" class="overview-image lazyload fade-in" src="https://static.ctctcdn.com/lp/images/standard/ctctfos12646/luke_adams_mobile.jpg" alt="Teamwork is the core of the our white label email marketing product for technology partners"> 
+     </picture> 
+     <p class="caption">—Luke Adams Glass Blowing, Constant Contact customer</p> 
+    </div> 
+   </div> 
+  </section> 
+  <section class="refreshed-trial lazyload text-center with-pizzaz"> 
+   <div class="container refreshed-trial-container"> 
+    <div id="refreshed-trial-signup" class="refreshed-trial-signup"> 
+     <h2>You've got this. You've got us.</h2> 
+     <h3>Start your free trial today or call us to learn more at 1-888-IDK-MKTG.</h3> 
+     <div class="form-wrapper presto-form-container"> 
+      <form id="" name="toolkit-only-email-password-trial" class="refreshed-trial-signup-form signup" action="/trial/signup.jsp" method="get" target=""> 
+       <div class="refreshed-trial-signup-body"> <label for="trialSiteContactEmailLogin" class="screen-reader-text">Email Address</label> 
+        <input class="refreshed-trial-signup-input track-step1" type="text" name="siteContactEmailLogin" id="trialSiteContactEmailLogin" placeholder="xxx@yyy.zzz" maxlength="50" autocomplete data-qe-id="siteContactEmailLogin"> 
+       </div> 
+       <div class="accept-submit refreshed-trial-signup-footer"> 
+        <div class="refreshed-trial-signup-cta-group"> <button class="track-step2 js-track-om track-click refreshed-cta refreshed-cta-orange refreshed-trial-signup-cta track-step2" type="submit">Get Started!</button>
+         <p class="refreshed-cta-caption">No risk. No credit card required.</p> 
+        </div> 
+       </div> 
+      </form> 
+     </div> 
+     <p class="learn-more"><span>Not sure if Constant Contact is right for you?</span> Learn more about our free <a href="/free-email-marketing-trial" target="_blank">60-day email marketing trial</a>.</p> 
+    </div> 
+   </div> 
+  </section> 
+  <script>
+
+        if (typeof ctct === "undefined") {
+            var ctct = {};
+        }
+
+        if (typeof ctct.sourceJsonData === "undefined") {
+            ctct.sourceJsonData = {};
+        }
+
+        ctct.sourceJsonData.ctctWebsiteIsProd = true;
+
+    </script> 
+  <aside class="dialog chat js-chat-window" style="display: none;"> 
+   <div class="chat__window-content--minimized"> <button class="button button--link button--big js-open-chat">Have a question? Let's chat</button> 
+   </div> 
+   <div class="chat__window-content--full"> 
+    <div class="header"> 
+     <h2 style="color: #3c4a57; font-size: 29px !important; margin:0">Questions?</h2> 
+     <img id="minimized-chat" class="minimized-chat js-minimize-chat-window" src="//static.ctctcdn.com/lp/images/standard/x.svg" alt="minimize-chat"> 
+    </div> 
+    <p>An advisor is waiting with your answers.</p> <button class="button button--primary js-open-chat">Chat with Us</button> 
+    <p></p> 
+    <p> <button class="button button--link js-minimize-chat-window">Not right now</button> </p> 
+   </div> 
+  </aside> 
+  <script>
+
+        if (typeof ctct === "undefined") {
+            var ctct = {};
+        }
+
+        if (typeof ctct.sourceJsonData === "undefined") {
+            ctct.sourceJsonData = {};
+        }
+
+        ctct.sourceJsonData.ctctWebsiteIsProd = true;
+
+    </script> 
+  <div id="chatBotContainer"></div> 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var jsBot = window.document.createElement('script');
+        jsBot.src = 'https://constantcontact.force.com/chatbot/resource/chatbot_init?t=' + Date.now();
+        jsBot.type = 'text/javascript';
+        document.head.appendChild(jsBot);
+    });
+</script> 
+  <div> 
+   <aside class="scroll-indicator" id="scroll-indicator"> 
+    <ul class="scroll-indicator__container" id="indicator-container"></ul> 
+   </aside> 
+  </div> 
+  <footer id="ctct-footer" class="js-page-footer content-info " data-qe-id="site-footer" role="contentinfo" data-sct-link-location="footer"> 
+   <div class="footer-container-fluid"> 
+    <div class="footer-row footer-margin-top"> 
+     <nav class="footer-container-navigation" aria-label="Footer Navigation"> 
+      <div class="footer-row"> 
+       <div class="footer-container-logo"> <a href="//www.constantcontact.com" class="footer-logo" data-om-config="footer,home_logo"> <img src="https://static.ctctcdn.com/lp/images/standard/logos/logo-ctct-white.svg" alt="Constant Contact Logo"> </a> 
+       </div> 
+       <div class="footer-navigation-column"> 
+        <h4 class="column-title js-toggle-section-Features--Services">Features &amp; Services
+         <svg width="19" height="12" viewbox="0 0 19 12">
+          <path d="M9.5 6.57l5.75-5.9a2.15 2.15 0 0 1 3.1 0 2.3 2.3 0 0 1 0 3.2l-7.26 7.47c-.46.47-1.07.69-1.67.66a2.16 2.16 0 0 1-1.5-.66L.63 3.86a2.3 2.3 0 0 1 0-3.2 2.16 2.16 0 0 1 3.12 0L9.5 6.57z" fill="#FFF" fill-rule="nonzero" />
+         </svg></h4> 
+        <ul class="nav-column Features--Services hide-xs"> 
+         <li> <a href="/email-marketing" class="track-click " data-tracked-action="Email Marketing"> Email Marketing</a> </li> 
+         <li> <a href="/email-templates" class="track-click " data-tracked-action="Email Templates"> Email Templates</a> </li> 
+         <li> <a href="/services" class="track-click " data-tracked-action="Professional Services"> Professional Services</a> </li> 
+         <li> <a href="/marketing-advisor" class="track-click " data-tracked-action="Marketing Advisor"> Marketing Advisor</a> </li> 
+         <li> <a href="/features/apps-integration" class="track-click " data-tracked-action="Apps &amp; Integrations"> Apps &amp; Integrations</a> </li> 
+        </ul> 
+       </div> 
+       <div class="footer-navigation-column"> 
+        <h4 class="column-title js-toggle-section-Learn-More">Learn More
+         <svg width="19" height="12" viewbox="0 0 19 12">
+          <path d="M9.5 6.57l5.75-5.9a2.15 2.15 0 0 1 3.1 0 2.3 2.3 0 0 1 0 3.2l-7.26 7.47c-.46.47-1.07.69-1.67.66a2.16 2.16 0 0 1-1.5-.66L.63 3.86a2.3 2.3 0 0 1 0-3.2 2.16 2.16 0 0 1 3.12 0L9.5 6.57z" fill="#FFF" fill-rule="nonzero" />
+         </svg></h4> 
+        <ul class="nav-column Learn-More hide-xs"> 
+         <li> <a href="/pricing" class="track-click " data-tracked-action="Pricing"> Pricing</a> </li> 
+         <li> <a href="/free-email-marketing-trial" class="track-click " data-tracked-action="Free Trial"> Free Trial</a> </li> 
+         <li> <a href="https://blogs.constantcontact.com/" class="track-click " data-tracked-action="Blog" target="_blank" rel="noopener"> Blog</a> </li> 
+         <li> <a href="https://blogs.constantcontact.com/events/" class="track-click " data-tracked-action="Events &amp; Webinars" target="_blank" rel="noopener"> Events &amp; Webinars</a> </li> 
+         <li> <a href="https://community.constantcontact.com/help-center" class="track-click " data-tracked-action="Help Center" target="_blank" rel="noopener"> Help Center</a> </li> 
+        </ul> 
+       </div> 
+       <div class="footer-navigation-column"> 
+        <h4 class="column-title js-toggle-section-Partner-Programs">Partner Programs
+         <svg width="19" height="12" viewbox="0 0 19 12">
+          <path d="M9.5 6.57l5.75-5.9a2.15 2.15 0 0 1 3.1 0 2.3 2.3 0 0 1 0 3.2l-7.26 7.47c-.46.47-1.07.69-1.67.66a2.16 2.16 0 0 1-1.5-.66L.63 3.86a2.3 2.3 0 0 1 0-3.2 2.16 2.16 0 0 1 3.12 0L9.5 6.57z" fill="#FFF" fill-rule="nonzero" />
+         </svg></h4> 
+        <ul class="nav-column Partner-Programs hide-xs"> 
+         <li> <a href="/partners/solution-providers" class="track-click " data-tracked-action="Agencies"> Agencies</a> </li> 
+         <li> <a href="/partners/technology" class="track-click " data-tracked-action="Technology &amp; Software"> Technology &amp; Software</a> </li> 
+         <li> <a href="/partners/affiliate" class="track-click " data-tracked-action="Affiliates"> Affiliates</a> </li> 
+         <li> <a href="/partners/franchise" class="track-click " data-tracked-action="Franchises"> Franchises</a> </li> 
+         <li> <a href="/partners/association" class="track-click " data-tracked-action="Associations"> Associations</a> </li> 
+        </ul> 
+       </div> 
+       <div class="footer-navigation-column"> 
+        <h4 class="column-title js-toggle-section-About-Us">About Us
+         <svg width="19" height="12" viewbox="0 0 19 12">
+          <path d="M9.5 6.57l5.75-5.9a2.15 2.15 0 0 1 3.1 0 2.3 2.3 0 0 1 0 3.2l-7.26 7.47c-.46.47-1.07.69-1.67.66a2.16 2.16 0 0 1-1.5-.66L.63 3.86a2.3 2.3 0 0 1 0-3.2 2.16 2.16 0 0 1 3.12 0L9.5 6.57z" fill="#FFF" fill-rule="nonzero" />
+         </svg></h4> 
+        <ul class="nav-column About-Us hide-xs"> 
+         <li> <a href="/about" class="track-click " data-tracked-action="Company"> Company</a> </li> 
+         <li> <a href="https://careers.endurance.com/pages/endurance-brands-constant-contact" class="track-click " data-tracked-action="Careers" target="_blank" rel="noopener"> Careers</a> </li> 
+         <li> <a href="https://news.constantcontact.com/" class="track-click " data-tracked-action="News" target="_blank" rel="noopener"> News</a> </li> 
+         <li> <a href="https://ir.endurance.com/" class="track-click " data-tracked-action="Investors" target="_blank" rel="noopener"> Investors</a> </li> 
+         <li> <a href="/about/contact-us" class="track-click " data-tracked-action="Contact Us"> Contact Us</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </nav> 
+     <div class="raf-wrapper"> <a href="/refer-a-friend" data-tracked-action="footer,refer_a_friend"> 
+       <div class="refer-a-friend"> 
+        <div class="raf-icon"> 
+         <svg width="28" height="32" viewbox="0 0 28 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 .6l.1.4c.1.2 1.2 3.8-.8 5.3l-.1.1c2.7 1.3 9.9 6 7.8 19.9 1.1.4 1.6 1.4 1.6 2.5.1 1.3-.7 2.6-2.3 2.6H2.7c-1.5 0-2.3-1.3-2.3-2.6 0-1.1.5-2.2 1.6-2.5C.6 17.6 3 12.6 5.2 9.9c1.6-2 3.4-3 4.5-3.5l-.1-.1c-2-1.4-.8-5.1-.7-5.3L9 .6h10zM18 2h-8c-.2 1-.4 2.8.4 3.3l.1.1L12.1 7l-1.1.3c-.4.1-10.4 3.2-7.7 19.4l.1.8c0-.1-.7-.1-.7-.1-.8 0-1 .8-1 1.3s.2 1.3 1 1.3h22.6c.8 0 1-.8 1-1.3s-.2-1.3-1-1.3h-.8l.1-.8C27.4 10.4 17 7.3 16.9 7.3l-1-.3 1.7-1.7c.9-.6.7-2.4.4-3.3zm-2.9 9.6v1c0 .1 0 .1.1.1.2 0 .4.1.5.1.4.1.8.2 1.1.4.3.1.5.3.7.5l.6.6-1.2 1.8c-.075.075-.094.15-.14.225l-.06.075c-.1-.1-.2-.3-.4-.4-.2-.2-.4-.3-.6-.4-.16-.08-.32-.16-.531-.24L15 15.3v2.3h.1c.2 0 .3.1.5.1.3.1.7.2 1 .3.3.1.5.2.7.4.2.1.4.3.5.5.3.4.6.8.7 1.3 0 .2.1.3.1.5v1.2c0 .2-.1.3-.1.5-.1.2-.1.4-.2.6-.1.3-.3.5-.5.7-.3.3-.5.5-.9.7-.2.1-.5.3-.8.4-.2.1-.4.1-.6.2-.1 0-.2 0-.3.1h-.1v1.1h-2.3v-1.1c-.2 0-.4-.1-.6-.1-.4-.1-.8-.2-1.2-.4l-.9-.6-.6-.6c0-.356 0-.395-.07-.47l-.03-.03c.3-.5.6-.9.9-1.3.167-.25.333-.5.442-.692l.058-.109V20.7s0 .1.1.1c.1.2.3.4.5.6.3.3.6.5.9.6.15.075.244.094.366.14l.134.06v-2.1h-.2c-.3-.1-.7-.2-1-.3-.3-.1-.5-.2-.8-.4-.3-.2-.5-.4-.7-.6-.3-.3-.5-.6-.6-1-.1-.2-.1-.4-.2-.6V16c0-.2.1-.5.1-.7.1-.5.3-.9.6-1.3.3-.3.6-.6 1-.8.3-.2.6-.3.9-.4.2-.1.4-.1.5-.1h.4v-1.1h2.3zm.1 8.8h-.1v1.9c.1 0 .3 0 .4-.1.1 0 .1 0 .2-.1s.2-.1.3-.2c.1-.1.2-.3.2-.4v-.2c0-.2-.1-.3-.2-.4l-.3-.3c-.2-.1-.3-.1-.5-.2zm-2.4-5.3h-.1c-.1 0-.2 0-.3.1-.2.1-.3.2-.5.3-.1.1-.1.2-.2.3 0 .1-.1.2-.1.3v.2c0 .1 0 .2.1.2.1.2.2.3.3.4.1 0 .1.1.2.1.16.08.256.096.39.1h.11V17c.1-.3.1-.6.1-.9v-1z" fill="#FFF" fill-rule="nonzero" />
+         </svg> 
+        </div> 
+        <div class="raf-text"> <span>It pays to have friends. Literally.</span>
+         <br> <span class="raf-arrow-text">Refer A Friend
+          <svg width="7" height="12" class="arrow" xmlns="http://www.w3.org/2000/svg">
+           <path d="M7.2 6a.948.948 0 0 0-.293-.683L1.705.283a1.023 1.023 0 0 0-1.412 0 .944.944 0 0 0 0 1.367L4.788 6 .293 10.35a.944.944 0 0 0 0 1.367c.39.377 1.022.377 1.412 0l5.202-5.034A.948.948 0 0 0 7.2 6z" fill="#FFF" fill-rule="nonzero" />
+          </svg></span> 
+        </div> 
+       </div></a> 
+      <div class="truste"> <a href="https://privacy.truste.com/privacy-seal/validation?rid=e295bdb8-2205-4b5d-bdb2-78ff2021f349" target="_blank" rel="noopener" data-tracked-action="trustee-privacy-seal"><img src="https://privacy-policy.truste.com/privacy-seal/seal?rid=e295bdb8-2205-4b5d-bdb2-78ff2021f349" alt="TRUSTe"></a> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="footer-row"> 
+     <div class="social-section"> 
+      <div class="footer-container-social-locale"> 
+       <div class="locale-switcher-wrapper"> 
+        <div class="locale-switcher"> 
+         <div class="sl_opaque locale-indicator ca" id="locale-toggle" aria-label="Locale Menu Toggle" aria-expanded="false" aria-controls="locale-menu" aria-describedby="locale-menu-description"> 
+          <svg width="19" height="19" class="world-icon">
+           <path d="M12.196 17.838c.495-.465.948-1.065 1.344-1.788.26-.477.49-.996.685-1.548h2.468a8.78 8.78 0 0 1-4.497 3.336zm-9.89-3.336h2.47c.195.552.423 1.071.684 1.548.396.723.85 1.323 1.344 1.788a8.78 8.78 0 0 1-4.497-3.336zM.747 9.176a8.714 8.714 0 0 1 1.049-3.85h2.718a15.487 15.487 0 0 0-.544 3.85H.745zm.003.738H3.97c.033 1.358.228 2.665.568 3.85H1.845A8.71 8.71 0 0 1 .75 9.914zm6.055-8.752c-.495.465-.948 1.065-1.344 1.788a10.7 10.7 0 0 0-.716 1.638h-2.5a8.782 8.782 0 0 1 4.56-3.426zM9.87 9.176v-3.85h3.85c.342 1.152.547 2.46.575 3.85H9.869zm0 4.588v-3.85h4.423c-.036 1.393-.25 2.701-.6 3.85H9.868zm0 4.472v-3.734h3.57c-.801 2.1-2.092 3.528-3.57 3.734zm-.738-3.734v3.734c-1.478-.206-2.769-1.635-3.57-3.734h3.57zm0-4.588v3.85H5.309a14.523 14.523 0 0 1-.6-3.85H9.13zm0-4.588v3.85H4.706c.028-1.39.233-2.698.575-3.85h3.85zm0-4.562v3.824H5.527C6.325 2.44 7.632.972 9.131.764zm4.342 3.824H9.869V.764c1.5.208 2.806 1.676 3.604 3.824zm3.283 0h-2.5a10.7 10.7 0 0 0-.716-1.638c-.396-.723-.85-1.323-1.344-1.788a8.782 8.782 0 0 1 4.56 3.426zm1.496 5.326a8.71 8.71 0 0 1-1.097 3.85h-2.693c.34-1.185.535-2.492.568-3.85h3.222zm-3.22-.738a15.487 15.487 0 0 0-.545-3.85h2.719a8.715 8.715 0 0 1 1.049 3.85H15.03zM9.5 0C4.262 0 0 4.262 0 9.5S4.262 19 9.5 19 19 14.738 19 9.5 14.738 0 9.5 0z" fill="#FFF" fill-rule="evenodd" />
+          </svg> English
+          <svg width="19" height="12" class="point-up" viewbox="0 0 19 12">
+           <path d="M9.5 6.57l5.75-5.9a2.15 2.15 0 0 1 3.1 0 2.3 2.3 0 0 1 0 3.2l-7.26 7.47c-.46.47-1.07.69-1.67.66a2.16 2.16 0 0 1-1.5-.66L.63 3.86a2.3 2.3 0 0 1 0-3.2 2.16 2.16 0 0 1 3.12 0L9.5 6.57z" fill="#FFF" fill-rule="nonzero" />
+          </svg> 
+         </div> 
+         <div class="locale-menu" id="locale-menu" aria-hidden="true"> <span class="choose-country" id="locale-menu-description">Choose your Country</span> 
+          <ul class="sl_opaque"> 
+           <li class="au"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-au" href="/site/au.jsp?src=/ca/about">Australia — English</a> </li> 
+           <li class="ca"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-ca" href="/site/ca.jsp?src=/ca/about">Canada — English</a> </li> 
+           <li class="co"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-co" href="/site/co.jsp?src=/ca/about">Colombia — Español</a> </li> 
+           <li class="es"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-es" href="/site/es.jsp?src=/ca/about">España — Español</a> </li> 
+           <li class="fr"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-fr" href="/site/fr.jsp?src=/ca/about">France — English</a> </li> 
+           <li class="de"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-de" href="/site/de.jsp?src=/ca/about">Germany — English</a> </li> 
+           <li class="in"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-in" href="/site/in.jsp?src=/ca/about">India — English</a> </li> 
+           <li class="mx"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-mx" href="/site/mx.jsp?src=/ca/about">México — Español</a> </li> 
+           <li class="nz"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-nz" href="/site/nz.jsp?src=/ca/about">New Zealand — English</a> </li> 
+           <li class="gb"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-gb" href="/site/uk.jsp?src=/ca/about">United Kingdom — English</a> </li> 
+           <li class="us"> <a class="track-om track-click" data-om-config="footer-locale-switcher,ca-to-us" href="/site/.jsp?src=/ca/about">United States — English</a> </li> 
+          </ul> <span>Don't see your country? Click <a class="click-locale track-om track-click" data-om-config="footer-locale-switcher,ca-to-global" href="/site/global.jsp?src=/ca/about">here</a>.</span> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="social-icons"> 
+       <ul> 
+        <li> <a data-om-config="footer,facebook" target="_blank" rel="noopener" href="https://www.facebook.com/constantcontact"> <img class="facebook" alt="facebook-logo" src="https://static.ctctcdn.com/lp/images/standard/ctct-footer/facebook_sm.svg"> <span class="screen-reader-text">Follow Us on Facebook</span> </a> </li> 
+        <li> <a data-om-config="footer,twitter" target="_blank" rel="noopener" href="https://twitter.com/constantcontact"> <img class="twitter" alt="twitter-logo" src="https://static.ctctcdn.com/lp/images/standard/ctct-footer/twitter_sm.svg"> <span class="screen-reader-text">Follow Us on Twitter</span> </a> </li> 
+        <li> <a data-om-config="footer,google-plus" target="_blank" rel="noopener" href="https://www.instagram.com/constantcontact/"> <img class="instagram" alt="instagram-logo" src="https://static.ctctcdn.com/lp/images/standard/ctct-footer/instagram_sm.svg"> <span class="screen-reader-text">Follow Us on Instagram</span> </a> </li> 
+        <li> <a data-om-config="footer,pinterest" target="_blank" rel="noopener" href="https://www.pinterest.com/constantcontact/"> <img class="pinterest" alt="pinterest-logo" src="https://static.ctctcdn.com/lp/images/standard/ctct-footer/pinterest_sm.svg"> <span class="screen-reader-text">Follow Us on Pinterest</span> </a> </li> 
+        <li> <a data-om-config="footer,ctct-social-media" target="_blank" rel="noopener" href="/about"> <img class="more" alt="more-social-media-logo" src="https://static.ctctcdn.com/lp/images/standard/ctct-footer/more_sm.svg"> <span class="screen-reader-text">All social media options</span> </a> </li> 
+       </ul> 
+      </div> 
+      <div class="footer-container-cta"> 
+       <div> 
+        <p class="mobile-cta footer-icon footer-icon-phone"> 
+         <svg width="10" height="16" viewbox="0 0 10 16">
+          <path d="M8.7.5H1c-.5 0-1 .4-1 .9v13.2c0 .5.5.9 1 .9h7.7c.5 0 1-.4 1-.9V1.4c0-.5-.4-.9-1-.9zM4.9 14.4c-.5 0-1-.4-1-.9s.4-.9 1-.9 1 .4 1 .9-.5.9-1 .9zM1.6 2h6.6v9.8H1.6V2z" fill="#FFF" fill-rule="nonzero" />
+         </svg> <strong></strong> <a href="/features/mobile-marketing" class="track-om track-click " data-tracked-action="Check out our Mobile Apps"> Check out our Mobile Apps</a> </p> 
+       </div> 
+      </div> 
+      <div class="footer-container-jmml obscured"> <button class="js-toggle-visibility show-button">
+        <svg class="icon-email" width="15" height="12" viewbox="0 0 15 12">
+         <path d="M14.89.6c-.11-.36-.34-.6-.67-.6H.78A.85.85 0 0 0 0 .6c0 .36.11.72.34.96l6.71 5.28c.23.24.67.24.9 0l6.71-5.28c.23-.24.34-.6.23-.96zM15 3v8.16c0 .48-.34.84-.78.84H.78c-.44 0-.78-.36-.78-.84V3l7.5 5.88L15 3z" fill="#FFF" fill-rule="nonzero" />
+        </svg>Join Mailing List</button> 
+       <form action="https://cloud.c.constantcontact.com/jmmlsubscriptions/coi_verify" novalidate> 
+        <input type="hidden" name="method" value="JMML_site_footer" required> 
+        <input type="hidden" name="sub" value="1" required> 
+        <input type="hidden" name="page" value="http://www.constantcontact.com/ca/about"> <label for="jmml-email" class="screen-reader-text">Enter email address</label> 
+        <input class="jmml-email" type="email" name="email" id="jmml-email" placeholder="Enter email address" required> 
+        <input class="jmml-submit" type="submit" value="Join"> 
+       </form> <button class="js-toggle-visibility close-button">×</button> 
+       <p class="disclaimer">By entering your information, you permit us to reach out to you with future communications.</p> 
+       <p class="error-message invalid-email">Please check that your email follows the xxx@yyy.zzz format and doesn't contain spaces or special characters.</p> 
+       <p class="success-message">Got it! Be on the lookout for your first email from us.</p> 
+      </div> 
+     </div> 
+     <div class="footer-container-legal
+                    "> 
+      <ul class="terms-row"> 
+       <li> <a href="/legal/terms" class="track-om track-click " data-tracked-action="Terms &amp; Conditions" rel="nofollow"> Terms &amp; Conditions</a> </li> 
+       <li> <a href="/forward/privacy-center" class="track-om track-click " data-tracked-action="Privacy" target="_blank" rel="noopener nofollow"> Privacy</a> </li> 
+       <li> <a href="/legal/california-privacy-rights" class="track-om track-click " data-tracked-action="California Privacy Rights" rel="nofollow"> California Privacy Rights</a> </li> 
+       <li> <a href="#" class="track-om track-click cookie-settings" data-tracked-action="Cookie Settings" data-om-config="footer,tk_ca_privacy" id="cookie-settings-footer" rel="nofollow"> Cookie Settings</a> </li> 
+       <li> <a href="/legal/security" class="track-om track-click " data-tracked-action="Security" rel="nofollow"> Security</a> </li> 
+       <li> <a href="/legal/anti-spam" class="track-om track-click " data-tracked-action="Anti-Spam" rel="nofollow"> Anti-Spam</a> </li> 
+       <li> <a href="https://endurance.clarip.com/dsr/create?brand=ctct&amp;type=3" class="track-om track-click do-not-sell-my-info" data-tracked-action="Do Not Sell My Info" rel="nofollow"> Do Not Sell My Info</a> </li> 
+       <li class="copyright">© Constant Contact, Inc. 1996-2020</li> 
+      </ul> 
+     </div> 
+    </div> 
+   </div> 
+  </footer> 
+  <script>
+        if (typeof ctct === "undefined") {
+            var ctct = {};
+        }
+
+        if (typeof ctct.showCookieConsentBanner === "undefined") {
+            ctct.showCookieConsentBanner = false;
+        }
+    </script> 
+  <div class="cookie-consent-banner-container" style="display: none;"> 
+   <div class="cookie-consent-banner-content"> 
+    <p class="cookie-consent-banner-container__text">We use cookies to ensure that we give you the best experience on our website. This includes cookies from third party social media websites and advertising cookies that may analyze your use of this site. Click “Got it” to agree or “Cookie Settings” to opt out. <a href="https://endurance.clarip.com/privacycenter/?brand=ctct" target="_blank" rel="noopener">Learn more</a></p> 
+    <div class="cookie-consent-banner-container__cookie-container"> <a href="#" class="cookie-settings" id="cookie-settings" data-om-config="cookie-consent-banner,cookie-settings">cookie settings</a> <a href="#" class="cookie-cta" id="cookie-cta" data-om-config="cookie-consent-banner,got-it-cta">got it</a> 
+    </div> 
+   </div> 
+  </div> 
+  <div style="display: none;"> 
+   <script type="text/javascript"> //<![CDATA[
+var utag_data={
+pageName:"/ca/about",
+visitorStatus:"prospect",
+partnerName:"ROVING",
+sopsStatus:"XXXXXXXXXX",
+visitNumber:"1",
+locale:"en_CA",
+hostName:"p2-prod-landingpages-006.ctct.net",
+geolocatedCountry:"ca",
+/* Custom Page-Specific Adobe SiteCatalyst Variables */
+prospectHomepageName:""
+/* End Custom Page-Specific Omniture Variables */
+};//]]></script> 
+   <script type="text/javascript">(function(a,b,c,d){ a='https://tags.tiqcdn.com/utag/cc/main/prod/utag.js'; b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true; a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a); })();</script>
+  </div> 
+  <script src="/site/guide/js/third_party/lazysizes.min.js?version=1585064634000" async></script>
+  <script src="/site/common/_script/libs/modernizr/3.5.0/min.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/widgets/cc-alert-banner.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/modules/cc-alert-modal.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/modules/cc-cookies.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/modules/cc-analytics.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/modules/cc-utils.js?version=1585064634000" defer></script>
+  <script src="/site/guide/js/cookie-consent-banner.js?version=1585064634000"></script>
+  <script src="/site/guide/js/third_party/velocity.min.js?version=1585064634000"></script>
+  <script src="/site/guide/js/pages/ctctfos12646-about.js?version=1585064634000"></script>
+  <script src="/site/guide/js/navbar-master.js?version=1585064634000" defer></script>
+  <script src="/site/guide/js/accordion.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/modules/cc-signup.js?version=1585064634000" defer></script>
+  <script src="https://c.la4-c2cs-dfw.salesforceliveagent.com/content/g/js/42.0/deployment.js?version=1585064634000" async></script>
+  <script src="/site/guide/js/salesforce-chat.js?version=1585064634000" defer></script>
+  <script src="https://constantcontact.force.com/chatbot/lightning/lightning.out.js?version=1585064634000" defer></script>
+  <script src="/site/common/_script/external_sites/navigation.js?version=1585064634000" defer></script>
+  <script src="/site/next/js/cc-toggle-section.js?version=1585064634000" defer></script>
+  <script src="/site/guide/js/footer.js?version=1585064634000" defer></script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"errorBeacon":"bam.nr-data.net","licenseKey":"5ab79a9e36","agent":"","beacon":"bam.nr-data.net","applicationTime":2259,"applicationID":"1641038","transactionName":"Y1MHYRBUCBJZBRJfW1oZNkUQXAgGewkIQkZbWglQEBpMSxhOIXNgHQ==","queueTime":0}</script> 
+ </body>
+</html>

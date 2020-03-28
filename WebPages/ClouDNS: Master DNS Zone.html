@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <title>ClouDNS: Master DNS Zone</title> 
+  <meta name="description" content="How to add Master DNS Zone?"> 
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+  <meta name="distribution" content="Global"> 
+  <meta name="rating" content="General"> 
+  <meta name="google-site-verification" content="V8FW4BSR7VgKb8hrBu28Xyr4Vm2LqyCM6DxN7uOfzHQ"> 
+  <meta name="robots" content="index, follow"> 
+  <meta name="language" content="en"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="icon" type="image/png" href="/images/web/favicon.gif"> 
+  <link rel="apple-touch-icon" href="i/apple-touch-icon.png"> 
+  <script src="/js/jquery.min.js" type="text/javascript"></script> 
+  <script src="/js/jquery.ui.js?ver=2020-03-27-22" type="text/javascript"></script> 
+  <script src="/js/jquery.additional.min.js" type="text/javascript" defer></script> 
+  <link href="/css/style.css?ver=2020-03-27-22" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/additional.min.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/desktop.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/languages.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/fonts.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/new-style.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/icons.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/wiki.css?ver=2020-03-27-22" rel="stylesheet" type="text/css"> 
+  <link href="/css/responsive.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/popup.css" rel="stylesheet" type="text/css" defer> 
+  <link href="/css/header-responsive.css" rel="stylesheet" type="text/css" defer> <!-- Facebook --> 
+  <meta property="og:title" content="ClouDNS: Master DNS Zone"> 
+  <meta property="og:description" content="How to add Master DNS Zone?"> 
+  <meta property="og:image" content="https://www.cloudns.net/images/logo/social.png"> <!-- Twitter --> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:title" content="ClouDNS: Master DNS Zone"> 
+  <meta name="twitter:description" content="How to add Master DNS Zone?"> 
+  <script type="text/javascript">
+			$(function() {
+								addTranslation('cart_menu', 'Cart (%s)');
+									
+				$("#cartHeaderProductsTitle").tooltip({
+					track: true,
+					delay: 0,
+					showURL: false,
+					showBody: "<body>",
+					fade: 250 
+				});
+				checkDirection('ltr');
+			});
+		</script> 
+ </head> 
+ <body class="lang-en"> <!-- Header --> 
+  <header> 
+   <div class="wraper"> <a href="/" class="logo"></a> 
+    <nav> 
+     <ul> 
+      <li> <a href="javascript: void(0);" class="drop-down cursor-default">Managed DNS</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/premium/">Premium DNS</a></li> 
+        <li><a href="/ddos-protected-plans/">DDoS Protected DNS</a></li> 
+        <li><a href="/geodns/">GeoDNS</a></li> 
+        <li><a href="/dns-failover/">DNS Failover</a></li> 
+        <li><a href="/private-dns-servers/">Private DNS servers</a></li> 
+       </ul> </li> 
+      <li> <a href="javascript: void(0);" class="drop-down cursor-default">Services</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/secondary-dns/">Secondary DNS</a></li> 
+        <li><a href="/reverse-dns/">Reverse DNS</a></li> 
+        <li><a href="/managed-dns/">Managed DNS</a></li> 
+        <li><a href="/anycast-dns/">Anycast DNS</a></li> 
+        <li><a href="/enterprise-dns/">Enterprise DNS</a></li> 
+        <li><a href="/dynamic-dns/">Dynamic DNS</a></li> 
+        <li><a href="/domain-pricing-list/">Domain names</a></li> 
+        <li><a href="/ssl-certificates/">SSL Certificates</a></li> 
+        <li><a href="https://www.cloudprima.com/?utm_source=footer&amp;utm_campaign=ClouDNS+Web" target="_blank">DDoS Protected VPS</a></li> 
+       </ul> </li> 
+      <li> <a href="javascript: void(0);" class="drop-down cursor-default">Company</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/about-us/">About Us</a></li> 
+        <li><a href="/news/">News</a></li> 
+        <li><a href="/contact/">Contacts</a></li> 
+        <li><a href="/data-centers/">Data centers</a></li> 
+        <li><a href="/feedback/">Feedback</a></li> 
+        <li><a href="/careers/">Careers</a></li> 
+       </ul> </li> 
+      <li> <a href="javascript: void(0);" class="drop-down cursor-default">Partnership</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/affiliate/">Affiliate Program</a></li> 
+        <li><a href="/resellers-api/">Resellers API</a></li> 
+       </ul> </li> 
+      <li class="extra-menu"> <a href="javascript: void(0);" class="drop-down cursor-default">KnowledgeBase</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/blog/" target="_blank">Blog</a></li> 
+        <li><a href="/wiki/">Wiki</a></li> 
+        <li><a href="/features/">Features</a></li> 
+        <li><a href="/faq/">FAQ</a></li> 
+        <li><a href="/api-help/">HTTP API</a></li> 
+        <li><a href="/whmcs-module/">WHMCS module</a></li> 
+        <li><a href="/payment-methods/">Payment methods</a></li> 
+       </ul> </li> 
+     </ul> 
+    </nav> 
+    <aside> 
+     <div> <a href="/order/step/1/" class="icon icon-cart icon-white header-tooltip hidden" title="Cart (0)" aria-label="Cart (0)" id="cartHeaderProductsTitle"> <span id="cartHeaderProducts" class="counter">0</span> </a> <button type="button" id="sign-in" class="sign-in round-btn dark-btn s-btn " onclick="show2FALoginForm();">Sign In</button> 
+      <div class="lang-bar"> <a href="javascript:void(0);" onclick="showLanguages(event); return false;" class="drop-down"> <span class="lang lang-en"></span> <span>English</span> </a> 
+       <ul class="drop-down-menu"> 
+        <li> <a href="/wiki/lang/ru/"> <span class="lang lang-ru"></span> <span>Русский</span> </a> </li> 
+        <li> <a href="/wiki/lang/de/"> <span class="lang lang-de"></span> <span>Deutsch</span> </a> </li> 
+        <li> <a href="/wiki/lang/fr/"> <span class="lang lang-fr"></span> <span>Français</span> </a> </li> 
+        <li> <a href="/wiki/lang/ro/"> <span class="lang lang-ro"></span> <span>Română</span> </a> </li> 
+        <li> <a href="/wiki/lang/bg/"> <span class="lang lang-bg"></span> <span>Български</span> </a> </li> 
+        <li> <a href="/wiki/lang/es/"> <span class="lang lang-es"></span> <span>Español</span> </a> </li> 
+        <li> <a href="/wiki/lang/pt/"> <span class="lang lang-pt"></span> <span>Português</span> </a> </li> 
+        <li> <a href="/wiki/lang/it/"> <span class="lang lang-it"></span> <span>Italiano</span> </a> </li> 
+        <li> <a href="/wiki/lang/pl/"> <span class="lang lang-pl"></span> <span>Polski</span> </a> </li> 
+        <li> <a href="/wiki/lang/sk/"> <span class="lang lang-sk"></span> <span>Slovenský</span> </a> </li> 
+        <li> <a href="/wiki/lang/ua/"> <span class="lang lang-ua"></span> <span>Українська</span> </a> </li> 
+        <li> <a href="/wiki/lang/tr/"> <span class="lang lang-tr"></span> <span>Türkçe</span> </a> </li> 
+        <li> <a href="/wiki/lang/jp/"> <span class="lang lang-jp"></span> <span>日本語</span> </a> </li> 
+        <li> <a href="/wiki/lang/hi/"> <span class="lang lang-hi"></span> <span>हिंदी</span> </a> </li> 
+        <li class="font-smaller"> <a href="/wiki/lang/id/"> <span class="lang lang-id"></span> <span>Bahasa Indonesia</span> </a> </li> 
+        <li> <a href="https://asia.cloudns.net/wiki/lang/chs/"> <span class="lang lang-chs"></span> <span>简体中文</span> </a> </li> 
+        <li> <a href="https://asia.cloudns.net/wiki/lang/cht/"> <span class="lang lang-cht"></span> <span>繁體中文</span> </a> </li> 
+        <li> <a href="https://asia.cloudns.net/wiki/lang/vn/"> <span class="lang lang-vn"></span> <span>Tiếng Việt</span> </a> </li> 
+        <li> <a href="https://asia.cloudns.net/wiki/lang/ir/"> <span class="lang lang-ir"></span> <span>فارسی</span> </a> </li> 
+       </ul> 
+      </div> 
+     </div> 
+    </aside> <button class="mobile-nav-btn" onclick="openMobileMenu(this);"><span></span></button> 
+    <div class="mobile-nav a-c"> 
+     <ul> 
+      <li onclick="expandMobileMenu(this);"> <a href="javascript: void(0);" class="drop-down cursor-default">Managed DNS</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/premium/">Premium DNS</a></li> 
+        <li><a href="/ddos-protected-plans/">DDoS Protected DNS</a></li> 
+        <li><a href="/geodns/">GeoDNS</a></li> 
+        <li><a href="/dns-failover/">DNS Failover</a></li> 
+        <li><a href="/private-dns-servers/">Private DNS servers</a></li> 
+       </ul> </li> 
+      <li onclick="expandMobileMenu(this);"> <a href="javascript: void(0);" class="drop-down cursor-default">Services</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/secondary-dns/">Secondary DNS</a></li> 
+        <li><a href="/reverse-dns/">Reverse DNS</a></li> 
+        <li><a href="/managed-dns/">Managed DNS</a></li> 
+        <li><a href="/anycast-dns/">Anycast DNS</a></li> 
+        <li><a href="/enterprise-dns/">Enterprise DNS</a></li> 
+        <li><a href="/dynamic-dns/">Dynamic DNS</a></li> 
+        <li><a href="/domain-pricing-list/">Domain names</a></li> 
+        <li><a href="/ssl-certificates/">SSL Certificates</a></li> 
+        <li><a href="https://www.cloudprima.com/?utm_source=footer&amp;utm_campaign=ClouDNS+Web" target="_blank">DDoS Protected VPS</a></li> 
+       </ul> </li> 
+      <li onclick="expandMobileMenu(this);"> <a href="javascript: void(0);" class="drop-down cursor-default">Company</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/about-us/">About Us</a></li> 
+        <li><a href="/news/">News</a></li> 
+        <li><a href="/contact/">Contacts</a></li> 
+        <li><a href="/data-centers/">Data centers</a></li> 
+        <li><a href="/feedback/">Feedback</a></li> 
+        <li><a href="/careers/">Careers</a></li> 
+       </ul> </li> 
+      <li onclick="expandMobileMenu(this);"> <a href="javascript: void(0);" class="drop-down cursor-default">Partnership</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/affiliate/">Affiliate Program</a></li> 
+        <li><a href="/resellers-api/">Resellers API</a></li> 
+       </ul> </li> 
+      <li onclick="expandMobileMenu(this);"> <a href="javascript: void(0);" class="drop-down cursor-default">KnowledgeBase</a> 
+       <ul class="drop-down-menu"> 
+        <li><a href="/blog/" target="_blank">Blog</a></li> 
+        <li><a href="/wiki/">Wiki</a></li> 
+        <li><a href="/features/">Features</a></li> 
+        <li><a href="/faq/">FAQ</a></li> 
+        <li><a href="/api-help/">HTTP API</a></li> 
+        <li><a href="/whmcs-module/">WHMCS module</a></li> 
+        <li><a href="/payment-methods/">Payment methods</a></li> 
+       </ul> </li> 
+     </ul> 
+    </div> 
+   </div> 
+  </header> 
+  <div id="cloudOverlay"></div> 
+  <div id="cloudPage"> 
+   <div id="cloudPageClose"></div> 
+   <div id="cloudPageContent"></div> 
+  </div> 
+  <div id="cloudSecondOverlay"></div> 
+  <div id="cloudMessage"> 
+   <div id="cloudMessageClose"></div> 
+   <div id="cloudMessageContent"></div> 
+  </div> 
+  <div class="popup" id="cloudnspop"> 
+   <div id="popupOverlay" class="overlay"></div> 
+   <div class="popup-wraper"> <button type="button" class="close-btn close-popup"> 
+     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox="0 0 40 40">
+      <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
+     </svg> </button> 
+    <div class="popup-content"> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="popup popup-message" id="popup-message"> 
+   <div id="popupSecondOverlay" class="overlay"></div> 
+   <div class="popup-wraper"> <button type="button" class="close-btn close-popup"> 
+     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox="0 0 40 40">
+      <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
+     </svg> </button> 
+    <div class="popup-content"> 
+    </div> 
+   </div> 
+  </div> 
+  <section class="section-wraper wiki-wraper"> 
+   <div class="wraper w-b b-r"> 
+    <div class="wiki-nav" id="menu"> 
+     <h2>Wiki</h2> 
+     <form method="post" class="s-input-wraper flat2-input-style wiki-search" action="/wiki/"> 
+      <input placeholder="search..." name="search" id="search" value="" type="text"> <button type="submit" class="btn-search icon icon-search icon-dark"></button> 
+     </form> 
+     <ul>
+      <li><a href="/wiki/">Home</a></li>
+     </ul>
+     <ul style="margin-top: 0;"> 
+      <li id="article-41"> <a href="/wiki/article/41/">API Help</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-42"> <a href="/wiki/article/42/">Access and Authentication</a> </li> 
+        <li id="article-43"> <a href="/wiki/article/43/">Request Parameter Data Types</a> </li> 
+        <li id="article-44"> <a href="/wiki/article/44/">Response formats</a> </li> 
+        <li id="article-45"> <a href="/wiki/article/45/">Login</a> </li> 
+        <li id="article-307"> <a href="/wiki/article/307/">Get current IP address</a> </li> 
+        <li id="article-354"> <a href="/wiki/article/354/">Get account balance</a> </li> 
+        <li id="article-46"> <a href="/wiki/article/46/">DNS Zones</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-47"> <a href="/wiki/article/47/">Available name servers</a> </li> 
+          <li id="article-48"> <a href="/wiki/article/48/">Register Domain Zone</a> </li> 
+          <li id="article-49"> <a href="/wiki/article/49/">Delete domain zone</a> </li> 
+          <li id="article-50"> <a href="/wiki/article/50/">List Zones</a> </li> 
+          <li id="article-51"> <a href="/wiki/article/51/">Get pages count</a> </li> 
+          <li id="article-52"> <a href="/wiki/article/52/">Get zones statistics</a> </li> 
+          <li id="article-134"> <a href="/wiki/article/134/">Get zone information</a> </li> 
+          <li id="article-135"> <a href="/wiki/article/135/">Update zone</a> </li> 
+          <li id="article-53"> <a href="/wiki/article/53/">Update status</a> </li> 
+          <li id="article-54"> <a href="/wiki/article/54/">Is updated</a> </li> 
+          <li id="article-55"> <a href="/wiki/article/55/">Change status</a> </li> 
+          <li id="article-56"> <a href="/wiki/article/56/">Records</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-57"> <a href="/wiki/article/57/">List records</a> </li> 
+            <li id="article-358"> <a href="/wiki/article/358/">Get records pages count</a> </li> 
+            <li id="article-58"> <a href="/wiki/article/58/">Add record</a> </li> 
+            <li id="article-59"> <a href="/wiki/article/59/">Delete record</a> </li> 
+            <li id="article-60"> <a href="/wiki/article/60/">Modify Record</a> </li> 
+            <li id="article-61"> <a href="/wiki/article/61/">Copy records</a> </li> 
+            <li id="article-156"> <a href="/wiki/article/156/">Import records</a> </li> 
+            <li id="article-166"> <a href="/wiki/article/166/">Export records in BIND format</a> </li> 
+            <li id="article-157"> <a href="/wiki/article/157/">Get the available record types</a> </li> 
+            <li id="article-153"> <a href="/wiki/article/153/">Get the available TTL</a> </li> 
+            <li id="article-62"> <a href="/wiki/article/62/">Get SOA details</a> </li> 
+            <li id="article-63"> <a href="/wiki/article/63/">Modify SOA details</a> </li> 
+            <li id="article-64"> <a href="/wiki/article/64/">Get DynamicURL</a> 
+             <ul style="margin-top: 0;"> 
+              <li id="article-151"> <a href="/wiki/article/151/">Disable DynamicURL of a record</a> </li> 
+              <li id="article-152"> <a href="/wiki/article/152/">Change DynamicURL of a record</a> </li>
+             </ul></li> 
+            <li id="article-65"> <a href="/wiki/article/65/">Import via transfer</a> </li> 
+            <li id="article-66"> <a href="/wiki/article/66/">Change status</a> </li>
+           </ul></li> 
+          <li id="article-67"> <a href="/wiki/article/67/">Slave Zones</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-68"> <a href="/wiki/article/68/">Add master server</a> </li> 
+            <li id="article-69"> <a href="/wiki/article/69/">Delete master server</a> </li> 
+            <li id="article-70"> <a href="/wiki/article/70/">List master servers</a> </li>
+           </ul></li> 
+          <li id="article-71"> <a href="/wiki/article/71/">Mail forwards</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-133"> <a href="/wiki/article/133/">Get mail forwards statistics</a> </li> 
+            <li id="article-149"> <a href="/wiki/article/149/">Available Mail Forwards Servers</a> </li> 
+            <li id="article-72"> <a href="/wiki/article/72/">Add mail forward</a> </li> 
+            <li id="article-73"> <a href="/wiki/article/73/">Delete mail forward</a> </li> 
+            <li id="article-74"> <a href="/wiki/article/74/">Modify mail forward</a> </li> 
+            <li id="article-75"> <a href="/wiki/article/75/">List mail forwards</a> </li>
+           </ul></li> 
+          <li id="article-77"> <a href="/wiki/article/77/">Cloud domains</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-76"> <a href="/wiki/article/76/">Add cloud domain</a> </li> 
+            <li id="article-78"> <a href="/wiki/article/78/">Delete cloud domain</a> </li> 
+            <li id="article-79"> <a href="/wiki/article/79/">Change cloud master</a> </li> 
+            <li id="article-80"> <a href="/wiki/article/80/">List cloud domains</a> </li>
+           </ul></li> 
+          <li id="article-81"> <a href="/wiki/article/81/">Zone transfers</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-82"> <a href="/wiki/article/82/">Allow new IP</a> </li> 
+            <li id="article-83"> <a href="/wiki/article/83/">Delete an allowed IP</a> </li> 
+            <li id="article-84"> <a href="/wiki/article/84/">List the allowed IPs</a> </li>
+           </ul></li> 
+          <li id="article-85"> <a href="/wiki/article/85/">Query statistics</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-86"> <a href="/wiki/article/86/">Hourly statistics</a> </li> 
+            <li id="article-87"> <a href="/wiki/article/87/">Daily statistics</a> </li> 
+            <li id="article-88"> <a href="/wiki/article/88/">Monthly statistics</a> </li> 
+            <li id="article-89"> <a href="/wiki/article/89/">Yearly statistics</a> </li> 
+            <li id="article-90"> <a href="/wiki/article/90/">Statistics for the last 30 days</a> </li>
+           </ul></li> 
+          <li id="article-129"> <a href="/wiki/article/129/">Parked Zones</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-130"> <a href="/wiki/article/130/">Get Parked Templates</a> </li> 
+            <li id="article-131"> <a href="/wiki/article/131/">Get parked zones Settings</a> </li> 
+            <li id="article-132"> <a href="/wiki/article/132/">Modify parked zone settings</a> </li>
+           </ul></li> 
+          <li id="article-183"> <a href="/wiki/article/183/">GeoDNS</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-184"> <a href="/wiki/article/184/">List GeoDNS locations</a> </li> 
+            <li id="article-306"> <a href="/wiki/article/306/">Is GeoDNS available</a> </li>
+           </ul></li> 
+          <li id="article-272"> <a href="/wiki/article/272/">DNS Failover</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-273"> <a href="/wiki/article/273/">Failover settings</a> </li> 
+            <li id="article-274"> <a href="/wiki/article/274/">Activate failover</a> </li> 
+            <li id="article-275"> <a href="/wiki/article/275/">Deactivate failover</a> </li> 
+            <li id="article-276"> <a href="/wiki/article/276/">Modify failover</a> </li> 
+            <li id="article-277"> <a href="/wiki/article/277/">Check history pages</a> </li> 
+            <li id="article-278"> <a href="/wiki/article/278/">Check history</a> </li> 
+            <li id="article-279"> <a href="/wiki/article/279/">Action history pages</a> </li> 
+            <li id="article-280"> <a href="/wiki/article/280/">Action history</a> </li> 
+            <li id="article-309"> <a href="/wiki/article/309/">Get DNS Failover checks limit</a> </li> 
+            <li id="article-313"> <a href="/wiki/article/313/">List DNS Failover Checkers</a> </li>
+           </ul></li> 
+          <li id="article-315"> <a href="/wiki/article/315/">Groups</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-316"> <a href="/wiki/article/316/">Add group</a> </li> 
+            <li id="article-317"> <a href="/wiki/article/317/">List groups</a> </li> 
+            <li id="article-318"> <a href="/wiki/article/318/">Delete group</a> </li> 
+            <li id="article-319"> <a href="/wiki/article/319/">Rename group</a> </li> 
+            <li id="article-320"> <a href="/wiki/article/320/">Change group</a> </li>
+           </ul></li> 
+          <li id="article-334"> <a href="/wiki/article/334/">DNSSEC</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-335"> <a href="/wiki/article/335/">Is DNSSEC available</a> </li> 
+            <li id="article-336"> <a href="/wiki/article/336/">Activate DNSSEC</a> </li> 
+            <li id="article-337"> <a href="/wiki/article/337/">Deactivate DNSSEC</a> </li> 
+            <li id="article-338"> <a href="/wiki/article/338/">Get DS Records</a> </li>
+           </ul></li>
+         </ul></li> 
+        <li id="article-91"> <a href="/wiki/article/91/">Domain names</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-343"> <a href="/wiki/article/343/">DNSSEC</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-344"> <a href="/wiki/article/344/">Add DNSSEC Records</a> </li> 
+            <li id="article-345"> <a href="/wiki/article/345/">List DNSSEC Records </a> </li> 
+            <li id="article-346"> <a href="/wiki/article/346/">Delete DNSSEC Record</a> </li>
+           </ul></li> 
+          <li id="article-321"> <a href="/wiki/article/321/">Groups</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-322"> <a href="/wiki/article/322/">Add group</a> </li> 
+            <li id="article-323"> <a href="/wiki/article/323/">List groups</a> </li> 
+            <li id="article-324"> <a href="/wiki/article/324/">Delete group</a> </li> 
+            <li id="article-325"> <a href="/wiki/article/325/">Change group</a> </li> 
+            <li id="article-326"> <a href="/wiki/article/326/">Rename group</a> </li>
+           </ul></li> 
+          <li id="article-96"> <a href="/wiki/article/96/">Check availability</a> </li> 
+          <li id="article-297"> <a href="/wiki/article/297/">Domains price list</a> </li> 
+          <li id="article-97"> <a href="/wiki/article/97/">Register new domain</a> </li> 
+          <li id="article-98"> <a href="/wiki/article/98/">Renew domain</a> </li> 
+          <li id="article-99"> <a href="/wiki/article/99/">Transfer domain</a> </li> 
+          <li id="article-154"> <a href="/wiki/article/154/">List registered domains</a> </li> 
+          <li id="article-155"> <a href="/wiki/article/155/">Get pages count</a> </li> 
+          <li id="article-100"> <a href="/wiki/article/100/">Domain information</a> </li> 
+          <li id="article-101"> <a href="/wiki/article/101/">Get contacts</a> </li> 
+          <li id="article-102"> <a href="/wiki/article/102/">Modify contacts</a> </li> 
+          <li id="article-103"> <a href="/wiki/article/103/">Get name servers</a> </li> 
+          <li id="article-104"> <a href="/wiki/article/104/">Modify name servers</a> </li> 
+          <li id="article-105"> <a href="/wiki/article/105/">Get child name servers</a> </li> 
+          <li id="article-106"> <a href="/wiki/article/106/">Add child name server</a> </li> 
+          <li id="article-107"> <a href="/wiki/article/107/">Delete child name server</a> </li> 
+          <li id="article-108"> <a href="/wiki/article/108/">Modify child name server</a> </li> 
+          <li id="article-109"> <a href="/wiki/article/109/">Modify privacy protection</a> </li> 
+          <li id="article-110"> <a href="/wiki/article/110/">Modify transfer lock</a> </li> 
+          <li id="article-111"> <a href="/wiki/article/111/">Get transfer code</a> </li> 
+          <li id="article-112"> <a href="/wiki/article/112/">Get RAA status</a> </li> 
+          <li id="article-113"> <a href="/wiki/article/113/">Resend RAA verification</a> </li>
+         </ul></li> 
+        <li id="article-114"> <a href="/wiki/article/114/">Sub users</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-115"> <a href="/wiki/article/115/">Add user</a> </li> 
+          <li id="article-116"> <a href="/wiki/article/116/">Get sub user's info</a> </li> 
+          <li id="article-117"> <a href="/wiki/article/117/">Get pages count</a> </li> 
+          <li id="article-118"> <a href="/wiki/article/118/">List sub users</a> </li> 
+          <li id="article-119"> <a href="/wiki/article/119/">Modify zones limit</a> </li> 
+          <li id="article-120"> <a href="/wiki/article/120/">Modify mail forwards limit</a> </li> 
+          <li id="article-121"> <a href="/wiki/article/121/">Add IP</a> </li> 
+          <li id="article-122"> <a href="/wiki/article/122/">Remove IP</a> </li> 
+          <li id="article-123"> <a href="/wiki/article/123/">Modify status</a> </li> 
+          <li id="article-310"> <a href="/wiki/article/310/">Modify DNS Failover checks limit</a> </li> 
+          <li id="article-124"> <a href="/wiki/article/124/">Modify password</a> </li> 
+          <li id="article-125"> <a href="/wiki/article/125/">Zones</a> </li> 
+          <li id="article-126"> <a href="/wiki/article/126/">Delegate zone</a> </li> 
+          <li id="article-127"> <a href="/wiki/article/127/">Remove zone delegation</a> </li> 
+          <li id="article-128"> <a href="/wiki/article/128/">Delete sub user</a> </li>
+         </ul></li> 
+        <li id="article-168"> <a href="/wiki/article/168/">SSL</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-327"> <a href="/wiki/article/327/">Groups</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-328"> <a href="/wiki/article/328/">Add group</a> </li> 
+            <li id="article-329"> <a href="/wiki/article/329/">List groups</a> </li> 
+            <li id="article-330"> <a href="/wiki/article/330/">Delete group</a> </li> 
+            <li id="article-331"> <a href="/wiki/article/331/">Rename group</a> </li> 
+            <li id="article-332"> <a href="/wiki/article/332/">Change group</a> </li>
+           </ul></li> 
+          <li id="article-169"> <a href="/wiki/article/169/">Order New SSL</a> </li> 
+          <li id="article-170"> <a href="/wiki/article/170/">List ordered certificates</a> </li> 
+          <li id="article-171"> <a href="/wiki/article/171/">Get pages count</a> </li> 
+          <li id="article-172"> <a href="/wiki/article/172/">SSL Information</a> </li> 
+          <li id="article-173"> <a href="/wiki/article/173/">Submit CSR</a> </li> 
+          <li id="article-174"> <a href="/wiki/article/174/">Renew SSL</a> </li> 
+          <li id="article-256"> <a href="/wiki/article/256/">Change SSL verification e-mail</a> </li> 
+          <li id="article-257"> <a href="/wiki/article/257/">Reissue SSL</a> </li> 
+          <li id="article-258"> <a href="/wiki/article/258/">List SSL verification e-mails</a> </li>
+         </ul></li> 
+        <li id="article-181"> <a href="/wiki/article/181/">Open source libs</a> </li> 
+        <li id="article-262"> <a href="/wiki/article/262/">Scripts</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-250"> <a href="/wiki/article/250/">Secondary DNS with Plesk</a> </li> 
+          <li id="article-311"> <a href="/wiki/article/311/">Slave DNS with DA Master</a> </li> 
+          <li id="article-264"> <a href="/wiki/article/264/">Secondary DNS with cPanel</a> </li> 
+          <li id="article-281"> <a href="/wiki/article/281/">Available DNS zones notification</a> </li> 
+          <li id="article-301"> <a href="/wiki/article/301/">New Master IP to all Slave zones</a> </li> 
+          <li id="article-282"> <a href="/wiki/article/282/">Bulk Records Update</a> </li> 
+          <li id="article-299"> <a href="/wiki/article/299/">Delete Cloud domains</a> </li> 
+          <li id="article-298"> <a href="/wiki/article/298/">Zones Import Via Transfer</a> </li> 
+          <li id="article-300"> <a href="/wiki/article/300/">Edit contact details</a> </li> 
+          <li id="article-283"> <a href="/wiki/article/283/">DNS Statistics Reports</a> </li> 
+          <li id="article-284"> <a href="/wiki/article/284/">Export DNS zones in BIND format</a> </li> 
+          <li id="article-285"> <a href="/wiki/article/285/">Export DNS zones in CSV format</a> </li> 
+          <li id="article-286"> <a href="/wiki/article/286/">DNS zone files export</a> </li> 
+          <li id="article-308"> <a href="/wiki/article/308/">Add Slave zones with cPanel</a> </li> 
+          <li id="article-287"> <a href="/wiki/article/287/">Slave with PowerDNS and pgSQL</a> </li> 
+          <li id="article-288"> <a href="/wiki/article/288/">PowerDNS Slave zones delete</a> </li> 
+          <li id="article-289"> <a href="/wiki/article/289/">Bulk SOA Update</a> </li> 
+          <li id="article-290"> <a href="/wiki/article/290/">Convert Cloud to Master zone</a> </li>
+         </ul></li>
+       </ul></li> 
+      <li id="article-355"> <a href="/wiki/article/355/">Getting Started</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-361"> <a href="/wiki/article/361/">How to delegate a sub-domain </a> </li>
+       </ul></li> 
+      <li id="article-22"> <a href="/wiki/article/22/">Domain names</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-23"> <a href="/wiki/article/23/">Register New Domain</a> </li> 
+        <li id="article-24"> <a href="/wiki/article/24/">Transfer your domain</a> </li> 
+        <li id="article-25"> <a href="/wiki/article/25/">Renew your domain</a> </li> 
+        <li id="article-38"> <a href="/wiki/article/38/">Domain Management</a> </li> 
+        <li id="article-295"> <a href="/wiki/article/295/">Glue Records in .de</a> </li> 
+        <li id="article-305"> <a href="/wiki/article/305/">Glue Records in .be</a> </li> 
+        <li id="article-92"> <a href="/wiki/article/92/">Specific Rules and Requirements</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-94"> <a href="/wiki/article/94/">.AU Rules/Requirements</a> </li> 
+          <li id="article-95"> <a href="/wiki/article/95/">.EU Rules/Requirements</a> </li> 
+          <li id="article-93"> <a href="/wiki/article/93/">.CN Rules/Requirements</a> </li> 
+          <li id="article-144"> <a href="/wiki/article/144/">.CA Domains Registrant Agreement</a> </li> 
+          <li id="article-357"> <a href="/wiki/article/357/">Afilias TLDs Registrant Agreement</a> </li> 
+          <li id="article-139"> <a href="/wiki/article/139/">Special ccTLD Requirements</a> </li>
+         </ul></li> 
+        <li id="article-197"> <a href="/wiki/article/197/">Privacy Protection</a> </li>
+       </ul></li> 
+      <li id="article-28"> <a href="/wiki/article/28/">DNS Zones</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-29"> <a href="/wiki/article/29/">Master DNS Zone</a> </li> 
+        <li id="article-30"> <a href="/wiki/article/30/">Slave/Backup Zone</a> </li> 
+        <li id="article-31"> <a href="/wiki/article/31/">Free Zone</a> </li> 
+        <li id="article-33"> <a href="/wiki/article/33/">Master/Slave Reverse Zone</a> </li> 
+        <li id="article-20"> <a href="/wiki/article/20/">Cloud Domains</a> </li> 
+        <li id="article-333"> <a href="/wiki/article/333/">Primary/Secondary ENUM Zones</a> </li> 
+        <li id="article-32"> <a href="/wiki/article/32/">Parked Zone</a> </li> 
+        <li id="article-196"> <a href="/wiki/article/196/">Slave DNS with hidden master</a> </li> 
+        <li id="article-248"> <a href="/wiki/article/248/">DNS zones and how do they count</a> </li> 
+        <li id="article-253"> <a href="/wiki/article/253/">Disable/enable DNS zones</a> </li>
+       </ul></li> 
+      <li id="article-9"> <a href="/wiki/article/9/">DNS Records</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-17"> <a href="/wiki/article/17/">SOA Record</a> </li> 
+        <li id="article-10"> <a href="/wiki/article/10/">A Record</a> </li> 
+        <li id="article-11"> <a href="/wiki/article/11/">AAAA Record</a> </li> 
+        <li id="article-12"> <a href="/wiki/article/12/">MX Record</a> </li> 
+        <li id="article-13"> <a href="/wiki/article/13/">CNAME Record</a> </li> 
+        <li id="article-14"> <a href="/wiki/article/14/">TXT Record</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-141"> <a href="/wiki/article/141/">DKIM Record</a> </li> 
+          <li id="article-142"> <a href="/wiki/article/142/">DMARC Record</a> </li> 
+          <li id="article-137"> <a href="/wiki/article/137/">SPF/TXT Duplication</a> </li>
+         </ul></li> 
+        <li id="article-15"> <a href="/wiki/article/15/">SPF Record</a> </li> 
+        <li id="article-34"> <a href="/wiki/article/34/">NS Record</a> </li> 
+        <li id="article-21"> <a href="/wiki/article/21/">SRV Record</a> </li> 
+        <li id="article-16"> <a href="/wiki/article/16/">Web Redirect Record</a> </li> 
+        <li id="article-140"> <a href="/wiki/article/140/">Web Redirect with SSL</a> </li> 
+        <li id="article-18"> <a href="/wiki/article/18/">ALIAS Record</a> </li> 
+        <li id="article-19"> <a href="/wiki/article/19/">RP Record</a> </li> 
+        <li id="article-27"> <a href="/wiki/article/27/">SSHFP Record</a> </li> 
+        <li id="article-40"> <a href="/wiki/article/40/">PTR Record</a> </li> 
+        <li id="article-189"> <a href="/wiki/article/189/">NAPTR Record</a> </li> 
+        <li id="article-198"> <a href="/wiki/article/198/">CAA record</a> </li> 
+        <li id="article-342"> <a href="/wiki/article/342/">TLSA Record</a> </li> 
+        <li id="article-190"> <a href="/wiki/article/190/">Wildcard DNS Record</a> </li> 
+        <li id="article-188"> <a href="/wiki/article/188/">What is TTL?</a> </li> 
+        <li id="article-205"> <a href="/wiki/article/205/">Records templates</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-206"> <a href="/wiki/article/206/">Mail Forwards</a> </li> 
+          <li id="article-207"> <a href="/wiki/article/207/">Gmail</a> </li> 
+          <li id="article-208"> <a href="/wiki/article/208/">Heroku</a> </li> 
+          <li id="article-209"> <a href="/wiki/article/209/">Heroku SSL</a> </li> 
+          <li id="article-210"> <a href="/wiki/article/210/">Zoho</a> </li> 
+          <li id="article-211"> <a href="/wiki/article/211/">Tumblr</a> </li> 
+          <li id="article-212"> <a href="/wiki/article/212/">Blogger</a> </li> 
+          <li id="article-213"> <a href="/wiki/article/213/">GitHub</a> </li> 
+          <li id="article-214"> <a href="/wiki/article/214/">Microsoft Azure</a> </li> 
+          <li id="article-215"> <a href="/wiki/article/215/">Weebly</a> </li> 
+          <li id="article-216"> <a href="/wiki/article/216/">Amazon Web Services</a> </li> 
+          <li id="article-217"> <a href="/wiki/article/217/">Google Sites</a> </li> 
+          <li id="article-218"> <a href="/wiki/article/218/">Google Calendar</a> </li> 
+          <li id="article-219"> <a href="/wiki/article/219/">Google Docs</a> </li> 
+          <li id="article-220"> <a href="/wiki/article/220/">Google Talk</a> </li> 
+          <li id="article-221"> <a href="/wiki/article/221/">WordPress</a> </li> 
+          <li id="article-222"> <a href="/wiki/article/222/">SupaDupa</a> </li> 
+          <li id="article-223"> <a href="/wiki/article/223/">Bitbucket</a> </li> 
+          <li id="article-224"> <a href="/wiki/article/224/">Divshot</a> </li> 
+          <li id="article-225"> <a href="/wiki/article/225/">Aldryn</a> </li> 
+          <li id="article-226"> <a href="/wiki/article/226/">Instapage</a> </li> 
+          <li id="article-227"> <a href="/wiki/article/227/">Enjin</a> </li> 
+          <li id="article-228"> <a href="/wiki/article/228/">Fastly</a> </li> 
+          <li id="article-229"> <a href="/wiki/article/229/">Format</a> </li> 
+          <li id="article-230"> <a href="/wiki/article/230/">atmail</a> </li> 
+          <li id="article-231"> <a href="/wiki/article/231/">FastMail</a> </li> 
+          <li id="article-232"> <a href="/wiki/article/232/">KickoffLabs</a> </li> 
+          <li id="article-233"> <a href="/wiki/article/233/">launchrock</a> </li> 
+          <li id="article-234"> <a href="/wiki/article/234/">Mailgun</a> </li> 
+          <li id="article-235"> <a href="/wiki/article/235/">paperplane.io</a> </li> 
+          <li id="article-236"> <a href="/wiki/article/236/">Tender Support</a> </li> 
+          <li id="article-237"> <a href="/wiki/article/237/">Squarespace</a> </li> 
+          <li id="article-238"> <a href="/wiki/article/238/">SimplyBuilt</a> </li> 
+          <li id="article-239"> <a href="/wiki/article/239/">Shopify</a> </li> 
+          <li id="article-240"> <a href="/wiki/article/240/">Pobox</a> </li> 
+          <li id="article-241"> <a href="/wiki/article/241/">Ghost</a> </li> 
+          <li id="article-242"> <a href="/wiki/article/242/">Office 365</a> </li> 
+          <li id="article-243"> <a href="/wiki/article/243/">Yandex</a> </li> 
+          <li id="article-244"> <a href="/wiki/article/244/">Minecraft</a> </li> 
+          <li id="article-245"> <a href="/wiki/article/245/">Mail.Ru</a> </li> 
+          <li id="article-246"> <a href="/wiki/article/246/">MailChimp</a> </li> 
+          <li id="article-247"> <a href="/wiki/article/247/">ImprovMX</a> </li> 
+          <li id="article-267"> <a href="/wiki/article/267/">Rackspace Email</a> </li>
+         </ul></li> 
+        <li id="article-182"> <a href="/wiki/article/182/">Round-Robin DNS</a> </li> 
+        <li id="article-252"> <a href="/wiki/article/252/">Records deactivation/activation</a> </li>
+       </ul></li> 
+      <li id="article-35"> <a href="/wiki/article/35/">Dynamic DNS</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-36"> <a href="/wiki/article/36/">Dynamic DNS for *NIX</a> </li> 
+        <li id="article-340"> <a href="/wiki/article/340/">Dynamic DNS for macOS</a> </li> 
+        <li id="article-37"> <a href="/wiki/article/37/">Dynamic DNS for Windows</a> </li> 
+        <li id="article-269"> <a href="/wiki/article/269/">Dynamic DNS script for Windows</a> </li> 
+        <li id="article-167"> <a href="/wiki/article/167/">DynDNS with multiple interfaces</a> </li> 
+        <li id="article-268"> <a href="/wiki/article/268/">Dynamic DNS with pfSense</a> </li> 
+        <li id="article-175"> <a href="/wiki/article/175/">Dynamic DNS for Synology</a> </li> 
+        <li id="article-255"> <a href="/wiki/article/255/">Dynamic DNS for MikroTik</a> </li> 
+        <li id="article-293"> <a href="/wiki/article/293/">Dynamic DNS for Android</a> </li> 
+        <li id="article-294"> <a href="/wiki/article/294/">Dynamic DNS with FreeNAS</a> </li> 
+        <li id="article-312"> <a href="/wiki/article/312/">Dynamic DNS with DD-WRT</a> </li> 
+        <li id="article-341"> <a href="/wiki/article/341/">Dynamic DNS Notifications</a> </li>
+       </ul></li> 
+      <li id="article-185"> <a href="/wiki/article/185/">GeoDNS</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-270"> <a href="/wiki/article/270/">Block visitors by country</a> </li>
+       </ul></li> 
+      <li id="article-271"> <a href="/wiki/article/271/">DNS Failover</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-356"> <a href="/wiki/article/356/">ICMP Ping</a> </li>
+       </ul></li> 
+      <li id="article-339"> <a href="/wiki/article/339/">DNSSEC</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-359"> <a href="/wiki/article/359/">Activating DNSSEC with GoDaddy </a> </li>
+       </ul></li> 
+      <li id="article-304"> <a href="/wiki/article/304/">Reseller's panel</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-347"> <a href="/wiki/article/347/">Reseller Panel API</a> 
+         <ul style="margin-top: 0;"> 
+          <li id="article-348"> <a href="/wiki/article/348/">JSON</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-349"> <a href="/wiki/article/349/">Login</a> </li>
+           </ul></li> 
+          <li id="article-350"> <a href="/wiki/article/350/">SSO</a> 
+           <ul style="margin-top: 0;"> 
+            <li id="article-351"> <a href="/wiki/article/351/">Direct Login</a> </li> 
+            <li id="article-352"> <a href="/wiki/article/352/">SSO Session Login</a> </li>
+           </ul></li>
+         </ul></li>
+       </ul></li> 
+      <li id="article-26"> <a href="/wiki/article/26/">Mail Forwards</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-302"> <a href="/wiki/article/302/">Mail Forwards for external zones</a> </li>
+       </ul></li> 
+      <li id="article-158"> <a href="/wiki/article/158/">SSL certificate</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-159"> <a href="/wiki/article/159/">How to order SSL certificate</a> </li> 
+        <li id="article-160"> <a href="/wiki/article/160/">Generate CSR on Windows</a> </li> 
+        <li id="article-161"> <a href="/wiki/article/161/">Generate CSR on Linux</a> </li> 
+        <li id="article-162"> <a href="/wiki/article/162/">Generate CSR on cPanel</a> </li> 
+        <li id="article-163"> <a href="/wiki/article/163/">Install SSL on Apache</a> </li> 
+        <li id="article-164"> <a href="/wiki/article/164/">Install SSL on NGINX</a> </li> 
+        <li id="article-165"> <a href="/wiki/article/165/">Install SSL on IIS 7</a> </li> 
+        <li id="article-263"> <a href="/wiki/article/263/">Install SSL in WHM/cPanel</a> </li> 
+        <li id="article-204"> <a href="/wiki/article/204/">How to renew SSL certificate</a> </li> 
+        <li id="article-186"> <a href="/wiki/article/186/">Let's Encrypt DNS challenge</a> </li> 
+        <li id="article-249"> <a href="/wiki/article/249/">SSL in VMware Horizon View 7</a> </li> 
+        <li id="article-259"> <a href="/wiki/article/259/">How to reissue SSL certificate</a> </li> 
+        <li id="article-260"> <a href="/wiki/article/260/">Change verification mail of SSL</a> </li> 
+        <li id="article-303"> <a href="/wiki/article/303/">Certificate Transparency</a> </li>
+       </ul></li> 
+      <li id="article-176"> <a href="/wiki/article/176/">WHMCS</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-177"> <a href="/wiki/article/177/">Change log</a> </li> 
+        <li id="article-179"> <a href="/wiki/article/179/">How to upgrade</a> </li> 
+        <li id="article-180"> <a href="/wiki/article/180/">Registered domains mode</a> </li>
+       </ul></li> 
+      <li id="article-191"> <a href="/wiki/article/191/">Products and Services</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-192"> <a href="/wiki/article/192/">Dedicated IPs</a> </li> 
+        <li id="article-199"> <a href="/wiki/article/199/">Our services</a> </li> 
+        <li id="article-200"> <a href="/wiki/article/200/">Hide your IP address</a> </li> 
+        <li id="article-314"> <a href="/wiki/article/314/">Free Migration to ClouDNS</a> </li>
+       </ul></li> 
+      <li id="article-251"> <a href="/wiki/article/251/">Features</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-353"> <a href="/wiki/article/353/">Auto-Renewal</a> </li> 
+        <li id="article-194"> <a href="/wiki/article/194/">Zone shares</a> </li> 
+        <li id="article-39"> <a href="/wiki/article/39/">DNS Branding</a> </li> 
+        <li id="article-292"> <a href="/wiki/article/292/">Groups</a> </li>
+       </ul></li> 
+      <li id="article-193"> <a href="/wiki/article/193/">Profile</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-147"> <a href="/wiki/article/147/">Account Balance</a> </li> 
+        <li id="article-195"> <a href="/wiki/article/195/">Subscriptions</a> </li> 
+        <li id="article-201"> <a href="/wiki/article/201/">Two-Factor Authentication</a> </li> 
+        <li id="article-261"> <a href="/wiki/article/261/">Default SOA settings</a> </li> 
+        <li id="article-266"> <a href="/wiki/article/266/">Change your e-mail</a> </li>
+       </ul></li> 
+      <li id="article-136"> <a href="/wiki/article/136/">Misc</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-360"> <a href="/wiki/article/360/">Slave DNS with PowerDNS</a> </li> 
+        <li id="article-150"> <a href="/wiki/article/150/">Change ownership of a DNS Zone</a> </li> 
+        <li id="article-138"> <a href="/wiki/article/138/">Not sending out Glue Records</a> </li> 
+        <li id="article-143"> <a href="/wiki/article/143/">Custom domain in Blogger</a> </li> 
+        <li id="article-187"> <a href="/wiki/article/187/">Issues with nslookup</a> </li> 
+        <li id="article-202"> <a href="/wiki/article/202/">Authoritative vs Resolving DNS</a> </li> 
+        <li id="article-254"> <a href="/wiki/article/254/">What is a DNS query? </a> </li> 
+        <li id="article-203"> <a href="/wiki/article/203/">Missing nameservers</a> </li> 
+        <li id="article-265"> <a href="/wiki/article/265/">Unknown AXFR requests</a> </li> 
+        <li id="article-296"> <a href="/wiki/article/296/">Changing name servers by plan</a> </li>
+       </ul></li> 
+      <li id="article-145"> <a href="/wiki/article/145/">Commands</a> 
+       <ul style="margin-top: 0;"> 
+        <li id="article-146"> <a href="/wiki/article/146/">10 DNS questions solved with DIG</a> </li> 
+        <li id="article-148"> <a href="/wiki/article/148/">10 DNS questions for nslookup</a> </li>
+       </ul></li>
+     </ul> 
+    </div> 
+    <div class="wiki-content ww-bw"> 
+     <h1>Master DNS Zone</h1> 
+     <h2>What is Master (Primary DNS) Zone?</h2> 
+     <p>The Master Zone also known as Primary Zone in the DNS&nbsp;server is the read or write copy of the DNS database. This means that whenever a new DNS record is added to the DNS database either automatically or manually, it is actually written in the master zone of the DNS server. The records in the Master zone can be managed only from our interface.</p> 
+     <h2>How to add Master Zone in ClouDNS?</h2> 
+     <p>Login in your account, click on the DNS zones [Add new] link, click on the Master zone box, enter the domain name (without www or http://) and click on the create button. You may want to choose only the servers you will add to the domain registrar or leave them all checked. You will be forwarded to the Records page of the DNS zone of your domain, there you will be able to add the records you need.</p> 
+     <h2>Options</h2> 
+     <p>When you create a Master DNS zone at ClouDNS you can select from 3 different options. Their main role is to assist you with NS or even all records in the DNS zone you are about to create.</p> 
+     <p><strong>Create zone with NS records</strong> - this option is selected by default. It is the easiest way to create a Master DNS zone with NS records for all name servers, available for you.<br><br> <strong>Copy all records from other zone</strong> - this option is suitable, if you&nbsp;would like to copy all records of another DNS zone into your new one.<br><br> <strong>Create zone without any records</strong> - selecting this option will create a DNS zone without any NS records in it. You will have to manually add them afterwards.</p> 
+     <h2>How to add Master DNS Zone in ClouDNS - Step by Step:</h2> 
+     <p><iframe class="video" src="https://www.youtube.com/embed/GM6_XbNZQTc?rel=0" width="300" height="150" frameborder="0" allowfullscreen></iframe></p> 
+     <hr> 
+    </div> 
+   </div> 
+  </section> 
+  <script type="text/javascript">
+	$(document).ready (function () {
+		expandWiki('article-29');
+		resizeWikiVideo();
+	});
+	$(window).resize(function() {
+		resizeWikiVideo();
+	});
+
+</script> 
+  <div class="clear"></div> 
+  <footer> 
+   <section class="section-wraper flex-3-col"> 
+    <div class="col"> 
+     <ul> 
+      <li>Company</li> 
+      <li><a href="/about-us/">About Us</a></li> 
+      <li><a href="/news/">News</a></li> 
+      <li><a href="/contact/">Contacts</a></li> 
+      <li><a href="/data-centers/">Data centers</a></li> 
+      <li><a href="/feedback/">Feedback</a></li> 
+      <li><a href="/careers/">Careers</a></li> 
+     </ul> 
+    </div> 
+    <div class="col"> 
+     <ul class="a-l"> 
+      <li>DNS Services</li> 
+      <li><a href="/premium/">Premium DNS</a></li> 
+      <li><a href="/ddos-protected-plans/">DDoS Protected DNS</a></li> 
+      <li><a href="/geodns/">GeoDNS</a></li> 
+      <li><a href="/dns-failover/">DNS Failover</a></li> 
+      <li><a href="/reverse-dns/">Reverse DNS</a></li> 
+      <li><a href="/secondary-dns/">Secondary DNS</a></li> 
+      <li><a href="/dynamic-dns/">Dynamic DNS</a></li> 
+      <li><a href="/dnssec/">DNSSEC</a></li> 
+      <li><a href="/enum-dns-zones/">ENUM DNS zones</a></li> 
+     </ul> 
+    </div> 
+    <div class="col a-r"> 
+     <ul class="a-l"> 
+      <li>Services</li> 
+      <li><a href="/managed-dns/">Managed DNS</a></li> 
+      <li><a href="/anycast-dns/">Anycast DNS</a></li> 
+      <li><a href="/enterprise-dns/">Enterprise DNS</a></li> 
+      <li><a href="/private-dns-servers/">Private DNS servers</a></li> 
+      <li><a href="/domain-pricing-list/">Domain names</a></li> 
+      <li><a href="/ssl-certificates/">SSL Certificates</a></li> 
+      <li><a href="https://www.cloudprima.com/?utm_source=footer&amp;utm_campaign=ClouDNS+Web" target="_blank">DDoS Protected VPS</a></li> 
+     </ul> 
+    </div> 
+   </section> 
+   <section class="section-wraper flex-3-col"> 
+    <div class="col"> 
+     <ul> 
+      <li>KnowledgeBase</li> 
+      <li><a href="https://www.cloudns.net/blog/">Blog</a></li> 
+      <li><a href="/wiki/">Wiki</a></li> 
+      <li><a href="/features/">Features</a></li> 
+      <li><a href="/faq/">FAQ</a></li> 
+      <li><a href="/api-help/">HTTP API</a></li> 
+      <li><a href="/whmcs-module/">WHMCS module</a></li> 
+      <li><a href="/hostbill-module/">Hostbill module</a></li> 
+      <li><a href="/domain-parking/">Domain parking</a></li> 
+      <li><a href="/payment-methods/">Payment methods</a></li> 
+     </ul> 
+    </div> 
+    <div class="col"> 
+     <ul class="a-l"> 
+      <li>Partnership</li> 
+      <li><a href="/affiliate/">Affiliate Program</a></li> 
+      <li><a href="/resellers-api/">Resellers API</a></li> 
+     </ul> 
+     <br> 
+     <ul class="a-l"> 
+      <li></li> 
+      <li><a href="http://www.icann.org/en/resources/registrars/registrant-rights/educational" target="_blank">Registrant Educational Materials</a></li> 
+      <li><a href="http://www.icann.org/en/resources/registrars/registrant-rights/benefits" target="_blank">Registrant Benefits and Responsibilities</a></li> 
+      <li><a href="http://www.internic.net/whois.html" target="_blank">Whois</a></li> 
+     </ul> 
+    </div> 
+    <div class="col a-r social-links"> 
+     <ul> 
+      <li>Social connection</li> 
+      <li> <a href="http://www.facebook.com/cloudns" target="_blank" class="sl-fb"></a> <a href="http://www.twitter.com/ClouDNS" target="_blank" class="sl-twitter"></a> <a href="https://github.com/ClouDNS" target="_blank" class="sl-git-hub"></a> <a href="https://www.linkedin.com/company/cloud-dns-ltd" target="_blank" class="sl-li"></a> <a href="https://vk.com/cloudns" target="_blank" class="sl-v-kontakt"></a> <a href="https://www.youtube.com/c/CloudnsNet" target="_blank" class="sl-youtube"></a> </li> 
+     </ul> 
+    </div> 
+   </section> 
+   <section class="wraper flex-2-col"> 
+    <div class="col"> <a href="/tos/">Terms of service</a>&nbsp; | &nbsp; <a href="/privacy-policy/">Privacy Policy</a>
+     <br>
+     <br> 
+     <p>©2020 ClouDNS</p> 
+    </div> 
+    <div class="col a-r"> <a href="https://www.cloudns.net/" class="footer-logo"></a>
+     <br> 
+    </div> 
+   </section> 
+   <section class="wraper"> 
+    <p class="a-c"> All prices are final and include all required taxes. No other hidden charges! </p> 
+   </section> 
+  </footer> <a href="/livechat/"> 
+   <div class="livechat-footer">
+     Online - Live Chat 
+   </div> </a> 
+  <div id="cookiesAlert" class="acenter">
+    Cookies help us deliver our services. By using our services, you agree to our use of cookies. <a href="/privacy-policy/">Learn more</a> <button class="round-btn s-btn dark-btn" onclick="hideCookiesAlert();">Okay</button> 
+  </div> 
+  <script type="text/javascript">
+			window.onerror = function(msg, url, line, col, error) {
+				var extra = !col ? '' : '\nColumn: ' + col;
+				// log the error
+				$.post('/ajaxActions.php?action=errorlog', {
+					'action': 'log',
+					'error': "Error: " + msg + "\nURL: " + url + "\nLine: " + line + extra
+				});
+				// supress error from showing in Console
+				return true;
+			};
+		</script> 
+  <script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-1653088-9', 'cloudns.net');
+		ga('require', 'displayfeatures');
+		ga('require', 'linkid', 'linkid.js');
+				ga('send', 'pageview');
+		</script> <!-- Facebook Pixel Code --> 
+  <script>
+		  !function(f,b,e,v,n,t,s)
+		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		  n.queue=[];t=b.createElement(e);t.async=!0;
+		  t.src=v;s=b.getElementsByTagName(e)[0];
+		  s.parentNode.insertBefore(t,s)}(window, document,'script',
+		  'https://connect.facebook.net/en_US/fbevents.js');
+		  fbq('init', '1471292723187937');
+		  fbq('track', 'PageView');
+		</script> 
+  <noscript>
+   <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1471292723187937&amp;ev=PageView&amp;noscript=1">
+  </noscript> <!-- End Facebook Pixel Code --> <!-- Yandex.Metrika counter --> 
+  <script type="text/javascript"> (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym"); ym(54343456, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); </script> 
+  <noscript>
+   <div>
+    <img src="https://mc.yandex.ru/watch/54343456" style="position:absolute; left:-9999px;" alt="">
+   </div>
+  </noscript> <!-- /Yandex.Metrika counter --> 
+  <script type="application/ld+json">
+		{ "@context" : "http://schema.org",
+			"@type" : "Organization",
+			"name" : "ClouDNS",
+			"url" : "https://www.cloudns.net/",
+			"logo": "https://www.cloudns.net/images/logo/logo-white-net-155x68.png",
+			"sameAs" : [
+				"http://www.facebook.com/cloudns",
+				"http://www.twitter.com/ClouDNS",
+				"https://github.com/ClouDNS",
+				"https://vk.com/cloudns",
+				"https://www.linkedin.com/company/cloud-dns-ltd",
+				"https://www.youtube.com/c/CloudnsNet"
+			]
+		}
+		</script>  
+ </body>
+</html>

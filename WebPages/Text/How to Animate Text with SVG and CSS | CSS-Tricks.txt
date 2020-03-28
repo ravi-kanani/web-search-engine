@@ -1,0 +1,58 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / articles / how to animate text with svg and css author robin rendle 7 comments join conversation published mar 25, 2020 personalized marketing with mailchimp the other day i was helping my pal jez work dept. of enthusiasm, the site for his newsletter, and i had a thought. what if we made the word “enthusiasm” in the title animate a little bit? like, what if each of the letters in the word bopped up and down enthusiastically? like this: codepen embed fallback neat, huh? to build this thing i knew we could use svg for the text and then animate things with css. each letter is a path with its own class, which makes it possible to select each one. that said, there’s nothing really stopping us from doing this with html and css. using svg is just one approach that felt right to me at the time. to get started we headed over to figma and typed out the text in separate text boxes. we did this so that when we click on the “outline stroke” menu item here... ...we have individual vectors of each letter. this will help us when we export the svg so that we can add the correct css classes to each element. once we’ve outlined the strokes of each letter we can then edit the points in the vector (but we don’t need to for what we’re about to do): if we added all the text in one box and clicked "outline stroke" then it would’ve created a single vector with all these letters combined. that would then make a single path with the coordinates and that’s pretty difficult for me to style or even understand what the heck is going on in there. next up, i put all these letters in a frame (sketch calls this an artboard) and placed each word into a group. this way, when they’re exported as an svg, each word will be in it's own g tag which also helps us style the letters: from there, i exported the svg — but! — i had to make sure to include the id option when doing it. if we don’t do this we’ll get a bunch of path elements for each letter but they won’t have an id attributes. this is what we get after the export: codepen embed fallback i'm not sure how much of this weirdness is me and how much is figma’s svg export, but i deleted that <rect> element because it's unecessary. then i gave the body element a background so i could see the text and remove those inline height and width attributes on the svg itself: codepen embed fallback neato! now we can get to the fun part: animating each letter in the word. if you look at the html of that example above you’ll notice there's a g element which with an id with the same name of the frame in figma.there are also g elements for each word and every path that makes up the word will have an individual id. (this is why naming our frames and groups properly, as well as keeping things organized in any design application, is important.) one thing that surprised me was the order in which each path is exported though: it’s in the opposite order than the one i’d expect, with m being the first letter in the “enthusiasm” group. so i cleaned that up a bit and made sure each letter is in the correct order. to get the animation working we first bump down each letter by 2px: g path {
+  transform: translatey(2px);
+} that’s because i want each letter to make a 2px hop which we’ll get to in a bit. i also noticed with this change i’d need to update the svg viewbox too. otherwise, the bottom of each letter will be cut off: <svg class="header" viewbox="0 0 146 13" fill="none" xmlns="http://www.w3.org/2000/svg"> i probably should’ve have just repositioned the text within the frame in figma and exported it again, but this is fine for what i needed. now i can target the third group in the svg (the word “enthusiasm”) and set the animation-count to infinite: /* targets the word "enthusiasm" */
+g:nth-child(3) path {
+  animation-name: wigglewiggle;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+} the code above then calls the wigglewiggle animation below: @keyframes wigglewiggle {
+  20%,
+  100% {
+    transform: translate(0, 2px); /* stay on the baseline for most of the animation duration */
+  }
+
+  0% {
+    transform: translate(0, 0px); /* hop up */
+  }
+  10% {
+    transform: translate(0, 2px); /* return to baseline */
+  }
+} see the beginning of that keyframe — the 20%, 100% bit? what that's saying is "keep all the text on the baseline for the majority of the animation." that’s what gives us a nice delay between each bounce: codepen embed fallback i learnt this trick from this really good post about animation timing by geoff and i would highly recommend you check it out if you’re about to start learning about animation in css. now for the fun bit: with the animation-delay property, we can make each letter hop just after the one before it. there’s definitely a smarter way i could be doing this, but i just used the id of each letter like so: #e {
+  animation-delay: 0s;
+}
+
+#n {
+  animation-delay: 0.1s;
+}
+
+#t {
+  animation-delay: 0.15s;
+}
+
+#h {
+  animation-delay: 0.2s;
+}
+
+#u {
+  animation-delay: 0.25s;
+}
+
+#s_2 {
+  animation-delay: 0.3s;
+}
+
+#i {
+  animation-delay: 0.35s;
+}
+
+#a {
+  animation-delay: 0.4s;
+}
+
+#s {
+  animation-delay: 0.45s;
+}
+
+#m {
+  animation-delay: 0.5s;
+} it sure is messy, but writing the loop wouldn’t save me that much time and i won’t need to update it in the future, so i think it’s fine enough. and with that we’re pretty much done! codepen embed fallback we now have a bouncy, enthusiastic title to say hello. yay for wiggly text! our learning partner need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. comments chris coyier permalink to comment# march 25, 2020 just another take on the idea where the letters stay as web text and uses splitting.js. reply chris dowling permalink to comment# march 27, 2020 i had a go using svg textpath – not perfect but you get the idea! see the pen text path demo by chris dowling (@gingerchris) on codepen. elijah permalink to comment# march 26, 2020 that’s cool but simple. also, is there a way of writing loops in css or would you have to use scss or something? reply ccprog permalink to comment# march 26, 2020 …and svg-only with smil. no library (well, for pre-blink edge compatibilty you would need fakesmile) and accessible text. the only downside is that you need to estimate the overall width of the text. see the pen hopping text with smil by ccprog (@ccprog) on codepen. reply rich werden permalink to comment# march 26, 2020 i love me some svg, but since this is a kind of one-and-done <h1> sort of effect – i immediately thought to wrap each letter in its own <span> and use sequenced animations via css custom-properties: a combo of calc(), var(), and assigning each letter it’s own --i value to calculate the individual letters’ delay. see the pen css custom-property sequenced animation by r-i-c-h (@r-i-c-h) on codepen. might be murdering a11y though. reply rich werden permalink to comment# march 26, 2020 ver2: now prettier html, but with an [ugly] js solution to replace the need for importing splitting.js… omri permalink to comment# march 27, 2020 cool stuff! if you use nth-child you can run a wave on any text length:) reply leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter notify me of follow-up comments by email. copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. related how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

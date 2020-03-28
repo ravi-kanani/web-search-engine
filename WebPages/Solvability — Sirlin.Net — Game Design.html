@@ -1,0 +1,629 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US"> 
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- This is Squarespace. --><!-- sirlin --> 
+  <base href=""> 
+  <meta charset="utf-8"> 
+  <title>Solvability — Sirlin.Net — Game Design</title> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1407150974055-CY221FA56K86CJUX44RL/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico?format="> 
+  <link rel="canonical" href="http://www.sirlin.net/articles/solvability"> 
+  <meta property="og:site_name" content="Sirlin.Net — Game Design"> 
+  <meta property="og:title" content="Solvability — Sirlin.Net — Game Design"> 
+  <meta property="og:latitude" content="40.68640015743611"> 
+  <meta property="og:longitude" content="-74.02857044306643"> 
+  <meta property="og:url" content="http://www.sirlin.net/articles/solvability"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:description" content="Designing competitive strategy games is a constant fight against solvability. It's a struggle to make a system simple enough to understand, yet complex enough that players  can't  figure out the best way to play and then always play that same way."> 
+  <meta property="og:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e94805e4b06e5639311361/1410940998728/?format=1500w"> 
+  <meta property="og:image:width" content="400"> 
+  <meta property="og:image:height" content="224"> 
+  <meta itemprop="name" content="Solvability — Sirlin.Net — Game Design"> 
+  <meta itemprop="url" content="http://www.sirlin.net/articles/solvability"> 
+  <meta itemprop="description" content="Designing competitive strategy games is a constant fight against solvability. It's a struggle to make a system simple enough to understand, yet complex enough that players  can't  figure out the best way to play and then always play that same way."> 
+  <meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e94805e4b06e5639311361/1410940998728/?format=1500w"> 
+  <link rel="image_src" href="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e94805e4b06e5639311361/1410940998728/?format=1500w"> 
+  <meta itemprop="image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e94805e4b06e5639311361/1410940998728/?format=1500w"> 
+  <meta itemprop="author" content="David Sirlin"> 
+  <meta itemprop="datePublished" content="2014-09-13T02:28:00-0700"> 
+  <meta itemprop="headline" content="Solvability"> 
+  <meta itemprop="publisher" content="Sirlin.Net — Game Design"> 
+  <meta name="twitter:title" content="Solvability — Sirlin.Net — Game Design"> 
+  <meta name="twitter:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e94805e4b06e5639311361/1410940998728/?format=1500w"> 
+  <meta name="twitter:url" content="http://www.sirlin.net/articles/solvability"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Designing competitive strategy games is a constant fight against solvability. It's a struggle to make a system simple enough to understand, yet complex enough that players  can't  figure out the best way to play and then always play that same way."> 
+  <meta name="description" content=""> 
+  <script type="text/javascript" src="//use.typekit.net/ik/au4t79rroqWoEa7xdWAV5Rg1u2QKPWEFWo-obOQO2nMfel92fFHN4UJLFRbh52jhWD93ZRIXZ2wuZQsKwebaweBKFAZRFejkFgT0HKoD-W4C-At0SaBujW48Sagyjh90jhNlOeUzjhBC-eNDifUD-W4C-At0dcmXOYFTScUTdKoDSWmyScmDSeBRZPoRdhXCiaiaO1FTScUTdKo0ZWbCiaiaO1FTScUTdKoDSWmyScmDSeBRZPoRdhXK2YgkdayTdAIldcNhjPJ4Z1mXiW4yOWgXH6qJ73IbMg6gJMJ7fbKCMsMMeMC6MKG4f5J7IMMjMkMfH6qJtkGbMg6FJMJ7fbKzMsMMeMb6MKG4fOMgIMMj2KMfH6GJCwbgIMMjgPMfH6GJCSbgIMMj2kMfH6qJnbIbMg6eJMJ7fbK0MsMMegM6MKG4fJCgIMMjgkMfH6qJRMIbMg6sJMJ7fbKTMsMMeM66MKG4fHGgIMMjIKMfH6qJKbIbMg64JMJ7fbKHMsMMegw6MKG4fJZmIMIjMkMfH6qJ6u9bMs6FJMJ7fbKImsMgeMb6MKG4fJmmIMIj2KMfH6qJxubbMs6BJMJ7fbKMmsMgeMv6MKG4fJBmIMIjgkMfH6qJ689bMs6sJMJ7fbKYmsMgeM66MKG4fJymIMIjIKMfqMYEhzRggb.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin:700,700italic|Oswald:400|Rosarivo:400italic"> 
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script> 
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].css = ["//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css">
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/performance-05c26a7ba97ad91a6081b-min.en-US.js" defer></script>
+  <script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/announcement-bar-e2fbe92a3604cd7ec3932-min.en-US.js"},"squarespace-audio-player":{"css":"//assets.squarespace.com/universal/styles-compressed/audio-player-52bdd87acccf92a19703e60e09c654bd-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/audio-player-991e7e1c1b3308738ed15-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-342036262b204974aa269-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-4d22db9ba7880e24bcd44-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-51aceea076ad0ff8aa83b-min.en-US.js"},"squarespace-comments":{"css":"//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/comments-e64031ca98dbe63037354-min.en-US.js"},"squarespace-commerce-cart":{"js":"//assets.squarespace.com/universal/scripts-compressed/commerce-cart-574df707b74266010398b-min.en-US.js"},"squarespace-dialog":{"css":"//assets.squarespace.com/universal/styles-compressed/dialog-afeb96ba160fb642a2d98c892a956065-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/dialog-bec10fad5a854d9b8562f-min.en-US.js"},"squarespace-events-collection":{"css":"//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/events-collection-f75316a66b099d806a536-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-fde3933cf0271ba5b3f63-min.en-US.js"},"squarespace-forms":{"css":"//assets.squarespace.com/universal/styles-compressed/forms-d21f3e517c32f4caba9f220beea0666d-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/forms-24ee632e09d923de05536-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-e23ee315df466f1dba9ec-min.en-US.js"},"squarespace-image-zoom":{"css":"//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/image-zoom-5a660e03e667b16c7a076-min.en-US.js"},"squarespace-pinterest":{"css":"//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/pinterest-4725f00d98ee2610ca950-min.en-US.js"},"squarespace-popup-overlay":{"css":"//assets.squarespace.com/universal/styles-compressed/popup-overlay-e984c5797664760d617b07bce15392a1-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/popup-overlay-07ab56995128d252d7025-min.en-US.js"},"squarespace-product-quick-view":{"css":"//assets.squarespace.com/universal/styles-compressed/product-quick-view-3fa8fd4df0755e7a7878e60166ca3d61-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/product-quick-view-cc9a2874f8c4b6a3f27e6-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-828c2fbae302bd3e4fe16-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-f260a4594424060b57c10-min.en-US.js"},"squarespace-search-page":{"css":"//assets.squarespace.com/universal/styles-compressed/search-page-207da8872118254c0a795bf9b187c205-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/search-page-a3d76808795360256a5a6-min.en-US.js"},"squarespace-search-preview":{"js":"//assets.squarespace.com/universal/scripts-compressed/search-preview-9acb915547fb6c41d5a99-min.en-US.js"},"squarespace-share-buttons":{"js":"//assets.squarespace.com/universal/scripts-compressed/share-buttons-b7c8ee26ec3639fa3da50-min.en-US.js"},"squarespace-simple-liking":{"css":"//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/simple-liking-89bbd9e8e108b969eb994-min.en-US.js"},"squarespace-social-buttons":{"css":"//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/social-buttons-547a9a0004ff7f9768043-min.en-US.js"},"squarespace-tourdates":{"css":"//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/tourdates-69d260a4100c302369d4e-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-43724a83fe4cb8b953146-min.en-US.js"}},"pageType":50,"website":{"id":"50f14d35e4b0d70ab5fc4f24","identifier":"sirlin","websiteType":1,"contentModifiedOn":1564017090920,"cloneable":false,"siteStatus":{},"language":"en-US","timeZone":"America/Los_Angeles","machineTimeZoneOffset":-25200000,"timeZoneOffset":-25200000,"timeZoneAbbr":"PDT","siteTitle":"Sirlin.Net \u2014 Game Design","fullSiteTitle":"Solvability \u2014 Sirlin.Net \u2014 Game Design","siteDescription":"<p>Site description goes here.</p>","location":{"mapZoom":11.0,"mapLat":40.68640015743611,"mapLng":-74.02857044306641,"addressTitle":"","addressLine1":"","addressLine2":"","addressCountry":""},"logoImageId":"538a6c53e4b07541307ca12b","shareButtonOptions":{},"logoImageUrl":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","authenticUrl":"http://www.sirlin.net","internalUrl":"http://sirlin.squarespace.com","baseUrl":"http://www.sirlin.net","primaryDomain":"www.sirlin.net","socialAccounts":[{"serviceId":2,"userId":"759231843","userName":"david.sirlin","screenname":"Sirlin Games","addedOn":1401585908216,"profileUrl":"http://www.facebook.com/SirlinGames","iconUrl":"http://graph.facebook.com/759231843/picture?type=square","metaData":{"service":"facebook"},"iconEnabled":true,"serviceName":"facebook"},{"serviceId":4,"userId":"64127998","userName":"Sirlin","screenname":"David Sirlin","addedOn":1416883541216,"profileUrl":"https://twitter.com/Sirlin","iconUrl":"http://pbs.twimg.com/profile_images/2194481794/pic4b_normal.jpg","collectionId":"5473ed55e4b029492ac9d740","iconEnabled":true,"serviceName":"twitter"}],"typekitId":"","statsMigrated":true,"imageMetadataProcessingEnabled":false,"screenshotId":"57e6e910","showOwnerLogin":false},"websiteSettings":{"id":"50f14d35e4b0d70ab5fc4f25","websiteId":"50f14d35e4b0d70ab5fc4f24","type":"Business","subjects":[{"systemSubject":"other","otherSubject":"Design/Art"},{"systemSubject":"design"}],"country":"US","state":"CA","simpleLikingEnabled":true,"mobileInfoBarSettings":{"style":1,"isContactEmailEnabled":true,"isContactPhoneNumberEnabled":true,"isLocationEnabled":true,"isBusinessHoursEnabled":true},"announcementBarSettings":{"style":1,"text":"<p>test announcement is&nbsp;here, this is it.</p>","clickthroughUrl":{"url":"http://www.cnn.com","newWindow":true}},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":true,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":false,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"storeSettings":{"returnPolicy":"","termsOfService":"","privacyPolicy":"","expressCheckout":true,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"currenciesSupported":["USD","AUD","CAD","CHF","EUR","GBP"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"orderConfirmationInjectCode":"","showCustomCheckoutForm":false,"enableMailingListOptInByDefault":true,"sameAsRetailLocation":false,"merchandisingSettings":{"scarcityEnabledOnProductItems":false,"scarcityEnabledOnProductBlocks":false,"scarcityMessageType":"DEFAULT_SCARCITY_MESSAGE","scarcityThreshold":10,"multipleQuantityAllowedForServices":true,"restockNotificationsEnabled":false,"restockNotificationsMailingListSignUpEnabled":false,"relatedProductsEnabled":false,"relatedProductsOrdering":"random","soldOutVariantsDropdownDisabled":false},"isLive":true,"multipleQuantityAllowedForServices":true},"useEscapeKeyToLogin":true,"trialAssistantEnabled":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled","size":"small","shape":"rect","color":"white"},"ampEnabled":false},"cookieSettings":{"isCookieBannerEnabled":false,"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false,"cookieBannerText":"","cookieBannerTheme":"","cookieBannerVariant":"","cookieBannerPosition":"","cookieBannerCtaVariant":"","cookieBannerCtaText":""},"websiteCloneable":false,"collection":{"title":"Articles","id":"53ded0ace4b0ec2792626d72","fullUrl":"/articles","type":1},"item":{"title":"Solvability","id":"53e94805e4b06e5639311361","fullUrl":"/articles/solvability","publicCommentCount":0,"commentState":2,"recordType":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"TGutter":"3%","TMaxWidth":"300","TPerRow":"3","gallery-auto-play":"false","galleryPlaySpeed":"3.0","hide-thumbnail-titles":"true","outerPadding":"75px","pagePadding":"30px","product-gallery-auto-crop":"false","product-image-auto-crop":"true","thumbnail-layout":"Basic Grid","topPadding":"10px","tweak-v1-related-products-title-spacing":"50px"},"templateId":"4fd11f32c4aad9b01c9e624c","templateVersion":"7","pageFeatures":[1,2,4],"gmRenderKey":"QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4","betaFeatureFlags":["ORDERS-SERVICE-check-digital-good-access-with-service","ORDERS-SERVICE-reset-digital-goods-access-with-service","ORDER_SERVICE-submit-subscription-order-through-service","ORDER_SERVICE-submit-reoccurring-subscription-order-through-service","dg_downloads_from_fastly","generic_iframe_loader_for_campaigns","donations_customer_accounts","product-retriever-v2-enabled","domain_registration_via_registrar_service","domain_locking_via_registrar_service","domain_deletion_via_registrar_service","domain_info_via_registrar_service","content_item_settings","seven_one_image_overlay_opacity","commerce_restock_notifications","newsletter_block_captcha","new_billing_system","gallery_settings_71","commerce_onboarding_wizard","seven_one_portfolio_hover_layouts","commerce_onboarding_wizard_phase_two","domains_allow_async_gsuite"],"yuiEliminationExperimentList":[{"name":"statsMigrationJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"ContributionConfirmed-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"TextPusher-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MenuItemWithProgress-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"billingNewsletters-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"imageProcJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"QuantityChangePreview-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CompositeModel-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"HasPusherMixin-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"INACTIVE"},{"name":"ProviderList-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MediaTracker-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"pushJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"internal-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"BillingPanel-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"PopupOverlayEditor-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CoverPagePicker-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"}],"impersonatedSession":false,"tzData":{"zones":[[-480,"US","P%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}}};</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://www.sirlin.net/articles?format=rss"> 
+  <script type="application/ld+json">{"url":"http://www.sirlin.net","name":"Sirlin.Net \u2014 Game Design","description":"<p>Site description goes here.</p>","image":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <script type="application/ld+json">{"name":"Solvability \u2014 Sirlin.Net \u2014 Game Design","url":"http://www.sirlin.net/articles/solvability","datePublished":"2014-09-13T02:28:00-0700","headline":"Solvability","author":"David Sirlin","publisher":{"name":"Sirlin.Net \u2014 Game Design","logo":{"@type":"ImageObject","url":"https://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/"},"@context":"http://schema.org","@type":"Organization"},"image":"http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e94805e4b06e5639311361/1410940998728/?format=1500w","@context":"http://schema.org","@type":"Article"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=4"/><![endif]--> <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]--> <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&amp;filterFeatures=false"><!-- <![endif]--> 
+  <script type="text/javascript">
+  var ShopifyStoreConfig = {shop:"sirlin.myshopify.com", collections:[8156021]};
+  (function() {
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; 
+    s.src = "http://widgets.shopifyapps.com/assets/shopifystore.js";
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();  
+</script> 
+  <noscript>
+   Please enable javascript, visit the &lt;a href="http://sirlin.myshopify.com"&gt;Sirlin Games Tabletop Store.
+  </noscript> <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53dddd843aed3211"></script> <!--Share This --> 
+  <script type="text/javascript">var switchTo5x=true;</script> 
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script> 
+  <script type="text/javascript">stLight.options({publisher: "63e23d4f-8cab-4d21-ba0d-bbfb30801340", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script> <!--Shareaholic
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+    var shr = document.createElement('script');
+    shr.setAttribute('data-cfasync', 'false');
+    shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+    shr.type = 'text/javascript'; shr.async = 'true';
+    shr.onload = shr.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      var site_id = 'f85ba2f3bf2982871221fa38b75a6419';
+      try { Shareaholic.init(site_id); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(shr, s);
+  })();
+//]]>
+</script>
+-->
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script> 
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-776666-1', 'auto');ga('send', 'pageview');</script><!-- End of Squarespace Headers --> 
+ </head> 
+ <body class="blog-sidebar-display-right index-thumb-title-position-below index-item-layout-auto thumbnail-layout-basic-grid thumbnails-on-open-page-show-all hide-thumbnail-titles  layout-style-center page-borders-dotted  gallery-page-controls-tiny-thumbnails  social-icon-style-normal  hide-social-icons     event-thumbnails event-thumbnail-size-32-standard event-date-label event-date-label-time event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts  event-item-back-link    product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing tweak-v1-related-products-image-aspect-ratio-11-square tweak-v1-related-products-details-alignment-center newsletter-style-dark  opentable-style-light small-button-style-solid small-button-shape-rounded medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-square tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd collection-53ded0ace4b0ec2792626d72 view-item collection-type-blog collection-layout-default mobile-style-available logo-image has-primary-nav" id="item-53e94805e4b06e5639311361"> 
+  <div id="canvas"> 
+   <div id="mobileNav" class=""> 
+    <div id="mobileNavWrapper" class="wrapper"> 
+     <nav class="main-nav mobileNav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=" external-link"> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </div> 
+   <div id="mobileMenuLink">
+    <a>Menu</a>
+   </div> 
+   <header id="header"> 
+    <div id="logo" data-content-field="site-title"> 
+     <h1 class="logo"><a href="/"><img src="//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/?format=1000w" alt="Sirlin.Net — Game Design"></a></h1> 
+    </div> 
+    <script>
+        Y.use('squarespace-ui-base', function(Y) {
+          Y.all("#header .logo, #header .logo-subtitle").each(function (text) {
+            text.plug(Y.Squarespace.TextShrink, {
+              parentEl: Y.one('#header'),
+              triggerWidth: 750
+            });
+          });
+        });
+
+        // Show spinner on page load if loading bookmarked url
+        if (window.location.hash && window.location.hash !== '#') {
+          document.querySelector('body').className += ' index-loading';
+        }
+      </script> 
+    <div id="topNav" data-content-field="navigation"> 
+     <nav class="main-nav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=""> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </header> 
+   <div class="page-divider"></div> 
+   <div class="extra-wrapper page-header"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Header Content: Articles" data-type="block-field" id="page-header-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <section id="page" role="main" data-content-field="main-content"> <!-- CATEGORY NAV --> 
+    <div class="article-wrapper"> 
+     <article class="hentry tag-set1 author-david-sirlin post-type-text" id="article-53e94805e4b06e5639311361" data-item-id="53e94805e4b06e5639311361"> <!--SPECIAL CONTENT--> <!--POST HEADER--> 
+      <header> 
+       <h1 class="entry-title"> <a href="/articles/solvability" data-content-field="title">Solvability</a> </h1> 
+       <div class="meta"> <span class="date"><time class="published" datetime="2014-09-13">September 13, 2014</time></span> 
+       </div> 
+      </header> <!--POST BODY--> 
+      <div class="body entry-content">
+       <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1407800198933" id="item-53e94805e4b06e5639311361">
+        <div class="row sqs-row">
+         <div class="col sqs-col-12 span-12">
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-0b7613d8700a3f52db4f">
+           <div class="sqs-block-content">
+            <p>Designing competitive strategy games is a constant fight against solvability. It's a struggle to make a system simple enough to understand, yet complex enough that players <em>can't</em> figure out the best way to play and then always play that same way.</p>
+           </div>
+          </div>
+          <div class="row sqs-row">
+           <div class="col sqs-col-2 span-2">
+            <div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21" id="block-yui_3_17_2_1_1409870942494_30383">
+             <div class="sqs-block-content">
+              &nbsp;
+             </div>
+            </div>
+           </div>
+           <div class="col sqs-col-8 span-8">
+            <div class="sqs-block image-block sqs-block-image" data-aspect-ratio="101.39664804469272" data-block-type="5" id="block-yui_3_17_2_1_1409806582755_504660">
+             <div class="sqs-block-content"> 
+              <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+               <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1074.0px;"> 
+                <div style="padding-bottom:101.39664459228516%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+                 <noscript>
+                  <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409870959449-R0G61W04PZU9O2YJZWKD/ke17ZwdGBToddI8pDm48kLyzwawajfxDmFlwuorHoxB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmmV5_8-bAHr7cY_ioNsJS_5S7Kb4eucTyMlQZi5mHFUkYgV55xrQSte_3BeH1hzz4/puzzle_solver.jpg" alt="puzzle_solver.jpg">
+                 </noscript>
+                 <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409870959449-R0G61W04PZU9O2YJZWKD/ke17ZwdGBToddI8pDm48kLyzwawajfxDmFlwuorHoxB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmmV5_8-bAHr7cY_ioNsJS_5S7Kb4eucTyMlQZi5mHFUkYgV55xrQSte_3BeH1hzz4/puzzle_solver.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409870959449-R0G61W04PZU9O2YJZWKD/ke17ZwdGBToddI8pDm48kLyzwawajfxDmFlwuorHoxB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmmV5_8-bAHr7cY_ioNsJS_5S7Kb4eucTyMlQZi5mHFUkYgV55xrQSte_3BeH1hzz4/puzzle_solver.jpg" data-image-dimensions="1074x1089" data-image-focal-point="0.38,0.9210526315789473" alt="puzzle_solver.jpg" data-load="false" data-image-id="5408ec6fe4b04e7237529136" data-type="image"> 
+                </div> 
+               </figure> 
+              </div> 
+             </div>
+            </div>
+           </div>
+           <div class="col sqs-col-2 span-2">
+            <div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21" id="block-yui_3_17_2_1_1409870942494_31971">
+             <div class="sqs-block-content">
+              &nbsp;
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409806582755_504904">
+           <div class="sqs-block-content"> 
+            <h2 id="yui_3_17_2_1_1409870942494_45725">Pure Solution vs. Mixed Solution</h2>
+            <p id="yui_3_17_2_1_1409870942494_45726">It's a much different situation if a game has a pure solution rather than a mixed solution. To understand why, we'll first have to define those terms.</p> 
+            <p>A pure strategy is&nbsp;a complete definition of how to play a game. It's a set of instructions describing the move the player should make for every situation they could face. If a certain pure strategy is the best way to play the game, we'll call that a pure solution. If you know a pure solution for a game, it's hardly a game anymore because there aren't any actual decisions left for you; you simply follow the instructions of the pure solution.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-aspect-ratio="66.98717948717949" data-block-type="5" id="block-yui_3_17_2_1_1409870942494_42575">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:776.0px;"> 
+              <div style="padding-bottom:66.9871826171875%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409871197869-OEHHBIABL4MXTN89TD5X/ke17ZwdGBToddI8pDm48kOhm4TuIzw8evuoFOahD7DFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIYLgy1Me9PR1lpHPPMgJHwunDJV4KI3Ca9cvpeVqy8-4KMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409871197869-OEHHBIABL4MXTN89TD5X/ke17ZwdGBToddI8pDm48kOhm4TuIzw8evuoFOahD7DFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIYLgy1Me9PR1lpHPPMgJHwunDJV4KI3Ca9cvpeVqy8-4KMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409871197869-OEHHBIABL4MXTN89TD5X/ke17ZwdGBToddI8pDm48kOhm4TuIzw8evuoFOahD7DFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIYLgy1Me9PR1lpHPPMgJHwunDJV4KI3Ca9cvpeVqy8-4KMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image-dimensions="776x582" data-image-focal-point="0.45145631067961167,0.23026315789473684" alt="" data-load="false" data-image-id="5408ed5de4b06b763c304ed3" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409870942494_55909">
+           <div class="sqs-block-content">
+            <p>A mixed strategy is a set of pure strategies where you assign a probability to each one. So instead of your instructions being something like "If the opponent does X, I'll do Y," it's more like "If the opponent does X, I'll do Y 30% of the time and Z 70% of the time." If a certain mixed strategy is the optimal way to play, we'll call that a mixed solution.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409870942494_48992">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:190.0px;"> 
+              <div style="padding-bottom:100.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409871817785-1N9QXZ0EF8AQPOWKPX1J/ke17ZwdGBToddI8pDm48kMHgcABMWtplcjn3zIBR1mdZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-tNJe8KjeJl04yPVhEi4oeXdA0TYH5mfR99zMvhtQd-vg/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409871817785-1N9QXZ0EF8AQPOWKPX1J/ke17ZwdGBToddI8pDm48kMHgcABMWtplcjn3zIBR1mdZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-tNJe8KjeJl04yPVhEi4oeXdA0TYH5mfR99zMvhtQd-vg/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409871817785-1N9QXZ0EF8AQPOWKPX1J/ke17ZwdGBToddI8pDm48kMHgcABMWtplcjn3zIBR1mdZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-tNJe8KjeJl04yPVhEi4oeXdA0TYH5mfR99zMvhtQd-vg/image-asset.jpeg" data-image-dimensions="190x190" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5408efc9e4b003ed9c1940b6" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409870942494_75640">
+           <div class="sqs-block-content">
+            <p>If you knew the mixed solution for a game, it sounds like just as bad of a situation as if you knew a pure solution. You still wouldn't be making any decisions, just randomizing across a set of choices. But this is NOT correct; there's still a lot for you to do in the case of a mixed solution. To understand why we'll have to look more closely on what playing "optimally" really means.</p>
+            <h2>Playing Optimally</h2>
+            <p>We said that if you had several possible mixed strategies, the one that lets you play <em>optimally</em> we'll call a mixed solution (this is also a <a href="http://en.wikipedia.org/wiki/Nash_equilibrium">Nash Equilibrium</a>). There's a lot of potential confusion there because the word <em>optimal</em>&nbsp;has two meanings: an ordinary English meaning and a specific mathematical definition. This article is always referring to the mathematics meaning, NOT the everyday usage of the word that means "the best way to play." The math meaning is that playing <em>optimally</em> is playing <em>least exploitably</em>.</p>
+            <p>Let's see what playing exploitably looks like. If you were playing rock, paper, scissors and you decided to play rock 100% of the time, that is extremely exploitable. Your opponent could pick up on that and shift to playing paper 100% of the time. Your opponent can exploit your strategy so fully that your win rate goes down to 0%. If instead you play rock only 80% of the time (and paper 10%; scissors 10%), that's still a bad idea but it's a bit less exploitable. Your opponent could still play paper 100% of the time, but at least you'll win 10% of the time, rather than 0%.</p>
+            <p>If you want to be the least exploitable possible, you'll have to play each option 33% of the time. If you do that, there's no strategy your opponent can use to do better than you. That's the <em>optimal</em> mixed strategy to simple RPS.</p>
+            <h2>Optimal Is Not "Best"</h2>
+            <p>Playing optimally sounds like the best you can do, but if your goal is to win a tournament, then playing optimally is very likely <em>not</em> to be the best idea. Imagine you entered a rock, paper, scissors tournament and face a player who is known to play rock 100% of the time and they do exactly that against you. If you play optimally, you'll play each option 33%, so each hand of RPS there's a 33% chance you'll lose. Meanwhile, another player in the tournament could choose to play 100% paper when facing the 100% rock player. Your so-called optimal strategy has a much higher chance of losing and getting you eliminated from the tournament than if you had played 100% paper, too.</p>
+            <p>By choosing to play optimally, you gave up a massive advantage that was right there for you to take. Your opponent was ridiculously exploitable, but you chose not to capitalize on it. That's poor play if your goal is to win the tournament. This is an extreme example but the concept is still true even if the opponent was playing 40% rock, or even 35%.</p>
+            <p>What if you do play 100% paper against the 100% rock player, but after several rounds of play they change their strategy? It's possible that they could exploit <em>you</em> because now you strayed from optimal play. Yes, that's correct, but it's still worth it to try. If you're worried about your opponent changing their strategy to exploit you, then you don't have to go all the way from 33% paper to 100% paper. If you went up to, say, 40% then you're more likely to win this match than someone who stuck to 33%, but you're still not all that exploitable. Also, how good is your opponent at a) recognizing that you strayed from optimal and b) correctly implementing a strategy against that? It's entirely possible that you are better at those things, in which case you should definitely exploit their strategy. As they slowly adjust to that, you adjust faster.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-5 span-5 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1409806582755_491935">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:215.0px;"> 
+              <div style="padding-bottom:148.8372039794922%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409816815114-2UOFJG2FRIWMQEYZKKYK/ke17ZwdGBToddI8pDm48kFw0ylXDyh-usai_QXX9mRlZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vOlfBwWKiCsHKZAm3Ykamk8bCbXO6I3qwXmANuUV3zaw/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409816815114-2UOFJG2FRIWMQEYZKKYK/ke17ZwdGBToddI8pDm48kFw0ylXDyh-usai_QXX9mRlZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vOlfBwWKiCsHKZAm3Ykamk8bCbXO6I3qwXmANuUV3zaw/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409816815114-2UOFJG2FRIWMQEYZKKYK/ke17ZwdGBToddI8pDm48kFw0ylXDyh-usai_QXX9mRlZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vOlfBwWKiCsHKZAm3Ykamk8bCbXO6I3qwXmANuUV3zaw/image-asset.jpeg" data-image-dimensions="215x320" data-image-focal-point="0.5,0.0" alt="" data-load="false" data-image-id="540818efe4b085cd0745102a" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409806582755_492192">
+           <div class="sqs-block-content">
+            <h2>Donkeyspace</h2>
+            <p>The term <em>donkeyspace</em>, coined by Frank Lantz, describes the space of suboptimal plays. As described in the previous section, a good player should intentionally enter donkeyspace (in other words: play in an exploitable way) in order to exploit opponents who are also playing in donkeyspace. If both players are good, they each might dance through different regions of donkeyspace, jockeying for advantages.</p>
+            <p>It's important to have some perspective here. You might be thinking that everyone is going to play optimally so there's no dance through donkeyspace in high level play. That's laughable if you think about actual competitive games though. First, even at a high level, it's very common for players to play far from optimal. Second, it's highly unlikely that any—much less ALL—opponents will be playing optimally or even close to it. In a good competitive game, it's incredibly difficult to know what optimal play even is. There can be rules of thumb, but to know exactly the right probabilities in which to play a mixed strategy of exactly the right moves in a specific game state that could have thousands of variables? Even in a popular, well-understood game like Poker, optimal play is not known perfectly and in practice players stray from it considerably. Knowing optimal play in <a href="/articles/designing-pandante">Pandante</a> or <a href="/articles/designing-yomi">Yomi</a> is way more hopeless than in Poker.</p>
+            <p><strong>Remember that when other players are playing non-optimally, even if you did know how to play optimally and even if you could perfectly execute the mixed solution, you still need to closely monitor your opponents and react to their styles in order to maximize your win rate.</strong></p>
+            <p>There are several other reasons why actually executing an optimal mixed strategy is extremely difficult, even if you did somehow know what it was:</p>
+            <ol>
+             <li>People are very bad at actually playing randomly, so it would be very difficult to choose some certain option 42.3% of the time, for example.</li>
+             <li>When people fail to play randomly, they are probably falling back on tendencies they do not know they have, but that you can detect and exploit.</li>
+             <li>People cannot help but let their personalities spill over into decisions about how conservative or risky they are.</li>
+             <li>If it's a real-time game, then skills at timing and&nbsp;physically executing the right moves (such as a difficult combo in a fighting game or a precise shot in a shooter) mean no one is ever anywhere near playing mathematically optimally.</li>
+            </ol>
+            <p>Item 2 on that list is especially interesting. In two studies by Lewicki, et al (1997 and 1998), they demonstrated that people learn patterns without knowing that they learned them and without being able to explain or express what they learned. Subjects were shown four quadrants of numbers and had to press one of four buttons corresponding to the quadrant containing a certain number. They did several trials of this, but weren't told that the location of the numbers across trials was not random. The locations followed a complex set of 10 rules. As subjects did more and more trials, they were able to perform more and more quickly, yet they weren't aware of there being any pattern and no subjects could explain a pattern even after they were informed one existed and even when they were offered $100. Furthermore, when the underlying pattern was secretly replaced with pure randomness, the subjects immediately did far worse. Hilariously, even the subjects who were fellow psychology professors in Lewicki's department who were aware of Lewicki's research were adamant in their belief that the trials containing a secret pattern were actually random. They learned to exploit the pattern, yet were convinced it didn't exist.</p>
+            <p>The point is that your unconscious mind will make you perform mixed strategies imperfectly, and you'll fall into patterns you won't know you're doing. And then your opponent will pick up on those patterns and be able to exploit them, even if your opponent isn't aware that's happening. Mixed strategy games and dances through donkeyspace involve interesting battles of unconscious minds vs. other unconscious minds in addition to the part where conscious minds might disagree on what optimal play even is.</p>
+            <h2>Pure Solution Games Degenerate Faster Than Mixed Solution Games</h2>
+            <p><strong>So in a game with a mixed solution, you still must be highly sensitive to what your opponent is doing</strong>. You have be able to detect how far they are straying for optimal play and then you have to be able to correctly counter that strategy. These are very difficult things to do and they involve, among other things, your unconscious mind picking up subtle patterns.</p>
+            <p><strong>In a game with a pure solution, you do not have to care what your opponent will do, ever</strong>. If you know that pure solution, it doesn't matter what the opponent tends to do or what you think is in their mind, etc. You should follow the optimal script and there's no gameplay left.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409870942494_98202">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:2163.0px;"> <a class="
+                sqs-block-image-link
+                
+          
+        
+              " href="http://store.steampowered.com/app/314340/" target="_blank"> 
+               <div style="padding-bottom:33.28710174560547%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+                <noscript>
+                 <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409876134993-C9Q1C6CBG9DELNM4UKCN/ke17ZwdGBToddI8pDm48kAhr4hNcOIJP2bMfD1TXX14UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dip1sWZ3fXKBN7J-DY_5nUFKupLo3OmLS9-A_3VO-W5xoRwB-dUGsSquCnVTFQcaRg/image-asset.jpeg" alt="">
+                </noscript>
+                <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409876134993-C9Q1C6CBG9DELNM4UKCN/ke17ZwdGBToddI8pDm48kAhr4hNcOIJP2bMfD1TXX14UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dip1sWZ3fXKBN7J-DY_5nUFKupLo3OmLS9-A_3VO-W5xoRwB-dUGsSquCnVTFQcaRg/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409876134993-C9Q1C6CBG9DELNM4UKCN/ke17ZwdGBToddI8pDm48kAhr4hNcOIJP2bMfD1TXX14UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dip1sWZ3fXKBN7J-DY_5nUFKupLo3OmLS9-A_3VO-W5xoRwB-dUGsSquCnVTFQcaRg/image-asset.jpeg" data-image-dimensions="2163x720" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540900a6e4b0371c2119fe4d" data-type="image"> 
+               </div> </a> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409870942494_98453">
+           <div class="sqs-block-content">
+            <p>It's also very important to think about how a game with a mixed solution looks vs. one with a pure solution when the playerbase is on their way to knowing that solution but isn't fully there yet. They're learning more and more about each game over time, they're approximating what optimal play is more and more closely. For the game with the pure solution, that means pockets of the game here and there become entirely about memorization and not about what the opponent is doing. For example, solved endgames in Chess are this way (but not <a target="_blank" href="http://store.steampowered.com/app/314340/">Chess 2</a>, because the midline invasion rule prevents all those solved endgames from happening). Openings in Chess (but not Chess 2) are another good example of that. As more and more is known about Chess over the years, the more structured the opening books become (the set of known-good opening moves) and the more important memorizing them becomes so that you don't enter the midgame at too much disadvantage.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409870942494_116166">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:2360.0px;"> 
+              <div style="padding-bottom:35.12711715698242%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409881404629-I00U20AHRC6L4THKBNK5/ke17ZwdGBToddI8pDm48kAKyobaMjJDAY8gQ3jKH6kkUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2di9pjpYgU210cj8AF2tKBgG59sY5LTkN6l_filOAnXIgJvwGh1qtNWvMhYKnvaKhbA/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409881404629-I00U20AHRC6L4THKBNK5/ke17ZwdGBToddI8pDm48kAKyobaMjJDAY8gQ3jKH6kkUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2di9pjpYgU210cj8AF2tKBgG59sY5LTkN6l_filOAnXIgJvwGh1qtNWvMhYKnvaKhbA/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409881404629-I00U20AHRC6L4THKBNK5/ke17ZwdGBToddI8pDm48kAKyobaMjJDAY8gQ3jKH6kkUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2di9pjpYgU210cj8AF2tKBgG59sY5LTkN6l_filOAnXIgJvwGh1qtNWvMhYKnvaKhbA/image-asset.jpeg" data-image-dimensions="2360x829" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5409153ce4b0d384103e08fd" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409870942494_116423">
+           <div class="sqs-block-content">
+            <p>Meanwhile, when we get closer to an approximation of a mixed solution—in Poker, Pandante, or Yomi for example—these games do not start to collapse into memorization. They are still about being very responsive to what your opponent is doing. And while these approximations get closer to a complete mixed solution over time (which will not happen for Yomi in our lifetimes), remember that EVERYONE is in donkeyspace. Even when there are lots of good players, they aren't literally playing optimally at every single step. Everyone is in some sort of donkeyspace and they disagree on who is where. Playing the game is in some way a method of resolving that debate. "I think I should block 42% of the time in this particular situation," while another player believes blocking 60% is correct. They each try to exploit the other's incorrect approximation, if they can even detect it in the first place.</p>
+            <p>From a design standpoint, games with mixed solutions have an inherent advantage in fighting against solvability. It's much safer to design a game that is still very interesting even if solved than it is to design a game that necessarily degenerates closer and closer to pure memorization and no decisions as it gets closer to being solved.</p>
+            <h2>Making Pure Solution Games vs. Mixed Solution Games</h2>
+            <p>As I've explained, pure solution games are dangerous to make. On the one hand, if your game is deep enough then you could delay people finding the solutions for a very long time. Chess and Go have been around for many centuries without full solutions being known. On the other hand, you'd be hard-pressed to make a pure solution game that stands up anywhere near as long as those games. Checkers is already solved, for example. Furthermore, even if you have a game as deep as Chess, Chess shows that memorization becomes more and more of what a pure solution game is about as the playerbase gets better. That's an unfortunate fate for a competitive multiplayer game.</p>
+            <p>There's also some irony there. If I told you that a certain game had perfect information (you know the full state of the game at each moment you have to make a decision) and that it had no randomness, then you'd probably say it sounds very skill-based. If you like skill-based games, you'd say we're off to a good start. But actually, we just guaranteed that this game has a pure solution and that it will necessarily become LESS about skill (decisions in-the-moment) and more about memorization as the game develops. A similar game that had some unknown elements, hidden information, and/or randomness could actually be more skill-testing, not less skill-testing.</p>
+            <p>So in creating a design, I recommend looking for what those unknown elements will be. What that hidden information will be. What that random element will be. Randomness has a real stigma, but it's important to understand that it's a valid tool to keep your game out of the dangerous pure solution category.</p>
+            <h3>Kongai</h3>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409870942494_87225">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:700.0px;"> 
+              <div style="padding-bottom:54.71428680419922%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409873053934-5X0MNJK9TW9TS4LEI1JO/ke17ZwdGBToddI8pDm48kMH7jIG8ji9q2OEYkjb-rHJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwkf3h79E2m2smFwjaCIi-PBcsfBLOJvVkUdblH7HyQw4254fZy99WKBY07i9cfx6E/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409873053934-5X0MNJK9TW9TS4LEI1JO/ke17ZwdGBToddI8pDm48kMH7jIG8ji9q2OEYkjb-rHJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwkf3h79E2m2smFwjaCIi-PBcsfBLOJvVkUdblH7HyQw4254fZy99WKBY07i9cfx6E/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409873053934-5X0MNJK9TW9TS4LEI1JO/ke17ZwdGBToddI8pDm48kMH7jIG8ji9q2OEYkjb-rHJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwkf3h79E2m2smFwjaCIi-PBcsfBLOJvVkUdblH7HyQw4254fZy99WKBY07i9cfx6E/image-asset.png" data-image-dimensions="700x383" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5408f49de4b0371c2119eaa9" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409870942494_87468">
+           <div class="sqs-block-content">
+            <p>My game <a href="/articles/designing-kongai">Kongai</a> is an example of that. You make two decisions per turn and each of those decisions is double blind. That means you make the decision at the same time the opponent makes theirs, then you simultaneously reveal those decisions. This very much helps against solvability (it's no longer a perfect information game), but even then, the game would be dangerously solvable without some other unknown elements. I used randomness in hit rates (just like in the Pokemon game Kongai is based on) as well as randomness in proc rates (the chance that a move does a special thing on hit). This worked extremely well in fighting against solvability. Those hit and proc percentages make it very, very difficult to compute the possibility tree several moves ahead.</p>
+            <p>Some Kongai players intent on finding mixed solutions had to zero in on the most pared down, toy examples you can imagine. They tried to find out optimal play given a certain lineup of characters vs another certain lineup, with a certain set of items equipped, in the endgame only when each team was down to its last character so no switching or intercepting was possible, and hit points were down to the end. In this microscopic portion of the game, it took them a dozen pages of analysis to determine the right play. Doing this for the real full game is basically unthinkable.</p>
+            <h2>Conclusion</h2>
+            <p>Competitive multiplayer games have to strive to be as unsolvable as possible while at the same time being understandable to players. Games with pure solutions may seem skill-based, but over time will necessarily degenerate to becoming pure memorization. Meanwhile, mixed solution games remain strategically interesting far, far longer.</p>
+            <p>In order to make a game with a mixed solution, incorporate some sort of unknown elements, hidden information, or randomness. If your game is real-time rather than turn-based, you're even better off.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409870942494_90675">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:350.0px;"> 
+              <div style="padding-bottom:102.57142639160156%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409873190725-XM00FC54BXCYNCZK8YUS/ke17ZwdGBToddI8pDm48kCdgv32sgiWfcH9k6yPJMfFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGq2Lv5ka4yBUgF19qiqMUZJKgE-a7RklSXs8wbkPQbu3-5hmNjaqsYTvOQnMPB6NE/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409873190725-XM00FC54BXCYNCZK8YUS/ke17ZwdGBToddI8pDm48kCdgv32sgiWfcH9k6yPJMfFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGq2Lv5ka4yBUgF19qiqMUZJKgE-a7RklSXs8wbkPQbu3-5hmNjaqsYTvOQnMPB6NE/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409873190725-XM00FC54BXCYNCZK8YUS/ke17ZwdGBToddI8pDm48kCdgv32sgiWfcH9k6yPJMfFZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGq2Lv5ka4yBUgF19qiqMUZJKgE-a7RklSXs8wbkPQbu3-5hmNjaqsYTvOQnMPB6NE/image-asset.jpeg" data-image-dimensions="350x359" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5408f526e4b06903cd0d5eed" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div> <!--POST FOOTER--> 
+      <footer> 
+       <div class="meta"> 
+        <div class="first meta-row"> <span class="tags"><span class="tags-title">Tags</span> <a href="/articles/tag/set1" rel="tag">set1</a></span> 
+        </div> 
+        <div class="second meta-row"> <span class="sqs-simple-like" data-item-id="53e94805e4b06e5639311361" data-like-count="55"> <span class="like-icon"></span> <span class="like-count"></span> </span> 
+        </div> 
+       </div> 
+      </footer> 
+     </article> <!--PAGINATION--> 
+     <nav class="pagination clear"> <a class="next-item" href="/articles/designing-pandante">Designing Pandante →</a> 
+     </nav> <!-- COMMENTS --> 
+     <section id="comments-" class="comments-wrapper"> 
+      <div class="squarespace-comments" id="comments-53e94805e4b06e5639311361" data-item-id="53e94805e4b06e5639311361" data-public-comment-count="0" data-comment-state="2"></div> 
+     </section> 
+    </div> 
+    <aside id="sidebar">
+     <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Blog Sidebar" data-type="block-field" data-updated-on="1491168332520" id="sidebarBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1">
+        <div class="sqs-block search-block sqs-block-search" data-block-type="33" id="block-yui_3_10_1_1_1401522710068_7239">
+         <div class="sqs-block-content">
+          <div class="sqs-search-ui-text-input sqs-search-ui-button-wrapper color-dark" data-source="block" data-preview="false" data-collection=""> 
+           <div class="spinner-wrapper"></div> 
+           <input type="search" class="search-input" value="" placeholder="Search"> 
+          </div> 
+         </div>
+        </div>
+        <div class="sqs-block markdown-block sqs-block-markdown" data-block-type="44" id="block-yui_3_17_2_1_1406864496533_163579">
+         <div class="sqs-block-content">
+          <h4 data-preserve-html-node="true">Best of Sirlin.net</h4>
+         </div>
+        </div>
+        <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1406864496533_163676">
+         <div class="sqs-block-content">
+          <p><a href="/ptw">Playing to Win book</a></p>
+          <p><a href="/codex">Codex Design (23 Articles)</a><br><a href="/articles/designing-pandante">Designing Pandante</a><br><a href="/articles/blivand-design">Blivand Design</a><br><a href="/articles/designing-yomi">Designing Yomi</a><br><a href="/articles/game-balance-and-yomi">Game Balance and Yomi</a><br><a href="/articles/designing-puzzle-strike">Designing Puzzle Strike</a></p>
+          <p><a href="/articles/sf">Street Fighter HDR Articles</a><br><a href="/articles/balancing-puzzle-fighter">Balancing Puzzle Fighter</a></p>
+          <p><a href="/articles/solvability">Solvability</a><br><a href="/articles/slippery-slope-and-perpetual-comeback">Slippery Slope</a><br><a href="/articles/subtractive-design">Subtractive Design</a></p>
+          <p><span style="font-size:15px">Multiplayer Game Balance:</span><br><a href="/articles/balancing-multiplayer-games-part-1-definitions">Part 1: Definitions</a><br><a href="/articles/balancing-multiplayer-games-part-2-viable-options">Part 2: Viable Options</a><br><a href="/articles/balancing-multiplayer-games-part-3-fairness">Part 3: Fairness</a><br><a href="/articles/balancing-multiplayer-games-part-4-intuition">Part 4: Intuition</a><br><a target="_blank" href="/s/GDC-2009-sirlin-handout6.pdf"><span style="font-size:15px">Game Balance Handout</span></a></p>
+          <p>Tutorial Videos:<br><a href="/articles/street-fighter-tutorial-videos">Street Fighter Tutorial</a><br><a href="/articles/smash-bros-brawl-tutorial-videos">Smash Bros. Brawl Tutorial</a></p>
+          <p><a href="/article-archive">More articles...</a></p>
+         </div>
+        </div>
+        <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_2_1491167759049_17133">
+         <div class="sqs-block-content">
+          <!--
+<div class="section" id="chatbutton">
+                    <a class="btn btnChat" href='/' 
+ onclick='window.open("http://widget.mibbit.com/?channel=%23sirlin&nick=LameGuest_%3F%3F%3F&settings=84a6b1d147e4438f1f78873d04c9ebd4&customloading=waiting%20for%20the%20IRC-server%20...&autoConnect=0","","status=no, toolbar=no, menubar=no, location=no, width=999,height=555")' title="Stop by the community chat room">Chat</a>
+</div>
+--> 
+          <div class="section" id="chatbutton"> <a class="btn btnChat" href="https://discord.gg/Q3qrGUq" title="Stop by the community chat room">Chat</a> 
+          </div> 
+          <p> </p>
+          <div class="section" id="stayConnected"> 
+           <ul> 
+            <li><a class="btn btnTwt" href="http://twitter.com/SirlinGames" title="Follow Sirlin Games on Twitter"></a></li> 
+            <li><a class="btn btnFb" href="http://www.facebook.com/SirlinGames" title="Like Sirlin Games on Facebook"></a></li> 
+            <li><a class="btn btnTwitch" href="http://www.twitch.tv/sirlingames" title="Watch Sirlin Games on Twitch TV"></a></li> 
+            <li><a class="btn btnRss" href="http://sirlin.squarespace.com/?format=rss" title="Subscribe to the Sirlin.net RSS"></a></li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </aside> 
+   </section> 
+   <div class="extra-wrapper page-footer"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Footer Content: Articles" data-type="block-field" data-updated-on="1408693965564" id="page-footer-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <div class="page-divider"></div> 
+   <footer id="footer"> 
+    <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1410685816526" id="footerBlock">
+     <div class="row sqs-row">
+      <div class="col sqs-col-1 span-1">
+       <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-d3a95877fceaec72ddc3">
+        <div class="sqs-block-content">
+         <pre class="text-align-center"><a target="_blank" href="http://www.sirlingames.com">My tabletop games</a> | <a href="http://www.fantasystrike.com">My online games</a> | <a href="/ptw">Playing to Win</a> | <a href="/recommended-books">Recommended Books</a> | <a href="/about">About</a> | <a href="/contact">Contact</a></pre>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div id="socialLinks" class="social-links sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://www.facebook.com/SirlinGames" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+       </svg> 
+      </div> </a> <a href="https://twitter.com/Sirlin" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+       </svg> 
+      </div> </a> 
+    </div> 
+   </footer> 
+  </div> 
+  <div></div> 
+  <script src="https://static1.squarespace.com/static/ta/4fd1028ee4b02be53c65dfb3/1353/scripts/site-bundle.js" type="text/javascript"></script> 
+  <script type="text/javascript" data-sqs-type="imageloader-bootstrapper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none" data-usage="social-icons-svg">
+   <symbol id="facebook-icon" viewbox="0 0 64 64">
+    <path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+   </symbol><symbol id="facebook-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+   </symbol><symbol id="twitter-icon" viewbox="0 0 64 64">
+    <path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" />
+   </symbol><symbol id="twitter-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z" />
+   </symbol>
+  </svg>  
+ </body>
+</html>

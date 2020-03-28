@@ -1,0 +1,690 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US"> 
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- This is Squarespace. --><!-- sirlin --> 
+  <base href=""> 
+  <meta charset="utf-8"> 
+  <title>Balancing Multiplayer Games, Part 4: Intuition — Sirlin.Net — Game Design</title> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1407150974055-CY221FA56K86CJUX44RL/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico?format="> 
+  <link rel="canonical" href="http://www.sirlin.net/articles/balancing-multiplayer-games-part-4-intuition"> 
+  <meta property="og:site_name" content="Sirlin.Net — Game Design"> 
+  <meta property="og:title" content="Balancing Multiplayer Games, Part 4: Intuition — Sirlin.Net — Game Design"> 
+  <meta property="og:latitude" content="40.68640015743611"> 
+  <meta property="og:longitude" content="-74.02857044306643"> 
+  <meta property="og:url" content="http://www.sirlin.net/articles/balancing-multiplayer-games-part-4-intuition"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:description" content="Here's the wicked problem of game balance: you definitely do not know how to solve your game, but you must &amp;nbsp;somehow balance it.  By solving, I mean you cannot determine how to play your game optimally. In  this article on solvability , I covered what playing optimally actually means. For ga"> 
+  <meta property="og:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e9cd54e4b0447dbee31e73/1410850307225/?format=1500w"> 
+  <meta property="og:image:width" content="800"> 
+  <meta property="og:image:height" content="450"> 
+  <meta itemprop="name" content="Balancing Multiplayer Games, Part 4: Intuition — Sirlin.Net — Game Design"> 
+  <meta itemprop="url" content="http://www.sirlin.net/articles/balancing-multiplayer-games-part-4-intuition"> 
+  <meta itemprop="description" content="Here's the wicked problem of game balance: you definitely do not know how to solve your game, but you must &amp;nbsp;somehow balance it.  By solving, I mean you cannot determine how to play your game optimally. In  this article on solvability , I covered what playing optimally actually means. For ga"> 
+  <meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e9cd54e4b0447dbee31e73/1410850307225/?format=1500w"> 
+  <link rel="image_src" href="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e9cd54e4b0447dbee31e73/1410850307225/?format=1500w"> 
+  <meta itemprop="image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e9cd54e4b0447dbee31e73/1410850307225/?format=1500w"> 
+  <meta itemprop="author" content="David Sirlin"> 
+  <meta itemprop="datePublished" content="2014-08-14T21:35:00-0700"> 
+  <meta itemprop="headline" content="Balancing Multiplayer Games, Part 4: Intuition"> 
+  <meta itemprop="publisher" content="Sirlin.Net — Game Design"> 
+  <meta name="twitter:title" content="Balancing Multiplayer Games, Part 4: Intuition — Sirlin.Net — Game Design"> 
+  <meta name="twitter:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e9cd54e4b0447dbee31e73/1410850307225/?format=1500w"> 
+  <meta name="twitter:url" content="http://www.sirlin.net/articles/balancing-multiplayer-games-part-4-intuition"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Here's the wicked problem of game balance: you definitely do not know how to solve your game, but you must &amp;nbsp;somehow balance it.  By solving, I mean you cannot determine how to play your game optimally. In  this article on solvability , I covered what playing optimally actually means. For ga"> 
+  <meta name="description" content=""> 
+  <script type="text/javascript" src="//use.typekit.net/ik/au4t79rroqWoEa7xdWAV5Rg1u2QKPWEFWo-obOQO2nMfel92fFHN4UJLFRbh52jhWD93ZRIXZ2wuZQsKwebaweBKFAZRFejkFgT0HKoD-W4C-At0SaBujW48Sagyjh90jhNlOeUzjhBC-eNDifUD-W4C-At0dcmXOYFTScUTdKoDSWmyScmDSeBRZPoRdhXCiaiaO1FTScUTdKo0ZWbCiaiaO1FTScUTdKoDSWmyScmDSeBRZPoRdhXK2YgkdayTdAIldcNhjPJ4Z1mXiW4yOWgXH6qJ73IbMg6gJMJ7fbKCMsMMeMC6MKG4f5J7IMMjMkMfH6qJtkGbMg6FJMJ7fbKzMsMMeMb6MKG4fOMgIMMj2KMfH6GJCwbgIMMjgPMfH6GJCSbgIMMj2kMfH6qJnbIbMg6eJMJ7fbK0MsMMegM6MKG4fJCgIMMjgkMfH6qJRMIbMg6sJMJ7fbKTMsMMeM66MKG4fHGgIMMjIKMfH6qJKbIbMg64JMJ7fbKHMsMMegw6MKG4fJZmIMIjMkMfH6qJ6u9bMs6FJMJ7fbKImsMgeMb6MKG4fJmmIMIj2KMfH6qJxubbMs6BJMJ7fbKMmsMgeMv6MKG4fJBmIMIjgkMfH6qJ689bMs6sJMJ7fbKYmsMgeM66MKG4fJymIMIjIKMfqMYEhzRggb.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin:700,700italic|Oswald:400|Rosarivo:400italic"> 
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script> 
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].css = ["//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css">
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/performance-05c26a7ba97ad91a6081b-min.en-US.js" defer></script>
+  <script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/announcement-bar-e2fbe92a3604cd7ec3932-min.en-US.js"},"squarespace-audio-player":{"css":"//assets.squarespace.com/universal/styles-compressed/audio-player-52bdd87acccf92a19703e60e09c654bd-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/audio-player-991e7e1c1b3308738ed15-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-342036262b204974aa269-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-4d22db9ba7880e24bcd44-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-51aceea076ad0ff8aa83b-min.en-US.js"},"squarespace-comments":{"css":"//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/comments-e64031ca98dbe63037354-min.en-US.js"},"squarespace-commerce-cart":{"js":"//assets.squarespace.com/universal/scripts-compressed/commerce-cart-574df707b74266010398b-min.en-US.js"},"squarespace-dialog":{"css":"//assets.squarespace.com/universal/styles-compressed/dialog-afeb96ba160fb642a2d98c892a956065-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/dialog-bec10fad5a854d9b8562f-min.en-US.js"},"squarespace-events-collection":{"css":"//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/events-collection-f75316a66b099d806a536-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-fde3933cf0271ba5b3f63-min.en-US.js"},"squarespace-forms":{"css":"//assets.squarespace.com/universal/styles-compressed/forms-d21f3e517c32f4caba9f220beea0666d-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/forms-24ee632e09d923de05536-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-e23ee315df466f1dba9ec-min.en-US.js"},"squarespace-image-zoom":{"css":"//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/image-zoom-5a660e03e667b16c7a076-min.en-US.js"},"squarespace-pinterest":{"css":"//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/pinterest-4725f00d98ee2610ca950-min.en-US.js"},"squarespace-popup-overlay":{"css":"//assets.squarespace.com/universal/styles-compressed/popup-overlay-e984c5797664760d617b07bce15392a1-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/popup-overlay-07ab56995128d252d7025-min.en-US.js"},"squarespace-product-quick-view":{"css":"//assets.squarespace.com/universal/styles-compressed/product-quick-view-3fa8fd4df0755e7a7878e60166ca3d61-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/product-quick-view-cc9a2874f8c4b6a3f27e6-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-828c2fbae302bd3e4fe16-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-f260a4594424060b57c10-min.en-US.js"},"squarespace-search-page":{"css":"//assets.squarespace.com/universal/styles-compressed/search-page-207da8872118254c0a795bf9b187c205-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/search-page-a3d76808795360256a5a6-min.en-US.js"},"squarespace-search-preview":{"js":"//assets.squarespace.com/universal/scripts-compressed/search-preview-9acb915547fb6c41d5a99-min.en-US.js"},"squarespace-share-buttons":{"js":"//assets.squarespace.com/universal/scripts-compressed/share-buttons-b7c8ee26ec3639fa3da50-min.en-US.js"},"squarespace-simple-liking":{"css":"//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/simple-liking-89bbd9e8e108b969eb994-min.en-US.js"},"squarespace-social-buttons":{"css":"//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/social-buttons-547a9a0004ff7f9768043-min.en-US.js"},"squarespace-tourdates":{"css":"//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/tourdates-69d260a4100c302369d4e-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-43724a83fe4cb8b953146-min.en-US.js"}},"pageType":50,"website":{"id":"50f14d35e4b0d70ab5fc4f24","identifier":"sirlin","websiteType":1,"contentModifiedOn":1564017090920,"cloneable":false,"siteStatus":{},"language":"en-US","timeZone":"America/Los_Angeles","machineTimeZoneOffset":-25200000,"timeZoneOffset":-25200000,"timeZoneAbbr":"PDT","siteTitle":"Sirlin.Net \u2014 Game Design","fullSiteTitle":"Balancing Multiplayer Games, Part 4: Intuition \u2014 Sirlin.Net \u2014 Game Design","siteDescription":"<p>Site description goes here.</p>","location":{"mapZoom":11.0,"mapLat":40.68640015743611,"mapLng":-74.02857044306641,"addressTitle":"","addressLine1":"","addressLine2":"","addressCountry":""},"logoImageId":"538a6c53e4b07541307ca12b","shareButtonOptions":{},"logoImageUrl":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","authenticUrl":"http://www.sirlin.net","internalUrl":"http://sirlin.squarespace.com","baseUrl":"http://www.sirlin.net","primaryDomain":"www.sirlin.net","socialAccounts":[{"serviceId":2,"userId":"759231843","userName":"david.sirlin","screenname":"Sirlin Games","addedOn":1401585908216,"profileUrl":"http://www.facebook.com/SirlinGames","iconUrl":"http://graph.facebook.com/759231843/picture?type=square","metaData":{"service":"facebook"},"iconEnabled":true,"serviceName":"facebook"},{"serviceId":4,"userId":"64127998","userName":"Sirlin","screenname":"David Sirlin","addedOn":1416883541216,"profileUrl":"https://twitter.com/Sirlin","iconUrl":"http://pbs.twimg.com/profile_images/2194481794/pic4b_normal.jpg","collectionId":"5473ed55e4b029492ac9d740","iconEnabled":true,"serviceName":"twitter"}],"typekitId":"","statsMigrated":true,"imageMetadataProcessingEnabled":false,"screenshotId":"57e6e910","showOwnerLogin":false},"websiteSettings":{"id":"50f14d35e4b0d70ab5fc4f25","websiteId":"50f14d35e4b0d70ab5fc4f24","type":"Business","subjects":[{"systemSubject":"other","otherSubject":"Design/Art"},{"systemSubject":"design"}],"country":"US","state":"CA","simpleLikingEnabled":true,"mobileInfoBarSettings":{"style":1,"isContactEmailEnabled":true,"isContactPhoneNumberEnabled":true,"isLocationEnabled":true,"isBusinessHoursEnabled":true},"announcementBarSettings":{"style":1,"text":"<p>test announcement is&nbsp;here, this is it.</p>","clickthroughUrl":{"url":"http://www.cnn.com","newWindow":true}},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":true,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":false,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"storeSettings":{"returnPolicy":"","termsOfService":"","privacyPolicy":"","expressCheckout":true,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"currenciesSupported":["USD","AUD","CAD","CHF","EUR","GBP"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"orderConfirmationInjectCode":"","showCustomCheckoutForm":false,"enableMailingListOptInByDefault":true,"sameAsRetailLocation":false,"merchandisingSettings":{"scarcityEnabledOnProductItems":false,"scarcityEnabledOnProductBlocks":false,"scarcityMessageType":"DEFAULT_SCARCITY_MESSAGE","scarcityThreshold":10,"multipleQuantityAllowedForServices":true,"restockNotificationsEnabled":false,"restockNotificationsMailingListSignUpEnabled":false,"relatedProductsEnabled":false,"relatedProductsOrdering":"random","soldOutVariantsDropdownDisabled":false},"isLive":true,"multipleQuantityAllowedForServices":true},"useEscapeKeyToLogin":true,"trialAssistantEnabled":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled","size":"small","shape":"rect","color":"white"},"ampEnabled":false},"cookieSettings":{"isCookieBannerEnabled":false,"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false,"cookieBannerText":"","cookieBannerTheme":"","cookieBannerVariant":"","cookieBannerPosition":"","cookieBannerCtaVariant":"","cookieBannerCtaText":""},"websiteCloneable":false,"collection":{"title":"Articles","id":"53ded0ace4b0ec2792626d72","fullUrl":"/articles","type":1},"item":{"title":"Balancing Multiplayer Games, Part 4: Intuition","id":"53e9cd54e4b0447dbee31e73","fullUrl":"/articles/balancing-multiplayer-games-part-4-intuition","publicCommentCount":0,"commentState":2,"recordType":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"TGutter":"3%","TMaxWidth":"300","TPerRow":"3","gallery-auto-play":"false","galleryPlaySpeed":"3.0","hide-thumbnail-titles":"true","outerPadding":"75px","pagePadding":"30px","product-gallery-auto-crop":"false","product-image-auto-crop":"true","thumbnail-layout":"Basic Grid","topPadding":"10px","tweak-v1-related-products-title-spacing":"50px"},"templateId":"4fd11f32c4aad9b01c9e624c","templateVersion":"7","pageFeatures":[1,2,4],"gmRenderKey":"QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4","betaFeatureFlags":["ORDERS-SERVICE-check-digital-good-access-with-service","ORDERS-SERVICE-reset-digital-goods-access-with-service","ORDER_SERVICE-submit-subscription-order-through-service","ORDER_SERVICE-submit-reoccurring-subscription-order-through-service","dg_downloads_from_fastly","generic_iframe_loader_for_campaigns","donations_customer_accounts","product-retriever-v2-enabled","domain_registration_via_registrar_service","domain_locking_via_registrar_service","domain_deletion_via_registrar_service","domain_info_via_registrar_service","content_item_settings","seven_one_image_overlay_opacity","commerce_restock_notifications","newsletter_block_captcha","new_billing_system","gallery_settings_71","commerce_onboarding_wizard","seven_one_portfolio_hover_layouts","commerce_onboarding_wizard_phase_two","domains_allow_async_gsuite"],"yuiEliminationExperimentList":[{"name":"statsMigrationJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"ContributionConfirmed-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"TextPusher-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MenuItemWithProgress-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"billingNewsletters-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"imageProcJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"QuantityChangePreview-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CompositeModel-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"HasPusherMixin-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"INACTIVE"},{"name":"ProviderList-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MediaTracker-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"pushJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"internal-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"BillingPanel-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"PopupOverlayEditor-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CoverPagePicker-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"}],"impersonatedSession":false,"tzData":{"zones":[[-480,"US","P%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}}};</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://www.sirlin.net/articles?format=rss"> 
+  <script type="application/ld+json">{"url":"http://www.sirlin.net","name":"Sirlin.Net \u2014 Game Design","description":"<p>Site description goes here.</p>","image":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <script type="application/ld+json">{"name":"Balancing Multiplayer Games, Part 4: Intuition \u2014 Sirlin.Net \u2014 Game Design","url":"http://www.sirlin.net/articles/balancing-multiplayer-games-part-4-intuition","datePublished":"2014-08-14T21:35:00-0700","headline":"Balancing Multiplayer Games, Part 4: Intuition","author":"David Sirlin","publisher":{"name":"Sirlin.Net \u2014 Game Design","logo":{"@type":"ImageObject","url":"https://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/"},"@context":"http://schema.org","@type":"Organization"},"image":"http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53e9cd54e4b0447dbee31e73/1410850307225/?format=1500w","@context":"http://schema.org","@type":"Article"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=4"/><![endif]--> <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]--> <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&amp;filterFeatures=false"><!-- <![endif]--> 
+  <script type="text/javascript">
+  var ShopifyStoreConfig = {shop:"sirlin.myshopify.com", collections:[8156021]};
+  (function() {
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; 
+    s.src = "http://widgets.shopifyapps.com/assets/shopifystore.js";
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();  
+</script> 
+  <noscript>
+   Please enable javascript, visit the &lt;a href="http://sirlin.myshopify.com"&gt;Sirlin Games Tabletop Store.
+  </noscript> <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53dddd843aed3211"></script> <!--Share This --> 
+  <script type="text/javascript">var switchTo5x=true;</script> 
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script> 
+  <script type="text/javascript">stLight.options({publisher: "63e23d4f-8cab-4d21-ba0d-bbfb30801340", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script> <!--Shareaholic
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+    var shr = document.createElement('script');
+    shr.setAttribute('data-cfasync', 'false');
+    shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+    shr.type = 'text/javascript'; shr.async = 'true';
+    shr.onload = shr.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      var site_id = 'f85ba2f3bf2982871221fa38b75a6419';
+      try { Shareaholic.init(site_id); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(shr, s);
+  })();
+//]]>
+</script>
+-->
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script> 
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-776666-1', 'auto');ga('send', 'pageview');</script><!-- End of Squarespace Headers --> 
+ </head> 
+ <body class="blog-sidebar-display-right index-thumb-title-position-below index-item-layout-auto thumbnail-layout-basic-grid thumbnails-on-open-page-show-all hide-thumbnail-titles  layout-style-center page-borders-dotted  gallery-page-controls-tiny-thumbnails  social-icon-style-normal  hide-social-icons     event-thumbnails event-thumbnail-size-32-standard event-date-label event-date-label-time event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts  event-item-back-link    product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing tweak-v1-related-products-image-aspect-ratio-11-square tweak-v1-related-products-details-alignment-center newsletter-style-dark  opentable-style-light small-button-style-solid small-button-shape-rounded medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-square tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd collection-53ded0ace4b0ec2792626d72 view-item collection-type-blog collection-layout-default mobile-style-available logo-image has-primary-nav" id="item-53e9cd54e4b0447dbee31e73"> 
+  <div id="canvas"> 
+   <div id="mobileNav" class=""> 
+    <div id="mobileNavWrapper" class="wrapper"> 
+     <nav class="main-nav mobileNav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=" external-link"> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </div> 
+   <div id="mobileMenuLink">
+    <a>Menu</a>
+   </div> 
+   <header id="header"> 
+    <div id="logo" data-content-field="site-title"> 
+     <h1 class="logo"><a href="/"><img src="//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/?format=1000w" alt="Sirlin.Net — Game Design"></a></h1> 
+    </div> 
+    <script>
+        Y.use('squarespace-ui-base', function(Y) {
+          Y.all("#header .logo, #header .logo-subtitle").each(function (text) {
+            text.plug(Y.Squarespace.TextShrink, {
+              parentEl: Y.one('#header'),
+              triggerWidth: 750
+            });
+          });
+        });
+
+        // Show spinner on page load if loading bookmarked url
+        if (window.location.hash && window.location.hash !== '#') {
+          document.querySelector('body').className += ' index-loading';
+        }
+      </script> 
+    <div id="topNav" data-content-field="navigation"> 
+     <nav class="main-nav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=""> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </header> 
+   <div class="page-divider"></div> 
+   <div class="extra-wrapper page-header"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Header Content: Articles" data-type="block-field" id="page-header-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <section id="page" role="main" data-content-field="main-content"> <!-- CATEGORY NAV --> 
+    <div class="article-wrapper"> 
+     <article class="hentry tag-set1 author-david-sirlin post-type-text" id="article-53e9cd54e4b0447dbee31e73" data-item-id="53e9cd54e4b0447dbee31e73"> <!--SPECIAL CONTENT--> <!--POST HEADER--> 
+      <header> 
+       <h1 class="entry-title"> <a href="/articles/balancing-multiplayer-games-part-4-intuition" data-content-field="title">Balancing Multiplayer Games, Part 4: Intuition</a> </h1> 
+       <div class="meta"> <span class="date"><time class="published" datetime="2014-08-14">August 14, 2014</time></span> 
+       </div> 
+      </header> <!--POST BODY--> 
+      <div class="body entry-content">
+       <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1407832533891" id="item-53e9cd54e4b0447dbee31e73">
+        <div class="row sqs-row">
+         <div class="col sqs-col-12 span-12">
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-2ffc467532b6c49b89de">
+           <div class="sqs-block-content">
+            <p>Here's the wicked problem of game balance: you definitely do not know how to solve your game, but you must &nbsp;somehow balance it.</p>
+            <p>By solving, I mean you cannot determine how to play your game optimally. In <a href="/articles/solvability">this article on solvability</a>, I covered what playing optimally actually means. For games with a pure solution, it means a set of instructions that's the best way to play. Knowing those instructions means there are no more decisions or strategy in your game. For games with a mixed solution, there still could be strategy, but you'd have a far much more interesting game if no one knew how to play optimally.</p>
+            <p>If you can solve your game, your players can definitely solve it. If you can’t solve your game, your players might still solve it. In any case, we know <em>you</em> can’t solve it because that means you &nbsp;didn't make an interesting enough game in the first place.</p>
+            <p>How in the world can you balance something when it’s impossible to know the best ways of playing it? If you aren’t worried about this, then you don’t understand how distressing the problem is. The techniques I discussed in the previous three articles will help, but they remind me of what art director Larry Ahern said when he was preparing to draw all the backgrounds in The Curse of Monkey Island. He said that by following the rules of composition from classical painting, he believed he could get results that were "not terrible." But, he said, going from not terrible to great was something he hoped he had within him, and that it's not exactly possible to get there by following someone else's cookbook of rules.</p>
+            <h2>Picking The Top Players</h2>
+            <p>Let’s back up to an easier problem. Imagine I gave you a room full of players of a certain game and I asked you to determine who the best player is, and who is second best. How would you do it? Answer: you would have them all play each other.</p>
+            <p>What if I don’t let anyone play the game, though? I’ll let you interview the players or have them submit written answers to your questions about how they will play the game and what they know about the game. Can you determine the best players from this method? I bet you will do only slightly better than monkeys throwing darts to determine the answer. In all my experience running and competing in tournaments, I can say with some authority that there is little correlation between ability to win and ability to explain yourself.</p>
+            <p>Why are the best players not necessarily able to reveal themselves as best through interviews or speaking? I claim there are two reasons:</p>
+            <p style="margin-left:40px">1) Spoken and written answers have extremely narrow bandwidth.<br>2) It’s impossible to access many of our own skills with conscious thought.</p>
+            <p>Both of these ideas have to do with the concept of the mental iceberg.</p>
+            <h2>The Mental Iceberg</h2>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409953861458_545707">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:800.0px;"> 
+              <div style="padding-bottom:75.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410219779914-008AQHG8J2FPLGF80UGI/ke17ZwdGBToddI8pDm48kPoswlzjSVMM-SxOp7CV59BZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIeQMKeWYgwh6Mn73n2eZmZLHHpcPIxgL2SArp_rN2M_AKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410219779914-008AQHG8J2FPLGF80UGI/ke17ZwdGBToddI8pDm48kPoswlzjSVMM-SxOp7CV59BZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIeQMKeWYgwh6Mn73n2eZmZLHHpcPIxgL2SArp_rN2M_AKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410219779914-008AQHG8J2FPLGF80UGI/ke17ZwdGBToddI8pDm48kPoswlzjSVMM-SxOp7CV59BZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIeQMKeWYgwh6Mn73n2eZmZLHHpcPIxgL2SArp_rN2M_AKMshLAGzx4R3EDFOm1kBS/image-asset.jpeg" data-image-dimensions="800x600" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e3f03e4b0a9fac1c15b81" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409953861458_546002">
+           <div class="sqs-block-content">
+            <p>Imagine an iceberg that represents your total knowledge, skill, and ability at something, for example in playing a certain competitive game. The small part of the iceberg above the waterline is what you have direct conscious access to; it’s what you can explain. The gigantic underbelly of the iceberg is the part you do not have direct access to, and yet it accounts for far more of your overall skill than the exposed tip. When we interview players or ask them for written answers about how they might play, we are only accessing the tip. If one player’s iceberg has a larger tip (they tell a better story about how they will win), it’s entirely possible that their hidden below-water iceberg is much smaller than another player’s, and that’s really what matters.</p>
+            <p>The above-water part of the iceberg represents what you can explain or consciously understand. The huge underside represents your vast unconscious.</p>
+            <h3>Narrow bandwidth</h3>
+            <p>The amount of information you can convey in a written or spoken answer is actually very small compared the storehouse of knowledge and decisions rules you have stored in your head. Also, spoken and written language encourage linear thinking, while your actual decision-making might be a more complex weighting of many different interconnected factors. In a written answer, a player might say “move A beats move B, so I will concentrate on using move A in this match.” But really it might depend on many factors: the timing of move A, the distancing, the relative hit points of the characters, the mental state of the opponent, and so on. Players cannot communicate these nuances in an explanation the way they can enact them during actual gameplay.</p>
+            <h3>No Direct Access to Parts of Our Own Minds</h3>
+            <p>You don't know most of what's going on in your own brain or body. This concept might be hard to swallow at first, but it should be incredibly obvious if you think about it for a moment. You are not conscious of how your digestive system works. You do not have direct access to how your cells make and break the bonds of ATP and ADP to give your body energy. When you see a frisbee travel across the sky, you are not aware that your eye moves in a particular pattern of jerky movement called <em>saccades</em>&nbsp;that are common in all humans (you believe that you smoothly follow the moving object).</p>
+            <p>One study estimates that the human brain takes in about 11,000,000 pieces of information per second through the five senses, yet the most liberal estimates say that we can fit at most 40 pieces of information in conscious memory. There is A LOT going on behind the scenes, and we do not have conscious access to it, even though we are still able to make decisions that leverage all that information. (<a href="http://www.amazon.com/gp/product/0674013824?ie=UTF8&amp;tag=sirlinnet-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0674013824%22%3EStrangers%20to%20Ourselves:%20Discovering%20the%20Adaptive%20Unconscious%3C/a%3E%3Cimg%20src=%22http://www.assoc-amazon.com/e/ir?t=sirlinnet-20&amp;l=as2&amp;o=1&amp;a=0674013824%22%20width=%221%22%20height=%221%22%20border=%220%22%20alt=%22%22%20style=%22border:none%20%21important;%20margin:0px%20%21important;">Wilson</a>, p.24.)</p>
+            <p><strong>Blindsight</strong></p>
+            <p>The medical condition of blindsight is a particularly telling example. Blindsight is blindness that results from having damage to a certain part of your visual cortex. There are actually two different neural pathways for vision, and people with blindsight have only one of these pathways blocked. The result is that they are blind, meaning specifically that they don’t consciously experience seeing. Even though they claim to see black, they can still make decisions based on eyesight. In one experiment with a blindsight subject named DB, experimenters showed him a circle with either vertical or horizontal black and white stripes. Even though he can’t see so he has no idea whehter the stripes are horizontal or vertical, and sometimes become agitated when asked to guess, his “guesses” were correct between 90 and 95 percent of the time. In other words, people with blindsight can perceive the world more accurately than their conscious minds can explain. (<a href="http://www.amazon.com/gp/product/019515343X?ie=UTF8&amp;tag=sirlinnet-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=019515343X%22%3EConsciousness:%20An%20Introduction%3C/a%3E%3Cimg%20src=%22http://www.assoc-amazon.com/e/ir?t=sirlinnet-20&amp;l=as2&amp;o=1&amp;a=019515343X%22%20width=%221%22%20height=%221%22%20border=%220%22%20alt=%22%22%20style=%22border:none%20%21important;%20margin:0px%20%21important;">Blackthorne</a>, p.263.)</p>
+            <p><strong>Instant Decisions</strong></p>
+            <p>Another clue to this concept lies in decisions that we make extremely quickly. Consciousness does not coalesce instantly; it takes somewhere between 0.3 to 0.5 seconds to form. I know that that sentence is highly controversial amongst brain researchers, but I think it’s generally safe to say in times shorter than that, we have not yet formed enough of an awareness about what’s happening to be conscious of it. And yet, experiments show that we make decisions based on outside stimulus faster than this. For example, when people are asked to grab wooden rods as they light up a certain color, and the experimenter cleverly lights up one rod, then as you are reaching for it, darkens that rod and lights up a different one, he can measure when your hand made the course correction to go for the newly-lit rod. The course correction occurs almost immediately, much faster than 0.3 seconds, and yet the subjects believe they course correct only at the last moment, after 0.5 seconds. In fact, they don't even consciously percieve that the lights on the rods changed until after they made the course correction! They are making decisions before they are conscious of what is going on.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409953861458_549514">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:236.0px;"> 
+              <div style="padding-bottom:150.42373657226562%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410220113932-XL6H54T0VBD8OZ5SXE2U/ke17ZwdGBToddI8pDm48kBUsuDjd-qQGuNXD9KP1J0VZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-tN33pgOwIwumoaB8X79lL31tJ51WuQ8PpwBLUAxExj-w/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410220113932-XL6H54T0VBD8OZ5SXE2U/ke17ZwdGBToddI8pDm48kBUsuDjd-qQGuNXD9KP1J0VZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-tN33pgOwIwumoaB8X79lL31tJ51WuQ8PpwBLUAxExj-w/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410220113932-XL6H54T0VBD8OZ5SXE2U/ke17ZwdGBToddI8pDm48kBUsuDjd-qQGuNXD9KP1J0VZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-tN33pgOwIwumoaB8X79lL31tJ51WuQ8PpwBLUAxExj-w/image-asset.jpeg" data-image-dimensions="236x355" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e4051e4b0fce93c49028a" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409953861458_549797">
+           <div class="sqs-block-content">
+            <p>Tennis is more real-world example of this. Tennis pros can serve the ball at 130mph, and the distance between baselines is 78 feet. That means it takes 0.41 seconds for the ball to reach the opponent. New York Times writer David Foster Wallace said:</p>
+            <blockquote>
+             The upshot is that pro tennis involves intervals of time too brief for deliberate action. Temporally, we’re more in the operative range of reflexes, purely physical reactions that bypass conscious thought. And yet an effective return of serve depends on a large set of decisions and physical adjustments that are a whole lot more involved and intentional than blinking, jumping when startled, etc.
+             <br>(<a href="http://www.nytimes.com/2006/08/20/sports/playmagazine/20federer.html?pagewanted=all">New York Times</a>.)
+            </blockquote>
+            <p>&nbsp;</p>
+            <p>Tennis pro Roger Federer has explained in interviews that he doesn’t like to be called a genius at the game, because he doesn’t think during the incredible moments when he returns balls few other players can. He acts before he is conscious of the situation by leveraging his unconscious skills.</p>
+            <p><strong>Heuristics We Use But Can't Explain</strong></p>
+            <p>Baseball gives us another important example. How do fielders catch fly balls? It seems like a very complex math problem with variables for speed, trajectory, gravity, friction from air resistance, wind influence, etc. Should fielders run as quickly as they can to the general location where the ball will land, then make adjustments as they solve these equations somehow?</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409953861458_577134">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:96.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410221658252-843G303IRJX77SVQLEYA/ke17ZwdGBToddI8pDm48kMCR0rPRCJJg8WnMmWTayqBZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGNlsQXoXAUySQNQ87OMnl2vXRUi7GtMcpvyIsp-2bvk-7tp_E7bIGeIAY8egHI9t4/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410221658252-843G303IRJX77SVQLEYA/ke17ZwdGBToddI8pDm48kMCR0rPRCJJg8WnMmWTayqBZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGNlsQXoXAUySQNQ87OMnl2vXRUi7GtMcpvyIsp-2bvk-7tp_E7bIGeIAY8egHI9t4/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410221658252-843G303IRJX77SVQLEYA/ke17ZwdGBToddI8pDm48kMCR0rPRCJJg8WnMmWTayqBZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGNlsQXoXAUySQNQ87OMnl2vXRUi7GtMcpvyIsp-2bvk-7tp_E7bIGeIAY8egHI9t4/image-asset.jpeg" data-image-dimensions="450x434" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e465ae4b073fcdfd373fd" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409953861458_577407">
+           <div class="sqs-block-content">
+            <p>No. The best way to catch a fly ball is to use the gaze heuristic, as described in the book Gut Instincts. The method is to look at the ball, start running, and adjust your running speed so that the angle of your gaze remains constant. You will then reach the ball just as it lands, and you’ll be in the right place. Experimenters found that the best professional baseball players use this method (and so do dogs), but that most of the players don’t know that they use it, and are unable to explain any method they use to catch fly balls. (<a href="http://www.amazon.com/gp/product/0143113763?ie=UTF8&amp;tag=sirlinnet-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0143113763%22%3EGut%20Feelings:%20The%20Intelligence%20of%20the%20Unconscious%3C/a%3E%3Cimg%20src=%22http://www.assoc-amazon.com/e/ir?t=sirlinnet-20&amp;l=as2&amp;o=1&amp;a=0143113763%22%20width=%221%22%20height=%221%22%20border=%220%22%20alt=%22%22%20style=%22border:none%20%21important;%20margin:0px%20%21important;">Gigerenzer</a>, p.10.)</p>
+            <p>This example shows that it’s very possible for the correct answer to be hidden in your mental iceberg’s underbelly, but it’s not necessarily a representative example. I chose it on purpose because the underlying decision process can be simply described, which allows me to describe it to you. But what if they underlying decision process relies on a complex weighting of variables that isn’t easy to describe? This is another clue that explanations of how to solve complex problems are just tips of the iceberg, and not necessarily accurate.</p>
+            <p>Before we get back to solving our mind-bending task of balancing a game that we can’t possibly know how to play optimally, I’d like us to look at two cases outside of games where experts solved very difficult problems. The different methods they used are applicable our problem, and to solving any other highly complex problem.</p>
+            <h3>The Case of the Greek Statue</h3>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1410222843213_19801">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:2118.0px;"> 
+              <div style="padding-bottom:141.406982421875%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223130236-U5DWA4VE446VBS24T5PY/ke17ZwdGBToddI8pDm48kLeHQIoXfGVHePrB5dHrSn57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdvIYd0gkPX9kz4p5jdUKiVg6PZZIegCfhZgGmwx7FtqaLJgimyKlpluUohcN8RoZQ/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223130236-U5DWA4VE446VBS24T5PY/ke17ZwdGBToddI8pDm48kLeHQIoXfGVHePrB5dHrSn57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdvIYd0gkPX9kz4p5jdUKiVg6PZZIegCfhZgGmwx7FtqaLJgimyKlpluUohcN8RoZQ/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223130236-U5DWA4VE446VBS24T5PY/ke17ZwdGBToddI8pDm48kLeHQIoXfGVHePrB5dHrSn57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UdvIYd0gkPX9kz4p5jdUKiVg6PZZIegCfhZgGmwx7FtqaLJgimyKlpluUohcN8RoZQ/image-asset.jpeg" data-image-dimensions="2118x2995" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e4c1ae4b02e0dc209f9ab" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1410222843213_20019">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1410222843213_63001">From an example in the book Blink, the Getty Museum of California was considering purchasing a 2,600-year-old Greek statue for almost $10 million. To determine if it was a fake, the museum had its lawyers investigate the paper trail of the statue’s ownership and whereabouts over the last several decades and had a geologist named Margolis</p>
+            <blockquote id="yui_3_17_2_1_1410222843213_63002">
+             ...analyze the material composition of the statue. The geologist extracted a 1cm by 2cm sample from the statue analyzed it using an electron microscope, electron microprobe, mass spectrometry, X-ray diffraction, and X-ray fluorescence. The statue was made of dolomite marble from the island of Thasos, Margolis concluded, and the surface of the statue was covered by a thin layer of calcite -- which was significant, Margolis told the Getty, because dolomite can turn into calcite only over the course of hundreds, if not thousands, of years.
+            </blockquote>
+            <p id="yui_3_17_2_1_1410222843213_63003"><br></p>
+            <p id="yui_3_17_2_1_1410222843213_63004">After 14 months of analysis by the lawyers and scientists, the Getty was ready to buy the statue. And then the trouble started. When the Getty was nearing the unveiling of the statue, a few art experts saw it and each of them had an immediate reaction that something was wrong. They didn’t know what, but they thought it was a fake.</p>
+            <p id="yui_3_17_2_1_1410222843213_63005">One of those experts was Thomas Hoving, the former director of the Metropolitan Museum of Art in New York. When Hoving saw the statue, the first word that popped into his head was “fresh,” which he thought was an odd word to describe a statue that’s thousands of years old.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1410222843213_96807">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:620.0px;"> 
+              <div style="padding-bottom:59.67742156982422%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="<p>Thomas Hoving</p>" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410231219476-75GSMRGXXJ3PNT16314N/ke17ZwdGBToddI8pDm48kGm3DTV9sUgu0toxTeuJYcJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpzzTE68Bo6RxDRkrLyYJc2GEFLm-eHorGgZzcZXu3staMVQiZLB-shCOUImAI_pxL8/image-asset.jpeg" alt="Thomas Hoving">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410231219476-75GSMRGXXJ3PNT16314N/ke17ZwdGBToddI8pDm48kGm3DTV9sUgu0toxTeuJYcJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpzzTE68Bo6RxDRkrLyYJc2GEFLm-eHorGgZzcZXu3staMVQiZLB-shCOUImAI_pxL8/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410231219476-75GSMRGXXJ3PNT16314N/ke17ZwdGBToddI8pDm48kGm3DTV9sUgu0toxTeuJYcJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpzzTE68Bo6RxDRkrLyYJc2GEFLm-eHorGgZzcZXu3staMVQiZLB-shCOUImAI_pxL8/image-asset.jpeg" data-image-dimensions="620x370" data-image-focal-point="0.5,0.5" alt="Thomas Hoving" data-load="false" data-image-id="540e6bb3e4b0c54026e04667" data-type="image"> 
+              </div> 
+              <figcaption class="image-caption-wrapper"> 
+               <div class="image-caption">
+                <p>Thomas Hoving</p>
+               </div> 
+              </figcaption> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1410222843213_97023">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1410222843213_63006">The Getty was worried, so they shipped the statue to Athens where they invited art experts to a symposium to look at the statue. Most of them said it was fake, too. “It’s the fingernails” or “it’s the hands” or “statues don’t come out of the ground looking quite like that,” people said. They didn’t know just why, but they knew. Then the Getty’s lawyers discovered that some of the statue’s ownership documents had been faked. The geologist (who was so proud of his examination that he wrote an article about it in Scientific American) discovered that it was possible to convert dolomite to calcite in just a few months using potato mold.</p>
+            <p id="yui_3_17_2_1_1410222843213_63007">How did Thomas Hoving know something instantly that the lawyers and scientists could not discover after 14 months of investigation? He knew because he had an enormous mental iceberg of knowledge and expertise in this exact area. He dug up statues himself in Sicily. He also said:</p>
+            <blockquote id="yui_3_17_2_1_1410222843213_63008">
+             In my second year working at the Met, I had the good luck of having this European curator come over and go through virtually everything with me. We spent evening after evening taking things out of cases and putting them on the table. We were down in the storerooms. There were thousands of things. I mean, we were there every night until ten o’clock, and it wasn’t just a routine glance. It was really poring and poring and poring over things.
+            </blockquote>
+            <p id="yui_3_17_2_1_1410222843213_63009"><br></p>
+            <p id="yui_3_17_2_1_1410222843213_63010">The lawyers and scientists had a large “iceberg tip” in this case. They had lots of explanations why the statues were real. But if there’s anyone in the world who has a tiny iceberg underbelly when it comes to knowledge about Greek statues, it’s laywers and scientists. Hoving’s iceberg tip was small (he just had a feeling), yet his iceberg underside was enormous. (<a data-cke-saved-href="http://www.amazon.com/gp/product/0316010669?ie=UTF8&amp;tag=sirlinnet-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0316010669%22%3EBlink:%20The%20Power%20of%20Thinking%20Without%20Thinking%3C/a%3E%3Cimg%20src=%22http://www.assoc-amazon.com/e/ir?t=sirlinnet-20&amp;l=as2&amp;o=1&amp;a=0316010669%22%20width=%221%22%20height=%221%22%20border=%220%22%20alt=%22%22%20style=%22border:none%20%21important;%20margin:0px%20%21important;" href="http://www.amazon.com/gp/product/0316010669?ie=UTF8&amp;tag=sirlinnet-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0316010669%22%3EBlink:%20The%20Power%20of%20Thinking%20Without%20Thinking%3C/a%3E%3Cimg%20src=%22http://www.assoc-amazon.com/e/ir?t=sirlinnet-20&amp;l=as2&amp;o=1&amp;a=0316010669%22%20width=%221%22%20height=%221%22%20border=%220%22%20alt=%22%22%20style=%22border:none%20%21important;%20margin:0px%20%21important;">Gladwell</a>, pgs.3-11,184.)</p>
+            <p id="yui_3_17_2_1_1410222843213_63011">Can you imagine trying to detect fake statues by asking Hoving to give you a theory of fake statue detection? What if his theory left out lots of things he unknowingly uses to solve the problem? What if his theory is actually wrong, and doesn’t reflect his methods at all (because he doesn’t know them himself)? That’s the inherent problem with requiring that any expert synthesize a theory of his own expertise.</p>
+            <p id="yui_3_17_2_1_1410222843213_63012">The way to solve a complex problem is to develop an enormous iceberg underside. Is that just saying that you need “experience,” though? Experience is kind of a dirty word to me. George Bush has “experience” as a president and with foreign affairs. Do you want him running the country (or anything else)? Meanwhile Lincoln had hardly any experience. Experience is only as good as the person who has it, and even besides that, we usually use completely the wrong scale to measure experience.</p>
+            <p id="yui_3_17_2_1_1410222843213_63013">If you have the experience of “shipping 10 games,” for example, that’s great but it doesn’t have anything to do with the particular type of experience--the particular iceberg of knowledge--that is involved with balancing a complex asymmetric game. Before we try to develop this iceberg, let’s look at one more example.</p>
+            <h2 id="yui_3_17_2_1_1410222843213_63014">The Case of the Space Shuttle Disaster</h2>
+            <p id="yui_3_17_2_1_1410222843213_63015">Imagine that your problem is that you must determine how and why the Space Shuttle Challenger crashed. You are on the investigative committee, looking for this answer. What is the best way to solve this problem? Is it to be an extreme expert in aerospace engineering? Is it to be an expert at investigating disasters? The answer is to first live the life of Richard Feynman, then solve the problem.</p>
+            <p id="yui_3_17_2_1_1410222843213_63016">I think Feynman is one of the most brilliant people who ever lived, and he demonstrated his ability to solve complex problems in many fields outside of his own field of physics. Feynman was not an engineer, but the shuttle problem required an engineering analysis. He was a fish out of water on the investigative committee, and had no experience doing anything like that. What he did have experience doing was analyzing problems in general. Taking in vast amounts of information, organizing it in his head, figuring out what mattered and what didn’t.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-5 span-5 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1410222843213_59465">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:281.0px;"> 
+              <div style="padding-bottom:138.0782928466797%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="<p>Richard Feynman</p>" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223886024-XDDFIY8NY9WRJ87ANU5S/ke17ZwdGBToddI8pDm48kCgbnF5hmgwON3kRwO8q9TtZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-v_IkxdrVMtXcquAzawvPOue9FGgDufHGuWGeL713nK3g/image-asset.jpeg" alt="Richard Feynman">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223886024-XDDFIY8NY9WRJ87ANU5S/ke17ZwdGBToddI8pDm48kCgbnF5hmgwON3kRwO8q9TtZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-v_IkxdrVMtXcquAzawvPOue9FGgDufHGuWGeL713nK3g/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223886024-XDDFIY8NY9WRJ87ANU5S/ke17ZwdGBToddI8pDm48kCgbnF5hmgwON3kRwO8q9TtZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-v_IkxdrVMtXcquAzawvPOue9FGgDufHGuWGeL713nK3g/image-asset.jpeg" data-image-dimensions="281x388" data-image-focal-point="0.5,0.5" alt="Richard Feynman" data-load="false" data-image-id="540e4f0ee4b0fc69cb713fb0" data-type="image"> 
+              </div> 
+              <figcaption class="image-caption-wrapper"> 
+               <div class="image-caption">
+                <p>Richard Feynman</p>
+               </div> 
+              </figcaption> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1410222843213_59727">
+           <div class="sqs-block-content">
+            <p>Feynman took nothing at face value, ignored the rules of the committee, questioned everyone he could, ignored authority figures and the politics of the investigation, and instead focused getting real information. His very first interview was a marathon session with the engineers who designed the shuttle’s rockets. They had the iceberg of knowledge he needed and he knew how to get at least a piece of it out of their heads and into his own. By ignoring illusions like who had important titles or who supposedly knew anything and instead focusing on who actually had the relevant icebergs of knoweldge, Feynman—and no one else on the commission—discovered that the real problem with the shuttle was lack of resilience of the rubber O-rings during cold weather. (<a href="http://www.amazon.com/gp/product/0393320928?ie=UTF8&amp;tag=sirlinnet-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0393320928">Feynman</a>, pgs.113-153.)</p>
+            <p>If you are going to solve a complex problem, the two best ways are to be like Hoving or to be like Feynman. When I worked on Street Fighter, I was like Hoving. I have a mountain of knowledge about that particular game, so my expert opinion, even if it expresses itself as just a feeling, is worth a lot. On other games I worked on such as Kongai and Yomi, I was more like Feynman. I know how to solve balance problems in general, but there are playtesters who have bigger icebergs of knowledge about how to play the game at an expert level than I do, so I question them, watch them, and rely on them.</p>
+            <h2>Developing the Iceberg</h2>
+            <p>How do you actually get the iceberg of knowledge in the realm of balancing competitive games? Ideally, you want the Feynman-type of ability that can be applied to many types of problems, not just a very narrow domain of one game.</p>
+            <p>The problem with developing this type of knowledge is time. If we are instead trying to become expert players (rather than expert game balancers), we have access to a very fast feedback loop. Play the game against people better than us, see what worked and didn’t, adjust, play again. A game of Street Fighter takes only a couple minutes, and even an RTS game takes less than 1 hour. But creating a game and seeing how its balance turns out takes years. It’s a very slow feedback loop, and extremely few people get to even participate in it directly.</p>
+            <p>I think that there is a way to gain the necessary knowledge though. Here are the games I studied:</p>
+            <p style="margin-left:40px">1) <strong>Street Fighter</strong>. I'm knowledgeable about more than 20 versions of this game.<br>2) <strong>Virtua Fighter</strong>. It says version 5 on the box of the latest one, but really, there have been at least 15 versions of this game if you look closely.<br>3) <strong>Guilty Gear</strong>. I know about 8 versions of this game.<br>4) <strong>Magic: The Gathering</strong>. This game has changed (with new sets of cards) about 3 times per year for over 10 years. I followed it for several years.<br>5) <strong>World of Warcraft</strong>. I played that game for two years before it was released and I couldn’t even guess the number of mini-releases over that time. Maybe 50 or 100.</p>
+            <p>That is A LOT of data about how changes to a game’s balance out. You can study what the exact changes are from one version of a game to the next, then learn how those changes actually affected the game’s balance and how they players perceived the changes. I actually count those as two separate things, and on Street Fighter I had two separate main advisors: one who knew the most about how a change would affect the game system itself, and another who knew the most about how players would perceive changes.</p>
+            <p>You have to put in real, effortful study on following games like the ones I listed above, though. Just being along for the ride doesn’t necessarily get you much. Also, experience working at a game company is almost a detriment here, because game companies I’ve worked at don’t spend any time looking at things like “exactly why did Virtua Fighter change this move’s recovery to 8 frames?” Instead, the focus is on actually implementing and shipping games.</p>
+            <p>I also think that you can’t really fake this. There is no way I could have accumulated the knowledge that I have if my motivation was to be better at my career. My motivation is that I am actually interested in things like this. Thomas Hoving was actually interested in art history. You have to <em>live an authentic life</em> in your chosen area of interest to develop true, deep knowledge of it.</p>
+            <h2>Garcia vs. Sirlin (Analysis vs. Intuition)</h2>
+            <p>In Street Fighter, there is no possible way to create a "balancing algorithm" that will tell you if Chun Li's walking speed should be faster. How good is faster walking speed compared to damage on her fierce punch, compared to priority of her ducking medium kick, etc? You could do a year of math on that and still be more wrong about it than my guess in two seconds.</p>
+            <p>I was very aware of this when I <a href="/articles/designing-kongai">designed Kongai</a>, and I tried to make it as difficult as possible to compare the relative value of moves because of their varied effects. I wanted valuation (the ability of players to intuitiely know the relative value of moves in specific situations) and yomi (the ability of players to know the mind of the opponent) to be the two main skills in the game. And then I encountered garcia1000, a Kongai player who came from the poker community. While my goal as a designer is to facilitate valuation and yomi, garcia's goal as a player is to play optimally without needing to make any judgment calls on those things at all. He want's to compute the odds and solve the game. You could say that he's my worst nightmare, but he is work is also fascinating.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1410222843213_67245">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:700.0px;"> 
+              <div style="padding-bottom:54.71428680419922%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223964282-J2H0E74A01FKX7X6OE8M/ke17ZwdGBToddI8pDm48kMH7jIG8ji9q2OEYkjb-rHJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwkf3h79E2m2smFwjaCIi-PBcsfBLOJvVkUdblH7HyQw4254fZy99WKBY07i9cfx6E/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223964282-J2H0E74A01FKX7X6OE8M/ke17ZwdGBToddI8pDm48kMH7jIG8ji9q2OEYkjb-rHJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwkf3h79E2m2smFwjaCIi-PBcsfBLOJvVkUdblH7HyQw4254fZy99WKBY07i9cfx6E/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410223964282-J2H0E74A01FKX7X6OE8M/ke17ZwdGBToddI8pDm48kMH7jIG8ji9q2OEYkjb-rHJZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwkf3h79E2m2smFwjaCIi-PBcsfBLOJvVkUdblH7HyQw4254fZy99WKBY07i9cfx6E/image-asset.png" data-image-dimensions="700x383" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e4f5ce4b0b9a729a7cbbd" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1410222843213_67461">
+           <div class="sqs-block-content">
+            <p>Garcia started by creating several endgame problems in Kongai. He chose very specific situations, Character A vs. Character B, all other characters are dead, life totals a certain amount, fighting range set to far, item cards given, etc. He would give very specific situations (which were much simpler because there are fewer chioces during the endgame), and then invite other testers to work out the solution for optimal play. Each specific situation took dozens of pages of forum posts to settle. They would also show amusing things such as optimal play giving a 3% edge over the more obvious plays, in one case. It was also amusing that the math reequired to solve these endgame situations was far more complicated than the math I used to set all the tuning variables. (Because I mostly used intution....)</p>
+            <p>What you have to keep in perspective though, is how limited these endgame solutions are. You could know the solution to dozens of them and you wouldn't have solved even 0.00001% of the game. The number of possible game states is very large indeed, and each of these endgame problems that took dozens of pages of posts to figure out solved only ONE gamestate. If I had used rigorous math to solve Kongai during development, I could have been working on it for 100 years.</p>
+            <h2>Trusting Intuition</h2>
+            <p>If you have this iceberg of knowledge, or if you’re like Feynman who can rely on the icebergs of others, you should still know two things about maximizing the value of intuitions. Intuition by experts is better at solving complex problems than analysis, but:</p>
+            <p style="margin-left:40px">1) The intuitive expert will be less sure of their answers, while incompetent people will be very sure of their (wrong) answers.<br>2) Having to explain yourself diminishes your ability to draw on your intuition in the first place.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1410222843213_112936">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:400.0px;"> 
+              <div style="padding-bottom:75.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410234004210-QV3O3L08UHO2KWANDMPG/ke17ZwdGBToddI8pDm48kDAv91l_EVpAtt3T82Wm1m9Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGRdKQdAvYPFeoNHcl0B9NbYhRtIalXltUl4wqyICqU51hQUjdct07RUVzezzWpvVo/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410234004210-QV3O3L08UHO2KWANDMPG/ke17ZwdGBToddI8pDm48kDAv91l_EVpAtt3T82Wm1m9Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGRdKQdAvYPFeoNHcl0B9NbYhRtIalXltUl4wqyICqU51hQUjdct07RUVzezzWpvVo/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410234004210-QV3O3L08UHO2KWANDMPG/ke17ZwdGBToddI8pDm48kDAv91l_EVpAtt3T82Wm1m9Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGRdKQdAvYPFeoNHcl0B9NbYhRtIalXltUl4wqyICqU51hQUjdct07RUVzezzWpvVo/image-asset.jpeg" data-image-dimensions="400x300" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e7694e4b0daae99956bf1" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1410222843213_113153">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1410222843213_113136">This is too large of a topic to go into depth on here, so I’ll give only a short summary. There’s a wonderful <a target="_blank" data-cke-saved-href="/s/unskilled_and_unaware.pdf" href="/s/unskilled_and_unaware.pdf">study on incompetence</a>&nbsp;that shows that people who are incompetent at a task (logic, humor, grammar, etc.) grossly overestimate their own ability at the task and are unable to detect expert performance in other people who actually are skilled at the task. The reason is that the very knowledge they lack to do the task is the same knowledge they need to evaluate themselves and others.</p>
+            <p>The result is that you will definitely have to deal with the loud complaints of incompetent people who are quite sure of themselves, and who might even have a well-developed tip-of-the-iceberg of reasoning, but no underside to their iceberg at all. I suggest somehow gaining enough authority that your vague feeling on a balance issue is able to trump their loud complaints. You might even try explaining why that is best for the game.</p>
+            <p>Several studies show that explaining yourself wrecks your intuition. If you see a person’s face, then must identify that person later in a lineup, you will do much better if you do NOT have to explain the face in detail beforehand. Your explanation is imperfect because the bandwidth of words is so narrow, yet your knowledge of the face is nuanced. The story you create about the face overwrites your actual knowledge and makes you perform worse in the lineup test. Other studies show that requring an explanation of thought process makes test subjects less able to come up with creative solutions for problems.</p>
+            <p id="yui_3_17_2_1_1410222843213_112780">While balancing Street Fighter, I had the luxury of not having to really explain myself to anyone, and that was a great advantage. Note that I happily <a data-cke-saved-href="/articles/sf" href="/articles/sf">explained everything</a> after the fact, but I’m talking about in the heat of development. If I wanted to try a balance idea, and I wasn’t exactly sure why I wanted to try it, I could. I did not need to convene a meeting and lay out a logical plan that people voted on. I could just do it, and test it.</p>
+            <p>There was a brief period of disaster where a new producer tried to track every single task I planned to do in the balancing process. I was reluctant to submit any list of future changes because every day, the landscape changed. Tomorrow I might learn how to implement something that I thought before was impossible to implement. The next day I might learn that a recent change removed the need for some other future change, based on playtest results. Every day, the thing I worked on was whatever thing I felt was most important that day.</p>
+            <p id="yui_3_17_2_1_1410222843213_112799">The agility that method allowed was amazing, and it's the only way I can imagine doing things. I think it’s pointless to track my work in the way that producer wanted to because doing so gives the overall project no advantage, while it damages my ability to draw on my intuition. Game balance has not been on the critical path of development on any game I’ve ever worked on, meaning there’s always some other thing that pushes out the ship date. In balancing, you keep doing it and doing it until someone says you have to ship.</p>
+            <p id="yui_3_17_2_1_1410222843213_112791">My advice to not explain yourself and to have the authority to ignore incompetent complainers unfortunately sounds like a recipe for creating an ego-centric dictatorship that ruins a project. Yet the best way to leverage intuition is to gain that kind of power on a project, and then not use it much. You want your subordinates to do their best jobs without having to explain every little thing to you either, after all. (Alternative: you could work at Valve where no one is anyone else's boss. Yeah really.)&nbsp;</p>
+            <h2>Conclusion</h2>
+            <p>Balancing a game when we know we can’t know how to play that game optimally is a deeply troubling problem. Logical analysis often fails at this type of complex problem because it doesn’t take into account all the nuances that our unconscious minds and intuitions can. To solve this balance problem, or any similar problem, we should build up a vast mental iceberg of knowledge and experience in the field. I don’t mean fake experience like working at a game company or getting your name listed in credits though, I mean real experience which only comes from effortful study. Use your own iceberg of knowledge in the form of intuition and seek out others with vast icebergs of knowledge and rely on their advice. Finally, somehow acquire enough power on a project that you don’t let your valid feelings about what to do get trumped by loud disagreement from incompetents and don’t let your intuition be destroyed by anyone who demands constant explanations of your every decision.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1410222843213_128872">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:2100.0px;"> 
+              <div style="padding-bottom:33.380950927734375%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410234962182-6I4RP64HT2OU5D0T9NL7/ke17ZwdGBToddI8pDm48kFr4L1SByBDndPxCinhXNPQUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dkc3F18UwMvsWD54m83kF660W_okZNd_If5nyERW5bhPZtJ3qR9G2BYeA0wOAaeYNg/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410234962182-6I4RP64HT2OU5D0T9NL7/ke17ZwdGBToddI8pDm48kFr4L1SByBDndPxCinhXNPQUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dkc3F18UwMvsWD54m83kF660W_okZNd_If5nyERW5bhPZtJ3qR9G2BYeA0wOAaeYNg/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1410234962182-6I4RP64HT2OU5D0T9NL7/ke17ZwdGBToddI8pDm48kFr4L1SByBDndPxCinhXNPQUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dkc3F18UwMvsWD54m83kF660W_okZNd_If5nyERW5bhPZtJ3qR9G2BYeA0wOAaeYNg/image-asset.jpeg" data-image-dimensions="2100x701" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="540e7a52e4b0d68e9de1d448" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div> <!--POST FOOTER--> 
+      <footer> 
+       <div class="meta"> 
+        <div class="first meta-row"> <span class="tags"><span class="tags-title">Tags</span> <a href="/articles/tag/set1" rel="tag">set1</a></span> 
+        </div> 
+        <div class="second meta-row"> <span class="sqs-simple-like" data-item-id="53e9cd54e4b0447dbee31e73" data-like-count="31"> <span class="like-icon"></span> <span class="like-count"></span> </span> 
+        </div> 
+       </div> 
+      </footer> 
+     </article> <!--PAGINATION--> 
+     <nav class="pagination clear"> <a class="prev-item" href="/articles/balancing-multiplayer-games-part-3-fairness">← Balancing Multiplayer Games, Part 3: Fairness</a><a class="next-item" href="/articles/playing-to-win">Playing to Win Overview →</a> 
+     </nav> <!-- COMMENTS --> 
+     <section id="comments-" class="comments-wrapper"> 
+      <div class="squarespace-comments" id="comments-53e9cd54e4b0447dbee31e73" data-item-id="53e9cd54e4b0447dbee31e73" data-public-comment-count="0" data-comment-state="2"></div> 
+     </section> 
+    </div> 
+    <aside id="sidebar">
+     <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Blog Sidebar" data-type="block-field" data-updated-on="1491168332520" id="sidebarBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1">
+        <div class="sqs-block search-block sqs-block-search" data-block-type="33" id="block-yui_3_10_1_1_1401522710068_7239">
+         <div class="sqs-block-content">
+          <div class="sqs-search-ui-text-input sqs-search-ui-button-wrapper color-dark" data-source="block" data-preview="false" data-collection=""> 
+           <div class="spinner-wrapper"></div> 
+           <input type="search" class="search-input" value="" placeholder="Search"> 
+          </div> 
+         </div>
+        </div>
+        <div class="sqs-block markdown-block sqs-block-markdown" data-block-type="44" id="block-yui_3_17_2_1_1406864496533_163579">
+         <div class="sqs-block-content">
+          <h4 data-preserve-html-node="true">Best of Sirlin.net</h4>
+         </div>
+        </div>
+        <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1406864496533_163676">
+         <div class="sqs-block-content">
+          <p><a href="/ptw">Playing to Win book</a></p>
+          <p><a href="/codex">Codex Design (23 Articles)</a><br><a href="/articles/designing-pandante">Designing Pandante</a><br><a href="/articles/blivand-design">Blivand Design</a><br><a href="/articles/designing-yomi">Designing Yomi</a><br><a href="/articles/game-balance-and-yomi">Game Balance and Yomi</a><br><a href="/articles/designing-puzzle-strike">Designing Puzzle Strike</a></p>
+          <p><a href="/articles/sf">Street Fighter HDR Articles</a><br><a href="/articles/balancing-puzzle-fighter">Balancing Puzzle Fighter</a></p>
+          <p><a href="/articles/solvability">Solvability</a><br><a href="/articles/slippery-slope-and-perpetual-comeback">Slippery Slope</a><br><a href="/articles/subtractive-design">Subtractive Design</a></p>
+          <p><span style="font-size:15px">Multiplayer Game Balance:</span><br><a href="/articles/balancing-multiplayer-games-part-1-definitions">Part 1: Definitions</a><br><a href="/articles/balancing-multiplayer-games-part-2-viable-options">Part 2: Viable Options</a><br><a href="/articles/balancing-multiplayer-games-part-3-fairness">Part 3: Fairness</a><br><a href="/articles/balancing-multiplayer-games-part-4-intuition">Part 4: Intuition</a><br><a target="_blank" href="/s/GDC-2009-sirlin-handout6.pdf"><span style="font-size:15px">Game Balance Handout</span></a></p>
+          <p>Tutorial Videos:<br><a href="/articles/street-fighter-tutorial-videos">Street Fighter Tutorial</a><br><a href="/articles/smash-bros-brawl-tutorial-videos">Smash Bros. Brawl Tutorial</a></p>
+          <p><a href="/article-archive">More articles...</a></p>
+         </div>
+        </div>
+        <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_2_1491167759049_17133">
+         <div class="sqs-block-content">
+          <!--
+<div class="section" id="chatbutton">
+                    <a class="btn btnChat" href='/' 
+ onclick='window.open("http://widget.mibbit.com/?channel=%23sirlin&nick=LameGuest_%3F%3F%3F&settings=84a6b1d147e4438f1f78873d04c9ebd4&customloading=waiting%20for%20the%20IRC-server%20...&autoConnect=0","","status=no, toolbar=no, menubar=no, location=no, width=999,height=555")' title="Stop by the community chat room">Chat</a>
+</div>
+--> 
+          <div class="section" id="chatbutton"> <a class="btn btnChat" href="https://discord.gg/Q3qrGUq" title="Stop by the community chat room">Chat</a> 
+          </div> 
+          <p> </p>
+          <div class="section" id="stayConnected"> 
+           <ul> 
+            <li><a class="btn btnTwt" href="http://twitter.com/SirlinGames" title="Follow Sirlin Games on Twitter"></a></li> 
+            <li><a class="btn btnFb" href="http://www.facebook.com/SirlinGames" title="Like Sirlin Games on Facebook"></a></li> 
+            <li><a class="btn btnTwitch" href="http://www.twitch.tv/sirlingames" title="Watch Sirlin Games on Twitch TV"></a></li> 
+            <li><a class="btn btnRss" href="http://sirlin.squarespace.com/?format=rss" title="Subscribe to the Sirlin.net RSS"></a></li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </aside> 
+   </section> 
+   <div class="extra-wrapper page-footer"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Footer Content: Articles" data-type="block-field" data-updated-on="1408693965564" id="page-footer-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <div class="page-divider"></div> 
+   <footer id="footer"> 
+    <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1410685816526" id="footerBlock">
+     <div class="row sqs-row">
+      <div class="col sqs-col-1 span-1">
+       <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-d3a95877fceaec72ddc3">
+        <div class="sqs-block-content">
+         <pre class="text-align-center"><a target="_blank" href="http://www.sirlingames.com">My tabletop games</a> | <a href="http://www.fantasystrike.com">My online games</a> | <a href="/ptw">Playing to Win</a> | <a href="/recommended-books">Recommended Books</a> | <a href="/about">About</a> | <a href="/contact">Contact</a></pre>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div id="socialLinks" class="social-links sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://www.facebook.com/SirlinGames" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+       </svg> 
+      </div> </a> <a href="https://twitter.com/Sirlin" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+       </svg> 
+      </div> </a> 
+    </div> 
+   </footer> 
+  </div> 
+  <div></div> 
+  <script src="https://static1.squarespace.com/static/ta/4fd1028ee4b02be53c65dfb3/1353/scripts/site-bundle.js" type="text/javascript"></script> 
+  <script type="text/javascript" data-sqs-type="imageloader-bootstrapper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none" data-usage="social-icons-svg">
+   <symbol id="facebook-icon" viewbox="0 0 64 64">
+    <path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+   </symbol><symbol id="facebook-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+   </symbol><symbol id="twitter-icon" viewbox="0 0 64 64">
+    <path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" />
+   </symbol><symbol id="twitter-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z" />
+   </symbol>
+  </svg>  
+ </body>
+</html>

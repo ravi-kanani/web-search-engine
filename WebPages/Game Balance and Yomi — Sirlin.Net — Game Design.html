@@ -1,0 +1,889 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US"> 
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- This is Squarespace. --><!-- sirlin --> 
+  <base href=""> 
+  <meta charset="utf-8"> 
+  <title>Game Balance and Yomi — Sirlin.Net — Game Design</title> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1407150974055-CY221FA56K86CJUX44RL/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico"> 
+  <link rel="canonical" href="http://www.sirlin.net/articles/game-balance-and-yomi"> 
+  <meta property="og:site_name" content="Sirlin.Net — Game Design"> 
+  <meta property="og:title" content="Game Balance and Yomi — Sirlin.Net — Game Design"> 
+  <meta property="og:latitude" content="40.68640015743611"> 
+  <meta property="og:longitude" content="-74.02857044306643"> 
+  <meta property="og:url" content="http://www.sirlin.net/articles/game-balance-and-yomi"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:description" content="I'll tell you two myths about game balance, then about how to measure balance with tier lists and matchup charts, and then about the long process of balancing Yomi over the years.  &nbsp;  Game Balance Myth 1: If it's too well balanced, it's boring.  &nbsp;  I understand where this one comes from. Game balanc"> 
+  <meta property="og:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53f1b338e4b06d4f65c4ec66/1430780255903/?format=1500w"> 
+  <meta property="og:image:width" content="800"> 
+  <meta property="og:image:height" content="450"> 
+  <meta itemprop="name" content="Game Balance and Yomi — Sirlin.Net — Game Design"> 
+  <meta itemprop="url" content="http://www.sirlin.net/articles/game-balance-and-yomi"> 
+  <meta itemprop="description" content="I'll tell you two myths about game balance, then about how to measure balance with tier lists and matchup charts, and then about the long process of balancing Yomi over the years.  &nbsp;  Game Balance Myth 1: If it's too well balanced, it's boring.  &nbsp;  I understand where this one comes from. Game balanc"> 
+  <meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53f1b338e4b06d4f65c4ec66/1430780255903/?format=1500w"> 
+  <link rel="image_src" href="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53f1b338e4b06d4f65c4ec66/1430780255903/?format=1500w"> 
+  <meta itemprop="image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53f1b338e4b06d4f65c4ec66/1430780255903/?format=1500w"> 
+  <meta itemprop="author" content="David Sirlin"> 
+  <meta itemprop="datePublished" content="2014-08-20T01:31:00-0700"> 
+  <meta itemprop="headline" content="Game Balance and Yomi"> 
+  <meta itemprop="publisher" content="Sirlin.Net — Game Design"> 
+  <meta name="twitter:title" content="Game Balance and Yomi — Sirlin.Net — Game Design"> 
+  <meta name="twitter:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53f1b338e4b06d4f65c4ec66/1430780255903/?format=1500w"> 
+  <meta name="twitter:url" content="http://www.sirlin.net/articles/game-balance-and-yomi"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="I'll tell you two myths about game balance, then about how to measure balance with tier lists and matchup charts, and then about the long process of balancing Yomi over the years.  &nbsp;  Game Balance Myth 1: If it's too well balanced, it's boring.  &nbsp;  I understand where this one comes from. Game balanc"> 
+  <meta name="description" content=""> 
+  <script type="text/javascript" src="//use.typekit.net/ik/au4t79rroqWoEa7xdWAV5Rg1u2QKPWEFWo-obOQO2nMfel92fFHN4UJLFRbh52jhWD93ZRIXZ2wuZQsKwebaweBKFAZRFejkFgT0HKoD-W4C-At0SaBujW48Sagyjh90jhNlOeUzjhBC-eNDifUD-W4C-At0dcmXOYFTScUTdKoDSWmyScmDSeBRZPoRdhXCiaiaO1FTScUTdKo0ZWbCiaiaO1FTScUTdKoDSWmyScmDSeBRZPoRdhXK2YgkdayTdAIldcNhjPJ4Z1mXiW4yOWgXH6qJ73IbMg6gJMJ7fbKCMsMMeMC6MKG4f5J7IMMjMkMfH6qJtkGbMg6FJMJ7fbKzMsMMeMb6MKG4fOMgIMMj2KMfH6GJCwbgIMMjgPMfH6GJCSbgIMMj2kMfH6qJnbIbMg6eJMJ7fbK0MsMMegM6MKG4fJCgIMMjgkMfH6qJRMIbMg6sJMJ7fbKTMsMMeM66MKG4fHGgIMMjIKMfH6qJKbIbMg64JMJ7fbKHMsMMegw6MKG4fJZmIMIjMkMfH6qJ6u9bMs6FJMJ7fbKImsMgeMb6MKG4fJmmIMIj2KMfH6qJxubbMs6BJMJ7fbKMmsMgeMv6MKG4fJBmIMIjgkMfH6qJ689bMs6sJMJ7fbKYmsMgeM66MKG4fJymIMIjIKMfqMYEhzRggb.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin:700,700italic|Oswald:400|Rosarivo:400italic"> 
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script> 
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].css = ["//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css">
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/performance-05c26a7ba97ad91a6081b-min.en-US.js" defer></script>
+  <script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/announcement-bar-e2fbe92a3604cd7ec3932-min.en-US.js"},"squarespace-audio-player":{"css":"//assets.squarespace.com/universal/styles-compressed/audio-player-52bdd87acccf92a19703e60e09c654bd-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/audio-player-991e7e1c1b3308738ed15-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-342036262b204974aa269-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-4d22db9ba7880e24bcd44-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-51aceea076ad0ff8aa83b-min.en-US.js"},"squarespace-comments":{"css":"//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/comments-e64031ca98dbe63037354-min.en-US.js"},"squarespace-commerce-cart":{"js":"//assets.squarespace.com/universal/scripts-compressed/commerce-cart-574df707b74266010398b-min.en-US.js"},"squarespace-dialog":{"css":"//assets.squarespace.com/universal/styles-compressed/dialog-afeb96ba160fb642a2d98c892a956065-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/dialog-768dfc6a3d9f6ada6cb79-min.en-US.js"},"squarespace-events-collection":{"css":"//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/events-collection-f75316a66b099d806a536-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-fde3933cf0271ba5b3f63-min.en-US.js"},"squarespace-forms":{"css":"//assets.squarespace.com/universal/styles-compressed/forms-d21f3e517c32f4caba9f220beea0666d-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/forms-24ee632e09d923de05536-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-e23ee315df466f1dba9ec-min.en-US.js"},"squarespace-image-zoom":{"css":"//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/image-zoom-5a660e03e667b16c7a076-min.en-US.js"},"squarespace-pinterest":{"css":"//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/pinterest-4725f00d98ee2610ca950-min.en-US.js"},"squarespace-popup-overlay":{"css":"//assets.squarespace.com/universal/styles-compressed/popup-overlay-e984c5797664760d617b07bce15392a1-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/popup-overlay-07ab56995128d252d7025-min.en-US.js"},"squarespace-product-quick-view":{"css":"//assets.squarespace.com/universal/styles-compressed/product-quick-view-3fa8fd4df0755e7a7878e60166ca3d61-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/product-quick-view-cc9a2874f8c4b6a3f27e6-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-828c2fbae302bd3e4fe16-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-f260a4594424060b57c10-min.en-US.js"},"squarespace-search-page":{"css":"//assets.squarespace.com/universal/styles-compressed/search-page-207da8872118254c0a795bf9b187c205-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/search-page-a3d76808795360256a5a6-min.en-US.js"},"squarespace-search-preview":{"js":"//assets.squarespace.com/universal/scripts-compressed/search-preview-9acb915547fb6c41d5a99-min.en-US.js"},"squarespace-share-buttons":{"js":"//assets.squarespace.com/universal/scripts-compressed/share-buttons-b7c8ee26ec3639fa3da50-min.en-US.js"},"squarespace-simple-liking":{"css":"//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/simple-liking-89bbd9e8e108b969eb994-min.en-US.js"},"squarespace-social-buttons":{"css":"//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/social-buttons-547a9a0004ff7f9768043-min.en-US.js"},"squarespace-tourdates":{"css":"//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/tourdates-69d260a4100c302369d4e-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-43724a83fe4cb8b953146-min.en-US.js"}},"pageType":50,"website":{"id":"50f14d35e4b0d70ab5fc4f24","identifier":"sirlin","websiteType":1,"contentModifiedOn":1564017090920,"cloneable":false,"siteStatus":{},"language":"en-US","timeZone":"America/Los_Angeles","machineTimeZoneOffset":-25200000,"timeZoneOffset":-25200000,"timeZoneAbbr":"PDT","siteTitle":"Sirlin.Net \u2014 Game Design","fullSiteTitle":"Game Balance and Yomi \u2014 Sirlin.Net \u2014 Game Design","siteDescription":"<p>Site description goes here.</p>","location":{"mapZoom":11.0,"mapLat":40.68640015743611,"mapLng":-74.02857044306641,"addressTitle":"","addressLine1":"","addressLine2":"","addressCountry":""},"logoImageId":"538a6c53e4b07541307ca12b","shareButtonOptions":{},"logoImageUrl":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","authenticUrl":"http://www.sirlin.net","internalUrl":"http://sirlin.squarespace.com","baseUrl":"http://www.sirlin.net","primaryDomain":"www.sirlin.net","socialAccounts":[{"serviceId":2,"userId":"759231843","userName":"david.sirlin","screenname":"Sirlin Games","addedOn":1401585908216,"profileUrl":"http://www.facebook.com/SirlinGames","iconUrl":"http://graph.facebook.com/759231843/picture?type=square","metaData":{"service":"facebook"},"iconEnabled":true,"serviceName":"facebook"},{"serviceId":4,"userId":"64127998","userName":"Sirlin","screenname":"David Sirlin","addedOn":1416883541216,"profileUrl":"https://twitter.com/Sirlin","iconUrl":"http://pbs.twimg.com/profile_images/2194481794/pic4b_normal.jpg","collectionId":"5473ed55e4b029492ac9d740","iconEnabled":true,"serviceName":"twitter"}],"typekitId":"","statsMigrated":true,"imageMetadataProcessingEnabled":false,"screenshotId":"57e6e910","showOwnerLogin":false},"websiteSettings":{"id":"50f14d35e4b0d70ab5fc4f25","websiteId":"50f14d35e4b0d70ab5fc4f24","type":"Business","subjects":[{"systemSubject":"other","otherSubject":"Design/Art"},{"systemSubject":"design"}],"country":"US","state":"CA","simpleLikingEnabled":true,"mobileInfoBarSettings":{"style":1,"isContactEmailEnabled":true,"isContactPhoneNumberEnabled":true,"isLocationEnabled":true,"isBusinessHoursEnabled":true},"announcementBarSettings":{"style":1,"text":"<p>test announcement is&nbsp;here, this is it.</p>","clickthroughUrl":{"url":"http://www.cnn.com","newWindow":true}},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":true,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":false,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"storeSettings":{"returnPolicy":"","termsOfService":"","privacyPolicy":"","expressCheckout":true,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"currenciesSupported":["USD","AUD","CAD","CHF","EUR","GBP"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"orderConfirmationInjectCode":"","showCustomCheckoutForm":false,"enableMailingListOptInByDefault":true,"sameAsRetailLocation":false,"merchandisingSettings":{"scarcityEnabledOnProductItems":false,"scarcityEnabledOnProductBlocks":false,"scarcityMessageType":"DEFAULT_SCARCITY_MESSAGE","scarcityThreshold":10,"multipleQuantityAllowedForServices":true,"restockNotificationsEnabled":false,"restockNotificationsMailingListSignUpEnabled":false,"relatedProductsEnabled":false,"relatedProductsOrdering":"random","soldOutVariantsDropdownDisabled":false},"isLive":true,"multipleQuantityAllowedForServices":true},"useEscapeKeyToLogin":true,"trialAssistantEnabled":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled","size":"small","shape":"rect","color":"white"},"ampEnabled":false},"cookieSettings":{"isCookieBannerEnabled":false,"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false,"cookieBannerText":"","cookieBannerTheme":"","cookieBannerVariant":"","cookieBannerPosition":"","cookieBannerCtaVariant":"","cookieBannerCtaText":""},"websiteCloneable":false,"collection":{"title":"Articles","id":"53ded0ace4b0ec2792626d72","fullUrl":"/articles","type":1},"item":{"title":"Game Balance and Yomi","id":"53f1b338e4b06d4f65c4ec66","fullUrl":"/articles/game-balance-and-yomi","publicCommentCount":0,"commentState":2,"recordType":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"TGutter":"3%","TMaxWidth":"300","TPerRow":"3","gallery-auto-play":"false","galleryPlaySpeed":"3.0","hide-thumbnail-titles":"true","outerPadding":"75px","pagePadding":"30px","product-gallery-auto-crop":"false","product-image-auto-crop":"true","thumbnail-layout":"Basic Grid","topPadding":"10px","tweak-v1-related-products-title-spacing":"50px"},"templateId":"4fd11f32c4aad9b01c9e624c","templateVersion":"7","pageFeatures":[1,2,4],"gmRenderKey":"QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4","betaFeatureFlags":["ORDERS-SERVICE-check-digital-good-access-with-service","ORDERS-SERVICE-reset-digital-goods-access-with-service","ORDER_SERVICE-submit-subscription-order-through-service","ORDER_SERVICE-submit-reoccurring-subscription-order-through-service","dg_downloads_from_fastly","generic_iframe_loader_for_campaigns","donations_customer_accounts","product-retriever-v2-enabled","domain_registration_via_registrar_service","domain_locking_via_registrar_service","domain_deletion_via_registrar_service","domain_info_via_registrar_service","content_item_settings","seven_one_image_overlay_opacity","commerce_restock_notifications","newsletter_block_captcha","new_billing_system","gallery_settings_71","commerce_onboarding_wizard","seven_one_portfolio_hover_layouts","commerce_onboarding_wizard_phase_two","domains_allow_async_gsuite"],"yuiEliminationExperimentList":[{"name":"statsMigrationJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"ContributionConfirmed-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"TextPusher-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MenuItemWithProgress-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"billingNewsletters-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"imageProcJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"QuantityChangePreview-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CompositeModel-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"HasPusherMixin-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"INACTIVE"},{"name":"ProviderList-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MediaTracker-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"pushJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"internal-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"BillingPanel-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"PopupOverlayEditor-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CoverPagePicker-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"}],"impersonatedSession":false,"tzData":{"zones":[[-480,"US","P%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}}};</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://www.sirlin.net/articles?format=rss"> 
+  <script type="application/ld+json">{"url":"http://www.sirlin.net","name":"Sirlin.Net \u2014 Game Design","description":"<p>Site description goes here.</p>","image":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <script type="application/ld+json">{"name":"Game Balance and Yomi \u2014 Sirlin.Net \u2014 Game Design","url":"http://www.sirlin.net/articles/game-balance-and-yomi","datePublished":"2014-08-20T01:31:00-0700","headline":"Game Balance and Yomi","author":"David Sirlin","publisher":{"name":"Sirlin.Net \u2014 Game Design","logo":{"@type":"ImageObject","url":"https://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/"},"@context":"http://schema.org","@type":"Organization"},"image":"http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53f1b338e4b06d4f65c4ec66/1430780255903/?format=1500w","@context":"http://schema.org","@type":"Article"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=4"/><![endif]--> <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]--> <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&amp;filterFeatures=false"><!-- <![endif]--> 
+  <script type="text/javascript">
+  var ShopifyStoreConfig = {shop:"sirlin.myshopify.com", collections:[8156021]};
+  (function() {
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; 
+    s.src = "http://widgets.shopifyapps.com/assets/shopifystore.js";
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();  
+</script> 
+  <noscript>
+   Please enable javascript, visit the &lt;a href="http://sirlin.myshopify.com"&gt;Sirlin Games Tabletop Store.
+  </noscript> <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53dddd843aed3211"></script> <!--Share This --> 
+  <script type="text/javascript">var switchTo5x=true;</script> 
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script> 
+  <script type="text/javascript">stLight.options({publisher: "63e23d4f-8cab-4d21-ba0d-bbfb30801340", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script> <!--Shareaholic
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+    var shr = document.createElement('script');
+    shr.setAttribute('data-cfasync', 'false');
+    shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+    shr.type = 'text/javascript'; shr.async = 'true';
+    shr.onload = shr.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      var site_id = 'f85ba2f3bf2982871221fa38b75a6419';
+      try { Shareaholic.init(site_id); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(shr, s);
+  })();
+//]]>
+</script>
+-->
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script> 
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-776666-1', 'auto');ga('send', 'pageview');</script><!-- End of Squarespace Headers --> 
+ </head> 
+ <body class="blog-sidebar-display-right index-thumb-title-position-below index-item-layout-auto thumbnail-layout-basic-grid thumbnails-on-open-page-show-all hide-thumbnail-titles  layout-style-center page-borders-dotted  gallery-page-controls-tiny-thumbnails  social-icon-style-normal  hide-social-icons     event-thumbnails event-thumbnail-size-32-standard event-date-label event-date-label-time event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts  event-item-back-link    product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing tweak-v1-related-products-image-aspect-ratio-11-square tweak-v1-related-products-details-alignment-center newsletter-style-dark  opentable-style-light small-button-style-solid small-button-shape-rounded medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-square tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd collection-53ded0ace4b0ec2792626d72 view-item collection-type-blog collection-layout-default mobile-style-available logo-image has-primary-nav" id="item-53f1b338e4b06d4f65c4ec66"> 
+  <div id="canvas"> 
+   <div id="mobileNav" class=""> 
+    <div id="mobileNavWrapper" class="wrapper"> 
+     <nav class="main-nav mobileNav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=" external-link"> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </div> 
+   <div id="mobileMenuLink">
+    <a>Menu</a>
+   </div> 
+   <header id="header"> 
+    <div id="logo" data-content-field="site-title"> 
+     <h1 class="logo"><a href="/"><img src="//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/?format=1000w" alt="Sirlin.Net — Game Design"></a></h1> 
+    </div> 
+    <script>
+        Y.use('squarespace-ui-base', function(Y) {
+          Y.all("#header .logo, #header .logo-subtitle").each(function (text) {
+            text.plug(Y.Squarespace.TextShrink, {
+              parentEl: Y.one('#header'),
+              triggerWidth: 750
+            });
+          });
+        });
+
+        // Show spinner on page load if loading bookmarked url
+        if (window.location.hash && window.location.hash !== '#') {
+          document.querySelector('body').className += ' index-loading';
+        }
+      </script> 
+    <div id="topNav" data-content-field="navigation"> 
+     <nav class="main-nav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=""> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </header> 
+   <div class="page-divider"></div> 
+   <div class="extra-wrapper page-header"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Header Content: Articles" data-type="block-field" id="page-header-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <section id="page" role="main" data-content-field="main-content"> <!-- CATEGORY NAV --> 
+    <div class="article-wrapper"> 
+     <article class="hentry tag-set1 author-david-sirlin post-type-text" id="article-53f1b338e4b06d4f65c4ec66" data-item-id="53f1b338e4b06d4f65c4ec66"> <!--SPECIAL CONTENT--> <!--POST HEADER--> 
+      <header> 
+       <h1 class="entry-title"> <a href="/articles/game-balance-and-yomi" data-content-field="title">Game Balance and Yomi</a> </h1> 
+       <div class="meta"> <span class="date"><time class="published" datetime="2014-08-20">August 20, 2014</time></span> 
+       </div> 
+      </header> <!--POST BODY--> 
+      <div class="body entry-content">
+       <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1408350669533" id="item-53f1b338e4b06d4f65c4ec66">
+        <div class="row sqs-row">
+         <div class="col sqs-col-12 span-12">
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-aea913f324c6de96fb16">
+           <div class="sqs-block-content">
+            <p>I'll tell you two myths about game balance, then about how to measure balance with tier lists and matchup charts, and then about the long process of balancing Yomi over the years.</p>
+            <p>&nbsp;</p>
+            <blockquote>
+             Game Balance Myth 1: If it's too well balanced, it's boring.
+            </blockquote>
+            <p>&nbsp;</p>
+            <p>I understand where this one comes from. Game balance is really hard, so if you had a cast of characters (or RTS races, or card decks, or whatever) and some of them were too good vs other ones, what should you do? The easiest thing is to smooth out anything that's&nbsp;too different from everything else. Make things more and more homogeneous until it's fair. Yeah that's one approach, but it makes things boring because you're losing out on the fun asymmetry is supposed to offer. The harder way is to try to preserve as much asymmetry as possible AND to make it fair. When we do things the hard way, the good way, it doesn't make things boring. Furthermore, balanced just means the matchups are fair. It doesn't say anything about the dynamics of how interesting the game is. A balanced game could be boring or interesting and if you had a really interesting game, it's better if it's balanced well than if it isn't.</p>
+            <p>&nbsp;</p>
+            <blockquote>
+             Game Balance Myth 2: Sirlin only cares about balance.
+            </blockquote>
+            <p>&nbsp;</p>
+            <p>From the outside, I can see why someone would think that because I work on games that require a lot of balance work. But the testers who work with me would laugh at this. I'm the one always pushing back on balance changes because other things are more important: good flavor (mechanics expressing the right personality), good dynamics, and elegance. I want fewer words, fewer elements, things to be as simple as we can get away with, and for characters to feel right. If you allow balance to rank higher than those things, you get a terrible feeling game. You get stuff like the huge guy made of rock having fewer hit points than the young ninja girl. If you make only balance changes that respect all the constraints I mentioned, it's hard work but you can still have a balanced game.</p>
+            <h2>Measuring Balance</h2>
+            <p>At first, I think it's best to get tier lists from testers. That where they put all the characters in a few tiers (groups) to say which characters are all pretty much tied for strongest, which are tied for next strongest, etc. The goal isn't to eliminate tiers, because even you had a 100.00% perfectly magically balanced game, testers would still say there are tiers because of their imperfect perceptions, and that's fine. Tiers help you get a sense of what's going on with balance though.</p>
+            <p>A helpful format is:</p>
+            <p><strong>God Tier (S rank)</strong>. Any character here is brokenly good, above the maximum level that should be allowed, and obsoletes the other characters.<br><strong>Top Tier (A rank)</strong>. The group of strongest characters. Being here doesn't mean there's any problem.<br><strong>Mid Tier (B rank)</strong>. These characters are noticeably weaker than the top tier, but still very useable.<br><strong>Bottom Tier (C rank)</strong>. These characters are noticeably weaker than the mid tier. They are still useable.<br><strong>Garbage Tier (F rank)</strong>. Any character here is too weak to bother with. Something really went wrong and they need a boost to become a real part of the game again.</p>
+            <p>Players are going to disagree and argue, but there will also be some low-hanging fruit here. Even if everyone is arguing about whether CharacterX is high or mid, they might pretty much all agree that CharacterY is garbage or CharacterZ is God tier. The first thing to fix here is to nerf anything in God tier (since even a single thing there ruins the game). The next thing is to buff anything in garbage tier. After that, try to compress the tiers so that being a tier below only means you're barely worse, not like hugely worse.</p>
+            <h2>Matchup Charts</h2>
+            <p>The next level of zooming in on balance is a matchup chart. (I think many asymmetric games don't even do this part?) That's where you create a grid of every character vs every character and then give a rating to how difficult the matchup is. The notation is stuff like 6-4 or 7-3 which means if two experts played 10 games, we expect the expert using CharacterA to win 6 (and opponent using CharacterX wins 4), for example.</p>
+            <p>It's actually best not to use numerical data to determine these numbers. Yes, really. It's faster and more accurate to get to the bottom of things by relying on expert opinions, and then having those experts argue and then play each other to sort out disagreements. Think of matchup chart numbers as a kind of shorthand for this:</p>
+            <p><strong>10-0</strong>. Not possible to lose when you play how you should, which you can always do.<br><strong>9-1</strong>. Horrifically bad matchup. Impossible to lose unless something very unlucky happens.<br><strong>8-2</strong>. Really hard for the other player. Multiple "miracles" required each game for the disadvantaged player to win.<br><strong>7-3</strong>. Very hard for the other player. Clear disadvantage for them, but they can still win.<br><strong>6-4</strong>. Somewhat advantage for you. Pretty close overall.<br><strong>5.5-4.5.</strong> Very close match, but you can slightly detect an advantage.<br><strong>5-5</strong>. No advantage to either character.</p>
+            <p>I want to emphasize just how important it is to get expert opinions on this, rather than adding up numbers from matches. Experts can get a good sense of what's going on in a match much, much sooner than data will reflect. I mean like months or years sooner, even. Imagine two experts played a certain matchup 20 times and the more they played, the more unfair it got. In our example, there is a certain way of playing that the other character just can't deal with and both players are coming to realize that truth more and more. It's entirely possible that they (correctly!) declare it an 8-2 matchup even though their results are no where near that bad. Lots of their games were played before they fully understood what's going on. And if we lump in the data from anyone other than experts, it's likely to be worse than ignoring it because they probably aren't playing the match well enough.</p>
+            <p>With 20 characters, that's 210 matchups (190 non-mirror matchups) so if every non-mirror matchup was played 20 times, that's 3,800 games. Wow is that a lot to even do a first pass with the numerical method. And you get extremely bad data if you do. Let's say a matchup is really 5-5 and you're lucky enough to have found two expert players of those characters with about equal skill. The chance that result will be 10 games to 10 is just 18%. Finding catastrophically wrong results (the chance of a player winning 14 games or more, indicating a 7-3 MU or worse) is 12%. You're really better off just asking the experts, letting them argue, and letting them sort it out by playtesting, and that's what we do. Also, game balance changes a lot during development and the intuition of experts can keep up with that, but a numerical method would need to keep starting from scratch after every change. That happens hundreds of times.</p>
+            <p>That said, if you like numerical analysis of balance, there's like 35,000 games played in the dataset for the posts about Yomi <a href="http://www.sirlin.net/blog/2011/6/13/yomi-online-rankings.html">Season 1</a> and <a href="http://www.sirlin.net/blog/2011/12/8/yomi-season-2-ends-season-3-begins.html">Season 2</a> online rankings. (And many more than that since then.)</p>
+            <p>Here's Yomi's matchup chart as of today. Of course it slightly changes as players gain more and more understanding, but it's fairly stable:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408350771174_54610">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:853.0px;"> 
+              <div style="padding-bottom:42.086753845214844%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408350990994-0RH2B44QGLZMS6AV3MGS/ke17ZwdGBToddI8pDm48kDfYl1Fc3588uQAKx_S_4B1Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI2jQLz_ynEF_PoX_tv0DK2-0euo8543GYk0gq0QGLvks/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408350990994-0RH2B44QGLZMS6AV3MGS/ke17ZwdGBToddI8pDm48kDfYl1Fc3588uQAKx_S_4B1Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI2jQLz_ynEF_PoX_tv0DK2-0euo8543GYk0gq0QGLvks/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408350990994-0RH2B44QGLZMS6AV3MGS/ke17ZwdGBToddI8pDm48kDfYl1Fc3588uQAKx_S_4B1Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI2jQLz_ynEF_PoX_tv0DK2-0euo8543GYk0gq0QGLvks/image-asset.png" data-image-dimensions="853x359" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="53f1bb0ee4b06ae6d5b17070" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408350771174_54821">
+           <div class="sqs-block-content">
+            <p>This chart currently has 0 matchups of 7-3 or worse anywhere in the 210 matchups. The highest point total of any character is only +6.5 with a cast of 20, and the lowest is only -6. To put it into perspective, I'm not aware of any asymmetric game with 10+ sides that is even close to that. Let's develop some perspective about these kinds of numbers by looking at other games.</p>
+            <h3>Japanese Super Turbo Street Fighter chart, Arcadia (<a target="_blank" data-cke-saved-href="http://curryallergy.blogspot.com/2008/11/super-turbo-new-arcadia-diagram.html" href="http://curryallergy.blogspot.com/2008/11/super-turbo-new-arcadia-diagram.html">source</a>)</h3>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_20867">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:570.0px;"> 
+              <div style="padding-bottom:63.85964584350586%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351179747-H24ZV2A9BWCQO4KOIITI/ke17ZwdGBToddI8pDm48kA4NjuJci1rmYg5B27faxg9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwcsJhtlQXOmiB0fBAvNrCMc61LAUi4WSQZDqFfClmXmfSE_f4taY8HM9f80vZgUFM/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351179747-H24ZV2A9BWCQO4KOIITI/ke17ZwdGBToddI8pDm48kA4NjuJci1rmYg5B27faxg9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwcsJhtlQXOmiB0fBAvNrCMc61LAUi4WSQZDqFfClmXmfSE_f4taY8HM9f80vZgUFM/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351179747-H24ZV2A9BWCQO4KOIITI/ke17ZwdGBToddI8pDm48kA4NjuJci1rmYg5B27faxg9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwcsJhtlQXOmiB0fBAvNrCMc61LAUi4WSQZDqFfClmXmfSE_f4taY8HM9f80vZgUFM/image-asset.png" data-image-dimensions="570x364" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="53f1bbcbe4b0337c7d39544d" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_21155">
+           <div class="sqs-block-content">
+            <p>Note that this chart doesn't even have the character O.Sagat in it. It really should to give a more accurate picture, because O.Sagat is undeniably top tier and has a ton of extremely lopsided matchups. The US version of this chart puts him at +30. Even without those lopsided matchups that aren't in the chart, the top character here has a whopping +27 point total advantage, and the bottom character has a huge -22.5 point total disadvantage. That's with a game with 16 characters, so having more than +16 or -16 is pretty big. This is a from a beloved tournament game that's been played almost 20 years now and is considered pretty balanced. Balance is hard.</p>
+            <h3>SF HD Remix Consensus Chart (<a data-cke-saved-href="http://forums.shoryuken.com/discussion/93569/consensus-matchup-chart" href="http://forums.shoryuken.com/discussion/93569/consensus-matchup-chart">source</a>)</h3>
+            <p>Here's a matchup chart for SF HD Remix. I was in charge of that game, and we improved on the balance of Super Turbo Street Fighter by making very specific tweaks based on the decade+ of tournaments for ST.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_34525">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:654.0px;"> 
+              <div style="padding-bottom:44.49541091918945%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351227122-PLISZ4FDFWDGBGNEAHKC/ke17ZwdGBToddI8pDm48kETof_22ySgF_rmZWq2jFFFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxz2lFjAcX4c_NYzbdiWRAYuIQ_gKr6rwa6FGHSe8FikFAOWGB8_aj3B-fdXwRFIgA/hd_remix_matchup_srk.png" alt="hd_remix_matchup_srk.png">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351227122-PLISZ4FDFWDGBGNEAHKC/ke17ZwdGBToddI8pDm48kETof_22ySgF_rmZWq2jFFFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxz2lFjAcX4c_NYzbdiWRAYuIQ_gKr6rwa6FGHSe8FikFAOWGB8_aj3B-fdXwRFIgA/hd_remix_matchup_srk.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351227122-PLISZ4FDFWDGBGNEAHKC/ke17ZwdGBToddI8pDm48kETof_22ySgF_rmZWq2jFFFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxz2lFjAcX4c_NYzbdiWRAYuIQ_gKr6rwa6FGHSe8FikFAOWGB8_aj3B-fdXwRFIgA/hd_remix_matchup_srk.png" data-image-dimensions="654x291" data-image-focal-point="0.5,0.5" alt="hd_remix_matchup_srk.png" data-load="false" data-image-id="53f1bbfbe4b0fe85d162ebb2" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_34809">
+           <div class="sqs-block-content">
+            <p>So here, the top characters are +10 overall while the bottom is&nbsp;-16.5. (I actually really disagree with the bottom 5 characters' matchups there, all of them are generally more favorable than that chart says and I think the players polled there had not yet adapted to the many new tools of those characters).</p>
+            <h3>Street Fighter 3: 3rd Strike's matchup chart, according to Japanese players (<a href="http://wiki.shoryuken.com/Street_Fighter_3:_3rd_Strike">source</a>).</h3>
+            <p>(It's very similar to the US matchup chart).&nbsp;</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_39031">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:555.0px;"> 
+              <div style="padding-bottom:89.36936950683594%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351243963-QUJFGTBRKGN514N0Y1CM/ke17ZwdGBToddI8pDm48kKObRKrRIWe7C1OIc7YLnFFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxjICsvI6P128ByJaZRaOOGjO31C5_KLohfukIdtLrpWdaMyDc-7PtXnGjDvjRE-6c/ThridStrikeDiagramCropped2.jpg" alt="ThridStrikeDiagramCropped2.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351243963-QUJFGTBRKGN514N0Y1CM/ke17ZwdGBToddI8pDm48kKObRKrRIWe7C1OIc7YLnFFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxjICsvI6P128ByJaZRaOOGjO31C5_KLohfukIdtLrpWdaMyDc-7PtXnGjDvjRE-6c/ThridStrikeDiagramCropped2.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351243963-QUJFGTBRKGN514N0Y1CM/ke17ZwdGBToddI8pDm48kKObRKrRIWe7C1OIc7YLnFFZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxjICsvI6P128ByJaZRaOOGjO31C5_KLohfukIdtLrpWdaMyDc-7PtXnGjDvjRE-6c/ThridStrikeDiagramCropped2.jpg" data-image-dimensions="555x496" data-image-focal-point="0.5,0.5" alt="ThridStrikeDiagramCropped2.jpg" data-load="false" data-image-id="53f1bc0be4b097fb5adac03e" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_39311">
+           <div class="sqs-block-content">
+            <p>Oh my, the top character is +32 points and bottom is -36 in a game with only 19 characters. Well that's incredibly bad.</p>
+            <h3>More Than Just The Total</h3>
+            <p>Even though so far I've only mentioned the overall point spread, it's important to point out that's not actually a good indicator. That just gives you a really zoomed out view of the whole thing, so a very bad overall spread does tell you something, but looking more closely can tell you a lot more. Do any characters have no bad matchups? What percentage of the chart is made up of lopsided matchups? Like imagine a game where the top character is +0 and bottom character is -0, but all matchups are 8-2. That's a pretty badly balanced game because every single matchup is incredibly unfair, lol. So you have to look past the overall totals. Lots of effort in the development of Street Fighter HD Remix was to specifically correct many of the bad matchups, and it worked out very well (example improved matchups: Guile vs. Dhalsim, Cammy vs. Blanka, Cammy or Fei Long vs Honda, Zangief vs. Vega, Everyone vs. O.Sagat.)</p>
+            <h3>Guilty Gear Accent Core</h3>
+            <p>For another example of looking at specific matchups, check out <strong>GGXX Accent Core</strong>. Here's Ogawa's ratings for the character Eddie as of July 2009 in Arcadia Magazine. Ogawa is the best player in the world of Eddie.</p>
+            <p><strong>6-4</strong> – Sol, Ky, May, Millia, Chipp, Faust, Baiken, Axl, Venom, Testament, Slayer, I-No, Bridget, Robo, Anji, Jam<br><strong>6.5-3.5</strong> – Zappa, Dizzy<br><strong>7-3</strong> – Potemkin, Johnny, A.B.A, Order-Sol<br>In other words, out of 17 non-mirror matchups, Eddie has four 7-3s and no matchup at all worse than 6-4. That's considered "way way too powerful."</p>
+            <p>"But these are all fighting games," you say. Fighting games are good source of data for asymmetric games with lots of characters. They give you a sense of what kind of balance or imbalance is still ok. But let's look at some card games now.</p>
+            <h3>Summoner Wars</h3>
+            <p>This chart is only for the first 10 factions, compiled from tournament players (<a data-cke-saved-href="https://docs.google.com/spreadsheets/d/1uYcRAxr-0tEFH7z3kf4goWPlpTKE4JVuNwWdwFjBIGA/edit#gid=0" href="https://docs.google.com/spreadsheets/d/1uYcRAxr-0tEFH7z3kf4goWPlpTKE4JVuNwWdwFjBIGA/edit#gid=0">source</a>):</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_43442">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:371.0px;"> 
+              <div style="padding-bottom:51.21293640136719%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351267929-XGKWIK55JJDUKNGJ49HG/ke17ZwdGBToddI8pDm48kN39onVXFkfXiV0wQjf_SqtZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVHk-5wDCqJ2u8Cqz2tsNg0NimCpKQAEYKko5CK1XxVs05uG45vQwBxdpDrCGUSSl5w/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351267929-XGKWIK55JJDUKNGJ49HG/ke17ZwdGBToddI8pDm48kN39onVXFkfXiV0wQjf_SqtZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVHk-5wDCqJ2u8Cqz2tsNg0NimCpKQAEYKko5CK1XxVs05uG45vQwBxdpDrCGUSSl5w/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351267929-XGKWIK55JJDUKNGJ49HG/ke17ZwdGBToddI8pDm48kN39onVXFkfXiV0wQjf_SqtZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVHk-5wDCqJ2u8Cqz2tsNg0NimCpKQAEYKko5CK1XxVs05uG45vQwBxdpDrCGUSSl5w/image-asset.png" data-image-dimensions="371x190" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="53f1bc23e4b0880c7d519881" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_43718">
+           <div class="sqs-block-content">
+            <p>This chart used to have 36% of non-mirror matchups as 7-3 or worse. As of today, it's only 22% of non-mirror matchups at 7-3 or worse, so I guess some new gameplay tech was figured out in some matchups. That's sort of an unfortunate number of bad matchups still though. And +13 is pretty high for only 10 sides, but it's not as bad as +30 with 16 characters or +32 with 19 characters that we saw in other games, above.</p>
+            <h3>Magic: the Gathering</h3>
+            <p>I actually can't find data on this, but I would LOVE to see a matchup chart of the top 10 decks in a given type 2 format. Yeah I know what you're going to say to that. First, it's "not fair" to pick 10 decks when a format can really only support like 4 or 5 decks that have a chance. And second, that even if you were to restrict the chart to those 4 or 5, that of course they have lots of bad matchups against each other because it's the nature of customizable card games to have bad matchups.</p>
+            <p>The thing is, it's still fair to measure. If you sit down to the table in a competitive card game, or in a fighting game, or any game really and you already have a huge 8-2 disadvantage then that sucks. And it's nice to know just how much of that there is in a game. Furthermore, it actually really is fair to pick the top 10 decks. Yomi has 20 characters, but think about back when it had 10. That's 55 cards per character (or should we only count it as 14 different cards? I don't know, but that would make this even more favorable.). Anyway that's 550 cards total for 10 characters. If it's basically impossible to make a cardpool of a customizable game of 550 cards that results in 10 decks, NONE of which have 7-3 matchups against each other...then you can see why I made Yomi a fixed deck game. It's precisely to get such a large number of distinct decks that are all fair against each other.</p>
+            <p>So if someone can create an MtG matchup chart of the top 10 decks in a format, it would be really interesting to see. I actually don't know how many lopsided matchups it would have, so I'm curious. (Goblins vs a deck with protection from red that existed in the same format?) And incidentally, this is why I had to make Codex work differently than any other CCG, specifically to prevent the tons of unfair matchups that are common in the genre.</p>
+            <h3>BattleCON</h3>
+            <p>It's cool that there's another fighting game inspired card game out there. There's a whole lot of characters in BattleCON, almost 50. I was not able to find a consensus matchup chart for the game though. I did find <a data-cke-saved-href="https://docs.google.com/spreadsheets/d/1Ls0XdX7ySMsQPaSRE5NQT40l7YP1-Mo3WCaRgDqR7u0/edit#gid=679135368" href="https://docs.google.com/spreadsheets/d/1Ls0XdX7ySMsQPaSRE5NQT40l7YP1-Mo3WCaRgDqR7u0/edit#gid=679135368">this attempt</a> by the player community to create one based on numerical data. It actually illustrates my point very well about why it's bad to add up match results rather than get the experts to come together. That chart has THE MAJORITY of matchups listed as 100% win or 0% win. Yes, really.</p>
+            <p>That doesn't speak to the balance being catastrophically bad though, it just means that mountains of more data would be needed to get anywhere with that method. (And even then, how much would be players playing those matches suboptimally?) So how many 7-3 matchups does BattleCON have? I honestly have no idea and I wasn't able to find information on this. Thing is, the only way to eliminate those is to have a whole lot of experts develop that chart and then start iterating on improvements. I can't tell you if that's a priority of BattleCON or not, but it seems like this data should be out there if it was? shrug.</p>
+            <p>I don't want to speak on behalf of what BattleCON's priorities are or aren't, because I honestly don't know. But lots of games, such as League of Legends, put releasing tons of characters at a much higher priority than making sure all the characters and matchups they currently have are fair against each other. Is that "better"? That's up to you, but it practically guarantees lots of matchup problems and past a certain point, doesn't exactly improve things, in my opinion.</p>
+            <h3>Yomi</h3>
+            <p>Back to Yomi. Check out that matchup chart again:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_47780">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:853.0px;"> 
+              <div style="padding-bottom:42.086753845214844%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351288769-9VA2ZDX1YJ54JL5B9HCY/ke17ZwdGBToddI8pDm48kDfYl1Fc3588uQAKx_S_4B1Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI2jQLz_ynEF_PoX_tv0DK2-0euo8543GYk0gq0QGLvks/yomi_matchup_chart_5-9_2014-04-16.png" alt="yomi_matchup_chart_5-9_2014-04-16.png">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351288769-9VA2ZDX1YJ54JL5B9HCY/ke17ZwdGBToddI8pDm48kDfYl1Fc3588uQAKx_S_4B1Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI2jQLz_ynEF_PoX_tv0DK2-0euo8543GYk0gq0QGLvks/yomi_matchup_chart_5-9_2014-04-16.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351288769-9VA2ZDX1YJ54JL5B9HCY/ke17ZwdGBToddI8pDm48kDfYl1Fc3588uQAKx_S_4B1Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI2jQLz_ynEF_PoX_tv0DK2-0euo8543GYk0gq0QGLvks/yomi_matchup_chart_5-9_2014-04-16.png" data-image-dimensions="853x359" data-image-focal-point="0.5,0.5" alt="yomi_matchup_chart_5-9_2014-04-16.png" data-load="false" data-image-id="53f1bc38e4b097fb5adac056" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_48046">
+           <div class="sqs-block-content">
+            <p>No 7-3 matchups, in a 20 character game with 210 matchups. (Maybe a few players think there's 1 or 2? Even in that case, it's just very, very few and would still be fewer than games I'm aware of.) This doesn't happen by magic or even luck. It takes...years. We started testing the Yomi expansion characters online on <a href="http://www.fantasystrike.com">fantasystrike.com</a> on over 3.5 <em>years</em> before doing a kickstarter to print physical decks. We added rules enforcement for them about a year before the kickstarter. The matchup chart had a lot of bad matchups that we addressed one by one over all this time. Here's some stories so you can see some of the specifics.</p>
+            <h2>Yomi Balance Stories</h2>
+            <p><strong>Bal-Bas-Beta</strong><strong>, Pesky Balance Robot</strong>.</p>
+            <p>BBB is a really interesting character in that he's so different from all the others. He has a mechanic called Long Range that lets him push the opponent far away and then force the opponent to guess right just to "get back in" and be able to deal damage again. Meanwhile, BBB can still damage the opponent with a few moves from Long Range. Think of Dhalsim keeping you out in Street Fighter. All of this makes BBB the most complicated character to understand how he works, but he's not actually that difficult to play once you understand him. That said, he had various unfair matchups over the years and it's difficult to fix them because any change to how Long Range works affects a lot of stuff. Here's the current version:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_51743">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351458776-MA0TT4BJXFHVOK5VYSFY/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0013_bbb.jpg" alt="_0013_bbb.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351458776-MA0TT4BJXFHVOK5VYSFY/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0013_bbb.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351458776-MA0TT4BJXFHVOK5VYSFY/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0013_bbb.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_0013_bbb.jpg" data-load="false" data-image-id="53f1bc4ce4b0bc14a81f6de8" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_51997">
+           <div class="sqs-block-content">
+            <p>There have been many versions of Long Range, different end conditions and timings for it. I'll skip the details of all that, but each one solved more problems than the previous one at least. But...</p>
+            <p>At one point, <strong>Troq</strong> (a grappler) had way too much trouble getting in. By giving him a new property called "Troq Armor" on his Jack which acts like "super armor" in a fighting game, it gave him one more answer to being at range. It turns out this makes a big difference and helps that match a ton.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_55537">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351334654-MX8Q8GJEARUD06BWYTTQ/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0674_troq_jh.jpg" alt="_0674_troq_jh.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351334654-MX8Q8GJEARUD06BWYTTQ/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0674_troq_jh.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351334654-MX8Q8GJEARUD06BWYTTQ/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0674_troq_jh.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_0674_troq_jh.jpg" data-load="false" data-image-id="53f1bc66e4b0b6bc4ba94588" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_55787">
+           <div class="sqs-block-content">
+            <p>On the flipside, <strong>Jaina</strong> completely wrecked BBB. Specifically her ability to play her 2 over and over forever while buying it back and left BBB with not nearly enough options. It cost her the same amount of life to buyback her 2 as the block damage it deals. In the other 19 matchups in the game, this is pretty much ok, but not vs BBB. We had to change her block damage numbers just for this matchup.</p>
+            <p>Oh and also Long Range used to end if you dealt blocked damage to BBB. That was ok in pretty much all matchups except Jaina too. Now BBB simply doesn't take any blocked damage at range. And one more thing: Long Range used to end if BBB took damage from abilities, which means Jaina's Smoldering Embers ability wrecked him too. Keep-away robot hates fire girl. Or at least he did for a long time.</p>
+            <p><strong>Zane</strong></p>
+            <p>Zane is sort of like Bison in Street Fighter: all offense and bad defense. For this reason, he didn't have a fast reversal move like a dragon punch. In the Yomi game system, he really needs SOMETHING though to deal with fast attacks, so he has a move called Crash Bomb that can still hit the opponent even if the opponent does a fast move. It's a bad reversal basically. Except, it was accidentally the best reversal in the game because of how it worked.</p>
+            <p>That was a total failure of design right there. I fixed that to work how it should and be a bad reversal that you use if you need to, not your main source of damage every game. Wow did Zane players hate that. But Zane players didn't really understand that it's a bad idea to improve balance when it's based on a wrong thing to begin with. If you do that, you end up with a well balanced game full of really bad flavor (or bad dynamics). So step 1 is correct the design issue, which I did. Here's the current version:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_74813">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351512949-PL0025H9RXSOXKYX2A5A/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_1055_zane_kh.jpg" alt="_1055_zane_kh.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351512949-PL0025H9RXSOXKYX2A5A/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_1055_zane_kh.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351512949-PL0025H9RXSOXKYX2A5A/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_1055_zane_kh.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_1055_zane_kh.jpg" data-load="false" data-image-id="53f1bd18e4b009ba7e4ec503" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_75060">
+           <div class="sqs-block-content">
+            <p>In order to give some power back, I then gave him "Meaty Attacks." That's a dumb term from fighting games that means attacks you do against an opponent who is getting up from a knockdown. Think of it this way: if you have a really slow move, usually you'd get hit out of it. But if you do that slow move as a "meaty attack" (while the opponent is knocked down) then you can get past the startup of it while the opponent is still on the ground. By the time they stand up, you're already to the point in your attack where you can actually hit them, so your attack FEELS fast to the opponent. They're forced to stand up right as your punch hits. Zane's meaty attacks ability speeds up his normal moves to a very fast speed 1.0.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_79993">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351953033-KV2HIFKFU29MBGJI5U82/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0020_zane2.jpg" alt="_0020_zane2.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351953033-KV2HIFKFU29MBGJI5U82/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0020_zane2.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351953033-KV2HIFKFU29MBGJI5U82/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0020_zane2.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_0020_zane2.jpg" data-load="false" data-image-id="53f1bed1e4b07998dc3a5d95" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_80234">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1408351360162_89747">Here's the problem: how easily Zane can knock you down becomes hugely important. The more he can, the more he can do speed 1.0 attacks against you. Tiny changes in how much or little he can knockdown result in large swings in power. It was difficult to figure out the amount of knockdown he needs to be fair. (Answer: very little! It's super strong.)</p>
+            <p id="yui_3_17_2_1_1408351360162_89748">Another problem: Zane meaty attacks vs. whoever is the slowest in the game. It turns out <strong>Gloria</strong> and <strong>Quince</strong> generally have the slowest moves. Gloria (a healing character) is one of the most complicated characters in the game. She needs to be slow to make up for the many various tricks she has. We tried some structural changes to help this matchup, but in the end, we just had to make her Queen speed 1.0 specifically for this matchup.</p>
+            <p id="yui_3_17_2_1_1408351360162_89749">Quince is the other slow character. Like Gloria, he is complicated and has tricks to make up for that speed. It turns out that vs Zane, he can just use his tricks. Quince can literally do unavoidable unblockables against Zane because of Zane's bad defense, but it costs a lot and isn't that frequent. Zane can more frequently do fast attacks vs Quince that Quince has a lot of trouble with. That kind of evens out so no change was needed there.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_82920">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:315.0px;"> 
+              <div style="padding-bottom:100.0%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351566412-6LOVSC6CXNX3SOB1HVJU/ke17ZwdGBToddI8pDm48kCQltXx7saUMgoQf-TU82N1Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFNbGgF85lfwBw6m5BXJgG4mXJ00yC6l0irFlgGymiVYWyfz4VDlGL86t3OdrGkYI0/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351566412-6LOVSC6CXNX3SOB1HVJU/ke17ZwdGBToddI8pDm48kCQltXx7saUMgoQf-TU82N1Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFNbGgF85lfwBw6m5BXJgG4mXJ00yC6l0irFlgGymiVYWyfz4VDlGL86t3OdrGkYI0/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351566412-6LOVSC6CXNX3SOB1HVJU/ke17ZwdGBToddI8pDm48kCQltXx7saUMgoQf-TU82N1Zw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFNbGgF85lfwBw6m5BXJgG4mXJ00yC6l0irFlgGymiVYWyfz4VDlGL86t3OdrGkYI0/image-asset.jpeg" data-image-dimensions="315x315" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="53f1bd4ee4b07b4e476f2d41" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_90910">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1408351360162_94138"><strong>Persephone</strong>. Persphone is one of the other most complicated characters to play (3 hardest are Persephone, Gloria, and Quince imo). Her Mistress's Command move was very, very tricky to get right in Puzzle Strike. It had more changes than most chips and was still changing right up until shipping. In Yomi, it started out controlling the opponent's entire turn when it hit. Over time, it controlled less and less. Now it controls just up to the point where they reveal their combat card; you can choose that for the controlled opponent, but you can't make them play a bluff card or a whole useless combo, or power-up for Aces for them. It turns out that despite all these nerfs, the move is still incredibly powerful.</p>
+            <p>The more powerful older version of the move cost two Aces to use. These days it only costs one Ace. She can do it more often, but it's not as crushing when she does. Also, there is kind of a neat property it has where if you happen to land it, yeah that's good, but if you really set things up exactly right (which takes work and requires backup from another ability) then you can completely lock them down. It's hard to really pull that off, but it's possible, and it seems fitting for a dominatrix. Her matchups are still pretty fair, it's just that when you lose to her, you REALLY lose hard. Here's her current Mistress's Command, by the way:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_94632">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351677794-4VOLFGVK8PX4C3RM8YI7/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0845_perse_ah.jpg" alt="_0845_perse_ah.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351677794-4VOLFGVK8PX4C3RM8YI7/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0845_perse_ah.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351677794-4VOLFGVK8PX4C3RM8YI7/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0845_perse_ah.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_0845_perse_ah.jpg" data-load="false" data-image-id="53f1bdbde4b0b80451155343" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_94866">
+           <div class="sqs-block-content">
+            <p><strong>Vendetta</strong></p>
+            <p>Here's a simpler story. Vendetta's innate was kind of complicated. Then it was kind of complicated in a different way. Then in yet a different way. Then it was just too junky so I made it very simple by deleting most of it but keeping the part that lets him poke a lot because that's the point of his character. Then he was too weak for a long time. So we increased his damage, and now he's fine. Done.</p>
+            <p><strong>Midori</strong></p>
+            <p>Midori can transform into a Dragon, and when he does, his Dragon attacks beat all dodges. That was always fine until Quince came along and had special dodges that he relies on to even function. Remember, Quince is slow, so that means Midori's Dragon attack Queen being fast means "Quince: you basically can't do anything." Dragon Form now only turns off normal dodges, so it doesn't turn off Quince's special dodges. This affects a couple other matchups, but the main thing is it fixes the problem in Midori vs. Quince.</p>
+            <p><strong>More On Gloria</strong></p>
+            <p>The healing character again. This time, it's her move called Healing Sphere. This is an incredibly strong ability that buffs Gloria as long as she can keep her Sphere going. It's inspired by Dark Phoenix's similar move in Marvel vs. Capcom 3. The ability lets her draw extra cards, but you should keep in mind that she can use those cards as part of her "engine" to recur previously used cards and to heal. Here's Healing Sphere:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_97946">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351699386-NLTY0EYCKSASAGKFQBRG/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0882_gloria_10h.jpg" alt="_0882_gloria_10h.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351699386-NLTY0EYCKSASAGKFQBRG/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0882_gloria_10h.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351699386-NLTY0EYCKSASAGKFQBRG/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0882_gloria_10h.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_0882_gloria_10h.jpg" data-load="false" data-image-id="53f1bdd3e4b012df005cae33" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_98178">
+           <div class="sqs-block-content">
+            <p>Gloria used to lose her sphere when she was knocked down. I fought long and hard to keep it that way. Some characters can knock her down more easily than others, which is exactly WHY I wanted it that way. It's good when matchups are different and things are more diverse rather than more homogeneous. There's a poisonous word in our testing community called "variance" though where testers frame boring homogeneity as a desirable property. Wow is that not the goal.</p>
+            <p>Ideally, some characters really are worse at removing her sphere but they are able to make up for it in different ways. In practice, this caused unfair matchups that we just weren't able to fix. So of the 100 times people wanted to make the game more samey, this is the one I had to give in on. It's now removed when she's thrown. Characters do vary quite a lot in how good their throws are so there is still texture that's different across matchups, but all characters can throw her one way or another. Some characters just had an awful time knocking her down. Also, after this was changed Gloria's Queen throw became absurdly too good. It was a fast throw, which is normally "very good" but in the hands of a character you need to throw to disable her incredible Healing Sphere buff, Gloria having a throw that always beats yours was crazy. So that's fixed too.</p>
+            <p><strong>Lum / Argagarg / Persephone / Gloria</strong></p>
+            <p>Here's a tangled mess, check this out. <strong>Argagarg</strong>'s main thing is blocking. Even when he blocks, you slowly die. He has a super block that powers him up so you die even faster when he blocks some more. <strong>Lum</strong> is Gambling Panda who likes to attack a lot. Blocking beats attacking. That's a tough match. Lum can also do out-of-combat damage with his poker tricks, so maybe that can make up for the difference? Usually the answer would be yes, but Argagarg also has a counter. He can use that to prevent Lum from doing much with his poker abilities.</p>
+            <p>This was claimed to be one of the most unfair matchups in the game. Maybe we can buff Lum? Actually no. Lum is one of the best characters now. All characters are almost an identical power level because the tiers are soooo compressed, but Lum happens to be near the top of that very small range of power. So buffing him is kind of bad. Can we nerf Argagarg? His other matchups are currently fair, so nerfing them would make him too weak. So now we have to make Lum better in one match, but not better in any other? That's pretty hard to do.</p>
+            <p>Many things were proposed. Many problems with all of them (sometimes flavor problems, or elegance problems, or logistics, or balance problems in other matchups). Then more problems came up with Argagarg. People started claiming that Argagarg was too weak vs <strong>Gloria</strong> and possibly too weak vs <strong>Persephone</strong>. Gloria wants to build up a card engine that lets her heal a lot and then convert that to a win with her Overdose move. That's a super effective strategy against a stalling character like Argagarg. Remember, Gloria has a powerful Healing Sphere ability, so Argagarg wants to counter that. Except...even if he does, Gloria has the ability to fetch cards from her discard pile to get it back anyway. Persephone also has the ability to fetch things from her discard pile, making Argagarg's counter unusually weak in that match.</p>
+            <p>That's now THREE matchups that are all in trouble, all because of Argagarg's counter. But in one of the three (Lum vs Argagarg) we want the counter to be WEAKER. In the other two matchups (vs Gloria and vs Persephone), we want the counter to be STRONGER. This is the kind of thing that makes game balance truly tricky. It looks pretty much unsolvable. This constellation of issues came up for weeks and I kept reminding everyone, "currently, there is literally no workable suggestion on the table." When we finally had an idea that worked at all, it was immediately better than the literally nothing else we had.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_101111">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351723655-3TZ3VLYNZBRCD14397EY/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0511_arg_10h.jpg" alt="_0511_arg_10h.jpg">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351723655-3TZ3VLYNZBRCD14397EY/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0511_arg_10h.jpg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408351723655-3TZ3VLYNZBRCD14397EY/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/_0511_arg_10h.jpg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="_0511_arg_10h.jpg" data-load="false" data-image-id="53f1bdebe4b0b80451155351" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_101335">
+           <div class="sqs-block-content">
+            <p>If Argagarg's counter sends the countered card to the bottom of their deck, that makes it much stronger vs Gloria and vs Persephone. They can no longer immediately recur that countered card to their hand, so that helps a lot. What about Lum? Well, it's actually barely weaker against Lum, which is what we want. Lum can't recur cards from the discard pile, so it's not about that. It's that he might draw that card again. It goes to the bottom of the deck, but he can reshuffle any time from powering up and he draws more cards than most other characters, so he has a better chance than most would of running Argagarg out of counters.</p>
+            <p>Lum could also choose not to power up and still get that card back. I changed his innate slightly so that sometimes it lets him draw the bottom card of his deck. Lum players can try to maximize that to get his previously countered back in their hand again.</p>
+            <p id="yui_3_17_2_1_1408351360162_103905">We wanted another slight buff though, something that buffs Lum in a way that doesn't matter in any matchup except when he fights Argagarg. Does such a thing exist? Yes it does. Lum's 10 throw also has his poker ability on it, the one we just talked about. He doesn't really want to use it as a throw, but vs Argagarg he is ok with doing that. So we buffed the damage on the 10 throw only, giving it the name Extra Juice and allowing him to pump it up a bit more, so that he can sneak more damage in just for that matchup. So a player can try for either playing too many copies of the card per game for Argagarg to counter them all, or try for just more throw damage to make Argagarg block less, and to threaten dealing lethal damage a little bit earlier.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1408351360162_104274">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:450.0px;"> 
+              <div style="padding-bottom:136.44444274902344%;" class="
+                image-block-wrapper
+                
+                
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408352003759-DTE9AEOT4PI4U3C1I54L/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408352003759-DTE9AEOT4PI4U3C1I54L/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1408352003759-DTE9AEOT4PI4U3C1I54L/ke17ZwdGBToddI8pDm48kNetEf8f4pnao0x9MWKhkKxZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFDFIV_C4OnH_UURr_mJV975r-Nbm0ECOFjG2JOoDJLg0Cp5ILtQowArhndPTnA1uQ/image-asset.jpeg" data-image-dimensions="450x614" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="53f1bf03e4b066376803c91f" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408351360162_104492">
+           <div class="sqs-block-content">
+            <h2>Conclusion</h2>
+            <p>Game balance is hard, and it takes a long time. From tier lists to matchup charts, you have to iterate on it a lot to really have any hope of good balance. In Yomi, we did all that work and I don't really know of other games (with 10+ sides) with a matchup chart that close, though maybe there is one somewhere? I'm really happy with what we've been able to achieve, in any case, and I hope you all enjoy the results.</p>
+            <p>Balance itself doesn't make a game fun, though. We actually didn't talk at all about why Yomi is fun or strategic. I think it has a lot going for it both those areas, and that it's an excellent strategy game for tournaments and casual play, but it took all these words just to cover the balance part!</p>
+            <p>If you'd like to learn more about Yomi, here's some more resources:</p>
+            <ul>
+             <li>You can read about the design <a href="/articles/designing-yomi">here</a>.</li>
+             <li>You can see a <a href="http://www.sirlingames.com/pages/yomi-card-images">gallery of all the cards</a>.</li>
+             <li>You can get the <a href="http://www.sirlingames.com/collections/yomi">tabletop version</a>, try it <a href="http://www.fantasystrike.com">free online</a>, or get the <a href="https://itunes.apple.com/us/app/yomi/id594630025?ls=1&amp;mt=8">iOS version</a>.</li>
+             <li>And here's an hour+ long discussion about the strategy of Yomi with the lead playtester and me:</li>
+            </ul>
+           </div>
+          </div>
+          <div class="sqs-block soundcloud-block sqs-block-soundcloud" data-aspect-ratio="67" data-block-type="56" id="block-yui_3_17_2_1_1410668713694_839338">
+           <div class="sqs-block-content">
+            <iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=true&amp;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F147674196&amp;show_artwork=true&amp;callback=YUI.Env.JSONP.yui_3_17_2_1_1410668713694_839932&amp;wmode=opaque"></iframe>
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1408342646215_247510">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1408342646215_247493"><br></p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div> <!--POST FOOTER--> 
+      <footer> 
+       <div class="meta"> 
+        <div class="first meta-row"> <span class="tags"><span class="tags-title">Tags</span> <a href="/articles/tag/set1" rel="tag">set1</a></span> 
+        </div> 
+        <div class="second meta-row"> <span class="sqs-simple-like" data-item-id="53f1b338e4b06d4f65c4ec66" data-like-count="6"> <span class="like-icon"></span> <span class="like-count"></span> </span> 
+        </div> 
+       </div> 
+      </footer> 
+     </article> <!--PAGINATION--> 
+     <nav class="pagination clear"> <a class="prev-item" href="/articles/designing-yomi">← Designing Yomi</a><a class="next-item" href="/articles/designing-puzzle-strike">Designing Puzzle Strike →</a> 
+     </nav> <!-- COMMENTS --> 
+     <section id="comments-" class="comments-wrapper"> 
+      <div class="squarespace-comments" id="comments-53f1b338e4b06d4f65c4ec66" data-item-id="53f1b338e4b06d4f65c4ec66" data-public-comment-count="0" data-comment-state="2"></div> 
+     </section> 
+    </div> 
+    <aside id="sidebar">
+     <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Blog Sidebar" data-type="block-field" data-updated-on="1491168332520" id="sidebarBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1">
+        <div class="sqs-block search-block sqs-block-search" data-block-type="33" id="block-yui_3_10_1_1_1401522710068_7239">
+         <div class="sqs-block-content">
+          <div class="sqs-search-ui-text-input sqs-search-ui-button-wrapper color-dark" data-source="block" data-preview="false" data-collection=""> 
+           <div class="spinner-wrapper"></div> 
+           <input type="search" class="search-input" value="" placeholder="Search"> 
+          </div> 
+         </div>
+        </div>
+        <div class="sqs-block markdown-block sqs-block-markdown" data-block-type="44" id="block-yui_3_17_2_1_1406864496533_163579">
+         <div class="sqs-block-content">
+          <h4 data-preserve-html-node="true">Best of Sirlin.net</h4>
+         </div>
+        </div>
+        <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1406864496533_163676">
+         <div class="sqs-block-content">
+          <p><a href="/ptw">Playing to Win book</a></p>
+          <p><a href="/codex">Codex Design (23 Articles)</a><br><a href="/articles/designing-pandante">Designing Pandante</a><br><a href="/articles/blivand-design">Blivand Design</a><br><a href="/articles/designing-yomi">Designing Yomi</a><br><a href="/articles/game-balance-and-yomi">Game Balance and Yomi</a><br><a href="/articles/designing-puzzle-strike">Designing Puzzle Strike</a></p>
+          <p><a href="/articles/sf">Street Fighter HDR Articles</a><br><a href="/articles/balancing-puzzle-fighter">Balancing Puzzle Fighter</a></p>
+          <p><a href="/articles/solvability">Solvability</a><br><a href="/articles/slippery-slope-and-perpetual-comeback">Slippery Slope</a><br><a href="/articles/subtractive-design">Subtractive Design</a></p>
+          <p><span style="font-size:15px">Multiplayer Game Balance:</span><br><a href="/articles/balancing-multiplayer-games-part-1-definitions">Part 1: Definitions</a><br><a href="/articles/balancing-multiplayer-games-part-2-viable-options">Part 2: Viable Options</a><br><a href="/articles/balancing-multiplayer-games-part-3-fairness">Part 3: Fairness</a><br><a href="/articles/balancing-multiplayer-games-part-4-intuition">Part 4: Intuition</a><br><a target="_blank" href="/s/GDC-2009-sirlin-handout6.pdf"><span style="font-size:15px">Game Balance Handout</span></a></p>
+          <p>Tutorial Videos:<br><a href="/articles/street-fighter-tutorial-videos">Street Fighter Tutorial</a><br><a href="/articles/smash-bros-brawl-tutorial-videos">Smash Bros. Brawl Tutorial</a></p>
+          <p><a href="/article-archive">More articles...</a></p>
+         </div>
+        </div>
+        <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_2_1491167759049_17133">
+         <div class="sqs-block-content">
+          <!--
+<div class="section" id="chatbutton">
+                    <a class="btn btnChat" href='/' 
+ onclick='window.open("http://widget.mibbit.com/?channel=%23sirlin&nick=LameGuest_%3F%3F%3F&settings=84a6b1d147e4438f1f78873d04c9ebd4&customloading=waiting%20for%20the%20IRC-server%20...&autoConnect=0","","status=no, toolbar=no, menubar=no, location=no, width=999,height=555")' title="Stop by the community chat room">Chat</a>
+</div>
+--> 
+          <div class="section" id="chatbutton"> <a class="btn btnChat" href="https://discord.gg/Q3qrGUq" title="Stop by the community chat room">Chat</a> 
+          </div> 
+          <p> </p>
+          <div class="section" id="stayConnected"> 
+           <ul> 
+            <li><a class="btn btnTwt" href="http://twitter.com/SirlinGames" title="Follow Sirlin Games on Twitter"></a></li> 
+            <li><a class="btn btnFb" href="http://www.facebook.com/SirlinGames" title="Like Sirlin Games on Facebook"></a></li> 
+            <li><a class="btn btnTwitch" href="http://www.twitch.tv/sirlingames" title="Watch Sirlin Games on Twitch TV"></a></li> 
+            <li><a class="btn btnRss" href="http://sirlin.squarespace.com/?format=rss" title="Subscribe to the Sirlin.net RSS"></a></li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </aside> 
+   </section> 
+   <div class="extra-wrapper page-footer"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Footer Content: Articles" data-type="block-field" data-updated-on="1408693965564" id="page-footer-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <div class="page-divider"></div> 
+   <footer id="footer"> 
+    <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1410685816526" id="footerBlock">
+     <div class="row sqs-row">
+      <div class="col sqs-col-1 span-1">
+       <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-d3a95877fceaec72ddc3">
+        <div class="sqs-block-content">
+         <pre class="text-align-center"><a target="_blank" href="http://www.sirlingames.com">My tabletop games</a> | <a href="http://www.fantasystrike.com">My online games</a> | <a href="/ptw">Playing to Win</a> | <a href="/recommended-books">Recommended Books</a> | <a href="/about">About</a> | <a href="/contact">Contact</a></pre>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div id="socialLinks" class="social-links sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://www.facebook.com/SirlinGames" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+       </svg> 
+      </div> </a> <a href="https://twitter.com/Sirlin" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+       </svg> 
+      </div> </a> 
+    </div> 
+   </footer> 
+  </div> 
+  <div></div> 
+  <script src="https://static1.squarespace.com/static/ta/4fd1028ee4b02be53c65dfb3/1353/scripts/site-bundle.js" type="text/javascript"></script> 
+  <script type="text/javascript" data-sqs-type="imageloader-bootstrapper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none" data-usage="social-icons-svg">
+   <symbol id="facebook-icon" viewbox="0 0 64 64">
+    <path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+   </symbol><symbol id="facebook-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+   </symbol><symbol id="twitter-icon" viewbox="0 0 64 64">
+    <path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" />
+   </symbol><symbol id="twitter-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z" />
+   </symbol>
+  </svg>  
+ </body>
+</html>

@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"073b4df364",applicationID:"70582482"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>How to Get Free Accommodation Around the World - The Professional Hobo</title> 
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- This site is optimized with the Yoast SEO plugin v13.3 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Here's a practical resource for free accommodation around the world using 5 different modalities of travel, based on years of full-time travel experience."> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="How to Get Free Accommodation Around the World - The Professional Hobo"> 
+  <meta property="og:description" content="Here's a practical resource for free accommodation around the world using 5 different modalities of travel, based on years of full-time travel experience."> 
+  <meta property="og:url" content="https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/"> 
+  <meta property="og:site_name" content="The Professional Hobo"> 
+  <meta property="article:publisher" content="https://facebook.com/TheProfessionalHobo"> 
+  <meta property="article:author" content="https://facebook.com/TheProfessionalHobo"> 
+  <meta property="og:image" content="https://s23639.pcdn.co/wp-content/uploads/2020/03/Getting-Free-Accommodation-Around-the-World.png"> 
+  <meta property="og:image:secure_url" content="https://s23639.pcdn.co/wp-content/uploads/2020/03/Getting-Free-Accommodation-Around-the-World.png"> 
+  <meta property="og:image:width" content="560"> 
+  <meta property="og:image:height" content="315"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.theprofessionalhobo.com/#organization","name":"The Professional Hobo","url":"https://www.theprofessionalhobo.com/","sameAs":["https://facebook.com/TheProfessionalHobo","https://twitter.com/hobonora"],"logo":{"@type":"ImageObject","@id":"https://www.theprofessionalhobo.com/#logo","inLanguage":"en-US","url":"https://s23639.pcdn.co/wp-content/uploads/2019/04/Hobo-Lady-Avatar.jpg","width":250,"height":250,"caption":"The Professional Hobo"},"image":{"@id":"https://www.theprofessionalhobo.com/#logo"}},{"@type":"WebSite","@id":"https://www.theprofessionalhobo.com/#website","url":"https://www.theprofessionalhobo.com/","name":"The Professional Hobo","inLanguage":"en-US","description":"Traveling full-time in a financially sustainable way","publisher":{"@id":"https://www.theprofessionalhobo.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.theprofessionalhobo.com/?s={search_term_string}","query-input":"required name=search_term_string"}]},{"@type":"ImageObject","@id":"https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/#primaryimage","inLanguage":"en-US","url":"https://s23639.pcdn.co/wp-content/uploads/2020/03/Getting-Free-Accommodation-Around-the-World.png","width":560,"height":315,"caption":"Getting Free Accommodation Around the World"},{"@type":"WebPage","@id":"https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/#webpage","url":"https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/","name":"How to Get Free Accommodation Around the World - The Professional Hobo","isPartOf":{"@id":"https://www.theprofessionalhobo.com/#website"},"inLanguage":"en-US","primaryImageOfPage":{"@id":"https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/#primaryimage"},"datePublished":"2013-10-30T19:03:23+00:00","dateModified":"2020-03-09T22:08:50+00:00","description":"Here's a practical resource for free accommodation around the world using 5 different modalities of travel, based on years of full-time travel experience.","potentialAction":[{"@type":"ReadAction","target":["https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/"]}]}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//www.theprofessionalhobo.com"> 
+  <link rel="dns-prefetch" href="//scripts.mediavine.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="The Professional Hobo » Feed" href="https://www.theprofessionalhobo.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="The Professional Hobo » Comments Feed" href="https://www.theprofessionalhobo.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="The Professional Hobo » How to Get Free Accommodation Around the World Comments Feed" href="https://www.theprofessionalhobo.com/travel-tips-resources/get-free-accommodation-around-world/feed/"> 
+  <link id="wellness-pro-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/cache/css/472a2057876202a4e8f66d9b74026fd4.min.css" type="text/css" media="all">
+  <style id="wellness-pro-inline-css" type="text/css">
+
+
+		.footer-widgets a:focus,
+		.footer-widgets a:hover,
+		.genesis-nav-menu .sub-menu .current-menu-item > a:focus,
+		.genesis-nav-menu .sub-menu .current-menu-item > a:hover,
+		.genesis-nav-menu .sub-menu a:focus,
+		.genesis-nav-menu .sub-menu a:hover,
+		.site-footer a:focus,
+		.site-footer a:hover {
+			color: #84ba55;
+		}
+
+		button:focus,
+		button:hover,
+		input:focus[type="button"],
+		input:focus[type="reset"],
+		input:focus[type="submit"],
+		input:hover[type="button"],
+		input:hover[type="reset"],
+		input:hover[type="submit"],
+		.button:focus,
+		.button:hover,
+		.entry-content .button:focus,
+		.entry-content .button:hover,
+		.featured-content .book-featured-text-banner {
+			background-color: #84ba55;
+			color: #333333;
+		}
+
+		.button:focus:after,
+		.button:focus:before,
+		.button:hover:after,
+		.button:hover:before,
+		.genesis-nav-menu > .highlight a {
+			border-bottom-color: #84ba55;
+			border-top-color: #84ba55;
+		}
+
+		
+</style> 
+  <link id="wp-block-library-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-includes/css/dist/block-library/style.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundry-lazy-load-style-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/mu-plugins/foundry-mu/inc/performance/assets/css/lazy-load.min.css?ver=1.9.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="scriptlesssocialsharing-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/scriptless-social-sharing/includes/css/scriptlesssocialsharing-style.css?ver=3.1.4" type="text/css" media="none" onload="this.media='all'">
+  <style id="scriptlesssocialsharing-inline-css" type="text/css">
+.scriptlesssocialsharing-buttons { width: 100% }.scriptlesssocialsharing-buttons a.button { padding: 4px; width: 25%;; }@media only screen and (max-width: 767px) { .scriptlesssocialsharing .sss-name { position: absolute; clip: rect(1px, 1px, 1px, 1px); height: 1px; width: 1px; border: 0; overflow: hidden; } }
+</style> 
+  <link id="foundrysl-fa-css-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/social-networks-links-by-performance-foundry/assets/css/font-awesome.min.css?ver=0.1.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundrysl-css-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/social-networks-links-by-performance-foundry/assets/css/foundrysl.css?ver=0.1.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="stcr-font-awesome-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/subscribe-to-comments-reloaded/includes/css/font-awesome.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="wellness-fonts-css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A400%2C700%7CArbutus+Slab&amp;ver=1.1.3" type="text/css" media="none" onload="this.media='all'">
+  <link id="dashicons-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-includes/css/dashicons.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundry-styles-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/cache/css/b2c23987a33f58d0f09d4916b8b236f0.min.css" type="text/css" media="none" onload="this.media='all'">
+  <script type="text/javascript" async data-noptimize="1" data-cfasync="false" src="https://scripts.mediavine.com/tags/the-professional-hobo.js?ver=5.3.2" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" defer></script>
+  <link rel="https://api.w.org/" href="https://www.theprofessionalhobo.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.theprofessionalhobo.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s23639.pcdn.co/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 5.3.2"> 
+  <link rel="shortlink" href="https://www.theprofessionalhobo.com/?p=5369"> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.theprofessionalhobo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.theprofessionalhobo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;format=xml"> <!-- BirdSend Pixel Start --> 
+  <script>
+	var _bsfInfo = {
+		wp: true,
+		ptype: 'page',
+		pcats: [ '' ],
+		ptags: [ '' ],
+	};
+	var _bsq = _bsq || []; _bsq.push(['init', '151']); _bsq.push(['track', 'PageView']); (function(w, d, s, id){ var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = 'https://cdn.birdsend.co/assets/static/js/pixel/main.js'; fjs.parentNode.insertBefore(js, fjs); }(window, document, 'script', 'birdsend-pixel-js'));	</script> <!-- BirdSend Pixel End --> 
+  <script type="text/javascript" async defer data-pin-color="red" data-pin-hover="true" src="https://s23639.pcdn.co/wp-content/plugins/pinterest-pin-it-button-on-image-hover-and-post/js/pinit.js"></script> 
+  <script>
+		jQuery(document).ready(function(){
+		jQuery(".is-cropped img").each(function(){
+			jQuery(this).attr("style", "min-height: 120px;min-width: 100px;");
+
+		});
+		jQuery('.avatar').attr('style', 'min-width: unset; min-height: unset;');
+	});
+		</script> 
+  <link rel="pingback" href="https://www.theprofessionalhobo.com/xmlrpc.php"> 
+  <meta name="\&quot;google-site-verification\&quot;" content="\&quot;dQ-HUt-flKU5LDdaZ0vacyp4M_uiJf52Rlvn9IxIgRo\&quot;"> <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16446938-1"></script> 
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-16446938-1');
+</script> 
+  <style type="text/css">.site-title a { background: url(https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Header.png) no-repeat !important; }</style> 
+  <link rel="icon" href="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg" sizes="32x32"> 
+  <link rel="icon" href="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg" sizes="192x192"> 
+  <link rel="apple-touch-icon-precomposed" href="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg"> 
+  <meta name="msapplication-TileImage" content="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg"> 
+  <style type="text/css" id="wp-custom-css">
+			/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/		</style> 
+ </head> 
+ <body class="page-template-default page page-id-5369 page-child parent-pageid-2782 custom-header header-image full-width-content genesis-breadcrumbs-hidden">
+  <div class="site-container">
+   <ul class="genesis-skip-link">
+    <li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li>
+    <li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut"> Skip to footer</a></li>
+   </ul>
+   <header class="site-header">
+    <div class="wrap">
+     <div class="title-area">
+      <p class="site-title"><a href="https://www.theprofessionalhobo.com/">The Professional Hobo</a></p>
+      <p class="site-description">Traveling full-time in a financially sustainable way</p>
+     </div>
+     <div class="widget-area header-widget-area">
+      <section id="foundry_social_links-2" class="widget widget_foundry_social_links">
+       <div class="widget-wrap"> 
+        <div class="foundry-social"> 
+         <div class="foundry-social__wrapper"> <a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.facebook.com/TheProfessionalHobo"><i class="fa fa-facebook foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.twitter.com/hobonora"><i class="fa fa-twitter foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://youtube.com/norablueskies"><i class="fa fa-youtube foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://feeds.feedburner.com/TheProfessionalHobo"><i class="fa fa-rss foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.pinterest.com/theprofessionalhobo/"><i class="fa fa-pinterest foundry-social__icon " aria-hidden="true"></i></a> 
+         </div> 
+        </div> 
+       </div>
+      </section> 
+     </div>
+    </div>
+   </header>
+   <nav class="nav-primary" aria-label="Main" id="genesis-nav-primary">
+    <div class="wrap">
+     <ul id="menu-main" class="menu genesis-nav-menu menu-primary js-superfish">
+      <li id="menu-item-4076" class="aboutLink menu-item menu-item-type-post_type menu-item-object-page menu-item-4076"><a href="https://www.theprofessionalhobo.com/about-the-professional-hobo/"><span>ABOUT</span></a></li> 
+      <li id="menu-item-9609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9609"><a href="https://www.theprofessionalhobo.com/blog-latest-posts/"><span>BLOG</span></a></li> 
+      <li id="menu-item-9610" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9610"><a href="https://www.theprofessionalhobo.com/destinations-where-ive-been/"><span>DESTINATIONS MAP</span></a></li> 
+      <li id="menu-item-4072" class="travelLink menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-4072"><a href="https://www.theprofessionalhobo.com/travel-tips-resources/"><span>TRAVEL STUFF</span></a></li> 
+      <li id="menu-item-4075" class="contactLink menu-item menu-item-type-post_type menu-item-object-page menu-item-4075"><a href="https://www.theprofessionalhobo.com/contact/"><span>CONTACT</span></a></li> 
+      <li id="menu-item-11251" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11251"><a href="https://www.theprofessionalhobo.com/books-and-courses/"><span>BOOKS/COURSES</span></a></li> 
+     </ul>
+    </div>
+   </nav>
+   <div class="site-inner">
+    <div class="content-sidebar-wrap">
+     <main class="content" id="genesis-content">
+      <article class="post-5369 page type-page status-publish has-post-thumbnail entry">
+       <header class="entry-header">
+        <h1 class="entry-title">How to Get Free Accommodation Around the World</h1> 
+       </header>
+       <div class="entry-content">
+        <div class="featured-image">
+         <i class="ferrari--spinner"></i>
+         <img width="560" height="315" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/03/Getting-Free-Accommodation-Around-the-World.png" class="ferrari__img ferrari--not-loaded aligncenter" alt="How to Get Free Accommodation Around the World">
+         <noscript>
+          <img width="560" height="315" src="https://s23639.pcdn.co/wp-content/uploads/2020/03/Getting-Free-Accommodation-Around-the-World.png" class="aligncenter" alt="How to Get Free Accommodation Around the World">
+         </noscript>
+        </div>
+        <div class="scriptlesssocialsharing">
+         <div class="scriptlesssocialsharing-buttons">
+          <a class="button pinterest" target="_blank" href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;media=https%3A%2F%2Fwww.theprofessionalhobo.com%2Fwp-content%2Fuploads%2F2020%2F03%2FHow-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png&amp;description=Learn%20about%20the%20five%20different%20ways%20to%20get%20Free%20Accommodation%20around%20the%20world%2C%20how%20to%20land%20gigs%2C%20stay%20safe%2C%20and%20have%20fun.%20This%20is%20insider%20scoop%20stuff%21%20%23freeaccommodation%20%23travel%20%23travelaccommodation%20%23volunteering%20%23house-sitting%20%23couchsurfing%20%23hospitalityexchange%20%23boatlife%20%23TheProfessionalHobo%20%23NoraDunn" rel="noopener noreferrer nofollow" data-pin-no-hover="true" data-pin-custom="true" data-pin-do="skip" data-pin-description="Learn about the five different ways to get Free Accommodation around the world, how to land gigs, stay safe, and have fun. This is insider scoop stuff! #freeaccommodation #travel #travelaccommodation #volunteering #house-sitting #couchsurfing #hospitalityexchange #boatlife #TheProfessionalHobo #NoraDunn"><span class="sss-name">Pinterest</span></a><a class="button facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F" rel="noopener noreferrer nofollow"><span class="sss-name">Facebook</span></a><a class="button twitter" target="_blank" href="https://twitter.com/intent/tweet?text=How%20to%20Get%20Free%20Accommodation%20Around%20the%20World&amp;url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;via=hobonora&amp;related=hobonora" rel="noopener noreferrer nofollow"><span class="sss-name">Twitter</span></a><a class="button linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?mini=1&amp;url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;title=How%20to%20Get%20Free%20Accommodation%20Around%20the%20World&amp;source=https%3A%2F%2Fwww.theprofessionalhobo.com" rel="noopener noreferrer nofollow"><span class="sss-name">Linkedin</span></a>
+         </div>
+        </div>
+        <div data-birdsend-form-placement="before"></div> 
+        <p data-birdsend-par-index="0" class="has-medium-font-size"><strong><em>How to Get Free Accommodation Around the World – </em></strong><br><strong><em>NEW in 2020 – 3rd Edition</em>! </strong></p> 
+        <p data-birdsend-par-index="1"><strong>Check out the extra EXTRA discounted prices below, and get it while the price is right.&nbsp;</strong></p> 
+        <div class="wp-block-image wp-image-11043 size-full">
+         <figure class="aligncenter">
+          <i class="ferrari--spinner"></i>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/p482626371-3.jpg" alt="Nora Dunn, aka The Professional Hobo, meditating in New Zealand while volunteering in trade for free accommodation" class="ferrari__img ferrari--not-loaded wp-image-11043" srcset="" data-srcset="https://s23639.pcdn.co/wp-content/uploads/2017/07/p482626371-3.jpg 580w, https://s23639.pcdn.co/wp-content/uploads/2017/07/p482626371-3-300x200.jpg 300w" sizes="(max-width: 580px) 100vw, 580px">
+          <noscript>
+           <img src="https://s23639.pcdn.co/wp-content/uploads/2017/07/p482626371-3.jpg" alt="Nora Dunn, aka The Professional Hobo, meditating in New Zealand while volunteering in trade for free accommodation" class="wp-image-11043" srcset="https://s23639.pcdn.co/wp-content/uploads/2017/07/p482626371-3.jpg 580w, https://s23639.pcdn.co/wp-content/uploads/2017/07/p482626371-3-300x200.jpg 300w" sizes="(max-width: 580px) 100vw, 580px">
+          </noscript>
+          <figcaption>
+           Volunteering at a retreat centre in New Zealand? Check!
+          </figcaption>
+         </figure>
+        </div> 
+        <p data-birdsend-par-index="2">&nbsp; <br> </p> 
+        <p data-birdsend-par-index="3" class="has-text-align-center has-medium-font-size"><span style="color: #000080;"><strong>Do you want to travel the world but worry you don’t have enough money?&nbsp;</strong></span></p> 
+        <p data-birdsend-par-index="4" class="has-text-align-center has-medium-font-size"><span style="color: #000080;"><strong>Are you looking to get off the beaten track and make local friends, but don’t know how?&nbsp;</strong></span></p> 
+        <p data-birdsend-par-index="5" class="has-text-align-center has-medium-font-size"><span style="color: #000080;"><strong>Do you crave a unique travel experience?&nbsp;</strong></span></p> 
+        <p data-birdsend-par-index="6">Have you ever wondered how I managed to travel full-time and stay in so many cool places?</p> 
+        <p data-birdsend-par-index="7"><em>Hint: I’m not rich. (Far from it).&nbsp;</em></p> 
+        <p data-birdsend-par-index="8"><strong>Everywhere you go, there are free accommodation opportunities.</strong> How would you like to sample local life by staying <em>for free</em> in the following places:</p> 
+        <ul>
+         <li>A bluestone cottage on 300 hectares of property in the Australian countryside</li>
+         <li>An abandoned village in Spain</li>
+         <li>A trendy house in the Beaches area of Toronto</li>
+         <li>A yurt on a Hawaii cliffside</li>
+         <li>A villa resort property on the Caribbean island of Grenada</li>
+         <li>A 49 foot sailing boat in the Caribbean</li>
+         <li>A Swiss alpine cottage and 4-storey home in Zurich</li>
+         <li>A palatial house in Panama</li>
+         <li>A full-sized house in Tokyo</li>
+        </ul> 
+        <p data-birdsend-par-index="9">I’ve done all of the above. This doesn’t count the individuals and families I’ve stayed with – <em>for free</em> – in Canada, USA, Spain, Ireland, Germany, Australia, New Zealand, England, Scotland, France, and many, many more countries.</p> 
+        <p data-birdsend-par-index="10">In addition to saving money, these are much more culturally enriching experiences than paying to stay in an impersonal hotel or hostel, and struggling to get a true feel for the local culture.</p> 
+        <p data-birdsend-par-index="11">&nbsp; <br> </p> 
+        <p data-birdsend-par-index="12" style="background-color:#84ba55" class="has-background has-medium-font-size"><b>In 12 years of full-time travel, I saved over $100,000 in accommodation expenses. </b><br><b>$100k.</b><br>I will teach you all my secrets. </p> 
+        <p data-birdsend-par-index="13">With the money you’ll save on accommodation, you can turn your travel dreams into a financially sustainable full-time lifestyle (as I did), or <strong>you can simply enjoy a great vacation, and spend the money you save on more exciting things than accommodation</strong>.</p> 
+        <p data-birdsend-par-index="14"><span style="font-size: 14px; line-height: 1.5em;">&nbsp;</span></p> 
+        <h2>Want to Know How to Do It?</h2> 
+        <div class="wp-block-image wp-image-11042 size-full">
+         <figure class="aligncenter">
+          <i class="ferrari--spinner"></i>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/p460233314-3.jpg" alt="" class="ferrari__img ferrari--not-loaded wp-image-11042">
+          <noscript>
+           <img src="https://s23639.pcdn.co/wp-content/uploads/2017/07/p460233314-3.jpg" alt="" class="wp-image-11042">
+          </noscript>
+          <figcaption>
+           Fancy staying in a decked-out Swiss alpine cottage for the summer? Been there, done that!
+          </figcaption>
+         </figure>
+        </div> 
+        <p data-birdsend-par-index="15"><strong>You’ve come to the right place.</strong></p> 
+        <p data-birdsend-par-index="16"><strong><em>How to Get Free Accommodation Around the World, 3rd Edition</em></strong> is packed with resources, tips, anecdotal experiences, and advice based on years of experience.</p> 
+        <p data-birdsend-par-index="17" class="has-text-align-center has-large-font-size"><span style="color: #000080;"><b>These five modalities of free accommodation are each covered in detail:</b></span></p> 
+        <h3 class="has-text-align-center"><span style="color: #000080;"><strong>Volunteering</strong></span></h3> 
+        <h3 class="has-text-align-center"><span style="color: #000080;"><strong>House-Sitting</strong></span></h3> 
+        <h3 class="has-text-align-center"><span style="color: #000080;"><strong>Couch Surfing (Hospitality Exchanges)</strong></span></h3> 
+        <h3 class="has-text-align-center"><span style="color: #000080;"><strong>Living on Boats</strong></span></h3> 
+        <h3 class="has-text-align-center"><span style="color: #000080;"><strong>Home Exchanges</strong></span></h3> 
+        <p data-birdsend-par-index="18"> <br> </p> 
+        <h2><b>Some of the things you’ll learn:</b></h2> 
+        <ul>
+         <li>Multiple resources to find gigs in each of the five modalities </li>
+         <li>How to stand out and land gigs</li>
+         <li>What to expect in terms of workloads and responsibilities</li>
+         <li>How to stay safe </li>
+         <li>Ensuring both parties have a good experience</li>
+         <li>Tips for managing an online business concurrently </li>
+        </ul> 
+        <div class="wp-block-image wp-image-11044 size-full">
+         <figure class="aligncenter">
+          <i class="ferrari--spinner"></i>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/p771689539-3.jpg" alt="Looking out the window of a historical village in Spain while getting free accommodation speaking conversational English" class="ferrari__img ferrari--not-loaded wp-image-11044">
+          <noscript>
+           <img src="https://s23639.pcdn.co/wp-content/uploads/2017/07/p771689539-3.jpg" alt="Looking out the window of a historical village in Spain while getting free accommodation speaking conversational English" class="wp-image-11044">
+          </noscript>
+          <figcaption>
+           Digs &amp; meals in a historical village in Spain for chatting in English? Done!
+          </figcaption>
+         </figure>
+        </div> 
+        <p data-birdsend-par-index="19"><strong>This e-book is</strong><b>&nbsp;a practical resource to get you on the road and enjoying free accommodation, right away – whether it’s for a week, a month, or a year</b> – with the help of my full-time travel experience specializing in free accommodation, since 2007.</p> 
+        <p data-birdsend-par-index="20"> <br> </p> 
+        <h3><strong>New to the 3</strong><sup><strong>rd</strong></sup><strong> Edition (expanded to 70 pages from 44 pages):</strong></h3> 
+        <ul>
+         <li>Dramatically expanded listings and descriptions of websites to find all five kinds of free accommodation (with updated links), especially the work-trade and house-sitting sections</li>
+         <li>An entire section on boat etiquette, safety tips, and ways to get the most out of a nautical arrangement</li>
+         <li>A massive expansion of the Home Exchanges chapter, including advice for getting the most out of an exchange (as both a guest and homeowner)</li>
+         <li>More anecdotes, practical resources, and advice</li>
+         <li>Less fluff </li>
+        </ul> 
+        <p data-birdsend-par-index="21"> <br> </p> 
+        <h2>Ready?</h2> 
+        <p data-birdsend-par-index="22">Great!</p>
+        <div data-birdsend-form-placement="middle"></div> 
+        <h3 class="has-text-align-center"><span style="color: #000080;"><strong><em>How to Get Free Accommodation Around the World, 3rd Edition</em> </strong></span></h3> 
+        <p data-birdsend-par-index="23" class="has-text-align-center has-medium-font-size"><span style="color: #000080;"><strong>is a 70-page e-book and costs</strong></span></p> 
+        <p data-birdsend-par-index="24" class="has-text-align-center has-medium-font-size"><span style="color: #000080;"><strong> <del>$19.99 </del>&nbsp; &nbsp;&nbsp;<del>$14.99 </del>&nbsp; &nbsp;</strong></span></p> 
+        <p data-birdsend-par-index="25" class="has-text-align-center has-large-font-size"><span style="color: #000080;"><strong>$6.99 USD!</strong></span></p> 
+        <p data-birdsend-par-index="26">Why the extra <em>extra</em> discounted price, you ask? <br>Because if you tried hard enough, you could probably find most of this information online, across a bunch of different websites (including some information right here on mine). </p> 
+        <p data-birdsend-par-index="27">In fact, some of you have might come to this very page from one of the amazing <a rel="noopener noreferrer" href="https://www.theprofessionalhobo.com/category/travel-lifestyle-guides/" target="_blank">free online guides</a> I’ve published on various topics that will help you travel intelligently, inexpensively, and rewardingly.</p> 
+        <p data-birdsend-par-index="28"><strong>The $6.99 charge is for people want to go the <span style="text-decoration: underline;">extra</span> mile.</strong></p> 
+        <ul>
+         <li><span style="text-decoration: underline;">You don’t want to sift through all of the various websites</span> that offer free accommodation to find the one that will be the best fit for you and your travel needs.</li>
+         <li><span style="text-decoration: underline;">You want an edge over the competition</span> – and trust me, competition is&nbsp;<em>fierce!&nbsp;</em></li>
+         <li><span style="text-decoration: underline;">You want tips and tricks</span> to be the best volunteer/house-sitter/boat-dweller/home exchanger/couch surfer out there.</li>
+         <li>You’re not sure whether some of these things are actually safe, and <span style="text-decoration: underline;">you need to know how to protect yourself</span>.</li>
+        </ul> 
+        <p data-birdsend-par-index="29"><strong>In buying this book, you will get your money’s value right away – on your next trip – on your first night of free accommodation.</strong></p> 
+        <p data-birdsend-par-index="30">In fact, if you apply the lessons in this book you will save you hundreds if not thousands of dollars and will deepen and enrich your travel experience beyond anything that money can provide.</p> 
+        <p data-birdsend-par-index="31"><em>It’s a PDF file that is nice and small and easy to download over any speed/quality of internet connection.&nbsp;</em></p> 
+        <p data-birdsend-par-index="32"><em>And, it’s formatted to be easy to read on computers, tablets, e-readers, etc.&nbsp;</em></p> 
+        <div class="wp-block-image">
+         <figure class="aligncenter size-large is-resized">
+          <i class="ferrari--spinner"></i>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png" alt="How to Get Free Accommodation Around the World, by Nora Dunn, The Professional Hobo, 3rd Edition" class="ferrari__img ferrari--not-loaded wp-image-12820" width="400">
+          <noscript>
+           <img src="https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png" alt="How to Get Free Accommodation Around the World, by Nora Dunn, The Professional Hobo, 3rd Edition" class="wp-image-12820" width="400">
+          </noscript>
+         </figure>
+        </div> 
+        <div class="wp-block-image">
+         <figure class="aligncenter">
+          <a class="ec_ejc_thkbx" href="https://www.e-junkie.com/ecom/gb.php?c=cart&amp;i=1290679&amp;cl=21326&amp;ejc=2" target="_blank" rel="noreferrer noopener"><i class="ferrari--spinner"></i><img class="ferrari__img ferrari--not-loaded" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/buynow-green.png" alt="Add to Cart">
+           <noscript>
+            <img src="https://s23639.pcdn.co/wp-content/uploads/2017/07/buynow-green.png" alt="Add to Cart">
+           </noscript></a>
+         </figure>
+        </div> 
+        <p data-birdsend-par-index="33"> <br> </p> 
+        <h2>What Others Are Saying About This Book<span style="font-size: 13px; line-height: 19px;">&nbsp;</span></h2> 
+        <blockquote class="wp-block-quote">
+         <p data-birdsend-par-index="34">“Nora is the uncontested Know-It-All when it comes to enjoying meaningful travel in a financially sustainable way. It should be no surprise then that this eBook is jam packed with solid tips that will help anyone find accommodations around the world for free. This is a very worthy read.”</p>
+         <p data-birdsend-par-index="35">–<a href="http://www.hecktictravels.com" target="_blank" rel="noopener noreferrer">Dalene Heck</a></p>
+        </blockquote> 
+        <blockquote class="wp-block-quote">
+         <p data-birdsend-par-index="36">There’s no way around it, when someone can tell you they spent $173 on accommodation for an entire year (yes, really!) I want to know what that person knows. Full of tips, tons of resources and enticing pictures, Nora’s book can help anyone attain greater freedom to travel with the money they save.&nbsp;She lays out the pros and cons of different housing options around the world, helping the reader to narrow down where to focus their energies for their own specific travel goals, whether that’s to try and fully embrace the local culture or manage an online business. This is a must have reference for any traveler.</p>
+         <p data-birdsend-par-index="37">– <a href="http://www.vagabondway.net/" target="_blank" rel="noopener noreferrer">Tiffany Soukup</a></p>
+        </blockquote> 
+        <blockquote class="wp-block-quote">
+         <p data-birdsend-par-index="38">“If you are traveling now or plan to, read this book. It will save you money. Don’t read it if you’ve got gobs of money you want to spend needlessly on lodging.”</p>
+         <p data-birdsend-par-index="39">– <a href="http://www.housesittingtravel.com/" target="_blank" rel="noopener noreferrer">Josie Schneider</a></p>
+        </blockquote> 
+        <blockquote class="wp-block-quote">
+         <p data-birdsend-par-index="40">I bought this book after spending 42 months traveling to 101 countries spending my time split between couch surfing and hostels. I read it to get a broad understanding of&nbsp;volunteering&nbsp;and house sitting for&nbsp;accommodations&nbsp;as I am planning on continuing&nbsp;my&nbsp;travels adding those methods as well. I must say that Nora does a great job of explaining the options. Her research is very&nbsp;thorough.&nbsp;I have&nbsp;referred to it several times. It is clear, concise and to the point on the mechanics of how to travel with no cost&nbsp;accommodations.&nbsp;But much more than that the author’s&nbsp;successful&nbsp;lifestyle redesign helps educate travelers and&nbsp;would-be travelers of the shift in&nbsp;thinking about what travel really means and can be. The fact that slow, inexpensive or almost free travel really allows you to be a traveler and not a tourist and really connect with the people and the culture leaving you with experiences that are beyond what any tourist package tour could ever deliver and with way more money left in your wallet. I highly recommend this e-book for any traveler, experienced or just starting out.</p>
+         <p data-birdsend-par-index="41">– <a href="http://www.theoutlawlist.com/" target="_blank" rel="noopener noreferrer">Jefre C. Outlaw</a></p>
+        </blockquote> 
+        <p data-birdsend-par-index="42"> <br> </p> 
+        <h3><span style="color: #000080;">Okay, NOW are you Ready?</span></h3> 
+        <p data-birdsend-par-index="43"><span style="color: #000080;"><strong>Buy <em>How to Get Free Accommodation Around the World, 3rd Edition</em> today, for the ridiculously low price of $6.99!&nbsp;</strong></span></p> 
+        <div class="wp-block-image">
+         <figure class="aligncenter">
+          <a class="ec_ejc_thkbx" href="https://www.e-junkie.com/ecom/gb.php?c=cart&amp;i=1290679&amp;cl=21326&amp;ejc=2" target="ej_ejc" rel="noopener noreferrer"><i class="ferrari--spinner"></i><img class="ferrari__img ferrari--not-loaded" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/buynow-green.png" alt="Add to Cart">
+           <noscript>
+            <img src="https://s23639.pcdn.co/wp-content/uploads/2017/07/buynow-green.png" alt="Add to Cart">
+           </noscript></a>
+         </figure>
+        </div> 
+        <div class="wp-block-image">
+         <figure class="aligncenter">
+          <a class="ec_ejc_thkbx" href="https://www.e-junkie.com/ecom/gb.php?c=cart&amp;cl=21326&amp;ejc=2" target="ej_ejc" rel="noopener noreferrer"><i class="ferrari--spinner"></i><img class="ferrari__img ferrari--not-loaded" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/view-cart-button.png" alt="View Cart">
+           <noscript>
+            <img src="https://s23639.pcdn.co/wp-content/uploads/2017/07/view-cart-button.png" alt="View Cart">
+           </noscript></a>
+         </figure>
+        </div> 
+        <p><br><script language="javascript">// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[
+// < ![CDATA[ function EJEJC_lc(th) { return false; } // ]]&gt;</script><br><script src="https://www.e-junkie.com/ecom/box.js"></script></p> 
+        <div data-birdsend-form-placement="after"></div>
+        <p></p>
+        <p><a href="//www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-color="red" data-pin-height="128"><i class="ferrari--spinner"></i><img class="ferrari__img ferrari--not-loaded" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_28.png">
+          <noscript>
+           <img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_28.png">
+          </noscript></a></p><i class="ferrari--spinner"></i>
+        <img width="642" height="1024" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png" class="ferrari__img ferrari--not-loaded scriptless__pinterest-image" alt="How to Get Free Accommodation Around the World, by Nora Dunn, The Professional Hobo, 3rd Edition" data-pin-media="true" style="display:none;" srcset="" data-srcset="https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png 642w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-376x600.png 376w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-768x1226.png 768w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-963x1536.png 963w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-1283x2048.png 1283w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-e1583791255136.png 450w" sizes="(max-width: 642px) 100vw, 642px">
+        <noscript>
+         <img width="642" height="1024" src="https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png" class="scriptless__pinterest-image" alt="How to Get Free Accommodation Around the World, by Nora Dunn, The Professional Hobo, 3rd Edition" data-pin-media="true" style="display:none;" srcset="https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png 642w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-376x600.png 376w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-768x1226.png 768w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-963x1536.png 963w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-1283x2048.png 1283w, https://s23639.pcdn.co/wp-content/uploads/2020/03/How-to-Get-Free-Accommodation-Around-the-World-book-cover-e1583791255136.png 450w" sizes="(max-width: 642px) 100vw, 642px">
+        </noscript>
+        <div class="scriptlesssocialsharing">
+         <div class="scriptlesssocialsharing-buttons">
+          <a class="button pinterest" target="_blank" href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;media=https%3A%2F%2Fwww.theprofessionalhobo.com%2Fwp-content%2Fuploads%2F2020%2F03%2FHow-to-Get-Free-Accommodation-Around-the-World-book-cover-642x1024.png&amp;description=Learn%20about%20the%20five%20different%20ways%20to%20get%20Free%20Accommodation%20around%20the%20world%2C%20how%20to%20land%20gigs%2C%20stay%20safe%2C%20and%20have%20fun.%20This%20is%20insider%20scoop%20stuff%21%20%23freeaccommodation%20%23travel%20%23travelaccommodation%20%23volunteering%20%23house-sitting%20%23couchsurfing%20%23hospitalityexchange%20%23boatlife%20%23TheProfessionalHobo%20%23NoraDunn" rel="noopener noreferrer nofollow" data-pin-no-hover="true" data-pin-custom="true" data-pin-do="skip" data-pin-description="Learn about the five different ways to get Free Accommodation around the world, how to land gigs, stay safe, and have fun. This is insider scoop stuff! #freeaccommodation #travel #travelaccommodation #volunteering #house-sitting #couchsurfing #hospitalityexchange #boatlife #TheProfessionalHobo #NoraDunn"><span class="sss-name">Pinterest</span></a><a class="button facebook" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F" rel="noopener noreferrer nofollow"><span class="sss-name">Facebook</span></a><a class="button twitter" target="_blank" href="https://twitter.com/intent/tweet?text=How%20to%20Get%20Free%20Accommodation%20Around%20the%20World&amp;url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;via=hobonora&amp;related=hobonora" rel="noopener noreferrer nofollow"><span class="sss-name">Twitter</span></a><a class="button linkedin" target="_blank" href="https://www.linkedin.com/shareArticle?mini=1&amp;url=https%3A%2F%2Fwww.theprofessionalhobo.com%2Ftravel-tips-resources%2Fget-free-accommodation-around-world%2F&amp;title=How%20to%20Get%20Free%20Accommodation%20Around%20the%20World&amp;source=https%3A%2F%2Fwww.theprofessionalhobo.com" rel="noopener noreferrer nofollow"><span class="sss-name">Linkedin</span></a>
+         </div>
+        </div>
+       </div>
+      </article>
+     </main>
+    </div>
+   </div>
+   <div id="before-footer" class="before-footer">
+    <h2 class="genesis-sidebar-title screen-reader-text">Before Footer</h2>
+    <div class="flexible-widgets widget-area  widget-full">
+     <div class="wrap">
+      <section id="media_image-9" class="widget widget_media_image">
+       <div class="widget-wrap">
+        <img width="2000" height="703" src="https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more.jpg" class="image wp-image-12533  attachment-full size-full" alt="Nora Dunn The Professional Hobo Featured in Conde Nast Traveler, Forbes, MSN Money, Yahoo, Lonely Planet, Wise Bread, Business Insider, and many more" style="max-width: 100%; height: auto;" srcset="https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more.jpg 2000w, https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more-600x211.jpg 600w, https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more-768x270.jpg 768w, https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more-1024x360.jpg 1024w" sizes="(max-width: 2000px) 100vw, 2000px">
+       </div>
+      </section> 
+     </div>
+    </div>
+   </div>
+   <div id="footer" class="flex-footer footer-widgets">
+    <h2 class="genesis-sidebar-title screen-reader-text">Footer</h2>
+    <div class="flexible-widgets widget-area  widget-thirds">
+     <div class="wrap">
+      <section id="text-456322505" class="widget widget_text">
+       <div class="widget-wrap">
+        <h3 class="widgettitle widget-title">About This Website</h3> 
+        <div class="textwidget">
+         <p>The Professional Hobo is about how to travel full-time in a financially sustainable way, as experienced since 2006 by Nora Dunn, former financial planner and current world traveler/writer. </p> 
+         <div class="one-half first"> 
+          <ul> 
+           <li><a href="https://www.theprofessionalhobo.com/writing-publicity/">Writing Portfolio &amp; Speaking Credits</a></li> 
+           <li><a href="https://www.theprofessionalhobo.com/contact/">Contact</a></li> 
+          </ul> 
+         </div> 
+         <div class="one-half"> 
+          <ul> 
+           <li><a href="https://www.theprofessionalhobo.com/faqs/">FAQs</a></li> 
+           <li><a href="https://www.theprofessionalhobo.com/travel-tips-resources/">Travel Resources</a></li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div>
+      </section> 
+      <section id="foundry_social_links-5" class="widget widget_foundry_social_links">
+       <div class="widget-wrap"> 
+        <div class="foundry-social"> 
+         <div class="foundry-social__wrapper"> <a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.facebook.com/TheProfessionalHobo"><i class="fa fa-facebook foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.twitter.com/hobonora"><i class="fa fa-twitter foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://youtube.com/norablueskies"><i class="fa fa-youtube foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://feeds.feedburner.com/TheProfessionalHobo"><i class="fa fa-rss foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.pinterest.com/theprofessionalhobo/"><i class="fa fa-pinterest foundry-social__icon " aria-hidden="true"></i></a> 
+         </div> 
+        </div> 
+       </div>
+      </section> 
+      <section id="custom_html-6" class="widget_text widget widget_custom_html">
+       <div class="widget_text widget-wrap">
+        <div class="textwidget custom-html-widget">
+         <div data-birdsend-form="2408"></div>
+        </div>
+       </div>
+      </section> 
+     </div>
+    </div>
+   </div>
+   <footer class="site-footer">
+    <div class="wrap">
+     <font size="1"> Copyright © 2009-2020 TheProfessionalHobo.com. All Rights Reserved. <br><br> <b>Disclosure:</b> In accordance with FTC guidelines, I disclose that I may be compensated if consumers choose to utilize links located throughout the content on this site. Additionally, some posts might be sponsored to support this blog. Please do the appropriate research before participating in any third party offers. All opinions are my own.<br> We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.<br><br> <b>Privacy Policy:</b> While you may rest assured that we at The Professional Hobo are not using your information for evil purposes, here is everything you need to know about our <a href="https://www.theprofessionalhobo.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>. </font>
+    </div>
+   </footer>
+  </div>
+  <script type="\&quot;text/javascript\&quot;">
+
+var _gaq = _gaq || [];
+_gaq.push([\'_setAccount\', \'UA-16446938-1\']);
+_gaq.push([\'_setDomainName\', \'theprofessionalhobo.com\']);
+_gaq.push([\'_setAllowLinker\', true]);
+_gaq.push([\'_trackPageview\']);
+
+(function() {
+var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.async = true;
+ga.src = (\'https:\' == document.location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';
+var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script> 
+  <div id="amzn-assoc-ad-558d724c-b26b-4bd7-885e-ec8a7b2eb6d0"></div>
+  <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=558d724c-b26b-4bd7-885e-ec8a7b2eb6d0"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var foundryLazySettings = {"aggressive":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/mu-plugins/foundry-mu/inc/performance/assets/js/lazy-load.min.js?ver=1.9.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/hoverIntent.min.js?ver=1.8.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/genesis/lib/js/menu/superfish.min.js?ver=1.7.10" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/genesis/lib/js/menu/superfish.args.min.js?ver=3.3.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/genesis/lib/js/skip-links.min.js?ver=3.3.1" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var genesis_responsive_menu = {"mainMenu":"Menu","subMenu":"Submenu","menuClasses":{"combine":[".nav-header",".nav-primary"]}};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/wellness-pro/js/responsive-menus.min.js?ver=1.1.3" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/cache/js/0b9101391a083cec8156f6523818cc7d.min.js" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/wp-embed.min.js?ver=5.3.2" defer></script>
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"073b4df364","applicationID":"70582482","transactionName":"ZQZWMhBXVxYAUxdYDFxMdQUWX1YLTkACVgY=","queueTime":0,"applicationTime":68,"atts":"SUFVRFhNRBg=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+ </body>
+</html>

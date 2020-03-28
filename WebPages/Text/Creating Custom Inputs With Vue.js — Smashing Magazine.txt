@@ -1,0 +1,188 @@
+skip to main content start reading the article jump to list of all articles search topics articles . design & development books . physical & digital books events . conferences & workshops jobs . find work & employees membership . webinars & early-birds browse all topics clear search browse all topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow about the author joseph zimmerman is a god-fearing and loving family man, web developer, javascript blogger, teacher, and amateur gamer. more about joseph zimmerman … august 1, 2017 leave a comment creating custom inputs with vue.js 10 min read vue, frameworks, javascript share on twitter or linkedin smashing newsletter upgrade your inbox and get our editors’ picks 2× a month — delivered right into your inbox. earlier issues. your (smashing) email subscribe → this tutorial aims to help you understand how v-model works on native inputs and on custom components by default. also, you’ll learn how to create custom checkboxes and radios that emulate how v-model works on them natively. in particular, form inputs tend to have plenty of complexity that you’d want to hide in a component, such as custom designs, labels, validation, help messages, and making sure each of these pieces are in the correct order so that they render correctly. on top of that though, vue has a built-in directive called v-model that simulates 2-way binding by binding a value and capturing input events. if you’re going to build a custom input component, then you’ll definitely want to support the v-model directive. sadly, when i looked around for examples of custom inputs in vue for radio buttons or checkboxes, they either didn’t take v-model into consideration at all, or they failed to implement it correctly. there is some decent documentation for custom text inputs, but since it doesn’t explain customizing radios or checkboxes, we’ll discuss that here. writing reusable modules in es6 are you excited to take advantage of new javascript language features but not sure where to start, or how? read a related article → by the end of this tutorial, i hope i’ll help you: understand how v-model works on native inputs, focusing primarily on radios and checkboxes, understand how v-model works on custom components by default, learn how to create custom checkboxes and radios that emulate how v-model works on them natively. quick note before we get started: es2015+ code will be used throughout the code examples. i’ll also be favoring the single file component syntax over using vue.component or new vue. how does v-model work normally? the official vue documentation is actually pretty good on this topic, but there are a few minor blind spots. in any case, we’ll be trying to cover it pretty thoroughly here. in essence, v-model is just a shorthand directive that gives us 2-way data binding, and the code it is shorthand for depends on what type of input it is being used on. text boxes <div><input v-model="message" placeholder="edit me">
+<p>message: {{ message }}</p>
+
+<!-- or -->
+
+<p>message:</p>
+<p style="white-space: pre-line">{{ message }}</p>
+<textarea v-model="message" placeholder="add multiple lines"></textarea>
+</div>
+ when using a text input (including types such as email, number, etc.) or textarea, v-model="varname" is equivalent to :value="varname" @input="e => varname = e.target.value". this means that the value of the input is set to varname after each update to the input varname is updated to the value of the input. a normal select element will act like this too, though a multiple select will be different. radio buttons so, what about radio buttons? <div><input type="radio" value="one" v-model="picked">
+<input type="radio" value="two" v-model="picked">
+<span>picked: {{ picked }}</span>
+</div>
+ this is equivalent to: <div><input type="radio" value="one" :checked="picked == 'one'" @change="e => picked = e.target.value">
+<input type="radio" value="two" :checked="picked == 'two'" @change="e => picked = e.target.value">
+<span>picked: {{ picked }}</span>
+</div>
+ note how v-model isn’t even touching value anymore. it’s still doing the same thing in the change event handler (though it was changed to change instead of input), but now it’s determining whether checked should be true or false depending on whether picked is the same as the value of that radio button. checkboxes checkboxes are a bit more difficult to talk about because they have two different behaviors depending on whether there is only a single checkbox with a given v-model or multiple. if you are using a single checkbox, v-model will treat it like a boolean and ignore the value. <div><input type="checkbox" value="foo" v-model="ischecked">
+</div>
+ is the same as… <div><input type="checkbox" value="foo" :checked="!!ischecked" @change="e => ischecked = e.target.checked">
+</div>
+ if you want it to be something other than true and false, you can use the true-value and false-value attribute, which control what values your model will be set to when the checkbox is checked or not. <div><input type="checkbox" value="foo" v-model="ischecked" true-value="1" false-value="0">
+</div>
+ is the same as… <div><input type="checkbox" value="foo" :checked="ischecked == '1'" @change="e => ischecked = e.target.checked ? '1' : '0'">
+</div>
+ that’s pretty much it for single-checkbox examples. if you have multiple checkboxes that share a model, then those checkboxes will fill an array with values of all the checkboxes that are checked, but make sure the model that you pass in is already an array or you’ll get some odd behavior. also, the true-value and false-value attributes no longer affect anything. <div><template>
+  <div>
+    <input type="checkbox" value="foo" v-model="checkedvals">
+    <input type="checkbox" value="bar" v-model="checkedvals">
+    <input type="checkbox" value="baz" v-model="checkedvals">
+  </div>
+</template>
+<script><span class="javascript">
+  export default {
+    data: () => ({
+      checkedvals: ['bar']
+    })
+  }
+</script>
+</div>
+ the equivalent is a bit more difficult to keep inside the template, so i’ll move some of the logic to methods on the component: <div><template>
+  <div>
+    <input type="checkbox" value="foo" v-model="checkedvals">
+    <input type="checkbox" value="bar" v-model="checkedvals">
+    <input type="checkbox" value="baz" v-model="checkedvals">
+  </div>
+</template>
+<script><span class="javascript">
+  export default {
+    data() {
+      return { checkedvals: ['bar'] }
+    },
+    methods: {
+      shouldbechecked(val) {
+        return this.checkedvals.includes(val)
+      },
+      updatevals(e) {
+        let ischecked = e.target.checked
+        let val = e.target.value
+
+        if (ischecked) {
+          this.checkedvals.push(val)
+        } else {
+          this.checkvals.splice(this.checkedvals.indexof(val), 1)
+        }
+      }
+    }
+  }
+</script>
+</div>
+ that’s a lot more complicated than what we’ve seen before, but if you break it down, it’s not too bad. shouldbechecked is true when that checkbox’s value is included in the array and false if it isn’t. updatevals adds the checkbox’s value to the array when it gets checked and removes it when it gets unchecked. how does v-model work on components? since vue doesn’t know how your component is supposed to work, or if it’s trying to act as a replacement for a certain type of input, it treats all components the same with regards to v-model. it actually works the exact same way as it does for text inputs, except that in the event handler, it doesn’t expect an event object to be passed to it, rather it expects the value to be passed straight to it. so… <div><my-custom-component v-model="myproperty" />
+</div>
+ …is the same thing as… <div><my-custom-component :value="myproperty" @input="val => myproperty = val" />
+</div>
+ a component can change this to a small extent using the model property: export default {
+  name: 'my-custom-component',
+  model: {
+    prop: 'foo',
+    event: 'bar'
+  },
+  // ...
+}
+</div>
+ v-model will look at these properties and instead of using the value attribute, it’ll use the attribute you specify in prop and instead of listening for the input event, it’ll use the event you specified in event. so the above my-custom-component example would actually expand out to the following: <div><my-custom-component :foo="myproperty" @bar="val => myproperty = val" />
+</div>
+ this is nice, but if we’re making a custom radio or checkbox, this doesn’t work very well. with some work, though, we can move the logic that v-model uses on radios and checkboxes inside our custom components. supporting v-model on custom radios compared to a checkbox, custom radios are quite simple. here’s a very basic custom radio that i build that just wraps the input in a label and accepts a label property to add the label text. <div><template>
+  <label>
+    <input type="radio" :checked="shouldbechecked" :value="value" @change="updateinput">
+    {{ label }}
+  </label>
+</template>
+<script><span class="javascript">
+export default {
+  model: {
+    prop: 'modelvalue',
+    event: 'change'
+  },
+  props: {
+    value: {
+      type: <span class="hljs-built_in">string,
+    },
+    modelvalue: {
+      default: ""
+    },
+    label: {
+      type: <span class="hljs-built_in">string,
+      required: true
+    },
+  },
+  computed: {
+    shouldbechecked() {
+      return this.modelvalue == this.value
+    }
+  }
+  methods: {
+    updateinput() {
+      this.$emit('change', this.value)
+    }
+  }
+}
+</script>
+</div>
+ note: i only included props that are helpful for explaining how these should work with v-model, but input tags can take advantage of several other attributes (such as name or disabled), so make sure you create all of the props you’ll need and pass them on to input. you’ll also want to consider accessibility by adding wai-aria attributes, as well as using slots for adding content rather than props like i did here with label. you may think that since i didn’t include name in this example, a group of radios wouldn’t actually sync up with one another. actually the updating of the model will in turn update the other radio buttons that share that model, so they don’t need to share a name like they do in plain html forms as long as they share the same model. supporting v-model on custom checkboxes making custom checkboxes is noticeably more complex than the radio buttons, primarily because we have to support two different use cases: a single true/false checkbox (that may or may not use true-value and/or false-value) and multiple checkboxes that combine all the checked values into an array. so how do we determine which use case it is? you might think that we need to determine if there are other checkboxes with the same name attribute, but that’s not actually what vue’s built-in system uses. just like the radios, vue doesn’t take the name attribute into consideration at all. that’s only used when natively submitting a form. so then you might think it determines it based on whether there are other checkboxes that share the same model, but that’s not it either. it’s determined by whether or not the model is an array. that’s it. so the code will be structured similarly to the custom radio button’s code, but inside shouldbechecked and updateinput the logic will split depending on whether or not modelvalue is an array. <div><template>
+  <label>
+    <input type="checkbox" :checked="shouldbechecked" :value="value" @change="updateinput">
+    {{ label }}
+  </label>
+</template>
+<script><span class="javascript">
+export default {
+  model: {
+    prop: 'modelvalue',
+    event: 'change'
+  },
+  props: {
+    value: {
+      type: <span class="hljs-built_in">string,
+    },
+    modelvalue: {
+      default: false
+    },
+    label: {
+      type: <span class="hljs-built_in">string,
+      required: true
+    },
+    // we set `true-value` and `false-value` to the default true and false so
+    // we can always use them instead of checking whether or not they are set.
+    // also can use camelcase here, but hyphen-separating the attribute name
+    // when using the component will still work
+    truevalue: {
+      default: true
+    },
+    falsevalue: {
+      default: false
+    }
+  },
+  computed: {
+    shouldbechecked() {
+      if (this.modelvalue instanceof <span class="hljs-built_in">array) {
+        return this.modelvalue.includes(this.value)
+      }
+      // note that `true-value` and `false-value` are camelcase in the js
+      return this.modelvalue === this.truevalue
+    }
+  },
+  methods: {
+    updateinput(event) {
+      let ischecked = event.target.checked
+
+      if (this.modelvalue instanceof <span class="hljs-built_in">array) {
+        let newvalue = [...this.modelvalue]
+
+        if (ischecked) {
+          newvalue.push(this.value)
+        } else {
+          newvalue.splice(newvalue.indexof(this.value), 1)
+        }
+
+        this.$emit('change', newvalue)
+      } else {
+        this.$emit('change', ischecked ? this.truevalue : this.falsevalue)
+      }
+    }
+  }
+}
+</script>
+</div>
+ and there you have it. it may be better, though, to split this into two different components: one for handling the single true/false toggle and one for use in lists of options. that would allow it to more closely follow the single-responsibility principle, but if you’re looking for a drop-in replacement to checkboxes, this is what you’re looking for (plus the addition of all the other useful attributes and custom features you might want). further reading there’s plenty more to learn about custom inputs, vue components, and vue in general. i recommend giving some of these resources a look-through. awesome-vue’s component sets awesome-vue is a huge list of vue-related projects and resources, so feel free to peruse anything and everything on that list, but in particular i want to point out the ui libraries and component sets because they pretty much all have examples of checkboxes and radios you can look at if you feel like diving into their source code. vue curated this is a list similar to awesome-vue, but is more strictly curated so you know that everything on the list is worth taking a look at. vue component guide the official vue guide is a great place to learn the basics about anything related to vue. vue api documentation this documentation is where you get into the really deep details of vue. (rb, vf, al, il) browse all smashing magazine topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow with a commitment to quality content for the design community. founded by vitaly friedman and sven lennartz. 2006–2020. smashing is proudly running on netlify. fonts by latinotype. ✎ write for us contact us about us (impressum) privacy policy membership login delivery times advertise back to top

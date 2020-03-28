@@ -1,0 +1,918 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--[if lt IE 7 ]> <html class="ie6" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 7 ]> <html class="ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 8 ]> <html class="ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 9 ]> <html class="ie9" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if (gte IE 10)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <!--<![endif]--> 
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>remix (kottke.org)</title> 
+  <link href="/images/2016/ios/32x32.png" rel="icon" type="image/png" sizes="32x32"> 
+  <link href="/images/2016/ios/180x180.png" rel="apple-touch-icon" sizes="180x180"> 
+  <link href="/images/2016/ios/167x167.png" rel="apple-touch-icon" sizes="167x167"> 
+  <link href="/images/2016/ios/152x152.png" rel="apple-touch-icon" sizes="152x152"> 
+  <link href="/images/2016/ios/120x120.png" rel="apple-touch-icon" sizes="120x120"> 
+  <link href="/images/2016/ios/80x80.png" rel="apple-touch-icon" sizes="80x80"> 
+  <link href="/images/2016/ios/76x76.png" rel="apple-touch-icon" sizes="76x76"> 
+  <link href="/images/2016/ios/40x40.png" rel="apple-touch-icon" sizes="40x40"> 
+  <link href="/images/2016/ios/192x192.png" rel="icon" sizes="192x192"> 
+  <link href="/images/2016/ios/128x128.png" rel="icon" sizes="128x128"> 
+  <script src="/templates/2016/js/jquery-1.11.3.min.js"></script> 
+  <script src="/templates/2016/js/jquery-migrate-1.2.1.min.js"></script> 
+  <script src="/templates/2016/js/bigfoot.js"></script> 
+  <script src="/templates/2016/js/jquery.unveil.js"></script> 
+  <script>
+$(document).ready(function() {
+	$(".widescreen iframe").unveil(250);
+	$(".post iframe").unveil(250);
+	$(".widescreen img").unveil(150);
+	$(".post img").unveil(150);
+});
+</script> 
+  <script type="text/javascript">
+  window.MemberfulOptions = {site: "https://kottke.memberful.com"};
+
+  (function() {
+    var s   = document.createElement('script');
+
+    s.type  = 'text/javascript';
+    s.async = true;
+    s.src   = 'https://d35xxde4fgg0cx.cloudfront.net/assets/embedded.js';
+
+    setup = function() { window.MemberfulEmbedded.setup(); }
+
+    if(s.addEventListener) { s.addEventListener("load", setup, false); } else { s.attachEvent("onload", setup); }
+
+    ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+  })();
+</script> 
+  <script type="text/javascript">
+	$.bigfoot(
+        {
+			numberResetSelector: ".post",
+			buttonMarkup: "<div class='bigfoot-footnote__container' aria-hidden=\"true\"> <button class=\"bigfoot-footnote__button\" id=\"{{SUP:data-footnote-backlink-ref}}\" data-footnote-number=\"{{FOOTNOTENUM}}\" data-footnote-identifier=\"{{FOOTNOTEID}}\" aria-hidden=\"true\" rel=\"footnote\" data-bigfoot-footnote=\"{{FOOTNOTECONTENT}}\"> <i class=\"fa fa-plus-circle\"></i> </button></div>"
+        }
+    );
+</script> 
+  <script type="text/javascript">
+$(document).ready(function() {
+	$(".post p a").attr("target","_blank");
+	$('.post p a[href*="//kottke.org"]').removeAttr("target");
+	$(".post p sup a").removeAttr("target");
+	$(".post .footnote a:last-of-type").removeAttr("target");
+	$(".quicklinks-fp-post a").attr("target","_blank");
+	$(".bling-bling a").attr("target","_blank");
+	$(".bling-job a").attr("target","_blank");
+	
+   $(".post p strong:contains('Update:')").each(function() {
+	    $( this ).addClass("post-update").html("Update" + ((typeof $( this ).attr('title') !== typeof undefined && $( this ).attr('title') !== false) ? "<span class='update-timestamp'>&nbsp;&middot;&nbsp; " + $( this ).attr("title") + "</span>" : ""));
+	  });
+    });
+</script> 
+  <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/790324/737040/css/fonts.css"> 
+  <link rel="stylesheet" href="/templates/2016/css/font-awesome-4.7.0/css/font-awesome.min.css"> 
+  <link rel="stylesheet" href="/templates/2016/css/main.css?v=16" type="text/css"> 
+  <link rel="stylesheet" href="/templates/2016/css/bigfoot-default.css" type="text/css"> 
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.kottke.org/main"> 
+  <link rel="alternate" type="application/json" href="http://feeds.kottke.org/json"> 
+ </head> 
+ <body id="kottke-org"> 
+  <div id="header">
+   <a href="/">kottke.org<span id="head-br"><br></span><span id="head-heart"> &nbsp;♥&nbsp; </span> <span id="head-sub">home of fine hypertext products</span></a>
+  </div> 
+  <div id="top-nav-wide">
+   <a href="/">home</a><a href="/about">about</a><a href="/everfresh">archives + tags</a><a href="/shop">shop</a><a href="/members">membership!</a>
+   <div id="follow">
+    <a href="https://twitter.com/kottke" aria-label="Follow kottke.org on Twitter" id="follow-twitter"><i class="fa fa-twitter"></i></a><a href="https://facebook.com/kottke.org" aria-label="Follow kottke.org on Facebook" id="follow-facebook"><i class="fa fa-facebook-square"></i></a><a href="http://bonus.kottke.org/" aria-label="Follow kottke.org on Tumblr" id="follow-tumblr"><i class="fa fa-tumblr-square"></i></a><a href="http://feeds.kottke.org/main" aria-label="Read kottke.org via RSS" id="follow-feed"><i class="fa fa-rss"></i></a>
+   </div>
+  </div> 
+  <div id="top-nav-medium">
+   <a href="/about">about</a><a href="/everfresh">archives</a><a href="/shop">shop</a><a href="/members">membership!</a>
+   <div id="follow">
+    <a href="https://twitter.com/kottke" aria-label="Follow kottke.org on Twitter" id="follow-twitter"><i class="fa fa-twitter"></i></a><a href="https://facebook.com/kottke.org" aria-label="Follow kottke.org on Facebook" id="follow-facebook"><i class="fa fa-facebook-square"></i></a><a href="http://bonus.kottke.org/" aria-label="Follow kottke.org on Tumblr" id="follow-tumblr"><i class="fa fa-tumblr-square"></i></a><a href="http://feeds.kottke.org/main" aria-label="Read kottke.org via RSS" id="follow-feed"><i class="fa fa-rss"></i></a>
+   </div>
+  </div> 
+  <div id="top-nav-narrow">
+   <a href="/about">about</a><a href="/everfresh">archives</a><a href="/members">members!</a>
+  </div> 
+  <div id="easel"> 
+   <h3 style="margin-bottom: 4rem;">kottke.org posts about remix</h3> 
+   <ul class="related-tags"> 
+    <li><strong>See also...</strong></li>
+    <li><a href="/tag/video">video</a></li> 
+    <li><a href="/tag/art">art</a></li> 
+    <li><a href="/tag/music">music</a></li> 
+    <li><a href="/tag/movies">movies</a></li> 
+    <li><a href="/tag/TV">TV</a></li> 
+    <li><a href="/tag/design">design</a></li> 
+    <li><a href="/tag/Johannes%20Vermeer">Johannes Vermeer</a></li> 
+    <li><a href="/tag/NYC">NYC</a></li> 
+    <li><a href="/tag/museums">museums</a></li> 
+    <li><a href="/tag/photography">photography</a></li> 
+    <li><a href="/tag/artificial%20intelligence">artificial intelligence</a></li> 
+    <li><a href="/tag/maps">maps</a></li> 
+    <li><a href="/tag/Star%20Wars">Star Wars</a></li> 
+    <li><a href="/tag/The%20Simpsons">The Simpsons</a></li> 
+   </ul> 
+   <h2><a href="/20/03/iconic-art-design-reimagined-for-the-social-distancing-era">Iconic Art &amp; Design Reimagined for the Social Distancing Era</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 25, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>While it predates the COVID-19 pandemic and its accompanying social distancing by several years, <a href="http://www.josemanuelballester.com/">José Manuel Ballester</a>’s <a href="http://www.josemanuelballester.com/english/expoEspaciosOcultosMiami1/exposicionEspaciosOcultos1.htm">Concealed Spaces project</a> reimagines iconic works of art without the people in them (like what’s happening <a href="https://kottke.org/20/03/covid-19-empties-out-public-spaces">to our public spaces right now</a>). No one showed up for Leonardo’s Last Supper:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="550" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-01.jpg"></p> 
+    <p>Hieronymus Bosch’s The Garden of Earthly Delights is perhaps just as delightful without people:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="532" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-02.jpg"></p> 
+    <p>And Botticelli’s The Birth of Venus has been rescheduled:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="624" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-03.jpg"></p> 
+    <p><a href="https://twitter.com/bengreenman/status/1240102567243382787">Ben Greenman</a>, <a href="https://twitter.com/waxpancake/status/1241099119143178240">Andy Baio</a>, and <a href="https://6feetcovers.wixsite.com/6feetcovers">Paco Conde &amp; Roberto Fernandez</a> have some suggestions for new album covers:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="921" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-04.jpg"><br><img src="/plus/misc/images/corona-art-design-reimagined-05.jpg" width="1000" height="398" border="0" alt="Corona Art Design Reimagined"><br><img src="/plus/misc/images/corona-art-design-reimagined-06.jpg" width="1000" height="1045" border="0" alt="Corona Art Design Reimagined"></p> 
+    <p>Designer Jure Tovrljan <a href="https://www.behance.net/gallery/93755381/Coronavirus-Logos/">redesigned some company logos</a> for these coronavirus times.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1002" height="621" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-07.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1002" height="605" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-08.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1002" height="588" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-09.jpg"></p> 
+    <p>Coca-Cola even modified their own logo on a Times Square billboard to put some distance between the letters.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="667" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-10.jpg"></p> 
+    <p>(via <a href="https://www.thisiscolossal.com/2020/03/jose-manuel-ballester-concealed-spaces/">colossal</a> &amp; <a href="https://www.fastcompany.com/90480780/see-famous-logos-get-reimagined-for-the-coronavirus-age">fast company</a>)</p> 
+    <p><strong title="Mar 26, 2020">Update:</strong> <a href="https://www.fastcompany.com/90480769/empty-toilet-rolls-and-hand-sanitizer-emoji-get-redesigned-for-covid-19">Some emoji designed specifically for COVID-19</a>. The Earth with the pause button is my favorite. (via <a href="https://sidebar.io/">sidebar</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Andy%20Baio">Andy Baio</a></li> 
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/Ben%20Greenman">Ben Greenman</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/emoji">emoji</a></li> 
+     <li><a href="/tag/Jose%20Manuel%20Ballester">Jose Manuel Ballester</a></li> 
+     <li><a href="/tag/Jure%20Tovrljan">Jure Tovrljan</a></li> 
+     <li><a href="/tag/logos">logos</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/Paco%20Conde">Paco Conde</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Roberto%20Fernandez">Roberto Fernandez</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-sidebar"> 
+    <div class="bling-title">
+     <a href="https://carbonads.net/" target="_blank">ads via Carbon</a>
+    </div> 
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYICKJY&amp;placement=kottkeorg" id="_carbonads_js"></script> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/the-girl-with-a-schmeared-earring">The Girl with a Schmeared Earring</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 24, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1250" border="0" alt="Girl with the Schmeared Earring" data-src="/plus/misc/images/girl-schmeared-earring.jpg"></p> 
+    <p>From <a href="http://www.josephleeart.com/">Joseph Lee</a>, <a href="https://www.instagram.com/p/B-BPa-agdx6/">a super abstract rendition of Vermeer’s Girl with a Pearl Earring</a>. Another one for <a href="https://kottke.org/20/02/corn-with-a-pearl-earring">my collection of GPE remixes</a>.</p> 
+    <p>Previously from kottke.org on Joseph Lee’s work: <a href="https://kottke.org/18/11/ultra-impressionistic-portraits-made-with-just-a-few-thick-strokes-of-paint">Ultra-Impressionistic Portraits Made with Just a Few Thick Strokes of Paint</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/Johannes%20Vermeer">Johannes Vermeer</a></li> 
+     <li><a href="/tag/Joseph%20Lee">Joseph Lee</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/no-frills-branding">No Frills Branding</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 12, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="No Frills Branding" data-src="/plus/misc/images/no-frills-branding-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="No Frills Branding" data-src="/plus/misc/images/no-frills-branding-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="No Frills Branding" data-src="/plus/misc/images/no-frills-branding-03.jpg"></p> 
+    <p>Designer Kunel Gaur, head of a creative agency called <a href="https://www.weareanimal.co/">Animal</a>, has redesigned the packaging for several familiar brands using minimal black &amp; white graphics and unadorned typography. The designs don’t seem to be collected in one place, so you’ll have to <a href="https://www.instagram.com/kunelgaur/">poke around his Instagram</a> to find them.</p> 
+    <p>That LV bag actually looks like something <a href="https://www.instagram.com/virgilabloh/">Virgil Abloh</a> would design — it would sell like hotcakes. Dye it <a href="https://www.thecut.com/2020/03/will-the-millennial-aesthetic-ever-end.html">millennial pink</a> and you’ve got a freaking worldwide sensation. Fashion design is so easy!! (via <a href="https://mossandfog.com/brands-reimagined-with-bland-monochromatic-packaging/">moss &amp; fog</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/branding">branding</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Kunel%20Gaur">Kunel Gaur</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/new-york-apartment-for-sale-only-439-billion">New York Apartment For Sale, Only $43.9 Billion</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 09, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1100" border="0" alt="New York Apartment" data-src="/plus/misc/images/new-york-apartment.jpg"></p> 
+    <p>For <a href="https://whitney.org/exhibitions/new-york-apartment">New York Apartment</a>, an art project commissioned by The Whitney, artists Sam Lavigne and Tega Brain compiled actual NYC real estate listings into <a href="https://whitney.org/artport-commissions/new-york-apartment/">a listing for one mega apartment for sale</a>.</p> 
+    <blockquote>
+     <p>Compiled from actual online real estate listings, the artwork collapses the high and low ends of the market, architectural periods and styles, and neighborhoods and affordability into a single space that cumulatively creates a portrait of New York’s living spaces and the real estate market. Like a standard real estate ad, the listing shows the price, number of bed- and bathrooms, and square footage, all of which are updated weekly based on the city’s aggregated real estate listings.</p>
+    </blockquote> 
+    <p>Take some time to <a href="https://whitney.org/artport-commissions/new-york-apartment/">explore the project</a> — take the 3D virtual tour, scroll through all of the bathrooms &amp; closets, peruse the apartment features, and take the video tour:</p> 
+    <p class="widescreen embedded"><iframe src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen data-src="https://player.vimeo.com/video/376293182?color=ffffff&amp;title=0&amp;byline=0&amp;portrait=0"></iframe></p> 
+    <blockquote>
+     <p>Do you crave brilliant sunshine and the peace Zen behind closed doors at home, and the bustle and excitement of the big city at your doorstep?</p> 
+     <p>Do you dream of a Manhattan life?</p> 
+     <p>Do you dream of Brooklyn living with Manhattan in reach?</p> 
+     <p>Do you have a thing for top floor apartments?</p> 
+     <p>Do you have vision?</p> 
+     <p>Do you like light?</p> 
+     <p>Do you love to cook?</p> 
+     <p>Do you love to entertain?</p> 
+     <p>Do you need lots of closet space?</p> 
+     <p>Do you own or plan to buy a car?</p> 
+     <p>Do you prefer simple shaker style wood cabinets with solid surface counters or custom lacquer cabinets paired with a travertine marble?</p> 
+     <p>Do you want a home just steps to the beach?</p> 
+     <p>Do you want Katz Deli, Russ and Daughters or maybe some Economy Candy?</p>
+    </blockquote> 
+    <p>Contact information for all of the brokers is listed on the site in case you’re interested. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/real%20estate">real estate</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Sam%20Lavigne">Sam Lavigne</a></li> 
+     <li><a href="/tag/Tega%20Brain">Tega Brain</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/fossilized-skulls-of-cartoon-characters">Fossilized Skulls of Cartoon Characters</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 05, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Cartoon Fossils" data-src="/plus/misc/images/cartoon-fossils-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Cartoon Fossils" data-src="/plus/misc/images/cartoon-fossils-02.jpg"></p> 
+    <p>For his <a href="https://www.behance.net/gallery/91506639/Cartoon-Fossils">Cartoon Fossils series</a>, Filip Hodas used 3D modelling software to create fossilized skulls of cartoon characters like Scrooge McDuck, Tweetie Bird, Minnie Mouse, and Goofy.</p> 
+    <p>These remind me of <a href="https://michaelpaulus.com/section/59023-Character-Study.html">Michael Paulus’s Character Studies</a>, drawings of the skeletons of the likes of Lucy from Peanuts, Betty Boop, Marvin the Martian, and Pikachu. I have his Hello Kitty drawing hanging in my living room, purchased after <a href="https://kottke.org/06/12/leslie-harpold">Leslie Harpold</a> pointed me towards his work back in the day. (via <a href="https://www.thisiscolossal.com/2020/03/filip-hodas-cartoon-skull-fossils/">colossal</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/3D">3D</a></li> 
+     <li><a href="/tag/cartoons">cartoons</a></li> 
+     <li><a href="/tag/Filip%20Hodas">Filip Hodas</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/remaking-the-spider-verse-trailer-with-traditional-animation-techniques">Remaking the Spider-Verse Trailer with Traditional Animation Techniques</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 05, 2020</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/k4IdGIMa5JI"></iframe></p> 
+   <div class="post"> 
+    <p>Animator Pinot Ichwandardi, designer/illustrator Dita Ichwandardi, and their three young children decided to remake some of the iconic scenes from the <a href="https://www.youtube.com/watch?v=ii3n7hYQOl4">Spider-Man: Into the Spider-Verse trailer</a> using traditional animation techniques. You can see some of the process and the impressive results in the video above. They <a href="https://twitter.com/pinot/status/1079473368401879040">drew the scenes by hand</a>, built <a href="https://twitter.com/pinot/status/1187368366417367041">their own multiplane camera setup</a> (<a href="https://kottke.org/17/01/disneys-multiplane-camera-an-innovation-in-illusion">a la Disney</a>), and <a href="https://twitter.com/pinot/status/1188865434772221955">constructed a camera rig using Lego</a>. You can read more about their process in these two Twitter threads: <a href="https://twitter.com/pinot/status/1078361951707779072">one</a>, <a href="https://twitter.com/pinot/status/1185405091655929857">two</a>.</p> 
+    <p>After they were done, Sony Animation invited the family to visit their California campus to <a href="https://twitter.com/pinot/status/1205915533087928320">meet some of the team that worked on the movie</a>, including producers Phil Lord and Chris Miller.</p> 
+    <p>See also <a href="https://kottke.org/19/03/how-animators-created-the-spider-verse">How Animators Created Spider-Verse</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/animation">animation</a></li> 
+     <li><a href="/tag/Dita%20Ichwandardi">Dita Ichwandardi</a></li> 
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/Pinot%20Ichwandardi">Pinot Ichwandardi</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Spider-Man">Spider-Man</a></li> 
+     <li><a href="/tag/trailers">trailers</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/smithsonian-open-access-public-domain">Smithsonian Releases 2.8 Million High-Res Images Into the Public Domain</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 26, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1306" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="840" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="911" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-03.jpg"></p> 
+    <p>The Smithsonian Institution <a href="https://www.si.edu/openaccess">has released a massive trove of images and 3D models from their collections into the public domain</a>, allowing the public to use the images however they see fit. <a href="https://www.smithsonianmag.com/smithsonian-institution/smithsonian-releases-28-million-images-public-domain-180974263/">From Smithsonian Magazine</a>:</p> 
+    <blockquote>
+     <p>For the first time in its 174-year history, the Smithsonian has released 2.8 million high-resolution two- and three-dimensional images from across its collections onto an open access online platform for patrons to peruse and download free of charge. Featuring data and material from all 19 Smithsonian museums, nine research centers, libraries, archives and the National Zoo, the new digital depot encourages the public to not just view its contents, but use, reuse and transform them into just about anything they choose — be it a postcard, a beer koozie or a pair of bootie shorts.</p> 
+     <p>And this gargantuan data dump is just the beginning. Throughout the rest of 2020, the Smithsonian will be rolling out another 200,000 or so images, with more to come as the Institution continues to digitize its collection of 155 million items and counting.</p>
+    </blockquote> 
+    <p>Part of the release is <a href="https://smithsonian.figshare.com/?searchMode=1&amp;licenses=2">research data sets</a>, <a href="https://3d.si.edu/cc0">3D models of airplanes, chairs, and fossils</a>, and <a href="https://www.si.edu/openaccess/devtools">developer tools like an API and GitHub repository</a>. Here’s <a href="https://www.si.edu/openaccess/updates/21st-century-diffusion">the Smithsonian’s official press release</a> and <a href="https://www.si.edu/openaccess/faq">a FAQ about the Open Access collection</a>.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="975" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-04.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="847" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-05.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1590" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-06.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="477" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-07.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1498" border="0" alt="Smithsonian Open Access Collection" data-src="/plus/misc/images/smithsonian-open-08.jpg"></p> 
+    <p>The images above are (from top to bottom): <a href="https://www.si.edu/object/npg_NPG.74.75">photograph of Frederick Douglass</a>, <a href="https://3d.si.edu/object/3d/command-module-apollo-11:d8c6457e-4ebc-11ea-b77f-2e728ce88125?destination=edan-search/open_access?page=5">3D model of the Apollo 11 Command Module</a>, <a href="https://www.si.edu/object/npm_0.217665.1">inverted Curtiss Jenny stamp</a>, <a href="https://3d.si.edu/object/3d/tin-madame-cj-walkers-wonderful-hair-grower:5e37d1c8-6dce-46d5-9324-871eddba4313?destination=edan-search/open_access?page=2">3D model &amp; photographs of a tin of Madame C.J. Walker’s Wonderful Hair Grower</a>, <a href="https://3d.si.edu/object/3d/mammuthus-primigenius-blumbach:341c96cd-f967-4540-8ed1-d3fc56d31f12?destination=edan-search/open_access?page=5">3D model of a mammoth skeleton</a>, <a href="si.edu/object/nmaahc_2017.30.47">carte-de-visite portrait of Harriet Tubman</a>, <a href="https://3d.si.edu/object/3d/1903-wright-flyer:d8c62e5e-4ebc-11ea-b77f-2e728ce88125?destination=edan-search/open_access?page=3">3D model of the 1903 Wright Brothers Flyer</a>, <a href="https://www.si.edu/object/nmaahc_2017.71.5">a placard carried in the 1968 Memphis march</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/museums">museums</a></li> 
+     <li><a href="/tag/photography">photography</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/special-edition-gifjif-peanut-butter-jar">Special Edition GIF/JIF Peanut Butter Jar</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 25, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="https://www.amazon.com/exec/obidos/ASIN/B084R7DQK4/ref=nosim/0sil8"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Gif Jif" data-src="/plus/misc/images/gif-jif.jpg"></a></p> 
+    <p>Online image emporium <a href="https://giphy.com/">Giphy</a> has partnered with <a href="https://www.jif.com/">Jif</a> (the peanut butter people) to offer a limited edition jar of peanut butter with a dual-sided label: one side features the soft-G pronunciation of Jif and the other side the correct hard-G pronunciation of GIF. <a href="https://www.amazon.com/exec/obidos/ASIN/B084R7DQK4/ref=nosim/0sil8">You can purchase a jar on Amazon</a>. (via <a href="https://twitter.com/waxpancake">@waxpancake</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Giphy">Giphy</a></li> 
+     <li><a href="/tag/Jif">Jif</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/id-like-to-deprive-the-world-of-water-to-make-more-coca-cola">I’d Like to Deprive the World of Water (to Make More Coca-Cola)</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 21, 2020</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen data-src="https://player.vimeo.com/video/391983719"></iframe></p> 
+   <div class="post"> 
+    <p>For her video “The Real Thing”, filmmaker <a href="https://julianna.vision/">Julianna Villarosa</a> used footage of Coca-Cola’s famous “I’d Like to Buy the World a Coke” commercial ruined by pouring Coke on VHS and film copies to draw attention to the company’s water privatization practices in Chiapas, Mexico, where there’s a water shortage on. From the video:</p> 
+    <blockquote>
+     <p>The Chiapas Highlands, one of Mexico’s wettest regions, has a water shortage. Many drink Coca-Cola, which is bottled nearby and often easier to find than clean water. On average, residents drink more than half a gallon of soda per day. Indigenous Tzotzil use Coca-Cola in religious ceremonies and medicinal treatments. Diabetes has become the second-leading cause of death in Chiapas. The local Coca-Cola plant extracts more than 300,000 gallons of water per day.</p>
+    </blockquote> 
+    <p>Simple, direct, and brilliant activist art — Villarosa uses the company’s literally corrosive product to physically destroy their feel-good advertising to draw attention to the real harm this US company is doing to people &amp; ecosystems around the world. <a href="https://www.theguardian.com/world/2019/nov/15/coca-cola-country-in-southern-mexico-photo-essay">Here’s more on the Chiapas region and the residents’ reliance on Coke</a>:</p> 
+    <blockquote>
+     <p>Coca-Cola’s penetration of the market in Los Altos has also been aided by a strategy of charging less in remote rural areas where a Coke in a returnable glass bottle is often scarcely more expensive than bottled water. As in most of Mexico, clean drinking water is not generally available even to those who can count on running water in their homes, which means many turn to soft drinks for basic hydration.</p> 
+     <p>The irony of this is clear in an area known for its constant downpours and abundant springs, such as the one that attracted the Coca-Cola bottling company. Local activists say the company has so overexploited the spring that the city of San Cristóbal is now facing water shortages.</p> 
+     <p>The activists allege this has been possible in part because Coca-Cola has friends in high political places. Between 2000 and 2006 the country’s president was Vicente Fox, a former head of Coca-Cola Mexico.</p> 
+     <p>It all adds up to a perfect storm of sugar-related health issues in Los Altos. María del Socorro Sánchez, who is in charge of nutrition at the main hospital in San Juan Chamula, says only about one in 10 of the indigenous patients with diabetes accept there is any need to cut out sugar-packed drinks. “They just don’t believe that it is bad for them,” she said.</p>
+    </blockquote> 
+    <p>(via <a href="https://themorningnews.org/">the morning news</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/advertising">advertising</a></li> 
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/Coca-Cola">Coca-Cola</a></li> 
+     <li><a href="/tag/Julianna%20Villarosa">Julianna Villarosa</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/corn-with-a-pearl-earring">Corn with a Pearl Earring</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 21, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Corn with a Pearl Earring" data-src="/plus/misc/images/corn-pearl-earring.jpg"></p> 
+    <p>From artist Nanan Kang, <a href="https://www.instagram.com/p/B0X93xCnnfw/">Corn with a Pearl Earring</a>. I have a bit of a thing for riffs on Vermeer’s masterpiece. See also <a href="https://kottke.org/12/10/girl-with-a-pearl-earring-and-point-and-shoot-camera">Girl with a Pearl Earring and Point-and-Shoot Camera</a>, <a href="https://kottke.org/18/11/the-girl-with-the-grande-iced-latte">The Girl with the Grande Iced Latte</a>, <a href="https://kottke.org/18/02/rihanna-with-a-pearl-earring">Rihanna with a Pearl Earring</a>, <a href="https://kottke.org/18/02/mona-vincent-and-the-girl-with-the-pearl-earring-hit-the-beach">Girl with a Pearl Earring at the beach</a>, and <a href="https://www.behance.net/gallery/12506973/LEGO">a Lego version of the painting</a>. (via <a href="https://www.thisiscolossal.com/">colossal</a>)</p> 
+    <p><strong title="Feb 24, 2020">Update:</strong> This is fun (<a href="https://twitter.com/jschulenklopper/status/1230929486700589057">courtesy of @jschulenklopper</a>):</p> 
+    <blockquote>
+     <p>In Dutch (Vermeer’s native language) this one is even better. The original painting is called “Meisje met de parel” in Dutch, and corn is “mais”. So this one could be named “Maisje met de parel” which is pronounced almost identically.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/Johannes%20Vermeer">Johannes Vermeer</a></li> 
+     <li><a href="/tag/Nanan%20Kang">Nanan Kang</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/a-dj-mixes-songs-that-sound-the-same">A DJ Mixes Songs That Sound The Same</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 21, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>From DJ <a href="https://soundcloud.com/mike2600">Mike 2600</a>, a YouTube series called <a href="https://www.youtube.com/playlist?list=PLNfE79HMZCv29h_-Cfa_zrPUTLVMfCh7x">Songs That Sound The Same</a>.</p> 
+    <blockquote>
+     <p>My hit series of DJ videos exploring pairs of songs that aren’t direct covers or rip-offs, but have similar melodies, riffs, or chord progressions and just fit together nicely.</p>
+    </blockquote> 
+    <p>Each video is about a minute long and features him playfully mixing two or more songs together that sound very similar. Here’s one of the early episodes, featuring Hot Fun in the Summertime by Sly &amp; the Family Stone and Misunderstanding by Genesis:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/II9kqYhXd60"></iframe></p> 
+    <p>T.I.’s Whatever You Like and Zombie by The Cranberries:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/69CTMNJvtmM"></iframe></p> 
+    <p>Whomst among us wouldn’t go nuts if the DJ laid this down at the club — M83’s Midnight City &amp; Rihanna’s Diamonds:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/2I7UpB5_qII"></iframe></p> 
+    <p>And this one made me LOL — Draggin’ the Line by Tommy James mixes really well with the Baby Back Ribs song from the Chili’s commercial:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/3uszHMBfjJY"></iframe></p> 
+    <p>What a great combination of creativity and craft. Watching stuff like this always makes this non-musical person want to make some music. (via <a href="https://twitter.com/hoodinternet">@hoodinternet</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Mike%202600">Mike 2600</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/deepfake-video-of-robert-downey-jr-and-tom-holland-in-back-to-the-future">Deepfake Video of Robert Downey Jr. and Tom Holland in Back to the Future</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 19, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>This deepfake video of Back to the Future that features Robert Downey Jr. &amp; Tom Holland as Doc Brown &amp; Marty McFly is so convincing that I almost want to see an actual remake with those actors. (Almost.)</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/8OJnkJqkyio"></iframe></p> 
+    <p>They really should have deepfaked Zendaya into the video as Lorraine for the cherry on top. Here’s <a href="https://www.youtube.com/watch?v=y2wweemH8No">an earlier effort</a> with Holland as Marty that’s not as good. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/artificial%20intelligence">artificial intelligence</a></li> 
+     <li><a href="/tag/Back%20to%20the%20Future">Back to the Future</a></li> 
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Robert%20Downey%20Jr.">Robert Downey Jr.</a></li> 
+     <li><a href="/tag/Tom%20Holland">Tom Holland</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/the-dancing-baby-meme-digitally-remastered">The Dancing Baby Meme, Digitally Remastered</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 13, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>In 1996, <a href="https://knowyourmeme.com/memes/dancing-baby">Dancing Baby</a> was one of the earliest big memes to cross over from the nerd space of Usenet to the wider population; it even appeared on the popular TV show Ally McBeal. 18-year-old English college student Jack Armstrong, born more than 5 years after the meme debuted, decided to digitally remaster the original in 1080p and 60FPS:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/IObGEfDhNfw"></iframe></p> 
+    <p>Armstrong <a href="https://twitter.com/JArmstrongArty/status/1225901929898946561">shared how he tracked down the original 3D file</a> on Twitter. (via <a href="https://waxy.org/">waxy</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Jack%20Armstrong">Jack Armstrong</a></li> 
+     <li><a href="/tag/memes">memes</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/alternate-map-of-the-americas-features-long-chile">Alternate Map of the Americas Features “Long Chile”</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 13, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1334" border="0" alt="Anna Calcaterra Map" data-src="/plus/misc/images/anna-calcaterra-map.jpg"></p> 
+    <p>Long-time readers know that I like me some maps and in particular hand-drawn/homemade maps and maps of alternate realities. So I was charmed by <a href="https://twitter.com/craigcalcaterra/status/1227594895747141632">Anna Calcaterra’s alternate map of the Americas</a>, which features geographic entities like Long Chile, Ohio 2 (“Four Corners replaced w/ Ohio 2”), and East Dakota (RIP Minnesota). The kids are alright, y’all. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Anna%20Calcaterra">Anna Calcaterra</a></li> 
+     <li><a href="/tag/maps">maps</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/darth-costanza">Darth Costanza</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 27, 2020</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/Q__oy6ez9Vw"></iframe></p> 
+   <div class="post"> 
+    <p>The premise is pretty simple and there’s no need to oversell it because you can imagine what this is going to sound like going in and it delivers perfectly: George Costanza’s father’s voice dubbed over Darth Vader’s dialogue in Star Wars. Serenity now!</p> 
+    <p>(Quickly: Luke = Jerry, Han = George, Leia = Elaine, Chewie = Kramer. Does that even work? (Obi-Wan = Uncle Leo? Is 3PO Newman?)) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Seinfeld">Seinfeld</a></li> 
+     <li><a href="/tag/Star%20Wars">Star Wars</a></li> 
+     <li><a href="/tag/TV">TV</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/world-map-projection-but-all-south-americas">World Map Projection, But All South Americas</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 20, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>I bet you never noticed that South America can kind of approximate most of the world’s other continents pretty well. XKCD’s Randall Munroe did and <a href="https://xkcd.com/2256/">made a bad map projection of it</a>.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="682" border="0" alt="World Map Projection with all South Americas" data-src="/plus/misc/images/FEC6DE54-3802-428F-863A-E12B6CBE8B60.jpeg"></p> 
+    <p>This is only slightly worse than <a href="https://kottke.org/18/10/how-the-mercator-projection-distorts-the-true-sizes-of-countries-on-maps">the Mercator projection</a> tbh. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/maps">maps</a></li> 
+     <li><a href="/tag/Randall%20Munroe">Randall Munroe</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/kenobi-a-star-wars-fan-film">Kenobi, a Star Wars Fan Film</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 17, 2020</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/3uDwjIBR9s4"></iframe></p> 
+   <div class="post"> 
+    <p>Although the announced Disney+ series about Obi-Wan Kenobi may shed some light on the matter, we don’t know too much about what “Ben Kenobi” was up to on Tatooine after the events of Revenge of the Sith, besides keeping an eye on Luke. This short film made by a group of Star Wars fans as a “love letter” to the series shows what may have happened after the Empire makes its presence known when Luke is just a young boy. (via <a href="https://kk.org/">kevin kelly</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Star%20Wars">Star Wars</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/retitling-little-women-so-men-will-go-see-it">Retitling “Little Women” So Men Will Go See It</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 14, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>The audience for Greta Gerwig’s Little Women is running about 2/3 women and 1/3 men. Bruce Handy has <a href="https://www.newyorker.com/humor/daily-shouts/retitling-little-women-to-entice-men-to-go-see-it">some suggestions for a title change</a> that would entice more men to check the movie out.</p> 
+    <blockquote>
+     <p>“Star Wars, Episode X: The Rise of Amy”<br> “Four Girls, One Teacup”<br> “Into the Marchverse”<br> “The Jo Supremacy”</p>
+    </blockquote> 
+    <p>I saw Little Women on New Year’s Day and loved it — one of my favorite 2019 movies for sure. It’s idiotic that Gerwig didn’t get nominated for a Best Director Oscar.</p> 
+    <p>See also Kaitlyn Greenidge’s opinion piece, <a href="https://www.nytimes.com/2020/01/13/opinion/sunday/little-women-movie-race.html">The Bearable Whiteness of ‘Little Women’</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Bruce%20Handy">Bruce Handy</a></li> 
+     <li><a href="/tag/Greta%20Gerwig">Greta Gerwig</a></li> 
+     <li><a href="/tag/Kaitlyn%20Greenidge">Kaitlyn Greenidge</a></li> 
+     <li><a href="/tag/Little%20Women">Little Women</a></li> 
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/the-first-and-last-time-mister-rogers-sang-wont-you-be-my-neighbor-on-tv">The First and Last Time Mister Rogers Sang “Won’t You Be My Neighbor” on TV</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 14, 2020</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/_biMtzAxiy0"></iframe></p> 
+   <div class="post"> 
+    <p>Including special shows, Mister Rogers’ Neighborhood ran for 912 episodes and at the beginning of each one, Rogers sang “Won’t You Be My Neighbor?” while putting his sweater on and changing his shoes. In the video above, you can compare his rendition of the song from the first episode (February 19, 1968) and the final episode (August 31, 2001). It would take a significant effort (and might actually be impossible because he sings the song at a different pace each time), but I’d love to see someone cut together a version of this that features all 912 openings strung together chronologically, so you can see Rogers get older as he sings (a la <a href="https://kottke.org/20/01/noah-takes-a-photo-of-himself-every-day-for-20-years">Noah Kalina’s Everyday</a>).</p> 
+    <p>The same YouTube channel also edited together the first and last times Rogers sang “Good Feeling”:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/3ismxlNZeG0"></iframe></p> 
+    <p>(via <a href="http://www.openculture.com/2020/01/the-first-last-time-mister-rogers-sang-wont-you-be-my-neighbor-1968-2001.html">open culture</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Fred%20Rogers">Fred Rogers</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/TV">TV</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/12/every-sample-from-pauls-boutique-by-the-beastie-boys">Every Sample from Paul’s Boutique by the Beastie Boys</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Dec 23, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>This video catalogs every borrowed sample from Paul’s Boutique by the Beastie Boys, from the soundtrack to Car Wash to the Sugarhill Gang to the Eagles to the Ramones to the Beatles. They play the original first and then what they did with it on the album.</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/AYwCZqzrmaQ"></iframe></p> 
+    <p>Somehow this video only has 31,000 views?! You can also listen to <a href="https://soundcloud.com/ninja-tune/solid-steel-radio-show-31-8-1">this remix of Paul’s Boutique on Soundcloud</a>, which combines the source tracks with Beastie Boys vocals and some audio commentary.</p> 
+    <p class="widescreen"><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/58201292&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true"></iframe></p> 
+    <p><a href="https://twitter.com/tcarmody">Tim Carmody</a> made <a href="https://open.spotify.com/playlist/2RzG2meN4PMCkHVK0cCdPt?si=5lhVOpJhRUqfCvYNxcIgMQ">a Spotify playlist of all the sampled songs</a> or you can <a href="https://www.aloha-miscreant.com/p/beastie-boys-sample-source-collection.html">download zip files of the original songs sampled in Paul’s Boutique and five of their other albums</a>.</p> 
+    <p class="widescreen"><iframe src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="100%" height="360" frameborder="0" allowtransparency="true" allow="encrypted-media" data-src="https://open.spotify.com/embed/playlist/2RzG2meN4PMCkHVK0cCdPt"></iframe></p> 
+    <p>They just don’t make ‘em like this anymore, mostly because clearing all of the samples <a href="https://slate.com/business/2012/05/adam-yauch-and-pauls-boutique-how-dumb-court-decisions-have-made-it-nearly-impossible-for-artists-to-sample-the-way-the-beastie-boys-did.html">would be prohibitively expensive if not impossible</a>.</p> 
+    <blockquote>
+     <p>Hip-hop sampling began as a live technique, with DJs working turntables at parties and clubs. Whether it was strictly legal or not, nobody was going to try to sue anyone about it. As the genre’s popularity grew, people naturally started recording performances and releasing them as albums. Early sampling tended to come fast and furious. In the ’80s, short clips of existing recordings were the order of the day, often — as in the case of the Beastie Boys — lots of them, layered and shuffled in a clearly creative way. As hip-hop pushed further into the mainstream, however, the stakes got bigger and so did the samples.</p> 
+     <p>1990 saw the release of both M.C. Hammer’s “U Can’t Touch This” and Vanilla Ice’s “Ice, Ice, Baby.” Not only did both songs sample, they each relied heavily on one particular sample — the baselines from Rick James’ “Superfreak” and Queen and David Bowie’s “Under Pressure” — for their main hook. Both hits resulted in legal controversy.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Beastie%20Boys">Beastie Boys</a></li> 
+     <li><a href="/tag/copyright">copyright</a></li> 
+     <li><a href="/tag/legal">legal</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/12/artworks-from-the-prado-museum-altered-to-show-effects-of-climate-change">Artworks from the Prado Museum Altered to Show Effects of Climate Change</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Dec 17, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="476" border="0" alt="Prado Climate Change" data-src="/plus/misc/images/prado-climate-change-01.jpg"></p> 
+    <p>In collaboration with the Prado Museum in Madrid, the World Wildlife Fund <a href="https://www.wwf.es/nuestro_trabajo_/clima_y_energia/cumbres_del_clima/cop_25_chile_madrid/locambiatodo/accioncoplocambiatodo/">altered a few paintings from the museum’s collection to highlight the future effects of climate change</a>: extinction of species, sea level rise, desertification, and climate refugees.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1387" border="0" alt="Prado Climate Change" data-src="/plus/misc/images/prado-climate-change-02.jpg"></p> 
+    <p>(via <a href="http://www.openculture.com/2019/12/the-prado-museum-digitally-alters-four-masterpieces-to-strikingly-illustrate-the-impact-of-climate-change.html">open culture</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/global%20warming">global warming</a></li> 
+     <li><a href="/tag/museums">museums</a></li> 
+     <li><a href="/tag/Prado%20Museum">Prado Museum</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/World%20Wildlife%20Fund">World Wildlife Fund</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/12/mashup-of-radioheads-creep-all-i-want-for-christmas-is-you">Mashup of Radiohead’s Creep &amp; All I Want for Christmas is You</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Dec 16, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>This is a little slice of genius right here, a mashup of Radiohead’s Creep and Mariah Carey’s All I Want for Christmas is You. It takes a little bit to get going but I LOL’d when the vocals finally came in.</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/ZE4shVkwqIk"></iframe></p> 
+    <p>I have to say though that it’s not quite as entertaining as this All I Want for Christmas / This Is America combo, which might actually be the best thing on the internet.</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/7ekZwkmWzH0"></iframe> </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Childish%20Gambino">Childish Gambino</a></li> 
+     <li><a href="/tag/Mariah%20Carey">Mariah Carey</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/Radiohead">Radiohead</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/12/pachelbels-canon-played-by-train-horns">Pachelbel’s Canon Played by Train Horns</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Dec 11, 2019</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/cD3QlR98--A"></iframe></p> 
+   <div class="post"> 
+    <p>This video of the familiar tune of Pachelbel’s Canon being played by different clips of train horns all edited together is both funny and charming. If you need a little pick-me-up right now, this should do the trick. Watch for the celebrity cameo around the 1:00 mark. (via <a href="https://thekidshouldseethis.com/post/pachelbels-train-horns">the kid should see this</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Johann%20Pachelbel">Johann Pachelbel</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/trains">trains</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/ornitographies-time-merged-images-of-the-paths-of-birds-through-the-sky">Ornitographies, Time-Merged Images of the Paths of Birds Through the Sky</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 27, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://www.xavibou.com/index.php/project/ornitographies/">For his Ornitographies project</a>, Xavi Bou takes photographs of birds and stitches them together into single images so that you can see their flight paths through the sky.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="586" border="0" alt="Xavi Bou Ornitographies" data-src="/plus/misc/images/xavi-bou-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1464" border="0" alt="Xavi Bou Ornitographies" data-src="/plus/misc/images/xavi-bou-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="563" border="0" alt="Xavi Bou Ornitographies" data-src="/plus/misc/images/xavi-bou-03.jpg"></p> 
+    <p>My guest editor Patrick briefly shared one of Bou’s images <a href="https://kottke.org/19/11/the-best-excuse-for-some-internet-wanderings">on his exit post</a> a couple of weeks ago, but I thought they were worth another look. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/birds">birds</a></li> 
+     <li><a href="/tag/photography">photography</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Xavi%20Bou">Xavi Bou</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/a-deepfake-nixon-delivers-eulogy-for-the-apollo-11-astronauts">A Deepfake Nixon Delivers Eulogy for the Apollo 11 Astronauts</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 26, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>When Neil Armstrong and Buzz Aldrin landed safely on the Moon in July 1969, President Richard Nixon <a href="https://en.wikisource.org/wiki/Richard_Nixon%27s_Phone_Call_to_the_Moon">called them</a> from the White House during their moonwalk to say how proud he was of what they had accomplished. But in the event that Armstrong and Aldrin did not make it safely off the Moon’s surface, Nixon was prepared to give a very different sort of speech. The remarks were written by William Safire and recorded in a memo called <a href="https://www.archives.gov/files/presidential-libraries/events/centennials/nixon/images/exhibit/rn100-6-1-2.pdf">In Event of Moon Disaster</a>.</p> 
+    <p>Fifty years ago, not even Stanley Kubrick could have faked the Moon landing. But today, visual effects and techniques driven by machine learning are so good that it might be relatively simple, at least the television broadcast part of it.<sup id="fnref:1574781744"><a href="#fn:1574781744" rel="footnote">1</a></sup> In a short demonstration of that technical supremacy, <a href="https://virtuality.mit.edu/">a group from MIT</a> has created a <a href="https://kottke.org/19/06/deepfakes-imagine-all-the-people">deepfake</a> version of Nixon delivering that disaster speech. Here are a couple of clips from the deepfake speech:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/yaq4sWFvnAY"></iframe></p> 
+    <blockquote>
+     <p>Fate has ordained that the men who went to the moon to explore in peace will stay on the moon to rest in peace.</p>
+    </blockquote> 
+    <p><a href="https://moondisaster.org/">The full film</a> is being <a href="https://www.idfa.nl/en/film/29cebac4-4364-49d6-bf7a-479d16c04c02/in-event-of-moon-disaster">shown at IDFA DocLab</a> in Amsterdam and will make its way online sometime next year.</p> 
+    <p>The implications of being able to so convincingly fake the televised appearance of a former US President are left as an exercise to the reader. (via <a href="https://boingboing.net/2019/11/25/nixon-deepfaked-to-read-his-pr.html">boing boing</a>)</p> 
+    <ol>
+     <li class="footnote" id="fn:1574781744"><p>But technology is often a two-way street. If the resolution of the broadcast is high enough, CGI probably still has tells…and AI definitely does. And even if you got the TV broadcast correct, with the availability of all sorts of high-tech equipment, the backyard astronomer, with the collective help of their web-connected compatriots around the world, would probably be able to easily sniff out whether actual spacecraft and communication signals were in transit to and from the Moon.<a href="#fnref:1574781744" title="return to article">↩</a></p></li> 
+    </ol> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Apollo">Apollo</a></li> 
+     <li><a href="/tag/Apollo%2011">Apollo 11</a></li> 
+     <li><a href="/tag/artificial%20intelligence">artificial intelligence</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Richard%20Nixon">Richard Nixon</a></li> 
+     <li><a href="/tag/space">space</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/the-typologies-of-new-york-city">The Typologies of New York City</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 22, 2019</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/WTGmxCpo89c"></iframe></p> 
+   <div class="post"> 
+    <p>Using almost 1300 photos from Instagram of iconic/stereotypical shots of NYC, Sam Morrison spent 200 hours creating what he calls a crowdsourced hyperlapse video of the city. I love it. Reminds me a little of <a href="http://www.slate.com/articles/technology/technology/2009/01/all_i_wanna_do_is_zoom_zoom_zoom_zoom.html">the old Microsoft application Photosynth</a>, which could stitch together hundreds of online photos of, say, the Eiffel Tower or Golden Gate Bridge into a composite 3D image. (via a newly resurgent <a href="https://waxy.org/">waxy.org</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Sam%20Morrison">Sam Morrison</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/2019-films-as-simpsons-screencaps">2019 Films as Simpsons Screencaps</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 22, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>On Twitter, <a href="https://twitter.com/goodjobliz/status/1197238461067124736">Hannah Woodhead posted</a> a thread of screencaps from The Simpsons that uncannily encapsulate movies released in 2019. My two favorites are Parasite and The Lighthouse:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="640" height="480" border="0" alt="Simpsons 2019 Movies" data-src="/plus/misc/images/simpsons-2019-movies-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="640" height="480" border="0" alt="Simpsons 2019 Movies" data-src="/plus/misc/images/simpsons-2019-movies-02.jpg"></p> 
+    <p>If you’d like, you can make your own using <a href="https://frinkiac.com/">Frinkiac</a>, the Simpsons screencap search engine. I did this one for Booksmart:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="640" height="480" border="0" alt="Simpsons 2019 Movies" data-src="/plus/misc/images/simpsons-2019-movies-03.jpg"></p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Hannah%20Woodhead">Hannah Woodhead</a></li> 
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/The%20Simpsons">The Simpsons</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/the-art-of-the-travelling-salesman-problem">The Art of the Travelling Salesman Problem</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 21, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="999" border="0" alt="TSP Portraits" data-src="/plus/misc/images/tsp-portraits-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="TSP Portraits" data-src="/plus/misc/images/tsp-portraits-02.jpg"></p> 
+    <p>All art is bounded by one constraint or another. Mathematician <a href="http://www2.oberlin.edu/math/faculty/bosch.html">Robert Bosch</a> makes what he calls “optimization art”, which is best embodied by <a href="http://www.math.uwaterloo.ca/tsp/data/art/">these</a> <a href="http://www2.oberlin.edu/math/faculty/bosch/tspart-page.html">images</a> produced as solutions to the travelling salesman problem. Each image is made up of a continuous line that is the shortest possible route through a series of points without revisiting any single point, much like <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">the optimal route of a travelling salesperson visiting cities</a>. The rendition of a van Gogh self-portrait uses a solution for 120,000 “cities” while the single line forming the Girl with the Pearl Earring visits 200,000 cities.</p> 
+    <p>I would love to see an <a href="https://observablehq.com/">Observable</a> notebook where you could upload any photo to make images like these. (via <a href="https://twitter.com/Ianmurren">@Ianmurren</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/mathematics">mathematics</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Robert%20Bosch">Robert Bosch</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/the-succession-theme-works-over-any-tv-show-title-sequence">The Succession Theme Works Over Any TV Show Title Sequence</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 14, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>If you’re having withdrawals from Succession, perhaps this will help a little. A fan created <a href="https://www.youtube.com/playlist?list=PLqYonWamyoZRLNjfvZ88PnWedY3eQbsZO">these title sequences</a> of iconic TV shows with the pulsing Succession theme song dubbed over them. The Wire, The Simpsons, and Mad Men are particular favorites of mine:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/DKyeLGLG1Jk"></iframe></p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/M_1Sgyo_-js"></iframe></p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/fUmkjr9E6Zw"></iframe></p> 
+    <p>The Succession theme is to title sequences like what <a href="https://knowyourmeme.com/memes/christ-what-an-asshole">“Christ, what an asshole!”</a> is to New Yorker cartoon captions — it even fits Happy Days (mostly):</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/y-zHeyIBhow"></iframe></p> 
+    <p>If you’d like to try your hand at this, the theme song <a href="https://open.spotify.com/track/6Xlqe68uqG50X6kWYCQked?si=hG0ozYNgTyKHe9E5d5-EXQ">is available on Spotify</a>. Its composer, Nicholas Britell, also scored Moonlight and If Beale Street Could Talk. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Mad%20Men">Mad Men</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/Nicholas%20Britell">Nicholas Britell</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Succession">Succession</a></li> 
+     <li><a href="/tag/The%20Simpsons">The Simpsons</a></li> 
+     <li><a href="/tag/The%20Wire">The Wire</a></li> 
+     <li><a href="/tag/TV">TV</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/10/the-odyssey-in-limerick-form">The Odyssey in Limerick Form</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 16, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Emily Wilson, whose <a href="http://www.amazon.com/exec/obidos/ASIN/0393089053/ref=nosim/0sil8">translation of The Odyssey</a> recently reintroduced the epic to a wider non-classics audience, <a href="https://twitter.com/emilyrcwilson/status/1181997025774260224">has now cheekily translated the tale of Odysseus into a series of limericks</a>. She starts off:</p> 
+    <blockquote>
+     <p>There was a young man called Telemachus<br> who was bullied and in a dilemma ‘cause<br> he missed his lost dad<br> and his mom made him mad<br> and he almost got killed by Eurymachus.</p>
+    </blockquote> 
+    <p>And here’s the bit about Odysseus’ men eating the cattle of Helios, which earns them a thunderbolt from Zeus.</p> 
+    <blockquote>
+     <p>The men were fed up with their boss,<br> the rich guy, who’d gone for a doss.<br> They ate up the cattle,<br> which shortly proved fatal,<br> and all of their short lives were lost.</p>
+    </blockquote> 
+    <p>So good. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/books">books</a></li> 
+     <li><a href="/tag/Emily%20Wilson">Emily Wilson</a></li> 
+     <li><a href="/tag/poetry">poetry</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/The%20Odyssey">The Odyssey</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <p class="page-nav"><a href="/tag/remix/2">Older posts &nbsp;<i class="fa fa-arrow-right"></i></a></p> 
+  </div> 
+  <div class="spacer"></div> 
+  <div id="footer"> 
+   <div id="bottom-nav-wide">
+    <span id="loving-you">kottke.org, loving you since 1998</span><a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives + tags</a><a href="/shop">shop</a><a href="/members">membership!</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+   <div id="bottom-nav-medium">
+    <a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives</a><a href="/shop">shop</a><a href="/members">membership!</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+   <div id="bottom-nav-narrow">
+    <a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+  </div> 
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-871179-1', 'auto');
+  ga('send', 'pageview');
+
+</script>  
+ </body>
+</html>

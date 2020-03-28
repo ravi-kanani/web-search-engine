@@ -1,0 +1,71 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / articles / full width containers in limited width parents author chris coyier 35 comments go to comments published jul 25, 2016 personalized marketing with mailchimp i bookmarked a tweet a few months ago, as it was a bonafide css trick and that's what we love around here. the issue is: how do we make a full-browser-width container when we're inside a limited-width parent? starting point this image is 100% wide as it's limited-width parent. we want to stretch it exactly as wide as the browser window. here's some minimal assumed markup: <!-- parent -->
+<main>
+
+  <p>stuff.</p>
+
+  <!-- container we want to be full width -->
+  <figure class="full-width">
+    <!-- could be whatever content -->
+    <img src="dog.jpg" alt="">
+  </figure>
+
+</main> considerations if we could use absolute positioning, we could set the container to be at left: 0; and width: 100%; - but we can't, because we want the container to remain in flow. can't we just apply some negative margin to each side and pull it outwards? in some circumstances, we can! with known % width let's say the parent container was 60% wide and centered. that means there is 20% width on either side of it. but margin is calculated based on the parent element, so to pull it to the left 20% of the browser window, you'd need 1/3 of the width of the parent, so... main {
+  width: 60%;
+  margin: 0 auto;
+  /* creates 20% margins on either side */
+}
+.full-width {
+  /* 1/3 of 60% = the 20% margin on either side */
+  margin-left: -33.33%;
+  margin-right: -33.33%;
+} with known non-% parent width under most other circumstances, we just don't have enough information to know exactly how far to pull out the full width container with negative margins. well, unless... we could use the width of the browser window in our css math. the amount we want to "pull" to the left and right is half the width of the browser window plus half the width of the parent. (assuming the parent is centered.) so, so our parent is 500px wide: .full-width {
+  margin-left: calc(-100vw / 2 + 500px / 2);
+  margin-right: calc(-100vw / 2 + 500px / 2);
+} a fixed width like that feels a little red-flaggy (i.e. what happens on narrower screens?), all this would likely be wrapped in a media query that makes it only apply on larger screens: @media (min-width: 500px) {
+  main {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .full-width {
+    margin-left: calc(-100vw / 2 + 500px / 2);
+    margin-right: calc(-100vw / 2 + 500px / 2);
+  }
+} since our demo was an image, you might also do something like .full-width img { width: 100%; } too, to get that full coverage. if it's less brain bending, you might have luck reducing to: @media (min-width: $max-width) {
+  .full-width {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+} translate since animations (probably) aren't involved here, it's probably not super necessary, but you could pull the container back to the edge with transforms instead. @media (min-width: 40em) {
+  .full-width {
+    width: 100vw;
+    transform: translatex(calc((40em - 100vw)/2));
+  }
+} @supports() the above idea was taken from a pen by brandon mathis where he combined that idea with wrapping it all in @supports. /* see warning below */
+@supports (width: 100vw) {
+  .full-width {
+    width: 100vw;
+  }
+  @media all and (min-width: 40rem) {
+    .full-width {
+       transform: translatex(calc((40rem - 100vw)/2));
+    }
+  }
+} the idea here is that none of this would apply if the browser didn't support viewport units. that way you could pull fallback behavior above this in the css and let this override it if it can. seems like a good idea, but in my testing only firefox got this right. chrome would sometimes incorrectly apply the media query when it wasn't supposed to (screenshot). (i say "sometimes" as it seemed like a redraw would "fix" it, only to not apply the media query the other direction.) edge also didn't seem to apply the media query rules at all (screenshot). maybe nested @-rules are a bit buggy yet. no calc() needed sven wolfermann followed up jon neal's idea with a clever variation that doesn't need calc(): .full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+} the idea here is: push the container to the exact middle of the browser window with left: 50%;, then pull it back to the left edge with negative -50vw margin. very clever! this way you don't need any information about the parent width at all. do note that both this and the calc() version require the parent to be exactly centered in the browser. you might even think: why bother with the right and margin-right? it's true you don't really need it on a left-to-right site, but if there is any chance of direction: rtl; happening, you'll need the right properties, so having both is more bulletproof. i'm gonna put a fork of this method here, as it seems the most useful. see the pen full viewport width image (container) inside article by chris coyier (@chriscoyier) on codepen. our learning partner need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. comments jennifer permalink to comment# july 25, 2016 this is just awesome, thank you! taylor hunt permalink to comment# july 25, 2016 the chrome bug might be from not measuring viewport units correctly when the document’s overflow is set to something other than auto. i ran into that problem with this technique too (scroll down to “oh no, a horizontal scrollbar”), and it doesn’t look like they’ve fixed it since then. gabriel tadeu permalink to comment# july 25, 2016 i just found the reason reading this text here: “at some point, the items will overflow the viewport. on windows, a scroll bar will appear, slightly shrinking the viewport. on os x, a smart scroll bar will appear over the content which shows and hides automatically, thus not affecting the viewport. how is that relevant? here’s a bit of the specification:” “when the value of ‘overflow’ on the root element is ‘auto’, any scroll bars are assumed not to exist.” – http://www.w3.org/tr/css3-values/#viewport-relative-lengths colir permalink to comment# july 25, 2016 in the same idea, here an code pen to get image sized to half of the viewport with bootstrap3..perhaps this can be useful for somebody lewis cowles (@lewiscowles1) permalink to comment# july 25, 2016 very cool, but please don’t do this if you can help it nick caldwell permalink to comment# july 25, 2016 it would probably be useful to explain why not. tyler sticka permalink to comment# july 25, 2016 great summary, chris! i wrote a post on this very topic, though i’d completely missed jonathan neal’s tweet! great minds and all that. personally, i prefer the calc version. allow me to be a self-quoting dork to explain why: although this sidesteps the calc dependency (which is great), browsers that don’t support viewport units will still apply left: 50%. using calc (which has greater browser support than viewport units anyway) insures no layout change occurs unless the browser supports 100% of the technique. proq permalink to comment# july 25, 2016 can this be used for emails? alan hardman permalink to comment# july 25, 2016 considering you generally can’t even safely use a float within emails, i’d say don’t use this. it’ll probably just fall back to typical standard positioning where not supported, but some clients do weeeeird things to email. sérgio lopes permalink to comment# july 25, 2016 maybe with simples a fallback? .full-width {
+  width: 100%;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50%;
+  margin-left: -50vw;
+}
+ maxart permalink to comment# july 25, 2016 no. 100% and 50% would refer to the parent’s width, thus cancelling any effect. if the browser doesn’t support vw, just don’t use anything. ted permalink to comment# july 25, 2016 unfortunately, the issue is that “full width” image will always be cut by the vertical browser scrollbar (~25px). anyone has a solution for that? for now, everyone is just using js, or modifying layout of parent containers (to just apply width:100% to the image). vin permalink to comment# july 26, 2016 curious about this too. it is possible with using calc(): .full-width { width: calc(100vw – 25px); position: relative; left: 50%; right: 50%; margin-left: calc(-50vw + 12.5px); margin-right: calc(-50vw + 12.5px); } thomas permalink to comment# july 29, 2016 @vince: then you’d have a 12.5px gap on the right on devices whose os and/or settings defaults to having a scrollbar over the content, namely every single mac without a standard mouse plugged in and every single mobile device. the truth is, while this technique surely would be ideal in a perfect world, the current spec for the viewport units is so dumb it prevents us from using it, as well as vw-based grids. see gabriel tadeu’s comment for details on the spec. vijay rudraraju permalink to comment# july 25, 2016 genius! you’ve delivered again chris. i was racking my brain just yesterday on how to get full width colored backgrounds when inside a .container. murat atila permalink to comment# july 27, 2016 what you say, about a such decision? p.s. sry for my eng david permalink to comment# july 26, 2016 the not so cool method of selecting anything but the image: see the pen full viewport width image (container) inside article – simple version by david bullock (@serkai) on codepen. florian permalink to comment# july 26, 2016 that’s amazing! thanks! wndlql permalink to comment# july 26, 2016 i’m still wondering where could this trick be useful… rodrigo ibarra permalink to comment# july 26, 2016 say you are a publication, and you have some great photos and want to display some of them at 100%, whoever is writing the content just needs to drop the images in the middle of said text and boom! full with images. terry permalink to comment# august 2, 2016 really? ever written a blog and wanted a full-bleed image? lazza permalink to comment# july 26, 2016 very nice trick, thank you. :) btw i was wondering how you got the idea of that amazing lorem ipsum-like text filled with bacon and similar words in many languages. :d wefegererg permalink to comment# july 27, 2016 http://baconipsum.com/ lazza permalink to comment# july 27, 2016 thank you, wefegererg! davor suljic permalink to comment# july 26, 2016 what about this solution? rahul permalink to comment# july 28, 2016 theres even zombie and skateipsum :) emil björklund permalink to comment# july 27, 2016 maybe nested @-rules are a bit buggy yet. yup – i found a bug with regards to that specific situation in chrome – turns out, @media blocks inside @supports were not being re-evaluated on resize. i sent a bug report (and blogged about the bug) and the chromium folks had a fix real quick – so that particular situation should be resolved soon. :-) russellkitchen permalink to comment# july 27, 2016 very cool! have to say i prefer this method though: .full-width { width: 100vw; position: relative; left: 50%; transform: translatex(-50%); } vitor permalink to comment# july 28, 2016 hell ya! this is awesome! azragh permalink to comment# july 29, 2016 awesome! i didn’t even thought about doing this.. will consider this in near future.. =d ahmad awais permalink to comment# july 31, 2016 awesome sauce! i had created a codepen last year just for doing that. i did it with margin-left and translatex. amanda permalink to comment# august 5, 2016 awesome! grant hutchins permalink to comment# august 7, 2016 great article! fyi the image is missing in the codepen. arden permalink to comment# august 12, 2016 although this is a great and easy solution, it also feels a bit ‘hacky’, breaking out of the box this way. if you can control your markup, i guess it would always be nicest to have a container for your paragraphs, etc. and have your images be the 100% width. tristen unrau permalink to comment# september 3, 2016 thanks for the ‘no calc needed’ solution! here’s an additional tip: if you want to have content inside any full-width element, you can apply your main wrapper properties to all child elements of any .full-width element like this: .full-width > * {
+  // main wrapper properties here
+}
+ this comment thread is closed. if you have important information to share, please contact us. related how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

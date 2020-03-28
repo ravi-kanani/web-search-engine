@@ -1,0 +1,1029 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"> 
+ <head profile="http://gmpg.org/xfn/11"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>null and void | petite anglaise</title> 
+  <link rel="pingback" href="https://petiteanglaise.com/xmlrpc.php"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9wZXRpdGVhbmdsYWlzZS5jb20%3D"
+		+ "&wpcomid=14262311"
+		+ "&time=1585342254";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//petiteanglaise.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Feed" href="https://petiteanglaise.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Comments Feed" href="https://petiteanglaise.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » null and void Comments Feed" href="https://petiteanglaise.com/2005/05/22/null-and-void/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s2.wp.com/_static/??-eJylk9tuwjAMhl9oaVZQgV1Me5akNZlZTkocur79XFq0DgSbxk0VO/7sP7Yr+yja4Ak8SVdEtMWgzzKBVQSdiCHThVW1OT/JBXZmTGFTQzJ8k0Buq21VS13QdlLb0H4IizqpNMhMg4U/pDlRWR6AohpxNYRCwiTs/psiKUJv8i/4vlgrMhII6HAE5rbIzbpebzerFwlHjmeueOpC76cyD2c9qyR0YNHDwwlZlpmGNivsMJM8IvQ3k7ZhblldrZ6rWvSxDW7ipotqEnWa6wPSJlWW8y6lXXqvCixWdFwy9ruoaIxwXEmBBcdh97AeOwO80xwynwXB531k7IHQOibIWfDXYXGC3rnW9d8wuWUsWrZW5YztjTEuChgIgp/Lyxn8D0PsrcJ0D00wDpmP5vSib3OE3txr3eyauml29ebwBVtYdEw=?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link rel="stylesheet" id="print-css-1-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s0.wp.com/_static/??-eJx9jtEOgjAMRX/I2Uwc4oPxW8Yco1o2spYY/96ZQMSQ+NQ2Off2wHNULkXxUWCY1EhTwMhgnWCKrc3fbe+Yd7DCF7abiBSjeOVvKBjD3AJ1patTfThDoNTawsiLPAOLFXTQko2PTenKYUwsqiOLGbi3uRQv81+Kk8Pyi1JIv8cmJL0fik5/nP0+wHW4aNMYbUyj6/sbZOVojw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script>
+var related_posts_js_options = {"post_heading":"h4"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJx9zcEKwjAMBuAXMqs7uOlBfJa5xZLSpLVJGb69HehliBAIIV/yuzUDyRzrgupCq2fF8vq0LujB/QPA5Mtk2DHJF89JDMU2m5Mao+rk8ceW050iQlUsDYi1mEfaO66QY/Uk6grGFrXA9nU3tasbX/vT2F+O4zCcwxtEF0+w"></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://petiteanglaise.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <link rel="prev" title="endings" href="https://petiteanglaise.com/2005/05/20/275/"> 
+  <link rel="next" title="bisou" href="https://petiteanglaise.com/2005/05/24/bisou-2/"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="canonical" href="https://petiteanglaise.com/2005/05/22/null-and-void/"> 
+  <link rel="shortlink" href="https://wp.me/pXQhh-4t"> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2005%2F05%2F22%2Fnull-and-void%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2005%2F05%2F22%2Fnull-and-void%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="null and void"> 
+  <meta property="og:url" content="https://petiteanglaise.com/2005/05/22/null-and-void/"> 
+  <meta property="og:description" content="I wish I knew how to behave. If Mr Frog had shouted, or cried, or lost his temper, stormed out and slammed the door behind him, I would have known how to react to that. I expected fireworks and mel…"> 
+  <meta property="article:published_time" content="2005-05-22T20:49:45+00:00"> 
+  <meta property="article:modified_time" content="2005-05-22T20:49:45+00:00"> 
+  <meta property="og:site_name" content="petite anglaise"> 
+  <meta property="og:image" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="200"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> 
+  <meta name="twitter:text:title" content="null and void"> 
+  <meta name="twitter:image" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="openid.server" href="https://petiteanglaise.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://petiteanglaise.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://petiteanglaise.com/osd.xml" title="petite anglaise"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style> 
+  <meta name="application-name" content="petite anglaise">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://petiteanglaise.com/feed/;icon-uri=https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="I wish I knew how to behave. If Mr Frog had shouted, or cried, or lost his temper, stormed out and slammed the door behind him, I would have known how to react to that. I expected fireworks and melodrama. I felt I deserved them, somehow. Here was I, stammering in a low, guilt-ridden voice…"> 
+  <link rel="amphtml" href="https://petiteanglaise.com/2005/05/22/null-and-void/amp/">
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta name="msapplication-TileImage" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&amp;csblog=XQhh&amp;cscache=6&amp;csrev=77"> 
+ </head> 
+ <body class="post-template-default single single-post postid-277 single-format-standard customizer-styles-applied highlander-enabled highlander-light"> 
+  <div id="rap"> 
+   <h1 id="header"><a href="https://petiteanglaise.com/">petite anglaise</a></h1> 
+   <div id="content"> <!-- end header --> 
+    <h2>May 22, 2005</h2> 
+    <div class="post-277 post type-post status-publish format-standard hentry category-navel-gazing category-parting-ways" id="post-277"> 
+     <h3 class="storytitle"> null and void </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/navel-gazing/" rel="category tag">navel gazing</a>, <a href="https://petiteanglaise.com/category/parting-ways/" rel="category tag">parting ways</a> — petiteanglaiseparis @ 10:49 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div align="justify"> 
+       <p>I wish I knew how to behave.</p> 
+       <p>If Mr Frog had shouted, or cried, or lost his temper, stormed out and slammed the door behind him, I would have known how to react to that. I expected fireworks and melodrama. I felt I <em>deserved</em> them, somehow. Here was I, stammering in a low, guilt-ridden voice that I had finally found the strength to walk away from this relationship which was not what I wanted any more. Where, in my opinion, it was plain to see that we were both deeply unhappy. Here was I confessing that I hadn’t come to take this decision without any outside help: there was another person involved. It’s not that I <em>wanted</em> to inflict pain. Far from it. But <em>some</em> kind of reaction would have been nice.</p> 
+       <p>Nothing.</p> 
+       <p>Not a moan or a whimper on my account. There was genuine anguish as he grappled with the idea of having to live apart from our daughter, and possibly see her less often. There were demands for reassurance that his role as daddy would never be challenged. This was the outcome I had told myself I expected, that I had hoped for, as I rehearsed my lines earlier that evening, but I found the total absence of any emotional response in relation to <strong>me</strong> galling nonetheless.</p> 
+       <p>“What about me?” I wanted to yell. “You’re losing me too. Me! Do I really leave you completely indifferent?”</p> 
+       <p>I suppose we have both known for a long time that we were now together by default, even if we rarely dared to admit or acknowledge it, even to ourselves. For the sake of our Tadpole. Out of inertia. Or fear of change and upheaval. So where the jagged emotions should have been, there was now just a gaping void.</p> 
+       <p>Part of me feels cheated. After working myself up to this finale over a week of sleepless nights and adrenaline-fuelled days, it was a resounding anti-climax. I wanted to be wept over bitterly or gallantly fought for. Mourned, or regretted just a little.</p> 
+       <p>So that I felt like I was someone worth having in the first place. </p> 
+      </div> 
+      <div id="jp-post-flair" class="sharedaddy sd-sharing-enabled">
+       <div class="sharedaddy sd-sharing-enabled">
+        <div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing">
+         <h3 class="sd-title">Share this:</h3>
+         <div class="sd-content">
+          <ul>
+           <li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-277" class="share-twitter sd-button share-icon" href="https://petiteanglaise.com/2005/05/22/null-and-void/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li>
+           <li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-277" class="share-facebook sd-button share-icon" href="https://petiteanglaise.com/2005/05/22/null-and-void/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li>
+           <li class="share-end"></li>
+          </ul>
+         </div>
+        </div>
+       </div> 
+       <div id="jp-relatedposts" class="jp-relatedposts"> 
+        <h3 class="jp-relatedposts-headline"><em>Related</em></h3> 
+       </div>
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2005/05/22/null-and-void/#comments">Comments (61)</a> 
+     </div> 
+    </div> 
+    <h2 id="comments">61 Comments</h2> 
+    <ol id="commentlist"> 
+     <li id="comment-3355" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3355" class="vcard"> 
+       <p>Good luck Petite in this new life.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.lesleygraham.blogspot.com" rel="external nofollow ugc" class="url">Lesley</a></span> — May 22, 2005 @ <a href="#comment-3355">11:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3356" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3356" class="vcard"> 
+       <p>just want to say that i’m sorry to hear your news. i’ve been an avid reader of your blog for quite some time and was shocked to read your most recent posts. i sincerely hope you come out at the other side ok…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.christurnpenny.com" rel="external nofollow ugc" class="url">chris</a></span> — May 22, 2005 @ <a href="#comment-3356">11:13 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3357" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3357" class="vcard"> 
+       <p>Endings are always painful, even when you know it’s the right course of action. I doubt Mr. Frog is saying all that he feels, either.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.bluegrassmama.com" rel="external nofollow ugc" class="url">Bluegrass Mama</a></span> — May 22, 2005 @ <a href="#comment-3357">11:22 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3358" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3358" class="vcard"> 
+       <p>Why is it that we always look to other people to validate our worth? I know the exact thing you are talking about… when I’ve left a relationship, even when I know it’s best, there is that little ego-part of me that wants the man I’m leaving to act like it matters to him… as if getting that reaction makes me “special enough”. What we fail to notice is that if we are already strong enough and brave enough to speak our truth and do what we know is best, then we are already “special enough”, no matter how the other person reacts. Or does not react. His not reacting has nothing to do with YOU, cher petite… that’s all about his own pain. Don’t take it personally.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://theboldsoul.lisataylorhuff.com" rel="external nofollow ugc" class="url">Lisa</a></span> — May 22, 2005 @ <a href="#comment-3358">11:29 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3359" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3359" class="vcard"> 
+       <p>Don’t take Mr Frog’s words at face value. He may have worked out that the situation was inevitable and he perhaps wanted to keep it calm for the sake of future cooperation over Tadpole and the sake of his pride. Think of it as a quick raising of his draw bridge in the face of an attack.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.satsumanet.blogspot.com" rel="external nofollow ugc" class="url">Satsuma</a></span> — May 22, 2005 @ <a href="#comment-3359">11:52 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3360" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3360" class="vcard"> 
+       <p>‘Endings’is a beautiful testimony to what must have been a very deep &amp; loving mutual relationship. The previous comments are very wise and very caring, so despite the pain, hang on to your self-belief and know that even we who only know things from your blogs will truly hope for the best possible outcome for tadpole, Mr Frog and ‘our’ petite anglaise. Take care!</p> 
+       <p><cite>Comment by <span class="fn">fella</span> — May 23, 2005 @ <a href="#comment-3360">12:18 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3361" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3361" class="vcard"> 
+       <p>This is so weird. I’ve only been here once before, you were writing about not being sure about having another baby, at least not right now. For some reason, I never came back till tonight and then I read this. And I felt really sad. I don’t know why. Maybe because I remember this feeling from when I left my ex and he reacted in the exact same way and although *I* was the one leaving (and i knew the decision was right, with or without my new man – whom i am now, three years later, happily married to and continue to love like I loved him then..) and he was the one being brave, I felt like I was the only one who was upset. It hurt me so much that he just didn’t have that emotional reaction and it just felt like it didn’t matter to him whether i stayed or left.<br> I know this probably doesn’t help, but you’re not alone and it’s not *you*, it’s just some men’s way of dealing with being dumped, maybe particularly in situations where you both *know* but ultimately one of you beat the other person to it. Good luck, and keep strong. You and only you know if the decision is right, regardless of what anyone says or don’t say…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.davidandtrine.org" rel="external nofollow ugc" class="url">trine</a></span> — May 23, 2005 @ <a href="#comment-3361">12:20 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3362" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3362" class="vcard"> 
+       <p>Oh, sweetie, endings are always hard. He’s probably guarding his feelings. Probably dreads the loss terribly.</p> 
+       <p>Good fortune in whatever you are starting, every end is a beginning.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://nadamasrespira.blogspot.com/" rel="external nofollow ugc" class="url">maria</a></span> — May 23, 2005 @ <a href="#comment-3362">12:43 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3363" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3363" class="vcard"> 
+       <p>its a man thing … men, normally take a while to feel the pain. First we must be practical – once we realize we cant fix it – we then feel it</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.abeautifulrevolution.com" rel="external nofollow ugc" class="url">andre</a></span> — May 23, 2005 @ <a href="#comment-3363">12:54 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3364" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3364" class="vcard"> 
+       <p>Maybe he just needed to get through the terror of losing his place in Tadpole’s life before he could move on to thinking about life without you. I’m sure he has his feelings about losing you, but your daughter took precedance.</p> 
+       <p>best wishes.</p> 
+       <p><cite>Comment by <span class="fn">Girl In Glass</span> — May 23, 2005 @ <a href="#comment-3364">1:03 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3365" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3365" class="vcard"> 
+       <p>I agree with the previous comments, i.e. that he’s holding a lot back, possibly out of pride or self-defence. My guess would be that what you understandably found so hard to say to him didn’t actually come as a great surprise; in truth, why should it, if things had been labouring for some time?</p> 
+       <p>Like others, I was truly shocked when I read your announcement, almost as if the two of you were personal friends. I’ll bet that the warmth of the good wishes that you’ve been receiving has amazed you, but this shows that you’ve won many hearts with your style of writing.</p> 
+       <p>I wish the very best for all three of you in the weeks and months ahead.</p> 
+       <p><cite>Comment by <span class="fn">David H</span> — May 23, 2005 @ <a href="#comment-3365">2:58 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3366" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3366" class="vcard"> 
+       <p>OMG Petite, I’m so shocked. I feel like a friend of yours now (even though a virtual one) and I’m just overwhelmed. I have been through this (having left my husband) though without a child but the different feelings of anger, guilt, frustration, freedom, prde, fear,etc… are very normal.<br> (((Petite)))</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://225429" rel="external nofollow ugc" class="url">Maurine au bout du monde</a></span> — May 23, 2005 @ <a href="#comment-3366">3:22 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3367" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3367" class="vcard"> 
+       <p>I said a prayer for the three of you.</p> 
+       <p><cite>Comment by <span class="fn">Iowa</span> — May 23, 2005 @ <a href="#comment-3367">3:23 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3368" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3368" class="vcard"> 
+       <p>I’m so sorry – and thank you for being brave enough to share it with us, your (mostly) faceless friends. All of us who read blogs know (or should know) that we don’t get the whole of a person’s life – that it’s only ever what people are prepared to share with us – thanks for allowing us to know this much of your life.</p> 
+       <p>I wish you all the best as you make some big changes and work out your future. As for Mr Frog … people react how they react … and it’s not always necessarily how they wished they had reacted either …</p> 
+       <p>Anyway, good luck to you all :)</p> 
+       <p><cite>Comment by <span class="fn">Miss Lisa</span> — May 23, 2005 @ <a href="#comment-3368">3:23 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3369" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3369" class="vcard"> 
+       <p>Non, je ne peux imaginer ce que fait une telle sÃ©paration mais je suis triste car jâai lâimpression que ce qui arrive, arrive Ã une de mes proches.</p> 
+       <p>Je dois lire ce blog depuis septembre et quand jây repense, vous mâavez beaucoup inspirÃ©. Il est vrai que je connais plein de choses de votre vieâ¦et en mÃªme temps, câest si peu… Tout ce que vous avez partagÃ©, je lâai lu, je lâai adorÃ© et je lâai mÃªme parfois idÃ©alisÃ©. Je nâai que 19 ans et pourtant il y a encore une semaine, jâaurais voulu, dâune certaine faÃ§on, que mon futur ressemble au vÃ´tre. Vous, lui, un bÃ©bÃ© et la vie Ã Paris. Câest commun et pourtant, je me disais que vous Ã©tiez les esquisses dâun avenir, dâun exemple que je devais suivre.</p> 
+       <p>Evidemment, câest naÃ¯f de ma part de croire si simplement ces choses lÃ . Vous avez ouvert votre quotidien pour nous. Et je ne peux que vous remercier. De plus, il faut aussi vous fÃ©liciter car il semble quâil faut Ãªtre courageuse pour continuer dans ces circonstances.</p> 
+       <p>—</p> 
+       <p>Que vous souhaiter pour la suite ? SincÃ¨rement je nâen ai aucune idÃ©e.<br> Il yâa une page qui se tourne, Ã vous dâen rÃ©Ã©crire une nouvelle.</p> 
+       <p>En espÃ©rant vous revoir rayonnante. Prenez soin dâelle et de vous.</p> 
+       <p>Petite Anglaise, donnez nous encore le plaisir de vous lire.</p> 
+       <p>:)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://whitepaper.jexiste.fr/blog" rel="external nofollow ugc" class="url">wiLLoØ</a></span> — May 23, 2005 @ <a href="#comment-3369">3:51 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3370" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3370" class="vcard"> 
+       <p>Petite, you are someone worth having. Sometimes people don’t know how to show that when they are losing what is worth having. This has to be true and so I declare it so. I’ll be thinking of you through this difficult time.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://reebeckisupergirl.blogspot.com" rel="external nofollow ugc" class="url">Rebecca</a></span> — May 23, 2005 @ <a href="#comment-3370">5:39 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3371" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3371" class="vcard"> 
+       <p>Hi Petite,</p> 
+       <p>Like many others who’ve commented I do not know you in person but am an avid fan of your blog and pop in every day to see how you’re doing. I love your writing and find myself deeply moved by what you have written on your current situation. For all the impersonality of the internet I feel as though you are a close friend going through this painful time and I mourn with you. Thanks for your candid observations on life and stay the strong,true and lovely person I’ve come to admire.</p> 
+       <p><cite>Comment by <span class="fn">nise74</span> — May 23, 2005 @ <a href="#comment-3371">7:16 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3372" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3372" class="vcard"> 
+       <p>I’m so sorry to see that you are having to go through this. It’s a hard thing to do. I know. I agree with most of the other people who have posted in that I think he his holding back his feelings. I know that you and Tadpole will be ok. It will just take time. Please know that you all are in my thoughts.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://yehovahyireh.blogspot.com" rel="external nofollow ugc" class="url">Taarna</a></span> — May 23, 2005 @ <a href="#comment-3372">8:45 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3373" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3373" class="vcard"> 
+       <p>I’ve only just read the last two posts and I cannot express how saddened I am, yet, somehow, given some of your earlier postings, not completely surprised. And I can only admire your courage, petite, for making the the hardest of all decisions when children are involved. This probably sounds trite, but it’s nonetheless true: life is too short to be unhappy like that. And of course your unhappiness will have one day, rubbed off on Tadpole. I agree with the other posters, men just don’t react in a predictable manner, but that doesn’t mean he isn’t feeling lost and confused. But he is already in the “post-petite”- you are no longer someone he wants to share his feeling with- even if they’re about you. The Mars and Venus guy would probably say he’s retreated into his cave- for once he’s not too far from the truth.<br> I didn’t want to get into an analysis of Mr. Frog. I just want to say, like everyone else has, I’m with you, petite. Courage.</p> 
+       <p><cite>Comment by <span class="fn">suziboo</span> — May 23, 2005 @ <a href="#comment-3373">9:14 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3374" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3374" class="vcard"> 
+       <p>Sorry to read of your sadness, good luck for all three of you.</p> 
+       <p>Griff</p> 
+       <p>(be warned though, some may think this another amusement – always crying wolf)</p> 
+       <p><cite>Comment by <span class="fn">GriffMG</span> — May 23, 2005 @ <a href="#comment-3374">9:19 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3375" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3375" class="vcard"> 
+       <p>Wow. How did you find the strength? You are amazing for having the courage to see your situation and take action. I understand completely how you feel – but Mr Frog is just being male. They will NEVER show you that inside they are really hurting. You KNOW that you are someone worth loving and missing, you don’t need him to validate that for you. Go and be strong and love the tadpole and the third party (should that work out), and know that you deserve to be happy.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://brainbubbles.blogspot.com" rel="external nofollow ugc" class="url">Valkyrie</a></span> — May 23, 2005 @ <a href="#comment-3375">9:22 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3376" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3376" class="vcard"> 
+       <p>Perhaps if he had cried and showed very strong feelings of remorse then you would have been tempted to go back on what you know is the right decision, which could only have led to a long and painful ending (trust me I’ve been there). It doesn’t mean he’s not feeling those things but that he has protected what is left of your relationship for the sake of Tadpole.</p> 
+       <p><cite>Comment by <span class="fn">Ellie</span> — May 23, 2005 @ <a href="#comment-3376">9:35 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3377" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3377" class="vcard"> 
+       <p>Petite, I am so sorry this had to be this way, but you know that Mr. Frog’s reaction (or lack of one?) can only confirm the rightness of your decision. You deserve someone who can love you passionately and fight for you. Not knowing you in person, but seeing at the same thing through your writings much of what you have inside, I can truly say that Mr. Frog is losing someone full of heart, talented and witty, and full of devotion for those around her.</p> 
+       <p>His reaction does not mean that YOU are not worth it. It just shows, rather, his lack of perception and one-mindedness. Be strong. Funny, I don’t know you, but I did actually worry about you this weekend, and said a little prayer for you and your Tadpole.</p> 
+       <p>The ‘endings’ post was beautiful. I wanted to respect your wish for no comments, but let me make this one. This is more of a ‘new beginning’ than just an ending.</p> 
+       <p>You are an amazing writer. Do something with it.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://izoinoan.blogspot.com/" rel="external nofollow ugc" class="url">sammy</a></span> — May 23, 2005 @ <a href="#comment-3377">9:46 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3378" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3378" class="vcard"> 
+       <p>I’m floored by your strength. I think you’re in a lot of people’s thoughts right now…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.lacoquette.blogs.com" rel="external nofollow ugc" class="url">Coquette</a></span> — May 23, 2005 @ <a href="#comment-3378">9:48 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3379" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3379" class="vcard"> 
+       <p>Bonjour P.A</p> 
+       <p>Ce que dit wiLLoÃ est correct. C’est l’effet blog, la “fausse” impression de connaÃ®tre quelqu’un, presque plus qu’un ami de chair et d’os.</p> 
+       <p>Un couple d’amis vit actuellement la mÃªme situation aprÃ¨s 5 ans de vie commune. Et comme pour eux il est peut-Ãªtre prÃ©fÃ©rable d’arrÃªter une relation qui s’enlise ou qui n’a pas d’avenir maintenant que de la faire durer… C’est toujours plus facile de dire cela quand on est pas concernÃ© directement, c’est la tÃªte qui parle et pas le coeur.</p> 
+       <p>On est triste pour vous 3. Maintenant il y Miss TÃ©tard vers qui vous vous retournerez peut-Ãªtre encore plus… Et dans quelque temps un autre homme (ou une femme, qui sait!) rentrera dans votre vie.</p> 
+       <p>Vous Ãªtes jeune, drÃ´le, spirituelle, sÃ©duisante…<br> Paris intra-muros c’est deux millions d’Ã¢mes, et rien que lÃ il y a des hommes/femmes qui ne demandent qu’Ã vous connaÃ®tre vous et Miss TÃ©tard…</p> 
+       <p>Il n’y a qu’un remÃ¨de Ã l’amour : aimer davantage!<br> Mr Grenouille est “mort”, vive Mr Crapaud :-D</p> 
+       <p><cite>Comment by <span class="fn">bob</span> — May 23, 2005 @ <a href="#comment-3379">9:53 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3380" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3380" class="vcard"> 
+       <p>A friend of ours stopped by last night to inform us that he is also going through this same situation right now. He realized he wasn’t in love with her anymore, and that he didn’t want to live the rest of his life that way.</p> 
+       <p>We were really floored as we didn’t see it coming, and we are friends with the female half of this couple as well. But he found the courage to be honest with himself (and her), and I’m sure they’ll both be better for it once the surrealness of the situation wears off. I’m sure you and your frog will be the same way.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.francophony.net" rel="external nofollow ugc" class="url">kim</a></span> — May 23, 2005 @ <a href="#comment-3380">9:55 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3381" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3381" class="vcard"> 
+       <p>Amazing how your “endings” post moved me. Good luck with everything.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.nakedtranslations.com" rel="external nofollow ugc" class="url">céline</a></span> — May 23, 2005 @ <a href="#comment-3381">10:37 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3382" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3382" class="vcard"> 
+       <p>Good luck to you all. It is hard to do what you did. I am sure that he just contained all his emotions. It’s how I would have reacted. Everyone handles things so differently. I hope that you will all be happy.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://eleven47.com" rel="external nofollow ugc" class="url">Sarah</a></span> — May 23, 2005 @ <a href="#comment-3382">10:44 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3383" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3383" class="vcard"> 
+       <p>If M. Frog is anything like me he’s just covering. In his head it’s probably looking something like “this hurts … (being a guy) I’ll deal with my own way and in my own time but I don’t know what that is yet so best buck up and tough it through … I can’t bear the thought of losing Tadpole too so I’ll do what I must to protect that … this hurts … I’ll miss her … what does she want from me? … I don’t know what to say … this hurts … Tadpole … I need some time alone to think this through … merde!” Bon courage to you both. PS. Good writing, great blog!</p> 
+       <p><cite>Comment by <span class="fn">zap</span> — May 23, 2005 @ <a href="#comment-3383">10:49 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3384" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3384" class="vcard"> 
+       <p>Best of luck Petite. Follow your heart.</p> 
+       <p><cite>Comment by <span class="fn">cheria</span> — May 23, 2005 @ <a href="#comment-3384">10:52 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3385" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3385" class="vcard"> 
+       <p>I’m sorry to read the news. Strange coincidence: i was in Paris this WE visiting my partner’s sister who lives in your neighbourhood with her little girl. I had even thought about you.<br> I understand the pain and sense of emptiness, but I also think you’re lucky because bad and hateful separations can be really devastating for all involved.<br> You should also look at the bits of fortune you have: tadpole is young enough to go through a separation rather untraumatically and Mr Frog obviously really loves tadpole and seems to want to continue to be part of her life.<br> Best of luck.</p> 
+       <p><cite>Comment by <span class="fn">Mari</span> — May 23, 2005 @ <a href="#comment-3385">11:29 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3386" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3386" class="vcard"> 
+       <p>Petite (for once it would be nice to know your real name), I have been thinking about you, Mr Frog and Tadpole all week-end and on the train all the way to work today. I feel so sad for you… Why is it that we end up having to hurt other people when we follow what feels right to us? I suppose it’s inevitable. Still, I think you have been brave by ‘biting the bullet’ rather than staying on in a situation that makes you unhappy, trying to ignore your own needs.</p> 
+       <p>I really feel for Mr Frog, too (especially as I have one of my own who sounds strikingly similar, although we are halfway down the path you have followed). I hope he has as many supporters around him as you do…</p> 
+       <p>Bon courage,</p> 
+       <p>Lauren x</p> 
+       <p><cite>Comment by <span class="fn">Lauren</span> — May 23, 2005 @ <a href="#comment-3386">11:31 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3387" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3387" class="vcard"> 
+       <p>I’m not a big fan of giving advices in these situations, neither can any of us really give some. Sharing what happens is, in my opinion, neither brave, or any other sort of adjective, it’s your choice. The decisions you take is yours, and yours alone.</p> 
+       <p>When I broke up a 4 year relationship, everybody offered advice and solutions. It was all well intended, nethertheless was it all crap.</p> 
+       <p>Your feelings are your feelings and while of course people do care about you and Tadpole and even for Mr Frog, nobody but you will sort all of this out.</p> 
+       <p>But thanks for sharing them, even if I think that for a lot of us out here, it re-opens scars. A tribute to your writer skills.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://domaineabsurde.blogspot.com/" rel="external nofollow ugc" class="url">stephan</a></span> — May 23, 2005 @ <a href="#comment-3387">11:47 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3388" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3388" class="vcard"> 
+       <p>Most people are saying he’s holding back. I’m going to give you a different view. Having been on the receiving end of almost exactly the same situation. The feeling, even when you are expecting it, is like being punched in the stomach. You feel empty and helpless. You want to say something, but there is nothing you can say that is going to change anything and you are utterly powerless. He isn’t being emotionless, he just died a little inside.</p> 
+       <p>That isn’t any criticism of you, by the way. When things are making you miserable, what you are doing is the only thing to do. In the end, it was the right thing for us even though to me it didn’t feel like it at the time. You only get one life, and your only duty is to you and to the tadpole. And the tadpole, trust me, will be better for having two parents who are apart but happy, than ones who are together and miserable.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.ashbooks.co.uk/weblog/index.php" rel="external nofollow ugc" class="url">Alan</a></span> — May 23, 2005 @ <a href="#comment-3388">11:48 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3389" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3389" class="vcard"> 
+       <p>Hello petite,</p> 
+       <p>Good luck for the three of you. My parents stayed together after the “love disappearance”. I think they lost 10 years of their lives. It had ended up to a divorce in their late forty’s…</p> 
+       <p>So, you’ve been brave to admit your feelings openly. It always hurts and for the man, it takes long months to recover. But I really hope that you and Mr Frog will keep a great relationship like my parents did after those long recovery months.</p> 
+       <p>Take Care,</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.ebtb.info" rel="external nofollow ugc" class="url">nathan</a></span> — May 23, 2005 @ <a href="#comment-3389">11:50 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3390" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3390" class="vcard"> 
+       <p>Maybe Mr F already realised this was going on from changes in your behaviour but didn’t challenge you about it from fear of losing his daughter and you.<br> His lack of a violent reaction to your announcement is just further proof if you needed it that he was a mismatch from the start.<br> It isn’t a man thing either whatever your blog girlfriends say. When this happened to me I can tell you this bloke cried, shouted, pleaded on cue but to no avail. When she left I was stricken with doubts about my worth which I only partly resolved by bedding a maximum number of women in a fury over the next year or so. Then I met Mrs Frogette who already had a son from a previous marriage but that’s another story with a happy ending.</p> 
+       <p><cite>Comment by <span class="fn">Parkin Pig</span> — May 23, 2005 @ <a href="#comment-3390">11:56 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3391" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3391" class="vcard"> 
+       <p>I wonder whether I should have turned comments off again today. But then this wouldn’t be a blog, would it?</p> 
+       <p>Know that I am writing this because I feel the need to, as I have always done. Not for any other reason. Not to win your sympathy (which I’m sure Mr Frog deserves more than I do). The virtual hugs are lovely, the advice I will take with a pinch of salt, but I don’t mind hearing it. Any non-virtual friend would offer some words of wisdom in this situation.</p> 
+       <p>I don’t feel brave or strong. Just like I finally woke up and took my life back into my own hands. Something I should have done a long time ago.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — May 23, 2005 @ <a href="#comment-3391">12:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3392" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3392" class="vcard"> 
+       <p>petite, I’m glad you said you’re writing this because *you* need to.</p> 
+       <p>I was concerned that you’d feel obliged (by your huge, adoring readership!) to post, even though things of this magnitude are happening in your personal life.</p> 
+       <p>As long as you need to write about this, your readers will of course read and listen and comment (if you want them to – and there are blogs without comments!). But if you don’t want to share every aspect of this difficult time, please don’t! Does that make sense?</p> 
+       <p>Take care</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://dearwitho.blogspot.com" rel="external nofollow ugc" class="url">witho</a></span> — May 23, 2005 @ <a href="#comment-3392">12:29 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3393" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3393" class="vcard"> 
+       <p>Oh wow – I know just how that feels…..I haven’t even moved out yet and I’ve already been replaced and the kids introduced to the new girlfriend. They’re already playing happy families..it shouldn’t hurt – I wanted out – but somehow it does. I feel a bit indignant, too.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.sayinghi.blogspot.com" rel="external nofollow ugc" class="url">Muse</a></span> — May 23, 2005 @ <a href="#comment-3393">12:32 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3394" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3394" class="vcard"> 
+       <p>Thinking of you this bleary morning in New York.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://ban-sidhe.com/blog/" rel="external nofollow ugc" class="url">Mathieu</a></span> — May 23, 2005 @ <a href="#comment-3394">12:49 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3395" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3395" class="vcard"> 
+       <p>are you me? no, of course not, because I havent got beyond the thinking about it part &amp; am trying to convince myself that this is the normal and next stage of a relationship. I ask myself is ‘default’ bad &amp; will things change? Does this also mean your re-considering living in France? (I recall reading the comments about’no-real-French-friends’ and I suppose this is when friends are needed – big time)</p> 
+       <p><cite>Comment by <span class="fn">lisa</span> — May 23, 2005 @ <a href="#comment-3395">1:35 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3396" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3396" class="vcard"> 
+       <p>Hello, Petite! I’ve been reading for awhile now, I look forward to new posts from you everyday. Everyone is saying that they’re shocked, but I’m not at all surprised to read these last posts. I’ve been in a similar situation, sans a Tadpole and maybe recognized the tone of some of your posts regarding Mr. Frog lately, or the tone between the lines, so to speak. I admire you for having the strength to do what you think is right and to summon the courage to do so.</p> 
+       <p>Selfishly, I’m glad that you are still writing through this time – it’s inspirational for those who are still trying to find the strength to make changes – whether a change in attitude, relationship, or, in my case, to let the past be the past and be happy again where I am. I wish you, Mr. Frog, and Tadpole the very best.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.worldbeforecolumbus.com" rel="external nofollow ugc" class="url">Nikki</a></span> — May 23, 2005 @ <a href="#comment-3396">2:59 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3397" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3397" class="vcard"> 
+       <p>Hi, Petite. I only recently found your blog, and…ironically enough…I thought how wonderful it must be to be living in Paris with your partner and child! I am sorry to have come back and found that this is happening. I’ve been through this twice, myself…the first time I left the father of my son, and it was difficult. Like Mr. Frog, he was more concerned about his place with his son than losing me, and a part of me felt cheated, too. The second time (after two years of inertia), I kicked out my then-husband and began the long process of divorce. Neither situation was easy, but it left me free to grow up and find a relationship where I could really be valued and loved for me. I wish you the best of luck, and hope that all remains amicable for the sake of Tadpole. Please, please take care of yourself. You’re worth every bit of someone’s love…never doubt it.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.badhippie.squarespace.com" rel="external nofollow ugc" class="url">Bad Hippie</a></span> — May 23, 2005 @ <a href="#comment-3397">3:02 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3398" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3398" class="vcard"> 
+       <p>Good luck with this new Stage in your life petite! Although am sure you dont need it!!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://Kmac" rel="external nofollow ugc" class="url">Kirsty</a></span> — May 23, 2005 @ <a href="#comment-3398">3:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3399" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3399" class="vcard"> 
+       <p>Hadn’t been by for a while when I read today’s post. Stopped me cold.</p> 
+       <p>Yet since I started reading your blog last year, I always had the impression that things were not going the way you wanted. They were not minor niggles (toilet seat up/down) but a continual undercurrent of discontent, particularly over his absence from your and Tadpoles’ lives.</p> 
+       <p>Too many women get sucked into this situation and are afraid to leave. Whoever thinks work is more important than their family can sleep at the office!</p> 
+       <p>Just as others have mentioned the odd feeling of intimacy with someone who is in fact a stranger, I feel morbidly curious to hear more.</p> 
+       <p>Curious but also concerned.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://riabacon.blogspot.com" rel="external nofollow ugc" class="url">Ria</a></span> — May 23, 2005 @ <a href="#comment-3399">4:19 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3400" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3400" class="vcard"> 
+       <p>Hiya Petite,<br> I can’t offer any advice, All I can relay on, are how a bloke might feel. There isn’t much he can say, if he was aware that the relationship wasn’t really ment to be. He will have accepted that you me not be in his life anymore, but he will be more concerned, as any father will, of how his future with Tadpole. He will in my view try and keep everything amicable for the wellbeing of his relationship with his tadpole.</p> 
+       <p>For Tabpole I hope you and Mr frog can at least stay friends.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.andyhopkins.com/blog1/" rel="external nofollow ugc" class="url">Andy</a></span> — May 23, 2005 @ <a href="#comment-3400">4:37 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3401" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3401" class="vcard"> 
+       <p>Hmm, you dump the guy, deprive your daughter of her father and vice versa, and you expect not only sympathy from him, but from all your blog readers as well…who duly give it to you, amazingly enough. No doubt you are getting lots of attention from the new man in your life too. Well, give my deepest sympathies to Mr Frog. He might be feeling a tad(pole) lonely.</p> 
+       <p><cite>Comment by <span class="fn">dan</span> — May 23, 2005 @ <a href="#comment-3401">4:58 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3402" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3402" class="vcard"> 
+       <p>dan – I homed in on one very specific part of my reaction to our breakup in today’s post, which was a selfish one, and not one which shows me in the most favourable light, in my opinion. But I wanted to write it regardless, and I did.</p> 
+       <p>Clearly it’s only one tiny facet of a very complicated whole. But if you want to judge the person you think I am on the basis of the little I’m telling you, be my guest.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — May 23, 2005 @ <a href="#comment-3402">6:22 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3403" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3403" class="vcard"> 
+       <p>Just remember that:</p> 
+       <p>“Everything is ok in the end, and if it’s not ok, then it’s not the end”</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.julianagoesinternational.blogspot.com" rel="external nofollow ugc" class="url">juliana</a></span> — May 23, 2005 @ <a href="#comment-3403">6:43 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3404" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3404" class="vcard"> 
+       <p>That Dan guy might have a big mouth but he wasn’t even brave enough to leave us a link on his comment.</p> 
+       <p>You are a real person, not some reality blog-show.</p> 
+       <p>No one can understand the situation, no one should judge. Who are we kidding, does reading a blog give us the right to poke around into your heart and life, Petite? Thank you,all the same, for sharing with us.</p> 
+       <p>Best wishes for the continuation…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://izoinoan.blogspot.com/" rel="external nofollow ugc" class="url">sammy</a></span> — May 23, 2005 @ <a href="#comment-3404">6:47 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3405" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3405" class="vcard"> 
+       <p>Rien de telle dans cette situation que l’épaule d’une amie (sauf si elle couche avec MrFrog) ou d’un ami (homo de préférence dans ces circonstances).</p> 
+       <p>Laissez votre blog quelques temps et tournez vous vers des humains :)</p> 
+       <p>Just my 2 cents, but who cares? Hum …</p> 
+       <p><cite>Comment by <span class="fn">moi</span> — May 23, 2005 @ <a href="#comment-3405">7:19 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3406" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3406" class="vcard"> 
+       <p>Almost a year ago I got some really bad news and I wrote about it extensively on my blog. My readership always shot up whenever I was in a state and I realise I’m as guilty of rubber necking with you as my readers were with me. I loved the sympathetic comments I was getting but in the end I wondered why I was putting my life on show as entertainment. I hope this doesn’t put you off blogging. If I were you I’d make the next few posts just observations of French life and that sort of stuff. I wouldn’t want you to say more than you’re comfortable with later and get put off blogging. Reading you is better than chocolate!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.satsumanet.blogspot.com" rel="external nofollow ugc" class="url">Satsuma</a></span> — May 23, 2005 @ <a href="#comment-3406">8:00 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3407" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3407" class="vcard"> 
+       <p>I’ve been obsessed with your blog since I first came across it and have been rallying for you ever since reading Endings. Never once did I think, as Dan did, that you DECIDED to dump a man and DEPRIVE your daughter of her father. I do hope you don’t take what that miserable man had to say to heart. It was obvious to me, and I’m quite sure a number of others, that you you have no intention of depriving Tadpole of Papa Froggy.</p> 
+       <p>You will have no clue as to how many anonymous strangers are crossing their fingers and holding their breath for you.</p> 
+       <p>Greta</p> 
+       <p><cite>Comment by <span class="fn">Girl In Glass</span> — May 23, 2005 @ <a href="#comment-3407">8:00 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3408" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3408" class="vcard"> 
+       <p>There is no “rule book for break ups” each is idividual unique, and more often than not painful to at least one of the parties involved. Pain and love have much in common.They can both come “out of the blue”, they can both hurt in their way.Love is blind, love can survive even in a cold climate, love can be fleeting or steadfast and stronger than any bond. Love needs to be fed nurtured, cherished, but most of all returned in equal measure.Pain however painful fades with time, but only true love endures.</p> 
+       <p><cite>Comment by <span class="fn">Colin</span> — May 23, 2005 @ <a href="#comment-3408">9:54 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3409" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3409" class="vcard"> 
+       <p>I think it’s all been said Petite. I don’t know you personally either, like so many of your readers, but I have been thinking about you these last few days. You have every right to share your experiences on your blog, and by doing so you have made a lot of people think, either about your situation, one of their own or relationships in general.<br> Be strong and keep that little Tadpole of yours safely under your wing (and Mr Frog’s too).</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.displacedkiwi.co.nz/" rel="external nofollow ugc" class="url">Greg</a></span> — May 23, 2005 @ <a href="#comment-3409">11:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3410" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3410" class="vcard"> 
+       <p>Hello Petite Anglaise,</p> 
+       <p>I am really sorry to hear the news, I know what it is to leave with someone knowing that it is going to come to an end but for different reasons you are not brave to do so. I live it.</p> 
+       <p>For everything I have read, I know you are a very brave person and I know that you will do well on everything you set your mind to. Take care of you and Tadpole, but I am sure Mr. Frog will be by her side as well.</p> 
+       <p>Take care, Flavia</p> 
+       <p><cite>Comment by <span class="fn">Flavia</span> — May 23, 2005 @ <a href="#comment-3410">11:34 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3411" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3411" class="vcard"> 
+       <p>Petite,</p> 
+       <p>I’ve been an avid fan of yours for over a year now and my day isn’t complete until I have read the latest from Paris. Usually I am in tears from laughing but not alas this week.</p> 
+       <p>I hope it works out for you all. He’s probably in denial right now (I would be).</p> 
+       <p>sp_999</p> 
+       <p><cite>Comment by <span class="fn">sp999</span> — May 25, 2005 @ <a href="#comment-3411">4:16 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3412" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3412" class="vcard"> 
+       <p>A second try.</p> 
+       <p>This news is very moving, but responding to it is perplexing. Responding to it in a comment, in fact, for other people to read, including the author, is a novelty that our emotions and our behavior haven’t quite caught up with.</p> 
+       <p>As petite says, she writes for herself. Nobody really writes for any other reason. Writing is an affliction, not an aspiration.</p> 
+       <p>And petite is a good writer. You read her site because of that. And because you like the writing, you like the writer, “petite.” (I’m excepting petite’s fellow Parisians who have met her at blogmeets.) And because you like the writer, you hope that the writer will like you. That’s how we’re built. But when the response splits, when you like the writer but you don’t like what the writer is saying (just the way in which it’s said), you’re perplexed.</p> 
+       <p>That split hasn’t quite happened here. I’m oddly unsurprised by the news; something that petite wrote a few weeks ago made me connect Mr Frog with Charles-Henri, the bad husband in “Le Divorce.” But I’m sorry to hear about it for Tadpole’s sake. My daughter is about petite’s age, and when she was a little younger than Tadpole, her mother decided that she no longer wished to be married (at all – and she meant it). I bawled like a baby for days, by the way, but it turned out to be for the best, as indeed I’ve spent twenty-five happy years with my dear Kathleen. But for my daugher it was not, it seems, so great. She has been filling me in, gently, on how rought it all was. I didn’t handle the part-time Dad thing nearly as well as I thought I had.</p> 
+       <p>So, like Tadpole, I’m pushing for a reunion. Not really, of course – really, I’m perplexed.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.portifex.com/DailyBlague" rel="external nofollow ugc" class="url">R J Keefe</a></span> — May 25, 2005 @ <a href="#comment-3412">7:07 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3413" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3413" class="vcard"> 
+       <p>petite, your ability to show yourself under not-so-favorable light is, I think, a rare one. Anyway, it is what makes your blog not just interesting and fun to read, but also very moving (I’m thinking about the “adoption” category in particular). I’m sure you won’t let one hastily written comment put you off.</p> 
+       <p><cite>Comment by <span class="fn">ontario frog</span> — May 26, 2005 @ <a href="#comment-3413">2:15 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3414" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-3414" class="vcard"> 
+       <p>Dan, While I might have liked your courage if you’d<br> let at least an email adress, I cannot feel but sorry<br> for you and the fact that you project your personal<br> life into someones life that is just a tad (haha)<br> grander then you. While I have some reserves about<br> stuff, I cannot help but admire the honesty (and the<br> previous lies and struggle you must have been into) of<br> Petite. If you’d been a little motre insightful, you’d<br> notice that petite readership is an important part of<br> her life as it stands today. Respect it or be brave.</p> 
+       <p><cite>Comment by <span class="fn">schuey</span> — May 26, 2005 @ <a href="#comment-3414">9:05 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-3415" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-3415" class="vcard"> 
+       <p>good look whatever</p> 
+       <p><cite>Comment by <span class="fn">root</span> — May 26, 2005 @ <a href="#comment-3415">9:06 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+    </ol> 
+    <div class="navigation"> 
+     <div class="alignleft"></div> 
+     <div class="alignright"></div> 
+    </div> 
+    <br> 
+    <p><a href="https://petiteanglaise.com/2005/05/22/null-and-void/feed/"><abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.</a></p> 
+    <p>Sorry, the comment form is closed at this time.</p> <!-- begin footer --> 
+   </div> <!-- begin sidebar --> 
+   <div id="menu"> 
+    <ul> 
+     <li id="search-15" class="widget widget_search">
+      <form role="search" method="get" id="searchform" class="searchform" action="https://petiteanglaise.com/"> 
+       <div> <label class="screen-reader-text" for="s">Search for:</label> 
+        <input type="text" value="" name="s" id="s"> 
+        <input type="submit" id="searchsubmit" value="Search"> 
+       </div> 
+      </form></li> 
+     <li id="text-21" class="widget widget_text"> 
+      <div class="textwidget">
+       <ul> 
+        <li id="text" style="list-style-type:none;"> 
+         <ul> 
+          <li><a title="about this site" href="https://petiteanglaise.wordpress.com/about-this-site/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/union-jack2.jpg" alt="union-jack2.jpg"> about</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/book/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/book.png" alt="book.png"> books</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/press/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/press.jpg" alt="press.jpg"> press</a></li> 
+          <li><a title="Petite Anglaise fan page" href="http://www.facebook.com/pages/Petite-Anglaise/8204603380" target="_TOP" rel="noopener noreferrer"><img src="https://petiteanglaise.files.wordpress.com/2010/06/facebook1.png" alt="facebook.png"> fbk</a></li> 
+         </ul> 
+         <ul> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031190?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031190"><img src="https://petiteanglaise.files.wordpress.com/2010/06/petite-paperback1.gif" alt="buy from amazon uk"></a></li> 
+          <li><a title="buy from amazon us" href="http://www.amazon.com/gp/product/0385522800?ie=UTF8&amp;tag=petiteanglais-20&amp;linkCode=xm2&amp;camp=1789&amp;creativeASIN=0385522800"><img src="https://petiteanglaise.files.wordpress.com/2009/11/petitepbusa.jpg" alt="buy from amazon us"></a></li> 
+          <li><a title="buy from amazon.fr" href="http://www.amazon.fr/Petite-anglaise-Catherine-Sanderson/dp/2702140394/ref=sr_1_2?ie=UTF8&amp;s=books&amp;qid=1258292753&amp;sr=8-2"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french_petite.jpg" alt="buy from amazon france"></a></li> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031247?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031247"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french-kissing_web1.jpg" alt="buy from amazon uk"></a></li> 
+         </ul> </li> 
+        <li id="text">potted petite 
+         <ul> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2004/12/02/adoption/">prologue</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/10/burned/">burned</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/22/null-and-void/">null and void</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/29/slacker-mum/">part time mummy</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/03/baggage/">baggage</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/11/23/song/">singing in tongues</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/03/14/eleven-days-later/">eleven days later</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/04/06/semi-detached/">semi-detached</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/07/20/suspendered/">suspend<span style="text-decoration:line-through;">er</span>ed</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2007/06/03/sunday/">sunday</a></li> 
+         </ul> </li> 
+        <li id="text">archives 
+         <ul> 
+          <li><a title="January 2011" href="https://petiteanglaise.com/2011/01/">January 2011</a></li> 
+          <li><a title="November 2009" href="https://petiteanglaise.com/2009/11/">November 2009</a></li> 
+          <li><a title="September 2009" href="https://petiteanglaise.com/2009/09/">September 2009</a></li> 
+          <li><a title="August 2009" href="https://petiteanglaise.com/2009/08/">August 2009</a></li> 
+          <li><a title="July 2009" href="https://petiteanglaise.com/2009/07/">July 2009</a></li> 
+          <li><a title="June 2009" href="https://petiteanglaise.com/2009/06/">June 2009</a></li> 
+          <li><a title="May 2009" href="https://petiteanglaise.com/2009/05/">May 2009</a></li> 
+          <li><a title="April 2009" href="https://petiteanglaise.com/2009/04/">April 2009</a></li> 
+          <li><a title="March 2009" href="https://petiteanglaise.com/2009/03/">March 2009</a></li> 
+          <li><a title="February 2009" href="https://petiteanglaise.com/2009/02/">February 2009</a></li> 
+          <li><a title="January 2009" href="https://petiteanglaise.com/2009/01/">January 2009</a></li> 
+          <li><a title="December 2008" href="https://petiteanglaise.com/2008/12/">December 2008</a></li> 
+          <li><a title="November 2008" href="https://petiteanglaise.com/2008/11/">November 2008</a></li> 
+          <li><a title="October 2008" href="https://petiteanglaise.com/2008/10/">October 2008</a></li> 
+          <li><a title="September 2008" href="https://petiteanglaise.com/2008/09/">September 2008</a></li> 
+          <li><a title="August 2008" href="https://petiteanglaise.com/2008/08/">August 2008</a></li> 
+          <li><a title="July 2008" href="https://petiteanglaise.com/2008/07/">July 2008</a></li> 
+          <li><a title="June 2008" href="https://petiteanglaise.com/2008/06/">June 2008</a></li> 
+          <li><a title="May 2008" href="https://petiteanglaise.com/2008/05/">May 2008</a></li> 
+          <li><a title="April 2008" href="https://petiteanglaise.com/2008/04/">April 2008</a></li> 
+          <li><a title="March 2008" href="https://petiteanglaise.com/2008/03/">March 2008</a></li> 
+          <li><a title="February 2008" href="https://petiteanglaise.com/2008/02/">February 2008</a></li> 
+          <li><a title="January 2008" href="https://petiteanglaise.com/2008/01/">January 2008</a></li> 
+          <li><a title="December 2007" href="https://petiteanglaise.com/2007/12/">December 2007</a></li> 
+          <li><a title="November 2007" href="https://petiteanglaise.com/2007/11/">November 2007</a></li> 
+          <li><a title="October 2007" href="https://petiteanglaise.com/2007/10/">October 2007</a></li> 
+          <li><a title="September 2007" href="https://petiteanglaise.com/2007/09/">September 2007</a></li> 
+          <li><a title="August 2007" href="https://petiteanglaise.com/2007/08/">August 2007</a></li> 
+          <li><a title="July 2007" href="https://petiteanglaise.com/2007/07/">July 2007</a></li> 
+          <li><a title="June 2007" href="https://petiteanglaise.com/2007/06/">June 2007</a></li> 
+          <li><a title="May 2007" href="https://petiteanglaise.com/2007/05/">May 2007</a></li> 
+          <li><a title="April 2007" href="https://petiteanglaise.com/2007/04/">April 2007</a></li> 
+          <li><a title="March 2007" href="https://petiteanglaise.com/2007/03/">March 2007</a></li> 
+          <li><a title="February 2007" href="https://petiteanglaise.com/2007/02/">February 2007</a></li> 
+          <li><a title="January 2007" href="https://petiteanglaise.com/2007/01/">January 2007</a></li> 
+          <li><a title="December 2006" href="https://petiteanglaise.com/2006/12/">December 2006</a></li> 
+          <li><a title="November 2006" href="https://petiteanglaise.com/2006/11/">November 2006</a></li> 
+          <li><a title="October 2006" href="https://petiteanglaise.com/2006/10/">October 2006</a></li> 
+          <li><a title="September 2006" href="https://petiteanglaise.com/2006/09/">September 2006</a></li> 
+          <li><a title="August 2006" href="https://petiteanglaise.com/2006/08/">August 2006</a></li> 
+          <li><a title="July 2006" href="https://petiteanglaise.com/2006/07/">July 2006</a></li> 
+          <li><a title="June 2006" href="https://petiteanglaise.com/2006/06/">June 2006</a></li> 
+          <li><a title="May 2006" href="https://petiteanglaise.com/2006/05/">May 2006</a></li> 
+          <li><a title="April 2006" href="https://petiteanglaise.com/2006/04/">April 2006</a></li> 
+          <li><a title="March 2006" href="https://petiteanglaise.com/2006/03/">March 2006</a></li> 
+          <li><a title="February 2006" href="https://petiteanglaise.com/2006/02/">February 2006</a></li> 
+          <li><a title="January 2006" href="https://petiteanglaise.com/2006/01/">January 2006</a></li> 
+          <li><a title="December 2005" href="https://petiteanglaise.com/2005/12/">December 2005</a></li> 
+          <li><a title="November 2005" href="https://petiteanglaise.com/2005/11/">November 2005</a></li> 
+          <li><a title="October 2005" href="https://petiteanglaise.com/2005/10/">October 2005</a></li> 
+          <li><a title="September 2005" href="https://petiteanglaise.com/2005/09/">September 2005</a></li> 
+          <li><a title="August 2005" href="https://petiteanglaise.com/2005/08/">August 2005</a></li> 
+          <li><a title="July 2005" href="https://petiteanglaise.com/2005/07/">July 2005</a></li> 
+          <li><a title="June 2005" href="https://petiteanglaise.com/2005/06/">June 2005</a></li> 
+          <li><a title="May 2005" href="https://petiteanglaise.com/2005/05/">May 2005</a></li> 
+          <li><a title="April 2005" href="https://petiteanglaise.com/2005/04/">April 2005</a></li> 
+          <li><a title="March 2005" href="https://petiteanglaise.com/2005/03/">March 2005</a></li> 
+          <li><a title="February 2005" href="https://petiteanglaise.com/2005/02/">February 2005</a></li> 
+          <li><a title="January 2005" href="https://petiteanglaise.com/2005/01/">January 2005</a></li> 
+          <li><a title="December 2004" href="https://petiteanglaise.com/2004/12/">December 2004</a></li> 
+          <li><a title="November 2004" href="https://petiteanglaise.com/2004/11/">November 2004</a></li> 
+          <li><a title="October 2004" href="https://petiteanglaise.com/2004/10/">October 2004</a></li> 
+          <li><a title="September 2004" href="https://petiteanglaise.com/2004/09/">September 2004</a></li> 
+          <li><a title="August 2004" href="https://petiteanglaise.com/2004/08/">August 2004</a></li> 
+          <li><a title="July 2004" href="https://petiteanglaise.com/2004/07/">July 2004</a></li> 
+         </ul> </li> 
+        <li id="text">categories 
+         <ul> 
+          <li class="cat-item cat-item-19290"><a title="View all posts filed under adoption" href="https://petiteanglaise.com/category/adoption/">adoption</a></li> 
+          <li class="cat-item cat-item-101238"><a title="View all posts filed under book stuff" href="https://petiteanglaise.com/category/book-stuff/">book stuff</a></li> 
+          <li class="cat-item cat-item-269813"><a title="on Paris and Parisians" href="https://petiteanglaise.com/category/city-of-light/">city of light</a></li> 
+          <li class="cat-item cat-item-777392"><a title="View all posts filed under french touch" href="https://petiteanglaise.com/category/french-touch/">french touch</a></li> 
+          <li class="cat-item cat-item-37959060"><a title="View all posts filed under good time girl" href="https://petiteanglaise.com/category/good-time-girl/">good time girl</a></li> 
+          <li class="cat-item cat-item-36442"><a title="View all posts filed under knocked up" href="https://petiteanglaise.com/category/knocked-up/">knocked up</a></li> 
+          <li class="cat-item cat-item-214948"><a title="View all posts filed under knot tying" href="https://petiteanglaise.com/category/knot-tying/">knot tying</a></li> 
+          <li class="cat-item cat-item-34596"><a title="food for thought" href="https://petiteanglaise.com/category/miam/">miam</a></li> 
+          <li class="cat-item cat-item-1455466"><a title="View all posts filed under mills &amp; boon" href="https://petiteanglaise.com/category/mills-boon/">mills &amp; boon</a></li> 
+          <li class="cat-item cat-item-277"><a title="View all posts filed under misc" href="https://petiteanglaise.com/category/misc/">misc</a></li> 
+          <li class="cat-item cat-item-37959061"><a title="England through rose tinted spectacles" href="https://petiteanglaise.com/category/missing-blighty/">missing blighty</a></li> 
+          <li class="cat-item cat-item-7289"><a title="me me me me me" href="https://petiteanglaise.com/category/navel-gazing/">navel gazing</a></li> 
+          <li class="cat-item cat-item-4358"><a title="View all posts filed under on the road" href="https://petiteanglaise.com/category/on-the-road/">on the road</a></li> 
+          <li class="cat-item cat-item-2439939"><a title="View all posts filed under parting ways" href="https://petiteanglaise.com/category/parting-ways/">parting ways</a></li> 
+          <li class="cat-item cat-item-178503"><a title="View all posts filed under single life" href="https://petiteanglaise.com/category/single-life/">single life</a></li> 
+          <li class="cat-item cat-item-37959062"><a title="View all posts filed under Tadpole rearing" href="https://petiteanglaise.com/category/tadpole-rearing/">Tadpole rearing</a></li> 
+          <li class="cat-item cat-item-37959063"><a title="View all posts filed under Tadpole says" href="https://petiteanglaise.com/category/tadpole-says/">Tadpole says</a></li> 
+          <li class="cat-item cat-item-37959065"><a title="View all posts filed under Tadpole sings" href="https://petiteanglaise.com/category/tadpole-sings/">Tadpole sings</a></li> 
+          <li class="cat-item cat-item-1"><a title="View all posts filed under Uncategorized" href="https://petiteanglaise.com/category/uncategorized/">Uncategorized</a></li> 
+          <li class="cat-item cat-item-4612"><a title="View all posts filed under working girl" href="https://petiteanglaise.com/category/working-girl/">working girl</a></li> 
+         </ul> </li> 
+        <li id="text">stats 
+         <ul> 
+          <li>638 posts</li> 
+          <li>27,981 comments</li> 
+          <li><strong>©</strong> catherine sanderson 2004-2009</li> 
+         </ul> </li> 
+       </ul> 
+       <div style="clear:both;"></div> 
+      </div> </li> 
+    </ul> 
+   </div> 
+   <p class="credit"> <a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></p> 
+  </div> <!--  --> 
+  <div style="display:none"> 
+  </div> 
+  <script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/petiteanglaise.com\/2005\/05\/22\/null-and-void\/":277};
+	</script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s2.wp.com/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css?m=1583834955h&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"14262311","siteName":"petite anglaise","siteURL":"https:\/\/petiteanglaise.com","icon":"<img alt='' src='https:\/\/petiteanglaise.files.wordpress.com\/2017\/07\/cropped-union-jack.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/classic","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2005%2F05%2F22%2Fnull-and-void%2F&signup_flow=account&domain=petiteanglaise.com","themeURL":"","xhrURL":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"fe4c42e1ec\" \/>","referer":"https:\/\/petiteanglaise.com\/2005\/05\/22\/null-and-void\/","canFollow":"1","feedID":"269408","statusMessage":"","customizeLink":"https:\/\/petiteanglaise.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fpetiteanglaise.wordpress.com%2F2005%2F05%2F22%2Fnull-and-void%2F","postID":"277","shortlink":"https:\/\/wp.me\/pXQhh-4t","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/petiteanglaise.com\/277","statsLink":"https:\/\/wordpress.com\/stats\/post\/277\/petiteanglaise.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: WordPress Classic","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 104 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2005%2F05%2F22%2Fnull-and-void%2F&signup_flow=account&domain=petiteanglaise.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+</script> 
+  <script type="text/javascript" src="https://s2.wp.com/_static/??-eJydUEFuwzAM+9BcISuSdYdhb3FtpVPmyIElJ9vvq7RNDz0U2C62IIqkRFgmFzIrssIgEHGmgNPPbpAXMIg4pBpRLhiJwowcc1mhKaffnlLajcTb+KY0pXoiFuhrSk5I0WEkJT65KwLdvtm/da/vcEzZmllUnJXh++ZCuPxfE21JNV5ljXnhm/DllUfw0WWsbjPy0S5zR19g9KJYrHJ5xlJoDeTe+6OCFm9rPCMFpcwr6V49mV6jc33yVEC+fLE4tt9In+NH0x7apm0PTTecAeRvtYg="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'14262311','blog_tz':'2','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'14262311','v':'wpcom','tz':'2','user_id':'0','post':'277','subd':'petiteanglaise'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlXzhxdW0vQ1hzcFE3aUFOUjg2Z2sxLXYlMXwsPVRFfjk1RkZUKz9jTHFvci9mNzJHb2NHVj15R1lydE9SJjMvWFM3dzNHNmpXejY9a1JGWTlUWkhFVmJvLmlQPXEtSTEzSU5BM0MyUjZDY0w0RzhPeVc9LTczZStaV1E4JXFxYTc1OXhPOHZVLz1LZkh2Rkt4JjV3VSZbYlU3S3VjZE5hQyxFdDB4MzdFQnxYbFdkbEFOODI/bUdbSDdZSFtVb19tPSVCNF95fGc1empSa0RhYWFhTw=='}]);
+_stq.push([ 'clickTrackerInit', '14262311', '277' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+ </body>
+</html>

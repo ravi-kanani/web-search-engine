@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"1fa3ed442f",applicationID:"206885983"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"> 
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="https://bookriot.com/feed/"> 
+  <link rel="alternate" type="text/xml" title="RSS .92" href="https://bookriot.com/feed/rss/"> 
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="https://bookriot.com/feed/atom/"> 
+  <link rel="pingback" href="https://bookriot.com/xmlrpc.php"> 
+  <title>20 Must-Read 2020 Debut Novels for Your TBR | Book Riot</title> <!-- This site is optimized with the Yoast SEO plugin v13.3 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Blow up your TBR with 20 of exciting 2020 debut novels headed our way this year! From drama to science fiction to horror, there's something for everyone."> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://bookriot.com/2020/01/30/2020-debut-novels/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="20 Must-Read 2020 Debut Novels for Your TBR | Book Riot"> 
+  <meta property="og:description" content="Blow up your TBR with 20 of exciting 2020 debut novels headed our way this year! From drama to science fiction to horror, there's something for everyone."> 
+  <meta property="og:url" content="https://bookriot.com/2020/01/30/2020-debut-novels/"> 
+  <meta property="og:site_name" content="BOOK RIOT"> 
+  <meta property="article:publisher" content="https://www.facebook.com/BookRiot/"> 
+  <meta property="article:tag" content="20 must read"> 
+  <meta property="article:tag" content="2020 books"> 
+  <meta property="article:tag" content="debut novels"> 
+  <meta property="article:tag" content="must read debut novels"> 
+  <meta property="article:tag" content="must-read books"> 
+  <meta property="article:section" content="Lists"> 
+  <meta property="article:published_time" content="2020-01-30T11:37:21+00:00"> 
+  <meta property="article:modified_time" content="2020-01-31T14:25:57+00:00"> 
+  <meta property="og:updated_time" content="2020-01-31T14:25:57+00:00"> 
+  <meta property="og:image" content="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg"> 
+  <meta property="og:image:secure_url" content="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg"> 
+  <meta property="og:image:width" content="640"> 
+  <meta property="og:image:height" content="342"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="Blow up your TBR with 20 of exciting 2020 debut novels headed our way this year! From drama to science fiction to horror, there's something for everyone."> 
+  <meta name="twitter:title" content="20 Must-Read 2020 Debut Novels for Your TBR | Book Riot"> 
+  <meta name="twitter:site" content="@bookriot"> 
+  <meta name="twitter:image" content="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg"> 
+  <meta name="twitter:creator" content="@MissLiberty"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bookriot.com/#website","url":"https://bookriot.com/","name":"BOOK RIOT","inLanguage":"en-US","description":"Book Recommendations and Reviews","potentialAction":[{"@type":"SearchAction","target":"https://bookriot.com/?s={search_term_string}","query-input":"required name=search_term_string"}]},{"@type":"ImageObject","@id":"https://bookriot.com/2020/01/30/2020-debut-novels/#primaryimage","inLanguage":"en-US","url":"https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg","width":640,"height":342},{"@type":"WebPage","@id":"https://bookriot.com/2020/01/30/2020-debut-novels/#webpage","url":"https://bookriot.com/2020/01/30/2020-debut-novels/","name":"20 Must-Read 2020 Debut Novels for Your TBR | Book Riot","isPartOf":{"@id":"https://bookriot.com/#website"},"inLanguage":"en-US","primaryImageOfPage":{"@id":"https://bookriot.com/2020/01/30/2020-debut-novels/#primaryimage"},"datePublished":"2020-01-30T11:37:21+00:00","dateModified":"2020-01-31T14:25:57+00:00","author":{"@id":"https://bookriot.com/#/schema/person/5216a26029d03c26a790059e3bdff125"},"description":"Blow up your TBR with 20 of exciting 2020 debut novels headed our way this year! From drama to science fiction to horror, there's something for everyone.","potentialAction":[{"@type":"ReadAction","target":["https://bookriot.com/2020/01/30/2020-debut-novels/"]}]},{"@type":["Person"],"@id":"https://bookriot.com/#/schema/person/5216a26029d03c26a790059e3bdff125","name":"Liberty Hardy","image":{"@type":"ImageObject","@id":"https://bookriot.com/#authorlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/9321384c1cb22e30d83fc0343318916e?s=96&d=mm&r=g","caption":"Liberty Hardy"},"description":"Liberty Hardy is an unrepentant velocireader, writer, bitey mad lady, and tattoo canvas. Turn-ons include books, books and books. Her favorite exclamation is \u201cHoly cats!\u201d Liberty reads more than should be legal, sleeps very little, frequently writes on her belly with Sharpie markers, and when she dies, she\u2019s leaving her body to library science. Until then, she lives with her three cats, Millay, Farrokh, and Zevon, in Maine. She is also right behind you. Just kidding! She\u2019s too busy reading.\r\n\r\n<strong>Blog: <a href=\"http://franzencomesalive.tumblr.com\">Franzen Comes Alive</a></strong>\r\n\r\n<strong>Twitter: <a href=\"https://twitter.com/@MissLiberty\">@MissLiberty</a></strong>","sameAs":["https://www.instagram.com/franzencomesalive/","https://twitter.com/https://twitter.com/@MissLiberty"]}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="amphtml" href="https://bookriot.com/2020/01/30/2020-debut-novels/amp/">
+  <meta name="generator" content="AMP for WP 1.0.36">
+  <link rel="dns-prefetch" href="//bookriot.com"> 
+  <link rel="dns-prefetch" href="//cdn.taboola.com"> 
+  <link rel="dns-prefetch" href="//www.dwin2.com"> 
+  <link rel="dns-prefetch" href="//www.youtube.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="BOOK RIOT » Feed" href="https://bookriot.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="BOOK RIOT » Comments Feed" href="https://bookriot.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="BOOK RIOT » Absolute Beginners: 20 Must-Read Debut Novels of 2020 Comments Feed" href="https://bookriot.com/2020/01/30/2020-debut-novels/feed/"> <!-- This site uses the Google Analytics by MonsterInsights plugin v7.10.4 - Using Analytics tracking - https://www.monsterinsights.com/ --> 
+  <script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-25481245-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+window.ga = __gaTracker;		__gaTracker('create', 'UA-25481245-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('set', 'dimension1', 'Liberty Hardy');
+		__gaTracker('set', 'dimension2', 'Lists');
+		__gaTracker('send','pageview');
+		__gaTracker( function() { window.ga = __gaTracker; } );
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+			window.ga = __gaTracker;		})();
+		}
+</script> <!-- / Google Analytics by MonsterInsights --> 
+  <link rel="stylesheet" id="wordkeeper-lazyload-video-css" href="https://s2982.pcdn.co/wp-content/mu-plugins/wordkeeper-speed/css/lazyload.video.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="amazonpolly-css" href="https://s2982.pcdn.co/wp-content/plugins/amazon-polly/public/css/amazonpolly-public.css?ver=1.0.0" type="text/css" media="all"> 
+  <link rel="stylesheet" id="ohayou-style-css" href="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/css/ohayou.css?ver=mar27_16" type="text/css" media="all"> 
+  <link rel="stylesheet" id="ohayou-fonts-css" href="https://fonts.googleapis.com/css?family=PT+Serif&amp;display=swap&amp;ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="newsletter-widgets-css" href="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/css/newsletter-widgets.css?ver=mar27_16" type="text/css" media="all"> 
+  <link rel="stylesheet" id="nectar-navigation-css" href="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/css/navigation.css?ver=mar27_16" type="text/css" media="all"> 
+  <link rel="stylesheet" id="nectar-footer-css" href="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/css/footer.css?ver=mar27_16" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jetpack_css-css" href="https://s2982.pcdn.co/wp-content/plugins/jetpack/css/jetpack.css?ver=8.3" type="text/css" media="all"> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/mu-plugins/wordkeeper-speed/js/lazysizes.min.js?ver=5.3.2"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[]","home_url":"https:\/\/bookriot.com","hash_tracking":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/plugins/google-analytics-premium/assets/js/frontend.min.js?ver=7.10.4"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/plugins/amazon-polly/public/js/amazonpolly-public.js?ver=1.0.0"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/sticky-sidebar.js?ver=mar27_16"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/ads/ls.unveilhooks.min.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/nectar-nav.js?ver=mar27_16"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var newsletter_form = {"ajaxurl":"https:\/\/bookriot.com\/wp-content\/themes\/bookriot\/lib\/sailthru-ajax-jsonp.php"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/newsletter-form.js?ver=mar27_16"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/ohayou/resize-sensor.js?ver=mar27_16"></script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/post.js?ver=mar27_16"></script> 
+  <script type="text/javascript" src="https://cdn.taboola.com/libtrc/riotnewmedia-network/loader.js?ver=mar27_16"></script> 
+  <script type="text/javascript" src="https://www.dwin2.com/pub.258769.min.js?ver=mar27_16"></script> 
+  <link rel="https://api.w.org/" href="https://bookriot.com/wp-json/"> <!-- BEGIN Sailthru Horizon Meta Information --> 
+  <meta name="sailthru.date" content="2020-01-30 06:37:21"> 
+  <meta name="sailthru.title" content="Absolute Beginners: 20 Must-Read Debut Novels of 2020"> 
+  <meta name="sailthru.tags" content="20 must read, 2020 books, debut novels, must read debut novels, must-read books, site-bookriot, post-type-post, lists, sponsored"> 
+  <meta name="sailthru.author" content="Liberty Hardy"> 
+  <meta name="sailthru.description" content="Blow up your TBR with 20 of exciting 2020 debut novels headed our way this year! From drama to science fiction to horror, there's something for everyone."> 
+  <meta name="sailthru.image.full" content="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg"> 
+  <meta name="sailthru.image.thumb" content="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1-50x27.jpg"> <!-- END Sailthru Horizon Meta Information --> 
+  <style type="text/css">img#wpstats{display:none}</style><!-- Google Tag Manager --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N3XT6XB');</script> <!-- End Google Tag Manager --> 
+  <meta property="fb:pages" content="119200448178678"> 
+  <script>
+		if (typeof(__gaTracker) !== 'undefined')
+			window.ga = __gaTracker;
+	</script> <!-- Quantcast Tag, part 1 --> 
+  <script type="text/javascript">
+		var _qevents = _qevents || [];
+
+		(function() {
+		var elem = document.createElement('script');
+		elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+		elem.async = true;
+		elem.type = "text/javascript";
+		var scpt = document.getElementsByTagName('script')[0];
+		scpt.parentNode.insertBefore(elem, scpt);
+		})();
+	</script> 
+  <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script> 
+  <script>
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+
+
+    var top_takeover = googletag.defineSlot('/207207792/BookRiot_1600x520_ATF_PG1', [[1600, 520], 'fluid', [300, 250], [970, 250], [970, 90], [970, 66]], 'top_takeover_responsive').addService(googletag.pubads());
+
+var middle = googletag.defineSlot('/207207792/BookRiot_1600x520_ArticleDiv_PG2', [[300, 250], [970, 90], [1600, 520], [970, 66], 'fluid', [300, 600], [970, 250]], 'middle').addService(googletag.pubads());
+
+
+    var inside1 = googletag.defineSlot('/207207792/BookRiot_300x250_InContent_PG1', [[300, 250], [300,600]],'inside1').addService(googletag.pubads());
+    var inside2 = googletag.defineSlot('/207207792/BookRiot_300x250_InContent2_PG1', [[300, 250], [300,600]], 'inside2').addService(googletag.pubads());
+    var sidebar = googletag.defineSlot('/207207792/BookRiot_300x600_ATF_PG1', [300, 600], 'sidebar').addService(googletag.pubads());
+
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+
+    googletag.display('top_takeover_responsive');
+    googletag.display('middle');
+  });
+</script> 
+ </head> 
+ <body class="post-template-default single single-post postid-293270 single-format-standard br lists sponsored loading date20200327" data-categories="lists sponsored "> <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3XT6XB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> <!-- End Google Tag Manager (noscript) -->
+  <nav class="over"> 
+   <div class="navigation-close-button menu-nav-button"></div> 
+   <div class="over-container"> 
+    <section class="over-media"> 
+     <div class="over-read"> 
+      <h3 class="section-title"><a href="/read">Articles</a></h3> 
+      <ul> 
+       <li><a href="/read"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/images/BR_logo_navmenu.png"> <span>Main</span></a></li> 
+       <li><a href="/category/audiobooks"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-audiobooks.svg"> <span>Audiobooks</span></a></li>
+       <li><a href="/category/childrens"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-childrens.svg"> <span>Children's</span></a></li>
+       <li><a href="/category/comics-graphic-novels"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-comics-graphic-novels.svg"> <span>Comics</span></a></li>
+       <li><a href="/category/mystery-thriller"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-mystery-thriller.svg"> <span>Mystery/Thriller</span></a></li>
+       <li><a href="/category/nonfiction"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-nonfiction.svg"> <span>Nonfiction</span></a></li>
+       <li><a href="/category/romance"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-romance.svg"> <span>Romance</span></a></li>
+       <li><a href="/category/science-fiction-fantasy"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-science-fiction-fantasy.svg"> <span>Sci-Fi/Fantasy</span></a></li>
+       <li><a href="/category/young-adult-literature"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-young-adult-literature.svg"> <span>Young Adult</span></a></li> 
+       <li><a href="/category/read-harder"><img class="icon" src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/svgs/genre-read-harder.svg"> <span>Read Harder</span></a></li> 
+      </ul> 
+     </div> <span></span> 
+     <div class="over-listen"> 
+      <h3 class="section-title"><a href="/listen">Listen</a></h3> 
+      <ul> 
+       <li><a href="https://bookriot.com/listen/shows/allthebooks/">
+         <div class="thumbnail allthebooks">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_allTheBooks_3000x3000.png" width="50" height="50">
+         </div><span>All The Books</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/thepodcast/">
+         <div class="thumbnail thepodcast">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_thePodcast_3000x3000.png" width="50" height="50">
+         </div><span>Book Riot: The Podcast</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/forreal/">
+         <div class="thumbnail forreal">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_forReal_3000x3000.png" width="50" height="50">
+         </div><span>For Real</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/getbooked/">
+         <div class="thumbnail getbooked">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_getBooked_3000x3000.png" width="50" height="50">
+         </div><span>Get Booked</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/heyya/">
+         <div class="thumbnail heyya">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_heyYA_3000x3000.png" width="50" height="50">
+         </div><span>Hey YA</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/kidlit-these-days/">
+         <div class="thumbnail kidlit-these-days">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_kidlitTheseDays_3000x3000.png" width="50" height="50">
+         </div><span>Kidlit These Days</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/novel-gazing/">
+         <div class="thumbnail novel-gazing">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_novelGazing_3000x3000.png" width="50" height="50">
+         </div><span>Novel Gazing</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/readordead/">
+         <div class="thumbnail readordead">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_readOrDead_3000x3000.png" width="50" height="50">
+         </div><span>Read or Dead</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/sffyeah/">
+         <div class="thumbnail sffyeah">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_sffYeah_3000x3000.png" width="50" height="50">
+         </div><span>SFF Yeah!</span></a></li> 
+       <li><a href="https://bookriot.com/listen/shows/when-in-romance/">
+         <div class="thumbnail when-in-romance">
+          <img src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_whenInRomance_3000x3000.png" width="50" height="50">
+         </div><span>When In Romance</span></a></li> 
+      </ul> 
+     </div> <span></span> 
+    </section> 
+    <section class="over-other"> 
+     <ul id="menu-submenuctas" class="cta-links">
+      <li id="menu-item-297653" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-297653"><a href="https://bookriot.com/newsletters/">Newsletters Galore</a></li> 
+      <li id="menu-item-297654" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297654"><a href="https://bookriot.com/category/book-fetish/">Buy Some Bookish Goods</a></li> 
+      <li id="menu-item-297655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-297655"><a href="https://insiders.bookriot.com/?utm_source=BR&amp;utm_medium=menu_link&amp;utm_campaign=Insiders_BR_menu_link">Join Insiders</a></li> 
+      <li id="menu-item-297656" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-297656"><a href="https://bookriot.com/giveaways/">Enter a Giveaway</a></li> 
+      <li id="menu-item-297657" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297657"><a href="https://bookriot.com/category/deals/">Save on Books</a></li> 
+      <li id="menu-item-297658" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-297658"><a href="https://www.youtube.com/user/BookRiotVideo/">Watch Bookish Content</a></li> 
+     </ul> 
+     <ul id="menu-mainnavsubitems" class="subnav-links">
+      <li id="menu-item-91707" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91707"><a href="https://bookriot.com/about/">About Book Riot</a></li> 
+      <li id="menu-item-91709" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91709"><a href="https://bookriot.com/advertise/">Advertise</a></li> 
+      <li id="menu-item-428383" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-428383"><a href="https://bookriot.com/join-us/">Join Us</a></li> 
+      <li id="menu-item-91710" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91710"><a href="https://bookriot.com/contact/">Contact</a></li> 
+      <li id="menu-item-91711" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91711"><a href="https://bookriot.com/staff-contributors/">Staff &amp; Contributors</a></li> 
+      <li id="menu-item-94486" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94486"><a href="https://bookriot.com/about/community-guidelines/">Community Guidelines</a></li> 
+     </ul> 
+     <ul class="over-social"> 
+      <li><a class="fa icon-facebook" href="http://facebook.com/bookriot" title="Follow Book Riot on Facebook"></a></li> 
+      <li><a class="fa icon-twitter" href="http://twitter.com/bookriot" title="Follow Book Riot on Twitter"></a></li> 
+      <li><a class="fa icon-pinterest" href="https://www.pinterest.com/bookriot/" title="Follow Book Riot on Pinterest"></a></li> 
+      <li><a class="fa icon-youtube" href="https://www.youtube.com/user/BookRiotVideo" title="Follow Book Riot on Youtube"></a></li> 
+      <li><a class="fa icon-instagram" href="http://instagram.com/bookriot" title="Follow Book Riot on Instagram"></a></li> 
+     </ul> 
+    </section> 
+   </div> 
+  </nav> 
+  <nav class="main-nav relative"> 
+   <div class="button-and-logo absolute abs-left"> 
+    <div class="menu-nav-button nav-corner-box nav-corner-left"> <span class="bar bar1"></span> <span class="bar bar2"></span> <span class="bar bar3"></span> 
+    </div><!--fly-but-wrap--> 
+    <div class="logo"> <a itemprop="url" href="https://bookriot.com/"> <img src="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/images/BR_logo_192x192.png" data-skip-lazyload> </a> 
+    </div> 
+    <div class="mobile-share"> <a class="trackable" data-category="Social Share" data-value="Masthead Facebook" onclick="window.open('http://www.facebook.com/sharer.php?u=https://bookriot.com/2020/01/30/2020-debut-novels/&amp;t=Absolute Beginners: 20 Must-Read Debut Novels of 2020', 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"> 
+      <div class="share-button facebook">
+       <i class="fa icon-facebook fa-2"></i>
+      </div> </a> <a class="trackable" data-category="Social Share" data-value="Masthead Twitter" onclick="window.open('http://twitter.com/share?text=Absolute+Beginners%3A+20+Must-Read+Debut+Novels+of+2020 -&amp;url=https://bookriot.com/2020/01/30/2020-debut-novels/', 'twitterShare', 'width=626,height=436'); return false;" title="Tweet This Post"> 
+      <div class="share-button twitter">
+       <i class="fa icon-twitter fa-2"></i>
+      </div> </a> <a class="trackable" data-category="Social Share" data-value="Masthead Pinterest" onclick="window.open('http://pinterest.com/pin/create/button/?url=https://bookriot.com/2020/01/30/2020-debut-novels/&amp;media=&amp;description=Absolute Beginners: 20 Must-Read Debut Novels of 2020', 'pinterestShare', 'width=750,height=350'); return false;" title="Pin This Post"> 
+      <div class="share-button pinterest">
+       <i class="fa icon-pinterest fa-2"></i>
+      </div> </a> <a class="trackable" data-category="Social Share" data-value="Masthead Email Share" href="mailto:?subject=&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://bookriot.com/2020/01/30/2020-debut-novels/"> 
+      <div class="share-button email">
+       <i class="fa icon-envelope fa-2"></i>
+      </div> </a> 
+    </div> 
+   </div> 
+   <div class="nav-content-right"> 
+    <div class="search-button nav-corner-box nav-corner-right"> 
+     <svg x="0px" y="0px" viewbox="0 0 32 32"> <path class="st0" d="M29.1,24.7l-8.6-8.6c2.2-4.1,1.6-9.4-1.9-12.9c-4.3-4.3-11.2-4.3-15.4,0c-4.3,4.3-4.3,11.2,0,15.4
+		c3.5,3.5,8.8,4.1,12.9,1.9l8.6,8.6c1.2,1.2,3.2,1.2,4.4,0C30.3,27.9,30.3,25.9,29.1,24.7z M5.1,16.7c-3.2-3.2-3.2-8.4,0-11.6
+		c3.2-3.2,8.4-3.2,11.6,0c3.2,3.2,3.2,8.4,0,11.6C13.5,19.9,8.3,19.9,5.1,16.7z"></path> 
+     </svg> 
+    </div> <a class="store-button" href="https://bookriot.com/category/book-fetish/?utm_source=br-homepage&amp;utm_medium=site-button&amp;utm_campaign=tbr-top-nav-button">Shop</a> 
+   </div> 
+   <div id="search-bar"> 
+    <div class="whiteout-bar"></div> 
+    <div class="container"> 
+     <form role="search" method="get" id="searchform" class="searchform" action="https://bookriot.com/"> 
+      <div class="controls"> 
+       <input type="text" value="" name="s" id="s"> 
+       <input type="submit" id="searchsubmit" value="Search"> 
+      </div> 
+     </form> 
+    </div> 
+    <div class="navigation-close-button search-close-button"></div> 
+   </div><!--search-bar--> 
+   <nav class="genre-nav"> 
+    <ul>
+     <li><a href="/category/audiobooks">Audiobooks</a></li>
+     <li><a href="/category/childrens">Children's</a></li>
+     <li><a href="/category/comics-graphic-novels">Comics</a></li>
+     <li><a href="/category/mystery-thriller">Mystery/Thriller</a></li>
+     <li><a href="/category/nonfiction">Nonfiction</a></li>
+     <li><a href="/category/romance">Romance</a></li>
+     <li><a href="/category/science-fiction-fantasy">Sci-Fi/Fantasy</a></li>
+     <li><a href="/category/young-adult-literature">Young Adult</a></li>
+    </ul>
+   </nav> 
+  </nav><!--/.main-nav--> 
+  <div id="top_takeover" style="display:block !important;"> 
+   <div id="top_takeover_responsive"></div> 
+   <div id="top-alt-content random_content_pro_widget-5" class="alt-content widget_random_content_pro_widget">
+    <div class="random-content-pro-wrapper" data-id="426146" data-campaign-name="Storefront Alt Content March 20">
+     <a class="fullwidth" href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="alignnone size-full wp-image-166706" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_97.jpg" alt="" width="970" height="250"></a> <a class="mobile" href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="mobile" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_3.jpg" alt="" width="300" height="250"></a> <a class="sidebar" href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="sidebar" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_6.jpg" alt="" width="300" height="600"></a>
+    </div>
+   </div> 
+  </div> 
+  <div class="riot-headline container" data-post-id="427088"> <a href="https://bookriot.com/2020/03/16/covid-19-updates/"> <span class="riot-headline-title">Riot Headline</span> <span class="headline-text">COVID-19 Updates from the Bookish World</span> </a> 
+  </div> 
+  <script>
+	setTimeout(function() {
+
+		if ((typeof __gaTracker !== 'undefined')) {
+	  		__gaTracker('send', 'event', 'AuthorPageview', "Liberty Hardy");
+	  	}
+
+	}, 1000);
+</script> 
+  <div id="post-main-wrap" class="left relative" itemscope itemtype="http://schema.org/Article"> 
+   <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject"> 
+    <meta itemprop="url" content="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg"> 
+    <meta itemprop="width" content="640"> 
+    <meta itemprop="height" content="342"> 
+   </div> 
+   <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization"> 
+    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject"> 
+     <meta itemprop="url" content="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/images/BR_textlogo2.png"> 
+     <meta itemprop="width" content="427"> 
+     <meta itemprop="height" content="94"> 
+    </div> 
+    <meta itemprop="name" content="Book Riot"> 
+   </div> 
+   <div id="post-area"> 
+    <div class="social-wrap-outer"> 
+     <div class="social-share-stack-fixed"> 
+      <div class="post-social-share"> <a class="trackable share-button" data-category="Social Share" data-value="Sharebar Facebook" onclick="window.open('http://www.facebook.com/sharer.php?u=https://bookriot.com/2020/01/30/2020-debut-novels/&amp;t=Absolute Beginners: 20 Must-Read Debut Novels of 2020', 'facebookShare', 'width=626,height=436'); return false;" title="Share on Facebook"> <i class="icon-facebook"></i> </a> <a class="trackable share-button" data-category="Social Share" data-value="Sharebar Twitter" onclick="window.open('http://twitter.com/share?text=Absolute+Beginners%3A+20+Must-Read+Debut+Novels+of+2020-&amp;url=https://bookriot.com/2020/01/30/2020-debut-novels/', 'twitterShare', 'width=626,height=436'); return false;" title="Tweet This Post"> <i class="icon-twitter"></i> </a> <a class="trackable share-button" data-category="Social Share" data-value="Sharebar Pinterest" onclick="window.open('http://pinterest.com/pin/create/button/?url=https://bookriot.com/2020/01/30/2020-debut-novels/&amp;media=https://bookriot.com/wp-content/uploads/2019/07/books-feature-640x340-1.jpg&amp;description=Absolute Beginners: 20 Must-Read Debut Novels of 2020', 'pinterestShare', 'width=750,height=350'); return false;" title="Pin This Post"> <i class="icon-pinterest-circled"></i> </a> <a class="trackable share-button" data-category="Social Share" data-value="Sharebar Email" href="mailto:?subject=Absolute Beginners: 20 Must-Read Debut Novels of 2020&amp;BODY=I found this article interesting and thought of sharing it with you. Check it out: https://bookriot.com/2020/01/30/2020-debut-novels/"> <i class="icon-envelope"></i> </a> 
+      </div> 
+     </div> 
+    </div> 
+    <article class="container post-293270 post type-post status-publish format-standard has-post-thumbnail hentry category-lists category-sponsored tag-20-must-read tag-2020-books tag-debut-novels tag-must-read-debut-novels tag-must-read-books"> 
+     <div class="post-content" itemprop="mainEntityOfPage"> 
+      <div class="featured-image"> 
+       <img data-pin-url="https://bookriot.com/2020/01/30/2020-debut-novels/" data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" width="620" height="331" src="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg" class="attachment-large size-large wp-post-image" alt="" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1.jpg 640w, https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1-300x160.jpg 300w, https://s2982.pcdn.co/wp-content/uploads/2019/07/books-feature-640x340-1-50x27.jpg 50w" sizes="(max-width: 620px) 100vw, 620px"> 
+      </div> 
+      <header class="post-header"> 
+       <h1 class="post-title" itemprop="name headline">Absolute Beginners: 20 Must-Read Debut Novels of 2020</h1> 
+       <div class="post-info left relative"> <span class="author-name vcard fn" itemprop="author"><a href="https://bookriot.com/author/libertyhardy/" title="Posts by Liberty Hardy" rel="author">Liberty Hardy</a></span> <time class="post-date updated" itemprop="datePublished" datetime="2020-01-30">Jan 30, 2020</time> 
+        <meta itemprop="dateModified" content="2020-01-30"> 
+       </div> 
+      </header><!--post-header--> 
+      <div class="content-area" itemprop="articleBody"> 
+       <div class="tasty-pins-hidden-image-container" style="display:none;">
+        <img data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="Absolute Beginners: 20 Must-Read Debut Novels of 2020" class="tasty-pins-hidden-image" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels-150x150.jpg" data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-skip-lazyload>
+       </div> 
+       <p>This list of 2020 debut novels is sponsored by Book Riot’s new <a href="https://bookriot.com/listen/shows/novel-gazing/">literary fiction podcast Novel Gazing</a>.</p> 
+       <p><a href="https://bookriot.com/listen/shows/novel-gazing/"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-293779" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/BR_novelGazing_300x250-1.jpg" alt="" width="250" height="208" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/BR_novelGazing_300x250-1.jpg 300w, https://s2982.pcdn.co/wp-content/uploads/2020/01/BR_novelGazing_300x250-1-50x42.jpg 50w" sizes="(max-width: 250px) 100vw, 250px"></a>Novel Gazing is your destination for all things literary fiction, bringing you news from the world of fiction, and recommendations for under the radar reads, works in translation, buzzy books, and more. Stay in the know, expand your TBR and your view of literary fiction, and, of course, have some laughs with hosts Mary Kay McBrayer and Louise Johnson. Novel Gazing is a biweekly show available wherever you get your podcasts–go listen to episode one now!</p> 
+       <hr> 
+       <p>I wish I could write a novel. I mean, not enough to sit down and try, and I don’t have any ideas even if I did, so I’m willing to bet it’s never going to happen. But still! As someone who reads a ton of novels, and appreciates the people who do write books, it sounds so exciting to have written one! And how amazing it must feel when you release your debut novel.</p> 
+       <p>I do not write books, but I often wonder if writing your first book is the hardest. We as a society certainly put a lot of stock in debut novels. And while I know that you can’t judge a career by an author’s first book, I love the new crop of debut novels every year, with all their new voices, and the amazing potential.</p> 
+       <p>Or alternately, some of each year’s incredible debut novels are by authors who normally publish poetry, nonfiction, or story collections. And they’ve now taken a stab at a novel, and succeeded!</p> 
+       <div style="display:none;">
+        Category ID: 476
+       </div>
+       <div style="display:none;">
+        Category ID: 2822
+       </div> 
+       <div class="newsletter-signup"> 
+        <div class="newsletter-wrap"> 
+         <div class="newsletter-heading"> 
+          <div class="newsletter-name">
+           Check Your Shelf Newsletter
+          </div> 
+          <div class="newsletter-description">
+           Sign up to receive&nbsp;<strong>Check Your Shelf</strong>, the&nbsp;Librarian's One-Stop Shop For News, Book Lists, And More.
+          </div> 
+         </div> 
+         <form class="newsletter-form"> 
+          <div class="inputs"> 
+           <input class="newsletter-firstname" type="text" name="firstname" id="firstname"> 
+           <input class="newsletter-email" type="email" name="email" placeholder="Email"> 
+           <input class="newsletter-validate" type="submit" value="Let's Do This"> 
+          </div> 
+          <input type="hidden" name="sailthru_email_list" value="BookRiot_Master"> 
+          <input type="hidden" name="newsletter" value="BookRiot_CheckYourShelf"> 
+          <input type="hidden" name="action" value="add_subscriber"> 
+          <input type="hidden" name="template" value="BookRiot_DoubleOptIn"> 
+         </form> 
+         <div class="newsletter-error"></div> 
+         <div class="newsletter-confirmation">
+          Thank you for signing up! Keep an eye on your inbox.
+         </div> <small class="newsletter-terms">By signing up you agree to our Terms of Service</small> 
+        </div> 
+       </div> 
+       <p>It will not surprise you that there are so many amazing debut novels rolling out in 2020. It was incredibly hard for me to pick just 20 for this list, because I admire most anyone who can sit down and arrange that many words into something that moves us, and makes us happy. But, alas, I cannot put them all on this list, or I would be writing this post until the end of time.</p> 
+       <p>So here are 20 of the must-read debut novels of 2020. I hope you discover something wonderful here. And a reminder that one of my favorite debut novels of the last several years, <a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/052554190X/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=052554190X" target="_blank" rel="nofollow noopener noreferrer" data-title="Such a Fun Age" data-publisher="G.P. Putnam's Sons" data-releasedate="2019-12-31">Such a Fun Age</a>, actually came out on December 31, 2019, and you should definitely check it out if you haven’t already.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0525656286/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0525656286" target="_blank" rel="nofollow noopener noreferrer" data-title="Topics of Conversation: A novel" data-publisher="Knopf" data-releasedate="2020-01-07"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-290076" src="https://s2982.pcdn.co/wp-content/uploads/2019/12/topics-of-conversation-181x300.jpg" alt="Topics of Conversation book cover" width="200" height="331" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/12/topics-of-conversation-181x300.jpg 181w, https://s2982.pcdn.co/wp-content/uploads/2019/12/topics-of-conversation-30x50.jpg 30w, https://s2982.pcdn.co/wp-content/uploads/2019/12/topics-of-conversation.jpg 301w" sizes="(max-width: 200px) 100vw, 200px">Topics of Conversation: A novel</a> by Miranda Popkey (Knopf, January 7)</h3> 
+       <p>This is an explosive first book! It’s a slim novel of two decades of conversations between friends, with frank talk about love, motherhood, anger, shame, assault, and more. It’s hard-hitting, but amazing. Fans of Sally Rooney and Jenny Offill will especially love it.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1641290862/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1641290862" target="_blank" rel="nofollow noopener noreferrer" data-title="The Seep" data-publisher="Soho Press" data-releasedate="2020-01-21"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-289844" src="https://s2982.pcdn.co/wp-content/uploads/2019/12/the-seep-188x300.jpg" alt="the seep" width="200" height="319" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/12/the-seep-188x300.jpg 188w, https://s2982.pcdn.co/wp-content/uploads/2019/12/the-seep-31x50.jpg 31w, https://s2982.pcdn.co/wp-content/uploads/2019/12/the-seep.jpg 297w" sizes="(max-width: 200px) 100vw, 200px">The Seep</a> by Chana Porter (Soho Press, January 21)</h3> 
+       <p>This is a unique look at what happens when humanity get everything they want. It arrives in the form of an alien invasion. When the Seep infects the world population, people stop fighting, they begin caring about others, and taking care of each other. Money no longer has value because everyone shares, and anyone can have any profession they want. People can also have wings, tails, fins, any body modification they choose. And it works for almost everyone. But there is always a danger to getting everything you want.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1335010122/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1335010122" target="_blank" rel="nofollow noopener noreferrer" data-title="The Lost Book of Adana Moreau: A Novel" data-publisher="Hanover Square Press" data-releasedate="2020-02-04"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294130" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-lost-book-of-adana-moreau-200x300.jpg" alt="the lost book of adana moreau" width="200" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-lost-book-of-adana-moreau-200x300.jpg 200w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-lost-book-of-adana-moreau-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-lost-book-of-adana-moreau.jpg 332w" sizes="(max-width: 200px) 100vw, 200px">The Lost Book of Adana Moreau: A Novel</a> by Michael Zapata (Hanover Square Press, February 4)</h3> 
+       <p>A man in Chicago finds a mysterious manuscript for a science fiction novel while cleaning out his dead grandfather’s attic. He tracks it back to a Dominican immigrant named Adana Moreau who lived decades before in New Orleans. But when he arrives in Louisiana to discuss it with her son, Hurricane Katrina impedes his search for answers.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0385544669/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0385544669" target="_blank" rel="nofollow noopener noreferrer" data-title="The Illness Lesson: A Novel" data-publisher="Doubleday" data-releasedate="2020-02-11"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-294131" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-illness-lesson-198x300.jpg" alt="the illness lesson" width="200" height="304" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-illness-lesson-198x300.jpg 198w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-illness-lesson-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-illness-lesson.jpg 329w" sizes="(max-width: 200px) 100vw, 200px">The Illness Lesson: A Novel</a> by Clare Beams (Doubleday, February 11)</h3> 
+       <p>Samuel Hood and his daughter Caroline run a groundbreaking new school for young women in 19th century New England. When a flock of red birds arrives on school grounds, one by one, the young women begin to exhibit strange signs of illness. Caroline must figure out how to push back against her father and his decision not to notify the girls’ parents about the events at the school, even as she also falls ill.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0802148042/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0802148042" target="_blank" rel="nofollow noopener noreferrer" data-title="Shuggie Bain: A Novel" data-publisher="Grove Press" data-releasedate="2020-02-11"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-294132" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/shuggie-bain-199x300.jpg" alt="shuggie bain" width="200" height="301" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/shuggie-bain-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/shuggie-bain-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/shuggie-bain.jpg 331w" sizes="(max-width: 200px) 100vw, 200px">Shuggie Bain</a> by Douglas Stuart (Grove Press, February 11)</h3> 
+       <p>This is a beautiful, heartwrenching look at the love between a mother and child. Set in Glasgow, Scotland, in the 1980s, it’s about a boy named Shuggie and his family, who struggle to keep food on their table as his mother sinks further into chemical dependancy.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0525538887/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0525538887" target="_blank" rel="nofollow noopener noreferrer" data-title="Real Life: A Novel" data-publisher="Riverhead Books" data-releasedate="2020-02-18"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-290660" src="https://s2982.pcdn.co/wp-content/uploads/2019/12/real-life-brandon-taylor-191x300.jpg" alt="" width="200" height="314" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/12/real-life-brandon-taylor-191x300.jpg 191w, https://s2982.pcdn.co/wp-content/uploads/2019/12/real-life-brandon-taylor-32x50.jpg 32w, https://s2982.pcdn.co/wp-content/uploads/2019/12/real-life-brandon-taylor.jpg 318w" sizes="(max-width: 200px) 100vw, 200px">Real Life</a> by Brandon Taylor (Riverhead Books, February 18)</h3> 
+       <p>One of the year’s most highly anticipated debuts, Taylor’s first novel is about past wounds, fresh intimacies, and the unknowability of other people, as readers follow a young man from Alabama living in a Midwestern university town as he works to get a biochem degree.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1982117435/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1982117435" target="_blank" rel="nofollow noopener noreferrer" data-title="These Ghosts Are Family: A Novel" data-publisher="Simon &amp; Schuster" data-releasedate="2020-03-03"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-289771" src="https://s2982.pcdn.co/wp-content/uploads/2019/12/These-Ghosts-Are-Family-195x300.jpg" alt="These Ghosts Are Family" width="200" height="308" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/12/These-Ghosts-Are-Family-195x300.jpg 195w, https://s2982.pcdn.co/wp-content/uploads/2019/12/These-Ghosts-Are-Family-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2019/12/These-Ghosts-Are-Family.jpg 200w" sizes="(max-width: 200px) 100vw, 200px">These Ghosts Are Family: A Novel</a> by Maisy Card (Simon &amp; Schuster, March 3)</h3> 
+       <p>As Stanford Solomon comes to the end of his life, he reveals a bombshell: His name is actually Abel Paisley, and three decades earlier he faked his death and started a new life with a stolen identity. <em>These Ghosts are Family</em> is about the consequences of his actions and how they affected the family he left behind.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0374272085/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0374272085" target="_blank" rel="nofollow noopener noreferrer" data-title="Sharks in the Time of Saviors: A Novel" data-publisher="MCD" data-releasedate="2020-03-03"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294133" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/sharks-in-the-time-of-saviors-196x300.jpg" alt="" width="196" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/sharks-in-the-time-of-saviors-196x300.jpg 196w, https://s2982.pcdn.co/wp-content/uploads/2020/01/sharks-in-the-time-of-saviors-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/sharks-in-the-time-of-saviors.jpg 326w" sizes="(max-width: 196px) 100vw, 196px">Sharks in the Time of Saviors: A Novel</a> by Kawai Strong Washburn (MCD, March 3)</h3> 
+       <p>When 7-year-old Nainoa Flores falls overboard into shark-infested waters while on vacation in Hawaii, everyone fears the worst. But when the sharks deliver him safely back to the boat, it is seen as a a sign of favor from ancient Hawaiian gods that will change the direction of their lives.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/125021615X/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=125021615X" target="_blank" rel="nofollow noopener noreferrer" data-title="Docile" data-publisher="Tor.com" data-releasedate="2020-03-03"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-289849" src="https://s2982.pcdn.co/wp-content/uploads/2019/12/docile-194x300.jpg" alt="" width="194" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/12/docile-194x300.jpg 194w, https://s2982.pcdn.co/wp-content/uploads/2019/12/docile-32x50.jpg 32w, https://s2982.pcdn.co/wp-content/uploads/2019/12/docile.jpg 307w" sizes="(max-width: 194px) 100vw, 194px">Docile</a> by K.M. Szpara (Tor.com, March 3)</h3> 
+       <p>A hard-hitting science fiction debut about a future where people’s bodies are rented out as Dociles to pay off their parents’ debts and ensure their children’s futures. Alex’s mother never recovered from her Dociline, so when Alex is contracted out, he refuses to participate. But his contract is held by none other than the heir of the family who created the Docile debt erasure empire, and he is determined to make Alex take part in their work.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0358106400/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0358106400" target="_blank" rel="nofollow noopener noreferrer" data-title="The Animals at Lockwood Manor" data-publisher="Houghton Mifflin Harcourt" data-releasedate="2020-03-10"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294134" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-animals-at-lockwood-manor-199x300.jpg" alt="" width="199" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-animals-at-lockwood-manor-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-animals-at-lockwood-manor-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-animals-at-lockwood-manor.jpg 331w" sizes="(max-width: 199px) 100vw, 199px">The Animals at Lockwood Manor</a> by Jane Healey (Houghton Mifflin Harcourt, March 10)</h3> 
+       <p>A young woman tasked with safeguarding a natural history museum collection during WWII discovers her new home at Lockwood Manor is a lot more thrilling and dangerous than she expected.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1984855239/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1984855239" target="_blank" rel="nofollow noopener noreferrer" data-title="New Waves: A Novel" data-publisher="One World" data-releasedate="2020-03-10"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294135" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/new-waves-199x300.jpg" alt="" width="199" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/new-waves-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/new-waves-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/new-waves.jpg 331w" sizes="(max-width: 199px) 100vw, 199px">New Waves: A Novel</a> by Kevin Nguyen (One World, March 10)</h3> 
+       <p>Margo and Lucas are fed up with their jobs at a tech firm and decide to steal data. When Margo dies in an accident, Lucas begins sifting through her computer to try and figure out if it really was an accident, and discovers he didn’t know as much about her as he thought. New Waves is a relevant discussion of racism, grief, and our digital footprints.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0593098668/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0593098668" target="_blank" rel="nofollow noopener noreferrer" data-title="The Return" data-publisher="Berkley" data-releasedate="2020-03-24"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294136" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-return-199x300.jpg" alt="" width="199" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-return-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-return-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-return.jpg 331w" sizes="(max-width: 199px) 100vw, 199px">The Return</a> by Rachel Harrison (Berkley, March 24)</h3> 
+       <p><em>The Return</em> is about four best friends from college, and what happens when one disappears for two years, then shows up again with no memory of what happened. To celebrate her not being dead, they plan a weekend trip in upstate New York. WHOOOOOOO, are they going to regret that. This book so is fantastic and SCARY!</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1948226480/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1948226480" target="_blank" rel="nofollow noopener noreferrer" data-title="Godshot: A Novel" data-publisher="Catapult" data-releasedate="2020-04-07"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294022" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/Godshot-by-Chelsea-Bieker-200x300.jpg" alt="Godshot cover" width="200" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/Godshot-by-Chelsea-Bieker.jpg 200w, https://s2982.pcdn.co/wp-content/uploads/2020/01/Godshot-by-Chelsea-Bieker-33x50.jpg 33w" sizes="(max-width: 200px) 100vw, 200px">Godshot: A Novel</a> by Chelsea Bieker (Catapult, April 7)</h3> 
+       <p>An electrifying novel about mothers and daughters, <em>Godshot</em> is about 14-year-old Lacey and her mother as they struggle to get by in drought-stricken California. They are involved in a religious cult whose leader promises to bring the rains back. But when Lacey is abandoned by her mother, she gives up everything and must confront her fears in order to find her.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1947793616/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1947793616" target="_blank" rel="nofollow noopener noreferrer" data-title="The Last Summer of Ada Bloom" data-publisher="Tin House Books" data-releasedate="2020-04-07"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-294139" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-last-summer-of-ada-bloom-194x300.jpg" alt="" width="200" height="309" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-last-summer-of-ada-bloom-194x300.jpg 194w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-last-summer-of-ada-bloom-32x50.jpg 32w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-last-summer-of-ada-bloom.jpg 323w" sizes="(max-width: 200px) 100vw, 200px">The Last Summer of Ada Bloom</a> by Martine Murray (Tin House Books, April 7)</h3> 
+       <p>Over the course of one hot summer, the Bloom family begins to come apart. Ada’s mother reunites with an old flame; her father is upset by the increasing distance in his marriage; her older teenage siblings are off exploring the world; and Ada has discovered a dangerous secret beneath an old windmill.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1250246288/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1250246288" target="_blank" rel="nofollow noopener noreferrer" data-title="The Unsuitable" data-publisher="Henry Holt and Co." data-releasedate="2020-04-14"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-291090" src="https://s2982.pcdn.co/wp-content/uploads/2019/12/The-Unsuitable-194x300.jpg" alt="The Unsuitable cover image" width="194" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2019/12/The-Unsuitable-194x300.jpg 194w, https://s2982.pcdn.co/wp-content/uploads/2019/12/The-Unsuitable-32x50.jpg 32w, https://s2982.pcdn.co/wp-content/uploads/2019/12/The-Unsuitable.jpg 324w" sizes="(max-width: 194px) 100vw, 194px">The Unsuitable</a> by Molly Pohlig (Henry Holt, April 14)</h3> 
+       <p>Iseult’s mother died giving birth to her, but she hasn’t left Iseult’s life completely: she lives in a scar on Iseult’s neck and talks to her. Iseult has always found her mother’s presence a comfort, but now Iseult wants to be independent. Her father’s attempts to marry her off have been unsuccessful, partly because Iseult likes to tell guests about her neck-mother. <i>The&nbsp;Unsuitable</i>&nbsp;is a fiercely feminist Gothic novel of manners and body horror, that portrays spinsterhood, self-image, and mental illness in Victorian times in fresh light.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0593129466/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0593129466" target="_blank" rel="nofollow noopener noreferrer" data-title="If I Had Your Face: A Novel" data-publisher="Ballantine Books" data-releasedate="2020-04-21"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294140" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/if-I-had-your-face-197x300.jpg" alt="" width="197" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/if-I-had-your-face-197x300.jpg 197w, https://s2982.pcdn.co/wp-content/uploads/2020/01/if-I-had-your-face-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/if-I-had-your-face.jpg 329w" sizes="(max-width: 197px) 100vw, 197px">If I Had Your Face: A Novel</a> by Frances Cha (Ballantine Books, April 21)</h3> 
+       <p>Four friends in contemporary Seoul, Korea, deal with unrealistic beauty standards, relationships, debt, despair, and hope, as they try their best to survive in today’s image-driven world.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1982121548/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1982121548" target="_blank" rel="nofollow noopener noreferrer" data-title="The Down Days: A Novel" data-publisher="Skybound Books" data-releasedate="2020-05-05"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294141" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-down-days-199x300.jpg" alt="" width="199" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-down-days-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-down-days-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-down-days.jpg 331w" sizes="(max-width: 199px) 100vw, 199px">The Down Days: A Novel</a> by Ilze Hugo (Skybound Books, May 5)</h3> 
+       <p>A community in a city in Africa struggles to deal with circumstances after they are quarantined following an outbreak of a deadly laughing epidemic. Perfect for fans of <em>The Book of M</em>, <em>The Dreamers</em>, <em>Wanderers</em>, and other novels with unusual plagues.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0062905651/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0062905651" target="_blank" rel="nofollow noopener noreferrer" data-title="Catherine House: A Novel" data-publisher="Custom House" data-releasedate="2020-05-12"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294142" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/catherine-house-201x300.jpg" alt="" width="201" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/catherine-house-201x300.jpg 201w, https://s2982.pcdn.co/wp-content/uploads/2020/01/catherine-house-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/catherine-house.jpg 334w" sizes="(max-width: 201px) 100vw, 201px">Catherine House: A Novel</a> by Elisabeth Thomas (Custom House, May 12)</h3> 
+       <p>Fans of <em>The Secret History</em> will be intrigued by this novel about a group of rebellious students at a prestigious school. Admittance to the school is very hard to gain. Students are expected to give up their lives before school, in return for a top notch education.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/1524745979/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=1524745979" target="_blank" rel="nofollow noopener noreferrer" data-title="All My Mother's Lovers: A Novel" data-publisher="Dutton" data-releasedate="2020-05-26"><em><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft wp-image-294143" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/all-my-mothers-lovers-199x300.jpg" alt="all my mother's lovers" width="200" height="302" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/all-my-mothers-lovers-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/all-my-mothers-lovers-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/all-my-mothers-lovers.jpg 331w" sizes="(max-width: 200px) 100vw, 200px"></em>All My Mother’s Lovers: A Novel</a> by Ilana Masad (Dutton, May 26)</h3> 
+       <p>Hooray for former Rioter Ilana! Her highly anticipated debut novel is about a woman named Maggie who returns home after the death of her mother. While going through her things, she discovers five envelopes addressed to strangers. Maggie embarks on a road trip to deliver the letters and learn about her mother’s secrets.</p> 
+       <h3><a class="butter" title="Buy From Amazon" href="http://www.amazon.com/gp/product/0062059572/ref=as_li_tf_il?ie=UTF8&amp;tag=boorio-20&amp;linkCode=as2&amp;camp=217145&amp;creative=399349&amp;creativeASIN=0062059572" target="_blank" rel="nofollow noopener noreferrer" data-title="The Son of Good Fortune: A Novel" data-publisher="Ecco" data-releasedate="2020-07-07"><img data-pin-media="https://s2982.pcdn.co/wp-content/uploads/2020/01/must-read-2020-debut-novels.jpg" data-pin-description="Read your way into this year's most exciting new voices. book lists | debut novels | 2020 debut novels" data-pin-title="" data-pin-id="" class="alignleft size-medium wp-image-294144" src="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-son-of-good-fortune-199x300.jpg" alt="" width="199" height="300" srcset="https://s2982.pcdn.co/wp-content/uploads/2020/01/the-son-of-good-fortune-199x300.jpg 199w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-son-of-good-fortune-33x50.jpg 33w, https://s2982.pcdn.co/wp-content/uploads/2020/01/the-son-of-good-fortune.jpg 331w" sizes="(max-width: 199px) 100vw, 199px">The Son of Good Fortune: A Novel</a> by Lysley Tenorio (Ecco, July 7)</h3> 
+       <p>Excel is an undocumented Filipino immigrant with a larger-than-life con artist mother. He spends his days working at a spy-themed pizza parlor and hanging out with his girlfriend, Sab. When Sab goes on a road trip, Excel sees it as a chance to start writing his own story and to forge a new path for himself.</p> 
+      </div><!--.content-area--> 
+     </div><!--.post-content--> 
+     <div class="sidebar-container left"> <!--<div style="width:300px;height:600px;background: blue;"></div>--> 
+      <div class="sidebar-outer" id="sidebar-lock"> 
+       <div class="sidebar-inner" id="sidebar-inner"> 
+        <div class="sidebar widget_nectar_ad">
+         <div id="sidebar" class="sidebar-ad-container lazyload " data-script="https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/ads/nectarad.js?u=BookRiot_300x600_ATF_PG1&amp;c=sidebar&amp;p=gam"></div>
+        </div>
+        <div class="sidebar widget_random_content_pro_widget">
+         <div class="random-content-pro-wrapper" data-id="426146" data-campaign-name="Storefront Alt Content March 20">
+          <a class="fullwidth" href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="alignnone size-full wp-image-166706" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_97.jpg" alt="" width="970" height="250"></a> <a class="mobile" href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="mobile" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_3.jpg" alt="" width="300" height="250"></a> <a class="sidebar" href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="sidebar" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_6.jpg" alt="" width="300" height="600"></a>
+         </div>
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sidebar-container right"> 
+      <div class="sidebar-outer" id="sidebar-right-lock"> 
+       <div class="sidebar-inner" id="sidebar-right-inner"> 
+       </div> 
+      </div> 
+     </div> 
+    </article> 
+    <section class="below-content container"> 
+     <div class="post-content"> 
+      <div id="random_content_pro_widget-13" class="below-single-post widget_random_content_pro_widget">
+       <div class="random-content-pro-wrapper" data-id="426144" data-campaign-name="Storefront RC March 20">
+        <a href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57">We're keeping track of our favorite books of the year. Shop the list here!</a> <a href="https://www.amazon.com/shop/influencer-2417d294?listId=3CD7GDW21KP57"><img class="aligncenter size-full wp-image-426145" src="https://s2982.pcdn.co/wp-content/uploads/2020/03/BR_AMZ_BB_970x250-1.jpg" alt="" width="970" height="251"></a>
+       </div> 
+       <script>
+setTimeout(function() {
+	if (typeof(__gaTracker) !== 'undefined') {
+		__gaTracker('send', 'event', 'InsidePost Impression', 'InsidePost', 'Storefront RC March 20'); }
+	}, 3000);
+</script>
+      </div>
+      <div id="custom_html-2" class="widget_text below-single-post widget_custom_html">
+       <div class="textwidget custom-html-widget">
+        <div id="taboola-1"></div>
+       </div>
+      </div> 
+     </div> 
+     <div class="sidebar-container left"> 
+      <div id="sidebar-below" class="sidebar-outer"> 
+       <div class="sidebar-inner"> <iframe src="https://omny.fm/shows/book-riot-the-podcast-1/playlists/podcast/embed?style=cover&amp;size=square" width="400" height="700" frameborder="0" title="Book Riot - The Podcast"></iframe> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="sidebar-container right"></div> 
+    </section> 
+   </div><!--#post-area--> 
+   <section class="ohayou-footer"> <a class="widget-link" href="https://bookriot.com/listen/"> 
+     <div class="widget"> 
+      <div class="widget-background" style="background-color:#0000ff"> 
+       <div class="white-background"></div> 
+      </div> 
+      <div class="inner-wrap"> 
+       <h3 class="cta-name">Listen to a Podcast</h3> <summary class="cta-description" style="color:#0000ff">We make the best mouth words</summary> 
+      </div> 
+     </div> </a> <a class="widget-link" href="https://bookriot.com/newsletters/"> 
+     <div class="widget"> 
+      <div class="widget-background" style="background-color:#ff0000"> 
+       <div class="white-background"></div> 
+      </div> 
+      <div class="inner-wrap"> 
+       <h3 class="cta-name">Subscribe to a Newsletter</h3> <summary class="cta-description" style="color:#ff0000">We write really great emails</summary> 
+      </div> 
+     </div> </a> <a class="widget-link" href="https://mytbr.co/"> 
+     <div class="widget"> 
+      <div class="widget-background" style="background-color:#2ad2d2"> 
+       <div class="white-background"></div> 
+      </div> 
+      <div class="inner-wrap"> 
+       <h3 class="cta-name">Get Book Recommendations</h3> <summary class="cta-description" style="color:#2ad2d2">We tailor 'em just for you</summary> 
+      </div> 
+     </div> </a> 
+   </section> 
+  </div><!--post-main-wrap--> 
+  <section class="ohayou-footer"> <a class="widget-link" href="https://bookriot.com/newsletters/"> 
+    <div class="widget"> 
+     <div class="widget-background" style="background-color:#ff0000"> 
+      <div class="white-background"></div> 
+     </div> 
+     <div class="inner-wrap"> 
+      <h3 class="cta-name">Subscribe to a Newsletter</h3> <summary class="cta-description" style="color:#ff0000">We write really great emails</summary> 
+     </div> 
+    </div> </a> <a class="widget-link" href="https://bookriot.com/listen/"> 
+    <div class="widget"> 
+     <div class="widget-background" style="background-color:#0000ff"> 
+      <div class="white-background"></div> 
+     </div> 
+     <div class="inner-wrap"> 
+      <h3 class="cta-name">Listen to a Podcast</h3> <summary class="cta-description" style="color:#0000ff">We make the best mouth words</summary> 
+     </div> 
+    </div> </a> <a class="widget-link" href="https://mytbr.co/"> 
+    <div class="widget"> 
+     <div class="widget-background" style="background-color:#2ad2d2"> 
+      <div class="white-background"></div> 
+     </div> 
+     <div class="inner-wrap"> 
+      <h3 class="cta-name">Get Book Recommendations</h3> <summary class="cta-description" style="color:#2ad2d2">We tailor 'em just for you</summary> 
+     </div> 
+    </div> </a> 
+  </section> 
+  <footer id="footer"> 
+   <div class="container"> <a href="http://riotnewmedia.com/">
+     <div class="rnmg-logo"></div></a> 
+    <div class="social-buttons"> <a href="http://facebook.com/bookriot" title="Follow 2020-debut-novels on Facebook" target="_blank"> <span class="subscribe-button facebook"><i class="fa icon-facebook fa-2"></i></span> </a> <a href="http://twitter.com/bookriot" title="Follow 2020-debut-novels on Twitter" target="_blank"> <span class="subscribe-button twitter"><i class="fa icon-twitter fa-2"></i></span> </a> <a href="https://www.pinterest.com/bookriot/" title="Follow 2020-debut-novels on Pinterest" target="_blank"> <span class="subscribe-button pinterest"><i class="fa icon-pinterest fa-2"></i></span> </a> <a href="https://www.youtube.com/user/BookRiotVideo" title="Follow 2020-debut-novels on Youtube" target="_blank"> <span class="subscribe-button youtube"><i class="fa icon-youtube fa-2"></i></span> </a> <a href="http://instagram.com/bookriot" title="Follow 2020-debut-novels on Instagram" target="_blank"> <span class="subscribe-button instagram"><i class="fa icon-instagram fa-2"></i></span> </a> 
+    </div> 
+    <div class="menu-footer-container">
+     <ul id="menu-footer" class="menu">
+      <li id="menu-item-118027" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-118027"><a href="https://bookriot.com/affiliate-disclosure/">Affiliate Disclosure</a></li> 
+      <li id="menu-item-1247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1247"><a href="https://bookriot.com/join-us/">Join Us</a></li> 
+      <li id="menu-item-1249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1249"><a href="https://bookriot.com/advertise/">Advertise</a></li> 
+      <li id="menu-item-1277" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1277"><a href="https://bookriot.com/contact/">Contact</a></li> 
+      <li id="menu-item-1248" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-1248"><a href="https://bookriot.com/privacy/">Privacy</a></li> 
+      <li id="menu-item-73311" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73311"><a href="https://bookriot.com/sitemap/">Sitemap</a></li> 
+     </ul>
+    </div> 
+    <div class="copyright-wrap"> <a href="//www.dmca.com/Protection/Status.aspx?ID=79f44dc3-0f30-4502-a4a0-08dbf22bcfdd" title="DMCA.com Protection Status" class="dmca-badge"> <img src="https://images.dmca.com/Badges/dmca-badge-w200-5x1-01.png?ID=79f44dc3-0f30-4502-a4a0-08dbf22bcfdd" alt="DMCA.com Protection Status"></a> 
+     <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script> <span class="copyright">© 2020 Riot New Media Group</span> 
+    </div> 
+   </div> 
+  </footer> 
+  <style>
+	</style> 
+  <script type="text/javascript">
+	</script> 
+  <script async>(function(s,u,m,o,j,v){j=u.createElement(m);v=u.getElementsByTagName(m)[0];j.async=1;j.src=o;j.dataset.sumoSiteId='57e4798a737294361a40e8dc21f7283b8fe570eb63c3d4852842d72968055dbb';j.dataset.sumoPlatform='wordpress';v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');</script> 
+  <script type="application/javascript">
+      var ajaxurl = "https://bookriot.com/wp-admin/admin-ajax.php";
+
+      function sumo_add_woocommerce_coupon(code) {
+        jQuery.post(ajaxurl, {
+          action: 'sumo_add_woocommerce_coupon',
+          code: code,
+        });
+      }
+
+      function sumo_remove_woocommerce_coupon(code) {
+        jQuery.post(ajaxurl, {
+          action: 'sumo_remove_woocommerce_coupon',
+          code: code,
+        });
+      }
+
+      function sumo_get_woocommerce_cart_subtotal(callback) {
+        jQuery.ajax({
+          method: 'POST',
+          url: ajaxurl,
+          dataType: 'html',
+          data: {
+            action: 'sumo_get_woocommerce_cart_subtotal',
+          },
+          success: function(subtotal) {
+            return callback(null, subtotal);
+          },
+          error: function(err) {
+            return callback(err, 0);
+          }
+        });
+      }
+    </script> <!-- Sailthru Horizon  Async--> 
+  <script type="text/javascript">
+(function() {
+     function loadHorizon() {
+           var s = document.createElement('script');
+           s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'https://s2982.pcdn.co/wp-content/themes/bookriot/assets/js/vendor/horizon_v1.js';
+         var x = document.getElementsByTagName('script')[0];
+         x.parentNode.insertBefore(s, x);
+      }
+     loadHorizon();
+      var oldOnLoad = window.onload;
+      window.onload = function() {
+          if (typeof oldOnLoad === 'function') {
+            oldOnLoad();
+         }
+           Sailthru.setup({
+              domain:'horizon.bookriot.com'
+         });
+     };
+  })();
+ </script> 
+  <script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var random_content_pro_script = {"ajaxurl":"https:\/\/bookriot.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s2982.pcdn.co/wp-content/plugins/random-content-pro/includes/js/front-end-scripts.js?ver=1.3c"></script> 
+  <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script> 
+  <script type="text/javascript" src="https://stats.wp.com/e-202013.js" async defer></script> 
+  <script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.3',blog:'174711941',post:'293270',tz:'-4',srv:'bookriot.com'} ]);
+	_stq.push([ 'clickTrackerInit', '174711941', '293270' ]);
+</script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"1fa3ed442f","applicationID":"206885983","transactionName":"Yl0AMUcEX0YAAExRWVsXIwZBDF5bThBRVlFZXQ==","queueTime":0,"applicationTime":160,"atts":"ThoDRw8eTEg=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

@@ -1,0 +1,51 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / articles / add beautiful images with the unsplash api published mar 26, 2020 images ❥ sponsor perhaps you know unsplash? i'd wager it's the most popular stock photography site out there for two big reasons: every photo on there is pretty darn nice every photo is entirely free even for commercial use. you don't have to ask permission or even credit it (although that's appreciated). here's something you might not know though: unsplash has an api, and it's unlimited and free. brass tacks: it's exactly what you hope it's going to be. a really clean, well documented, well-performing, json api that gives you urls to photos with metadata. what would you use the unsplash api for? there are lots of examples on unsplash’s developer area, from medium to squarespace to trello, but here is another one of my favorites! i use notion every day. it's a great app for note-taking, planning, and all sorts of stuff. one of the features it has is giving every document you create within it a custom image header. these give the documents some great personality. notion has a handful you can choose from or you can upload your own. or, you can search unsplash for them! how does that work? lemme show you first: they use the unsplash api to do it and here's an article about that. there is a search endpoint as part of the api that makes this quite easy to do. for example, you'd hit a url like: https://api.unsplash.com/search/photos?page=1&query=search_query and you'll get json back like: {
+  "total": 133,
+  "total_pages": 7,
+  "results": [
+    {
+      "id": "eolpjytrbsq",
+      "created_at": "2014-11-18t14:35:36-05:00",
+      "width": 4000,
+      "height": 3000,
+      "color": "#a7a2a1",
+      "likes": 286,
+      "liked_by_user": false,
+      "description": "a man drinking a coffee.",
+      "user": {
+        "id": "ul0qvz12goo",
+        "username": "ugmonk",
+        "name": "jeff sheldon",
+        "first_name": "jeff",
+        "last_name": "sheldon",
+        "instagram_username": "instantgrammer",
+        "twitter_username": "ugmonk",
+        "portfolio_url": "http://ugmonk.com/",
+        "profile_image": {
+          "small": "https://images.unsplash.com/profile-1441298803695-accd94000cac?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=7cfe3b93750cb0c93e2f7caec08b5a41",
+          "medium": "https://images.unsplash.com/profile-1441298803695-accd94000cac?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=5a9dc749c43ce5bd60870b129a40902f",
+          "large": "https://images.unsplash.com/profile-1441298803695-accd94000cac?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=32085a077889586df88bfbe406692202"
+        },
+        "links": {
+          "self": "https://api.unsplash.com/users/ugmonk",
+          "html": "http://unsplash.com/@ugmonk",
+          "photos": "https://api.unsplash.com/users/ugmonk/photos",
+          "likes": "https://api.unsplash.com/users/ugmonk/likes"
+        }
+      },
+      "current_user_collections": [],
+      "urls": {
+        "raw": "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f",
+        "full": "https://hd.unsplash.com/photo-1416339306562-f3d12fefd36f",
+        "regular": "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=92f3e02f63678acc8416d044e189f515",
+        "small": "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=263af33585f9d32af39d165b000845eb",
+        "thumb": "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=8aae34cf35df31a592f0bef16e6342ef"
+      },
+      "links": {
+        "self": "https://api.unsplash.com/photos/eolpjytrbsq",
+        "html": "http://unsplash.com/photos/eolpjytrbsq",
+        "download": "http://unsplash.com/photos/eolpjytrbsq/download"
+      }
+    },
+    // more photos ...
+  ]
+} so to offer a search experience inside an app like notion, you'd have a little search form and when users submit that search query, you'd hit the api with the value they entered, then loop over response.results using the response.results.urls.thumb to show the images returned. if the user picks one, you can use a higher-res url to do something with and have access to all that photos metadata. hot tip! the urls to photos are dynamic in that you can resize them, crop them, serve them in different formats, and even change the compression quality all from url parameters. for example, changing size is like &w=200. that is exactly what we do on codepen the purpose of codepen pen editor is to provide an online code editor that makes it tremendously easy to code something up for the web, save it, and share it. images are a big part of the web, so it's very possible that you might want to use a gorgeous image in a pen. we have asset hosting ourselves on codepen as a pro feature, but we also offer unsplash images to everyone for free! check out how it works: a basic example in react let's make a search <form>, when submitted, it hits the unsplash api and returns a bunch of photos. we'll use superagent for the ajax just to make a smidge easier. we'll track the current search query and returned data in state. here is that working! codepen embed fallback how might you use that in your own app? does your app allow users to create anything? if so, could those things be enhanced by great photos? for example, cover images, background images, images for blog posts, etc. check out existing partners for more ideas. could this be part of an avatar-choosing experience? maybe you could build a plugin that enhances some existing app by allowing quicker access to photos. feel free to leave comments with more ideas or how you have used the api. and if you haven't, try it out. looking for a complete course on getting into web development? frontend masters has a complete intro course to web development by renouned developer brian holt from microsoft. you'll learn how to be a successful coder knowing everything from practical html and css to modern javascript to git and basic back-end development. comments dcw digital permalink to comment# march 26, 2020 oh my days, unsplash, where have you been all my life. thanks for the post and recommendation. reply lenny permalink to comment# march 26, 2020 affinity has integrated unsplash lately into their products and it’s really useful. reply leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter notify me of follow-up comments by email. copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

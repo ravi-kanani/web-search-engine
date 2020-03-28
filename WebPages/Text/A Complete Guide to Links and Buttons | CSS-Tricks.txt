@@ -1,0 +1,230 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation guide a complete guide to links and buttons author chris coyier 8 comments join conversation last updated feb 21, 2020 our complete guide to links, buttons, and button-like inputs in html, css, and javascript. monthly sponsor thanks, mailchimp! your app is up and running! now what? seamlessly connect it to your marketing data. there is a lot to know about links and buttons in html. there is markup implementation and related attributes, styling best practices, things to avoid, and the even-more-nuanced cousins of the link: buttons and button-like inputs. let's take a look at the whole world of links and buttons, and all the considerations at the html, css, javascript, design, and accessibility layers that come with them. there are plenty of pitfalls and bad practices to avoid along the way. by covering it, we’ll have a complete good ux implementation of both elements. quick guidelines on when to use each: are you giving a user a way to go to another page or a different part of the same page? use a link (<a href="/somewhere">link</a>) are you making a javascript-powered clickable action? use a button (<button type="button">button</button>) are you submitting a form? use a submit input (<input type="submit" value="submit">) links links are one of the most basic, yet deeply fundamental and foundational building blocks of the web. click a link, and you move to another page or are moved to another place within the same page. table of contents html implementation styling and css considerations javascript considerations accessibility considerations html implementation a basic link <a href="https://css-tricks.com">css-tricks</a> that's a link to a "fully qualified" or "absolute" url. a relative link you can link "relatively" as well: <!-- useful in navigation, but be careful in content that may travel elsewhere (e.g. rss) -->
+<a href="/pages/about.html">about</a> that can be useful, for example, in development where the domain name is likely to be different than the production site, but you still want to be able to click links. relative urls are most useful for things like navigation, but be careful of using them within content — like blog posts — where that content may be read off-site, like in an app or rss feed. a jump link links can also be "hash links" or "jump links" by starting with a #: <a href="#section-2">section two</a>
+<!-- will jump to... -->
+<section id="section-2"></section> clicking that link will "jump" (scroll) to the first element in the dom with an id that matches, like the section element above. 💥 little trick: using a hash link (e.g. #0) in development can be useful so you can click the link without being sent back to the top of the page like a click on a # link does. but careful, links that don't link anywhere should never make it to production. 💥 little trick: jump-links can sometimes benefit from smooth scrolling to help people understand that the page is moving from one place to another. it's a fairly common ui/ux thing to see a "back to top" link on sites, particularly where important navigational controls are at the top but there is quite a bit of content to scroll (or otherwise navigate) through. to create a jump link, link to the id of an element that is at the top of the page where it makes sense to send focus back to. <a href="#top-of-page">back to top</a> jump links are sometimes also used to link to other anchor (<a>) elements that have no href attribute. those are called "placeholder" links: <a id="section-2"></a>
+<h3>section 2</h3> there are accessibility considerations of these, but overall they are acceptable. disabled links a link without an href attribute is the only practical way to disable a link. why disable a link? perhaps it's a link that only becomes active after logging in or signing up. a:not[href] {
+  /* style a "disabled" link */
+} when a link has no href, it has no role, no focusability, and no keyboard events. this is intentional. you could think of it like a <span>. do you need the link to open in a new window or tab? you can use the target attribute for that, but it is strongly discouraged. <a href="https://css-tricks.com" target="_blank" rel="noopener noreferrer">
+  css-tricks
+</a> the bit that makes it work is target="_blank", but note the extra rel attribute and values there which make it safer and faster. making links open in new tabs is a major ux discussion. we have a whole article about when to use it here. summarized: don't use it: because you or your client prefer it personally. because you're trying to beef up your time on site metric. because you're distinguishing between internal and external links or content types. because it's your way out of dealing with infinite scroll trickiness. do use it: because a user is doing something on the current page, like actively playing media or has unsaved work. you have some obscure technical reason where you are forced to (even then you're still probably the rule, not the exception). need the link to trigger a download? the download attribute on a link will instruct the browser to download the linked file rather than opening it within the current page/tab. it's a nice ux touch. <a href="/files/file.pdf" download>download pdf</a> the rel attribute this attribute is for the relationship of the link to the target. the rel attribute is also commonly used on the <link> element (which is not used for creating hyperlinks, but for things like including css and preloading). we're not including rel values for the <link> element here, just anchor links. here are some basic examples: <a href="/page/3" rel="next">next</a>
+<a href="/page/1" rel="prev">previous</a>
+
+<a href="http://creativecommons.org/licenses/by/2.0/" rel="license">cc by 2.0</a>
+
+<a href="/topics/" rel="directory">all topics</a> rel="alternate": alternate version of the document. rel="author": author of the document. rel="help": a resource for help with the document. rel="license": license and legal information. rel="manifest": web app manifest document. rel="next": next document in the series. rel="prev": previous document in the series. rel="search": a document meant to perform a search in the current document. there are also some rel attributes specifically to inform search engines: rel="sponsored": mark links that are advertisements or paid placements (commonly called paid links) as sponsored. rel="ugc": for not-particularly-trusted user-generated content, like comments and forum posts. rel="nofollow": tell the search engine to ignore this and not associate this site with where this links to. and also some rel attributes that are most security-focused: rel="noopener": prevent a new tab from using the javascript window.opener feature, which could potentially access the page containing the link (your site) to perform malicious things, like stealing information or sharing infected code. using this with target="_blank" is often a good idea. rel="noreferrer": prevent other sites or tracking services (e.g. google analytics) from identifying your page as the source of clicked link. you can use multiple space-separated values if you need to (e.g. rel="noopener noreferrer") and finally, some rel attributes come from the microformats standard or the indieweb like: rel="directory": indicates that the destination of the hyperlink is a directory listing containing an entry for the current page. rel="tag": indicates that the destination of that hyperlink is an author-designated "tag" (or keyword/subject) for the current page. rel="payment": indicates that the destination of that hyperlink provides a way to show or give support for the current page. rel="help": states that the resource linked to is a help file or faq for the current document. rel="me": indicates that its destination represents the same person or entity as the current page. aria roles the default role of a link is link, so you do not need to do: <a role="link" href="/">link</a> you'd only need that if you were faking a link, which would be a weird/rare thing to ever need to do, and you'd have to use some javascript in addition to this to make it actually follow the link. <span class="link" tabindex="0" role="link" data-href="/">
+  fake accessible link created using a span
+</span> just looking above you can see how much extra work faking a link is, and that is before you consider that is breaks right-clicking, doesn't allow opening in a new tab, doesn't work with windows high contrast mode and other reader modes and assistive technology. pretty bad! a useful aria role to indicate the current page, like: <a href="/" aria-current="page">home</a>
+<a href="/contact">contact</a>
+<a href="/about">about/a></a> should you use the title attribute? probably not. save this for giving an iframe a short, descriptive title. <a title="i don't need to be here" href="/">
+  list of concerts
+</a> title provides a hover-triggered ui popup showing the text you wrote. you can't style it, and it's not really that accessible. hover-triggered is the key phrase here. it's unusable on any touch-only device. if a link needs more contextual information, provide that in actual content around the link, or use descriptive text the link itself (as opposed to something like "click here"). icon-only links if a link only has an icon inside it, like: <a href="/">😃</a>
+
+<a href="/">
+  <svg> ... </svg>
+</a> that isn't enough contextual information about the link, particularly for accessibility reasons, but potentially for anybody. links with text are almost always more clear. if you absolutely can't use text, you can use a pattern like: <a href="/">
+  <!-- hide the icon from assistive technology -->
+  <svg aria-hidden="true" focusable="false"> ... </svg>
+  <!-- acts as a label that is hidden from view -->
+  <span class="visually-hidden">useful link text</span>
+</a> visually-hidden is a class used to visually hide the label text with css: .visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+} unlike aria-label, visually hidden text can be translated and will hold up better in specialized browsing modes. links around images images can be links if you wrap them in a link. there is no need to use the alt text to say the image is a link, as assistive technology will do that already. <a href="/buy/puppies/now">
+  <img src="puppy.jpg" alt="a happy puppy.">
+</a> links around bigger chunks of content you can link a whole area of content, like: <a href="/article/">
+  <div class="card">
+    <h2>card</h2>
+    <img src="..." alt="...">
+    <p>content</p>
+  </div>
+</a> but of course, there are ux implications. for example, it can be harder to select the text, and the entire element needs fairly complex styling to create clear focus and hover states. there are also accessibility implications, like the fact that the content of the entire card is read before it is announced as a link. here's an example with two approaches. the first wraps the entire card in a link. this is valid, but remember the implications. the second has a link inside the title, and the link has a pseudo-element on it that covers the entire card. this also has implications (a bit awkward to select text, for example), but is perhaps more expected for assistive technology. codepen embed fallback the second example also opens up the possibility of including multiple links. you can't nest links, so things get a little tricky if you need to. it's possible though, by making the individual links set above the card-covering link with z-index. styling and css considerations here's the default look of a link: the default user-agent styling of a link. it's likely you'll be changing the style of your links, and also likely you'll use css to do it. i could make all my links red in css by doing: a {
+  color: red;
+} sometimes selecting and styling all links on a page is a bit heavy-handed, as links in navigation might be treated entirely differently than links within text. you can always scope selectors to target links within particular areas like: /* navigation links */
+nav a { }
+
+/* links in an article */
+article a { }
+
+/* links contained in an element with a "text" class */
+.text a { } or select the link directly to style. .link {
+  /* for styling <a class="link" href="/"> */
+}
+
+a[aria-current="page"] {
+  /* you'll need to apply this attribute yourself, but it's a great pattern to use for active navigation. */
+} link states links are focusable elements. in other words, they can be selected using the tab key on a keyboard. links are perhaps the most common element where you'll very consciously design the different states, including a :focus state. :hover: for styling when a mouse pointer is over the link. :visited: for styling when the link has been followed, as best as the browser can remember. it has limited styling ability due to security. :link: for styling when a link has not been visited. :active: for styling when the link is pressed (e.g. the mouse button is down or the element is being tapped on a touch screen). :focus: very important! links should always have a focus style. if you choose to remove the default blue outline that most browsers apply, also use this selector to re-apply a visually obvious focus style. these are chainable like any pseudo-class, so you could do something like this if it is useful for your design/ux. /* style focus and hover states in a single ruleset */
+a:focus:hover { } you can style a link to look button-like perhaps some of the confusion between links and buttons is stuff like this: very cool "button" style from katherine kato. that certainly looks like a button! everyone would call that a button. even a design system would likely call that a button and perhaps have a class like .button { }. but! a thing you can click that says "learn more" is very much a link, not a button. that's completely fine, it's just yet another reminder to use the semantically and functionally correct element. color contrast since we often style links with a distinct color, it's important to use a color with sufficient color contrast for accessibility. there is a wide variety of visual impairments (see the tool whocanuse for simulating color combinations with different impairments) and high contrast helps nearly all of them. perhaps you set a blue color for links: the blue link is #2196f3. while that might look ok to you, it's better to use tools for testing to ensure the color has a strong enough ratio according to researched guidelines. here, i'll look at chrome devtools and it will tell me this color is not compliant in that it doesn't have enough contrast with the background color behind it. chrome devtools is telling us this link color does not have enough contrast. color contrast is a big consideration with links, not just because they are often colored in a unique color that needs to be checked, but because they have all those different states (hover, focus, active, visited) which also might have different colors. compound that with the fact that text can be selected and you've got a lot of places to consider contrast. here's an article about all that. styling "types" of links we can get clever in css with attribute selectors and figure out what kind of resource a link is pointing to, assuming the href value has useful stuff in it. /* style all links that include .pdf at the end */
+a[href$=".pdf"]::after {
+  content: " (pdf)";
+}
+
+/* style links that point to google */
+a[href*="google.com"] {
+  color: purple;
+} styling links for print css has an "at-rule" for declaring styles that only take effect on printed media (e.g. printing out a web page). you can include them in any css like this: @media print {
+  /* for links in content, visually display the link */ 
+  article a::after { 
+    content: " (" attr(href) ")";
+  }
+} resetting styles if you needed to take all the styling off a link (or really any other element for that matter), css provides a way to remove all the styles using the all property. .special-area a {
+  all: unset;
+  all: revert;
+  
+  /* start from scratch */
+  color: purple;
+} you can also remove individual styles with keywords. (again, this isn't really unique to links, but is generically useful): a {
+  /* grab color from nearest parent that sets it */
+  color: inherit;
+
+  /* wipe out style (turn black) */
+  color: initial;
+
+  /* change back to user agent style (blue) */
+  color: revert;
+} javascript considerations say you wanted to stop the clicking of a link from doing what it normally does: go to that link or jump around the page. in javascript, you can usepreventdefault to prevent jumping around. const jumplinks = document.queryselectorall("a[href^='#']");
+
+jumplinks.foreach(link => {
+ link.addeventlistener('click', event => {
+    event.preventdefault();
+    // do something else instead, like handle the navigation behavior yourself
+  });
+}); this kind of thing is at the core of how "single page apps" (spas) work. they intercept the clicks so browsers don't take over and handle the navigation. spas see where you are trying to go (within your own site), load the data they need, replace what they need to on the page, and update the url. it's an awful lot of work to replicate what the browser does for free, but you get the ability to do things like animate between pages. another javascript concern with links is that, when a link to another page is clicked, the page is left and another page loads. that can be problematic for something like a page that contains a form the user is filling out but hasn't completed. if they click the link and leave the page, they lose their work! your only opportunity to prevent the user from leaving is by using the beforeunload event. window.addeventlistener("beforeunload", function(event) {
+  // remind user to save their work or whatever.
+}); a link that has had its default behavior removed won't announce the new destination. this means a person using assistive technology may not know where they wound up. you'll have to do things like update the page's title and move focus back up to the top of the document. javascript frameworks in a javascript framework, like react, you might sometimes see links created from something like a <link /> component rather than a native <a> element. the custom component probably creates a native <a> element, but with extra functionality, like enabling the javascript router to work, and adding attributes like aria-current="page" as needed, which is a good thing! ultimately, a link is a link. a javascript framework might offer or encourage some level of abstraction, but you're always free to use regular links. accessibility considerations we covered some accessibility in the sections above (it’s all related!), but here are some more things to think about. you don’t need text like “link” or “go to” in the link text itself. make the text meaningful (“documentation” instead of “click here”). links already have an aria role by default (role="link") so there's no need to explicitly set it. try not to use the url itself as the text (<a href="google.com">google.com</a>) links are generally blue and generally underlined and that's generally good. all images in content should have alt text anyway, but doubly so when the image is wrapped in a link with otherwise no text. unique accessible names some assistive technology can create lists of interactive elements on the page. imagine a group of four article cards that all have a "read more", the list of interactive elements will be like: read more read more read more read more not very useful. you could make use of that .visually-hidden class we covered to make the links more like: <a href="/article">
+  read more
+  <span class="visually-hidden">
+    of the article "dancing with rabbits".
+  <span>
+</a> now each link is unique and clear. if the design can support it, do it without the visually hidden class to remove the ambiguity for everyone. buttons buttons are for triggering actions. when do you use the <button> element? a good rule is to use a button when there is “no meaningful href.” here’s another way to think of that: if clicking it doesn’t do anything without javascript, it should be a <button>. a <button> that is within a <form>, by default, will submit that form. but aside from that, button elements don't have any default behavior, and you'll be wiring up that interactivity with javascript. table of contents html implementation styling and css considerations javascript considerations accessibility considerations html implementation <button>buy now</button> buttons inside of a <form> do something by default: they submit the form! they can also reset it, like their input counterparts. the type attributes matter: <form action="/" method="post">
+  <input type="text" name="name" id="name">
+  <button>submit</button>
+
+  <!-- if you want to be more explicit... -->
+  <button type="submit">submit</button>
+
+  <!-- ...or clear the form inputs back to their initial values -->
+  <button type="reset">reset</button>
+
+  <!-- this prevents a `submit` action from firing which may be useful sometimes inside a form -->
+  <button type="button">non-submitting button</button>
+</form> speaking of forms, buttons have some neat tricks up their sleeve where they can override attributes of the <form> itself. <form action="/" method="get">
+
+  <!-- override the action -->
+  <button formaction="/elsewhere/" type="submit">submit to elsewhere</button>
+
+  <!-- override encytype -->
+  <button formenctype="multipart/form-data" type="submit"></button>
+
+  <!-- override method -->
+  <button formmethod="post" type="submit"></button>
+
+  <!-- do not validate fields -->
+  <button formnovalidate type="submit"></button>
+
+  <!-- override target e.g. open in new tab -->
+  <button formtarget="_blank" type="submit"></button>
+
+</form> autofocus since buttons are focusable elements, we can automatically focus on them when the page loads using the autofocus attribute: <div class="modal">
+
+  <h2>save document?</h2>
+
+  <button>cancel</button>
+  <button autofocus>ok</button>
+</div> perhaps you'd do that inside of a modal dialog where one of the actions is a default action and it helps the ux (e.g. you can press enter to dismiss the modal). autofocusing after a user action is perhaps the only good practice here, moving a user's focus without their permission, as the autofocus attribute is capable of, can be a problem for screen reader and screen magnifier users. note thatautofocus may not work if the element is within an <iframe sandbox> for security reasons. disabling buttons to prevent a button from being interactive, there is a disabled attribute you can use: <button disabled>pay now</button>
+<p class="error-message">correct the form above to submit payment.</p> note that we've included descriptive text alongside the disabled button. it can be very frustrating to find a disabled button and not know why it's disabled. a better way to do this could be to let someone submit the form, and then explain why it didn't work in the validation feedback messaging. regardless, you could style a disabled button this way: /* might be good styles for any disabled element! */
+button[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+} we'll cover other states and styling later in this guide. buttons can contain child elements a submit button and a submit input (<input type="submit">) are identical in functionality, but different in the sense that an input is unable to contain child elements while a button can. <button>
+   <svg aria-hidden="true" focusable="false">
+     <path d="..." />
+   </svg>
+   <span class="callout">big</span>
+   sale!
+</button>
+
+<button type="button">
+  <span role="img" aria-label="fox">
+    🦊
+  </span>
+  button
+</button> note the focusable="false" attribute on the svg element above. in that case, since the icon is decorative, this will help assistive technology only announce the button's label. styling and css considerations buttons are generally styled to look very button-like. they should look pressable. if you're looking for inspiration on fancy button styles, you'd do well looking at the codepen topic on buttons. 1, 2, 3, 4, 5, 6 cross-browser/platform button styles how buttons look by default varies by browser and platform. just on macos: chrome, safari, and firefox (they look the same) add border: 0; to those same buttons as above, and we have different styles entirely. while there is some ux truth to leaving the defaults of form elements alone so that they match that browser/platform's style and you get some affordance for free, designers typically don't like default styles, particularly ones that differ across browsers. resetting the default button style removing all the styles from a button is easier than you think. you'd think, as a form control, appearance: none; would help, but don't count on that. actually all: revert; is a better bet to wipe the slate clean. you can see how a variety of properties are involved and that's not all of them. here's a consolidated chunk of what normalize does to buttons. button {
+  font-family: inherit; /* for all browsers */
+  font-size: 100%; /* for all browsers */
+  line-height: 1.15; /* for all browsers */
+  margin: 0; /* firefox and safari have margin */
+  overflow: visible; /* edge hides overflow */
+  text-transform: none; /* firefox inherits text-transform */
+  -webkit-appearance: button; /* safari otherwise prevents some styles */
+}
+
+button::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring {
+  outline: 1px dotted buttontext;
+} a consistent .button class in addition to using reset or baseline css, you may want to have a class for buttons that gives you a strong foundation for styling and works across both links and buttons. .button {
+  border: 0;
+  border-radius: 0.25rem;
+  background: #1e88e5;
+  color: white;
+  font-family: -system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  cursor: pointer;
+} check out this pen to see why all these properties are needed to make sure it works correctly across elements. button states just as with links, you'll want to style the states of buttons. button:hover { }
+button:focus { }
+button:active { }
+button:visited { } /* maybe less so */ you may also want to use aria attributes for styling, which is a neat way to encourage using them correctly: button[aria-pressed="true"] { }
+button[aria-pressed="false"] { } link-styled buttons there are always exceptions. for example, a website in which you need a button-triggered action within a sentence: <p>you may open your <button>user settings</button> to change this.</p> we've used a button instead of an anchor tag in the above code, as this hypothetical website opens user settings in a modal dialog rather than linking to another page. in this situation, you may want to style the button as if it looks like a link. this is probably rare enough that you would probably make a class (e.g. .link-looking-button) that incorporates the reset styles from above and otherwise matches what you do for anchor links. breakout buttons remember earlier when we talked about the possibility of wrapping entire elements in links? if you have a button within another element, but you want that entire outer element to be clickable/tappable as if it's the button, that's a "breakout" button. you can use an absolutely-positioned pseudo-element on the button to expand the clickable area to the whole region. fancy! codepen embed fallback javascript considerations even without javascript, button elements can be triggered by the space and enter keys on a keyboard. that's part of what makes them such appealing and useful elements: they are discoverable, focusable, and interactive with assistive technology in a predictable way. perhaps any <button> in that situation should be inserted into the dom by javascript. a tall order! food for thought. 🤔 "once" handlers say a button does something pretty darn important, like submitting a payment. it would be pretty scary if it was programmed such that clicking the button multiple times submitted multiple payment requests. it is situations like this where you would attach a click handler to a button that only runs once. to make that clear to the user, we'll disable the button on click as well. document.queryselector("button").addeventlistener('click', function(event) {
+  event.currenttarget.setattribute("disabled", true);
+}, {
+    once: true
+}); then you would intentionally un-disable the button and reattach the handler when necessary. inline handlers javascript can be executed by activating a button through code on the button itself: <button onclick="console.log('clicked');">
+  log it.
+</button>
+
+<button onmousedown="">
+</button>
+
+<button onmouseup="">
+</button> that practice went from being standard practice to being a faux pas (not abstracting javascript functionality away from html) to, eh, you need it when you need it. one advantage is that if you're injecting this html into the dom, you don't need to bind/re-bind javascript event handlers to it because it already has one. javascript frameworks it's common in any javascript framework to make a component for handling buttons, as buttons typically have lots of variations. those variations can be turned into an api of sorts. for example, in react: const button = ({ classname, children }) => {
+  const [activated, setactivated] = react.usestate(false);
+  return (
+    <button
+      classname={`button ${classname}`}
+      aria-pressed={activated ? "true" : "false")
+      onclick={() => setactivated(!activated)}
+    >
+      {children}
+    </button>
+  );
+}; in that example, the <button /> component ensures the button will have a button class and handles a toggle-like active class. accessibility considerations the biggest accessibility consideration with buttons is actually using buttons. don't try to replicate a button with a <div> or a <span>, which is, unfortunately, more common than you might think. it's very likely that will cause problems. (did you deal with focusability? did you deal with keyboard events? great. there's still probably more stuff you're forgetting.) focus styles like all focusable elements, browsers apply a default focus style, which is usually a blue outline. focus styles on chrome/macos while it's arguable that you should leave that alone as it's a very clear and obvious style for people that benefit from focus styles, it's also not out of the question to change it. what you should not do is button:focus { outline: 0; } to remove it. if you ever remove a focus style like that, put it back at the same time. button:focus {
+  outline: 0; /* removes the default blue ring */
+
+  /* now, let's create our own focus style */
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px red;
+} custom focus style the fact that a button may become focused when clicked and apply that style at the same time is offputting to some. there is a trick (that has limited, but increasing, browser support) on removing focus styles from clicks and not keyboard events: :focus:not(:focus-visible) { 
+  outline: 0; 
+} aria buttons already have the role they need (role="button"). but there are some other aria attributes that are related to buttons: aria-pressed: turns a button into a toggle, between aria-pressed="true" and aria-pressed="false". more on button toggles, which can also be done with role="switch" and aria-checked="true". aria-expanded: if the button controls the open/closed state of another element (like a dropdown menu), you apply this attribute to indicate that like aria-expanded="true". aria-label: overrides the text within the button. this is useful for labeling buttons that otherwise don't have text, but you're still probably better off using a visually-hidden class so it can be translated. aria-labelledby: points to an element that will act as the label for the button. for that last one: <button aria-labelledby="buttontext">
+  time is running out! 
+  <span id="buttontext">add to cart</span>
+</button> deque has a deeper dive blog post into button accessibility that includes much about aria. dialogs if a button opens a dialog, your job is to move the focus inside and trap it there. when closing the dialog, you need to return focus back to that button so the user is back exactly where they started. this makes the experience of using a modal the same for someone who relies on assistive technology as for someone who doesn't. focus management isn't just for dialogs, either. if clicking a button runs a calculation and changes a value on the page, there is no context change there, meaning focus should remain on the button. if the button does something like "move to next page," the focus should be moved to the start of that next page. size don't make buttons too small. that goes for links and any sort of interactive control. people with any sort of reduced dexterity will benefit. the classic apple guideline for the minimum size for a touch target (button) is 44x44pt. here's some guidelines from other companies. fitt's law tells us smaller targets have greater error rates. google even takes button sizes into consideration when evaluating the seo of a site. in addition to ample size, don't place buttons too close each other, whether they're stacked vertically or together on the same line. give them some margin because people experiencing motor control issues run the risk of clicking the wrong one. activating buttons buttons work by being clicked/touched, pressing the enter key, or pressing the space key (when focused). even if you add role="button" to a link or div, you won't get the spacebar functionality, so at the risk of beating a dead horse, use <button> in those cases. related need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. comments adam permalink to comment# february 14, 2020 this is a slam dunk of an article! a ton of information presented in an easy to read way and backed-up by other people’s work. thanks for writing it! reply vadim makeev permalink to comment# february 14, 2020 i think you mixing up something here: <a id=section-2></a>
+<h3>section 2</h3>
+ it doesn’t make sense because you can use id attribute on <h3> to achieve the same result. but there used to be name attribute and the following pattern: <a name=section-2></a>
+<h3>section 2</h3>
+ but name is deprecated in favor to id now. i’d suggest expanding logical links section with a different example featuring current links in menu or paging. this is where they’re are super convenient. reply adrian roselli permalink to comment# february 14, 2020 key handling note on native controls: events triggered by the space bar fire when the key is released (or onkeyup); events triggered by the enter key will fire the event as soon as you press the key down (or onkeydown). i have done testing with keyboard-only and screen reader users and while they may not know this behavior, they generally react with a bit of surprise when it is not followed. if you are trying to re-create a native control, make sure the keyboard handlers correspond. a pen where you can try it yourself. reply jason permalink to comment# february 17, 2020 thanks for this fantastic article! just looking above you can see how much extra work faking a link is, and that is before you consider that is breaks right-clicking, doesn’t allow opening in a new tab, doesn’t work with windows high contrast mode and other reader modes and assistive technology. pretty bad! it is absolutely astounding how many times i run into fake links. it seems every codebase i inherit is full of them. not only that, but google does it all the time on their nifty little applications baked into search results. it really drives me crazy. reply evan permalink to comment# february 17, 2020 is there a reason the quick guidelines only recommend <input type="submit" /> for forms? i thought <button type="submit" /> and <input type="submit" /> were interchangeable. the only difference the article mentions between the two that i found is that <button> can have child content, so it’s not obvious to me why you couldn’t use either an <input> or a <button> for form submissions. reply christian permalink to comment# february 18, 2020 thank you for the article. i’ve done my share of research on links/buttons, navigation/commands, but it looks like i’ve missed a few things. this will help fuel our discussions as we create our web development standards and try to get consistency across all of our products. reply justin conway permalink to comment# february 20, 2020 according to the spec (https://html.spec.whatwg.org/multipage/links.html#link-type-noreferrer) you shouldn’t have to put noopener and noreferrer together: <a href="..." rel="noreferrer" target="_blank"> has the same behavior as <a href="..." rel="noreferrer noopener" target="_blank">. reply dario permalink to comment# march 5, 2020 heihei i have a one page but with three href=”test.html” whem i am on test.html is it possible to return on index.php#about or index.php#contact which are some parts of the main page. the question is about the # that when the user clicks on contact, that it jumps back to the main page and there directly to #contact. reply leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter notify me of follow-up comments by email. copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

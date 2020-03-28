@@ -1,0 +1,137 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / code snippets / css / triangular list bullets triangular list bullets author chris coyier 20 comments join conversation published aug 18, 2011 personalized marketing with mailchimp ul {
+    margin: 0.75em 0;
+    padding: 0 1em;
+    list-style: none;
+}
+li:before { 
+    content: "";
+    border-color: transparent #111;
+    border-style: solid;
+    border-width: 0.35em 0 0.35em 0.45em;
+    display: block;
+    height: 0;
+    width: 0;
+    left: -1em;
+    top: 0.9em;
+    position: relative;
+} our learning partner need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. comments endy permalink to comment# august 18, 2011 tricks are very impressive,,, but i greatly admire the comments .. suppose blogspot platform can be like this … reply doug t permalink to comment# august 18, 2011 now… how do i make them rotate downward when the menu/list items expand? preferably sans-jquery… css only. reply janos janecki permalink to comment# august 18, 2011 i saw an example, you’re talking about, here http://www.artlebedev.ru/tools/technogrette/html/treeview/ janos janecki permalink to comment# august 18, 2011 in your case you may try to hide related ul content and display it on hover (using css) and rotate triangle by using li:hover:before {
+    border-width: 0.45em 0.35em 0 0.35em ;
+} maybe transitions will also be helpfull, i dunno. sean erdrich permalink to comment# december 6, 2011 here’s a bit of tweaking i did really quickly… i tried a few things and couldn’t find an efficient way to animate the transform for when the hover starts and ends. i suppose if you used javascript you could do something like that, but this snippet is pure css. 
+<ul>
+     <li>lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+          <div>this is visible when the &lt;li&gt; is hovered over.</div>
+     </li>
+     <li>aliquam tincidunt mauris eu risus.</li>
+     <li>vestibulum auctor dapibus neque.</li>
+</ul>
+           
+ partnered with this: 
+ul {
+    margin: 0.75em 0;
+    padding: 0 1em;
+    list-style: none;}
+	
+
+li:before { 
+    content: "";
+    border-color: transparent #111;
+    border-style: solid;
+    border-width: 0.35em 0 0.35em 0.45em;
+    display: block;
+    height: 0;
+    width: 0;
+    left: -1em;
+    top: 0.9em;
+    position: relative;
+	-webkit-transition:all 0.15s linear;
+	-moz-transition:all 0.15s linear;
+	-o-transition:all 0.15s linear;
+	transition:all 0.15s linear;}
+
+
+ul li div{
+	height:0px;	/*	you could use negative positioning too	*/
+	opacity:0;
+	transition:all .3s ease-in-out;
+	-webkit-transition:all .3s ease-in-out;
+	-moz-transition:all .3s ease-in-out;
+	-o-transition:all .3s ease-in-out;
+	transition:all .3s ease-in-out;}
+	
+	
+ul li:hover div{
+	height:20px;
+	opacity:1;}
+	
+	
+ul li:hover:before{
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+	transform:rotate(90deg);}
+
+ javi sola permalink to comment# october 3, 2011 awesome trick. however, here we go, ie 7 does not show the triangle bullets, is there a workaround band-aid approach to this (hack)? reply rick lecoat permalink to comment# november 27, 2011 javi: ie7 does not support the :before and :after pseudo elements. i was going to suggest using the selectivizr script which adds a lot of css3 selector functionality to ie 6-8, but it does not support those pseudo elements either. apparently this is because :before and :after cause changes to the dom which might cause some of selectivizr’s other functionality to fail. so, unless someone else has a clever workaround, i guess your only option is to feed ie7 a separate rule via conditional comments, perhaps using background images as list markers. sean erdrich permalink to comment# december 6, 2011 here’s a working (if somewhat lengthy) method: css: 
+ul {
+    margin: 0.75em 0;
+    padding: 0 1em;
+    list-style: none;}
+	
+	
+ul li span.bullet{
+	content: "";
+    border-color: transparent #111;
+    border-style: solid;
+    border-width: 0.35em 0 0.35em 0.45em;
+    display: inline-block;
+    height: 0;
+    width: 0;/*
+    left: -1em;
+    top: 0.9em;*/
+    position: relative;
+	left:-5px;}
+
+
+ul li div{
+	height:0px;	/*	you could use negative positioning too	*/
+	opacity:0;
+	margin-left:8px;
+	transition:all .3s ease-in-out;
+	-webkit-transition:all .3s ease-in-out;
+	-moz-transition:all .3s ease-in-out;
+	-o-transition:all .3s ease-in-out;
+	transition:all .3s ease-in-out;}
+	
+	
+ul li:hover div{
+	height:20px;
+	opacity:1;}
+	
+	
+ul li.dropdown:hover span.bullet {
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+	transform:rotate(90deg);}
+
+ html 
+
+<ul>
+         <li class="dropdown">
+            <span class="bullet"></span>
+            lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                  <div>this is visible when the &lt;li&gt; is hovered over.
+</div>
+
+
+            </li>
+                  <li><span class="bullet">
+                        </span>aliquam tincidunt mauris eu risus.</li>
+
+
+
+
+            </li>
+                  <li><span class="bullet">
+                        </span>aliquam tincidunt mauris eu risus.</li></ul>
+
+ josh w permalink to comment# january 25, 2013 in firefox (18.0.1) this was leaving a yucky dark grey outline/aliasing around the triangle. this is much more noticeable when you are using a colored bullet, rather than the black in this example. in chrome it looked fine. i found a fix, which is to use an rgba value for the border background color, with an rgb more closing matching the background color. transparent “isn’t really transparent” where diagonals and anti-aliasing are concerned: fixed (on white bg): border-color: rgba(255,255,255,0) #e45900; reply wil t permalink to comment# march 19, 2013 this was an incredibly helpful tutorial. i’m interested in making the triangles only appear where i actually have a drop down menu. i can’t figure out how to suppress them on a list item that doesn’t have a sublist. i have figured out how to suppress the triangles on the sublists themselves though. extra code pasted below: sidebar ul li ul li:before{ border: none; } reply wil t permalink to comment# march 20, 2013 i figured it out. just had to create a new class to suppress the arrow. ul li.no_carrot:before{ border-width: 0; } vanessa permalink to comment# december 30, 2014 sorry to barge in on a very old post, but i figured since i found this article, others might find it too and might think my solution is useful. li:before { content: "\25b6 \ "; /* caractère iso 10646 */ } you can use different ascii codes to achieve the result you want. and it’s done. reply st.g permalink to comment# february 4, 2015 this was exactly what i was hoping to verify. thanks for that snippet! greg permalink to comment# july 27, 2015 this worked perfectly and is exactly what i was looking for. thanks! ashok permalink to comment# june 19, 2015 its good. reply l david permalink to comment# july 17, 2015 these type of solutions break the ul start attribute, i don’t believe there is an ideal css-only approach for this other than an using a background image. reply nextlocal permalink to comment# november 26, 2015 i made a jsbin demo of what you posted here: http://jsbin.com/xusipig/1/edit?css,output reply sabry permalink to comment# november 23, 2016 helpful thanks ^_^ reply dev permalink to comment# february 10, 2020 thank you, but somehow, the line height is increasing to almost double when am using this trick compared to normal bullets… and am just not able to decrease it … you can see here compared with the numbered list : https://www.plarecon.com/implants-biomaterials-plastic-surgery/ reply geoff graham permalink to comment# february 10, 2020 looks like you were able to decrease the size! well, at least when i checked. i’d imagine that the element was inheriting a larger line height from somewhere else in the cascade, which means it would need to be explicitly defined in this ruleset. leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

@@ -1,0 +1,671 @@
+<!doctype html>
+<html class="no-js" lang="en-US"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="B-verify" content="fecc69a171a8627f463dc4f0d0ee85fb6a208673"> <!-- Default Meta Tags --> 
+  <link href="//www.google-analytics.com" rel="dns-prefetch"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"073b4df364",applicationID:"228992793"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"> 
+  <link rel="shortcut icon" href="https://s28838.pcdn.co/wp-content/uploads/2015/11/favicon-1.png"> 
+  <link rel="apple-touch-icon" href="https://s28838.pcdn.co/wp-content/uploads/2015/11/apple-favicon.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="https://s28838.pcdn.co/wp-content/uploads/2015/11/apple-iphone-retina-favicon.png"> 
+  <link rel="apple-touch-icon" sizes="72x72" href="https://s28838.pcdn.co/wp-content/uploads/2015/11/apple-iphone-retina-favicon.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="https://s28838.pcdn.co/wp-content/uploads/2015/11/apple-ipad-favicon.png"> 
+  <link rel="pingback" href="https://www.neverendingfootsteps.com/xmlrpc.php"> 
+  <meta name="p:domain_verify" content="b16614bc06729c0c57c20d04b52c2479"> <!-- css + javascript --> <!-- This site is optimized with the Yoast SEO plugin v12.4 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <title>Home | Never Ending Footsteps</title> 
+  <meta name="description" content="Never Ending Footsteps is the travel blog by Lauren Juliff, author of How Not to Travel the World. It chronicles her life as a traveler, writer, and walking disaster."> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.neverendingfootsteps.com/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="Home | Never Ending Footsteps"> 
+  <meta property="og:description" content="Never Ending Footsteps is the travel blog by Lauren Juliff, author of How Not to Travel the World. It chronicles her life as a traveler, writer, and walking disaster."> 
+  <meta property="og:url" content="https://www.neverendingfootsteps.com/"> 
+  <meta property="og:site_name" content="Never Ending Footsteps"> 
+  <meta property="og:image" content="https://s28838.pcdn.co/wp-content/uploads/2014/09/10626503_775084875863647_1149782182633260913_n.jpg.optimal.jpg"> 
+  <meta property="og:image:secure_url" content="https://s28838.pcdn.co/wp-content/uploads/2014/09/10626503_775084875863647_1149782182633260913_n.jpg.optimal.jpg"> 
+  <meta property="og:image:width" content="640"> 
+  <meta property="og:image:height" content="640"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="Never Ending Footsteps is the travel blog by Lauren Juliff, author of How Not to Travel the World. It chronicles her life as a traveler, writer, and walking disaster."> 
+  <meta name="twitter:title" content="Home | Never Ending Footsteps"> 
+  <meta name="twitter:site" content="@NEFootsteps"> 
+  <meta name="twitter:image" content="https://s28838.pcdn.co/wp-content/uploads/2014/09/10626503_775084875863647_1149782182633260913_n.jpg.optimal.jpg"> 
+  <meta name="twitter:creator" content="@NEFootsteps"> 
+  <meta name="p:domain_verify" content="7e58b487de37e588a6244e8b2f03e28e"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.neverendingfootsteps.com/#organization","name":"Never Ending Footsteps","url":"https://www.neverendingfootsteps.com/","sameAs":["https://facebook.com/NeverEndingFootsteps","http://youtube.com/NEFootsteps","https://www.pinterest.com/nefootsteps/","https://twitter.com/NEFootsteps"],"logo":{"@type":"ImageObject","@id":"https://www.neverendingfootsteps.com/#logo","url":"https://s28838.pcdn.co/wp-content/uploads/2015/11/favicon-1.png","width":273,"height":204,"caption":"Never Ending Footsteps"},"image":{"@id":"https://www.neverendingfootsteps.com/#logo"}},{"@type":"WebSite","@id":"https://www.neverendingfootsteps.com/#website","url":"https://www.neverendingfootsteps.com/","name":"Never Ending Footsteps","publisher":{"@id":"https://www.neverendingfootsteps.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.neverendingfootsteps.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"https://www.neverendingfootsteps.com/#primaryimage","url":"https://s28838.pcdn.co/wp-content/uploads/2014/09/10626503_775084875863647_1149782182633260913_n.jpg.optimal.jpg","width":640,"height":640,"caption":"Lauren eating Vietnamese food in London"},{"@type":"WebPage","@id":"https://www.neverendingfootsteps.com/#webpage","url":"https://www.neverendingfootsteps.com/","inLanguage":"en-US","name":"Home | Never Ending Footsteps","isPartOf":{"@id":"https://www.neverendingfootsteps.com/#website"},"about":{"@id":"https://www.neverendingfootsteps.com/#organization"},"primaryImageOfPage":{"@id":"https://www.neverendingfootsteps.com/#primaryimage"},"datePublished":"2013-06-15T08:34:48+00:00","dateModified":"2019-06-13T12:09:26+00:00","description":"Never Ending Footsteps is the travel blog by Lauren Juliff, author of How Not to Travel the World. It chronicles her life as a traveler, writer, and walking disaster."}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//scripts.mediavine.com"> 
+  <link rel="dns-prefetch" href="//www.neverendingfootsteps.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="Never Ending Footsteps » Feed" href="https://www.neverendingfootsteps.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Never Ending Footsteps » Comments Feed" href="https://www.neverendingfootsteps.com/comments/feed/"> 
+  <link id="symple_shortcode_styles-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/b16cb79cb783891ff6e1b525c13a5b80.min.css" type="text/css" media="none" onload="this.media='all'">
+  <link id="vwcss-icon-elusive-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/96f5684def1aba32a5b11c2c932d75ca.min.css" type="text/css" media="all">
+  <link id="vwcss-flexslider-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/2b9af31f84c0cf475c30caac0b6fc34e.min.css" type="text/css" media="all">
+  <link id="vwcss-icon-social-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/2c2029ec43cd9f67e73c44ddaab618db.min.css" type="text/css" media="all">
+  <link id="vwcss-icon-entypo-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/317e1408de0d536e1bbe8816259d076f.min.css" type="text/css" media="all">
+  <link id="vwcss-icon-symbol-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/096f3b3414e168cb6b0589642c416b38.min.css" type="text/css" media="all">
+  <link id="vwcss-swipebox-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/a764e3176117010df116eac6e0e91f74.min.css" type="text/css" media="all">
+  <link id="vwcss-bootstrap-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/themes/presso/framework/bootstrap/css/bootstrap.css?ver=2.1.1" type="text/css" media="all">
+  <link id="vwcss-theme-css" rel="stylesheet" href="https://s28838.pcdn.co/wp-content/cache/css/eda8fe56e6c01bb3b7b0fe1010c00db6.min.css" type="text/css" media="all">
+  <link id="a3a3_lazy_load-css" rel="stylesheet" href="//s28838.pcdn.co/wp-content/uploads/sass/a3_lazy_load.min.css?ver=1565888443" type="text/css" media="none" onload="this.media='all'">
+  <link id="redux-google-fonts-vw_presso-css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700%7COpen+Sans%3A300%2C400%2C600%2C700%2C800%2C300italic%2C400italic%2C600italic%2C700italic%2C800italic&amp;subset=latin&amp;ver=1581336317" type="text/css" media="none" onload="this.media='all'">
+  <script type="text/javascript" async data-noptimize="1" data-cfasync="false" src="https://scripts.mediavine.com/tags/never-ending-footsteps.js?ver=4.9.13" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var instant_search = {"blog_url":"https:\/\/www.neverendingfootsteps.com","ajax_url":"https:\/\/www.neverendingfootsteps.com\/wp-admin\/admin-ajax.php","placeholder":"Search"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/cache/js/99ac5f69c76654725e42b8e86cd873be.min.js" defer></script>
+  <link rel="https://api.w.org/" href="https://www.neverendingfootsteps.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.neverendingfootsteps.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s28838.pcdn.co/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 4.9.13"> 
+  <link rel="shortlink" href="https://www.neverendingfootsteps.com/"> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.neverendingfootsteps.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.neverendingfootsteps.com%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.neverendingfootsteps.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.neverendingfootsteps.com%2F&amp;format=xml"> 
+  <style id="vw-custom-font" type="text/css">
+						
+					</style> <!-- Theme's Custom CSS --> 
+  <style type="text/css">
+		::selection { color: white; background-color: #fa6e59; }
+		
+		h1 { line-height: 1.1; }
+		h2 { line-height: 1.2; }
+		h3, h4, h5, h6 { line-height: 1.4; }
+
+		.header-font,
+		woocommerce div.product .woocommerce-tabs ul.tabs li, .woocommerce-page div.product .woocommerce-tabs ul.tabs li, .woocommerce #content div.product .woocommerce-tabs ul.tabs li, .woocommerce-page #content div.product .woocommerce-tabs ul.tabs li
+		{ font-family: Oswald; font-weight: 700; }
+		.header-font-color { color: #333333; }
+
+		.wp-caption p.wp-caption-text {
+			color: #333333;
+			border-bottom-color: #333333;
+		}
+		
+		.body-font { font-family: Open Sans; font-weight: 400; }
+
+		/* Only header font, No font-weight */
+		.mobile-nav,
+		.top-nav,
+		.comment .author > span, .pingback .author > span, 
+		.label, .tagcloud a,
+		.woocommerce .product_meta .post-tags a,
+		.bbp-topic-tags a,
+		.woocommerce div.product span.price, .woocommerce-page div.product span.price, .woocommerce #content div.product span.price, .woocommerce-page #content div.product span.price, .woocommerce div.product p.price, .woocommerce-page div.product p.price, .woocommerce #content div.product p.price, .woocommerce-page #content div.product p.price,
+		.main-nav .menu-link { font-family: Oswald; }
+
+		/* Primary Color */
+		.primary-bg,
+		.label, .tagcloud a,
+		.woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce-page nav.woocommerce-pagination ul li span.current, .woocommerce #content nav.woocommerce-pagination ul li span.current, .woocommerce-page #content nav.woocommerce-pagination ul li span.current, .woocommerce nav.woocommerce-pagination ul li a:hover, .woocommerce-page nav.woocommerce-pagination ul li a:hover, .woocommerce #content nav.woocommerce-pagination ul li a:hover, .woocommerce-page #content nav.woocommerce-pagination ul li a:hover, .woocommerce nav.woocommerce-pagination ul li a:focus, .woocommerce-page nav.woocommerce-pagination ul li a:focus, .woocommerce #content nav.woocommerce-pagination ul li a:focus, .woocommerce-page #content nav.woocommerce-pagination ul li a:focus,
+		#pagination > span {
+			background-color: #fa6e59;
+		}
+		a, .social-share a:hover, .site-social-icons a:hover,
+		.bbp-topic-header a:hover,
+		.bbp-forum-header a:hover,
+		.bbp-reply-header a:hover { color: #fa6e59; }
+		.button-primary { color: #fa6e59; border-color: #fa6e59; }
+		.primary-border { border-color: #fa6e59; }
+
+		/* Top-bar Colors */
+		.top-bar {
+			background-color: #033f57;
+			color: #ffffff;
+		}
+
+		#open-mobile-nav, .top-nav  a, .top-bar-right > a {
+			color: #ffffff;
+		}
+
+		#open-mobile-nav:hover, .top-nav  a:hover, .top-bar-right > a:hover {
+			background-color: #fa6e59;
+			color: #ffffff;
+		}
+
+		.top-nav .menu-item:hover { background-color: #fa6e59; }
+		.top-nav .menu-item:hover > a { color: #ffffff; }
+
+		/* Header Colors */
+		.main-bar {
+			background-color: #ffffff;
+			color: #bbbbbb;
+		}
+
+		/* Main Navigation Colors */
+		.main-nav-bar {
+			background-color: #fa6e59;
+		}
+
+		.main-nav-bar, .main-nav > .menu-item > a {
+			color: #ffffff;
+		}
+
+		.main-nav .menu-item:hover > .menu-link,
+		.main-nav > .current-menu-ancestor > a,
+		.main-nav > .current-menu-item > a {
+			background-color: #fa6e59;
+			color: #ffffff;
+		}
+
+		/* Widgets */
+		.widget_vw_widget_social_subscription .social-subscription:hover .social-subscription-icon { background-color: #fa6e59; }
+		.widget_vw_widget_social_subscription .social-subscription:hover .social-subscription-count { color: #fa6e59; }
+
+		.widget_vw_widget_categories a:hover { color: #fa6e59; }
+
+		/* Footer Colors */
+		#footer {
+			background-color: #111111;
+		}
+
+		#footer .widget-title {
+			color: #fa6e59;
+		}
+
+		#footer,
+		#footer .title,
+		#footer .comment-author,
+		#footer .social-subscription-count
+		{ color: #cecece; }
+
+		.copyright {
+			background-color: #000000;
+		}
+		.copyright, .copyright a {
+			color: #dddddd;
+		}
+
+		/* Custom Styles */
+				#site-title {font-size: 0em; !important;}
+
+.homepagetitle {font-size: 3.5em !important;
+margin-top: 12px !important;}
+
+.iwm_map_canvas .google-visualization-tooltip {
+ pointer-events: visiblePainted !important;
+}
+
+blockquote, blockquote p {
+    font-size: 16px;
+}
+
+body.page #page-content>article>.post-content {
+    margin-top: 0px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+@font-face {
+  font-display: swap;
+}
+
+
+
+.booktitle {font-size: 24px; !important;
+  margin-top: -5px; !important;}
+
+body {
+  font-size: 16px;
+}
+
+p a:link
+
+{
+ text-decoration: underline;
+}
+
+.subtitle {
+    font-weight: 250; !important;
+    font-size: 13px; !important;
+    font-style: italic; !important;
+}
+
+.post .post-subtitle {
+    color: #8c8c8c;}
+
+
+.label-small, .bbp-topic-tags a, .woocommerce .product_meta .post-tags a {
+    font-size: 13px;
+    line-height: 1.3em;
+}
+
+.post-box-footer a, .post-box-footer i {
+    font-size: 13px; !important;
+}
+
+
+
+
+body.home .post-box-large-thumbnail .post-excerpt {
+  max-height: 4.5em;
+  overflow: hidden;
+}
+
+/* Disable post navigation */
+.post-nav { display: none; }
+
+.wpp-list li {
+    display: inline-block;
+    float: none;
+    clear: left;
+    margin-bottom: 6px!important;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted #bdbdbd!important;
+    width: 100%;/* NEW */
+    margin: 0 0 0 -15px!important;
+}
+
+
+
+.wpp-list {
+    margin-left: -20px;
+    font-size: 13px;
+    width: 100%;
+}
+
+
+
+header.main-bar {
+  background: url( 'https://s28838.pcdn.co/wp-content/uploads/2015/11/NEF-Banner2.jpg.optimal.jpg' ); /* Change the image url here */
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  -o-background-size:cover;
+  background-size:cover;
+  background-position:center;
+} 
+
+@media (min-width: 1150px) {
+ header.main-bar {
+   height: 350px;
+ }
+}
+
+@media (min-width: 1000px) and (max-width: 1150px) {
+ header.main-bar {
+   height: 300px;
+ }
+}
+
+
+@media (min-width: 950px) and (max-width: 1000px) {
+ header.main-bar {
+   height: 250px;
+ }
+}
+
+@media (min-width: 750px) and (max-width: 950px) {
+ header.main-bar {
+   height: 200px;
+ }
+}
+
+@media (min-width: 550px) and (max-width: 750px) {
+ header.main-bar {
+   height: 150px;
+ }
+}	</style> 
+  <style type="text/css" id="wp-custom-css">
+			/*Mediavine Sidebar Fix*/
+	@media only screen and (min-width: 768px) {
+   #page-content {
+       max-width: calc(100% - 350px);
+   }
+   .sidebar-inner {
+       min-width: 331px;
+   }
+}
+ 
+@media only screen and (max-width: 359px) {
+        
+#page-wrapper #page-content{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+    }		</style> 
+  <style type="text/css" title="dynamic-css" class="options-output">h1, h2, h3, h4, h5, h6{font-family:Oswald,Tahoma,Geneva, sans-serif;text-transform:inherit;font-weight:700;font-style:normal;color:#333333;}body{font-family:"Open Sans",Arial, Helvetica, sans-serif;font-weight:400;font-style:normal;color:#606060;font-size:17px;}</style> <!-- TradeDoubler site verification 3051654 --> 
+  <meta name="google-site-verification" content="O23WUNuSjIbIYmYmZBd-g2lUZTXjoirEwTcbkftE-yk"> 
+  <meta name="google-site-verification" content="O23WUNuSjIbIYmYmZBd-g2lUZTXjoirEwTcbkftE-yk"> 
+  <meta name="B-verify" content="5049cbf1f7a4a00ab6452e37e27056f6ee317ffc"> <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --> <!--[if lt IE 9]>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]--> 
+ </head> 
+ <body id="top" class="home page-template page-template-page_composer page-template-page_composer-php page page-id-5133 symple-shortcodes  symple-shortcodes-responsive site-layout-full-large site-disable-post-box-effects"> 
+  <nav id="mobile-nav-wrapper"></nav> 
+  <div id="off-canvas-body-inner"> <!-- Top Bar --> 
+   <div id="top-bar" class="top-bar"> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="col-sm-12"> 
+       <div class="top-bar-right"> <a class="site-social-icon" href="https://facebook.com/NeverEndingFootsteps" title="Facebook" target="_blank"><i class="icon-social-facebook"></i></a><a class="site-social-icon" href="http://feeds.feedblitz.com/neverendingfootsteps" title="RSS" target="_blank"><i class="icon-social-rss"></i></a><a class="site-social-icon" href="https://twitter.com/NEFootsteps" title="Twitter" target="_blank"><i class="icon-social-twitter"></i></a><a class="site-social-icon" href="http://youtube.com/user/NEFootsteps" title="Youtube" target="_blank"><i class="icon-social-youtube"></i></a> <a class="instant-search-icon" href="#menu1"><i class="icon-entypo-search"></i></a> 
+       </div> <a id="open-mobile-nav" href="#mobile-nav" title="Search"><i class="icon-entypo-menu"></i></a> 
+       <nav id="top-nav-wrapper"> 
+        <ul id="menu-top-navigation-bar" class="top-nav list-unstyled clearfix">
+         <li id="nav-menu-item-7302" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-5133 current_page_item"><a href="https://www.neverendingfootsteps.com/" class="menu-link main-menu-link"><span>Home</span></a></li> 
+         <li id="nav-menu-item-10526" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/about-lauren/" class="menu-link main-menu-link"><span>About Lauren</span></a></li> 
+         <li id="nav-menu-item-7303" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/archive/" class="menu-link main-menu-link"><span>Blog</span></a></li> 
+         <li id="nav-menu-item-10779" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/where-ive-been/" class="menu-link main-menu-link"><span>Destinations</span></a></li> 
+         <li id="nav-menu-item-9542" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/overcome-travel-anxiety/" class="menu-link main-menu-link"><span>My Travel Anxiety Course</span></a></li> 
+         <li id="nav-menu-item-7418" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/8-simple-steps-to-starting-a-travel-blog/" class="menu-link main-menu-link"><span>How to Start a Travel Blog</span></a></li> 
+        </ul> 
+       </nav> 
+      </div> 
+     </div> 
+    </div> 
+   </div> <!-- End Top Bar --> <!-- Main Bar --> 
+   <header class="main-bar header-layout-center-logo"> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="col-sm-12"> 
+       <div id="logo" class=""> <a href="https://www.neverendingfootsteps.com/"> 
+         <div id="site-title" class="title title-large">
+          Never Ending Footsteps
+         </div> </a> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </header> <!-- End Main Bar --> <!-- Main Navigation Bar --> 
+   <div class="main-nav-bar header-layout-center-logo"> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="col-sm-12"> 
+       <nav id="main-nav-wrapper">
+        <ul id="menu-main-navigation" class="main-nav list-unstyled">
+         <li id="nav-menu-item-6850" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-5133 current_page_item"><a href="https://www.neverendingfootsteps.com/" class="menu-link main-menu-link"><span>Home</span></a></li> 
+         <li id="nav-menu-item-6855" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/blog/" class="menu-link main-menu-link"><span>Blog</span></a></li> 
+         <li id="nav-menu-item-8511" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"><a href="https://www.neverendingfootsteps.com/about-lauren/" class="menu-link main-menu-link"><span>About Lauren</span></a> 
+          <ul class="sub-menu menu-odd  menu-depth-1"> 
+           <li id="nav-menu-item-6851" class="sub-menu-item  menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/about-lauren/" class="menu-link sub-menu-link"><span>About Lauren</span></a></li> 
+           <li id="nav-menu-item-6853" class="sub-menu-item  menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/lauren-media/" class="menu-link sub-menu-link"><span>Lauren in The Media</span></a></li> 
+           <li id="nav-menu-item-7739" class="sub-menu-item  menu-item-odd menu-item-depth-1 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/faq/" class="menu-link sub-menu-link"><span>Long-Term Travel FAQ</span></a></li> 
+          </ul> </li> 
+         <li id="nav-menu-item-6856" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/where-ive-been/" class="menu-link main-menu-link"><span>Where I’ve Been</span></a></li> 
+         <li id="nav-menu-item-6857" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/the-incidents/" class="menu-link main-menu-link"><span>The Incidents</span></a></li> 
+         <li id="nav-menu-item-6859" class="main-menu-item  menu-item-even menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.neverendingfootsteps.com/contact/" class="menu-link main-menu-link"><span>Contact</span></a></li> 
+        </ul>
+       </nav> 
+      </div> 
+     </div> 
+    </div> 
+   </div> <!-- End Main Navigation Bar --> 
+   <div id="page-wrapper" class="container"> 
+    <div class="row vwpc-row">
+     <div class="vwpc-section-custom_content">
+      <div class="col-sm-12">
+       <hr class="section-hr">
+       <div style="text-align: center;"> 
+        <h1 class="homepagetitle">Hi, I’m Lauren.</h1> 
+        <h2>I’ve been stumbling my way around the world for eight years and counting.</h2> 
+       </div> 
+       <p>&nbsp;<br> </p>
+       <div class="symple-column symple-one-third symple-column-first  ">
+        <img src="https://s28838.pcdn.co/wp-content/uploads/2017/06/Lauren-juliff.jpg.optimal.jpg" alt="lauren-juliff">
+        <p></p> 
+       </div> 
+       <p>It was back in 2011 when I quit my job, sold everything I owned, and left home with a one-way ticket in hand. Everyone told me I was making a huge mistake.</p> 
+       <p>At the time, I had never traveled alone before, and never for more than two weeks at a time. I suffered from an anxiety disorder, was concerned about everything, and had just had my heart broken.</p> 
+       <p>Like a lot of people, I hoped travel would solve everything. I set off convinced my trip would be all about incredible, life-changing moments; ones full of sunsets and rainbows and meaningful experiences. Instead, I stumbled headfirst into disaster.</p> 
+       <p>Over the past eight years of travel, I’ve been scammed in China and robbed in Tanzania. I’ve face-planted into a sand dune in Namibia and fallen into a leech-infested rice paddy in Indonesia, accidentally eaten a cockroach in Laos, and in Vietnam, a ferry started to sink with me on board. I’ve been caught up in a tsunami in Thailand, was stranded in the Congo, and accidentally flashed my tour group in the Cook Islands. It’s hard to believe, but my bad luck was the best thing to ever happen to me.</p> 
+       <p>On Never Ending Footsteps, I show that transformation through travel is possible, even when you feel as though you’re the unluckiest traveler in the world. I’m a different person to the one who stepped on that plane eight years ago. I’ve kicked my anxiety disorder to the curb, built up my confidence, and learned a ton about how to travel safely, wisely, and adventurously in the process. </p> 
+       <p>Travel transformed my life. Let me show you how it can change yours, too. Learn from my mistakes, find the courage to follow your dreams, and laugh at my misfortune. Let me show you how <em>not</em> to travel the world.</p> 
+       <div style="text-align: center;">
+        <a href="https://www.neverendingfootsteps.com/about-lauren/" class="symple-button large orange   " target="_self" title="Visit Site" style="border-radius:3px" rel=""><span class="symple-button-inner" style="border-radius:3px">Continue Reading</span></a>
+       </div> 
+      </div>
+     </div>
+    </div>
+    <div class="row vwpc-row">
+     <div class="vwpc-section-latest"> 
+      <div class="col-sm-12"> 
+       <hr class="section-hr"> 
+       <h1 class="section-title title title-large"> <span class="super-title">THE BLOG</span><font color="#02b7ae" ;>Latest Posts</font> </h1> 
+       <div class="row vw-isotope post-box-list"> 
+        <div class="post-box-wrapper col-sm-4">
+         <article class="post-11536 post-box fly-in animated-content post-box-large-thumbnail"> 
+          <div class="post-thumbnail-wrapper"> <a href="https://www.neverendingfootsteps.com/february-2020-summary/" title="Permalink to February 2020: Travel Summary and Statistics" rel="bookmark"> <img width="360" height="200" src="https://s28838.pcdn.co/wp-content/uploads/2020/03/Beach-at-St-Kilda-360x200.jpg.optimal.jpg" class="attachment-vw_small size-vw_small wp-post-image" alt="Beach at St Kilda" srcset="https://s28838.pcdn.co/wp-content/uploads/2020/03/Beach-at-St-Kilda-360x200.jpg.optimal.jpg 360w, https://s28838.pcdn.co/wp-content/uploads/2020/03/Beach-at-St-Kilda-265x147.jpg.optimal.jpg 265w" sizes="(max-width: 360px) 100vw, 360px"> </a> 
+          </div> 
+          <div class="post-box-inner"> 
+           <div class="post-categories clearfix"> <a class="label label-small" href="https://www.neverendingfootsteps.com/destinations/oceania/australia/" title="View all posts in Australia" rel="category">Australia</a><a class="label label-small" href="https://www.neverendingfootsteps.com/monthly-summaries/" title="View all posts in Monthly Summaries" rel="category">Monthly Summaries</a> 
+           </div> 
+           <h3 class="title"><a href="https://www.neverendingfootsteps.com/february-2020-summary/" title="Permalink to February 2020: Travel Summary and Statistics" rel="bookmark">February 2020: Travel Summary and Statistics</a></h3> 
+           <div class="post-meta header-font"> <a class="author-name" href="https://www.neverendingfootsteps.com/author/neverendingfootsteps/" title="View all posts by Lauren">Lauren</a><span class="post-meta-separator">,</span> <a href="https://www.neverendingfootsteps.com/february-2020-summary/" class="post-date" title="Permalink to February 2020: Travel Summary and Statistics" rel="bookmark">March 2, 2020</a> 
+           </div> 
+           <div class="post-excerpt ">
+            <p>What a wonderful month February was! I spent the entirety of the past four weeks in Australia, and I loved getting to discover explore even more beautiful spots in this delightful country.&nbsp; From Melbourne to the Grampians to an adventure travel film festival to the Great Ocean Road — I …</p> 
+           </div> 
+           <div class="post-box-footer clearfix"> <a class="read-more" href="https://www.neverendingfootsteps.com/february-2020-summary/" title="Permalink to February 2020: Travel Summary and Statistics" rel="bookmark"> Read more <i class="icon-entypo-right-open"></i> </a> <a class="comment-count" href="https://www.neverendingfootsteps.com/february-2020-summary/#comments" title="Permalink to February 2020: Travel Summary and Statistics" rel="bookmark"> <i class="icon-entypo-comment"></i> <span>15</span> Comments </a> 
+           </div> 
+          </div> 
+         </article>
+        </div> 
+        <div class="post-box-wrapper col-sm-4">
+         <article class="post-11522 post-box fly-in animated-content post-box-large-thumbnail"> 
+          <div class="post-thumbnail-wrapper"> <a href="https://www.neverendingfootsteps.com/pushkar-travel-guide/" title="Permalink to Pushkar Travel Guide: 11 Things to Do in Pushkar" rel="bookmark"> <img width="360" height="200" src="https://s28838.pcdn.co/wp-content/uploads/2020/02/pushkar-lake-form-above-360x200.jpg.optimal.jpg" class="attachment-vw_small size-vw_small wp-post-image" alt="pushkar lake from above" srcset="https://s28838.pcdn.co/wp-content/uploads/2020/02/pushkar-lake-form-above-360x200.jpg.optimal.jpg 360w, https://s28838.pcdn.co/wp-content/uploads/2020/02/pushkar-lake-form-above-265x147.jpg.optimal.jpg 265w" sizes="(max-width: 360px) 100vw, 360px"> </a> 
+          </div> 
+          <div class="post-box-inner"> 
+           <div class="post-categories clearfix"> <a class="label label-small" href="https://www.neverendingfootsteps.com/destinations/asia/india/" title="View all posts in India" rel="category">India</a> 
+           </div> 
+           <h3 class="title"><a href="https://www.neverendingfootsteps.com/pushkar-travel-guide/" title="Permalink to Pushkar Travel Guide: 11 Things to Do in Pushkar" rel="bookmark">Pushkar Travel Guide: 11 Things to Do in Pushkar</a></h3> 
+           <div class="post-meta header-font"> <a class="author-name" href="https://www.neverendingfootsteps.com/author/neverendingfootsteps/" title="View all posts by Lauren">Lauren</a><span class="post-meta-separator">,</span> <a href="https://www.neverendingfootsteps.com/pushkar-travel-guide/" class="post-date" title="Permalink to Pushkar Travel Guide: 11 Things to Do in Pushkar" rel="bookmark">February 20, 2020</a> 
+           </div> 
+           <div class="post-excerpt ">
+            <p>Pushkar felt different. From the moment I arrived, it felt unlike anywhere else I had visited in Rajasthan. This is one of the oldest cities in India, and one of the holiest on the planet.&nbsp; And yet, it felt so laid-back — laid-back for India, anyway. Pushkar is a beautiful …</p> 
+           </div> 
+           <div class="post-box-footer clearfix"> <a class="read-more" href="https://www.neverendingfootsteps.com/pushkar-travel-guide/" title="Permalink to Pushkar Travel Guide: 11 Things to Do in Pushkar" rel="bookmark"> Read more <i class="icon-entypo-right-open"></i> </a> <a class="comment-count" href="https://www.neverendingfootsteps.com/pushkar-travel-guide/#comments" title="Permalink to Pushkar Travel Guide: 11 Things to Do in Pushkar" rel="bookmark"> <i class="icon-entypo-comment"></i> <span>7</span> Comments </a> 
+           </div> 
+          </div> 
+         </article>
+        </div> 
+        <div class="post-box-wrapper col-sm-4">
+         <article class="post-11504 post-box fly-in animated-content post-box-large-thumbnail"> 
+          <div class="post-thumbnail-wrapper"> <a href="https://www.neverendingfootsteps.com/golden-triangle-india-guide/" title="Permalink to The Ultimate Guide to India’s Golden Triangle" rel="bookmark"> <img width="360" height="200" src="https://s28838.pcdn.co/wp-content/uploads/2020/02/Baby-Taj-in-Agra-360x200.jpg.optimal.jpg" class="attachment-vw_small size-vw_small wp-post-image" alt="Baby Taj in Agra" srcset="https://s28838.pcdn.co/wp-content/uploads/2020/02/Baby-Taj-in-Agra-360x200.jpg.optimal.jpg 360w, https://s28838.pcdn.co/wp-content/uploads/2020/02/Baby-Taj-in-Agra-265x147.jpg.optimal.jpg 265w" sizes="(max-width: 360px) 100vw, 360px"> </a> 
+          </div> 
+          <div class="post-box-inner"> 
+           <div class="post-categories clearfix"> <a class="label label-small" href="https://www.neverendingfootsteps.com/destinations/asia/india/" title="View all posts in India" rel="category">India</a> 
+           </div> 
+           <h3 class="title"><a href="https://www.neverendingfootsteps.com/golden-triangle-india-guide/" title="Permalink to The Ultimate Guide to India’s Golden Triangle" rel="bookmark">The Ultimate Guide to India’s Golden Triangle</a></h3> 
+           <div class="post-meta header-font"> <a class="author-name" href="https://www.neverendingfootsteps.com/author/neverendingfootsteps/" title="View all posts by Lauren">Lauren</a><span class="post-meta-separator">,</span> <a href="https://www.neverendingfootsteps.com/golden-triangle-india-guide/" class="post-date" title="Permalink to The Ultimate Guide to India’s Golden Triangle" rel="bookmark">February 8, 2020</a> 
+           </div> 
+           <div class="post-excerpt ">
+            <p>The Golden Triangle is a popular tourist circuit in Northern India.&nbsp; In fact, it’s the most popular part of the country for visitors. It encompasses the triangular region between New Delhi, Agra, and Jaipur, with every city located around 125 miles from the others.&nbsp; These days, the Golden Triangle receives …</p> 
+           </div> 
+           <div class="post-box-footer clearfix"> <a class="read-more" href="https://www.neverendingfootsteps.com/golden-triangle-india-guide/" title="Permalink to The Ultimate Guide to India’s Golden Triangle" rel="bookmark"> Read more <i class="icon-entypo-right-open"></i> </a> <a class="comment-count" href="https://www.neverendingfootsteps.com/golden-triangle-india-guide/#comments" title="Permalink to The Ultimate Guide to India’s Golden Triangle" rel="bookmark"> <i class="icon-entypo-comment"></i> <span>5</span> Comments </a> 
+           </div> 
+          </div> 
+         </article>
+        </div> 
+        <div class="post-box-wrapper col-sm-4">
+         <article class="post-11491 post-box fly-in animated-content post-box-large-thumbnail"> 
+          <div class="post-thumbnail-wrapper"> <a href="https://www.neverendingfootsteps.com/january-2020-travel-summary/" title="Permalink to January 2020: Travel Summary and Statistics" rel="bookmark"> <img width="360" height="200" src="https://s28838.pcdn.co/wp-content/uploads/2020/01/Mt-Aspiring-4-360x200.jpg.optimal.jpg" class="attachment-vw_small size-vw_small wp-post-image" alt="Mt Aspiring 4" srcset="https://s28838.pcdn.co/wp-content/uploads/2020/01/Mt-Aspiring-4-360x200.jpg.optimal.jpg 360w, https://s28838.pcdn.co/wp-content/uploads/2020/01/Mt-Aspiring-4-265x147.jpg.optimal.jpg 265w" sizes="(max-width: 360px) 100vw, 360px"> </a> 
+          </div> 
+          <div class="post-box-inner"> 
+           <div class="post-categories clearfix"> <a class="label label-small" href="https://www.neverendingfootsteps.com/monthly-summaries/" title="View all posts in Monthly Summaries" rel="category">Monthly Summaries</a><a class="label label-small" href="https://www.neverendingfootsteps.com/destinations/oceania/new-zealand/" title="View all posts in New Zealand" rel="category">New Zealand</a> 
+           </div> 
+           <h3 class="title"><a href="https://www.neverendingfootsteps.com/january-2020-travel-summary/" title="Permalink to January 2020: Travel Summary and Statistics" rel="bookmark">January 2020: Travel Summary and Statistics</a></h3> 
+           <div class="post-meta header-font"> <a class="author-name" href="https://www.neverendingfootsteps.com/author/neverendingfootsteps/" title="View all posts by Lauren">Lauren</a><span class="post-meta-separator">,</span> <a href="https://www.neverendingfootsteps.com/january-2020-travel-summary/" class="post-date" title="Permalink to January 2020: Travel Summary and Statistics" rel="bookmark">February 2, 2020</a> 
+           </div> 
+           <div class="post-excerpt ">
+            <p>I don’t even know how to begin writing about January. It was… a month.&nbsp; I kicked off 2020 with a panicked phone call to New Zealand’s Healthline service at 3 a.m. on New Year’s Day. I had spontaneously developed nerve pain across my body — tingling and prickling all over, …</p> 
+           </div> 
+           <div class="post-box-footer clearfix"> <a class="read-more" href="https://www.neverendingfootsteps.com/january-2020-travel-summary/" title="Permalink to January 2020: Travel Summary and Statistics" rel="bookmark"> Read more <i class="icon-entypo-right-open"></i> </a> <a class="comment-count" href="https://www.neverendingfootsteps.com/january-2020-travel-summary/#comments" title="Permalink to January 2020: Travel Summary and Statistics" rel="bookmark"> <i class="icon-entypo-comment"></i> <span>19</span> Comments </a> 
+           </div> 
+          </div> 
+         </article>
+        </div> 
+        <div class="post-box-wrapper col-sm-4">
+         <article class="post-11463 post-box fly-in animated-content post-box-large-thumbnail"> 
+          <div class="post-thumbnail-wrapper"> <a href="https://www.neverendingfootsteps.com/cost-of-travel-india-budget/" title="Permalink to The Cost of Travel in India: A Detailed Budget Breakdown" rel="bookmark"> <img width="360" height="200" src="https://s28838.pcdn.co/wp-content/uploads/2020/01/Chittorgarh-360x200.jpg.optimal.jpg" class="attachment-vw_small size-vw_small wp-post-image" alt="Chittorgarh" srcset="https://s28838.pcdn.co/wp-content/uploads/2020/01/Chittorgarh-360x200.jpg.optimal.jpg 360w, https://s28838.pcdn.co/wp-content/uploads/2020/01/Chittorgarh-265x147.jpg.optimal.jpg 265w" sizes="(max-width: 360px) 100vw, 360px"> </a> 
+          </div> 
+          <div class="post-box-inner"> 
+           <div class="post-categories clearfix"> <a class="label label-small" href="https://www.neverendingfootsteps.com/destinations/asia/india/" title="View all posts in India" rel="category">India</a><a class="label label-small" href="https://www.neverendingfootsteps.com/travel-expenses/" title="View all posts in Travel Expenses" rel="category">Travel Expenses</a> 
+           </div> 
+           <h3 class="title"><a href="https://www.neverendingfootsteps.com/cost-of-travel-india-budget/" title="Permalink to The Cost of Travel in India: A Detailed Budget Breakdown" rel="bookmark">The Cost of Travel in India: A Detailed Budget Breakdown</a></h3> 
+           <div class="post-meta header-font"> <a class="author-name" href="https://www.neverendingfootsteps.com/author/neverendingfootsteps/" title="View all posts by Lauren">Lauren</a><span class="post-meta-separator">,</span> <a href="https://www.neverendingfootsteps.com/cost-of-travel-india-budget/" class="post-date" title="Permalink to The Cost of Travel in India: A Detailed Budget Breakdown" rel="bookmark">January 25, 2020</a> 
+           </div> 
+           <div class="post-excerpt ">
+            <p>India is one of the cheapest countries I’ve ever travelled to.&nbsp; But not only that, it’s one of the best value places I’ve visited.&nbsp; Value is important when it comes to travel. There’s no joy in spending $5 on a dorm bed if it’s frequented by cockroaches and dengue-carrying mosquitoes …</p> 
+           </div> 
+           <div class="post-box-footer clearfix"> <a class="read-more" href="https://www.neverendingfootsteps.com/cost-of-travel-india-budget/" title="Permalink to The Cost of Travel in India: A Detailed Budget Breakdown" rel="bookmark"> Read more <i class="icon-entypo-right-open"></i> </a> <a class="comment-count" href="https://www.neverendingfootsteps.com/cost-of-travel-india-budget/#comments" title="Permalink to The Cost of Travel in India: A Detailed Budget Breakdown" rel="bookmark"> <i class="icon-entypo-comment"></i> <span>6</span> Comments </a> 
+           </div> 
+          </div> 
+         </article>
+        </div> 
+        <div class="post-box-wrapper col-sm-4">
+         <article class="post-11467 post-box fly-in animated-content post-box-large-thumbnail"> 
+          <div class="post-thumbnail-wrapper"> <a href="https://www.neverendingfootsteps.com/why-visit-rajasthan/" title="Permalink to 12 Reasons Why I Absolutely Loved Rajasthan" rel="bookmark"> <img width="360" height="200" src="https://s28838.pcdn.co/wp-content/uploads/2020/01/Girl-smiling-in-front-of-Mehrangarh-Fort-in-Jodhpur-360x200.jpg.optimal.jpg" class="attachment-vw_small size-vw_small wp-post-image" alt="Girl smiling in front of Mehrangarh Fort in Jodhpur" srcset="https://s28838.pcdn.co/wp-content/uploads/2020/01/Girl-smiling-in-front-of-Mehrangarh-Fort-in-Jodhpur-360x200.jpg.optimal.jpg 360w, https://s28838.pcdn.co/wp-content/uploads/2020/01/Girl-smiling-in-front-of-Mehrangarh-Fort-in-Jodhpur-265x147.jpg.optimal.jpg 265w" sizes="(max-width: 360px) 100vw, 360px"> </a> 
+          </div> 
+          <div class="post-box-inner"> 
+           <div class="post-categories clearfix"> <a class="label label-small" href="https://www.neverendingfootsteps.com/destinations/asia/india/" title="View all posts in India" rel="category">India</a> 
+           </div> 
+           <h3 class="title"><a href="https://www.neverendingfootsteps.com/why-visit-rajasthan/" title="Permalink to 12 Reasons Why I Absolutely Loved Rajasthan" rel="bookmark">12 Reasons Why I Absolutely Loved Rajasthan</a></h3> 
+           <div class="post-meta header-font"> <a class="author-name" href="https://www.neverendingfootsteps.com/author/neverendingfootsteps/" title="View all posts by Lauren">Lauren</a><span class="post-meta-separator">,</span> <a href="https://www.neverendingfootsteps.com/why-visit-rajasthan/" class="post-date" title="Permalink to 12 Reasons Why I Absolutely Loved Rajasthan" rel="bookmark">January 21, 2020</a> 
+           </div> 
+           <div class="post-excerpt ">
+            <p>How to begin writing about my life-changing trip to Rajasthan? I’ve spent the past week wrestling with just that, trying to figure out which blog post to write first. I can’t remember taking a trip that blew my mind so much as my three weeks in Rajasthan did, and I’m …</p> 
+           </div> 
+           <div class="post-box-footer clearfix"> <a class="read-more" href="https://www.neverendingfootsteps.com/why-visit-rajasthan/" title="Permalink to 12 Reasons Why I Absolutely Loved Rajasthan" rel="bookmark"> Read more <i class="icon-entypo-right-open"></i> </a> <a class="comment-count" href="https://www.neverendingfootsteps.com/why-visit-rajasthan/#comments" title="Permalink to 12 Reasons Why I Absolutely Loved Rajasthan" rel="bookmark"> <i class="icon-entypo-comment"></i> <span>17</span> Comments </a> 
+           </div> 
+          </div> 
+         </article>
+        </div> 
+       </div> 
+      </div> 
+     </div>
+    </div>
+    <div class="row vwpc-row">
+     <div class="vwpc-section-custom_content">
+      <div class="col-sm-12">
+       <hr class="section-hr"> 
+       <h1 class="section-title title title-large"> <span class="super-title">WHERE I'VE BEEN</span><font color="#02b7ae" ;>Travel Statistics</font> </h1> 
+       <h2> 
+        <div class="symple-column symple-one-third symple-column-first  ">
+         <i class="icon-elusive-flight"></i>Number of Continents: <font color="#02b7ae" ;>5</font>
+        </div> 
+        <div class="symple-column symple-one-third symple-column-first  ">
+         <i class="icon-elusive-globe"></i>Number of Countries: <font color="#02b7ae" ;>86</font>
+        </div> 
+        <div class="symple-column symple-one-third symple-column-last  ">
+         <i class="icon-elusive-calendar"></i>Days on the Road: <font color="#02b7ae" ;>3176</font>
+        </div></h2> 
+      </div>
+      <div class="symple-clear-floats"></div> 
+      <div class="symple-column symple-two-third symple-column-first  ">
+       <a href="https://www.neverendingfootsteps.com/where-ive-been/"><img src="https://s28838.pcdn.co/wp-content/uploads/2019/06/Screenshot-2019-06-07-at-14.58.08.png" alt="map of where I've been"></a>
+      </div> 
+      <h3>Distance Travelled: <font color="#02b7ae" ;>285,998 miles</font></h3> 
+      <h3>Number of Flights: <font color="#02b7ae" ;>198</font></h3> 
+      <h3>Number of Trains: <font color="#02b7ae" ;>99</font></h3> 
+      <h3>Number of Buses: <font color="#02b7ae" ;>123</font></h3> 
+      <h3>Number of Boats: <font color="#02b7ae" ;>60</font></h3> 
+      <h3>Beds Slept in: <font color="#02b7ae" ;>370</font></h3> 
+     </div>
+    </div>
+   </div>
+  </div> 
+  <footer id="footer"> 
+   <div class="footer-sidebar"> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="footer-sidebar-1 widget-area col-sm-4" role="complementary"> 
+       <div id="text-42" class="widget vw-sidebar-footer-1 widget_text">
+        <h3 class="widget-title">About</h3> 
+        <div class="textwidget">
+         <p><a href="https://www.neverendingfootsteps.com/about-lauren/">About Lauren</a></p> 
+         <p><a href="https://www.neverendingfootsteps.com/faq/">Frequently Asked Questions</a></p> 
+         <p><a href="https://www.neverendingfootsteps.com/where-ive-been/">Travel Map</a></p> 
+         <p><a href="https://www.neverendingfootsteps.com/privacy-policy/">Privacy Policy</a></p>
+        </div> 
+       </div> 
+      </div> 
+      <div class="footer-sidebar-2 widget-area col-sm-4" role="complementary"> 
+       <div id="text-43" class="widget vw-sidebar-footer-2 widget_text">
+        <h3 class="widget-title">Resources</h3> 
+        <div class="textwidget">
+         <p><a href="https://www.neverendingfootsteps.com/8-simple-steps-to-starting-a-travel-blog/">How to Start a Travel Blog</a></p> 
+         <p><a href="https://www.neverendingfootsteps.com/monthly-travel-summaries/">My Monthly Travel Summaries</a></p> 
+         <p><a href="https://www.neverendingfootsteps.com/how-to-fund-travel-blog">How I Fund My Travels</a></p> 
+         <p><a href="https://www.neverendingfootsteps.com/2014/01/17/on-anxiety-and-travel/">How You Can Travel if You Have Anxiety</a></p> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="copyright"> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="col-sm-6 copyright-left">
+       Copyright Lauren Juliff © 2010-2019. All rights reserved.
+      </div> 
+      <div class="col-sm-6 copyright-right"> <a class="back-to-top" href="#top">↑ Back to top</a> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </footer>  <!-- Off canvas body inner --> 
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-includes/js/comment-reply.min.js?ver=4.9.13" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var qpprFrontData = {"linkData":{"\/link\/skyscanner\/":[0,1,""],"\/link\/skyscanner-car-hire\/":[0,1,""]},"siteURL":"https:\/\/www.neverendingfootsteps.com","siteURLq":"https:\/\/www.neverendingfootsteps.com"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/plugins/quick-pagepost-redirect-plugin/js/qppr_frontend_script.min.js?ver=5.1.9" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-includes/js/jquery/ui/effect.min.js?ver=1.11.4" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-includes/js/jquery/ui/effect-fade.min.js?ver=1.11.4" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/cache/js/e573b0459c262f6de4d58d7f6cd8bec8.min.js" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/themes/presso/js/jquery.isotope.min.js?ver=2.1.1" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/cache/js/11707ced7ff3fb2e7c69169ddfeb372d.min.js" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/themes/presso/framework/swipebox/jquery.swipebox.min.js?ver=2.1.1" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/cache/js/cb71e03c508e090490f0dd76a5970635.min.js" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-content/cache/js/74f5edd825d23008f5f6e854325f9461.min.js" defer></script>
+  <script type="text/javascript" src="https://s28838.pcdn.co/wp-includes/js/wp-embed.min.js?ver=4.9.13" defer></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-20666571-1', 'auto');
+  ga('send', 'pageview');
+
+</script> 
+  <script type="text/javascript">
+			;(function( $, window, document, undefined ){
+				"use strict";
+
+				$( document ).ready( function ($) {
+							$( '.flexslider' ).flexslider({
+			animation: "fade",
+			easing: "easeInCirc",
+			slideshow: false,
+			slideshowSpeed: 4000,
+			animationSpeed: 600,
+			randomize: false,
+			pauseOnHover: false,
+			prevText: '',
+			nextText: '',
+			start: function( slider ) {
+				slider.css( 'opacity', '1' );
+				slider.find( '.post-thumbnail-wrapper' ).css( 'height', '500px' ).imgLiquid().fadeIn(250);
+			},
+		});
+					} );
+				
+			})( jQuery, window , document );
+
+					</script> 
+  <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=fc27a40e-f344-4935-8868-4a75636af813"></script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"073b4df364","applicationID":"228992793","transactionName":"ZQZWMhBXVxYAUxdYDFxMdQUWX1YLTkACVgZtAFsLEllKABM=","queueTime":0,"applicationTime":133,"atts":"SUFVRFhNRBg=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

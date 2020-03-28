@@ -1,0 +1,188 @@
+skip to main content start reading the article jump to list of all articles search topics articles . design & development books . physical & digital books events . conferences & workshops jobs . find work & employees membership . webinars & early-birds browse all topics clear search browse all topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow about the author kevin farrugia is a co-founder at incredible web, a web & mobile application development company based in malta, eu; that delivers industry-leading … more about kevin farrugia … august 11, 2016 leave a comment a beginner's guide to progressive web apps 18 min read mobile, apps, amp, service workers share on twitter or linkedin smashing newsletter upgrade your inbox and get our editors’ picks 2× a month — delivered right into your inbox. earlier issues. your (smashing) email subscribe → pwas take advantage of the latest technologies to combine the best of web and mobile apps. this articles look into recent advancements in the browser and the opportunities we, as developers, have to build a new generation of web apps. progressive web apps could be the next big thing for the mobile web. originally proposed by google in 2015, they have already attracted a lot of attention because of the relative ease of development and the almost instant wins for the application’s user experience. further reading on smashingmag: the building blocks of progressive web apps conversational design essentials: tips for building a chatbot building a first-class app that leverages your website creating a complete web app in foundation for apps a progressive web application takes advantage of the latest technologies to combine the best of web and mobile apps. think of it as a website built using web technologies but that acts and feels like an app. recent advancements in the browser and in the availability of service workers and in the cache and push apis have enabled web developers to allow users to install web apps to their home screen, receive push notifications and even work offline. progressive web apps take advantage of the much larger web ecosystem, plugins and community and the relative ease of deploying and maintaining a website when compared to a native application in the respective app stores. for those of you who develop on both mobile and web, you’ll appreciate that a website can be built in less time, that an api does not need to be maintained with backwards-compatibility (all users will run the same version of your website’s code, unlike the version fragmentation of native apps) and that the app will generally be easier to deploy and maintain. why progressive web apps? a study has shown that, on average, an app loses 20% of its users for every step between the user’s first contact with the app and the user starting to use the app. a user must first find the app in an app store, download it, install it and then, finally, open it. when a user finds your progressive web app, they will be able to immediately start using it, eliminating the unnecessary downloading and installation stages. and when the user returns to the app, they will be prompted to install the app and upgrade to a full-screen experience. however, a native app is definitely not all bad. mobile applications with push notifications achieve up to three times more retention than their counterparts without push, and a user is three times more likely to reopen a mobile application than a website. in addition, a well-designed mobile application consumes less data and is much faster because some resources reside on the device. a progressive web application takes advantage of a mobile app’s characteristics, resulting in improved user retention and performance, without the complications involved in maintaining a mobile application. use cases when should you build a progressive web app? native is usually recommended for applications that you expect users to return to frequently, and a progressive web app is not any different. flipkart uses a progressive web app for its popular e-commerce platform, flipkart lite, and sbb uses a progressive web app for its online check-in process, allowing users to access their tickets without an internet connection. when assessing whether your next application should be a progressive web app, a website or a native mobile application, first identify your users and the most important user actions. being “progressive,” a progressive web app works in all browsers, and the experience is enhanced whenever the user’s browser is updated with new and improved features and apis. thus, there is no compromise in the user experience with a progressive web app compared to a traditional website; however, you may have to decide what functionality to support offline, and you will have to facilitate navigation (remember that in standalone mode, the user does not have access to the back button). if your website already has an application-like interface, applying the concepts of progressive web apps will only make it better. if certain features are required for critical user actions but are not yet available due to a lack of cross-browser support, then a native mobile application might be the better option, guaranteeing the same experience for all users. characteristics of a progressive web app before we jump into the code, it is important to understand that progressive web apps have the following characteristics: progressive. by definition, a progressive web app must work on any device and enhance progressively, taking advantage of any features available on the user’s device and browser. discoverable. because a progressive web app is a website, it should be discoverable in search engines. this is a major advantage over native applications, which still lag behind websites in searchability. linkable. as another characteristic inherited from websites, a well-designed website should use the uri to indicate the current state of the application. this will enable the web app to retain or reload its state when the user bookmarks or shares the app’s url. responsive. a progressive web app’s ui must fit the device’s form factor and screen size. app-like. a progressive web app should look like a native app and be built on the application shell model, with minimal page refreshes. connectivity-independent. it should work in areas of low connectivity or offline (our favorite characteristic). re-engageable. mobile app users are more likely to reuse their apps, and progressive web apps are intended to achieve the same goals through features such as push notifications. installable. a progressive web app can be installed on the device’s home screen, making it readily available. fresh. when new content is published and the user is connected to the internet, that content should be made available in the app. safe. because a progressive web app has a more intimate user experience and because all network requests can be intercepted through service workers, it is imperative that the app be hosted over https to prevent man-in-the-middle attacks. let’s code! our first progressive web app, sky high, will simulate an airport’s arrivals schedule. the first time the user accesses our web app, we want to show them a list of upcoming flights, retrieved from an api. if the user does not have an internet connection and they reload the web app, we want to show them the flight schedule as it was when they last downloaded it with a connection. sky high, our fictitious progressive web app (large preview) the basics the first characteristic of a progressive web app is that it must work on all devices and must enhance on devices and browsers that allow it. therefore, we’ve built our website using traditional html5 and with javascript that simulates the retrieval of data from a mock api. throughout the application, we are using small bits of knockout to handle our model-view-viewmodel (mvvm) bindings — a lightweight javascript framework that allows us to bind our javascript models to our html views. we chose to use knockout because it is relatively simple to understand and does not clutter the code; however you may replace this with any other framework, such as react or angularjs. our website follows google’s material design guidelines, a set of principles that guide design and interaction. material design not only serves as a unified standard across applications and devices, but also gives design meaning. we’ve used material design for sky high’s arrivals view to give our progressive web app that native-app look and feel. finally, we tested our app to make sure it is jank-free and that scrolling is silky-smooth. jank-free rendering has been shown to improve user engagement. aim for a rendering of 60 frames per second. for this demo, we will retrieve a static json file, instead of a real api. this is merely to keep things simple. in the real world, you would query an api or use websockets. index.html <!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sky-high airport arrivals</title>
+    <link async rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=roboto:300,600,300italic,600italic" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        <div class="content">
+            <h3>arrivals</h3>
+        </div>
+    </header>
+    <div class="container">
+        <div id="main" class="content">
+            <ul class="arrivals-list" data-bind="foreach: arrivals">
+                <li class="item">
+                    <span class="title" data-bind="html: title"></span>
+                    <span class="status" data-bind="html: status"></span>
+                    <span class="time" data-bind="html: time"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="./js/build/vendor.min.js"></script>
+    <script src="./js/build/script.min.js"></script>
+</body>
+
+</html>
+ the index.html file is relatively standard. we’ve created an html list and bound our view model property arrivals to it using knockout, through the attribute data-bind=“foreach: arrivals”. the view model arrivals is declared in the page.js file below and exposed in the page module. on our html page, for each item in the arrivals array, we’ve bound the title, status and time properties to the html view. page.js (var page = (function() {
+
+    // declare the view model used within the page
+    function viewmodel() {
+        var self = this;
+        self.arrivals = ko.observablearray([]);
+    }
+
+    // expose the view model through the page module
+    return {
+        vm: new viewmodel(),
+        hideofflinewarning: function() {
+            // enable the live data
+            document.queryselector(".arrivals-list").classlist.remove('loading')
+            // remove the offline message
+            document.getelementbyid("offline").remove();
+            // load the live data
+        },
+        showofflinewarning: function() {
+            // disable the live data
+            document.queryselector(".arrivals-list").classlist.add('loading')
+                // load html template informing the user they are offline
+            var request = new xmlhttprequest();
+            request.open('get', './offline.html', true);
+
+            request.onload = function() {
+                if (request.status === 200) {
+                    // success
+                    // create offline element with html loaded from offline.html template
+                    var offlinemessageelement = document.createelement("div");
+                    offlinemessageelement.setattribute("id", "offline");
+                    offlinemessageelement.innerhtml = request.responsetext;
+                    document.getelementbyid("main").appendchild(offlinemessageelement);
+                } else {
+                    // error retrieving file
+                    console.warn('error retrieving offline.html');
+                }
+            };
+
+            request.onerror = function() {
+                // network errors
+                console.error('connection error');
+            };
+
+            request.send();
+        }
+    }
+
+})(); this page.js file exposes the page module, which contains our viewmodel vm and two functions, hideofflinewarning and showofflinewarning. the view model viewmodel is a simple javascript literal that will be used throughout the application. the property arrivals on the viewmodel is knockout’s observablearray, which automatically binds our html to a javascript array, allowing us to push and pop items onto our array in javascript and automatically update the page’s html. the functions hideofflinewarning and showofflinewarning enable the rest of our application to call these functions to update the page’s ui that displays whether we are connected online. the showofflinewarning adds a class of loading to our arrivals-list html element to fade the list, and then it retrieves the html file offline.html through xhr. assuming that the file has been retrieved successfully (response.status === 200), we append this to our html. of course, if we aren’t using service workers and the user is not connected to the internet, then it would not be possible to retrieve offline.html, and so the user would see the browser’s offline page. the business logic from where we retrieve the data from our api and bind it to our view models and views is found in arrivals.js and is standard mvvm functionality using knockout. in the arrivals.js file, we simply initialize the services and view models that we will be using throughout the application, and we expose a function — arrivals.loaddata() — that retrieves the data and binds it to the view model. web app manifest let’s make our web app more app-like. a web app manifest file is a simple json file that follows the w3c’s specification. with it, it is possible to run the web app in full-screen mode as a standalone application, to assign an icon that will get displayed when the application is installed on the device, and to assign a theme and background color to the app. in addition, chrome on android will proactively suggest that the user install the web app, via a web app install banner. to display the installation prompt, your web app needs to: have a valid web app manifest file, be served over https, have a valid service worker registered, have been visited twice, with at least five minutes between each visit. web app install banner (view large version) manifest.json {
+    "short_name": "arrivals",
+    "name": "arrivals at sky high",
+    "description": "progressive web application demonstration",
+    "icons": [
+        {
+            "src": "launcher-icon.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "launcher-icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "launcher-icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "launcher-icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "launcher-icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "./?utm_source=web_app_manifest",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#29bdbb",
+    "background_color": "#29bdbb"
+} let’s break down this manifest file: short_name is a human-readable name for the application. in chrome for android, this is also the name accompanying the icon on the home screen. name is also a human-readable name for the application and defines how the application will be listed. description provides a general description of the web application. icons defines an array of images of varying sizes that will serve as the application’s icon set. in chrome for android, the icon will be used on the splash screen, on the home screen and in the task switcher. start_url is the starting url of the application. display defines the default display mode for the web application: fullscreen, standalone, minimal-ui or browser. orientation defines the default orientation for the web application: portrait or landscape. theme_color is the default theme color for the application. on android, this is also used to color the status bar. background_color defines the background color of the web application. in chrome, it also defines the background color of the splash screen. related_applications is not implemented in our example but is used to specify native application alternatives in the various app stores. add the manifest.json reference to the index.html file’s head tag: <link rel="manifest" href="./manifest.json"> once a user has added the web app to their home screen, they will be able to re-engage with your application immediately from their device, without having to directly open the browser. you can see how this is much more than a web bookmark. add to homescreen on chrome for android from smashing magazine on vimeo. add to home screen in chrome for android service workers one of the more exciting aspects of progressive web apps is that they can work offline. using service workers, it is possible to show data that was retrieved in previous sessions of the app (using indexeddb) or, alternatively, to show the application shell and inform the user that they are not connected to the internet (the approach we’ve taken in this demo). once the user reconnects, we can then retrieve the latest data from the server. all of this is possible through service workers, which are event-driven scripts (written in javascript) that have access to domain-wide events, including network fetches. with them, we can cache all static resources, which could drastically reduce network requests and improve performance considerably, too. application shell the application shell is the minimum html, css and javascript required to power a user interface. a native mobile application includes the application shell as part of its distributable, whereas websites ordinarily request this over the network. progressive web applications bridge this gap by placing the application shell’s resources and assets in the browser’s cache. in our sky high application, we can see that our application shell consists of the top header bar, the fonts and any css required to render these elegantly. to get started with service workers, we first need to create our service worker’s javascript file, sw.js, placed in the root directory. sw.js // use a cachename for cache versioning
+var cachename = 'v1:static';
+
+// during the installation phase, you'll usually want to cache static assets.
+self.addeventlistener('install', function(e) {
+    // once the service worker is installed, go ahead and fetch the resources to make this work offline.
+    e.waituntil(
+        caches.open(cachename).then(function(cache) {
+            return cache.addall([
+                './',
+                './css/style.css',
+                './js/build/script.min.js',
+                './js/build/vendor.min.js',
+                './css/fonts/roboto.woff',
+                './offline.html'
+            ]).then(function() {
+                self.skipwaiting();
+            });
+        })
+    );
+});
+
+// when the browser fetches a url…
+self.addeventlistener('fetch', function(event) {
+    // … either respond with the cached object or go ahead and fetch the actual url
+    event.respondwith(
+        caches.match(event.request).then(function(response) {
+            if (response) {
+                // retrieve from cache
+                return response;
+            }
+            // fetch as normal
+            return fetch(event.request);
+        })
+    );
+}); let’s look more closely at our service worker. first, we are setting a cachename variable. this is used to determine whether any changes have been made to our cached assets. for this example, we will be using a static name, meaning that our assets will not change or require updating. self.addeventlistener('install', function(e) {
+    // declare which assets to cache
+} the install event fires during the installation phase of the service worker and will fire only once if the service worker is already installed. therefore, refreshing the page will not trigger the installation phase again. during the installation phase, we are able to declare which assets will be cached. in our example above, we are caching one css file, two javascript files, our fonts file, our offline html template and, of course, the application root. self.skipwaiting() forces the waiting service worker to become active. so far, we have declared our service worker, but before we see it kick into effect, we need to reference it in our javascript. in our application, we register it in main.js // register the service worker if available.
+if ('serviceworker' in navigator) {
+    navigator.serviceworker.register('./sw.js').then(function(reg) {
+        console.log('successfully registered service worker', reg);
+    }).catch(function(err) {
+        console.warn('error whilst registering service worker', err);
+    });
+}
+
+window.addeventlistener('online', function(e) {
+    // resync data with server.
+    console.log("you are online");
+    page.hideofflinewarning();
+    arrivals.loaddata();
+}, false);
+
+window.addeventlistener('offline', function(e) {
+    // queue up events for server.
+    console.log("you are offline");
+    page.showofflinewarning();
+}, false);
+
+// check if the user is connected.
+if (navigator.online) {
+    arrivals.loaddata();
+} else {
+    // show offline message
+    page.showofflinewarning();
+}
+
+// set knockout view model bindings.
+ko.applybindings(page.vm);
+ we’ve also included two event listeners to check whether the session’s state has changed from online to offline or vice versa. the event handlers then call the different functions to retrieve the data through arrivals.loaddata() and to enable or disable the offline message through page.showofflinewarning and page.hideofflinewarning, respectively. our application also checks whether the user is currently online, using navigator.online, and either retrieves the data or shows the offline warning accordingly. and in the last line of main.js, we apply the knockout bindings to our view model page.vm. if we load our application for the first time (with chrome developer tools), we will see nothing new. however, upon reloading, we will see that a number of network resource have been retrieved from the service worker. this is our application shell. application shell network resources, in chrome developer tools (view large version) offline test a user running the application without an internet connection (assuming that they have already been on the page) will simply result in the application shell and the offline warning being displayed — an improvement over chrome’s prowling t-rex. once the user has established a network connection, we disable the warning and retrieve the latest data. render a custom html page instead of chrome’s default page (view large version) the guardian takes a particularly interesting approach when offline users access its website, providing a crossword puzzle: the guardian’s offline crossword puzzle (view large version) push notifications push notifications allow users to opt in to timely updates from applications they trust, helping them to re-engage with the apps. push notifications on the web allow you to engage with your audience even when the browser is closed. push notifications on emojoy (view large version) the push api is supported in chrome, opera and samsung’s browser and is under development in firefox and microsoft edge. unfortunately, there is no indication that the feature will be implemented in safari. performance one of the easiest wins with service workers is that we can improve performance with little to no effort. comparing our website to itself before service workers were implemented, before we were retrieving over 200 kb upon page load; that is now reduced to 13 kb. on a regular 3g network, the page would have taken 3.5 seconds to load; now it takes 500 milliseconds. these performance improvements are drastic because the application itself is very small and has limited functionality. nevertheless, through the correct use of caching, it is possible to significantly improve performance and perceived performance, especially for users in places with low-connectivity. lighthouse google’s chrome team has put together a tool for testing progressive web apps. lighthouse runs in node.js or as a chrome plugin and can be found on github, too. to run a lighthouse test, your website needs to be available online, meaning that you cannot test on localhost. to start, download the npm package: npm install -g googlechrome/lighthouse once that’s installed, run chrome (version 52 onwards): npm explore -g lighthouse -- npm run chrome
+lighthouse https://incredibleweb.github.io/pwa-tutorial/ the output of the lighthouse run will be visible in the command line and will grade your website according to the progressive web app features and properties you have implemented — for example, whether you are using a manifest.json file or whether your page is available offline. conclusion this article is merely an appetizer for progressive web apps. we could do a lot more to create that app-like experience users are looking for, whether by supporting push notifications with the push api, making the app re-engageable, or using indexeddb and background syncing to improve the offline experience. cross-browser support these are still early days for progressive web apps, and cross-browser support is still limited, especially in safari and edge. however, microsoft openly supports progressive web apps and should be implementing more features by the end of the year. service workers and cache api. supported in chrome, firefox, opera and samsung’s browser. in development in microsoft edge, expected to be available by the end of 2016. under consideration for safari. add to home screen. supported in chrome, firefox, opera, android browser and samsung’s browser. microsoft seems to indicate that progressive web apps will be available as store listings. no plans for safari as of yet. push api. mostly supported in chrome, firefox, opera and samsung’s browser. in development in microsoft edge. no plans for safari as of yet. if more developers take advantage of the features offered by progressive web apps — which are relatively easy to implement and provide immediate rewards — then users will prefer consuming these web apps in supported browsers, hopefully convincing the other browser vendors to adapt. source code the entire source code for this tutorial is available in a github repository, and the demo is available on github pages. (da, al, il) browse all smashing magazine topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow with a commitment to quality content for the design community. founded by vitaly friedman and sven lennartz. 2006–2020. smashing is proudly running on netlify. fonts by latinotype. ✎ write for us contact us about us (impressum) privacy policy membership login delivery times advertise back to top

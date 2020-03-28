@@ -1,0 +1,1176 @@
+<!doctype html><!--[if lt IE 9]><html lang="en-US" class="oldie"><![endif]--><!--[if (gte IE 9) | !(IE)]><!-->
+<html lang="en-US" class="modern">
+ <!--<![endif]--> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"073b4df364",applicationID:"235483669"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script><![endif]--> 
+  <title>The Travel Tester || Cultural Travel, Reviews &amp; Self-Development</title> 
+  <script>
+                            /* You can add more configuration options to webfontloader by previously defining the WebFontConfig with your options */
+                            if ( typeof WebFontConfig === "undefined" ) {
+                                WebFontConfig = new Object();
+                            }
+                            WebFontConfig['google'] = {families: ['Caveat+Brush:400', 'Open+Sans:400&subset=latin']};
+
+                            (function() {
+                                var wf = document.createElement( 'script' );
+                                wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.3/webfont.js';
+                                wf.type = 'text/javascript';
+                                wf.async = 'true';
+                                var s = document.getElementsByTagName( 'script' )[0];
+                                s.parentNode.insertBefore( wf, s );
+                            })();
+                        </script> 
+  <link rel="alternate" hreflang="en" href="https://www.thetraveltester.com"> 
+  <link rel="alternate" hreflang="nl" href="https://www.thetraveltester.com/nl/"> 
+  <script>window._wca = window._wca || [];</script> <!-- This site is optimized with the Yoast SEO plugin v12.4 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="We help you get the most out of your trip ...and yourself! || Our mission is to discover outer world experiences in everyday life || #SpaceLifestyle"> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.thetraveltester.com/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="The Travel Tester || Cultural Travel, Reviews &amp; Self-Development"> 
+  <meta property="og:description" content="We help you get the most out of your trip ...and yourself! || Our mission is to discover outer world experiences in everyday life || #SpaceLifestyle"> 
+  <meta property="og:url" content="https://www.thetraveltester.com/"> 
+  <meta property="og:site_name" content="The Travel Tester || In-Depth Cultural Travel and Natural Sciences Guides &amp; Reviews"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="We help you get the most out of your trip ...and yourself! || Our mission is to discover outer world experiences in everyday life || #SpaceLifestyle"> 
+  <meta name="twitter:title" content="The Travel Tester || Cultural Travel, Reviews &amp; Self-Development"> 
+  <meta name="twitter:site" content="@thetraveltester"> 
+  <meta name="twitter:creator" content="@thetraveltester"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.thetraveltester.com/#organization","name":"The Travel Tester","url":"https://www.thetraveltester.com/","sameAs":["https://www.facebook.com/thetraveltester","http://instagram.com/thetraveltester","https://www.linkedin.com/in/nienkekrook/","https://www.youtube.com/user/thetraveltester","http://pinterest.com/thetraveltester/","https://twitter.com/thetraveltester"],"logo":{"@type":"ImageObject","@id":"https://www.thetraveltester.com/#logo","url":"https://s28966.pcdn.co/wp-content/uploads/2019/11/thetraveltester-800x400.png","width":700,"height":400,"caption":"The Travel Tester"},"image":{"@id":"https://www.thetraveltester.com/#logo"}},{"@type":"WebSite","@id":"https://www.thetraveltester.com/#website","url":"https://www.thetraveltester.com/","name":"The Travel Tester || In-Depth Cultural Travel and Natural Sciences Guides &amp; Reviews","publisher":{"@id":"https://www.thetraveltester.com/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.thetraveltester.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://www.thetraveltester.com/#webpage","url":"https://www.thetraveltester.com/","inLanguage":"en-US","name":"The Travel Tester || Cultural Travel, Reviews &amp; Self-Development","isPartOf":{"@id":"https://www.thetraveltester.com/#website"},"about":{"@id":"https://www.thetraveltester.com/#organization"},"datePublished":"2016-06-16T14:53:03+00:00","dateModified":"2019-09-16T14:17:09+00:00","description":"We help you get the most out of your trip ...and yourself! || Our mission is to discover outer world experiences in everyday life || #SpaceLifestyle"}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//www.thetraveltester.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//scripts.mediavine.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="The Travel Tester || In-Depth Cultural Travel and Natural Sciences Guides &amp; Reviews » Feed" href="https://www.thetraveltester.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="The Travel Tester || In-Depth Cultural Travel and Natural Sciences Guides &amp; Reviews » Comments Feed" href="https://www.thetraveltester.com/comments/feed/"> <!-- This site uses the Google Analytics by MonsterInsights plugin v7.10.4 - Using Analytics tracking - https://www.monsterinsights.com/ --> 
+  <script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-36473192-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-36473192-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script> <!-- / Google Analytics by MonsterInsights --> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s28966.pcdn.co\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.13"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <style type="text/css">
+				</style> 
+  <link rel="stylesheet" id="mailchimpSF_main_css-css" href="https://www.thetraveltester.com/?mcsf_action=main_css&amp;ver=4.9.13" type="text/css" media="all"> <!--[if IE]>
+<link rel='stylesheet' id='mailchimpSF_ie_css-css'  href='https://s28966.pcdn.co/wp-content/plugins/mailchimp/css/ie.css?ver=4.9.13' type='text/css' media='all' />
+<![endif]--> 
+  <link rel="stylesheet" id="sb_instagram_styles-css" href="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/css/sb-instagram-2-2.min.css?ver=2.3" type="text/css" media="all"> 
+  <link rel="stylesheet" id="aalb_basics_css-css" href="https://s28966.pcdn.co/wp-content/plugins/amazon-associates-link-builder/css/aalb_basics.css?ver=1.9.3" type="text/css" media="all"> 
+  <link rel="stylesheet" id="cptch_stylesheet-css" href="https://s28966.pcdn.co/wp-content/plugins/captcha/css/front_end_style.css?ver=4.4.5" type="text/css" media="all"> 
+  <link rel="stylesheet" id="dashicons-css" href="https://s28966.pcdn.co/wp-includes/css/dashicons.min.css?ver=4.9.13" type="text/css" media="all"> 
+  <link rel="stylesheet" id="cptch_desktop_style-css" href="https://s28966.pcdn.co/wp-content/plugins/captcha/css/desktop_style.css?ver=4.4.5" type="text/css" media="all"> 
+  <link rel="stylesheet" id="cpsh-shortcodes-css" href="https://s28966.pcdn.co/wp-content/plugins/column-shortcodes//assets/css/shortcodes.css?ver=1.0" type="text/css" media="all"> 
+  <link rel="stylesheet" id="contact-form-7-css" href="https://s28966.pcdn.co/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.1.7" type="text/css" media="all"> 
+  <link rel="stylesheet" id="toc-screen-css" href="https://s28966.pcdn.co/wp-content/plugins/table-of-contents-plus/screen.min.css?ver=2002" type="text/css" media="all"> 
+  <style id="woocommerce-inline-inline-css" type="text/css">
+.woocommerce form .form-row .required { visibility: visible; }
+</style> 
+  <link rel="stylesheet" id="wpml-legacy-dropdown-click-0-css" href="//s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-dropdown-click/style.css?ver=1" type="text/css" media="all"> 
+  <style id="wpml-legacy-dropdown-click-0-inline-css" type="text/css">
+.wpml-ls-statics-shortcode_actions{background-color:#ffffff;}.wpml-ls-statics-shortcode_actions, .wpml-ls-statics-shortcode_actions .wpml-ls-sub-menu, .wpml-ls-statics-shortcode_actions a {border-color:#cdcdcd;}.wpml-ls-statics-shortcode_actions a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions a:hover,.wpml-ls-statics-shortcode_actions a:focus {color:#000000;background-color:#eeeeee;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language:hover>a, .wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a:focus {color:#000000;background-color:#eeeeee;}
+</style> 
+  <link rel="stylesheet" id="wpml-legacy-horizontal-list-0-css" href="//s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-list-horizontal/style.css?ver=1" type="text/css" media="all"> 
+  <style id="wpml-legacy-horizontal-list-0-inline-css" type="text/css">
+.wpml-ls-statics-footer{background-color:#ffffff;}.wpml-ls-statics-footer, .wpml-ls-statics-footer .wpml-ls-sub-menu, .wpml-ls-statics-footer a {border-color:#cdcdcd;}.wpml-ls-statics-footer a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-footer a:hover,.wpml-ls-statics-footer a:focus {color:#000000;background-color:#eeeeee;}.wpml-ls-statics-footer .wpml-ls-current-language>a {color:#444444;background-color:#ffffff;}.wpml-ls-statics-footer .wpml-ls-current-language:hover>a, .wpml-ls-statics-footer .wpml-ls-current-language>a:focus {color:#000000;background-color:#eeeeee;}
+</style> 
+  <link rel="stylesheet" id="wpml-legacy-post-translations-0-css" href="//s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-post-translations/style.css?ver=1" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wpml-menu-item-0-css" href="//s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/menu-item/style.css?ver=1" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wpml-tm-admin-bar-css" href="https://s28966.pcdn.co/wp-content/plugins/wpml-translation-management/res/css/admin-bar-style.css?ver=2.9.5" type="text/css" media="all"> 
+  <link rel="stylesheet" id="parent-style-css" href="https://s28966.pcdn.co/wp-content/themes/simplemag/style.css?ver=4.9.13" type="text/css" media="all"> 
+  <link rel="stylesheet" id="main-style-css" href="https://s28966.pcdn.co/wp-content/themes/simplemag-child/style.css?ver=4.9.13" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wc-main-style-css" href="https://s28966.pcdn.co/wp-content/themes/simplemag/woocommerce/style.css?ver=4.9.13" type="text/css" media="all"> 
+  <link rel="stylesheet" id="tablepress-default-css" href="https://s28966.pcdn.co/wp-content/plugins/tablepress/css/default.min.css?ver=1.9.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jetpack_css-css" href="https://s28966.pcdn.co/wp-content/plugins/jetpack/css/jetpack.css?ver=7.1.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="commentluv_style-css" href="https://s28966.pcdn.co/wp-content/plugins/commentluv/css/commentluv.css?ver=4.9.13" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wp-paginate-css" href="https://s28966.pcdn.co/wp-content/plugins/wp-paginate/css/wp-paginate.css?ver=2.0.7" type="text/css" media="screen"> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/mailchimp//js/scrollTo.js?ver=1.5.7"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-includes/js/jquery/jquery.form.min.js?ver=4.2.1"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var mailchimpSF = {"ajax_url":"https:\/\/www.thetraveltester.com\/"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/mailchimp//js/mailchimp.js?ver=1.5.7"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var cl_settings = {"name":"author","url":"url","comment":"comment","email":"email","infopanel":"on","default_on":"on","default_on_admin":"on","cl_version":"3.0.4","images":"https:\/\/www.thetraveltester.com\/wp-content\/plugins\/commentluv\/images\/","api_url":"https:\/\/www.thetraveltester.com\/wp-admin\/admin-ajax.php","api_url_alt":"https:\/\/www.thetraveltester.com\/wp-admin\/admin-ajax.php","_fetch":"f2374ffa00","_info":"8d72830e2e","infoback":"white","infotext":"black","template_insert":"","logged_in":"","refer":"https:\/\/www.thetraveltester.com\/","no_url_message":"Please enter a URL and then click the CommentLuv checkbox if you want to add your last blog post","no_http_message":"Please use http:\/\/ in front of your url","no_url_logged_in_message":"You need to visit your profile in the dashboard and update your details with your site URL","no_info_message":"No info was available or an error occured"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/commentluv/js/commentluv.js?ver=3.0.4"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[]","home_url":"https:\/\/www.thetraveltester.com","hash_tracking":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js?ver=7.10.4"></script> 
+  <script type="text/javascript" async data-noptimize="1" data-cfasync="false" src="https://scripts.mediavine.com/tags/the-travel-tester.js?ver=4.9.13"></script> 
+  <script type="text/javascript" src="//s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/templates/language-switchers/legacy-dropdown-click/script.js?ver=1"></script> 
+  <link rel="https://api.w.org/" href="https://www.thetraveltester.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.thetraveltester.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s28966.pcdn.co/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 4.9.13"> 
+  <meta name="generator" content="WooCommerce 3.8.1"> 
+  <link rel="shortlink" href="https://www.thetraveltester.com/"> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.thetraveltester.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.thetraveltester.com%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.thetraveltester.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.thetraveltester.com%2F&amp;format=xml"> 
+  <meta name="generator" content="WPML ver:4.3.11 stt:38,1;"> <!-- Facebook Pixel Code --> 
+  <script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];
+	s.parentNode.insertBefore(t,s)}(window, document,'script',
+	'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '231115081245610');
+	fbq('track', 'PageView');
+	</script> 
+  <noscript>
+   &lt;img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=231115081245610&amp;amp;ev=PageView&amp;amp;noscript=1"&gt;
+  </noscript> <!-- End Facebook Pixel Code --> 
+  <style type="text/css">div#toc_container {background: #e1e6e9;border: 1px solid #1b2023;width: 100%;}div#toc_container p.toc_title {color: #1b2023;}div#toc_container p.toc_title a,div#toc_container ul.toc_list a {color: #444147;}div#toc_container p.toc_title a:hover,div#toc_container ul.toc_list a:hover {color: #33b0dd;}div#toc_container p.toc_title a:hover,div#toc_container ul.toc_list a:hover {color: #33b0dd;}div#toc_container p.toc_title a:visited,div#toc_container ul.toc_list a:visited {color: #1b2023;}</style> 
+  <link rel="dns-prefetch" href="//v0.wordpress.com"> 
+  <style type="text/css">
+.header .logo{max-width:750px;}
+.lines-button .lines, .lines-button .lines:after, .lines-button .lines:before{background:#ffffff;}
+.top-strip .search-form input,.top-strip .search-form button,.top-strip .mobile-search-button{color:#ffffff}
+.main-menu .sub-links .active-link,
+.main-menu .mega-menu-item:hover .item-title a,
+.main-menu > ul > .sub-menu-columns > .sub-menu > .sub-links > li > a {color:#33b0dd;}
+.main-menu .sub-menu-two-columns > .sub-menu > .sub-links li a:after {background-color:#33b0dd;}
+.main-menu .posts-loading:after {border-top-color:#33b0dd;border-bottom-color:#33b0dd;}
+.secondary-menu ul > li:hover > a {color:#33b0dd;}
+.main-menu > ul > .link-arrow > a:after {border-color:transparent transparent #33b0dd;}
+.main-menu > ul > li > .sub-menu {border-top-color:#33b0dd;}
+.main-menu .mega-menu-container .mega-menu-posts-title:hover:after{color:#ffffff;}
+.modern .content-over-image-tint .entry-image:before,
+.modern .content-over-image-tint.full-width-image:before{opacity:0.1;}
+.modern .content-over-image-tint:hover .entry-image:before,
+.modern .content-over-image-tint.full-width-image:hover:before,
+.modern .content-over-image-tint .gallery-item:not(.slick-active) .entry-image:before{opacity:0.7;}
+.sidebar .widget{border-bottom:1px solid #000000;}
+.footer-sidebar .widget_rss li:after,
+.footer-sidebar .widget_pages li:after,
+.footer-sidebar .widget_nav_menu li:after,
+.footer-sidebar .widget_categories ul li:after,
+.footer-sidebar .widget_recent_entries li:after,
+.footer-sidebar .widget_recent_comments li:after{background-color:#8c919b;}
+.entry-title {text-transform:uppercase;}
+.title-with-sep{background:url("https://s28966.pcdn.co/wp-content/themes/simplemag/images/section-header.png") repeat-x 0 50%;}
+.image-45444{background-image:url(https://s28966.pcdn.co/wp-content/uploads/2018/07/best-outdoor-clothing.jpg);}.image-50647{background-image:url(https://s28966.pcdn.co/wp-content/uploads/2019/04/exciting-space-collection-14.jpg);}.image-52677{background-image:url(https://s28966.pcdn.co/wp-content/uploads/2019/09/CHRIS-HADFIELD-NASA.jpg.optimal.jpg);}@media only screen and (min-width: 960px) {.full-width-media .gallery-carousel,.full-width-media .gallery-carousel .gallery-item{height:580px;}}
+/* Custom CSS */
+/* Begin Additions by Lauren @ Once Coupled, September 2017 */
+
+@media only screen and (max-width: 1200px) {
+  .single .grid-8.column-1 {
+    max-width: calc(100% - 380px);
+  }
+
+  .single .grid-4.column-2 {
+    min-width: 380px;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .single .grid-8.column-1 {
+    max-width: initial;
+    width: 100%;
+  }
+
+  .single .grid-4.column-2 {
+    padding-top: 40px;
+    margin: 0 auto;
+    float: none;
+    clear: both;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .single .grid-4.column-2 {
+    padding-top: 0;
+  }
+}
+
+/* End Additions by Lauren @ Once Coupled, September 2017 */
+
+</style> 
+  <noscript>
+   <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
+  </noscript> 
+  <link rel="icon" href="https://s28966.pcdn.co/wp-content/uploads/2018/03/cropped-2018-ICON-32x32.jpg.optimal.jpg" sizes="32x32"> 
+  <link rel="icon" href="https://s28966.pcdn.co/wp-content/uploads/2018/03/cropped-2018-ICON-192x192.jpg.optimal.jpg" sizes="192x192"> 
+  <link rel="apple-touch-icon-precomposed" href="https://s28966.pcdn.co/wp-content/uploads/2018/03/cropped-2018-ICON-180x180.jpg.optimal.jpg"> 
+  <meta name="msapplication-TileImage" content="https://s28966.pcdn.co/wp-content/uploads/2018/03/cropped-2018-ICON-270x270.jpg.optimal.jpg"> 
+  <style type="text/css" id="wp-custom-css">
+			.foundry__disclosure {
+	font-size: 14px;
+	margin-bottom: 25px;
+}
+
+#breadcrumbs {
+	font-size: 14px;
+	text-align: center;
+	color: #8c919b;
+	margin-bottom: 25px;
+	
+}		</style> 
+  <style type="text/css" title="dynamic-css" class="options-output">.menu-item a, .entry-meta, .see-more span, .read-more, .read-more-link, .nav-title, .related-posts-tabs li a, #submit, input, textarea, .copyright, .copyright a{font-family:"Caveat Brush";font-weight:400;font-style:normal;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .menu-item a,.wf-loading  .entry-meta,.wf-loading  .see-more span,.wf-loading  .read-more,.wf-loading  .read-more-link,.wf-loading  .nav-title,.wf-loading  .related-posts-tabs li a,.wf-loading  #submit,.wf-loading  input,.wf-loading  textarea,.wf-loading  .copyright,.wf-loading  .copyright a{opacity: 0;}.ie.wf-loading .menu-item a,.ie.wf-loading  .entry-meta,.ie.wf-loading  .see-more span,.ie.wf-loading  .read-more,.ie.wf-loading  .read-more-link,.ie.wf-loading  .nav-title,.ie.wf-loading  .related-posts-tabs li a,.ie.wf-loading  #submit,.ie.wf-loading  input,.ie.wf-loading  textarea,.ie.wf-loading  .copyright,.ie.wf-loading  .copyright a{visibility: hidden;}.secondary-menu > ul > li{font-size:14px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .secondary-menu > ul > li{opacity: 0;}.ie.wf-loading .secondary-menu > ul > li{visibility: hidden;}.main-menu > ul > li{font-size:20px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .main-menu > ul > li{opacity: 0;}.ie.wf-loading .main-menu > ul > li{visibility: hidden;}h1, h2, h3, h4, h5, h6, .main-menu .item-title a, .widget_pages, .widget_categories, .widget_nav_menu, .tagline, .sub-title, .entry-note, .manual-excerpt, .single-post.ltr:not(.woocommerce) .entry-content > p:first-of-type:first-letter, .sc-dropcap, .single-author-box .vcard, .comment-author, .comment-meta, .comment-reply-link, #respond label, #wp-calendar tbody, .latest-reviews .score-line i, .score-box .total{font-family:"Caveat Brush";font-weight:400;font-style:normal;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading h1,.wf-loading  h2,.wf-loading  h3,.wf-loading  h4,.wf-loading  h5,.wf-loading  h6,.wf-loading  .main-menu .item-title a,.wf-loading  .widget_pages,.wf-loading  .widget_categories,.wf-loading  .widget_nav_menu,.wf-loading  .tagline,.wf-loading  .sub-title,.wf-loading  .entry-note,.wf-loading  .manual-excerpt,.wf-loading  .single-post.ltr:not(.woocommerce) .entry-content > p:first-of-type:first-letter,.wf-loading  .sc-dropcap,.wf-loading  .single-author-box .vcard,.wf-loading  .comment-author,.wf-loading  .comment-meta,.wf-loading  .comment-reply-link,.wf-loading  #respond label,.wf-loading  #wp-calendar tbody,.wf-loading  .latest-reviews .score-line i,.wf-loading  .score-box .total{opacity: 0;}.ie.wf-loading h1,.ie.wf-loading  h2,.ie.wf-loading  h3,.ie.wf-loading  h4,.ie.wf-loading  h5,.ie.wf-loading  h6,.ie.wf-loading  .main-menu .item-title a,.ie.wf-loading  .widget_pages,.ie.wf-loading  .widget_categories,.ie.wf-loading  .widget_nav_menu,.ie.wf-loading  .tagline,.ie.wf-loading  .sub-title,.ie.wf-loading  .entry-note,.ie.wf-loading  .manual-excerpt,.ie.wf-loading  .single-post.ltr:not(.woocommerce) .entry-content > p:first-of-type:first-letter,.ie.wf-loading  .sc-dropcap,.ie.wf-loading  .single-author-box .vcard,.ie.wf-loading  .comment-author,.ie.wf-loading  .comment-meta,.ie.wf-loading  .comment-reply-link,.ie.wf-loading  #respond label,.ie.wf-loading  #wp-calendar tbody,.ie.wf-loading  .latest-reviews .score-line i,.ie.wf-loading  .score-box .total{visibility: hidden;}.section-title, .classic-layout .entry-title{font-size:35px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .section-title,.wf-loading  .classic-layout .entry-title{opacity: 0;}.ie.wf-loading .section-title,.ie.wf-loading  .classic-layout .entry-title{visibility: hidden;}.entries .post-item .entry-title, .media-post-item .entry-title{font-size:20px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .entries .post-item .entry-title,.wf-loading  .media-post-item .entry-title{opacity: 0;}.ie.wf-loading .entries .post-item .entry-title,.ie.wf-loading  .media-post-item .entry-title{visibility: hidden;}.page-title{font-size:45px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .page-title{opacity: 0;}.ie.wf-loading .page-title{visibility: hidden;}body, p{font-family:"Open Sans";font-weight:400;font-style:normal;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading body,.wf-loading  p{opacity: 0;}.ie.wf-loading body,.ie.wf-loading  p{visibility: hidden;}.page .entry-content, .single .entry-content, .home-section div.entry-summary{line-height:28px;font-size:16px;opacity: 1;visibility: visible;-webkit-transition: opacity 0.24s ease-in-out;-moz-transition: opacity 0.24s ease-in-out;transition: opacity 0.24s ease-in-out;}.wf-loading .page .entry-content,.wf-loading  .single .entry-content,.wf-loading  .home-section div.entry-summary{opacity: 0;}.ie.wf-loading .page .entry-content,.ie.wf-loading  .single .entry-content,.ie.wf-loading  .home-section div.entry-summary{visibility: hidden;}.score-line, .rating-total-indicator .sides span, .widget_ti_most_commented span{background-color:#33b0dd;}.comment-list .bypostauthor .avatar, .post-item .content-loading .load-media-content:before, .media-posts .content-loading .load-media-content:before, .post-item .content-loading .load-media-content:after, .media-posts .content-loading .load-media-content:after{border-color:#33b0dd;}.widget_ti_most_commented span i:before{border-top-color:#33b0dd;}.score-line span i, .widget_ti_most_commented span i{color:#444147;}#masthead{background-color:#ffffff;}.top-strip, .secondary-menu .sub-menu, .top-strip .search-form input[type="text"], .top-strip .social li ul{background-color:#444147;}.top-strip{border-bottom:0px solid #444147;}.secondary-menu a{color:#ffffff;}.secondary-menu a:hover{color:#33b0dd;}.top-strip .social li a{color:#8c919b;}.main-menu-container,.sticky-active .main-menu-fixed{background-color:#ffffff;}.main-menu > ul > li{color:#444147;}.main-menu > ul > li:hover{color:#444147;}.main-menu > ul > li > a > span:after{color:#eeeeee;}.main-menu-container{border-top:1px solid #444147;}.main-menu-container{border-bottom:2px solid #444147;}.main-menu .sub-menu{background-color:#444147;}.main-menu .sub-menu li a, .main-menu .mega-menu-container .mega-menu-posts-title{color:#ffffff;}.main-menu .sub-menu li a:hover, .main-menu .mega-menu-container .mega-menu-posts-title:hover{color:#33b0dd;}.modern .content-over-image-tint .entry-image:before, .modern .content-over-image-tint.full-width-image:before{background-color:#444147;}.sidebar{border-top:1px none #000000;border-bottom:1px none #000000;border-left:1px none #000000;border-right:1px none #000000;}.slide-dock{background-color:#ffffff;}.slide-dock h3, .slide-dock p{color:#444147;}.slide-dock .entry-meta a, .slide-dock h4 a{color:#444147;}.footer-sidebar, .footer-sidebar .widget_ti_most_commented li a, .footer-sidebar .widget-slider .widget-post-details .widget-post-category, .footer-sidebar .widget-posts-classic-entries .widget-post-details .widget-post-category, .footer-sidebar .widget-posts-entries .widget-post-item:not(:nth-child(1)) .widget-post-details{background-color:#444147;}.footer-sidebar .widget_ti_latest_comments .comment-text:after{border-bottom-color:#444147;}.footer-sidebar .widget_ti_most_commented span i{color:#444147;}.footer-sidebar .widget h3{color:#33b0dd;}.footer-sidebar .rating-total-indicator .sides span, .footer-sidebar .widget_ti_most_commented span{background-color:#33b0dd;}.footer-sidebar .widget_ti_most_commented span i:before{border-top-color:#33b0dd;}.footer-sidebar, .footer-sidebar button, .footer-sidebar select, .footer-sidebar input,  .footer-sidebar input[type="submit"]{color:#ffffff;}.footer-sidebar input, .footer-sidebar select, .footer-sidebar input[type="submit"]{border-color:#ffffff;}.footer-sidebar .widget_ti_latest_comments .comment-text:before{border-bottom-color:#ffffff;}.footer-sidebar .widget a{color:#8c919b;}.footer-sidebar .widget a:hover{color:#33b0dd;}.widget-area-2, .widget-area-3, .footer-sidebar .widget{border-top:1px dotted #444147;border-bottom:1px dotted #444147;border-left:1px dotted #444147;border-right:1px dotted #444147;}.full-width-sidebar{background-color:#e1e6e9;}.full-width-sidebar, .full-width-sidebar a{color:#444147;}.copyright{background-color:#444147;}.copyright, .copyright a{color:#e1e6e9;}</style>
+  <script async src="https://stats.wp.com/s-202013.js"></script> 
+ </head> 
+ <body class="home page-template page-template-page-composer page-template-page-composer-php page page-id-31655 woocommerce-no-js ltr page-home layout-full"> 
+  <section class="no-print top-strip"> 
+   <div class="wrapper clearfix"> 
+    <nav class="secondary-menu">
+     <ul id="menu-simplemag-top" class="menu">
+      <li id="menu-item-49182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49182"><a href="https://www.thetraveltester.com/about-us/">ABOUT</a></li> 
+      <li id="menu-item-49189" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49189"><a href="https://www.thetraveltester.com/contact-us/">CONTACT</a></li> 
+      <li id="menu-item-49199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49199"><a href="https://www.thetraveltester.com/work-with-us/">ADVERTISE</a></li> 
+      <li id="menu-item-49196" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-49196"><a href="https://www.thetraveltester.com/press/">PRESS</a></li> 
+      <li id="menu-item-49186" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-49186"><a href="https://www.thetraveltester.com/disclaimer/">DISCLAIMER</a></li> 
+      <li id="menu-item-55380" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-55380"><a href="https://www.thetraveltester.com/code-of-ethics/">CODE OF ETHICS</a></li> 
+      <li id="menu-item-wpml-ls-1681-en" class="menu-item-language menu-item-language-current menu-item wpml-ls-slot-1681 wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-menu-item wpml-ls-first-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-has-children menu-item-wpml-ls-1681-en"><a title="English" href="https://www.thetraveltester.com"><img class="wpml-ls-flag" src="https://s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png" alt=""><span class="wpml-ls-native" lang="en">English</span></a> 
+       <ul class="sub-menu"> 
+        <li id="menu-item-wpml-ls-1681-nl" class="menu-item-language menu-item wpml-ls-slot-1681 wpml-ls-item wpml-ls-item-nl wpml-ls-menu-item wpml-ls-last-item menu-item-type-wpml_ls_menu_item menu-item-object-wpml_ls_menu_item menu-item-wpml-ls-1681-nl"><a title="Nederlands" href="https://www.thetraveltester.com/nl/"><img class="wpml-ls-flag" src="https://s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/res/flags/nl.png" alt=""><span class="wpml-ls-native" lang="nl">Nederlands</span></a></li> 
+       </ul> </li> 
+     </ul>
+    </nav> <a href="#" id="mobile-menu-toggle" class="lines-button"> <span class="lines"></span> </a> 
+   </div><!-- .wrapper --> 
+  </section><!-- .top-strip --> 
+  <section id="site"> 
+   <div id="pageslide" class="mobilewhite">
+    <!-- Sidebar in Mobile View -->
+   </div> 
+   <div class="site-content"> 
+    <header id="masthead" role="banner" class="clearfix"> 
+     <div id="branding" class="anmtd"> 
+      <div class="wrapper"> 
+       <div class="header header-search"> 
+        <div class="inner"> 
+         <div class="inner-cell"> <a class="logo" href="https://www.thetraveltester.com"> <img src="https://s28966.pcdn.co/wp-content/uploads/2019/09/logo-the-travel-tester-blog.png" alt="The Travel Tester || In-Depth Cultural Travel and Natural Sciences Guides &amp; Reviews - Discovering Outer World Experiences in Everyday Life" width="750" height="200"> </a><!-- Logo --> 
+         </div> 
+         <div class="inner-cell"> 
+          <ul class="social"> 
+           <li><a href="#" class="icomoon-share social-share-link"></a> 
+            <ul>
+             <li><a href="https://www.facebook.com/thetraveltester" class="icomoon-facebook" target="_blank"></a></li>
+             <li><a href="https://twitter.com/thetraveltester" class="icomoon-twitter" target="_blank"></a></li>
+             <li><a href="https://uk.pinterest.com/thetraveltester/" class="icomoon-pinterest" target="_blank"></a></li>
+             <li><a href="http://instagram.com/thetraveltester" class="icomoon-instagram" target="_blank"></a></li>
+             <li><a href="https://www.youtube.com/user/thetraveltester" class="icomoon-youtube" target="_blank"></a></li> 
+            </ul> </li> 
+          </ul> 
+         </div> 
+         <div class="inner-cell search-form-cell"> 
+          <div class="search-form"> 
+           <form method="get" id="searchform" action="https://www.thetraveltester.com/" role="search"> 
+            <input type="text" name="s" id="s" value="Search" onfocus="if(this.value=='Search')this.value='';" onblur="if(this.value=='')this.value='Search';"> <button type="submit"> <i class="icomoon-search"></i> </button> 
+           </form> 
+           <div class="mobile-search-button"></div> 
+          </div> 
+         </div> 
+        </div> 
+       </div><!-- .header-search --> 
+      </div><!-- .wrapper --> 
+     </div><!-- #branding --> 
+     <div class="no-print anmtd main-menu-container" role="navigation">
+      <div class="main-menu-fixed">
+       <nav class="wrapper main-menu">
+        <ul id="menu-simplemag-main" class="menu">
+         <li id="menu-item-47250" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>TRAVEL</span></a> 
+          <ul class="sub-links"> 
+           <li id="menu-item-47188" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>Africa</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-54096" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://www.thetraveltester.com/mauritius-travel-guide/"><span>Mauritius</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47251" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE MOROCCO TRAVEL GUIDE!" href="https://www.thetraveltester.com/morocco-travel-guide/"><span>Morocco</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+           <li id="menu-item-47185" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>Asia</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-47154" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE INDIA TRAVEL GUIDE!" href="https://www.thetraveltester.com/india-travel-guide/"><span>India</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47155" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE JAPAN TRAVEL GUIDE!" href="https://www.thetraveltester.com/japan-travel-guide/"><span>Japan</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47156" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE LAOS TRAVEL GUIDE!" href="https://www.thetraveltester.com/laos-travel-guide/"><span>Laos</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47157" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE NEPAL TRAVEL GUIDE!" href="https://www.thetraveltester.com/nepal-travel-guide/"><span>Nepal</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47252" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE SRI LANKA TRAVEL GUIDE!" href="https://www.thetraveltester.com/sri-lanka-travel-guide/"><span>Sri Lanka</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+           <li id="menu-item-47186" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>Europe</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-47159" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE AUSTRIA TRAVEL GUIDE!" href="https://www.thetraveltester.com/austria-travel-guide/"><span>Austria</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47160" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE BELGIUM TRAVEL GUIDE!" href="https://www.thetraveltester.com/belgium-travel-guide/"><span>Belgium</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47161" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE ENGLAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/england-travel-guide/"><span>England</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47164" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE GERMANY TRAVEL GUIDE!" href="https://www.thetraveltester.com/germany-travel-guide/"><span>Germany</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47167" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE IRELAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/ireland-travel-guide/"><span>Ireland</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47169" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE LUXEMBOURG TRAVEL GUIDE!" href="https://www.thetraveltester.com/luxembourg-travel-guide/"><span>Luxembourg</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47176" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE NETHERLANDS TRAVEL GUIDE!" href="https://www.thetraveltester.com/the-netherlands-travel-guide/"><span>Netherlands</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47171" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE NORTHERN IRELAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/northern-ireland-travel-guide/"><span>Northern Ireland</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47172" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE PORTUGAL TRAVEL GUIDE!" href="https://www.thetraveltester.com/portugal-travel-guide/"><span>Portugal</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47173" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE SCOTLAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/scotland-travel-guide/"><span>Scotland</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47177" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE WALES TRAVEL GUIDE!" href="https://www.thetraveltester.com/wales-travel-guide/"><span>Wales</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+           <li id="menu-item-47192" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>The Mediterranean</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-47163" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE FRANCE TRAVEL GUIDE!" href="https://www.thetraveltester.com/france-travel-guide/"><span>France</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47165" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE GREECE TRAVEL GUIDE!" href="https://www.thetraveltester.com/greece-travel-guide/"><span>Greece</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47168" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE ITALY TRAVEL GUIDE!" href="https://www.thetraveltester.com/italy-travel-guide/"><span>Italy</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47170" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE MALTA TRAVEL GUIDE!" href="https://www.thetraveltester.com/malta-travel-guide/"><span>Malta</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47174" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE SPAIN TRAVEL GUIDE!" href="https://www.thetraveltester.com/spain-travel-guide/"><span>Spain</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+           <li id="menu-item-47191" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>The Nordics</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-47162" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE FINLAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/finland-travel-guide/"><span>Finland</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47166" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE ICELAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/iceland-travel-guide/"><span>Iceland</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47175" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE SWEDEN TRAVEL GUIDE!" href="https://www.thetraveltester.com/sweden-travel-guide/"><span>Sweden</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+           <li id="menu-item-47189" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>North America</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-47179" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE CANADA TRAVEL GUIDE!" href="https://www.thetraveltester.com/canada-travel-guide/"><span>Canada</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-52147" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://www.thetraveltester.com/caribbean-travel-guide/"><span>Caribbean</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47180" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE USA TRAVEL GUIDE!" href="https://www.thetraveltester.com/united-states-of-america-travel-guide/"><span>United States</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+           <li id="menu-item-47187" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#"><span>Oceania</span></a> 
+            <ul class="sub-links"> 
+             <li id="menu-item-47182" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE AUSTRALIA TRAVEL GUIDE!" href="https://www.thetraveltester.com/australia-travel-guide/"><span>Australia</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47183" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE FIJI TRAVEL GUIDE!" href="https://www.thetraveltester.com/fiji-travel-guide/"><span>Fiji</span></a>
+              <div class="sub-menu"></div> </li> 
+             <li id="menu-item-47184" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a title="CLICK FOR COMPLETE NEW ZEALAND TRAVEL GUIDE!" href="https://www.thetraveltester.com/new-zealand-travel-guide/"><span>New Zealand</span></a>
+              <div class="sub-menu"></div> </li> 
+            </ul> </li> 
+          </ul> </li> 
+         <li id="menu-item-43894" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children"><a href="https://www.thetraveltester.com/reviews/"><span>REVIEWS</span></a>
+          <div class="sub-menu">
+           <div class="sub-posts">
+            <div class="mega-menu-container">
+             <ul class="mega-menu-posts"> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/geek-in-japan-book-review/"><img src="https://s28966.pcdn.co/wp-content/uploads/2020/02/geek-in-japan-book-review-thetraveltester-370x247.jpg.optimal.jpg" alt="Be a Geek in Japan! Book Reviews of Titles Showcasing Japan’s ‘Otaku’ Culture" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/geek-in-japan-book-review/">Be a Geek in Japan! Book Reviews of Titles Showcasing Japan’s ‘Otaku’ Culture</a> 
+               </div> </li> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/japan-travelers-companion-book-review/"><img src="https://s28966.pcdn.co/wp-content/uploads/2017/12/japan-travel-guide-books-reviews-370x247.jpg.optimal.jpg" alt="Japan Traveler’s Companion Book Reviews: Complete Overview of Highlights!" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/japan-travelers-companion-book-review/">Japan Traveler’s Companion Book Reviews: Complete Overview of Highlights!</a> 
+               </div> </li> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/etiquette-of-japan-book-review/"><img src="https://s28966.pcdn.co/wp-content/uploads/2018/06/etiquette-in-japan-book-review-thetraveltester-370x247.jpg.optimal.jpg" alt="Etiquette of Japan: Book Reviews of Insightful Guides to Traditions &amp; Customs" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/etiquette-of-japan-book-review/">Etiquette of Japan: Book Reviews of Insightful Guides to Traditions &amp; Customs</a> 
+               </div> </li>
+             </ul>
+            </div>
+           </div> 
+           <ul class="sub-links"> 
+            <li id="menu-item-45635" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.thetraveltester.com/product-review-ratings/"><span>* Review Ratings</span></a></li> 
+            <li id="menu-item-46977" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/tag/accommodation-review/"><span>Accommodation</span></a></li> 
+            <li id="menu-item-53333" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.thetraveltester.com/tag/book-review/"><span>Books</span></a></li> 
+            <li id="menu-item-46979" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/tag/hotspot-review/"><span>Hotspots</span></a></li> 
+            <li id="menu-item-46980" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/tag/product-review/"><span>Products</span></a></li> 
+            <li id="menu-item-46981" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/tag/tour-and-activity-review/"><span>Tours and Activities</span></a></li> 
+            <li id="menu-item-49071" class="menu-item menu-item-type-post_type menu-item-object-post"><a href="https://www.thetraveltester.com/best-gifts-for-travellers/"><span>&gt; Travel Gift Guide</span></a></li> 
+           </ul> 
+          </div> </li> 
+         <li id="menu-item-34488" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="https://www.thetraveltester.com/tips-and-advice/"><span>TIPS &amp; ADVICE</span></a>
+          <div class="sub-menu">
+           <div class="sub-posts">
+            <div class="mega-menu-container">
+             <ul class="mega-menu-posts"> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/creative-travel/"><img src="https://s28966.pcdn.co/wp-content/uploads/2019/12/creative-travel-COVER-370x247.jpg.optimal.jpg" alt="Creative Travel: Is this the Best Way to See the World?" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/creative-travel/">Creative Travel: Is this the Best Way to See the World?</a> 
+               </div> </li> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/what-is-cider/"><img src="https://s28966.pcdn.co/wp-content/uploads/2018/09/what-is-cider-27-370x247.jpg.optimal.jpg" alt="What is Cider? All You Need to Know Guide to Cider Brands!" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/what-is-cider/">What is Cider? All You Need to Know Guide to Cider Brands!</a> 
+               </div> </li> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/best-paulo-coelho-quotes-on-life/"><img src="https://s28966.pcdn.co/wp-content/uploads/2014/10/best-paulo-coelho-quotes-on-life-cover-370x247.jpg.optimal.jpg" alt="These Are The Best Paulo Coelho Quotes on Life" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/best-paulo-coelho-quotes-on-life/">These Are The Best Paulo Coelho Quotes on Life</a> 
+               </div> </li>
+             </ul>
+            </div>
+           </div>
+          </div> </li> 
+         <li id="menu-item-50645" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children"><a href="https://www.thetraveltester.com/space-lifestyle/"><span>SPACE LIFESTYLE</span></a>
+          <div class="sub-menu">
+           <div class="sub-posts">
+            <div class="mega-menu-container">
+             <ul class="mega-menu-posts"> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/best-gifts-for-space-lovers/"><img src="https://s28966.pcdn.co/wp-content/uploads/2018/12/best-gifts-for-space-lovers-COVER2-370x247.jpg.optimal.jpg" alt="ULTIMATE GUIDE of Best Gifts for Space Lovers That Are Out Of This World!" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/best-gifts-for-space-lovers/">ULTIMATE GUIDE of Best Gifts for Space Lovers That Are Out Of This World!</a> 
+               </div> </li> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/moving-to-mars-london/"><img src="https://s28966.pcdn.co/wp-content/uploads/2019/11/moving-to-mars-design-museum-london-COVER-370x247.jpg.optimal.jpg" alt="Moving To Mars: Big Questions Answered at the Design Museum in London, England" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/moving-to-mars-london/">Moving To Mars: Big Questions Answered at the Design Museum in London, England</a> 
+               </div> </li> 
+              <li class="mega-menu-item"> 
+               <figure> <a href="https://www.thetraveltester.com/moon-landing-anniversary-omniversum-museon-the-hague-netherlands/"><img src="https://s28966.pcdn.co/wp-content/uploads/2019/05/moon-landing-anniversary-omniversum-museon-the-hague-netherlands-cover-370x247.jpg.optimal.jpg" alt="Celebrate the Moon Landing Anniversary at Omniversum and Museon The Hague, Netherlands" width="370" height="247"></a> 
+               </figure> 
+               <div class="item-title"> <a href="https://www.thetraveltester.com/moon-landing-anniversary-omniversum-museon-the-hague-netherlands/">Celebrate the Moon Landing Anniversary at Omniversum and Museon The Hague, Netherlands</a> 
+               </div> </li>
+             </ul>
+            </div>
+           </div> 
+           <ul class="sub-links"> 
+            <li id="menu-item-50654" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.thetraveltester.com/tag/astronaut-skills/"><span>Train Your Astronaut Skills</span></a></li> 
+            <li id="menu-item-50653" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.thetraveltester.com/tag/space-on-earth/"><span>Discover Space on Earth</span></a></li> 
+            <li id="menu-item-52664" class="menu-item menu-item-type-post_type menu-item-object-post"><a href="https://www.thetraveltester.com/how-hard-is-it-to-become-an-astronaut-masterclass/"><span>Masterclass ISS Commander Chris Hadfield</span></a></li> 
+            <li id="menu-item-49070" class="menu-item menu-item-type-post_type menu-item-object-post"><a href="https://www.thetraveltester.com/best-gifts-for-space-lovers/"><span>&gt; Space Gift Guide</span></a></li> 
+           </ul> 
+          </div> </li> 
+         <li id="menu-item-35933" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.thetraveltester.com/travel-blog/"><span>BLOG</span></a></li> 
+         <li id="menu-item-53075" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.thetraveltester.com/shop/"><span>SHOP</span></a></li> 
+         <li id="menu-item-49077" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.youtube.com/user/thetraveltester"><span>VIDEO</span></a></li> 
+         <li id="menu-item-55012" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://thelondontester.com/"><span>THE LONDON TESTER</span></a></li> 
+        </ul>
+       </nav>
+      </div>
+     </div> 
+    </header><!-- #masthead --> 
+    <section id="content" role="main" class="clearfix anmtd"> 
+     <section class="wrapper home-section custom-slider-section"> 
+      <div class="slider-latest"> 
+       <div class="grids"> 
+        <div class="grid-8 columns column-1"> 
+         <div class="global-sliders content-over-image posts-slider content-over-image-white"> 
+          <div> 
+           <figure class="entry-image"> 
+            <img src="https://s28966.pcdn.co/wp-content/uploads/2019/04/SPACE-LIFESTYLE.jpg.optimal.jpg" alt="WE ARE NIENKE &amp; NICK - HERE TO HELP YOU GET MORE OUT OF YOUR TRIP ...AND YOURSELF!"> 
+           </figure> 
+           <header class="entry-header content-over-image-white"> <a class="entry-link" href="https://www.thetraveltester.com/about-us/"></a> 
+            <div class="inner"> 
+             <div class="inner-cell"> 
+              <div class="entry-frame"> 
+               <h2 class="entry-title"> <a href="https://www.thetraveltester.com/about-us/">WE ARE NIENKE &amp; NICK - HERE TO HELP YOU GET MORE OUT OF YOUR TRIP ...AND YOURSELF!</a> </h2> <a class="read-more" href="https://www.thetraveltester.com/about-us/">FIND OUT MORE</a> 
+              </div> 
+             </div> 
+            </div> 
+           </header> 
+          </div><!-- Slide --> 
+         </div> 
+        </div><!-- Grid 8 --> 
+        <div class="grid-4 columns column-2 entries"> 
+         <article class="post-item content-over-image content-over-image-tint"> 
+          <figure class="entry-image"> 
+           <img src="https://s28966.pcdn.co/wp-content/uploads/2019/07/how-to-photograph-the-moon-13-370x247.jpg.optimal.jpg" alt="How To Photograph The Moon - My First Attempts! || The Travel Tester" width="370" height="247"> 
+          </figure> 
+          <header class="entry-header"> <a class="entry-link" href="https://www.thetraveltester.com/tag/space-on-earth/"></a> 
+           <div class="inner"> 
+            <div class="inner-cell"> 
+             <div class="entry-frame"> 
+              <h2 class="entry-title"> SPACE ON EARTH </h2> 
+             </div> 
+            </div> 
+           </div> 
+          </header> 
+         </article><!-- Custom Post --> 
+         <article class="post-item content-over-image content-over-image-tint"> 
+          <figure class="entry-image"> 
+           <img src="https://s28966.pcdn.co/wp-content/uploads/2018/06/husavik-exploration-museum-iceland-41-370x247.jpg.optimal.jpg" alt="Follow in the Footsteps of Famous Explorers at The Husavik Exploration Museum Iceland || The Travel Tester || #Iceland #SpaceNationIceland #Husavik #Astronauts #Vikings #Exploration #Museum #Explorers #NASA #SpaceTravel #EarlyExplorers #History" width="370" height="247"> 
+          </figure> 
+          <header class="entry-header"> <a class="entry-link" href="https://www.thetraveltester.com/shop"></a> 
+           <div class="inner"> 
+            <div class="inner-cell"> 
+             <div class="entry-frame"> 
+              <h2 class="entry-title"> SHOP SPACE &amp; TRAVEL ITEMS </h2> 
+             </div> 
+            </div> 
+           </div> 
+          </header> 
+         </article><!-- Custom Post --> 
+        </div><!-- Grid 4 --> 
+       </div><!-- .grids --> 
+      </div><!-- .slider-latest --> 
+     </section> 
+     <section class="wrapper home-section posts-section"> 
+      <header class="section-header"> 
+       <div class="section-title title-with-sep "> 
+        <h2 class="title">OUR LATEST ARTICLES</h2> 
+       </div> <span class="sub-title">- IN-DEPTH CULTURAL TRAVEL &amp; NATURAL SCIENCE GUIDES &amp; REVIEWS -</span> 
+      </header> 
+      <div class="grids grid-layout columns-size-3 entries"> 
+       <article id="postid-54600" class="grid-4 post-54600 post type-post status-publish format-standard has-post-thumbnail hentry category-australia-travel-guide category-fiji-travel-guide category-new-zealand-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-oceania/" title="8 Hands-on Travel Experiences in Oceania You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-oceania-1-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="8 Hands-on Travel Experiences in Oceania You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-oceania-1-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-oceania-1-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-oceania-1-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/australia-travel-guide/" rel="category tag">Australia Travel Guide</a>, <a href="https://www.thetraveltester.com/fiji-travel-guide/" rel="category tag">Fiji Travel Guide</a>, <a href="https://www.thetraveltester.com/new-zealand-travel-guide/" rel="category tag">New Zealand Travel Guide</a> </span> <time class="entry-date published" datetime="2020-03-08T11:13:08+00:00">March 8, 2020</time> <time class="updated" datetime="2020-03-08T13:15:37+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-oceania/" rel="bookmark">8 Hands-on Travel Experiences in Oceania You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-oceania/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54597" class="grid-4 post-54597 post type-post status-publish format-standard has-post-thumbnail hentry category-austria-travel-guide category-england-travel-guide category-finland-travel-guide category-germany-travel-guide category-northern-ireland-travel-guide category-portugal-travel-guide category-the-netherlands-travel-guide category-wales-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-west-europe/" title="10 Hands-on Travel Experiences in West Europe You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-west-europe-3-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="10 Hands-on Travel Experiences in West Europe You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-west-europe-3-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-west-europe-3-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-west-europe-3-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/austria-travel-guide/" rel="category tag">Austria Travel Guide</a>, <a href="https://www.thetraveltester.com/england-travel-guide/" rel="category tag">England Travel Guide</a>, <a href="https://www.thetraveltester.com/finland-travel-guide/" rel="category tag">Finland Travel Guide</a>, <a href="https://www.thetraveltester.com/germany-travel-guide/" rel="category tag">Germany Travel Guide</a>, <a href="https://www.thetraveltester.com/northern-ireland-travel-guide/" rel="category tag">Northern Ireland Travel Guide</a>, <a href="https://www.thetraveltester.com/portugal-travel-guide/" rel="category tag">Portugal Travel Guide</a>, <a href="https://www.thetraveltester.com/the-netherlands-travel-guide/" rel="category tag">The Netherlands Travel Guide</a>, <a href="https://www.thetraveltester.com/wales-travel-guide/" rel="category tag">Wales Travel Guide</a> </span> <time class="entry-date published" datetime="2020-03-04T08:01:46+00:00">March 4, 2020</time> <time class="updated" datetime="2020-03-08T13:15:55+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-west-europe/" rel="bookmark">10 Hands-on Travel Experiences in West Europe You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-west-europe/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54603" class="grid-4 post-54603 post type-post status-publish format-standard has-post-thumbnail hentry category-caribbean-travel-guide category-cuba-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-central-america-caribbean/" title="4 Hands-on Travel Experiences in Central America &amp; The Caribbean You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-central-america-caribbean-2-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="4 Hands-on Travel Experiences in Central America &amp; The Caribbean You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-central-america-caribbean-2-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-central-america-caribbean-2-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-central-america-caribbean-2-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/caribbean-travel-guide/" rel="category tag">Caribbean Travel Guide</a>, <a href="https://www.thetraveltester.com/cuba-travel-guide/" rel="category tag">Cuba Travel Guide</a> </span> <time class="entry-date published" datetime="2020-02-28T08:01:12+00:00">February 28, 2020</time> <time class="updated" datetime="2020-03-08T13:16:05+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-central-america-caribbean/" rel="bookmark">4 Hands-on Travel Experiences in Central America &amp; The Caribbean You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-central-america-caribbean/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-39399" class="grid-4 post-39399 post type-post status-publish format-standard has-post-thumbnail hentry category-japan-travel-guide category-reviews tag-book-review post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/geek-in-japan-book-review/" title="Be a Geek in Japan! Book Reviews of Titles Showcasing Japan’s ‘Otaku’ Culture"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/02/geek-in-japan-book-review-thetraveltester-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="A Geek in Japan &amp; Tokyo Geek's Guide Review: Dive Deep in Japan's 'Otaku' Culture || The Travel Tester Book Reviews" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/02/geek-in-japan-book-review-thetraveltester-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/02/geek-in-japan-book-review-thetraveltester-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/02/geek-in-japan-book-review-thetraveltester-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/japan-travel-guide/" rel="category tag">Japan Travel Guide</a>, <a href="https://www.thetraveltester.com/reviews/" rel="category tag">Reviews</a> </span> <time class="entry-date published" datetime="2020-02-20T08:01:22+00:00">February 20, 2020</time> <time class="updated" datetime="2020-02-20T16:47:51+00:00">February 20, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/geek-in-japan-book-review/" rel="bookmark">Be a Geek in Japan! Book Reviews of Titles Showcasing Japan’s ‘Otaku’ Culture</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/geek-in-japan-book-review/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54605" class="grid-4 post-54605 post type-post status-publish format-standard has-post-thumbnail hentry category-france-travel-guide category-italy-travel-guide category-spain-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-mediterranean/" title="8 Hands-on Travel Experiences in The Mediterranean You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/02/hands-on-travel-experiences-mediterranean-3-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="8 Hands-on Travel Experiences in The Mediterranean You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/02/hands-on-travel-experiences-mediterranean-3-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/02/hands-on-travel-experiences-mediterranean-3-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/02/hands-on-travel-experiences-mediterranean-3-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/france-travel-guide/" rel="category tag">France Travel Guide</a>, <a href="https://www.thetraveltester.com/italy-travel-guide/" rel="category tag">Italy Travel Guide</a>, <a href="https://www.thetraveltester.com/spain-travel-guide/" rel="category tag">Spain Travel Guide</a> </span> <time class="entry-date published" datetime="2020-02-15T08:01:14+00:00">February 15, 2020</time> <time class="updated" datetime="2020-03-08T13:16:58+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-mediterranean/" rel="bookmark">8 Hands-on Travel Experiences in The Mediterranean You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-mediterranean/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-41401" class="grid-4 post-41401 post type-post status-publish format-standard has-post-thumbnail hentry category-japan-travel-guide category-reviews tag-book-review post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/japan-travelers-companion-book-review/" title="Japan Traveler’s Companion Book Reviews: Complete Overview of Highlights!"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2017/12/japan-travel-guide-books-reviews-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Japan Traveler's Companion Book Reviews: Complete Overview of Highlights! || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2017/12/japan-travel-guide-books-reviews-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2017/12/japan-travel-guide-books-reviews-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2017/12/japan-travel-guide-books-reviews-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/japan-travel-guide/" rel="category tag">Japan Travel Guide</a>, <a href="https://www.thetraveltester.com/reviews/" rel="category tag">Reviews</a> </span> <time class="entry-date published" datetime="2020-02-10T08:01:53+00:00">February 10, 2020</time> <time class="updated" datetime="2020-02-20T16:46:52+00:00">February 20, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/japan-travelers-companion-book-review/" rel="bookmark">Japan Traveler’s Companion Book Reviews: Complete Overview of Highlights!</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/japan-travelers-companion-book-review/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+      </div> 
+     </section><!-- Posts Section: latest_posts --> 
+     <section class="wrapper home-section latest-reviews"> 
+      <header class="section-header"> 
+       <div class="section-title title-with-sep"> 
+        <h2 class="title">OUR LATEST REVIEWS</h2> 
+       </div> <span class="sub-title">- ACCOMMODATION, BOOKS, HOTSPOTS, PRODUCTS, TOURS &amp; ACTIVITIES -</span> 
+      </header> 
+      <div class="clearfix latest-reviews-carousel"> 
+       <article class="post-34596 post type-post status-publish format-standard has-post-thumbnail hentry category-japan-travel-guide tag-hotspot-review post-item"> 
+        <figure class="entry-image" style="width:14.461538461538em; height:14.461538461538em;"> <a href="https://www.thetraveltester.com/gonpachi-kill-bill-restaurant-tokyo-japan/"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/04/gonpachi-kill-bill-restaurant-tokyo-japan-COVER-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Unique Dining at Gonpachi (Kill Bill Restaurant) in Tokyo, Japan | The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/04/gonpachi-kill-bill-restaurant-tokyo-japan-COVER-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/04/gonpachi-kill-bill-restaurant-tokyo-japan-COVER-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/04/gonpachi-kill-bill-restaurant-tokyo-japan-COVER-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> <span class="show-total">8.8</span> </a> 
+        </figure> 
+        <header class="entry-header"> 
+         <div class="entry-meta"> <a href="https://www.thetraveltester.com/japan-travel-guide/" rel="category tag">Japan Travel Guide</a> 
+         </div> 
+         <h2 class="entry-title"> <a href="https://www.thetraveltester.com/gonpachi-kill-bill-restaurant-tokyo-japan/">Unique Dining at Gonpachi (Kill Bill Restaurant) in Tokyo, Japan</a> </h2> 
+        </header> 
+       </article> 
+       <article class="post-50111 post type-post status-publish format-standard has-post-thumbnail hentry category-england-travel-guide tag-tour-and-activity-review post-item"> 
+        <figure class="entry-image" style="width:14.153846153846em; height:14.153846153846em;"> <a href="https://www.thetraveltester.com/afternoon-tea-on-a-london-bus/"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/02/afternoon-tea-on-a-london-bus-coverimage-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Afternoon Tea on a London Bus You Need to Know About: B Bakery Bus Tour || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/02/afternoon-tea-on-a-london-bus-coverimage-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/02/afternoon-tea-on-a-london-bus-coverimage-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/02/afternoon-tea-on-a-london-bus-coverimage-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> <span class="show-total">8.4</span> </a> 
+        </figure> 
+        <header class="entry-header"> 
+         <div class="entry-meta"> <a href="https://www.thetraveltester.com/england-travel-guide/" rel="category tag">England Travel Guide</a> 
+         </div> 
+         <h2 class="entry-title"> <a href="https://www.thetraveltester.com/afternoon-tea-on-a-london-bus/">Afternoon Tea on a London Bus You Need to Know About: B Bakery Bus Tour</a> </h2> 
+        </header> 
+       </article> 
+       <article class="post-49877 post type-post status-publish format-standard has-post-thumbnail hentry category-reviews tag-product-review post-item"> 
+        <figure class="entry-image" style="width:14.461538461538em; height:14.461538461538em;"> <a href="https://www.thetraveltester.com/carry-on-backpack-review/"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/02/carry-on-backpack-review-header2-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="This Innovative Carry On Backpack Was Made To Spark Joy! || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/02/carry-on-backpack-review-header2-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/02/carry-on-backpack-review-header2-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/02/carry-on-backpack-review-header2-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> <span class="show-total">8.8</span> </a> 
+        </figure> 
+        <header class="entry-header"> 
+         <div class="entry-meta"> <a href="https://www.thetraveltester.com/reviews/" rel="category tag">Reviews</a> 
+         </div> 
+         <h2 class="entry-title"> <a href="https://www.thetraveltester.com/carry-on-backpack-review/">This Innovative Carry On Backpack Was Made To Spark Joy!</a> </h2> 
+        </header> 
+       </article> 
+       <article class="post-49036 post type-post status-publish format-standard has-post-thumbnail hentry category-reviews tag-product-review post-item"> 
+        <figure class="entry-image" style="width:14.461538461538em; height:14.461538461538em;"> <a href="https://www.thetraveltester.com/keen-terradora-mid-hiking-shoes-review/"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2018/12/keen-terradora-mid-hiking-shoes-review-header-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Keen Terradora Mid Waterproof Hiking Boots Review || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2018/12/keen-terradora-mid-hiking-shoes-review-header-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2018/12/keen-terradora-mid-hiking-shoes-review-header-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2018/12/keen-terradora-mid-hiking-shoes-review-header-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> <span class="show-total">8.8</span> </a> 
+        </figure> 
+        <header class="entry-header"> 
+         <div class="entry-meta"> <a href="https://www.thetraveltester.com/reviews/" rel="category tag">Reviews</a> 
+         </div> 
+         <h2 class="entry-title"> <a href="https://www.thetraveltester.com/keen-terradora-mid-hiking-shoes-review/">Lightweight Travel Must-Have: Keen Terradora Mid Hiking Shoes Review</a> </h2> 
+        </header> 
+       </article> 
+      </div><!-- .latest-reviews-carousel --> 
+      <div class="carousel-nav"></div> 
+     </section><!-- Featured Posts --> 
+     <section class="wrapper home-section advertising"> 
+      <center>
+       <div id="ghcahvhkdg3sw46xemrw" data-volume="70" data-ratio="16:9"></div> 
+       <script type="text/javascript" src="//video.mediavine.com/videos/ghcahvhkdg3sw46xemrw.js" async data-noptimize></script>
+      </center>
+     </section><!-- Code Box --> 
+     <section class="home-section full-width-section content-over-image full-width-image image-45444 content-over-image-white"> 
+      <div class="entry-header"> 
+       <div class="inner"> 
+        <div class="inner-cell"> 
+         <div class="entry-frame"> 
+          <h2 class="title"><a href="https://www.thetraveltester.com/category/space-lifestyle">- DISCOVER OUTER WORLD EXPERIENCES IN EVERYDAY LIFE -</a></h2> <span class="sub-title">and live the #SpaceLifestyle right here on earth</span> <a class="read-more" href="https://www.thetraveltester.com/category/space-lifestyle">FIND OUT MORE</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </section><!-- Full Width Image --> 
+     <section class="wrapper home-section posts-section"> 
+      <div class="grids grid-layout columns-size-3 entries"> 
+       <article id="postid-54817" class="grid-4 post-54817 post type-post status-publish format-standard has-post-thumbnail hentry category-cambodia-travel-guide category-laos-travel-guide category-myanmar-travel-guide category-thailand-travel-guide category-vietnam-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-south-east-asia/" title="14 Hands-on Travel Experiences in South East Asia You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-east-asia-9-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="14 Hands-on Travel Experiences in South East Asia You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-east-asia-9-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-east-asia-9-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-east-asia-9-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/cambodia-travel-guide/" rel="category tag">Cambodia Travel Guide</a>, <a href="https://www.thetraveltester.com/laos-travel-guide/" rel="category tag">Laos Travel Guide</a>, <a href="https://www.thetraveltester.com/myanmar-travel-guide/" rel="category tag">Myanmar Travel Guide</a>, <a href="https://www.thetraveltester.com/thailand-travel-guide/" rel="category tag">Thailand Travel Guide</a>, <a href="https://www.thetraveltester.com/vietnam-travel-guide/" rel="category tag">Vietnam Travel Guide</a> </span> <time class="entry-date published" datetime="2020-01-30T12:35:18+00:00">January 30, 2020</time> <time class="updated" datetime="2020-03-08T13:17:09+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-south-east-asia/" rel="bookmark">14 Hands-on Travel Experiences in South East Asia You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-south-east-asia/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54601" class="grid-4 post-54601 post type-post status-publish format-standard has-post-thumbnail hentry category-korea-travel-guide category-kyrgyzstan-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-central-east-asia/" title="3 Hands-on Travel Experiences in Central and East Asia You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-central-east-asia-1-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="3 Hands-on Travel Experiences in Central and East Asia You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-central-east-asia-1-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-central-east-asia-1-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-central-east-asia-1-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/korea-travel-guide/" rel="category tag">Korea Travel Guide</a>, <a href="https://www.thetraveltester.com/kyrgyzstan-travel-guide/" rel="category tag">Kyrgyzstan Travel Guide</a> </span> <time class="entry-date published" datetime="2020-01-22T16:47:38+00:00">January 22, 2020</time> <time class="updated" datetime="2020-03-08T13:17:12+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-central-east-asia/" rel="bookmark">3 Hands-on Travel Experiences in Central and East Asia You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-central-east-asia/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54769" class="grid-4 post-54769 post type-post status-publish format-standard has-post-thumbnail hentry category-japan-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-japan/" title="10 Hands-on Travel Experiences in Japan You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-japan-cover-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Hands-on Travel Experiences in Japan You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-japan-cover-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-japan-cover-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-japan-cover-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/japan-travel-guide/" rel="category tag">Japan Travel Guide</a> </span> <time class="entry-date published" datetime="2020-01-17T20:22:39+00:00">January 17, 2020</time> <time class="updated" datetime="2020-03-08T13:17:23+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-japan/" rel="bookmark">10 Hands-on Travel Experiences in Japan You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-japan/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54598" class="grid-4 post-54598 post type-post status-publish format-standard has-post-thumbnail hentry category-bulgaria-travel-guide category-croatia-travel-guide category-poland-travel-guide category-russia-travel-guide category-slovenia-travel-guide category-turkey-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-east-europe/" title="6 Hands-on Travel Experiences in East Europe You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-east-europe-cover-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Hands-on Travel Experiences in East Europe You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-east-europe-cover-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-east-europe-cover-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-east-europe-cover-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/bulgaria-travel-guide/" rel="category tag">Bulgaria Travel Guide</a>, <a href="https://www.thetraveltester.com/croatia-travel-guide/" rel="category tag">Croatia Travel Guide</a>, <a href="https://www.thetraveltester.com/poland-travel-guide/" rel="category tag">Poland Travel Guide</a>, <a href="https://www.thetraveltester.com/russia-travel-guide/" rel="category tag">Russia Travel Guide</a>, <a href="https://www.thetraveltester.com/slovenia-travel-guide/" rel="category tag">Slovenia Travel Guide</a>, <a href="https://www.thetraveltester.com/turkey-travel-guide/" rel="category tag">Turkey Travel Guide</a> </span> <time class="entry-date published" datetime="2020-01-09T19:03:57+00:00">January 9, 2020</time> <time class="updated" datetime="2020-03-08T13:17:25+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-east-europe/" rel="bookmark">6 Hands-on Travel Experiences in East Europe You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-east-europe/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54679" class="grid-4 post-54679 post type-post status-publish format-standard has-post-thumbnail hentry category-india-travel-guide category-nepal-travel-guide category-sri-lanka-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-south-asia/" title="14 Hands-on Travel Experiences in South Asia You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-asia-cover-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Hands-on Travel Experiences in South Asia You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-asia-cover-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-asia-cover-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2020/01/hands-on-travel-experiences-south-asia-cover-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/india-travel-guide/" rel="category tag">India Travel Guide</a>, <a href="https://www.thetraveltester.com/nepal-travel-guide/" rel="category tag">Nepal Travel Guide</a>, <a href="https://www.thetraveltester.com/sri-lanka-travel-guide/" rel="category tag">Sri Lanka Travel Guide</a> </span> <time class="entry-date published" datetime="2020-01-06T08:01:57+00:00">January 6, 2020</time> <time class="updated" datetime="2020-03-08T13:16:47+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-south-asia/" rel="bookmark">14 Hands-on Travel Experiences in South Asia You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-south-asia/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+       <article id="postid-54604" class="grid-4 post-54604 post type-post status-publish format-standard has-post-thumbnail hentry category-argentina-travel-guide category-bolivia-travel-guide category-chile-travel-guide category-colombia-travel-guide category-peru-travel-guide post-item"> 
+        <div class="post-item-inner"> 
+         <div class="entry-image"> 
+          <div class="entry-image-inner"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-south-america/" title="7 Hands-on Travel Experiences in South America You Need to Know About"> <span class="image-tint"> <img width="370" height="247" src="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-south-america-COVER-370x247.jpg.optimal.jpg" class="attachment-rectangle-size size-rectangle-size wp-post-image" alt="Hands-on Travel Experiences in South-America You Need to Know About || The Travel Tester" srcset="https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-south-america-COVER-370x247.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-south-america-COVER-270x180.jpg.optimal.jpg 270w, https://s28966.pcdn.co/wp-content/uploads/2019/12/hands-on-travel-experiences-south-america-COVER-570x381.jpg.optimal.jpg 570w" sizes="(max-width: 370px) 100vw, 370px"> </span> </a> 
+          </div> 
+         </div> 
+         <div class="entry-details"> 
+          <header class="entry-header"> 
+           <div class="entry-meta"> <span class="entry-category"> <a href="https://www.thetraveltester.com/argentina-travel-guide/" rel="category tag">Argentina Travel Guide</a>, <a href="https://www.thetraveltester.com/bolivia-travel-guide/" rel="category tag">Bolivia Travel Guide</a>, <a href="https://www.thetraveltester.com/chile-travel-guide/" rel="category tag">Chile Travel Guide</a>, <a href="https://www.thetraveltester.com/colombia-travel-guide/" rel="category tag">Colombia Travel Guide</a>, <a href="https://www.thetraveltester.com/peru-travel-guide/" rel="category tag">Peru Travel Guide</a> </span> <time class="entry-date published" datetime="2020-01-03T08:01:32+00:00">January 3, 2020</time> <time class="updated" datetime="2020-03-08T13:16:37+00:00">March 8, 2020</time> 
+           </div> 
+           <h2 class="entry-title"> <a href="https://www.thetraveltester.com/hands-on-travel-experiences-south-america/" rel="bookmark">7 Hands-on Travel Experiences in South America You Need to Know About</a> </h2> 
+          </header> 
+          <footer class="entry-footer"> <a class="read-more-link" href="https://www.thetraveltester.com/hands-on-travel-experiences-south-america/">Read More</a> 
+          </footer> 
+         </div> 
+        </div> 
+       </article> 
+      </div> 
+     </section><!-- Posts Section: latest_posts --> 
+     <section class="home-section wp-editor-section wrapper"> 
+      <div class="entry-content clearfix"> 
+       <h3 style="text-align: center;"><a href="https://www.thetraveltester.com/travel-blog/">GO TO BLOG ARCHIVE</a></h3> 
+      </div> 
+     </section><!-- WP Editor --> 
+     <section class="home-section full-width-section content-over-image full-width-image image-50647 content-over-image-white"> 
+      <div class="entry-header"> 
+       <div class="inner"> 
+        <div class="inner-cell"> 
+         <div class="entry-frame"> 
+          <h2 class="title"><a href="https://www.thetraveltester.com/tag/astronaut-skills/">TRAIN YOUR ASTRONAUT SKILLS ON EARTH</a></h2> <span class="sub-title">- physical well-being, mental well-being, social skills, cultural understanding, adaptability, planet care -</span> <a class="read-more" href="https://www.thetraveltester.com/tag/astronaut-skills/">FIND OUT MORE</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </section><!-- Full Width Image --> 
+     <section class="home-section wp-editor-section wrapper"> 
+      <div class="entry-content clearfix"> 
+       <h4 style="text-align: center;"><strong>⇾ BESTSELLERS FROM OUR <a href="https://www.thetraveltester.com/shop/">SPACE SHOP</a> ⇽</strong></h4> 
+       <p></p>
+       <center></center>
+       <center>
+        <a href="https://www.amazon.com/gp/product/B019SDSCZ4/ref=as_li_tl?ie=UTF8&amp;tag=thetraveltester-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=B019SDSCZ4&amp;linkId=475b90f9ca9a181911ddea1537392094" target="_blank" rel="nofollow noopener"><img class="size-full wp-image-48509 alignnone" src="https://s28966.pcdn.co/wp-content/uploads/2018/12/astronaut-tea-infuser.jpg.optimal.jpg" alt="ULTIMATE GUIDE of Best Gifts for Space Lovers That Are Out Of This World! || The Travel Tester" width="300" srcset="https://s28966.pcdn.co/wp-content/uploads/2018/12/astronaut-tea-infuser.jpg.optimal.jpg 500w, https://s28966.pcdn.co/wp-content/uploads/2018/12/astronaut-tea-infuser-300x235.jpg.optimal.jpg 300w, https://s28966.pcdn.co/wp-content/uploads/2018/12/astronaut-tea-infuser-370x290.jpg.optimal.jpg 370w" sizes="(max-width: 500px) 100vw, 500px"></a> &nbsp;<a href="https://www.amazon.com/gp/product/B071W77MBJ/ref=as_li_tl?ie=UTF8&amp;tag=thetraveltester-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=B071W77MBJ&amp;linkId=e16730a20496ebea280152519dc8edd4" target="_blank" rel="nofollow noopener"><img class="size-full wp-image-48563 alignnone" src="https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women.jpg.optimal.jpg" alt="ULTIMATE GUIDE of Best Gifts for Space Lovers That Are Out Of This World! || The Travel Tester" width="300" srcset="https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women.jpg.optimal.jpg 1000w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-150x150.jpg.optimal.jpg 150w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-300x300.jpg.optimal.jpg 300w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-768x768.jpg.optimal.jpg 768w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-370x370.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-570x570.jpg.optimal.jpg 570w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-770x770.jpg.optimal.jpg 770w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-lego-women-580x580.jpg.optimal.jpg 580w" sizes="(max-width: 1000px) 100vw, 1000px"> </a>
+       </center>
+       <center>
+        <a href="https://www.amazon.com/gp/product/B07D3ZBBR5/ref=as_li_tl?ie=UTF8&amp;tag=thetraveltester-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=B07D3ZBBR5&amp;linkId=73f5eeac4036fb10125d26006e055555" target="_blank" rel="nofollow noopener"><img class="size-full wp-image-48555 alignnone" src="https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue.jpg.optimal.jpg" alt="ULTIMATE GUIDE of Best Gifts for Space Lovers That Are Out Of This World! || The Travel Tester" width="300" srcset="https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue.jpg.optimal.jpg 1000w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-150x150.jpg.optimal.jpg 150w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-300x300.jpg.optimal.jpg 300w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-768x768.jpg.optimal.jpg 768w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-370x370.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-570x570.jpg.optimal.jpg 570w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-770x770.jpg.optimal.jpg 770w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-backpack-blue-580x580.jpg.optimal.jpg 580w" sizes="(max-width: 1000px) 100vw, 1000px"></a><a href="https://www.amazon.com/gp/product/B017IO371E/ref=as_li_tl?ie=UTF8&amp;tag=thetraveltester-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=B017IO371E&amp;linkId=65c4e3562a635c42ef55a98b9c70f180" target="_blank" rel="nofollow noopener"><img class="size-full wp-image-48569 alignnone" src="https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches.jpg.optimal.jpg" alt="ULTIMATE GUIDE of Best Gifts for Space Lovers That Are Out Of This World! || The Travel Tester" width="300" srcset="https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches.jpg.optimal.jpg 1080w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-150x150.jpg.optimal.jpg 150w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-300x300.jpg.optimal.jpg 300w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-768x768.jpg.optimal.jpg 768w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-1024x1024.jpg.optimal.jpg 1024w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-370x370.jpg.optimal.jpg 370w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-570x570.jpg.optimal.jpg 570w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-770x770.jpg.optimal.jpg 770w, https://s28966.pcdn.co/wp-content/uploads/2018/12/nasa-patches-580x580.jpg.optimal.jpg 580w" sizes="(max-width: 1080px) 100vw, 1080px"></a>&nbsp;
+       </center>
+       <p></p> 
+      </div> 
+     </section><!-- WP Editor --> 
+     <section class="home-section full-width-section content-over-image full-width-image image-52677 content-over-image-white"> 
+      <div class="entry-header"> 
+       <div class="inner"> 
+        <div class="inner-cell"> 
+         <div class="entry-frame"> 
+          <h2 class="title"><a href="https://www.thetraveltester.com/how-hard-is-it-to-become-an-astronaut-masterclass/">BECOME A REAL ASTRONAUT</a></h2> <span class="sub-title">MASTERCLASS WITH ISS COMMANDER CHRIS HADFIELD</span> <a class="read-more" href="https://www.thetraveltester.com/how-hard-is-it-to-become-an-astronaut-masterclass/">FIND OUT MORE</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </section><!-- Full Width Image --> 
+    </section> 
+    <footer id="footer" class="no-print anmtd" role="contentinfo"> 
+     <div class="full-width-sidebar"> 
+      <div class="wrapper"> 
+       <div id="custom_html-19" class="widget_text widget widget_custom_html">
+        <h3>⇾ FOLLOW US ON INSTAGRAM @THETRAVELTESTER ⇽</h3>
+        <div class="textwidget custom-html-widget"> 
+         <div id="sb_instagram" class="sbi sbi_col_6  sbi_width_resp" style="padding-bottom: 10px;width: 100%;" data-feedid="sbi_17841401193283336#6" data-res="auto" data-cols="6" data-num="6" data-shortcode-atts="{}"> 
+          <div id="sbi_images" style="padding: 5px;"> 
+           <div class="sbi_item sbi_type_image sbi_new sbi_transition" id="sbi_17860732402748712" data-date="1584297630"> 
+            <div class="sbi_photo_wrap"> <a class="sbi_photo" href="https://www.instagram.com/p/B9w8KIipyjC/" target="_blank" rel="noopener" data-full-res="https://scontent.xx.fbcdn.net/v/t51.2885-15/89601135_614000402783705_6591903575642581361_n.jpg?_nc_cat=103&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQnngc7rlfZ7mg4kGb0IgmOwao9e5dQsHBnCf4zfgOA8kP03OPgOOm2cStx1r1U6CIE&amp;_nc_ht=scontent.xx&amp;oh=e03d8aac03ef88d126a55db9474ce169&amp;oe=5E9E6EB1" data-img-src-set="{&quot;d&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/89601135_614000402783705_6591903575642581361_n.jpg?_nc_cat=103&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQnngc7rlfZ7mg4kGb0IgmOwao9e5dQsHBnCf4zfgOA8kP03OPgOOm2cStx1r1U6CIE&amp;_nc_ht=scontent.xx&amp;oh=e03d8aac03ef88d126a55db9474ce169&amp;oe=5E9E6EB1&quot;,&quot;150&quot;:&quot;https:\/\/www.instagram.com\/p\/B9w8KIipyjC\/media?size=t&quot;,&quot;320&quot;:&quot;https:\/\/www.instagram.com\/p\/B9w8KIipyjC\/media?size=m&quot;,&quot;640&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/89601135_614000402783705_6591903575642581361_n.jpg?_nc_cat=103&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQnngc7rlfZ7mg4kGb0IgmOwao9e5dQsHBnCf4zfgOA8kP03OPgOOm2cStx1r1U6CIE&amp;_nc_ht=scontent.xx&amp;oh=e03d8aac03ef88d126a55db9474ce169&amp;oe=5E9E6EB1&quot;}"> <span class="sbi-screenreader">THIS TOO SHALL PASS ♥ #thetraveltester</span> <img src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/img/placeholder.png" alt="THIS TOO SHALL PASS
+♥
+#thetraveltester"> </a> 
+            </div> 
+           </div>
+           <div class="sbi_item sbi_type_carousel sbi_new sbi_transition" id="sbi_17846365525996279" data-date="1584005464"> 
+            <div class="sbi_photo_wrap"> <a class="sbi_photo" href="https://www.instagram.com/p/B9oO5SJHxTO/" target="_blank" rel="noopener" data-full-res="https://scontent.xx.fbcdn.net/v/t51.2885-15/87751112_125528475688692_432953289018899304_n.jpg?_nc_cat=110&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQltyNycmsdtkkdM48wOT-WCERxjIk3vy7Q9rMaSn7rf8t_cv7b4naPZ38FmF8QqZFI&amp;_nc_ht=scontent.xx&amp;oh=e9b4394995074400f84039156f23a143&amp;oe=5E9D3FAB" data-img-src-set="{&quot;d&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/87751112_125528475688692_432953289018899304_n.jpg?_nc_cat=110&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQltyNycmsdtkkdM48wOT-WCERxjIk3vy7Q9rMaSn7rf8t_cv7b4naPZ38FmF8QqZFI&amp;_nc_ht=scontent.xx&amp;oh=e9b4394995074400f84039156f23a143&amp;oe=5E9D3FAB&quot;,&quot;150&quot;:&quot;https:\/\/www.instagram.com\/p\/B9oO5SJHxTO\/media?size=t&quot;,&quot;320&quot;:&quot;https:\/\/www.instagram.com\/p\/B9oO5SJHxTO\/media?size=m&quot;,&quot;640&quot;:&quot;https:\/\/www.instagram.com\/p\/B9oO5SJHxTO\/media?size=l&quot;}"> <span class="sbi-screenreader">L O V E 🇳🇱 With the world getting locked dow</span> 
+              <svg class="svg-inline--fa fa-clone fa-w-16 sbi_lightbox_carousel_icon" aria-hidden="true" aria-label="Clone" data-fa-proƒcessed="" data-prefix="far" data-icon="clone" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"> <path fill="currentColor" d="M464 0H144c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h320c26.51 0 48-21.49 48-48v-48h48c26.51 0 48-21.49 48-48V48c0-26.51-21.49-48-48-48zM362 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h42v224c0 26.51 21.49 48 48 48h224v42a6 6 0 0 1-6 6zm96-96H150a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h308a6 6 0 0 1 6 6v308a6 6 0 0 1-6 6z"></path> 
+              </svg> <img src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/img/placeholder.png" alt="L O V E
+🇳🇱
+With the world getting locked down, let's focus on some positive, local news. Congrats to @artis_amsterdam_royal_zoo who are expecting an elephant calf soon! Happy I was there last year to snap some shots of all the love in the elephant enclosure!
+🐘 🥰
+❕
+#thetraveltester #artis #artisamsterdam #elephantsofinstagram #amsterdamworld #visitamsterdam #igersamsterdam #iamsterdam #iaminamsterdam &nbsp;#amsterdamgram #amsterdamlove&nbsp;#amstergram #bestofamsterdam #loveamsterdam  #amsterdamlife #amsterdamvibe&nbsp;#iloveamsterdam #topamsterdamphoto #mijnmokum&nbsp;#mokummagazine&nbsp;#iloveholland #visitholland&nbsp;#hiamsterdam&nbsp;#thisisholland"> </a> 
+            </div> 
+           </div>
+           <div class="sbi_item sbi_type_carousel sbi_new sbi_transition" id="sbi_17850103375904467" data-date="1583751993"> 
+            <div class="sbi_photo_wrap"> <a class="sbi_photo" href="https://www.instagram.com/p/B9grb9yJ6Ds/" target="_blank" rel="noopener" data-full-res="https://scontent.xx.fbcdn.net/v/t51.2885-15/89380155_875202959596737_34611803390892236_n.jpg?_nc_cat=109&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQnszbydqF52-dniBkB8Sf4XSLJN0IC_msgVzFwxAH42AI0d1PS2V8KdYRf4ZK_Kub4&amp;_nc_ht=scontent.xx&amp;oh=211c047e7149a43b9b99cb21b029bdfa&amp;oe=5E9E85CC" data-img-src-set="{&quot;d&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/89380155_875202959596737_34611803390892236_n.jpg?_nc_cat=109&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQnszbydqF52-dniBkB8Sf4XSLJN0IC_msgVzFwxAH42AI0d1PS2V8KdYRf4ZK_Kub4&amp;_nc_ht=scontent.xx&amp;oh=211c047e7149a43b9b99cb21b029bdfa&amp;oe=5E9E85CC&quot;,&quot;150&quot;:&quot;https:\/\/www.instagram.com\/p\/B9grb9yJ6Ds\/media?size=t&quot;,&quot;320&quot;:&quot;https:\/\/www.instagram.com\/p\/B9grb9yJ6Ds\/media?size=m&quot;,&quot;640&quot;:&quot;https:\/\/www.instagram.com\/p\/B9grb9yJ6Ds\/media?size=l&quot;}"> <span class="sbi-screenreader">S K I 🇦🇹 Is it just me or do you also come b</span> 
+              <svg class="svg-inline--fa fa-clone fa-w-16 sbi_lightbox_carousel_icon" aria-hidden="true" aria-label="Clone" data-fa-proƒcessed="" data-prefix="far" data-icon="clone" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"> <path fill="currentColor" d="M464 0H144c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h320c26.51 0 48-21.49 48-48v-48h48c26.51 0 48-21.49 48-48V48c0-26.51-21.49-48-48-48zM362 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h42v224c0 26.51 21.49 48 48 48h224v42a6 6 0 0 1-6 6zm96-96H150a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h308a6 6 0 0 1 6 6v308a6 6 0 0 1-6 6z"></path> 
+              </svg> <img src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/img/placeholder.png" alt="S K I
+🇦🇹
+Is it just me or do you also come back from one trip only to right away want to book the next? So... looks like we're back in Austria this Xmas for some fun in the snow! ❄ 🎿 😍
+❔ SKI or SNOWBOARD for you?
+❕#thetraveltester #skitrip #skiing #lovewinter #winterwonderland #wintersports #mountainlife #skiingisfun #choosemountains #getoutstayout #keepitwild #theoutbound #outdoorlife #getoutside #lifeofadventure #outsideisfree #withoutwalls #naturelovers #outdooradventures #thegreatoutdoors"> </a> 
+            </div> 
+           </div>
+           <div class="sbi_item sbi_type_image sbi_new sbi_transition" id="sbi_17879905405532316" data-date="1583647760"> 
+            <div class="sbi_photo_wrap"> <a class="sbi_photo" href="https://www.instagram.com/p/B9dkoOxpwEB/" target="_blank" rel="noopener" data-full-res="https://scontent.xx.fbcdn.net/v/t51.2885-15/89449953_874315136351702_4766708900630982880_n.jpg?_nc_cat=109&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQlPJsTav0RzWiXidxF23huQI9dhz0mr_2DEpIqgIZ6aaMOZ6mJOkukz8H_gvQXQdr0&amp;_nc_ht=scontent.xx&amp;oh=b7a0b62b2ce13033cc75ba810ebbc0f5&amp;oe=5E9D0C4B" data-img-src-set="{&quot;d&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/89449953_874315136351702_4766708900630982880_n.jpg?_nc_cat=109&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQlPJsTav0RzWiXidxF23huQI9dhz0mr_2DEpIqgIZ6aaMOZ6mJOkukz8H_gvQXQdr0&amp;_nc_ht=scontent.xx&amp;oh=b7a0b62b2ce13033cc75ba810ebbc0f5&amp;oe=5E9D0C4B&quot;,&quot;150&quot;:&quot;https:\/\/www.instagram.com\/p\/B9dkoOxpwEB\/media?size=t&quot;,&quot;320&quot;:&quot;https:\/\/www.instagram.com\/p\/B9dkoOxpwEB\/media?size=m&quot;,&quot;640&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/89449953_874315136351702_4766708900630982880_n.jpg?_nc_cat=109&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQlPJsTav0RzWiXidxF23huQI9dhz0mr_2DEpIqgIZ6aaMOZ6mJOkukz8H_gvQXQdr0&amp;_nc_ht=scontent.xx&amp;oh=b7a0b62b2ce13033cc75ba810ebbc0f5&amp;oe=5E9D0C4B&quot;}"> <span class="sbi-screenreader">B E R L I N 🇩🇪 Another memorable week in Ber</span> <img src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/img/placeholder.png" alt="B E R L I N
+🇩🇪
+Another memorable week in Berlin - Now I'm very much ready to go home again. Till we meet again!
+. 
+#thetraveltester #berlin #berlijn #visit_berlin #diestadtberlin #berlincity #instaberlin #awesomeberlin #fromberlin #❤️berlin #topberlinphoto #ihavethisthingwithberlin #berlin365 #berlingram #ig_berlin #berlinstyle #berlinworld #berlinpage #igersberlin #unlimitedberlin  #discovergermany #germanyview #germanvision"> </a> 
+            </div> 
+           </div>
+           <div class="sbi_item sbi_type_image sbi_new sbi_transition" id="sbi_17842319174045385" data-date="1583406545"> 
+            <div class="sbi_photo_wrap"> <a class="sbi_photo" href="https://www.instagram.com/p/B9WYjETJfSl/" target="_blank" rel="noopener" data-full-res="https://scontent.xx.fbcdn.net/v/t51.2885-15/88224792_180892750022715_8844878452731736981_n.jpg?_nc_cat=104&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQkDxvH9sYqgBGf1U0DZ_USYy5nempl_UfRC_E463xM3BYIWsHEPEzYai96wor2jxpc&amp;_nc_ht=scontent.xx&amp;oh=6f5f2b941e0444fdfa3a4fd3e209f85f&amp;oe=5E9C91AB" data-img-src-set="{&quot;d&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/88224792_180892750022715_8844878452731736981_n.jpg?_nc_cat=104&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQkDxvH9sYqgBGf1U0DZ_USYy5nempl_UfRC_E463xM3BYIWsHEPEzYai96wor2jxpc&amp;_nc_ht=scontent.xx&amp;oh=6f5f2b941e0444fdfa3a4fd3e209f85f&amp;oe=5E9C91AB&quot;,&quot;150&quot;:&quot;https:\/\/www.instagram.com\/p\/B9WYjETJfSl\/media?size=t&quot;,&quot;320&quot;:&quot;https:\/\/www.instagram.com\/p\/B9WYjETJfSl\/media?size=m&quot;,&quot;640&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/88224792_180892750022715_8844878452731736981_n.jpg?_nc_cat=104&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQkDxvH9sYqgBGf1U0DZ_USYy5nempl_UfRC_E463xM3BYIWsHEPEzYai96wor2jxpc&amp;_nc_ht=scontent.xx&amp;oh=6f5f2b941e0444fdfa3a4fd3e209f85f&amp;oe=5E9C91AB&quot;}"> <span class="sbi-screenreader">E U R O P E 🇳🇱 Trading Amsterdam for Berlin </span> <img src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/img/placeholder.png" alt="E U R O P E
+🇳🇱
+Trading Amsterdam for Berlin this week (catching up with friends since the big travel trade fair here got canceled) - I love how we can travel to other countries so easily here in Europe! I am trying to cut down on flights, so took the train, my favourite transportation ♥🚂
+❔
+Who else is in Berlin this week?
+❕
+#thetraveltester #amsterdamworld #visitamsterdam #igersamsterdam #iamsterdam #iaminamsterdam #amsterdam_streets #amsterdamview #amsterdamgram #amsterdamlove #amstergram #bestofamsterdam #loveamsterdam #gametimeadam #streetsofamsterdam  #amsterdamlife #amsterdamvibe #iloveamsterdam #topamsterdamphoto #mijnmokum #mokummagazine #iloveholland #visitholland #hiamsterdam #thisisholland #amsterdamcanals #canalsofamsterdam #urbanarchitecture"> </a> 
+            </div> 
+           </div>
+           <div class="sbi_item sbi_type_carousel sbi_new sbi_transition" id="sbi_17924094697375500" data-date="1583327231"> 
+            <div class="sbi_photo_wrap"> <a class="sbi_photo" href="https://www.instagram.com/p/B9UBRJ7pXz0/" target="_blank" rel="noopener" data-full-res="https://scontent.xx.fbcdn.net/v/t51.2885-15/88712935_307467020214665_6522827566159351426_n.jpg?_nc_cat=108&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQlpWkgW7-TeDEfPJcHhjpjdPnJH8GYz6CA_U0hqgmzju3js4F4tQ3SA23E0Qkop7SY&amp;_nc_ht=scontent.xx&amp;oh=d9bd38c63de2f0d2ec655cdc5c979b5f&amp;oe=5E9F64DE" data-img-src-set="{&quot;d&quot;:&quot;https:\/\/scontent.xx.fbcdn.net\/v\/t51.2885-15\/88712935_307467020214665_6522827566159351426_n.jpg?_nc_cat=108&amp;_nc_sid=8ae9d6&amp;_nc_oc=AQlpWkgW7-TeDEfPJcHhjpjdPnJH8GYz6CA_U0hqgmzju3js4F4tQ3SA23E0Qkop7SY&amp;_nc_ht=scontent.xx&amp;oh=d9bd38c63de2f0d2ec655cdc5c979b5f&amp;oe=5E9F64DE&quot;,&quot;150&quot;:&quot;https:\/\/www.instagram.com\/p\/B9UBRJ7pXz0\/media?size=t&quot;,&quot;320&quot;:&quot;https:\/\/www.instagram.com\/p\/B9UBRJ7pXz0\/media?size=m&quot;,&quot;640&quot;:&quot;https:\/\/www.instagram.com\/p\/B9UBRJ7pXz0\/media?size=l&quot;}"> <span class="sbi-screenreader">C A R N I V A L 🇩🇪 My job as a blogger has t</span> 
+              <svg class="svg-inline--fa fa-clone fa-w-16 sbi_lightbox_carousel_icon" aria-hidden="true" aria-label="Clone" data-fa-proƒcessed="" data-prefix="far" data-icon="clone" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"> <path fill="currentColor" d="M464 0H144c-26.51 0-48 21.49-48 48v48H48c-26.51 0-48 21.49-48 48v320c0 26.51 21.49 48 48 48h320c26.51 0 48-21.49 48-48v-48h48c26.51 0 48-21.49 48-48V48c0-26.51-21.49-48-48-48zM362 464H54a6 6 0 0 1-6-6V150a6 6 0 0 1 6-6h42v224c0 26.51 21.49 48 48 48h224v42a6 6 0 0 1-6 6zm96-96H150a6 6 0 0 1-6-6V54a6 6 0 0 1 6-6h308a6 6 0 0 1 6 6v308a6 6 0 0 1-6 6z"></path> 
+              </svg> <img src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/img/placeholder.png" alt="C A R N I V A L
+🇩🇪
+My job as a blogger has taken me all around the world, but sometimes the best experiences are so close to home. I was invited to celebrate the 'Rosenmontag' during the carnaval in Düsseldorf, Germany for the first time and it was so much fun! Being part of the parade and throwing 'Kamelle' (sweets for the people in the crowds watching) from the float is very exclusive, so our little blogger group, with people from all over the world, felt extra special! I also had a great stay at @HotelFriendsDuesseldorf (where all the rooms have a funky theme, so cool!) and loved the VR experience I did with @schmnnvr (where you learn everything about the life of German composer Robert Schumann). On top of that, I discovered a space-themed restaurant @space_burger with the best burgers in town (how to make a space-geek happy!). If there is one thing I know for sure is that I will return to Düsseldorf soon to explore more of the city!
+❤️
+Thank you for the good times @visit_duesseldorf
+#DuesseldorfHelau #VisitDuesseldorf #thetraveltester #visitgermany #germanytourism #ig_germany #karneval #carnaval #carnival"> </a> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="sbi_load"> <span class="sbi_follow_btn sbi_custom"> <a href="https://www.instagram.com/thetraveltester/" style="background: rgb(67,177,226);color: rgb(255,255,255);" target="_blank" rel="noopener">
+             <svg class="svg-inline--fa fa-instagram fa-w-14" aria-hidden="true" data-fa-processed="" aria-label="Instagram" data-prefix="fab" data-icon="instagram" role="img" viewbox="0 0 448 512"> <path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path> 
+             </svg>FOLLOW @THETRAVELTESTER ON INSTAGRAM</a> </span> 
+          </div> <span class="sbi_resized_image_data" data-feed-id="sbi_17841401193283336#6" data-resized="{&quot;17850103375904467&quot;:{&quot;id&quot;:&quot;89380155_875202959596737_34611803390892236_n&quot;,&quot;ratio&quot;:&quot;0.80&quot;,&quot;sizes&quot;:{&quot;full&quot;:640,&quot;low&quot;:320}},&quot;17879905405532316&quot;:{&quot;id&quot;:&quot;89449953_874315136351702_4766708900630982880_n&quot;,&quot;ratio&quot;:&quot;0.80&quot;,&quot;sizes&quot;:{&quot;full&quot;:640,&quot;low&quot;:320}},&quot;17842319174045385&quot;:{&quot;id&quot;:&quot;88224792_180892750022715_8844878452731736981_n&quot;,&quot;ratio&quot;:&quot;0.80&quot;,&quot;sizes&quot;:{&quot;full&quot;:640,&quot;low&quot;:320}},&quot;17924094697375500&quot;:{&quot;id&quot;:&quot;88712935_307467020214665_6522827566159351426_n&quot;,&quot;ratio&quot;:&quot;1.00&quot;,&quot;sizes&quot;:{&quot;full&quot;:640,&quot;low&quot;:320}},&quot;17860732402748712&quot;:{&quot;id&quot;:&quot;89601135_614000402783705_6591903575642581361_n&quot;,&quot;ratio&quot;:&quot;0.80&quot;,&quot;sizes&quot;:{&quot;full&quot;:640,&quot;low&quot;:320}},&quot;17846365525996279&quot;:{&quot;id&quot;:&quot;87751112_125528475688692_432953289018899304_n&quot;,&quot;ratio&quot;:&quot;1.00&quot;,&quot;sizes&quot;:{&quot;full&quot;:640,&quot;low&quot;:320}}}"> </span> 
+         </div> 
+         <script type="text/javascript">var sb_instagram_js_options = {"font_method":"svg","placeholder":"https:\/\/www.thetraveltester.com\/wp-content\/plugins\/instagram-feed\/img\/placeholder.png","resized_url":"https:\/\/www.thetraveltester.com\/wp-content\/uploads\/sb-instagram-feed-images\/"};</script>
+         <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/instagram-feed/js/sb-instagram.min.js?ver=2.3"></script>
+        </div>
+       </div> 
+      </div> 
+     </div><!-- Full Width Sidebar --> 
+     <div class="footer-sidebar"> 
+      <div id="supplementary" class="wrapper clearfix columns col-3"> 
+       <div class="widget-area widget-area-1" role="complementary"> 
+        <div id="custom_html-21" class="widget_text widget widget_custom_html">
+         <h3>⇾ FOLLOW US ON YOUTUBE ⇽</h3>
+         <div class="textwidget custom-html-widget">
+          <center>
+           <a href="https://www.youtube.com/user/thetraveltester?sub_confirmation=1" target="_blank"><img src="https://s28966.pcdn.co/wp-content/uploads/2019/09/the-travel-tester-video.jpg.optimal.jpg" alt="Follow The Travel Tester on Youtube"></a>
+          </center>
+         </div>
+        </div> 
+       </div><!-- #first .widget-area --> 
+       <div class="widget-area widget-area-2" role="complementary"> 
+        <div id="custom_html-23" class="widget_text widget widget_custom_html">
+         <h3>⇾ THE LONDON TESTER ⇽</h3>
+         <div class="textwidget custom-html-widget">
+          <center>
+           <a href="https://thelondontester.com/" target="_blank"><img src="https://s28966.pcdn.co/wp-content/uploads/2019/09/the-london-tester-website.jpg.optimal.jpg" alt="Follow The London Tester"></a>
+          </center>
+         </div>
+        </div> 
+       </div><!-- #second .widget-area --> 
+       <div class="widget-area widget-area-3" role="complementary"> 
+        <div id="custom_html-25" class="widget_text widget widget_custom_html">
+         <h3>⇾ FOLLOW THE COMPASS ⇽</h3>
+         <div class="textwidget custom-html-widget">
+          <center>
+           <a href="https://www.thetraveltester.com/the-compass-newsletter/" target="_blank"><img src="https://s28966.pcdn.co/wp-content/uploads/2019/09/the-travel-tester-the-compass-newsletter.jpg.optimal.jpg" alt="Follow The Compass - The Travel Tester Newsletter"></a>
+          </center>
+         </div>
+        </div> 
+       </div><!-- #third .widget-area --> 
+      </div><!-- #supplementary --> 
+     </div> 
+     <div class="copyright"> 
+      <div class="wrapper"> 
+       <div class="grids"> 
+        <div class="grid-10"> 
+         <center>
+          <a href="https://www.thetraveltester.com/about-us/">ABOUT</a> &nbsp; | &nbsp;<a href="https://www.thetraveltester.com/contact-us/">CONTACT</a> &nbsp;| &nbsp;<a href="https://www.thetraveltester.com/work-with-us/">ADVERTISE</a>&nbsp; | &nbsp;<a href="https://www.thetraveltester.com/category/press/">PRESS</a> &nbsp;| &nbsp;<a href="https://www.thetraveltester.com/disclaimer/">DISCLAIMER</a> &nbsp;| &nbsp;<a href="https://www.thetraveltester.com/privacy-policy/">PRIVACY POLICY</a>
+          <br> <font size="1">THETRAVELTESTER.COM - ALL RIGHTS RESERVED © 2019</font>
+         </center> 
+        </div> 
+        <div class="grid-2"> <a href="#" class="alignright back-top">Back to top <i class="icomoon-chevron-left"></i></a> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </footer><!-- #footer --> 
+   </div><!-- .site-content --> 
+  </section><!-- #site --> 
+  <script type="text/javascript">
+            var thirstyGoogleClickTrack = function ( e ) {
+
+                var $this       = jQuery( this ),
+                    linkID      = $this.data( 'linkid' ),
+                    href        = linkID ? $this.attr( 'href' ) : thirstyFunctions.isThirstyLink( $this.attr( 'href' ) ),
+                    action_name = 'Affiliate Link',
+                    page_slug   = '/',
+                    home_url    = 'https://www.thetraveltester.com';
+
+                if ( ! href || typeof __gaTracker !== 'function' ) {
+                    return;
+                }
+
+                var is_uncloak  = href.indexOf( home_url + '/' + thirsty_global_vars.link_prefix ) < 0,
+                    href_parts  = href.split('/'),
+                    href_last   = href_parts[ href_parts.length - 1 ] ? href_parts[ href_parts.length - 1 ] : href_parts[ href_parts.length - 2 ],
+                    link_text   = $this.text(),
+                    link_uri    = linkID && is_uncloak ? href : href.replace( home_url , '' ),
+                    link_slug   = linkID && is_uncloak ? href : href_last;
+
+                __gaTracker( 'send' , 'event' , {
+                    eventCategory : action_name,
+                    eventAction   : link_uri,
+                    eventLabel    : page_slug,
+                    transport     : 'beacon'
+                } );
+            };
+
+            jQuery( document ).ready( function($) {
+                $( 'body' ).on( 'click', 'a', thirstyGoogleClickTrack );
+            });
+        </script> <!-- Instagram Feed JS --> 
+  <script type="text/javascript">
+var sbiajaxurl = "https://www.thetraveltester.com/wp-admin/admin-ajax.php";
+</script> 
+  <script type="text/javascript">
+		var c = document.body.className;
+		c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+		document.body.className = c;
+	</script> 
+  <div class="wpml-ls-statics-footer wpml-ls wpml-ls-legacy-list-horizontal" id="lang_sel_footer"> 
+   <ul>
+    <li class="wpml-ls-slot-footer wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-first-item wpml-ls-item-legacy-list-horizontal"> <a href="https://www.thetraveltester.com" class="wpml-ls-link"><img class="wpml-ls-flag iclflag" src="https://s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png" alt=""><span class="wpml-ls-native icl_lang_sel_native">English</span></a> </li>
+    <li class="wpml-ls-slot-footer wpml-ls-item wpml-ls-item-nl wpml-ls-last-item wpml-ls-item-legacy-list-horizontal"> <a href="https://www.thetraveltester.com/nl/" class="wpml-ls-link"><img class="wpml-ls-flag iclflag" src="https://s28966.pcdn.co/wp-content/plugins/sitepress-multilingual-cms/res/flags/nl.png" alt=""><span class="wpml-ls-native icl_lang_sel_native" lang="nl">Nederlands</span></a> </li>
+   </ul> 
+  </div> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"https:\/\/www.thetraveltester.com\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.1.7"></script> 
+  <script type="text/javascript" src="https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=202013"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var tocplus = {"smooth_scroll":"1","visibility_show":"show","visibility_hide":"hide","visibility_hide_by_default":"1","width":"100%"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/table-of-contents-plus/front.min.js?ver=2002"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var thirsty_global_vars = {"home_url":"\/\/www.thetraveltester.com","ajax_url":"https:\/\/www.thetraveltester.com\/wp-admin\/admin-ajax.php","link_fixer_enabled":"yes","link_prefix":"tip","link_prefixes":["recommends","tip"],"post_id":"31655","enable_record_stats":"yes","enable_js_redirect":"yes","disable_thirstylink_class":""};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/thirstyaffiliates/js/app/ta.js?ver=3.9.2"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.8.1"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_6cb268879f1a636a66248f9caf5e6d83-en","fragment_name":"wc_fragments_6cb268879f1a636a66248f9caf5e6d83","request_timeout":"5000"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.8.1"></script> 
+  <script type="text/javascript">
+		jQuery( 'body' ).bind( 'wc_fragments_refreshed', function() {
+			jQuery( 'body' ).trigger( 'jetpack-lazy-images-load' );
+		} );
+	
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-includes/js/comment-reply.min.js?ver=4.9.13"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/themes/simplemag/js/jquery.assets.js?ver=1.0"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/themes/simplemag/js/jquery.custom.js?ver=1.0"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/themes/simplemag/woocommerce/js/wc-jquery.custom.js?ver=1.0"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var ti_async = {"ti_nonce":"7cbb049c63","ti_ajax_url":"https:\/\/www.thetraveltester.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/themes/simplemag/js/jquery.async.js?ver=1.0"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/woocommerce-multilingual/res/js/front-scripts.min.js?ver=4.8.0"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var actions = {"is_lang_switched":"0","force_reset":"0"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-content/plugins/woocommerce-multilingual/res/js/cart_widget.min.js?ver=4.8.0"></script> 
+  <script type="text/javascript" src="https://s28966.pcdn.co/wp-includes/js/wp-embed.min.js?ver=4.9.13"></script> 
+  <script type="text/javascript"><div id="amzn-assoc-ad-9eb2623e-b92a-47dc-a1c7-d2c771a04a75"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=9eb2623e-b92a-47dc-a1c7-d2c771a04a75"></script>  
+  <script type="text/javascript" src="https://stats.wp.com/e-202013.js" async defer></script> 
+  <script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:7.1.2',blog:'59550113',post:'31655',tz:'0',srv:'www.thetraveltester.com'} ]);
+	_stq.push([ 'clickTrackerInit', '59550113', '31655' ]);
+</script> 
+  <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=9eb2623e-b92a-47dc-a1c7-d2c771a04a75"></script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"073b4df364","applicationID":"235483669","transactionName":"ZQZWMhBXVxYAUxdYDFxMYRQLGVERFUAHXgBBTF0IBlNBSxFYEw==","queueTime":0,"applicationTime":600,"atts":"SUFVRFhNRBg=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

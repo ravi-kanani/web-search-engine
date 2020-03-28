@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"> 
+ <head profile="http://gmpg.org/xfn/11"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>prologue | petite anglaise</title> 
+  <link rel="pingback" href="https://petiteanglaise.com/xmlrpc.php"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9wZXRpdGVhbmdsYWlzZS5jb20%3D"
+		+ "&wpcomid=14262311"
+		+ "&time=1585342253";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//petiteanglaise.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Feed" href="https://petiteanglaise.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Comments Feed" href="https://petiteanglaise.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » prologue Comments Feed" href="https://petiteanglaise.com/2004/12/02/adoption/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s2.wp.com/_static/??-eJylk9tuwjAMhl9oaVZQgV1Me5akNZlZTkocur79XFq0DgSbxk0VO/7sP7Yr+yja4Ak8SVdEtMWgzzKBVQSdiCHThVW1OT/JBXZmTGFTQzJ8k0Buq21VS13QdlLb0H4IizqpNMhMg4U/pDlRWR6AohpxNYRCwiTs/psiKUJv8i/4vlgrMhII6HAE5rbIzbpebzerFwlHjmeueOpC76cyD2c9qyR0YNHDwwlZlpmGNivsMJM8IvQ3k7ZhblldrZ6rWvSxDW7ipotqEnWa6wPSJlWW8y6lXXqvCixWdFwy9ruoaIxwXEmBBcdh97AeOwO80xwynwXB531k7IHQOibIWfDXYXGC3rnW9d8wuWUsWrZW5YztjTEuChgIgp/Lyxn8D0PsrcJ0D00wDpmP5vSib3OE3txr3eyauml29ebwBVtYdEw=?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link rel="stylesheet" id="print-css-1-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s0.wp.com/_static/??-eJx9jtEOgjAMRX/I2Uwc4oPxW8Yco1o2spYY/96ZQMSQ+NQ2Off2wHNULkXxUWCY1EhTwMhgnWCKrc3fbe+Yd7DCF7abiBSjeOVvKBjD3AJ1patTfThDoNTawsiLPAOLFXTQko2PTenKYUwsqiOLGbi3uRQv81+Kk8Pyi1JIv8cmJL0fik5/nP0+wHW4aNMYbUyj6/sbZOVojw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script>
+var related_posts_js_options = {"post_heading":"h4"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJx9zcEKwjAMBuAXMqs7uOlBfJa5xZLSpLVJGb69HehliBAIIV/yuzUDyRzrgupCq2fF8vq0LujB/QPA5Mtk2DHJF89JDMU2m5Mao+rk8ceW050iQlUsDYi1mEfaO66QY/Uk6grGFrXA9nU3tasbX/vT2F+O4zCcwxtEF0+w"></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://petiteanglaise.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <link rel="prev" title="festive fun?" href="https://petiteanglaise.com/2004/12/02/festive-fun/"> 
+  <link rel="next" title="letter" href="https://petiteanglaise.com/2004/12/06/letter/"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="canonical" href="https://petiteanglaise.com/2004/12/02/adoption/"> 
+  <link rel="shortlink" href="https://wp.me/sXQhh-adoption"> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F12%2F02%2Fadoption%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F12%2F02%2Fadoption%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="prologue"> 
+  <meta property="og:url" content="https://petiteanglaise.com/2004/12/02/adoption/"> 
+  <meta property="og:description" content="The year was 1972. In those days it was the done thing for single teenage mums to have their children adopted. My biological mother was fifteen when she realised she was pregnant, and no longer see…"> 
+  <meta property="article:published_time" content="2004-12-02T22:51:07+00:00"> 
+  <meta property="article:modified_time" content="2010-06-27T10:08:57+00:00"> 
+  <meta property="og:site_name" content="petite anglaise"> 
+  <meta property="og:image" content="https://petiteanglaise.files.wordpress.com/2004/12/secretlies.gif"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="150"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> 
+  <meta name="twitter:text:title" content="prologue"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="openid.server" href="https://petiteanglaise.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://petiteanglaise.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://petiteanglaise.com/osd.xml" title="petite anglaise"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style> 
+  <meta name="application-name" content="petite anglaise">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://petiteanglaise.com/feed/;icon-uri=https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="The year was 1972. In those days it was the done thing for single teenage mums to have their children adopted. My biological mother was fifteen when she realised she was pregnant, and no longer seeing her boyfriend. I was adopted at birth by a couple who had been unable to conceive and had spent…"> 
+  <link rel="amphtml" href="https://petiteanglaise.com/2004/12/02/adoption/amp/">
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta name="msapplication-TileImage" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&amp;csblog=XQhh&amp;cscache=6&amp;csrev=77"> 
+ </head> 
+ <body class="post-template-default single single-post postid-133 single-format-standard customizer-styles-applied highlander-enabled highlander-light"> 
+  <div id="rap"> 
+   <h1 id="header"><a href="https://petiteanglaise.com/">petite anglaise</a></h1> 
+   <div id="content"> <!-- end header --> 
+    <h2>December 2, 2004</h2> 
+    <div class="post-133 post type-post status-publish format-standard hentry category-adoption category-navel-gazing" id="post-133"> 
+     <h3 class="storytitle"> prologue </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/adoption/" rel="category tag">adoption</a>, <a href="https://petiteanglaise.com/category/navel-gazing/" rel="category tag">navel gazing</a> — petiteanglaiseparis @ 11:51 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <img data-attachment-id="1927" data-permalink="https://petiteanglaise.com/2004/12/02/adoption/secretlies/" data-orig-file="https://petiteanglaise.files.wordpress.com/2004/12/secretlies.gif" data-orig-size="200,150" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="secretlies" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2004/12/secretlies.gif?w=200" data-large-file="https://petiteanglaise.files.wordpress.com/2004/12/secretlies.gif?w=200" src="https://petiteanglaise.files.wordpress.com/2004/12/secretlies.gif?w=200&amp;h=150" alt="" title="secretlies" width="200" height="150" class="alignnone size-full wp-image-1927">
+      </div> 
+      <div align="justify"> 
+       <p> The year was 1972. In those days it was the done thing for single teenage mums to have their children adopted. My biological mother was fifteen when she realised she was pregnant, and no longer seeing her boyfriend.</p> 
+       <p>I was adopted at birth by a couple who had been unable to conceive and had spent several years on adoption agency waiting lists.</p> 
+       <p>The photographs taken of mum and dad holding me in their arms on the day they finally brought me home speak volumes. My new mum looked radiant.</p> 
+       <p>I cannot remember a time when I was not aware that I was adopted. I was told when I was too young to understand so it feels like I’ve always known. Two years later when my parents began proceedings to adopt a baby brother, my mother discovered she had conceived naturally. I have two sisters. The three of us are very different, although they look similar, and I do not. But I don’t remember ever minding this fact. Or feeling less loved.</p> 
+       <p>As a child I liked to shock adults by mentioning out of the blue that I was adopted and took a perverse pleasure in their visible discomfort as they tried to gauge how they should react. Being adopted made me feel a bit special. It was also full of dramatic potential. I had (I suspect very common) fantasies about my biological parents being fabulously wealthy and my one day inheriting a fortune. A favourite daydream was that I would see someone with <strong>my face</strong> walking towards me in the street and just <em>know</em> that we were related. A half brother or sister, or my mother herself. Or I imagined being attracted to a younger guy, only to find out that he was actually my half brother.</p> 
+       <p>At the magic age of fifteen I thought a lot about the hell my biological mother must have gone through – not an easy thing to conceive of, as I hadn’t even had my first kiss at that stage – and I was deeply superstitious about history repeating itself.</p> 
+       <p>Mum, a family history enthusiast, showed me all the adoption papers and even got hold of a copy of my biological mother’s birth certificate. The papers showed her maiden name, and gave scant details about her circumstances: she had met my father in the park, failed her ‘O’ Levels during the pregnancy. We knew her parents’ address, so I always knew that answers to any questions I might have were less than an hour’s drive away from where I lived with my adoptive family.</p> 
+       <p>Whenever I talked about being adopted, my friends said that if <em>they</em> were adopted they would search for their parents. They would <strong>have</strong> to know. My reticence was a mystery to them. But it didn’t strike me as necessary to find my mother. I already had a family and, although we had our ups and down, like everyone else, I didn’t ever feel as if any important part of me was missing.</p> 
+       <p>I had also convinced myself that my mother would have tried to put the whole traumatic experience behind her, and now quite possibly had a family who knew nothing of my existence. She might not want any contact with me. After watching the film ‘Secrets and Lies’, I admitted to myself that another of my fears was that my mother would be like the Brenda character, and if we ever did meet, we could well have very little in common.</p> 
+       <p>So for a long time I did nothing. Until one summer’s day in 2001, when I decided to write my biological mother a letter.</p> 
+       <p><em>click <a href="http://www.petiteanglaise.com/archives/category/adoption/">here</a> for further posts about adoption.<br> </em></p> 
+      </div> 
+      <div id="jp-post-flair" class="sharedaddy sd-sharing-enabled">
+       <div class="sharedaddy sd-sharing-enabled">
+        <div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing">
+         <h3 class="sd-title">Share this:</h3>
+         <div class="sd-content">
+          <ul>
+           <li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-133" class="share-twitter sd-button share-icon" href="https://petiteanglaise.com/2004/12/02/adoption/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li>
+           <li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-133" class="share-facebook sd-button share-icon" href="https://petiteanglaise.com/2004/12/02/adoption/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li>
+           <li class="share-end"></li>
+          </ul>
+         </div>
+        </div>
+       </div> 
+       <div id="jp-relatedposts" class="jp-relatedposts"> 
+        <h3 class="jp-relatedposts-headline"><em>Related</em></h3> 
+       </div>
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2004/12/02/adoption/#comments">Comments (27)</a> 
+     </div> 
+    </div> 
+    <h2 id="comments">27 Comments</h2> 
+    <ol id="commentlist"> 
+     <li id="comment-956" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-956" class="vcard"> 
+       <p>What a cliffhanger ! I love your blog, it’s funny and smart. Vivement la suite !</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://leroncier.levillage.org" rel="external nofollow ugc" class="url">le roncier</a></span> — December 3, 2004 @ <a href="#comment-956">1:13 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-957" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-957" class="vcard"> 
+       <p>Please don’t keep me in suspense for too long …</p> 
+       <p><cite>Comment by <span class="fn">snoopy</span> — December 3, 2004 @ <a href="#comment-957">3:58 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-958" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-958" class="vcard"> 
+       <p>And…?</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://360degreesofsky.blogspot.com" rel="external nofollow ugc" class="url">Claypot</a></span> — December 3, 2004 @ <a href="#comment-958">7:14 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-959" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-959" class="vcard"> 
+       <p>Hey!! No fair..where is the rest??</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://brainbubbles.blogspot.com" rel="external nofollow ugc" class="url">Valkyrie</a></span> — December 3, 2004 @ <a href="#comment-959">8:06 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-960" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-960" class="vcard"> 
+       <p>To tease , tease , tease …</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.bourzeix.com/weblog/" rel="external nofollow ugc" class="url">Da Bourz</a></span> — December 3, 2004 @ <a href="#comment-960">8:19 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-961" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-961" class="vcard"> 
+       <p>OOOhhhh that is evil, you minx! :P</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://dispatchesfromfrance.blogspot.com" rel="external nofollow ugc" class="url">ViVi</a></span> — December 3, 2004 @ <a href="#comment-961">8:26 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-962" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-962" class="vcard"> 
+       <p>You know how to hold an audience captive, don’t you? :mrgreen:</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.nakedtranslations.com" rel="external nofollow ugc" class="url">céline</a></span> — December 3, 2004 @ <a href="#comment-962">9:42 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-963" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-963" class="vcard"> 
+       <p>Brilliant. Absolutely brilliant. You know I will be back on Monday.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://jasonstone.typepad.com" rel="external nofollow ugc" class="url">Jason Stone</a></span> — December 3, 2004 @ <a href="#comment-963">10:20 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-964" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-964" class="vcard"> 
+       <p>Glad you blogged this. :-)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://theurbanbadger.blogspot.com" rel="external nofollow ugc" class="url">badger</a></span> — December 3, 2004 @ <a href="#comment-964">11:20 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-965" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-965" class="vcard"> 
+       <p>i know someone who is adopted and he was in touch with his biological mother even though he lived with another family. because of this he knows that he has a half-sister and half-brother, as well as a sister that was adopted within his family.</p> 
+       <p>he was glad to have kept in touch as he was there when his biological mother died – alone.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.myboyfriendisatwat.com" rel="external nofollow ugc" class="url">zed</a></span> — December 3, 2004 @ <a href="#comment-965">12:56 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-966" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-966" class="vcard"> 
+       <p>For the love of God. You can’t keep it like that.</p> 
+       <p>Perfect writing.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.watski.co.uk" rel="external nofollow ugc" class="url">Watski</a></span> — December 3, 2004 @ <a href="#comment-966">2:00 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-967" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-967" class="vcard"> 
+       <p>*impatient to hear the next instalment*</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://dearwitho.blogspot.com" rel="external nofollow ugc" class="url">witho</a></span> — December 3, 2004 @ <a href="#comment-967">2:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-968" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-968" class="vcard"> 
+       <p>Nice one Petite! Guaranteed to bring us all back tomorrow…</p> 
+       <p>A close friend was adopted and, as an adult, met her birth parents who were still together and who had 2 sons, her full brothers. Her father was so freaked out by her that he refused to tell the boys about her…</p> 
+       <p>She still hasn’t met them 10 years later…</p> 
+       <p>It makes me crazy for her.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.wiblog.com/deeleea" rel="external nofollow ugc" class="url">deeleea</a></span> — December 3, 2004 @ <a href="#comment-968">2:43 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-969" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-969" class="vcard"> 
+       <p>Ooh, that was really good. When do we get the next part?</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://themanlysmell.blogspot.com" rel="external nofollow ugc" class="url">the manly smell</a></span> — December 3, 2004 @ <a href="#comment-969">3:08 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-970" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-970" class="vcard"> 
+       <p>When I was a kid, there was a lot of uncool stuff going on in our home which made me fantasise that I was adopted and one day my “real” parents would come and find me and spoil me rotten. It would really piss me off when people told me I looked like my mum!! The odd thing is, my family is from a really strict branch of religion, which my parents broke away from and were ostracised as a result. So my fantasies where I would stare at strangers in the street,wondering if we were related were sort of justified- somewhere out ther I have a huge extended family whom I shall never know. I don’t really know why i’m telling you all this, petite, what I really wanted to say is, great blog. And I can’t wait till Monday!!</p> 
+       <p><cite>Comment by <span class="fn">Suziboo</span> — December 3, 2004 @ <a href="#comment-970">3:08 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-971" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-971" class="vcard"> 
+       <p>I too am adopted. This almost perfectly describes my situation as well, except that I’ve never tried to contact my biological mother.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://matchingtracksuits.com" rel="external nofollow ugc" class="url">mts</a></span> — December 3, 2004 @ <a href="#comment-971">3:18 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-972" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-972" class="vcard"> 
+       <p>wouah! incredible story! when i was a kid i also hoped that i was adopted, hehe…</p> 
+       <p>are you going to adopt kids too?</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://web.ics.purdue.edu/~lmoussu/myblogger1.html" rel="external nofollow ugc" class="url">miss lulu</a></span> — December 3, 2004 @ <a href="#comment-972">4:01 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-973" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-973" class="vcard"> 
+       <p>It’s nice to hear that you have a good relationship with your adoptive family. I’ve often heard that there can be problems with adopted kids, and I’ve seen this as I have 5 adopted cousins. I’m not sure why this is, but I am thankful it’s not a rule. My family adopted my sister when I was 7 and she was 1. She has known, like you, since she was a child that she was adopted and she really doesn’t seem to mind. Hannah has never felt less a part of our family and though we know she’s not a blood relative, it never feels that way. We love her tremendously. She’s a genius, amazingly talented and beautiful and we’re so blessed to have her, and I’m sure your family would say the same of you in a heartbeat. I am a huge advocate for adoption and I hope to be able to adopt one day as well.<br> Thanks for the great post. Can’t wait to hear the rest!</p> 
+       <p><cite>Comment by <span class="fn">MJ</span> — December 3, 2004 @ <a href="#comment-973">4:09 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-974" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-974" class="vcard"> 
+       <p>La suite, la suite ! By the way, I liked the movie “Secret and Lies” a lot, what did you think of it?</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.tetellita.blogspot.com" rel="external nofollow ugc" class="url">Estelle</a></span> — December 3, 2004 @ <a href="#comment-974">4:10 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-975" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-975" class="vcard"> 
+       <p>What a story teller! :) Good film that wasn’t it.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://glacons.blogspot.com" rel="external nofollow ugc" class="url">Dan</a></span> — December 3, 2004 @ <a href="#comment-975">7:02 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-976" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-976" class="vcard"> 
+       <p>Umm, I’ll still he here next week when you finish this story, just don’t forget that you’ve got us all hanging on your every word! :grin:</p> 
+       <p>When I was around 4 or 5 yrs old, my cousin (same age) was adopted by one of our aunts. I remember running into the house and telling my Mom that I wanted to be adopted, too. I can’t remember her reaction, but today, I can imagine her reaction.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.yayaempress.blogspot.com" rel="external nofollow ugc" class="url">yayaempress</a></span> — December 3, 2004 @ <a href="#comment-976">7:29 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-977" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-977" class="vcard"> 
+       <p>it’s FRIDAY! do we have to wait till you get back in the office to get the next bit?????? aaagh! can’t wait! ;)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.unkemptwomen.com" rel="external nofollow ugc" class="url">vitriolica</a></span> — December 3, 2004 @ <a href="#comment-977">9:12 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-978" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-978" class="vcard"> 
+       <p>Beautiful! You could be telling my story almost to the letter. How many times can I think to myself “wow! me too!!” during one reading?<br> We have the same birth year, a good enough relationship with adoptive parents to contemplate NOT trying to contact birth parents, and apparently the same fantasies stemming from being adopted.</p> 
+       <p>I often wonder how much of me (interests, talents, looks, etc) comes from genetics, and how much comes from the only parents I’ve ever known. (Nature vs. Nurture) -perhaps you too?</p> 
+       <p>Thanks for this – it’s nice to not feel quite so alone from time to time. I eagerly await the rest of the story.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.blythepiphany.blogspot.com" rel="external nofollow ugc" class="url">Epiphany</a></span> — December 3, 2004 @ <a href="#comment-978">9:51 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-979" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-979" class="vcard"> 
+       <p>*begins to fret about the fact that she has not even started to draft the next instalment*</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — December 3, 2004 @ <a href="#comment-979">10:03 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-980" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-980" class="vcard"> 
+       <p>Wow, evil place to stop, can’t wait for the rest :)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.livejournal.com/users/etcher" rel="external nofollow ugc" class="url">Emma</a></span> — December 4, 2004 @ <a href="#comment-980">11:53 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-981" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-981" class="vcard"> 
+       <p>Yes! Very evil!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://hystericalliberties.blogspot.com" rel="external nofollow ugc" class="url">Claire</a></span> — December 4, 2004 @ <a href="#comment-981">3:39 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-982" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-982" class="vcard"> 
+       <p>Thank you for part 1. Bring on part 2.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://unluckyman.blogspot.com" rel="external nofollow ugc" class="url">Unlucky man</a></span> — December 5, 2004 @ <a href="#comment-982">12:34 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+    </ol> 
+    <div class="navigation"> 
+     <div class="alignleft"></div> 
+     <div class="alignright"></div> 
+    </div> 
+    <br> 
+    <p><a href="https://petiteanglaise.com/2004/12/02/adoption/feed/"><abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.</a></p> 
+    <p>Sorry, the comment form is closed at this time.</p> <!-- begin footer --> 
+   </div> <!-- begin sidebar --> 
+   <div id="menu"> 
+    <ul> 
+     <li id="search-15" class="widget widget_search">
+      <form role="search" method="get" id="searchform" class="searchform" action="https://petiteanglaise.com/"> 
+       <div> <label class="screen-reader-text" for="s">Search for:</label> 
+        <input type="text" value="" name="s" id="s"> 
+        <input type="submit" id="searchsubmit" value="Search"> 
+       </div> 
+      </form></li> 
+     <li id="text-21" class="widget widget_text"> 
+      <div class="textwidget">
+       <ul> 
+        <li id="text" style="list-style-type:none;"> 
+         <ul> 
+          <li><a title="about this site" href="https://petiteanglaise.wordpress.com/about-this-site/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/union-jack2.jpg" alt="union-jack2.jpg"> about</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/book/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/book.png" alt="book.png"> books</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/press/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/press.jpg" alt="press.jpg"> press</a></li> 
+          <li><a title="Petite Anglaise fan page" href="http://www.facebook.com/pages/Petite-Anglaise/8204603380" target="_TOP" rel="noopener noreferrer"><img src="https://petiteanglaise.files.wordpress.com/2010/06/facebook1.png" alt="facebook.png"> fbk</a></li> 
+         </ul> 
+         <ul> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031190?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031190"><img src="https://petiteanglaise.files.wordpress.com/2010/06/petite-paperback1.gif" alt="buy from amazon uk"></a></li> 
+          <li><a title="buy from amazon us" href="http://www.amazon.com/gp/product/0385522800?ie=UTF8&amp;tag=petiteanglais-20&amp;linkCode=xm2&amp;camp=1789&amp;creativeASIN=0385522800"><img src="https://petiteanglaise.files.wordpress.com/2009/11/petitepbusa.jpg" alt="buy from amazon us"></a></li> 
+          <li><a title="buy from amazon.fr" href="http://www.amazon.fr/Petite-anglaise-Catherine-Sanderson/dp/2702140394/ref=sr_1_2?ie=UTF8&amp;s=books&amp;qid=1258292753&amp;sr=8-2"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french_petite.jpg" alt="buy from amazon france"></a></li> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031247?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031247"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french-kissing_web1.jpg" alt="buy from amazon uk"></a></li> 
+         </ul> </li> 
+        <li id="text">potted petite 
+         <ul> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2004/12/02/adoption/">prologue</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/10/burned/">burned</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/22/null-and-void/">null and void</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/29/slacker-mum/">part time mummy</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/03/baggage/">baggage</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/11/23/song/">singing in tongues</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/03/14/eleven-days-later/">eleven days later</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/04/06/semi-detached/">semi-detached</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/07/20/suspendered/">suspend<span style="text-decoration:line-through;">er</span>ed</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2007/06/03/sunday/">sunday</a></li> 
+         </ul> </li> 
+        <li id="text">archives 
+         <ul> 
+          <li><a title="January 2011" href="https://petiteanglaise.com/2011/01/">January 2011</a></li> 
+          <li><a title="November 2009" href="https://petiteanglaise.com/2009/11/">November 2009</a></li> 
+          <li><a title="September 2009" href="https://petiteanglaise.com/2009/09/">September 2009</a></li> 
+          <li><a title="August 2009" href="https://petiteanglaise.com/2009/08/">August 2009</a></li> 
+          <li><a title="July 2009" href="https://petiteanglaise.com/2009/07/">July 2009</a></li> 
+          <li><a title="June 2009" href="https://petiteanglaise.com/2009/06/">June 2009</a></li> 
+          <li><a title="May 2009" href="https://petiteanglaise.com/2009/05/">May 2009</a></li> 
+          <li><a title="April 2009" href="https://petiteanglaise.com/2009/04/">April 2009</a></li> 
+          <li><a title="March 2009" href="https://petiteanglaise.com/2009/03/">March 2009</a></li> 
+          <li><a title="February 2009" href="https://petiteanglaise.com/2009/02/">February 2009</a></li> 
+          <li><a title="January 2009" href="https://petiteanglaise.com/2009/01/">January 2009</a></li> 
+          <li><a title="December 2008" href="https://petiteanglaise.com/2008/12/">December 2008</a></li> 
+          <li><a title="November 2008" href="https://petiteanglaise.com/2008/11/">November 2008</a></li> 
+          <li><a title="October 2008" href="https://petiteanglaise.com/2008/10/">October 2008</a></li> 
+          <li><a title="September 2008" href="https://petiteanglaise.com/2008/09/">September 2008</a></li> 
+          <li><a title="August 2008" href="https://petiteanglaise.com/2008/08/">August 2008</a></li> 
+          <li><a title="July 2008" href="https://petiteanglaise.com/2008/07/">July 2008</a></li> 
+          <li><a title="June 2008" href="https://petiteanglaise.com/2008/06/">June 2008</a></li> 
+          <li><a title="May 2008" href="https://petiteanglaise.com/2008/05/">May 2008</a></li> 
+          <li><a title="April 2008" href="https://petiteanglaise.com/2008/04/">April 2008</a></li> 
+          <li><a title="March 2008" href="https://petiteanglaise.com/2008/03/">March 2008</a></li> 
+          <li><a title="February 2008" href="https://petiteanglaise.com/2008/02/">February 2008</a></li> 
+          <li><a title="January 2008" href="https://petiteanglaise.com/2008/01/">January 2008</a></li> 
+          <li><a title="December 2007" href="https://petiteanglaise.com/2007/12/">December 2007</a></li> 
+          <li><a title="November 2007" href="https://petiteanglaise.com/2007/11/">November 2007</a></li> 
+          <li><a title="October 2007" href="https://petiteanglaise.com/2007/10/">October 2007</a></li> 
+          <li><a title="September 2007" href="https://petiteanglaise.com/2007/09/">September 2007</a></li> 
+          <li><a title="August 2007" href="https://petiteanglaise.com/2007/08/">August 2007</a></li> 
+          <li><a title="July 2007" href="https://petiteanglaise.com/2007/07/">July 2007</a></li> 
+          <li><a title="June 2007" href="https://petiteanglaise.com/2007/06/">June 2007</a></li> 
+          <li><a title="May 2007" href="https://petiteanglaise.com/2007/05/">May 2007</a></li> 
+          <li><a title="April 2007" href="https://petiteanglaise.com/2007/04/">April 2007</a></li> 
+          <li><a title="March 2007" href="https://petiteanglaise.com/2007/03/">March 2007</a></li> 
+          <li><a title="February 2007" href="https://petiteanglaise.com/2007/02/">February 2007</a></li> 
+          <li><a title="January 2007" href="https://petiteanglaise.com/2007/01/">January 2007</a></li> 
+          <li><a title="December 2006" href="https://petiteanglaise.com/2006/12/">December 2006</a></li> 
+          <li><a title="November 2006" href="https://petiteanglaise.com/2006/11/">November 2006</a></li> 
+          <li><a title="October 2006" href="https://petiteanglaise.com/2006/10/">October 2006</a></li> 
+          <li><a title="September 2006" href="https://petiteanglaise.com/2006/09/">September 2006</a></li> 
+          <li><a title="August 2006" href="https://petiteanglaise.com/2006/08/">August 2006</a></li> 
+          <li><a title="July 2006" href="https://petiteanglaise.com/2006/07/">July 2006</a></li> 
+          <li><a title="June 2006" href="https://petiteanglaise.com/2006/06/">June 2006</a></li> 
+          <li><a title="May 2006" href="https://petiteanglaise.com/2006/05/">May 2006</a></li> 
+          <li><a title="April 2006" href="https://petiteanglaise.com/2006/04/">April 2006</a></li> 
+          <li><a title="March 2006" href="https://petiteanglaise.com/2006/03/">March 2006</a></li> 
+          <li><a title="February 2006" href="https://petiteanglaise.com/2006/02/">February 2006</a></li> 
+          <li><a title="January 2006" href="https://petiteanglaise.com/2006/01/">January 2006</a></li> 
+          <li><a title="December 2005" href="https://petiteanglaise.com/2005/12/">December 2005</a></li> 
+          <li><a title="November 2005" href="https://petiteanglaise.com/2005/11/">November 2005</a></li> 
+          <li><a title="October 2005" href="https://petiteanglaise.com/2005/10/">October 2005</a></li> 
+          <li><a title="September 2005" href="https://petiteanglaise.com/2005/09/">September 2005</a></li> 
+          <li><a title="August 2005" href="https://petiteanglaise.com/2005/08/">August 2005</a></li> 
+          <li><a title="July 2005" href="https://petiteanglaise.com/2005/07/">July 2005</a></li> 
+          <li><a title="June 2005" href="https://petiteanglaise.com/2005/06/">June 2005</a></li> 
+          <li><a title="May 2005" href="https://petiteanglaise.com/2005/05/">May 2005</a></li> 
+          <li><a title="April 2005" href="https://petiteanglaise.com/2005/04/">April 2005</a></li> 
+          <li><a title="March 2005" href="https://petiteanglaise.com/2005/03/">March 2005</a></li> 
+          <li><a title="February 2005" href="https://petiteanglaise.com/2005/02/">February 2005</a></li> 
+          <li><a title="January 2005" href="https://petiteanglaise.com/2005/01/">January 2005</a></li> 
+          <li><a title="December 2004" href="https://petiteanglaise.com/2004/12/">December 2004</a></li> 
+          <li><a title="November 2004" href="https://petiteanglaise.com/2004/11/">November 2004</a></li> 
+          <li><a title="October 2004" href="https://petiteanglaise.com/2004/10/">October 2004</a></li> 
+          <li><a title="September 2004" href="https://petiteanglaise.com/2004/09/">September 2004</a></li> 
+          <li><a title="August 2004" href="https://petiteanglaise.com/2004/08/">August 2004</a></li> 
+          <li><a title="July 2004" href="https://petiteanglaise.com/2004/07/">July 2004</a></li> 
+         </ul> </li> 
+        <li id="text">categories 
+         <ul> 
+          <li class="cat-item cat-item-19290"><a title="View all posts filed under adoption" href="https://petiteanglaise.com/category/adoption/">adoption</a></li> 
+          <li class="cat-item cat-item-101238"><a title="View all posts filed under book stuff" href="https://petiteanglaise.com/category/book-stuff/">book stuff</a></li> 
+          <li class="cat-item cat-item-269813"><a title="on Paris and Parisians" href="https://petiteanglaise.com/category/city-of-light/">city of light</a></li> 
+          <li class="cat-item cat-item-777392"><a title="View all posts filed under french touch" href="https://petiteanglaise.com/category/french-touch/">french touch</a></li> 
+          <li class="cat-item cat-item-37959060"><a title="View all posts filed under good time girl" href="https://petiteanglaise.com/category/good-time-girl/">good time girl</a></li> 
+          <li class="cat-item cat-item-36442"><a title="View all posts filed under knocked up" href="https://petiteanglaise.com/category/knocked-up/">knocked up</a></li> 
+          <li class="cat-item cat-item-214948"><a title="View all posts filed under knot tying" href="https://petiteanglaise.com/category/knot-tying/">knot tying</a></li> 
+          <li class="cat-item cat-item-34596"><a title="food for thought" href="https://petiteanglaise.com/category/miam/">miam</a></li> 
+          <li class="cat-item cat-item-1455466"><a title="View all posts filed under mills &amp; boon" href="https://petiteanglaise.com/category/mills-boon/">mills &amp; boon</a></li> 
+          <li class="cat-item cat-item-277"><a title="View all posts filed under misc" href="https://petiteanglaise.com/category/misc/">misc</a></li> 
+          <li class="cat-item cat-item-37959061"><a title="England through rose tinted spectacles" href="https://petiteanglaise.com/category/missing-blighty/">missing blighty</a></li> 
+          <li class="cat-item cat-item-7289"><a title="me me me me me" href="https://petiteanglaise.com/category/navel-gazing/">navel gazing</a></li> 
+          <li class="cat-item cat-item-4358"><a title="View all posts filed under on the road" href="https://petiteanglaise.com/category/on-the-road/">on the road</a></li> 
+          <li class="cat-item cat-item-2439939"><a title="View all posts filed under parting ways" href="https://petiteanglaise.com/category/parting-ways/">parting ways</a></li> 
+          <li class="cat-item cat-item-178503"><a title="View all posts filed under single life" href="https://petiteanglaise.com/category/single-life/">single life</a></li> 
+          <li class="cat-item cat-item-37959062"><a title="View all posts filed under Tadpole rearing" href="https://petiteanglaise.com/category/tadpole-rearing/">Tadpole rearing</a></li> 
+          <li class="cat-item cat-item-37959063"><a title="View all posts filed under Tadpole says" href="https://petiteanglaise.com/category/tadpole-says/">Tadpole says</a></li> 
+          <li class="cat-item cat-item-37959065"><a title="View all posts filed under Tadpole sings" href="https://petiteanglaise.com/category/tadpole-sings/">Tadpole sings</a></li> 
+          <li class="cat-item cat-item-1"><a title="View all posts filed under Uncategorized" href="https://petiteanglaise.com/category/uncategorized/">Uncategorized</a></li> 
+          <li class="cat-item cat-item-4612"><a title="View all posts filed under working girl" href="https://petiteanglaise.com/category/working-girl/">working girl</a></li> 
+         </ul> </li> 
+        <li id="text">stats 
+         <ul> 
+          <li>638 posts</li> 
+          <li>27,981 comments</li> 
+          <li><strong>©</strong> catherine sanderson 2004-2009</li> 
+         </ul> </li> 
+       </ul> 
+       <div style="clear:both;"></div> 
+      </div> </li> 
+    </ul> 
+   </div> 
+   <p class="credit"> <a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></p> 
+  </div> <!--  --> 
+  <div style="display:none"> 
+  </div> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="14262311"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://petiteanglaise.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="petite anglaise"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/2004/12/02/adoption/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/petiteanglaise.com\/2004\/12\/02\/adoption\/":133};
+	</script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/_static/??/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css,/wp-content/mu-plugins/carousel/jetpack-carousel.css?m=1583834955j&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"14262311","siteName":"petite anglaise","siteURL":"https:\/\/petiteanglaise.com","icon":"<img alt='' src='https:\/\/petiteanglaise.files.wordpress.com\/2017\/07\/cropped-union-jack.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/classic","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F12%2F02%2Fadoption%2F&signup_flow=account&domain=petiteanglaise.com","themeURL":"","xhrURL":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"fe4c42e1ec\" \/>","referer":"https:\/\/petiteanglaise.com\/2004\/12\/02\/adoption\/","canFollow":"1","feedID":"269408","statusMessage":"","customizeLink":"https:\/\/petiteanglaise.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fpetiteanglaise.wordpress.com%2F2004%2F12%2F02%2Fadoption%2F","postID":"133","shortlink":"https:\/\/wp.me\/sXQhh-adoption","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/petiteanglaise.com\/133","statsLink":"https:\/\/wordpress.com\/stats\/post\/133\/petiteanglaise.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: WordPress Classic","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 104 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F12%2F02%2Fadoption%2F&signup_flow=account&domain=petiteanglaise.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/petiteanglaise.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F12%2F02%2Fadoption%2F","blog_id":"14262311","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=14262311&v=wpcom&tz=2&user_id=0&subd=petiteanglaise","is_public":"1","reblog_enabled":""};
+</script> 
+  <script>
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJydUdFuwjAM/KGlUYfasYdp3xISl7mkSRY7Lfz9XNYCQghpe4ktn+/OsfWUlI2BIbDuSTsY0UI6Vj29aIEwWF8c0BlDYj1CcDHPUIr+1KH31YBhbV+Vki97DKS74r0iZFDgkDHs1S+i2029eWtf3/XORylGYlKS2sPigjD9XxNkSBZeCeziFBbh80v34L3LUNRqZJz8TO1M1oMhhiyZiiPkjPNCLrU/KnA2MsYzkmWMYSZdskfXoHRd+229/y6QT0uobrseeFmTYyHwugdOMpdaC08487FU5w1mTV8mywHWKKTP4aNutk3dNNu67X8ADungjw=="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'14262311','blog_tz':'2','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'14262311','v':'wpcom','tz':'2','user_id':'0','post':'133','subd':'petiteanglaise'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlXzhxdW0vQ1hzcFE3aUFOUjg2Z2sxLXYlMXwsPVRFfjk1RkZUKz9jTHFvci9mNzJHb2NHVj15R1lyW0c0cGhNVTlNNCU/NEpFXz1BLGxlbi1tLUZ1XUttSnYueD9dbHo4MV8sW1I0eXhJdWh4S35hUk8sUzlMdGkvUG0zfnp8LlZPaTZFLGlkKzZSeEU5dD9beUpyX3FrSVItR2dqWENIZHdhZXdreFNnN3oxMXQmSWhVdz1SdlUlblMuSjhkN3lpW3dEck5DTnVPYnVod2pCX0V+Qw=='}]);
+_stq.push([ 'clickTrackerInit', '14262311', '133' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+ </body>
+</html>

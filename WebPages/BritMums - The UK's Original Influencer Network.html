@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"52c0c7a266",applicationID:"8495866"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <title>BritMums - The UK's Original Influencer Network</title> 
+  <link rel="dns-prefetch" href="https://static.hupso.com/share/js/share_toolbar.js">
+  <link rel="preconnect" href="https://static.hupso.com/share/js/share_toolbar.js">
+  <link rel="preload" href="https://static.hupso.com/share/js/share_toolbar.js">
+  <meta property="og:image" content="https://www.britmums.com/wp-content/uploads/2014/10/Carrot-potato-coriander-cumin-fritters-610-300x153.jpg"> <!-- This site is optimized with the Yoast SEO plugin v13.3 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="The UK's Original Influencer Network"> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.britmums.com/"> 
+  <link rel="next" href="https://www.britmums.com/page/2/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="BritMums - The UK's Original Influencer Network"> 
+  <meta property="og:description" content="The UK's Original Influencer Network"> 
+  <meta property="og:url" content="https://www.britmums.com/"> 
+  <meta property="og:site_name" content="BritMums"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="The UK's Original Influencer Network"> 
+  <meta name="twitter:title" content="BritMums - The UK's Original Influencer Network"> 
+  <meta name="twitter:site" content="@BritMums"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.britmums.com/#website","url":"https://www.britmums.com/","name":"BritMums","inLanguage":"en-US","description":"The UK&#039;s Original Influencer Network","potentialAction":[{"@type":"SearchAction","target":"https://www.britmums.com/?s={search_term_string}","query-input":"required name=search_term_string"}]},{"@type":"CollectionPage","@id":"https://www.britmums.com/#webpage","url":"https://www.britmums.com/","name":"BritMums - The UK&#039;s Original Influencer Network","isPartOf":{"@id":"https://www.britmums.com/#website"},"inLanguage":"en-US","description":"The UK&#039;s Original Influencer Network"}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//secure.gravatar.com"> 
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com"> 
+  <link rel="dns-prefetch" href="//pipdigz.co.uk"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="BritMums » Feed" href="https://www.britmums.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="BritMums » Comments Feed" href="https://www.britmums.com/comments/feed/"> <!-- This site uses the Google Analytics by MonsterInsights plugin v7.10.4 - Using Analytics tracking - https://www.monsterinsights.com/ --> 
+  <script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-7104636-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-7104636-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script> <!-- / Google Analytics by MonsterInsights --> 
+  <link rel="stylesheet" id="A5-framework-css" href="https://www.britmums.com/a5-framework-frontend.css?ver=1.0%20beta%2020160127%20FCW" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wp-block-library-css" href="https://www.britmums.com/wp-includes/css/dist/block-library/style.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css" type="text/css">
+.has-text-align-justify{text-align:justify;}
+</style> 
+  <link rel="stylesheet" id="hupso_css-css" href="https://www.britmums.com/wp-content/plugins/hupso-share-buttons-for-twitter-facebook-google/style.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="projects-styles-css" href="https://www.britmums.com/wp-content/plugins/projects-by-woothemes/assets/css/woo-projects.css?ver=1.5.0" type="text/css" media="all"> 
+  <link rel="stylesheet" id="projects-handheld-css" href="https://www.britmums.com/wp-content/plugins/projects-by-woothemes/assets/css/woo-projects-handheld.css?ver=1.5.0" type="text/css" media="all"> 
+  <link rel="stylesheet" id="yumprint-recipe-theme-layout-css" href="https://www.britmums.com/wp-content/plugins/recipe-card/css/layout.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wp-biographia-bio-css" href="https://www.britmums.com/wp-content/plugins/wp-biographia/css/wp-biographia.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="p3-core-responsive-css" href="https://pipdigz.co.uk/p3/css/core_resp.css" type="text/css" media="all"> 
+  <link rel="stylesheet" id="pipdigicons-css" href="https://pipdigz.co.uk/fonts/pipdigicons.css" type="text/css" media="all"> 
+  <link rel="stylesheet" id="pipdig-style-css" href="https://www.britmums.com/wp-content/themes/pipdig-venture/style.css?ver=1579599277" type="text/css" media="all"> 
+  <link rel="stylesheet" id="pipdig-responsive-css" href="https://www.britmums.com/wp-content/themes/pipdig-venture/css/responsive.css?ver=1579599277" type="text/css" media="all"> 
+  <link rel="stylesheet" id="pipdig-fonts-css" href="https://fonts.googleapis.com/css?family=Vidaloka|Montserrat" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jetpack_css-css" href="https://www.britmums.com/wp-content/plugins/jetpack/css/jetpack.css?ver=8.3" type="text/css" media="all"> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[]","home_url":"https:\/\/www.britmums.com","hash_tracking":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js?ver=7.10.4"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/recipe-card/js/post.js?ver=5.3.2"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var samAjax = {"ajaxurl":"https:\/\/www.britmums.com\/wp-content\/plugins\/simple-ads-manager\/sam-ajax.php","loadurl":"https:\/\/www.britmums.com\/wp-content\/plugins\/simple-ads-manager\/sam-ajax-loader.php","load":"","mailer":"1","clauses":"YTo0OntzOjI6IldDIjtzOjE3ODoiKElGKHNhLmFkX3VzZXJzID0gMCwgVFJVRSwgKHNhLmFkX3VzZXJzX3VucmVnID0gMSkpKSBBTkQgKChzYS52aWV3X3R5cGUgPSAxKSBPUiAoc2Eudmlld190eXBlID0gMCBBTkQgKHNhLnZpZXdfcGFnZXMrMCAmIDEpKSkgQU5EIChzYS5hZF9jYXRzID0gMCkgIEFORCAoc2EuYWRfYXV0aG9ycyA9IDApICAgICAgICI7czozOiJXQ1QiO3M6MzYyOiIgQU5EIElGKHNhLmFkX3NjaGVkdWxlLCBDVVJEQVRFKCkgQkVUV0VFTiBzYS5hZF9zdGFydF9kYXRlIEFORCBzYS5hZF9lbmRfZGF0ZSwgVFJVRSkgQU5EIElGKHNhLmxpbWl0X2hpdHMsIHNhLmhpdHNfbGltaXQgPiAoU0VMRUNUIElGTlVMTChDT1VOVCgqKSwgMCkgRlJPTSB3cF9zYW1fc3RhdHMgc3MgV0hFUkUgc3MuaWQgPSBzYS5pZCBBTkQgc3MuZXZlbnRfdHlwZSA9IDApLCBUUlVFKSBBTkQgSUYoc2EubGltaXRfY2xpY2tzLCBzYS5jbGlja3NfbGltaXQgPiAoU0VMRUNUIElGTlVMTChDT1VOVCgqKSwgMCkgRlJPTSB3cF9zYW1fc3RhdHMgc3MgV0hFUkUgc3MuaWQgPSBzYS5pZCBBTkQgc3MuZXZlbnRfdHlwZSA9IDEpLCBUUlVFKSI7czozOiJXQ1ciO3M6ODA6IiBBTkQgSUYoc2EuYWRfd2VpZ2h0ID4gMCwgKHNhLmFkX3dlaWdodF9oaXRzKjEwLyhzYS5hZF93ZWlnaHQqMTAwMCkpIDwgMSwgRkFMU0UpIjtzOjQ6IldDMlciO3M6MjI6IkFORCAoc2EuYWRfd2VpZ2h0ID4gMCkiO30=","doStats":"1","container":"sam-container","place":"sam-place","ad":"sam-ad"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/simple-ads-manager/js/sam-layout.min.js?ver=2.9.8.125"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var the_ajax_script = {"ajaxurl":"https:\/\/www.britmums.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/google-site-verification-using-meta-tag//verification.js?ver=5.3.2"></script> 
+  <link rel="https://api.w.org/" href="https://www.britmums.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.britmums.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.britmums.com/wp-includes/wlwmanifest.xml"> 
+  <link rel="shortlink" href="https://wp.me/3bVJd"> 
+  <script type="text/javascript">
+	window.yumprintRecipePlugin = "https://www.britmums.com/wp-content/plugins/recipe-card";
+	window.yumprintRecipeAjaxUrl = "https://www.britmums.com/wp-admin/admin-ajax.php";
+	window.yumprintRecipeUrl = "https://www.britmums.com/";
+</script><!--[if lte IE 8]>
+<script type="text/javascript">
+    window.yumprintRecipeDisabled = true;
+</script>
+<![endif]--> 
+  <style type="text/css">	@import url(http://fonts.googleapis.com/css?family=Raleway|Open+Sans);    .blog-yumprint-recipe .blog-yumprint-recipe-title {
+    	color: #B71427;
+    }
+    .blog-yumprint-recipe .blog-yumprint-subheader, .blog-yumprint-recipe .blog-yumprint-infobar-section-title, .blog-yumprint-recipe .blog-yumprint-infobox-section-title, .blog-yumprint-nutrition-section-title {
+        color: #B71427;
+    }
+    .blog-yumprint-recipe .blog-yumprint-save, .blog-yumprint-recipe .blog-yumprint-header .blog-yumprint-save a {
+    	background-color: #6DBDD6;
+    	color: #ffffff !important;
+    }
+    .blog-yumprint-recipe .blog-yumprint-save:hover, .blog-yumprint-recipe .blog-yumprint-header .blog-yumprint-save:hover a {
+    	background-color: #7ad4f0;
+    }
+    .blog-yumprint-recipe .blog-yumprint-adapted-link, .blog-yumprint-nutrition-more, .blog-yumprint-report-error {
+        color: #6DBDD6;
+    }
+    .blog-yumprint-recipe .blog-yumprint-infobar-section-data, .blog-yumprint-recipe .blog-yumprint-infobox-section-data, .blog-yumprint-recipe .blog-yumprint-adapted, .blog-yumprint-recipe .blog-yumprint-author, .blog-yumprint-recipe .blog-yumprint-serves, .blog-yumprint-nutrition-section-data {
+        color: #8C8C8C;
+    }
+    .blog-yumprint-recipe .blog-yumprint-recipe-summary, .blog-yumprint-recipe .blog-yumprint-ingredient-item, .blog-yumprint-recipe .blog-yumprint-method-item, .blog-yumprint-recipe .blog-yumprint-note-item, .blog-yumprint-write-review, .blog-yumprint-nutrition-box {
+        color: black;
+    }
+    .blog-yumprint-write-review:hover, .blog-yumprint-nutrition-more:hover, .blog-yumprint-recipe .blog-yumprint-adapted-link:hover {
+        color: #7ad4f0;
+    }
+    .blog-yumprint-recipe .blog-yumprint-nutrition-bar:hover .blog-yumprint-nutrition-section-title {
+        color: #d1172c;
+    }
+    .blog-yumprint-recipe .blog-yumprint-nutrition-bar:hover .blog-yumprint-nutrition-section-data {
+        color: #a6a6a6;
+    }
+
+    .blog-yumprint-recipe .blog-yumprint-print {
+    	background-color: #BEBEBE;
+    	color: #ffffff;
+    }
+    .blog-yumprint-recipe .blog-yumprint-print:hover {
+    	background-color: #d8d8d8;
+    }
+    .blog-yumprint-recipe {
+    	background-color: white;
+    	border-color: black;
+    	border-style: solid;
+    	border-width: 1px;
+    	border-radius: 0px;
+    }
+    .blog-yumprint-recipe .blog-yumprint-recipe-contents {
+    	border-top-color: black;
+    	border-top-width: 1px;
+    	border-top-style: solid;
+    }
+    .blog-yumprint-recipe .blog-yumprint-info-bar, .blog-yumprint-recipe .blog-yumprint-nutrition-bar, .blog-yumprint-nutrition-border {
+    	border-top-color: black;
+    	border-top-width: 1px;
+    	border-top-style: solid;
+    }
+    .blog-yumprint-nutrition-line, .blog-yumprint-nutrition-thick-line, .blog-yumprint-nutrition-very-thick-line {
+    	border-top-color: black;
+    }
+    .blog-yumprint-recipe .blog-yumprint-info-box, .blog-yumprint-nutrition-box {
+    	background-color: white;
+    	border-color: black;
+    	border-style: solid;
+    	border-width: 1px;
+    	border-radius: 0px;
+    }
+    .blog-yumprint-recipe .blog-yumprint-recipe-title {
+		font-family: Raleway, Helvetica Neue, Helvetica, Tahoma, Sans Serif, Sans;
+		font-size: 22px;
+		font-weight: normal;
+		font-style: normal;
+		text-transform: uppercase;
+		text-decoration: none;
+    }
+    .blog-yumprint-recipe .blog-yumprint-subheader {
+		font-family: Raleway, Helvetica Neue, Helvetica, Tahoma, Sans Serif, Sans;
+		font-size: 18px;
+		font-weight: normal;
+		font-style: normal;
+		text-transform: uppercase;
+		text-decoration: none;
+    }
+    .blog-yumprint-recipe .blog-yumprint-recipe-summary, .blog-yumprint-recipe .blog-yumprint-ingredients, .blog-yumprint-recipe .blog-yumprint-methods, .blog-yumprint-recipe .blog-yumprint-notes, .blog-yumprint-write-review, .blog-yumprint-nutrition-box {
+		font-family: Open Sans, Helvetica Neue, Helvetica, Tahoma, Sans Serif, Sans;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		text-transform: none;
+		text-decoration: none;
+    }
+    .blog-yumprint-recipe .blog-yumprint-info-bar, .blog-yumprint-recipe .blog-yumprint-info-box, .blog-yumprint-recipe .blog-yumprint-adapted, .blog-yumprint-recipe .blog-yumprint-author, .blog-yumprint-recipe .blog-yumprint-serves, .blog-yumprint-recipe .blog-yumprint-infobar-section-title, .blog-yumprint-recipe .blog-yumprint-infobox-section-title,.blog-yumprint-recipe .blog-yumprint-nutrition-bar, .blog-yumprint-nutrition-section-title, .blog-yumprint-nutrition-more {
+		font-family: Open Sans, Helvetica Neue, Helvetica, Tahoma, Sans Serif, Sans;
+		font-size: 14px;
+		font-weight: normal;
+		font-style: normal;
+		text-transform: none;
+		text-decoration: none;
+    }
+    .blog-yumprint-recipe .blog-yumprint-action {
+		font-family: Open Sans, Helvetica Neue, Helvetica, Tahoma, Sans Serif, Sans;
+		font-size: 13px;
+		font-weight: normal;
+		font-style: normal;
+		text-transform: none;
+		text-decoration: none;
+    }    .blog-yumprint-header {
+        width: 100% !important;
+    }    </style>
+  <style type="text/css"> .wprm-comment-rating svg path, .comment-form-wprm-rating svg path { fill: #343434; } .comment-form-wprm-rating .rated svg polygon { fill: #343434; } .wprm-comment-rating svg polygon, .comment-form-wprm-rating svg polygon { stroke: #343434; }</style> 
+  <link rel="dns-prefetch" href="//v0.wordpress.com"> <!--noptimize--> 
+  <style>
+		.p3_instagram_post{width:12.5%}
+				@media only screen and (max-width: 719px) {
+			.p3_instagram_post {
+				width: 25%;
+			}
+		}
+				</style> <!--/noptimize--> <!--noptimize--> <!-- Cust --> 
+  <style>.container{max-width:1200px}@media screen and (min-width: 770px) { .site-title img{padding-top:55px} }body {font-size:15px}#p3_feature_header .widget-title, #header-1-widget-section .widget-title {text-transform: none}h1, h2, h3, h4, h5, h6, .p_post_titles_font, .slide-h2, .holly_large_slider_panel h2, .entry-title,.page-title,.pipdig_p3_related_title a, .entry-content .pipdig_p3_related_posts h3, .pipdig_p3_related_posts h3, .p3_popular_posts_widget h4, .comment-reply-title {font-style:normal}.site-title img{width:2040px}</style> <!-- /Cust --> <!--/noptimize-->
+  <link rel="icon" href="https://www.britmums.com/wp-content/uploads/2018/07/BritMums-original-network-Influencer-strap_v1_box-copy-100x100.jpg" sizes="32x32"> 
+  <link rel="icon" href="https://www.britmums.com/wp-content/uploads/2018/07/BritMums-original-network-Influencer-strap_v1_box-copy-300x300.jpg" sizes="192x192"> 
+  <link rel="apple-touch-icon-precomposed" href="https://www.britmums.com/wp-content/uploads/2018/07/BritMums-original-network-Influencer-strap_v1_box-copy-300x300.jpg"> 
+  <meta name="msapplication-TileImage" content="https://www.britmums.com/wp-content/uploads/2018/07/BritMums-original-network-Influencer-strap_v1_box-copy-300x300.jpg"> <!--
+Plugin: Google meta tag Site Verification Plugin
+Tracking Code.
+
+--> 
+  <meta name="google-site-verification" content="JWqSJ0Q82lfbviBPtSGyPZK0LKHgqAlFnwSQv192M-o"> 
+ </head> 
+ <body class="home blog pipdig_sidebar_active"> 
+  <header class="site-header nopin"> 
+   <div class="clearfix container"> 
+    <div class="site-branding"> 
+     <h1 class="site-title"> <a href="https://www.britmums.com/" title="BritMums" rel="home"> <img data-pin-nopin="true" src="https://www.britmums.com/wp-content/uploads/2018/06/Logo-Header-asset-2040-x-300_v3_Grey.png" alt="BritMums"> </a> </h1> 
+    </div> 
+   </div> 
+  </header><!-- .site-header --> 
+  <div class="site-top"> 
+   <div class="clearfix container"> 
+    <nav class="site-menu"> 
+     <div class="clearfix menu-bar">
+      <ul id="menu-primary" class="menu">
+       <li id="menu-item-17813" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-17813"><a href="https://www.britmums.com/about-2/">About</a> 
+        <ul class="sub-menu"> 
+         <li id="menu-item-35945" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-35945"><a href="https://www.britmums.com/about-2/">About BritMums</a></li> 
+         <li id="menu-item-35950" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-35950"><a href="https://www.britmums.com/the-founders/">The Founders &amp; Team</a></li> 
+         <li id="menu-item-29884" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29884"><a href="https://www.britmums.com/meet-the-britmums-round-up-editors/">Meet the Columnists</a></li> 
+         <li id="menu-item-39144" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39144"><a href="https://www.britmums.com/about-2/press/">BritMums in the Media</a></li> 
+         <li id="menu-item-35834" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35834"><a href="https://www.britmums.com/britmums-privacy-policy/">Privacy Policy</a></li> 
+        </ul> </li> 
+       <li id="menu-item-17779" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-17779"><a href="https://www.britmums.com/category/magazine/">Magazine</a> 
+        <ul class="sub-menu"> 
+         <li id="menu-item-18670" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18670"><a href="https://www.britmums.com/category/magazine/latest/">News &amp; Views</a></li> 
+         <li id="menu-item-26198" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-26198"><a href="https://www.britmums.com/category/magazine/family-magazine/">Family &amp; Relationships</a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-38963" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-38963"><a href="https://www.britmums.com/category/roundups/specialneedsroundup/">SEND Families &amp; Children</a></li> 
+          </ul> </li> 
+         <li id="menu-item-18673" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-18673"><a href="https://www.britmums.com/category/magazine/travel/">Travel</a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-36179" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36179"><a href="https://www.britmums.com/category/magazine/travel/uktravel/">UK Travel</a></li> 
+           <li id="menu-item-36181" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36181"><a href="https://www.britmums.com/category/magazine/travel/europe/">Europe</a></li> 
+           <li id="menu-item-37758" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-37758"><a href="https://www.britmums.com/category/magazine/travel/spain/">Spain</a></li> 
+           <li id="menu-item-36178" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36178"><a href="https://www.britmums.com/category/magazine/travel/summertravel/">Summer holidays</a></li> 
+           <li id="menu-item-36180" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36180"><a href="https://www.britmums.com/category/magazine/travel/wintertravel/">Winter holidays</a></li> 
+          </ul> </li> 
+         <li id="menu-item-18671" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-18671"><a href="https://www.britmums.com/category/magazine/food-and-drink/">Food &amp; Recipes</a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-37939" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-37939"><a href="https://www.britmums.com/category/magazine/food-and-drink/pancake-day/">Pancake Day</a></li> 
+           <li id="menu-item-37822" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-37822"><a href="https://www.britmums.com/category/magazine/food-and-drink/sunday-lunch/">Sunday lunch</a></li> 
+           <li id="menu-item-37223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-37223"><a href="https://www.britmums.com/category/magazine/christmas/">Christmas</a></li> 
+          </ul> </li> 
+         <li id="menu-item-36182" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36182"><a href="https://www.britmums.com/category/roundups/styleroundup/">Style</a></li> 
+         <li id="menu-item-18674" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18674"><a href="https://www.britmums.com/category/magazine/healthbeauty/">Health &amp; Beauty</a></li> 
+        </ul> </li> 
+       <li id="menu-item-27136" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-27136"><a href="https://www.britmums.com/category/howtos/">Blogs &amp; Social</a> 
+        <ul class="sub-menu"> 
+         <li id="menu-item-18273" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18273"><a href="https://www.britmums.com/category/howtos/money-howtos/">Making money</a></li> 
+         <li id="menu-item-18271" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18271"><a href="https://www.britmums.com/category/howtos/blogging-howtos/">Blogging &amp; Vlogging</a></li> 
+         <li id="menu-item-34876" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34876"><a href="https://www.britmums.com/category/howtos/socialnetworking/">Social media</a></li> 
+         <li id="menu-item-29857" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-29857"><a href="https://www.britmums.com/category/howtos/affiliatemarketing/">Affiliate marketing</a></li> 
+         <li id="menu-item-18270" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-18270"><a href="https://www.britmums.com/category/howtos/writing-howtos/">Writing/publishing</a></li> 
+        </ul> </li> 
+       <li id="menu-item-18288" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-18288"><a href="https://www.britmums.com/awards/">Awards</a> 
+        <ul class="sub-menu"> 
+         <li id="menu-item-38934" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-38934"><a href="https://www.britmums.com/announcing-the-bibs-2019-winners-bibs2019/">#BiBs2019 Winners</a></li> 
+         <li id="menu-item-38848" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-38848"><a href="https://www.britmums.com/announcing-the-bibs-finalists-2019-bibs2019/">#BiBs2019 Finalists</a></li> 
+         <li id="menu-item-38549" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38549"><a href="https://www.britmums.com/best-uk-blog-awards-bibs-2019-award-categories/">#BiBs2019 Categories</a></li> 
+         <li id="menu-item-26595" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26595"><a href="https://www.britmums.com/awards/">About the BiBs</a></li> 
+         <li id="menu-item-36839" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-36839"><a href="https://www.britmums.com/the-bibs2018-winners/">#BiBs2018 Winners</a></li> 
+         <li id="menu-item-34944" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-34944"><a href="https://www.britmums.com/2017-brilliance-blogging-winners-bibs17/">#BiBs2017 Winners</a></li> 
+         <li id="menu-item-30846" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-30846"><a href="https://www.britmums.com/bibs-2016-winners/">#BiBs2016 Winners</a></li> 
+         <li id="menu-item-24718" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24718"><a href="https://www.britmums.com/2015/06/brilliance-in-blogging-winners-2015/">#BiBs2015 Winners</a></li> 
+        </ul> </li> 
+       <li id="menu-item-29966" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-29966"><a>Events</a> 
+        <ul class="sub-menu"> 
+         <li id="menu-item-36140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36140"><a href="https://www.britmums.com/about-britmums-events/">About Events</a></li> 
+         <li id="menu-item-30543" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30543"><a href="https://www.britmums.com/category/britmums-events/">Latest News</a></li> 
+        </ul> </li> 
+       <li id="menu-item-35995" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35995"><a href="https://www.britmums.com/about-2/for-brands/">Brands</a></li> 
+       <li id="menu-item-17780" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-17780"><a href="https://www.britmums.com/category/dostuff/">Influencers</a> 
+        <ul class="sub-menu"> 
+         <li id="menu-item-17781" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17781"><a href="https://pro.britmums.com/">Join! Paid projects &amp; more</a></li> 
+         <li id="menu-item-25297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-25297"><a href="https://www.britmums.com/category/dostuff/twitter-parties-dostuff/">Twitter Chats</a></li> 
+         <li id="menu-item-18451" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18451"><a href="https://www.britmums.com/category/dostuff/snaphappybritmums-dostuff/">SnapHappyBritMums</a></li> 
+         <li id="menu-item-20915" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-20915"><a href="https://www.britmums.com/category/dostuff/giveawayschallenges/">Giveaways &amp; Linkys</a></li> 
+         <li id="menu-item-36175" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36175"><a href="https://www.britmums.com/about-britmums-events/">Events</a></li> 
+        </ul> </li> 
+       <li class="socialz top-socialz"><a href="https://twitter.com/britmums" target="_blank" rel="nofollow noopener" aria-label="twitter" title="twitter"><i class="pipdigicons pipdigicons-twitter"></i></a><a href="https://www.instagram.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="instagram" title="instagram"><i class="pipdigicons pipdigicons-instagram"></i></a><a href="https://www.facebook.com/BritMums" target="_blank" rel="nofollow noopener" aria-label="facebook" title="facebook"><i class="pipdigicons pipdigicons-facebook"></i></a><a href="https://www.pinterest.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="pinterest" title="pinterest"><i class="pipdigicons pipdigicons-pinterest"></i></a><a href="https://www.youtube.com/user/BritMumsTV" target="_blank" rel="nofollow noopener" aria-label="youtube" title="youtube"><i class="pipdigicons pipdigicons-youtube-play"></i></a><a id="p3_search_btn" class="toggle-search" aria-label="Search" title="Search"><i class="pipdigicons pipdigicons-search"></i></a></li>
+       <li class="pipdig_navbar_search">
+        <form role="search" method="get" class="search-form" action="https://www.britmums.com/"> 
+         <div class="form-group"> 
+          <input type="search" class="form-control" placeholder="Search" value="" name="s" autocomplete="off"> 
+         </div> 
+        </form></li>
+      </ul>
+     </div> 
+    </nav><!-- .site-menu --> 
+   </div> 
+  </div><!-- .site-top --> 
+  <div class="site-main"> 
+   <div class="clearfix container"> 
+    <div id="p3_feature_header" class="row nopin"> 
+     <style scoped>
+			.feature-header-cycle {height: auto} .cycle-slideshow li{display:none}.cycle-slideshow li.first{display:block}
+			#p3_feature_header .p3_trending_panel h4, #p3_feature_header .p3_feature_slide_banner, #p3_feature_header .p3_feature_slide_banner h2 {background:#fff;color:#000;}
+		</style> 
+     <div id="p3_feature_header_big_this_month" class="col-sm-6"> 
+      <div id="p3_big_this" class="nopin"> 
+       <h3 class="widget-title"><span>COVID-19</span></h3> 
+       <div class="p3_trending_panel" style="margin:0 .5% .5%"> <a href="https://www.britmums.com/homeschooling-round-first-look-around/"> 
+         <div class="p3_cover_me" style="background-image:url(https://www.britmums.com/wp-content/uploads/2015/11/shutterstock_homeschooling-by-focal-point-610.jpg);"> 
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAFoAQMAAAD9/NgSAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAADJJREFUeNrtwQENAAAAwiD7p3Z7DmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5HHoAAHnxtRqAAAAAElFTkSuQmCC" alt="Homeschooling: Tips for homeschooling during coronavirus" class="p3_invisible" data-pin-nopin="true"> 
+         </div> <h4 class="p_post_titles_font">Homeschooling: Tips for homeschooling during coronavirus</h4> </a> 
+       </div> 
+       <div class="p3_trending_panel" style="margin:0 .5% .5%"> <a href="https://www.britmums.com/arts-crafts-fairy-crafts/"> 
+         <div class="p3_cover_me" style="background-image:url(https://www.britmums.com/wp-content/uploads/2020/05/Fairy-crafts-collage-800.jpg);"> 
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAFoAQMAAAD9/NgSAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAADJJREFUeNrtwQENAAAAwiD7p3Z7DmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5HHoAAHnxtRqAAAAAElFTkSuQmCC" alt="Spring and summer fairy crafts to do with kids" class="p3_invisible" data-pin-nopin="true"> 
+         </div> <h4 class="p_post_titles_font">Spring and summer fairy crafts to do with kids</h4> </a> 
+       </div> 
+       <div class="p3_trending_panel" style="margin:.5% .5% 0"> <a href="https://www.britmums.com/5-no-equipment-exercises-to-do-in-your-garden-this-spring/"> 
+         <div class="p3_cover_me" style="background-image:url(https://www.britmums.com/wp-content/uploads/2018/06/Fitness-running-800x400.jpg);"> 
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAFoAQMAAAD9/NgSAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAADJJREFUeNrtwQENAAAAwiD7p3Z7DmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5HHoAAHnxtRqAAAAAElFTkSuQmCC" alt="5 ‘No equipment’ exercises to do in your garden" class="p3_invisible" data-pin-nopin="true"> 
+         </div> <h4 class="p_post_titles_font">5 ‘No equipment’ exercises to do in your garden</h4> </a> 
+       </div> 
+       <div class="p3_trending_panel" style="margin:.5% .5% 0"> <a href="https://www.britmums.com/linky-craft-ideas-for-keeping-kids-happy-and-occupied-during-coronavirus/"> 
+         <div class="p3_cover_me" style="background-image:url(https://www.britmums.com/wp-content/uploads/2019/04/Easter-crafts-800x400.jpg);"> 
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAFoAQMAAAD9/NgSAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAADJJREFUeNrtwQENAAAAwiD7p3Z7DmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5HHoAAHnxtRqAAAAAElFTkSuQmCC" alt="Linky: Craft ideas for keeping kids happy and occupied during coronavirus" class="p3_invisible" data-pin-nopin="true"> 
+         </div> <h4 class="p_post_titles_font">Linky: Craft ideas for keeping kids happy and occupied during coronavirus</h4> </a> 
+       </div> 
+       <div class="clearfix"></div> 
+      </div> 
+     </div> 
+     <div id="p3_feature_header_recent_posts" class="col-sm-6"> 
+      <h3 class="widget-title"><span>Parenting &amp; Coronavirus</span></h3> 
+      <div data-starting-slide="1" data-cycle-speed="1300" data-cycle-slides="li" data-cycle-manual-speed="700" class="cycle-slideshow feature-header-cycle nopin"> 
+       <ul> 
+        <li> 
+         <div class="p3_cover_me" style="background-image:url(https://www.britmums.com/wp-content/uploads/2020/03/doctor-hands-800.jpg);"> 
+          <div class="p3_feature_slide"> <span class="p3_feature_slide_banner"> <h2 class="p_post_titles_font">What does parenting look like in these coronavirus times?</h2> </span> <a href="https://www.britmums.com/what-does-parenting-look-like-in-these-coronavirus-times/" style="display: block; width: 100%; height: 100%;"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHCAQMAAAAtrT+LAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAENJREFUeNrtwYEAAAAAw6D7U19hANUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALIDsYoAAZ9qTLEAAAAASUVORK5CYII=" alt="What does parenting look like in these coronavirus times?" class="p3_invisible" data-pin-nopin="true"> </a> 
+          </div> 
+         </div> </li> 
+       </ul> 
+       <div class="cycle-prev"></div> 
+       <div class="cycle-next"></div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <div id="content" class="col-sm-8 content-area"> 
+      <article id="post-25359" class="clearfix post-25359 post type-post status-publish format-standard has-post-thumbnail hentry category-christmas category-food-and-drink category-midweekmeals tag-advice tag-jacket-potatoes tag-potato tag-potatoes tag-recipes tag-slider tag-tips tag-twitter-party"> 
+       <header class="entry-header"> 
+        <div class="entry-meta"> <span class="date-bar-white-bg"> <span class="vcard author show-author"> <span class="fn"> <a href="https://www.britmums.com/author/britmums/" title="Posts by BritMums" rel="author">BritMums</a> </span> <span class="show-author"></span> </span> <span class="entry-date updated"> <time datetime="2020-03">26 March 2020</time> </span> </span> 
+        </div> 
+        <h2 class="entry-title p_post_titles_font"><a href="https://www.britmums.com/50-clever-recipes-potatoes/" rel="bookmark">50 inspiring recipe ideas for Maris Piper potatoes</a></h2> 
+       </header><!-- .entry-header --> 
+       <div class="entry-summary"> 
+        <div class="textalign-center"> <a href="https://www.britmums.com/50-clever-recipes-potatoes/" title="50 inspiring recipe ideas for Maris Piper potatoes"> <img src="https://www.britmums.com/wp-content/uploads/2014/10/Carrot-potato-coriander-cumin-fritters-610-600x306.jpg" data-pin-description="50 inspiring recipe ideas for Maris Piper potatoes" data-p3-pin-link="https://www.britmums.com/50-clever-recipes-potatoes/" alt="50 inspiring recipe ideas for Maris Piper potatoes"> </a> 
+        </div> 
+        <p>Looking for inspiring ideas for cooking with Maris Piper potatoes? Here are 50 easy potato dishes and meal you can make with Maris Piper potatoes, the great all-round potato variety with a fluffy middle! Get more inspiration and recipe ideas at Lovepotatoes.co.uk. Comfort food with potatoes Potatoes are great in curries to make them thick…</p> 
+        <div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons">
+         <!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_toolbar" href="http://www.hupso.com/share/"><img src="https://static.hupso.com/share/buttons/share-small.png" style="border:0px; padding-top:5px; float:left;" alt="Share Button"></a>
+         <script type="text/javascript">var hupso_services_t=new Array("Twitter","Facebook","Google Plus","Pinterest","Linkedin","StumbleUpon","Digg","Reddit","Delicious","Email");var hupso_background_t="#EAF4FF";var hupso_border_t="#66CCFF";var hupso_toolbar_size_t="small";var hupso_image_folder_url = "";var hupso_url_t="https://www.britmums.com/50-clever-recipes-potatoes/";var hupso_title_t="50 inspiring recipe ideas for Maris Piper potatoes";</script>
+         <script type="text/javascript" src="https://static.hupso.com/share/js/share_toolbar.js"></script><!-- Hupso Share Buttons -->
+        </div> <a class="more-link" href="https://www.britmums.com/50-clever-recipes-potatoes/">View Post</a> <!--noptimize--> 
+        <script type="application/ld+json">
+	{
+		"@context": "https://schema.org", 
+		"@type": "BlogPosting",
+		"headline": "50 inspiring recipe ideas for Maris Piper potatoes",
+		"image": {
+			"@type": "imageObject",
+			"url": "https://www.britmums.com/wp-content/uploads/2014/10/Carrot-potato-coriander-cumin-fritters-610-300x153.jpg",
+			"height": "153",
+			"width": "300"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "BritMums",
+			"logo": {
+				"@type": "imageObject",
+				"url": "https://pipdigz.co.uk/p3/img/placeholder-publisher.png"
+			}
+		},
+		"mainEntityOfPage": "https://www.britmums.com/50-clever-recipes-potatoes/",
+		"url": "https://www.britmums.com/50-clever-recipes-potatoes/",
+		"datePublished": "2020-03-26",
+		"dateModified": "2020-03-26",
+		"description": "Looking for inspiring ideas for cooking with Maris Piper potatoes? Here are 50 easy potato dishes and meal you can make with Maris Piper potatoes, the great all-round potato variety with a fluffy middle! Get more inspiration and recipe ideas at Lovepotatoes.co.uk. Comfort food with potatoes Potatoes are great in curries to make them thick&hellip;",
+		"articleBody": "Looking for inspiring ideas for cooking with Maris Piper potatoes? Here are 50 easy potato dishes and meal you can make with Maris Piper potatoes, the great all-round potato variety with a fluffy middle! Get more inspiration and recipe ideas at Lovepotatoes.co.uk. Comfort food with potatoes Potatoes are great in curries to make them thick&hellip;",
+		"author": {
+			"@type": "Person",
+			"name": "BritMums"
+		}
+	}
+	</script> <!--/noptimize--> 
+       </div><!-- .entry-summary --> 
+       <footer class="entry-meta entry-footer"> 
+        <div class="addthis_toolbox">
+         <span class="p3_share_title">Share: </span><a href="/cdn-cgi/l/email-protection#526d212730383731266f013a332037366877606267627760623b3c21223b203b3c357760622037313b22377760623b36373321776062343d207760621f33203b21776062023b223720776062223d2633263d3721747162616a69303d362b6f1b776062263a3d27353a267760622b3d277760623f3b353a267760623e3b3937776062263a3b217760623a26262221687d7d2525257c30203b263f273f217c313d3f7d67627f313e372437207f2037313b2237217f223d2633263d37217d" target="_blank" rel="nofollow noopener" aria-label="Share via email" title="Share via email"><i class="pipdigicons pipdigicons-envelope" aria-hidden="true"></i></a><a href="https://www.facebook.com/sharer.php?u=https://www.britmums.com/50-clever-recipes-potatoes/" target="_blank" rel="nofollow noopener" aria-label="Share on Facebook" title="Share on Facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i></a><a href="https://twitter.com/share?url=https://www.britmums.com/50-clever-recipes-potatoes/&amp;text=50%20inspiring%20recipe%20ideas%20for%20Maris%20Piper%20potatoes&amp;via=britmums" target="_blank" rel="nofollow noopener" aria-label="Share on Twitter" title="Share on Twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i></a><a href="https://pinterest.com/pin/create/link/?url=https://www.britmums.com/50-clever-recipes-potatoes/&amp;media=https://www.britmums.com/wp-content/uploads/2014/10/Carrot-potato-coriander-cumin-fritters-610.jpg&amp;description=50%20inspiring%20recipe%20ideas%20for%20Maris%20Piper%20potatoes" target="_blank" rel="nofollow noopener" aria-label="Share on Pinterest" title="Share on Pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i></a><a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=https://www.britmums.com/50-clever-recipes-potatoes/&amp;title=50%20inspiring%20recipe%20ideas%20for%20Maris%20Piper%20potatoes" target="_blank" rel="nofollow noopener" aria-label="Share on tumblr" title="Share on tumblr"><i class="pipdigicons pipdigicons-tumblr" aria-hidden="true"></i></a>
+        </div> 
+       </footer><!-- .entry-footer --> <!-- #post-25359 -->
+      </article> 
+      <article id="post-39514" class="clearfix post-39514 post type-post status-publish format-standard has-post-thumbnail hentry category-covid-19 category-education tag-coronavirus tag-free-online-events tag-homeschooling"> 
+       <header class="entry-header"> 
+        <div class="entry-meta"> <span class="date-bar-white-bg"> <span class="vcard author show-author"> <span class="fn"> <a href="https://www.britmums.com/author/britmums/" title="Posts by BritMums" rel="author">BritMums</a> </span> <span class="show-author"></span> </span> <span class="entry-date updated"> <time datetime="2020-03">25 March 2020</time> </span> </span> 
+        </div> 
+        <h2 class="entry-title p_post_titles_font"><a href="https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/" rel="bookmark">Ultimate Guide to FREE UK kid’s education classes during coronavirus</a></h2> 
+       </header><!-- .entry-header --> 
+       <div class="entry-summary"> 
+        <div class="textalign-center"> <a href="https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/" title="Ultimate Guide to FREE UK kid’s education classes during coronavirus"> <img class="pipdig_lazy" data-src="https://www.britmums.com/wp-content/uploads/2020/03/ultimate-guide-to-kids-online-classes.jpg" data-pin-description="Ultimate Guide to FREE UK kid’s education classes during coronavirus" data-p3-pin-link="https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/" alt="Ultimate Guide to FREE UK kid’s education classes during coronavirus"> </a> 
+        </div> 
+        <p>Have you suddenly found yourself home educating? Us too!&nbsp; The important thing to remember is that you are not alone. Not only are there millions of parents doing the same thing for the first time, even better there are loads of experts and inspirational parents with free resources to make it all easier and more…</p> 
+        <div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons">
+         <!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_toolbar" href="http://www.hupso.com/share/"><img src="https://static.hupso.com/share/buttons/share-small.png" style="border:0px; padding-top:5px; float:left;" alt="Share Button"></a>
+         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+         <script type="text/javascript">var hupso_services_t=new Array("Twitter","Facebook","Google Plus","Pinterest","Linkedin","StumbleUpon","Digg","Reddit","Delicious","Email");var hupso_background_t="#EAF4FF";var hupso_border_t="#66CCFF";var hupso_toolbar_size_t="small";var hupso_image_folder_url = "";var hupso_url_t="https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/";var hupso_title_t="Ultimate Guide to FREE UK kid&#039;s education classes during coronavirus";</script>
+         <script type="text/javascript" src="https://static.hupso.com/share/js/share_toolbar.js"></script><!-- Hupso Share Buttons -->
+        </div> <a class="more-link" href="https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/">View Post</a> <!--noptimize--> 
+        <script type="application/ld+json">
+	{
+		"@context": "https://schema.org", 
+		"@type": "BlogPosting",
+		"headline": "Ultimate Guide to FREE UK kid&#8217;s education classes during coronavirus",
+		"image": {
+			"@type": "imageObject",
+			"url": "https://www.britmums.com/wp-content/uploads/2020/03/ultimate-guide-to-kids-online-classes-300x150.jpg",
+			"height": "150",
+			"width": "300"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "BritMums",
+			"logo": {
+				"@type": "imageObject",
+				"url": "https://pipdigz.co.uk/p3/img/placeholder-publisher.png"
+			}
+		},
+		"mainEntityOfPage": "https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/",
+		"url": "https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/",
+		"datePublished": "2020-03-25",
+		"dateModified": "2020-03-27",
+		"description": "Have you suddenly found yourself home educating? Us too!&nbsp; The important thing to remember is that you are not alone. Not only are there millions of parents doing the same thing for the first time, even better there are loads of experts and inspirational parents with free resources to make it all easier and more&hellip;",
+		"articleBody": "Have you suddenly found yourself home educating? Us too!&nbsp; The important thing to remember is that you are not alone. Not only are there millions of parents doing the same thing for the first time, even better there are loads of experts and inspirational parents with free resources to make it all easier and more&hellip;",
+		"author": {
+			"@type": "Person",
+			"name": "BritMums"
+		}
+	}
+	</script> <!--/noptimize--> 
+       </div><!-- .entry-summary --> 
+       <footer class="entry-meta entry-footer"> 
+        <div class="addthis_toolbox">
+         <span class="p3_share_title">Share: </span><a href="/cdn-cgi/l/email-protection#6a55191f08000f091e5739020b180f0e504f585a3f061e03070b1e0f4f585a2d1f030e0f4f585a1e054f585a2c382f2f4f585a3f214f585a01030e4f585c4f585952585b5d4f5928194f585a0f0e1f090b1e0305044f585a09060b19190f194f585a0e1f1803040d4f585a09051805040b1c03181f194c495a59525108050e1357234f585a1e02051f0d021e4f585a13051f4f585a07030d021e4f585a0603010f4f585a1e0203194f585a021e1e1a195045451d1d1d440818031e071f071944090507451f061e03070b1e0f470d1f030e0f471e05470c180f0f471f014701030e19470f0e1f090b1e030504470e1f1803040d4709051805040b1c03181f1945" target="_blank" rel="nofollow noopener" aria-label="Share via email" title="Share via email"><i class="pipdigicons pipdigicons-envelope" aria-hidden="true"></i></a><a href="https://www.facebook.com/sharer.php?u=https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/" target="_blank" rel="nofollow noopener" aria-label="Share on Facebook" title="Share on Facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i></a><a href="https://twitter.com/share?url=https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/&amp;text=Ultimate%20Guide%20to%20FREE%20UK%20kid%26%238217%3Bs%20education%20classes%20during%20coronavirus&amp;via=britmums" target="_blank" rel="nofollow noopener" aria-label="Share on Twitter" title="Share on Twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i></a><a href="https://pinterest.com/pin/create/link/?url=https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/&amp;media=https://www.britmums.com/wp-content/uploads/2020/03/ultimate-guide-to-kids-online-classes.jpg&amp;description=Ultimate%20Guide%20to%20FREE%20UK%20kid%26%238217%3Bs%20education%20classes%20during%20coronavirus" target="_blank" rel="nofollow noopener" aria-label="Share on Pinterest" title="Share on Pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i></a><a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=https://www.britmums.com/ultimate-guide-to-free-uk-kids-education-during-coronavirus/&amp;title=Ultimate%20Guide%20to%20FREE%20UK%20kid%26%238217%3Bs%20education%20classes%20during%20coronavirus" target="_blank" rel="nofollow noopener" aria-label="Share on tumblr" title="Share on tumblr"><i class="pipdigicons pipdigicons-tumblr" aria-hidden="true"></i></a>
+        </div> 
+       </footer><!-- .entry-footer --> <!-- #post-39514 -->
+      </article> 
+      <article id="post-28585" class="clearfix post-28585 post type-post status-publish format-standard has-post-thumbnail hentry category-covid-19 category-education category-homeschooling category-magazine tag-coronavirus tag-homeschooling tag-slider"> 
+       <header class="entry-header"> 
+        <div class="entry-meta"> <span class="date-bar-white-bg"> <span class="vcard author show-author"> <span class="fn"> <a href="https://www.britmums.com/author/claire-ridewood/" title="Posts by Claire Ridewood" rel="author">Claire Ridewood</a> </span> <span class="show-author"></span> </span> <span class="entry-date updated"> <time datetime="2020-03">25 March 2020</time> </span> </span> 
+        </div> 
+        <h2 class="entry-title p_post_titles_font"><a href="https://www.britmums.com/homeschooling-round-first-look-around/" rel="bookmark">Homeschooling: Tips for homeschooling during coronavirus</a></h2> 
+       </header><!-- .entry-header --> 
+       <div class="entry-summary"> 
+        <div class="textalign-center"> <a href="https://www.britmums.com/homeschooling-round-first-look-around/" title="Homeschooling: Tips for homeschooling during coronavirus"> <img class="pipdig_lazy" data-src="https://www.britmums.com/wp-content/uploads/2015/11/shutterstock_homeschooling-by-focal-point-610-600x307.jpg" data-pin-description="Homeschooling: Tips for homeschooling during coronavirus" data-p3-pin-link="https://www.britmums.com/homeschooling-round-first-look-around/" alt="Homeschooling: Tips for homeschooling during coronavirus"> </a> 
+        </div> 
+        <p>Millions of parents have now been thrown into homeschooling as we cope with coronavirus. We’ve heard from parents that the situation has prompted fear and a fair amount of anxiety, especially about how to teach what and how kids learn these days. Homeschooling requires some organising and strategising, but every parent can do it! Here,…</p> 
+        <div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons">
+         <!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_toolbar" href="http://www.hupso.com/share/"><img src="https://static.hupso.com/share/buttons/share-small.png" style="border:0px; padding-top:5px; float:left;" alt="Share Button"></a>
+         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+         <script type="text/javascript">var hupso_services_t=new Array("Twitter","Facebook","Google Plus","Pinterest","Linkedin","StumbleUpon","Digg","Reddit","Delicious","Email");var hupso_background_t="#EAF4FF";var hupso_border_t="#66CCFF";var hupso_toolbar_size_t="small";var hupso_image_folder_url = "";var hupso_url_t="https://www.britmums.com/homeschooling-round-first-look-around/";var hupso_title_t="Homeschooling: Tips for homeschooling during coronavirus";</script>
+         <script type="text/javascript" src="https://static.hupso.com/share/js/share_toolbar.js"></script><!-- Hupso Share Buttons -->
+        </div> <a class="more-link" href="https://www.britmums.com/homeschooling-round-first-look-around/">View Post</a> <!--noptimize--> 
+        <script type="application/ld+json">
+	{
+		"@context": "https://schema.org", 
+		"@type": "BlogPosting",
+		"headline": "Homeschooling: Tips for homeschooling during coronavirus",
+		"image": {
+			"@type": "imageObject",
+			"url": "https://www.britmums.com/wp-content/uploads/2015/11/shutterstock_homeschooling-by-focal-point-610-300x153.jpg",
+			"height": "153",
+			"width": "300"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "BritMums",
+			"logo": {
+				"@type": "imageObject",
+				"url": "https://pipdigz.co.uk/p3/img/placeholder-publisher.png"
+			}
+		},
+		"mainEntityOfPage": "https://www.britmums.com/homeschooling-round-first-look-around/",
+		"url": "https://www.britmums.com/homeschooling-round-first-look-around/",
+		"datePublished": "",
+		"dateModified": "2020-03-26",
+		"description": "Homeschooling round-up: A first look around! Click here to read more from BritMums - Britain&#039;s BIGGEST collective of lifestyle bloggers &amp; social influencers.",
+		"articleBody": "Millions of parents have now been thrown into homeschooling as we cope with coronavirus. We&#8217;ve heard from parents that the situation has prompted fear and a fair amount of anxiety, especially about how to teach what and how kids learn these days. Homeschooling requires some organising and strategising, but every parent can do it! Here,&hellip;",
+		"author": {
+			"@type": "Person",
+			"name": "Claire Ridewood"
+		}
+	}
+	</script> <!--/noptimize--> 
+       </div><!-- .entry-summary --> 
+       <footer class="entry-meta entry-footer"> 
+        <div class="addthis_toolbox">
+         <span class="p3_share_title">Share: </span><a href="/cdn-cgi/l/email-protection#a59ad6d0c7cfc0c6d198f6cdc4d7c0c19f809795edcac8c0d6c6cdcacac9cccbc28096e4809795f1ccd5d6809795c3cad7809795cdcac8c0d6c6cdcacac9cccbc2809795c1d0d7cccbc2809795c6cad7cacbc4d3ccd7d0d6838695969d9ec7cac1dc98ec809795d1cdcad0c2cdd1809795dccad0809795c8ccc2cdd1809795c9cccec0809795d1cdccd6809795cdd1d1d5d69f8a8ad2d2d28bc7d7ccd1c8d0c8d68bc6cac88acdcac8c0d6c6cdcacac9cccbc288d7cad0cbc188c3ccd7d6d188c9cacace88c4d7cad0cbc18a" target="_blank" rel="nofollow noopener" aria-label="Share via email" title="Share via email"><i class="pipdigicons pipdigicons-envelope" aria-hidden="true"></i></a><a href="https://www.facebook.com/sharer.php?u=https://www.britmums.com/homeschooling-round-first-look-around/" target="_blank" rel="nofollow noopener" aria-label="Share on Facebook" title="Share on Facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i></a><a href="https://twitter.com/share?url=https://www.britmums.com/homeschooling-round-first-look-around/&amp;text=Homeschooling%3A%20Tips%20for%20homeschooling%20during%20coronavirus&amp;via=britmums" target="_blank" rel="nofollow noopener" aria-label="Share on Twitter" title="Share on Twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i></a><a href="https://pinterest.com/pin/create/link/?url=https://www.britmums.com/homeschooling-round-first-look-around/&amp;media=https://www.britmums.com/wp-content/uploads/2015/11/shutterstock_homeschooling-by-focal-point-610.jpg&amp;description=Homeschooling%3A%20Tips%20for%20homeschooling%20during%20coronavirus" target="_blank" rel="nofollow noopener" aria-label="Share on Pinterest" title="Share on Pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i></a><a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=https://www.britmums.com/homeschooling-round-first-look-around/&amp;title=Homeschooling%3A%20Tips%20for%20homeschooling%20during%20coronavirus" target="_blank" rel="nofollow noopener" aria-label="Share on tumblr" title="Share on tumblr"><i class="pipdigicons pipdigicons-tumblr" aria-hidden="true"></i></a>
+        </div> 
+       </footer><!-- .entry-footer --> <!-- #post-28585 -->
+      </article> 
+      <article id="post-39492" class="clearfix post-39492 post type-post status-publish format-standard has-post-thumbnail hentry category-covid-19 category-latest category-magazine"> 
+       <header class="entry-header"> 
+        <div class="entry-meta"> <span class="date-bar-white-bg"> <span class="vcard author show-author"> <span class="fn"> <a href="https://www.britmums.com/author/britmums/" title="Posts by BritMums" rel="author">BritMums</a> </span> <span class="show-author"></span> </span> <span class="entry-date updated"> <time datetime="2020-03">24 March 2020</time> </span> </span> 
+        </div> 
+        <h2 class="entry-title p_post_titles_font"><a href="https://www.britmums.com/the-funniest-coronavirus-memes/" rel="bookmark">The funniest Work from Home &amp; Stay at Home memes</a></h2> 
+       </header><!-- .entry-header --> 
+       <div class="entry-summary"> 
+        <div class="textalign-center"> <a href="https://www.britmums.com/the-funniest-coronavirus-memes/" title="The funniest Work from Home &amp; Stay at Home memes"> <img class="pipdig_lazy" data-src="https://www.britmums.com/wp-content/uploads/2020/03/best-coronavirus-memes.jpg" data-pin-description="The funniest Work from Home &amp; Stay at Home memes" data-p3-pin-link="https://www.britmums.com/the-funniest-coronavirus-memes/" alt="The funniest Work from Home &amp; Stay at Home memes"> </a> 
+        </div> 
+        <p>This week we’ve seen images of horrific scenarios taking place in Italy and places places around the world. Our thoughts and prayers are with everyone – particularly with those suffering during this challenging period.&nbsp; Humour can be a great coping mechanism. &nbsp;We’ve collected a few of the memes going around and&nbsp;thought we’d share to give…</p> 
+        <div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons">
+         <!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_toolbar" href="http://www.hupso.com/share/"><img src="https://static.hupso.com/share/buttons/share-small.png" style="border:0px; padding-top:5px; float:left;" alt="Share Button"></a>
+         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+         <script type="text/javascript">var hupso_services_t=new Array("Twitter","Facebook","Google Plus","Pinterest","Linkedin","StumbleUpon","Digg","Reddit","Delicious","Email");var hupso_background_t="#EAF4FF";var hupso_border_t="#66CCFF";var hupso_toolbar_size_t="small";var hupso_image_folder_url = "";var hupso_url_t="https://www.britmums.com/the-funniest-coronavirus-memes/";var hupso_title_t="The funniest Work from Home &amp; Stay at Home memes";</script>
+         <script type="text/javascript" src="https://static.hupso.com/share/js/share_toolbar.js"></script><!-- Hupso Share Buttons -->
+        </div> <a class="more-link" href="https://www.britmums.com/the-funniest-coronavirus-memes/">View Post</a> <!--noptimize--> 
+        <script type="application/ld+json">
+	{
+		"@context": "https://schema.org", 
+		"@type": "BlogPosting",
+		"headline": "The funniest Work from Home &#038; Stay at Home memes",
+		"image": {
+			"@type": "imageObject",
+			"url": "https://www.britmums.com/wp-content/uploads/2020/03/best-coronavirus-memes-300x150.jpg",
+			"height": "150",
+			"width": "300"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "BritMums",
+			"logo": {
+				"@type": "imageObject",
+				"url": "https://pipdigz.co.uk/p3/img/placeholder-publisher.png"
+			}
+		},
+		"mainEntityOfPage": "https://www.britmums.com/the-funniest-coronavirus-memes/",
+		"url": "https://www.britmums.com/the-funniest-coronavirus-memes/",
+		"datePublished": "2020-03-24",
+		"dateModified": "2020-03-26",
+		"description": "This week we&#8217;ve seen images of horrific scenarios taking place in Italy and places places around the world. Our thoughts and prayers are with everyone &#8211; particularly with those suffering during this challenging period.&nbsp; Humour can be a great coping mechanism. &nbsp;We&#8217;ve collected a few of the memes going around and&nbsp;thought we&#8217;d share to give&hellip;",
+		"articleBody": "This week we&#8217;ve seen images of horrific scenarios taking place in Italy and places places around the world. Our thoughts and prayers are with everyone &#8211; particularly with those suffering during this challenging period.&nbsp; Humour can be a great coping mechanism. &nbsp;We&#8217;ve collected a few of the memes going around and&nbsp;thought we&#8217;d share to give&hellip;",
+		"author": {
+			"@type": "Person",
+			"name": "BritMums"
+		}
+	}
+	</script> <!--/noptimize--> 
+       </div><!-- .entry-summary --> 
+       <footer class="entry-meta entry-footer"> 
+        <div class="addthis_toolbox">
+         <span class="p3_share_title">Share: </span><a href="/cdn-cgi/l/email-protection#6b54181e09010e081f5638030a190e0f514e595b3f030e4e595b0d1e0505020e181f4e595b3c0419004e595b0d1904064e595b2304060e4e595b4e595d4e59585b58534e58294e595b381f0a124e595b0a1f4e595b2304060e4e595b060e060e184d485b58535009040f1256224e595b1f03041e0c031f4e595b12041e4e595b06020c031f4e595b0702000e4e595b1f0302184e595b031f1f1b185144441c1c1c450919021f061e061845080406441f030e460d1e0505020e181f4608041904050a1d02191e1846060e060e1844" target="_blank" rel="nofollow noopener" aria-label="Share via email" title="Share via email"><i class="pipdigicons pipdigicons-envelope" aria-hidden="true"></i></a><a href="https://www.facebook.com/sharer.php?u=https://www.britmums.com/the-funniest-coronavirus-memes/" target="_blank" rel="nofollow noopener" aria-label="Share on Facebook" title="Share on Facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i></a><a href="https://twitter.com/share?url=https://www.britmums.com/the-funniest-coronavirus-memes/&amp;text=The%20funniest%20Work%20from%20Home%20%26%23038%3B%20Stay%20at%20Home%20memes&amp;via=britmums" target="_blank" rel="nofollow noopener" aria-label="Share on Twitter" title="Share on Twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i></a><a href="https://pinterest.com/pin/create/link/?url=https://www.britmums.com/the-funniest-coronavirus-memes/&amp;media=https://www.britmums.com/wp-content/uploads/2020/03/best-coronavirus-memes.jpg&amp;description=The%20funniest%20Work%20from%20Home%20%26%23038%3B%20Stay%20at%20Home%20memes" target="_blank" rel="nofollow noopener" aria-label="Share on Pinterest" title="Share on Pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i></a><a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=https://www.britmums.com/the-funniest-coronavirus-memes/&amp;title=The%20funniest%20Work%20from%20Home%20%26%23038%3B%20Stay%20at%20Home%20memes" target="_blank" rel="nofollow noopener" aria-label="Share on tumblr" title="Share on tumblr"><i class="pipdigicons pipdigicons-tumblr" aria-hidden="true"></i></a>
+        </div> 
+       </footer><!-- .entry-footer --> <!-- #post-39492 -->
+      </article> 
+      <article id="post-39505" class="clearfix post-39505 post type-post status-publish format-standard has-post-thumbnail hentry category-covid-19 category-healthbeauty category-magazine"> 
+       <header class="entry-header"> 
+        <div class="entry-meta"> <span class="date-bar-white-bg"> <span class="vcard author show-author"> <span class="fn"> <a href="https://www.britmums.com/author/britmums/" title="Posts by BritMums" rel="author">BritMums</a> </span> <span class="show-author"></span> </span> <span class="entry-date updated"> <time datetime="2020-03">24 March 2020</time> </span> </span> 
+        </div> 
+        <h2 class="entry-title p_post_titles_font"><a href="https://www.britmums.com/2-fun-fitness-class-you-can-do-online/" rel="bookmark">£2 fun fitness class you can do online</a></h2> 
+       </header><!-- .entry-header --> 
+       <div class="entry-summary"> 
+        <div class="textalign-center"> <a href="https://www.britmums.com/2-fun-fitness-class-you-can-do-online/" title="£2 fun fitness class you can do online"> <img class="pipdig_lazy" data-src="https://www.britmums.com/wp-content/uploads/2020/03/fun-fitness-classes-.jpg" data-pin-description="£2 fun fitness class you can do online" data-p3-pin-link="https://www.britmums.com/2-fun-fitness-class-you-can-do-online/" alt="£2 fun fitness class you can do online"> </a> 
+        </div> 
+        <p>&nbsp; Ginger Warrior Dance Fitness &nbsp; Remember Cerys from BritMums Live? She’s hoping to bring lots of smiles (and sweat!!) directly to your very own living room from mine in an attempt to try and forget, even for an hour, the craziness going on out there. And boy, is it crazy!! She wants everyone to…</p> 
+        <div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons">
+         <!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_toolbar" href="http://www.hupso.com/share/"><img src="https://static.hupso.com/share/buttons/share-small.png" style="border:0px; padding-top:5px; float:left;" alt="Share Button"></a>
+         <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+         <script type="text/javascript">var hupso_services_t=new Array("Twitter","Facebook","Google Plus","Pinterest","Linkedin","StumbleUpon","Digg","Reddit","Delicious","Email");var hupso_background_t="#EAF4FF";var hupso_border_t="#66CCFF";var hupso_toolbar_size_t="small";var hupso_image_folder_url = "";var hupso_url_t="https://www.britmums.com/2-fun-fitness-class-you-can-do-online/";var hupso_title_t="£2 fun fitness class you can do online";</script>
+         <script type="text/javascript" src="https://static.hupso.com/share/js/share_toolbar.js"></script><!-- Hupso Share Buttons -->
+        </div> <a class="more-link" href="https://www.britmums.com/2-fun-fitness-class-you-can-do-online/">View Post</a> <!--noptimize--> 
+        <script type="application/ld+json">
+	{
+		"@context": "https://schema.org", 
+		"@type": "BlogPosting",
+		"headline": "£2 fun fitness class you can do online",
+		"image": {
+			"@type": "imageObject",
+			"url": "https://www.britmums.com/wp-content/uploads/2020/03/fun-fitness-classes--300x150.jpg",
+			"height": "150",
+			"width": "300"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "BritMums",
+			"logo": {
+				"@type": "imageObject",
+				"url": "https://pipdigz.co.uk/p3/img/placeholder-publisher.png"
+			}
+		},
+		"mainEntityOfPage": "https://www.britmums.com/2-fun-fitness-class-you-can-do-online/",
+		"url": "https://www.britmums.com/2-fun-fitness-class-you-can-do-online/",
+		"datePublished": "",
+		"dateModified": "2020-03-25",
+		"description": "&nbsp; Ginger Warrior Dance Fitness &nbsp; Remember Cerys from BritMums Live? She&#8217;s hoping to bring lots of smiles (and sweat!!) directly to your very own living room from mine in an attempt to try and forget, even for an hour, the craziness going on out there. And boy, is it crazy!! She wants everyone to&hellip;",
+		"articleBody": "&nbsp; Ginger Warrior Dance Fitness &nbsp; Remember Cerys from BritMums Live? She&#8217;s hoping to bring lots of smiles (and sweat!!) directly to your very own living room from mine in an attempt to try and forget, even for an hour, the craziness going on out there. And boy, is it crazy!! She wants everyone to&hellip;",
+		"author": {
+			"@type": "Person",
+			"name": "BritMums"
+		}
+	}
+	</script> <!--/noptimize--> 
+       </div><!-- .entry-summary --> 
+       <footer class="entry-meta entry-footer"> 
+        <div class="addthis_toolbox">
+         <span class="p3_share_title">Share: </span><a href="/cdn-cgi/l/email-protection#d9e6aaacbbb3bcbaade48ab1b8abbcbde3fcebe9fc9aebfc98eaebfcebe9bfacb7fcebe9bfb0adb7bcaaaafcebe9bab5b8aaaafcebe9a0b6acfcebe9bab8b7fcebe9bdb6fcebe9b6b7b5b0b7bcfffae9eae1e2bbb6bda0e490fcebe9adb1b6acbeb1adfcebe9a0b6acfcebe9b4b0beb1adfcebe9b5b0b2bcfcebe9adb1b0aafcebe9b1adada9aae3f6f6aeaeaef7bbabb0adb4acb4aaf7bab6b4f6ebf4bfacb7f4bfb0adb7bcaaaaf4bab5b8aaaaf4a0b6acf4bab8b7f4bdb6f4b6b7b5b0b7bcf6" target="_blank" rel="nofollow noopener" aria-label="Share via email" title="Share via email"><i class="pipdigicons pipdigicons-envelope" aria-hidden="true"></i></a><a href="https://www.facebook.com/sharer.php?u=https://www.britmums.com/2-fun-fitness-class-you-can-do-online/" target="_blank" rel="nofollow noopener" aria-label="Share on Facebook" title="Share on Facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i></a><a href="https://twitter.com/share?url=https://www.britmums.com/2-fun-fitness-class-you-can-do-online/&amp;text=%C2%A32%20fun%20fitness%20class%20you%20can%20do%20online&amp;via=britmums" target="_blank" rel="nofollow noopener" aria-label="Share on Twitter" title="Share on Twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i></a><a href="https://pinterest.com/pin/create/link/?url=https://www.britmums.com/2-fun-fitness-class-you-can-do-online/&amp;media=https://www.britmums.com/wp-content/uploads/2020/03/fun-fitness-classes-.jpg&amp;description=%C2%A32%20fun%20fitness%20class%20you%20can%20do%20online" target="_blank" rel="nofollow noopener" aria-label="Share on Pinterest" title="Share on Pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i></a><a href="https://www.tumblr.com/widgets/share/tool?canonicalUrl=https://www.britmums.com/2-fun-fitness-class-you-can-do-online/&amp;title=%C2%A32%20fun%20fitness%20class%20you%20can%20do%20online" target="_blank" rel="nofollow noopener" aria-label="Share on tumblr" title="Share on tumblr"><i class="pipdigicons pipdigicons-tumblr" aria-hidden="true"></i></a>
+        </div> 
+       </footer><!-- .entry-footer --> <!-- #post-39505 -->
+      </article> 
+      <div class="clearfix"></div> 
+      <div class="next-prev-hider"> 
+       <nav id="nav-below" class="clearfix paging-navigation"> 
+        <div class="nav-previous">
+         <a href="https://www.britmums.com/page/2/"><span class="meta-nav"><i class="pipdigicons pipdigicons-chevron-left"></i></span> Older Posts</a>
+        </div> 
+       </nav><!-- #nav-below --> 
+      </div> 
+      <ul class="page-numbers"> 
+       <li><span aria-current="page" class="page-numbers current">1</span></li> 
+       <li><a class="page-numbers" href="https://www.britmums.com/page/2/">2</a></li> 
+       <li><a class="page-numbers" href="https://www.britmums.com/page/3/">3</a></li> 
+       <li><a class="page-numbers" href="https://www.britmums.com/page/4/">4</a></li> 
+       <li><span class="page-numbers dots">…</span></li> 
+       <li><a class="page-numbers" href="https://www.britmums.com/page/1005/">1,005</a></li> 
+       <li><a class="next page-numbers" href="https://www.britmums.com/page/2/">Older Posts <i class="pipdigicons pipdigicons-angle-double-right"></i></a></li> 
+      </ul> 
+     </div><!-- .content-area --> 
+     <div class="col-sm-4 site-sidebar nopin" role="complementary"> 
+      <aside id="custom_html-7" class="widget_text widget widget_custom_html">
+       <div class="textwidget custom-html-widget">
+        <meta name="p:domain_verify" content="66e55da01950848142899a056f422ea3"> 
+       </div>
+      </aside>
+      <aside id="pipdig_widget_social_icons-2" class="widget pipdig_widget_social_icons">
+       <div class="socialz pipdig_socialz_2">
+        <a href="https://twitter.com/britmums" target="_blank" rel="nofollow noopener" aria-label="twitter" title="twitter" class="pipdig_socialz_widget_twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i><br><span>Twitter</span></a><a href="https://www.instagram.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="instagram" title="instagram" class="pipdig_socialz_widget_instagram"><i class="pipdigicons pipdigicons-instagram" aria-hidden="true"></i><br><span>Instagram</span></a><a href="https://www.facebook.com/BritMums" target="_blank" rel="nofollow noopener" aria-label="facebook" title="facebook" class="pipdig_socialz_widget_facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i><br><span>Facebook</span></a><a href="https://www.pinterest.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="pinterest" title="pinterest" class="pipdig_socialz_widget_pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i><br><span>Pinterest</span></a><a href="https://www.youtube.com/user/BritMumsTV" target="_blank" rel="nofollow noopener" aria-label="youtube" title="youtube" class="pipdig_socialz_widget_youtube"><i class="pipdigicons pipdigicons-youtube-play" aria-hidden="true"></i><br><span>YouTube</span></a>
+       </div>
+      </aside>
+      <aside id="pipdig_widget_profile-2" class="widget pipdig_widget_profile">
+       <img src="https://www.britmums.com/wp-content/uploads/2018/10/susanna-Jen_unionjack_nowm_small-file-800x630.jpg" alt="" data-pin-nopin="true" class="nopin">
+       <p>Welcome to BritMums! We're Jen and Susanna, BritMums Co-Founders. We started this network in 2008, back when bloggers were just called bloggers. Now influencers are a force to be reckoned with! This site is full of the best content from the community. Check it out and join the conversation!</p> 
+      </aside>
+      <aside id="custom_html-5" class="widget_text widget widget_custom_html">
+       <h3 class="widget-title">Join</h3>
+       <div class="textwidget custom-html-widget">
+        <a href="https://pro.britmums.com/"><img src="/wp-content/uploads/2018/06/Influencer-asset-700x400_v2.png" alt="Join BritMums Pro"></a>
+       </div>
+      </aside>
+      <aside id="custom_html-8" class="widget_text widget widget_custom_html">
+       <h3 class="widget-title">Announcing the #BiBs2019 Winners!</h3>
+       <div class="textwidget custom-html-widget">
+        <a href="https://www.britmums.com/announcing-the-bibs-2019-winners-bibs2019//"><img src="/wp-content/uploads/2019/06/BiBawards350Logo.png" alt="BiBs2019 awards badge"></a> 
+       </div>
+      </aside>
+      <aside id="pipdig_image_widget-3" class="widget pipdig_image_widget">
+       <h3 class="widget-title">Subscribe</h3>
+       <div class="p3_image_widget_wrapper" style="position:relative">
+        <a href="http://eepurl.com/dvNq79"><img data-src="https://www.britmums.com/wp-content/uploads/2018/06/Newsletter-asset-700x400_v2-copy-2-small.jpg" class="nopin pipdig_lazy" alt="" data-pin-nopin="true"></a>
+       </div>
+      </aside>
+      <aside id="pipdig_widget_featured_post-5" class="widget pipdig_widget_featured_post">
+       <h3 class="widget-title">Influencers to follow</h3><a href="https://www.britmums.com/the-b-list-5-chic-crafters-using-yarn-thread-wool/" style="position:relative; display: block;"><img class="p3_featured_post_widget_post_img  pipdig_lazy" data-src="https://www.britmums.com/wp-content/uploads/2020/02/B-list-needlcrafts800.jpg" alt="The B List: 5 chic crafters using yarn, thread &amp; wool"></a><a href="https://www.britmums.com/the-b-list-5-chic-crafters-using-yarn-thread-wool/"><h4 class="p3_featured_post_widget_post_title p_post_titles_font">The B List: 5 chic crafters using yarn, thread &amp; wool</h4></a>
+       <p class="p3_featured_post_widget_post_excerpt">Welcome to The B-List, BritMums’ bespoke list of noteworthy influencers and bloggers doing wonderful things in their field. This edition we’re shining a spotlight on the clever crafters working wonders with thread, wool and yarn. Knit and crochet designer (and self-confessed craft addict) Theodora Burrow picks her favourite influencers creating innovative pieces using traditional techniques…</p>
+       <div>
+        <a href="https://www.britmums.com/the-b-list-5-chic-crafters-using-yarn-thread-wool/" class="more-link">View Post</a>
+       </div>
+      </aside>
+      <aside id="pipdig_widget_instagram-3" class="widget pipdig_widget_instagram">
+       <h3 class="widget-title">Instagram</h3> 
+       <div id="p3_instagram_widget_338681906" class="p3_instagram_widget"> <!--noptimize--> 
+        <style>
+				#p3_instagram_widget_338681906 .p3_instagram_post {
+					width: 50%;
+					border: 2px solid #fff				}
+			</style> <!--/noptimize--> <a href="https://www.instagram.com/p/B-PXR_oBjdx/" class="p3_instagram_post  pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90893903_667060097404416_8402940576714932066_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=edjHq9PedqsAX_jIgsH&amp;oh=710a58d33feed296063c35a5afee752e&amp;oe=5EA9B357" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+         <div class="p3_instagram_post_overlay">
+          <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 2 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 99</span>
+         </div> </a> <a href="https://www.instagram.com/p/B-McSDgBDjD/" class="p3_instagram_post  pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90758065_201976207752428_1550630616412785464_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=lAqfXDf8sEwAX_jurkB&amp;oh=9ebeeb3b52936a96b36c7baa4e073ebd&amp;oe=5EA99A34" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+         <div class="p3_instagram_post_overlay">
+          <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 30 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 508</span>
+         </div> </a> <a href="https://www.instagram.com/p/B-J4yKDBCSU/" class="p3_instagram_post  pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/90510501_319876005639699_4502054662448948598_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=xzU6BrGjLfMAX-jAhx6&amp;oh=50325b7d50d5879a4f274e98269dc535&amp;oe=5EA99595" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+         <div class="p3_instagram_post_overlay">
+          <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 1 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 921</span>
+         </div> </a> <a href="https://www.instagram.com/p/B-HaKpdhicU/" class="p3_instagram_post  pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/90715466_1012225055959537_2771754652970503893_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=bV5zAMDEgrQAX_ncrX8&amp;oh=8655e401caf0406e4f1d6f9476446e05&amp;oe=5EA8586A" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+         <div class="p3_instagram_post_overlay">
+          <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 1 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 519</span>
+         </div> </a> 
+       </div> 
+       <div class="clearfix"></div> 
+       <div class="clearfix"></div> 
+       <p style="margin: 10px 0"><a href="https://www.instagram.com/britmums/" target="_blank" rel="nofollow noopener" style="color: #000;"><i class="pipdigicons pipdigicons-instagram" style="font-size: 15px; margin-bottom: -1px"></i> Follow on Instagram</a></p> 
+      </aside>
+      <aside id="pipdig_widget_pinterest-3" class="widget pipdig_widget_pinterest">
+       <h3 class="widget-title">Pinterest</h3> 
+       <div id="p3_pinterest_widget_763271324" class="p3_pinterest_widget"> 
+        <style>
+					#p3_pinterest_widget_763271324 .p3_pinterest_post {
+						width: 50%;
+						border: 2px solid #fff					}
+				</style> <a href="https://www.britmums.com/50-clever-recipes-potatoes/" class="p3_pinterest_post  pipdig_lazy" data-src="https://i.pinimg.com/736x/3b/52/5c/3b525c70329f5754d02d947d9d99f25b.jpg" rel="nofollow noopener" target="_blank" aria-label="Pinterest"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_invisible" alt=""> </a> <a href="https://www.iamtypecast.com/2020/03/work-from-home-and-home-schooling.html" class="p3_pinterest_post  pipdig_lazy" data-src="https://i.pinimg.com/736x/03/9a/b5/039ab56257f134e43314d0a4171b4d25.jpg" rel="nofollow noopener" target="_blank" aria-label="Pinterest"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_invisible" alt=""> </a> <a href="https://www.thereadingresidence.com/6-must-dos-in-walt-disney-worlds-galaxys-edge/" class="p3_pinterest_post  pipdig_lazy" data-src="https://i.pinimg.com/736x/91/fc/49/91fc49f98eea116217ad45f6337b582c.jpg" rel="nofollow noopener" target="_blank" aria-label="Pinterest"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_invisible" alt=""> </a> <a href="https://passivestream.club/2209579254506701187973/4-ways-using-visual-content-in-social-media-to-get-more-customers/" class="p3_pinterest_post  pipdig_lazy" data-src="https://i.pinimg.com/736x/99/8f/dd/998fddd94b45fe5fe1b158d110be034d.jpg" rel="nofollow noopener" target="_blank" aria-label="Pinterest"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_invisible" alt=""> </a> 
+        <div class="clearfix"></div> 
+       </div> 
+       <div class="clearfix"></div> 
+       <p style="margin: 10px 0"><a href="https://pinterest.com/britmums" target="_blank" rel="nofollow noopener" style="color: #000;"><i class="pipdigicons pipdigicons-pinterest" style="font-size: 15px;"></i> Follow on Pinterest</a></p> 
+      </aside>
+      <aside id="pipdig_widget_featured_post-4" class="widget pipdig_widget_featured_post">
+       <h3 class="widget-title">Influencer Trips</h3><a href="https://www.britmums.com/britmums-takes-influencers-to-the-french-ardennes/" style="position:relative; display: block;">
+        <div style="position: absolute; left: 0; top: 15px; background: #fff; color: #000; padding: 2px 5px;">
+         Featured
+        </div><img class="p3_featured_post_widget_post_img  pipdig_lazy" data-src="https://www.britmums.com/wp-content/uploads/2019/05/britmums-in-sedan-ardennes.jpg" alt="BritMums takes Influencers to the French Ardennes! #ardennesfamilies"></a><a href="https://www.britmums.com/britmums-takes-influencers-to-the-french-ardennes/"><h4 class="p3_featured_post_widget_post_title p_post_titles_font">BritMums takes Influencers to the French Ardennes! #ardennesfamilies</h4></a>
+      </aside>
+      <aside id="pipdig_widget_twitter-2" class="widget pipdig_widget_twitter">
+       <h3 class="widget-title">Twitter</h3> <a class="twitter-timeline" href="https://twitter.com/britmums" data-dnt="true" data-chrome="nofooter" data-tweet-limit="1" data-link-color="#333333">Tweets by britmums</a>
+       <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+       <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> 
+       <br> 
+       <div class="clearfix"></div> 
+       <p style="margin: 10px 0"><a href="https://twitter.com/britmums" target="_blank" rel="nofollow noopener" style="color: #000;"><i class="pipdigicons pipdigicons-twitter" style="font-size: 15px; margin-bottom: -1px"></i> Follow on Twitter</a></p> 
+      </aside>
+      <aside id="search-3" class="widget widget_search">
+       <h3 class="widget-title">Looking for something?</h3>
+       <form role="search" method="get" class="search-form" action="https://www.britmums.com/"> 
+        <div class="form-group"> 
+         <input type="search" class="form-control" placeholder="Search" value="" name="s" autocomplete="off"> 
+        </div> 
+       </form>
+      </aside>
+      <aside id="custom_html-6" class="widget_text widget widget_custom_html">
+       <div class="textwidget custom-html-widget">
+        <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+        <script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"e0d7bec491e16b6847779ed3a","lid":"7c9331207b"}) })</script>
+       </div>
+      </aside> 
+     </div><!-- .site-sidebar --> 
+    </div> 
+   </div> 
+  </div><!-- .site-main --> 
+  <div class="clearfix"></div> 
+  <div id="p3_instagram_kensington" class="row"> 
+   <div class="container"> 
+    <h3 class="widget-title"><span>Instagram</span></h3> <a href="https://www.instagram.com/p/B-PXR_oBjdx/" id="p3_instagram_post_0" class="p3_instagram_post pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90893903_667060097404416_8402940576714932066_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=edjHq9PedqsAX_jIgsH&amp;oh=710a58d33feed296063c35a5afee752e&amp;oe=5EA9B357" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 2 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 99</span>
+     </div> </a> <a href="https://www.instagram.com/p/B-McSDgBDjD/" id="p3_instagram_post_1" class="p3_instagram_post pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90758065_201976207752428_1550630616412785464_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=lAqfXDf8sEwAX_jurkB&amp;oh=9ebeeb3b52936a96b36c7baa4e073ebd&amp;oe=5EA99A34" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 30 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 508</span>
+     </div> </a> <a href="https://www.instagram.com/p/B-J4yKDBCSU/" id="p3_instagram_post_2" class="p3_instagram_post pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/90510501_319876005639699_4502054662448948598_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=xzU6BrGjLfMAX-jAhx6&amp;oh=50325b7d50d5879a4f274e98269dc535&amp;oe=5EA99595" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 1 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 921</span>
+     </div> </a> <a href="https://www.instagram.com/p/B-HaKpdhicU/" id="p3_instagram_post_3" class="p3_instagram_post pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/90715466_1012225055959537_2771754652970503893_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=bV5zAMDEgrQAX_ncrX8&amp;oh=8655e401caf0406e4f1d6f9476446e05&amp;oe=5EA8586A" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 1 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 519</span>
+     </div> </a> <a href="https://www.instagram.com/p/B-EiCINBH8c/" id="p3_instagram_post_4" class="p3_instagram_post p3_instagram_hide_mobile pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90433715_245395576627249_2241741517616606349_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=aiajeDKOL6UAX_4lkWj&amp;oh=246e87937e9eead091c56ab2bf97a10c&amp;oe=5EA789E4" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 3 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 499</span>
+     </div> </a> <a href="https://www.instagram.com/p/B-CAqHHBVfd/" id="p3_instagram_post_5" class="p3_instagram_post p3_instagram_hide_mobile pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90435632_563599734255533_2763326694880141086_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=h5JIEwu0-DEAX_v8sYB&amp;oh=ba395fddea0a4b8fd2577b55dfb9eb39&amp;oe=5EA7CE8B" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 7 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 521</span>
+     </div> </a> <a href="https://www.instagram.com/p/B-AfFiahJoU/" id="p3_instagram_post_6" class="p3_instagram_post p3_instagram_hide_mobile pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90674827_220228189344615_8470977026125847869_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=LBtohMHqJXUAX9KbqWh&amp;oh=8678a98ee2709630549559bfb7eb4b6f&amp;oe=5EA83B23" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 0 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 517</span>
+     </div> </a> <a href="https://www.instagram.com/p/B97eO2iB3jV/" id="p3_instagram_post_7" class="p3_instagram_post p3_instagram_hide_mobile pipdig_lazy" data-src="https://scontent.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/90183151_198534791433563_5990598430228593757_n.jpg?_nc_ht=scontent.cdninstagram.com&amp;_nc_ohc=_snZxDI0mMEAX_KuGeh&amp;oh=60af37cb5fd304d6dda44a5e971c4129&amp;oe=5EA6088D" rel="nofollow noopener" target="_blank" aria-label="Instagram"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=" class="p3_instagram_square" alt=""> 
+     <div class="p3_instagram_post_overlay">
+      <span class="p3_instagram_likes"><i class="pipdigicons pipdigicons-comment"></i> 5 &nbsp;<i class="pipdigicons pipdigicons-heart"></i> 552</span>
+     </div> </a> 
+    <div class="clearfix"></div> 
+   </div> 
+  </div> 
+  <div class="clearfix"></div> 
+  <div class="hide-back-to-top">
+   <div id="back-top">
+    <a href="#top"><i class="pipdigicons pipdigicons-angle-double-up"></i></a>
+   </div>
+  </div> 
+  <div id="p3_sticky_stop"></div> 
+  <div class="site-extra" role="complementary"> 
+   <div class="clearfix container"> 
+    <div class="row"> 
+     <div id="widget-area-2" class="col-sm-4 widget-area"> 
+      <div id="custom_html-3" class="widget_text widget widget_custom_html">
+       <h3 class="widget-title">Read on!</h3>
+       <div class="textwidget custom-html-widget">
+        <!-- Begin MailChimp Signup Form --> 
+        <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css"> 
+        <style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style> 
+        <div id="mc_embed_signup"> 
+         <form action="https://britmums.us4.list-manage.com/subscribe/post?u=e0d7bec491e16b6847779ed3a&amp;id=7c9331207b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate> 
+          <div id="mc_embed_signup_scroll"> 
+           <h2>Subscribe to our mailing list</h2> 
+           <div class="mc-field-group"> <label for="mce-EMAIL">Email Address </label> 
+            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"> 
+           </div> 
+           <div id="mce-responses" class="clear"> 
+            <div class="response" id="mce-error-response" style="display:none"></div> 
+            <div class="response" id="mce-success-response" style="display:none"></div> 
+           </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--> 
+           <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_e0d7bec491e16b6847779ed3a_7c9331207b" tabindex="-1" value="">
+           </div> 
+           <div class="clear">
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+           </div> 
+          </div> 
+         </form> 
+        </div> 
+        <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+        <script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script> <!--End mc_embed_signup-->
+       </div>
+      </div> <!-- #widget-area-2 -->
+     </div> 
+     <div id="widget-area-3" class="col-sm-4 widget-area"> 
+      <div id="pipdig_widget_social_icons-3" class="widget pipdig_widget_social_icons">
+       <h3 class="widget-title">Follow</h3>
+       <div class="socialz pipdig_socialz_2">
+        <a href="https://twitter.com/britmums" target="_blank" rel="nofollow noopener" aria-label="twitter" title="twitter" class="pipdig_socialz_widget_twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i><br><span>Twitter</span></a><a href="https://www.instagram.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="instagram" title="instagram" class="pipdig_socialz_widget_instagram"><i class="pipdigicons pipdigicons-instagram" aria-hidden="true"></i><br><span>Instagram</span></a><a href="https://www.facebook.com/BritMums" target="_blank" rel="nofollow noopener" aria-label="facebook" title="facebook" class="pipdig_socialz_widget_facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i><br><span>Facebook</span></a><a href="https://www.pinterest.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="pinterest" title="pinterest" class="pipdig_socialz_widget_pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i><br><span>Pinterest</span></a><a href="https://www.youtube.com/user/BritMumsTV" target="_blank" rel="nofollow noopener" aria-label="youtube" title="youtube" class="pipdig_socialz_widget_youtube"><i class="pipdigicons pipdigicons-youtube-play" aria-hidden="true"></i><br><span>YouTube</span></a>
+       </div>
+      </div> <!-- #widget-area-3 -->
+     </div> 
+     <div id="widget-area-4" class="col-sm-4 widget-area"> 
+      <div id="pipdig_widget_facebook-3" class="widget pipdig_widget_facebook">
+       <h3 class="widget-title">Find us on Facebook</h3>
+       <div id="fb-root"></div>
+       <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v3.3"></script> 
+       <div class="fb-page" data-href="https://www.facebook.com/BritMums" data-width="500" data-height="320px" data-small-header="false" data-hide-cta="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false" data-tabs="false">
+        <div class="fb-xfbml-parse-ignore"></div>
+       </div>
+      </div> <!-- #widget-area-4 -->
+     </div> 
+    </div> 
+   </div> <!-- .site-extra -->
+  </div> 
+  <div class="clearfix extra-footer-outer social-footer-outer">
+   <div class="container">
+    <div class="row social-footer">
+     <div class="col-sm-5ths">
+      <a href="https://twitter.com/britmums" target="_blank" rel="nofollow noopener" aria-label="Twitter" title="Twitter"><i class="pipdigicons pipdigicons-twitter" aria-hidden="true"></i> Twitter<span class="social-footer-counters"> | 78516</span></a>
+     </div>
+     <div class="col-sm-5ths">
+      <a href="https://www.instagram.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="Instagram" title="Instagram"><i class="pipdigicons pipdigicons-instagram" aria-hidden="true"></i> Instagram<span class="social-footer-counters"> | 14488</span></a>
+     </div>
+     <div class="col-sm-5ths">
+      <a href="https://www.facebook.com/BritMums" target="_blank" rel="nofollow noopener" aria-label="Facebook" title="Facebook"><i class="pipdigicons pipdigicons-facebook" aria-hidden="true"></i> Facebook<span class="social-footer-counters"> | 5119</span></a>
+     </div>
+     <div class="col-sm-5ths">
+      <a href="https://www.pinterest.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="Pinterest" title="Pinterest"><i class="pipdigicons pipdigicons-pinterest" aria-hidden="true"></i> Pinterest<span class="social-footer-counters"> | 12378</span></a>
+     </div>
+     <div class="col-sm-5ths">
+      <a href="https://www.youtube.com/user/BritMumsTV" target="_blank" rel="nofollow noopener" aria-label="YouTube" title="YouTube"><i class="pipdigicons pipdigicons-youtube-play" aria-hidden="true"></i> YouTube<span class="social-footer-counters"> | 549</span></a>
+     </div>
+    </div> 
+   </div> 
+  </div> 
+  <style scoped>#instagramz{margin-top:0}</style> 
+  <footer class="site-footer"> 
+   <div class="clearfix container"> 
+    <div class="row"> 
+     <div class="col-sm-8 site-info">
+       BritMums Ltd. Registered in England &amp; Wales. Registration number 07585463. Registered office: Chiltern House, 45 Station Road, Henley-on-Thames, Oxon, RG9 1AT 
+     </div> 
+     <div class="col-sm-4 site-credit"> <a href="https://www.pipdig.co/" target="_blank">Theme Created by <span style="text-transform: lowercase;letter-spacing:1px">pipdig</span></a> 
+     </div> 
+    </div> 
+   </div> 
+  </footer> 
+  <div style="display:none"> 
+  </div> 
+  <script type="text/javascript" src="https://secure.gravatar.com/js/gprofiles.js?ver=2020Maraa"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/jetpack/modules/wpgroho.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/themes/pipdig-venture/scripts.js"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-includes/js/wp-embed.min.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle2/20140415/jquery.cycle2.min.js"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/jetpack/_inc/build/spin.min.js?ver=1.3"></script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/jetpack/_inc/build/jquery.spin.min.js?ver=1.3"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/www.britmums.com\/wp-admin\/admin-ajax.php","nonce":"0a44b2d84b","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"white","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/www.britmums.com\/wp-login.php?redirect_to=https%3A%2F%2Fwww.britmums.com%2F50-clever-recipes-potatoes%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.britmums.com/wp-content/plugins/jetpack/_inc/build/carousel/jetpack-carousel.min.js?ver=20190102"></script> 
+  <script type="text/javascript" src="https://stats.wp.com/e-202013.js" async defer></script> 
+  <script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:8.3',blog:'47172527',post:'0',tz:'0',srv:'www.britmums.com'} ]);
+	_stq.push([ 'clickTrackerInit', '47172527', '0' ]);
+</script> 
+  <script>
+jQuery(document).ready(function($) {
+	
+	var combinedMenu = $('.site-top .menu').clone();
+	
+		combinedMenu.slicknav({
+		label: '<i class="pipdigicons pipdigicons-bars"></i>',
+		duration: 450,
+		brand: '<a href="https://twitter.com/britmums" target="_blank" rel="nofollow noopener" aria-label="twitter" title="twitter"><i class="pipdigicons pipdigicons-twitter"></i></a><a href="https://www.instagram.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="instagram" title="instagram"><i class="pipdigicons pipdigicons-instagram"></i></a><a href="https://www.facebook.com/BritMums" target="_blank" rel="nofollow noopener" aria-label="facebook" title="facebook"><i class="pipdigicons pipdigicons-facebook"></i></a><a href="https://www.pinterest.com/britmums/" target="_blank" rel="nofollow noopener" aria-label="pinterest" title="pinterest"><i class="pipdigicons pipdigicons-pinterest"></i></a><a href="https://www.youtube.com/user/BritMumsTV" target="_blank" rel="nofollow noopener" aria-label="youtube" title="youtube"><i class="pipdigicons pipdigicons-youtube-play"></i></a><a href="https://www.britmums.com/feed/" target="_blank" rel="nofollow noopener" aria-label="RSS Feed" title="RSS Feed"><i class="pipdigicons pipdigicons-rss"></i></a><a href="#" id="toggle-search-mobile"><i class="pipdigicons pipdigicons-search"></i></a>',
+		closedSymbol: '<i class="pipdigicons pipdigicons-chevron-right"></i>',
+		openedSymbol: '<i class="pipdigicons pipdigicons-chevron-down"></i>',
+		easingOpen: "swing",
+		beforeOpen: function(){
+			$('.slicknav_menu .slicknav_menutxt').html('<i class="pipdigicons pipdigicons-close"></i>');
+		},
+		beforeClose: function(){
+			$('.slicknav_menu .slicknav_menutxt').html('<i class="pipdigicons pipdigicons-bars"></i>');
+		},
+	});
+		$('body').on('click', 'a#toggle-search-mobile', function() {
+		combinedMenu.slicknav('open');
+		$('.pipdig_navbar_search .form-control').focus();
+	});
+	});
+</script> 
+  <div id="p3_search_overlay-search" class="p3_search_overlay"> <a href="javascript:void(0)" id="p3_search_overlay-closebtn">×</a> 
+   <div class="p3_search_overlay-content"> 
+    <div class="container"> 
+     <div class="row"> 
+      <div class="col-xs-12"> 
+       <form method="get" id="searchform" action="https://www.britmums.com/"> 
+        <input type="search" name="s" value="" placeholder="Type some keywords..." autocomplete="off"> 
+       </form> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script>
+	jQuery(document).ready(function($) {
+		$("#p3_search_btn").click(function(){
+			$("#p3_search_overlay-search").css("height", "100%").css("opacity", "1");
+			$(".p3_search_overlay-content input").focus();
+		});
+		$("#p3_search_overlay-closebtn").click(function(){
+			$("#p3_search_overlay-search").css("height", "0%").css("opacity", "0");
+		});
+	});
+	</script> <!--noptimize--> 
+  <script>
+	jQuery(document).ready(function($) {
+		$('.pipdig_lazy').Lazy({
+			effect: 'fadeIn',
+			effectTime: 360,
+		});
+	});
+	</script> <!--/noptimize--> <!--noptimize--> 
+  <script>
+	jQuery(document).ready(function($) {
+		$(window).scroll(function() {
+			if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+				$(".cc-window,.cookie-notice-container,.scrollbox-bottom-right,.widget_eu_cookie_law_widget,#cookie-law-bar,#cookie-law-info-bar,.cc_container,#catapult-cookie-bar,.mailmunch-scrollbox,#barritaloca,#upprev_box,#at4-whatsnext,#cookie-notice,.mailmunch-topbar,#cookieChoiceInfo, #eu-cookie-law,.sumome-scrollbox-popup,.tplis-cl-cookies,#eu-cookie,.pea_cook_wrapper,#milotree_box,#cookie-law-info-again,#jquery-cookie-law-script,.gdpr-privacy-bar,#moove_gdpr_cookie_info_bar,.pp-cookies-notice").addClass('p3_hide_me');
+			} else {
+				$(".cc-window,.cookie-notice-container,.scrollbox-bottom-right,.widget_eu_cookie_law_widget,#cookie-law-bar,#cookie-law-info-bar,.cc_container,#catapult-cookie-bar,.mailmunch-scrollbox,#barritaloca,#upprev_box,#at4-whatsnext,#cookie-notice,.mailmunch-topbar,#cookieChoiceInfo, #eu-cookie-law,.sumome-scrollbox-popup,.tplis-cl-cookies,#eu-cookie,.pea_cook_wrapper,#milotree_box,#cookie-law-info-again,#jquery-cookie-law-script,.gdpr-privacy-bar,#moove_gdpr_cookie_info_bar,.pp-cookies-notice").removeClass('p3_hide_me');
+			}
+		});
+	});
+	</script> <!--/noptimize--> 
+  <meta name="p3v" content="4.9.2 | Venture (pipdig) v3.7.2 | 665d44a61d_4948_c81d8f2f | https://www.britmums.com"> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"52c0c7a266","applicationID":"8495866","transactionName":"MwABNUUHV0pQBkFdWQpKIgJDD1ZXHgxbUFMc","queueTime":0,"applicationTime":612,"atts":"H0cCQw0dREQ=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

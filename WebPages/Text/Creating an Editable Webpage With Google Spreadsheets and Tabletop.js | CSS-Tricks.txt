@@ -1,0 +1,70 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / articles / creating an editable webpage with google spreadsheets and tabletop.js author david atanda 15 comments join conversation last updated feb 6, 2020 personalized marketing with mailchimp please raise your hand if you’ve ever faced never-ending content revision requests from your clients. it’s not that the changes themselves are difficult, but wouldn't it be less complicated if clients could just make the revisions themselves? that would save everyone valuable time, and allow you to turn your attention to more important tasks. in the case where the site is built on the flat files (e.g. html, css and javascript) instead of a cms (e.g. wordpress), you’ll need some other sort of solution to edit the content without directly editing those files. tabletop.js allows us to use google spreadsheets as a sort of data store, by taking the spreadsheet and making it easily accessible through javascript. it provides the data from a google spreadsheet in json format, which can then use in an app, like pulling data from any other api. in this article, we’ll be adding data to a spreadsheet then setting up tabletop so that it can pull data from the data source to our html. let us get straight to the code! this article is going to be based off a real-world site i built when i was initially trying to wrap my head around tabletop. by the way, i always advise developers to build applications with any form of technology they’re trying to learn, even after watching or reading tutorials. we’ll be using the demo i made, with its source code and spreadsheet . the first thing we’ll need is a google account to access the spreadsheet. open a new spreadsheet and input your own values in the columns just like mine. the first cell on each column is the reference that’ll be used later in our javascript, and the second cell is the actual content for the website. as in header is the reference name, and please edit me! is the actual content in the first column. next up, we’ll publish the data to the web by clicking on file → publish to the web in the menu bar. a link will be provided, but it’s technically useless to us, so we can ignore. the important thing is that the spreadsheet (and its data) is now publicly accessible so we can fetch it for our app. that said, there is a link we need. clicking the big green “share” button in the upper-right corner of the page will trigger a modal that provides a sharable link to the spreadsheet and lets us set permissions as well. let’s grab that link and set the permissions so that anyone with the link can view the spreadsheet. that way, the data won’t inadvertently be edited by someone else. now is the time to initialize tabletop in our project. let’s link up to their hosted minified file. similarly, we could copy the raw minified code, drop it into our own script file and host it ourselves. here’s the document file linked up to tabletop’s cdn and with code snagged from the documentation. <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+
+<script type='text/javascript'>    
+  var publicspreadsheeturl = 'https://docs.google.com/spreadsheets/d/1sbyminqhpsjctjatmw0lcflrcpmqogmojj6an-snqrc/pubhtml';
+
+  function init() {
+    tabletop.init( {
+      key: publicspreadsheeturl,
+      callback: showinfo,
+      simplesheet: true 
+    } )
+  }
+
+  function showinfo(data, tabletop) {
+    alert('successfully processed!')
+    console.log(data);
+  }
+
+  window.addeventlistener('domcontentloaded', init)
+</script> replace the publicspreadsheeturl variable in the code with the sharable link from the spreadsheet. see, told you we’d need that! now to the interesting part. let’s give the html unique ids and leave them empty. then, inside the showinfo function, we’ll use the foreach() method to loop through each spreadsheet column while equating it with the corresponding id.innerhtml method which, in turn, loads the spreadsheet’s data into the html tag through the id. function showinfo(data, tabletop) {
+  data.foreach(function(data) {
+    header.innerhtml = data.header;
+    header2.innerhtml = data.header2;
+    body.innerhtml = data.body;
+    body2.innerhtml = data.body2;
+    body3.innerhtml = data.body3;
+    body4.innerhtml = data.body4;
+    body5.innerhtml = data.body5;
+    body6.innerhtml = data.body6;
+    body7.innerhtml = data.body7;
+    body8.innerhtml = data.body8;
+    body9.innerhtml = data.body9;
+    body10.innerhtml = data.body10;
+    body11.innerhtml = data.body11;
+    body12.innerhtml = data.body12;
+    body13.innerhtml = data.body13;
+    body14.innerhtml = data.body14;
+    body15.innerhtml = data.body15;
+    body16.innerhtml = data.body16;
+    body17.innerhtml = data.body17;
+ });
+}
+window.addeventlistener('domcontentloaded', init) this is a section of html from my demo showing the empty tags. this is a good way to go, but it could be abstracted further but creating the html elements directly from javascript. <!-- start section one: keep track of your snippets -->
+<section class="feature">
+  <div class="intro-text">
+    <h3 id="body"></h3>
+    <p id="body2">
+      
+    </p>
+  </div>
+  <div class="track-snippets">
+    <div class="snippet-left"><img src="img/image-computer.png" alt="computer" /></div>
+    <div class="snippet-right">
+      <div>
+        <h4 id="body3"></h4>
+        <p id="body4">
+        </p>
+      </div>
+      <div>
+        <h4 id="body5"></h4>
+        <p id="body6"></p>
+      </div>
+      <div>
+        <h4 id="body7"></h4>
+        <p id="body8">
+        </p>
+      </div>
+    </div>
+  </div>
+</section> hey, look at that! now we can change the content on a website in real-time by editing the content in the spreadsheet. our learning partner need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. comments kel permalink to comment# february 5, 2020 i love things like this. … airtable based cms’s, mavo.io, etc – all great! :) reply mitchell permalink to comment# february 5, 2020 it would probably be better practice to save the publicspreadsheeturl variable into a seperate file that isn’t tracked in git and fetch that for use. that way you aren’t putting a link to what is effectively your database up for the world to see. david atanda permalink to comment# february 5, 2020 well, this project is pretty much for demonstration, so everyone can see the spreadsheet for themselves. plus, nobody can edit the sheet unless granted permissions, and the content on the spreadsheet is more or less completely public already. but, apart from it being demonstrative you’re 100% correct. david atanda permalink to comment# february 5, 2020 david atanda permalink to comment# february 5, 2020 thanks kel!! daniel puiatti permalink to comment# february 5, 2020 this is really neat. i wonder if it would be possible to build an email cms with this. reply david atanda permalink to comment# february 5, 2020 hmm…..i didn’t think of that earlier. i’ll check if that’s possible martin dimmock permalink to comment# february 5, 2020 i remember maybe 20 years ago coming across some commercial software that used a spreadsheet to update web pages. this was long before google sheets. i never got round to trying it out, but i’ll give this a go, just for lols. :) reply chetan permalink to comment# february 5, 2020 trunao.com has a great feature to embedded your grid link on to your website. this helps get the powerful features of trunao on website with no programming. reply david atanda permalink to comment# february 5, 2020 wow….talk about the no-code era. daniel puiatti permalink to comment# february 15, 2020 this is brilliant. i want to use this to build a cms for emails. richard bourke permalink to comment# february 5, 2020 i’ve used this architecture on several projects since 2003 to enable authoring/maintenance of test data for applications. originally i used actual microsoft excel sheets on a shared drive which were read by java applications via apache poi or jacozoom. you can use office 365, you don’t have to use google sheets. reply david atanda permalink to comment# february 5, 2020 ohh, that’s interesting…i’ll definitely try it out on office 365. thales permalink to comment# march 17, 2020 very nice article and simple, thank you. i’m using already. do you have any idea how to get the images url to the html? currently, my page has some articles and i’m looking for solutions, especially for dinamic background images using the tabletop.js reply thales permalink to comment# march 25, 2020 hi, i currently using tabletop. i already integrated with my spreadsheet, but my challenge now is to get exact data position to print on html. do you have any suggestion for do that? reply leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter notify me of follow-up comments by email. copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. related how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

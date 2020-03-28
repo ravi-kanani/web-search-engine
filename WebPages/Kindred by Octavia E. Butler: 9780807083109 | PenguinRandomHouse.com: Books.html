@@ -1,0 +1,1266 @@
+<!doctype html><!--[if IE 7]>
+<html class="ie ie7" lang="en-US" class="no-js">
+<![endif]--><!--[if IE 8]>
+<html class="ie ie8" lang="en-US" class="no-js">
+<![endif]--><!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US" class="no-js"> <!--<![endif]--> 
+ <head> 
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQIEVlVWARAHVlJXBgYBXg==",licenseKey:"aff351d92f",applicationID:"72351768"};window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o||n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({1:[function(t,n,e){function r(t){try{s.console&&console.log(t)}catch(n){}}var o,i=t("ee"),a=t(21),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,n,e){r(e.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,n){return t}).join(", ")))},{}],2:[function(t,n,e){function r(t,n,e,r,s){try{p?p-=1:o(s||new UncaughtException(t,n,e),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,n,e){this.message=t||"Uncaught error with no additional information",this.sourceURL=n,this.line=e}function o(t,n){var e=n?null:c.now();i("err",[t,e])}var i=t("handle"),a=t(22),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError",p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(9),t(8),"addEventListener"in window&&t(5),c.xhrWrappable&&t(10),d=!0)}s.on("fn-start",function(t,n,e){d&&(p+=1)}),s.on("fn-err",function(t,n,e){d&&!e[l]&&(f(e,l,function(){return!0}),this.thrown=!0,o(e))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})},{}],3:[function(t,n,e){t("loader").features.ins=!0},{}],4:[function(t,n,e){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(9),s=t(8),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",g="pushState",y=t("loader");y.features.stn=!0,t(7),"addEventListener"in window&&t(5);var x=NREUM.o.EV;o.on(m,function(t,n){var e=t[0];e instanceof x&&(this.bstStart=y.now())}),o.on(w,function(t,n){var e=t[0];e instanceof x&&i("bst",[e,n,this.bstStart,y.now()])}),a.on(m,function(t,n,e){this.bstStart=y.now(),this.bstType=e}),a.on(w,function(t,n){i(v,[n,this.bstStart,y.now(),this.bstType])}),s.on(m,function(){this.bstStart=y.now()}),s.on(w,function(t,n){i(v,[n,this.bstStart,y.now(),"requestAnimationFrame"])}),o.on(g+p,function(t){this.time=y.now(),this.startPath=location.pathname+location.hash}),o.on(g+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,n,e){function r(t){for(var n=t;n&&!n.hasOwnProperty(u);)n=Object.getPrototypeOf(n);n&&o(n)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,n){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";n.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,n){var e=t[1],r=c(e,"nr@wrapped",function(){function t(){if("function"==typeof e.handleEvent)return e.handleEvent.apply(e,arguments)}var n={object:t,"function":e}[typeof e];return n?s(n,"fn-",null,n.name||"anonymous"):e});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,n,e){function r(t,n,e){var r=t[n];"function"==typeof r&&(t[n]=function(){var t=i(arguments),n={};o.emit(e+"before-start",[t],n);var a;n[m]&&n[m].dt&&(a=n[m].dt);var s=r.apply(this,t);return o.emit(e+"start",[t,a],s),s.then(function(t){return o.emit(e+"end",[null,t],s),t},function(t){throw o.emit(e+"end",[t],s),t})})}var o=t("ee").get("fetch"),i=t(22),a=t(21);n.exports=o;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,l=s.Response,p=s.fetch,h="prototype",m="nr@context";d&&l&&p&&(a(u,function(t,n){r(d[h],n,f),r(l[h],n,f)}),r(s,"fetch",c),o.on(c+"end",function(t,n){var e=this;if(n){var r=n.headers.get("content-length");null!==r&&(e.rxSize=r),o.emit(c+"done",[null,n],e)}else o.emit(c+"done",[t],e)}))},{}],7:[function(t,n,e){var r=t("ee").get("history"),o=t("wrap-function")(r);n.exports=r;var i=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;i&&i.pushState&&i.replaceState&&(a=i),o.inPlace(a,["pushState","replaceState"],"-")},{}],8:[function(t,n,e){var r=t("ee").get("raf"),o=t("wrap-function")(r),i="equestAnimationFrame";n.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],9:[function(t,n,e){function r(t,n,e){t[0]=a(t[0],"fn-",null,e)}function o(t,n,e){this.method=e,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,e)}var i=t("ee").get("timer"),a=t("wrap-function")(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";n.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],10:[function(t,n,e){function r(t,n){d.inPlace(n,["onreadystatechange"],"fn-",s)}function o(){var t=this,n=u.context(t);t.readyState>3&&!n.resolved&&(n.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,g,"fn-",s)}function i(t){y.push(t),h&&(b?b.then(a):w?w(a):(E=-E,O.data=E))}function a(){for(var t=0;t<y.length;t++)r([],y[t]);y.length&&(y=[])}function s(t,n){return n}function c(t,n){for(var e in t)n[e]=t[e];return n}t(5);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",g=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],y=[];n.exports=u;var x=window.XMLHttpRequest=function(t){var n=new p(t);try{u.emit("new-xhr",[n],n),n.addEventListener(v,o,!1)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}return n};if(c(p,x),x.prototype=p.prototype,d.inPlace(x.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,n){r(t,n),i(n)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!w&&!m){var E=1,O=document.createTextNode(E);new h(a).observe(O,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],11:[function(t,n,e){function r(t){if(!i(t))return null;var n=window.NREUM;if(!n.loader_config)return null;var e=(n.loader_config.accountID||"").toString()||null,r=(n.loader_config.agentID||"").toString()||null,s=(n.loader_config.trustKey||"").toString()||null;if(!e||!r)return null;var c=a.generateCatId(),f=a.generateCatId(),u=Date.now(),d=o(c,f,u,e,r,s);return{header:d,guid:c,traceId:f,timestamp:u}}function o(t,n,e,r,o,i){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:o,id:t,tr:n,ti:e}};return i&&r!==i&&(s.d.tk=i),btoa(JSON.stringify(s))}function i(t){var n=!1,e=!1,r={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(r=NREUM.init.distributed_tracing,e=!!r.enabled),e)if(t.sameOrigin)n=!0;else if(r.allowed_origins instanceof Array)for(var o=0;o<r.allowed_origins.length;o++){var i=s(r.allowed_origins[o]);if(t.hostname===i.hostname&&t.protocol===i.protocol&&t.port===i.port){n=!0;break}}return e&&n}var a=t(19),s=t(13);n.exports={generateTracePayload:r,shouldGenerateTrace:i}},{}],12:[function(t,n,e){function r(t){var n=this.params,e=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(d[r],this.listener,!1);n.aborted||(e.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==n.status&&(n.status=0):i(this,t),e.cbTime=this.cbTime,u.emit("xhr-done",[t],t),s("xhr",[n,e,this.startTime]))}}function o(t,n){var e=c(n),r=t.params;r.host=e.hostname+":"+e.port,r.pathname=e.pathname,t.parsedOrigin=c(n),t.sameOrigin=t.parsedOrigin.sameOrigin}function i(t,n){t.params.status=n.status;var e=w(n,t.lastSize);if(e&&(t.metrics.rxSize=e),t.sameOrigin){var r=n.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable){var s=t("handle"),c=t(13),f=t(11).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(17),m=t(16),w=t(14),v=window.XMLHttpRequest;a.features.xhr=!0,t(10),t(6),u.on("new-xhr",function(t){var n=this;n.totalCbs=0,n.called=0,n.cbTime=0,n.end=r,n.ended=!1,n.xhrGuids={},n.lastSize=null,n.loadCaptureCalled=!1,t.addEventListener("load",function(e){i(n,t)},!1),h&&(h>34||h<10)||window.opera||t.addEventListener("progress",function(t){n.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},o(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,n){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&n.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var e=f(this.parsedOrigin);e&&e.header&&(n.setRequestHeader("newrelic",e.header),this.dt=e)}),u.on("send-xhr-start",function(t,n){var e=this.metrics,r=t[0],o=this;if(e&&r){var i=m(r);i&&(e.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||o.loadCaptureCalled||(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof n.onload))&&o.end(n)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}};for(var s=0;s<l;s++)n.addEventListener(d[s],this.listener,!1)}),u.on("xhr-cb-time",function(t,n,e){this.cbTime+=t,n?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof e.onload||this.end(e)}),u.on("xhr-load-added",function(t,n){var e=""+p(t)+!!n;this.xhrGuids&&!this.xhrGuids[e]&&(this.xhrGuids[e]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,n){var e=""+p(t)+!!n;this.xhrGuids&&this.xhrGuids[e]&&(delete this.xhrGuids[e],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,n){n instanceof v&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],n)}),u.on("removeEventListener-end",function(t,n){n instanceof v&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],n)}),u.on("fn-start",function(t,n,e){n instanceof v&&("onload"===e&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,n){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,n],n)}),u.on("fetch-before-start",function(t){var n,e=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url&&(n=t[0].url),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var r=f(this.parsedOrigin);if(r&&r.header){var o=r.header;if("string"==typeof t[0]){var i={};for(var a in e)i[a]=e[a];i.headers=new Headers(e.headers||{}),i.headers.set("newrelic",o),this.dt=r,t.length>1?t[1]=i:t.push(i)}else t[0]&&t[0].headers&&(t[0].headers.append("newrelic",o),this.dt=r)}})}},{}],13:[function(t,n,e){var r={};n.exports=function(t){if(t in r)return r[t];var n=document.createElement("a"),e=window.location,o={};n.href=t,o.port=n.port;var i=n.href.split("://");!o.port&&i[1]&&(o.port=i[1].split("/")[0].split("@").pop().split(":")[1]),o.port&&"0"!==o.port||(o.port="https"===i[0]?"443":"80"),o.hostname=n.hostname||e.hostname,o.pathname=n.pathname,o.protocol=i[0],"/"!==o.pathname.charAt(0)&&(o.pathname="/"+o.pathname);var a=!n.protocol||":"===n.protocol||n.protocol===e.protocol,s=n.hostname===document.domain&&n.port===e.port;return o.sameOrigin=a&&(!n.hostname||s),"/"===o.pathname&&(r[t]=o),o}},{}],14:[function(t,n,e){function r(t,n){var e=t.responseType;return"json"===e&&null!==n?n:"arraybuffer"===e||"blob"===e||"json"===e?o(t.response):"text"===e||"document"===e||""===e||void 0===e?o(t.responseText):void 0}var o=t(16);n.exports=r},{}],15:[function(t,n,e){function r(){}function o(t,n,e){return function(){return i(t,[f.now()].concat(s(arguments)),n?null:this,e),n?void 0:this}}var i=t("handle"),a=t(21),s=t(22),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,n){u[n]=o(l+n,!0,"api")}),u.addPageAction=o(l+"addPageAction",!0),u.setCurrentRouteName=o(l+"routeName",!0),n.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,n){var e={},r=this,o="function"==typeof n;return i(p+"tracer",[f.now(),t,e],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],e),o)try{return n.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],e),t}finally{c.emit("fn-end",[f.now()],e)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,n){h[n]=o(p+n)}),newrelic.noticeError=function(t,n){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now(),!1,n])}},{}],16:[function(t,n,e){n.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(n){return}}}},{}],17:[function(t,n,e){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),n.exports=r},{}],18:[function(t,n,e){function r(t,n){var e=t.getEntries();e.forEach(function(t){"first-paint"===t.name?c("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&c("timing",["fcp",Math.floor(t.startTime)])})}function o(t,n){var e=t.getEntries();e.length>0&&c("lcp",[e[e.length-1]])}function i(t){if(t instanceof u&&!l){var n,e=Math.round(t.timeStamp);n=e>1e12?Date.now()-e:f.now()-e,l=!0,c("timing",["fi",e,{type:t.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,s,c=t("handle"),f=t("loader"),u=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),s=new PerformanceObserver(o);try{a.observe({entryTypes:["paint"]}),s.observe({entryTypes:["largest-contentful-paint"]})}catch(d){}}if("addEventListener"in document){var l=!1,p=["click","keydown","mousedown","pointerdown","touchstart"];p.forEach(function(t){document.addEventListener(t,i,!1)})}}},{}],19:[function(t,n,e){function r(){function t(){return n?15&n[e++]:16*Math.random()|0}var n=null,e=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(n=r.getRandomValues(new Uint8Array(31)));for(var o,i="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<i.length;s++)o=i[s],"x"===o?a+=t().toString(16):"y"===o?(o=3&t()|8,a+=o.toString(16)):a+=o;return a}function o(){function t(){return n?15&n[e++]:16*Math.random()|0}var n=null,e=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&Uint8Array&&(n=r.getRandomValues(new Uint8Array(31)));for(var o=[],i=0;i<16;i++)o.push(t().toString(16));return o.join("")}n.exports={generateUuid:r,generateCatId:o}},{}],20:[function(t,n,e){function r(t,n){if(!o)return!1;if(t!==o)return!1;if(!n)return!0;if(!i)return!1;for(var e=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==e[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(o="Safari",i=c[1])}n.exports={agent:o,version:i,match:r}},{}],21:[function(t,n,e){function r(t,n){var e=[],r="",i=0;for(r in t)o.call(t,r)&&(e[i]=n(r,t[r]),i+=1);return e}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],22:[function(t,n,e){function r(t,n,e){n||(n=0),"undefined"==typeof e&&(e=t?t.length:0);for(var r=-1,o=e-n||0,i=Array(o<0?0:o);++r<o;)i[r]=t[n+r];return i}n.exports=r},{}],23:[function(t,n,e){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,n,e){function r(){}function o(t){function n(t){return t&&t instanceof r?t:t?c(t,s,i):i()}function e(e,r,o,i){if(!l.aborted||i){t&&t(e,r,o);for(var a=n(o),s=m(e),c=s.length,f=0;f<c;f++)s[f].apply(a,r);var d=u[y[e]];return d&&d.push([x,e,r,a]),a}}function p(t,n){g[t]=m(t).concat(n)}function h(t,n){var e=g[t];if(e)for(var r=0;r<e.length;r++)e[r]===n&&e.splice(r,1)}function m(t){return g[t]||[]}function w(t){return d[t]=d[t]||o(e)}function v(t,n){f(t,function(t,e){n=n||"feature",y[e]=n,n in u||(u[n]=[])})}var g={},y={},x={on:p,addEventListener:p,removeEventListener:h,emit:e,get:w,listeners:m,context:n,buffer:v,abort:a,aborted:!1};return x}function i(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var s="nr@context",c=t("gos"),f=t(21),u={},d={},l=n.exports=o();l.backlog=u},{}],gos:[function(t,n,e){function r(t,n,e){if(o.call(t,n))return t[n];var r=e();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(t,n,e){function r(t,n,e,r){o.buffer([t],r),o.emit(t,n,e)}var o=t("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(t,n,e){function r(t){var n=typeof t;return!t||"object"!==n&&"function"!==n?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");n.exports=r},{}],loader:[function(t,n,e){function r(){if(!E++){var t=b.info=NREUM.info,n=p.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&n))return u.abort();f(y,function(n,e){t[n]||(t[n]=e)}),c("mark",["onload",a()+b.offset],null,"api");var e=p.createElement("script");e.src="https://"+t.agent,n.parentNode.insertBefore(e,n)}}function o(){"complete"===p.readyState&&i()}function i(){c("mark",["domContent",a()+b.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(s=Math.max((new Date).getTime(),s))-b.offset}var s=(new Date).getTime(),c=t("handle"),f=t(21),u=t("ee"),d=t(20),l=window,p=l.document,h="addEventListener",m="attachEvent",w=l.XMLHttpRequest,v=w&&w.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:w,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var g=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},x=w&&v&&v[h]&&!/CriOS/.test(navigator.userAgent),b=n.exports={offset:s,now:a,origin:g,features:{},xhrWrappable:x,userAgent:d};t(15),t(18),p[h]?(p[h]("DOMContentLoaded",i,!1),l[h]("load",r,!1)):(p[m]("onreadystatechange",o),l[m]("onload",r)),c("mark",["firstbyte",s],null,"api");var E=0,O=t(23)},{}],"wrap-function":[function(t,n,e){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(22),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;n.exports=function(t,n){function e(t,n,e,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof e?e(r,a):e||{}}catch(f){l([f,"",[r,a,o],s])}u(n+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(d){throw u(n+"err",[r,a,d],s),d}finally{u(n+"end",[r,a,c],s)}}return r(t)?t:(n||(n=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function u(e,r,o){if(!c||n){var i=c;c=!0;try{t.emit(e,r,o,n)}catch(a){l([a,e,r,o])}c=i}}function d(t,n){if(Object.defineProperty&&Object.keys)try{var e=Object.keys(t);return e.forEach(function(e){Object.defineProperty(n,e,{get:function(){return t[e]},set:function(n){return t[e]=n,n}})}),n}catch(r){l([r])}for(var o in t)s.call(t,o)&&(n[o]=t[o]);return n}function l(n){try{t.emit("internal-error",n)}catch(e){}}return t||(t=o),e.inPlace=f,e.flag=a,e}},{}]},{},["loader",2,12,4,3]);</script> 
+  <meta name="viewport" content="initial-scale=1,width=device-width,height=device-height"> 
+  <meta property="og:site_name" content="PenguinRandomhouse.com"> 
+  <meta property="fb:app_id" content="356679881167712"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="@penguinrandomhouse"> 
+  <title>Kindred by Octavia E. Butler: 9780807083109 | PenguinRandomHouse.com: Books</title> 
+  <meta itemprop="name" content="Kindred by Octavia E. Butler: 9780807083109 | PenguinRandomHouse.com: Books"> 
+  <meta property="og:title" content="Kindred by Octavia E. Butler: 9780807083109 | PenguinRandomHouse.com: Books"> 
+  <meta name="twitter:title" content="Kindred by Octavia E. Butler: 9780807083109 | PenguinRandomHouse.com: Books"> 
+  <meta property="fb:pages" content="13673457388"> 
+  <meta name="description" content="The visionary author’s masterpiece pulls us—along with her Black female hero—through time to face the horrors of slavery and explore..."> 
+  <meta itemprop="description" content="The visionary author&amp;rsquo;s masterpiece pulls us&amp;mdash;along with her Black female hero&amp;mdash;through time to face the horrors of slavery and explore the impacts of racism, sexism, and white supremacy..."> 
+  <meta property="og:description" content="The visionary author’s masterpiece pulls us—along with her Black female hero—through time to face the horrors of slavery and explore the impacts of racism, sexism, and white supremacy..."> 
+  <meta name="twitter:description" content="The visionary author’s masterpiece pulls us—along with her Black female hero—through time to face the horrors of slavery and explore the impacts of racism, sexism, and white..."> 
+  <meta property="og:url" content="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/"> 
+  <meta itemprop="image" content="https://images1.penguinrandomhouse.com/cover/9780807083109"> 
+  <meta property="og:image" content="https://images1.penguinrandomhouse.com/cover/9780807083109"> 
+  <meta name="twitter:image" content="https://images1.penguinrandomhouse.com/cover/9780807083109"> 
+  <meta itemprop="price" content="26.95"> 
+  <meta itemprop="priceCurrency" content="USD"> 
+  <meta property="og:price:currency" content="USD"> 
+  <meta property="og:price:amount" content="26.95"> 
+  <link rel="alternate" hreflang="en" href="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/"> 
+  <link rel="alternate" hreflang="en-ca" href="https://www.penguinrandomhouse.ca/books/643834/kindred-by-octavia-e-butler/9780807083109"> 
+  <meta property="og:type" content="product"> 
+  <meta name="format-detection" content="telephone=no"> 
+  <meta name="twitter:url" content="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/#excerpt"> 
+  <meta name="twitter:url:preview" content="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/#excerpt"> 
+  <meta name="twitter:text:isbn" content="9780807083109"> 
+  <meta name="twitter:text:cta" content="Start reading"> 
+  <meta property="og:availability" content="instock"> 
+  <meta name="Tealium" content="Tealium meta values" data-book-title="Kindred" data-book-authors="Octavia E. Butler" data-book-isbn="9780807083109" data-book-imprint="Beacon Press" data-book-division="" data-book-format="Hardcover" data-page-type="product"> <!--[if lt IE 9]>
+	<script src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/js/ie.min.js"></script>
+	<![endif]--> <!--[if IE 9]>
+		<link rel='stylesheet' id='global-ie9-css' href='/wp-content/themes/penguinrandomhouse/css/ie9.min.css' type='text/css' media='all' />
+	<![endif]--> 
+  <script>
+  var images_url_pattern = "https:\/\/images%d.penguinrandomhouse.com%s",  images_url_buckets = 4;
+ var series_images_url_dir = "https:\/\/assets.penguinrandomhouse.com\/series-images\/", readdown_images_url_dir = "https:\/\/assets.penguinrandomhouse.com\/the-read-down-images\/", category_images_url_dir = "https:\/\/assets.penguinrandomhouse.com\/category-images\/";
+</script> 
+  <style> html.fouc-factor{ opacity:0; filter:alpha(opacity=0); } </style> 
+  <script> var htmlClass = document.getElementsByTagName( "html" )[0].getAttribute( "class" ); document.getElementsByTagName( "html" )[0].setAttribute( "class", htmlClass.replace( /no-js/, "fouc-factor" ) ); </script> 
+  <link rel="dns-prefetch" href="//ajax.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="stylesheet" id="wp-block-library-css" href="https://www.penguinrandomhouse.com/wp-includes/css/dist/block-library/style.min.css?ver=5.1.1" type="text/css" media="all"> 
+  <link rel="stylesheet" id="twentyfourteen-style-css" href="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/style.css?ver=cb20200323064246" type="text/css" media="all"> <!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/css/ie.css?ver=cb20200323064246' type='text/css' media='all' />
+<![endif]--> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.penguinrandomhouse.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.penguinrandomhouse.com%2Fbooks%2F643834%2Fkindred-by-octavia-e-butler"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.penguinrandomhouse.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.penguinrandomhouse.com%2Fbooks%2F643834%2Fkindred-by-octavia-e-butler&amp;format=xml"> 
+  <script type="text/javascript">document.documentElement.className += " js";</script> 
+  <link rel="canonical" href="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/"> 
+  <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style> <!-- WP_Route:  content_product_details_4_1_2 -->
+  <script>var GLOBAL_routeUrl = 'https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/';</script> 
+  <link rel="stylesheet" href="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/css/product.min.css?vers=cb20200323064246" media="all"> 
+  <script><!-- 
+	var GLOBAL_newslettersSignupObject = {"acquisition_code":"PRH_BOOKPAGE_STATIC_ONGOING","workId":"643834"};
+ 
+--></script> 
+  <script type="text/javascript">
+		window.cartUrl='https://cart.penguinrandomhouse.com';
+		window.piiUrl='https://account.penguinrandomhouse.com';
+	</script> 
+  <script type="text/javascript" src="//cdn-3.convertexperiments.com/js/10022714-10021509.js" defer></script> 
+  <script type="text/javascript">var acc_url='';</script> 
+  <noscript>
+   <link rel="stylesheet" id="no-js-global-css" href="/wp-content/themes/penguinrandomhouse/styles-nojs.min.css" type="text/css" media="all">
+  </noscript> 
+  <link rel="stylesheet" id="global-print-css" href="/wp-content/themes/penguinrandomhouse/styles-print.min.css" type="text/css" media="print"> 
+ </head> 
+ <body class="wp_router_page-template-default single single-wp_router_page postid-5 wp-embed-responsive group-blog masthead-fixed full-width singular"> <!-- Start Tealium tag --> 
+  <script type="text/javascript">
+        
+var utag_data={"page_name":"Kindred by Octavia E. Butler: 9780807083109 | PenguinRandomHouse.com: Books","code_release_version":"cb20200323064246","product_list_price":[26.95],"product_isbn":[9780807083109],"product_title":["Kindred"],"product_author":["Octavia E. Butler"],"product_author_id":["2205535"],"retailer_link_present":"yes","page_type":"Product Detail Page","product_imprint":["Beacon Press"],"product_format":["Hardcover"],"product_work_id":["643834"],"product_category":["Historical Fiction | Fiction"],"product_division":["Beacon Press"],"event_type":"peoplealsoread_load","website_banner":"Get a FREE Books of the Moment sampler!"};
+	</script> 
+  <script type="text/javascript">
+		(function(a,b,c,d){
+		a='//tags.tiqcdn.com/utag/random/rhcorp-prh/prod/utag.js';
+		b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+		a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+		})();
+	</script> <!-- / End Tealium tag --> 
+  <div id="exit_int_post"> 
+   <div class="before_link">
+    Before you go...
+   </div> 
+   <div class="line1">
+    Check Out
+   </div> 
+   <div class="line2">
+    The Bestselling Books of All Time
+   </div> <a href="/the-read-down/the-bestselling-books-of-all-time/" class="ei_link">See the List</a> 
+  </div> 
+  <div class="container"> 
+   <div class="row"> 
+    <header class="main-header"> <!-- Start Mobile Header --> 
+     <div class="mobile hidden-sm hidden-md hidden-lg"> 
+      <div class="mobile-nav notransition" id="mobile-nav"> 
+       <form role="search" method="get" class="mobile-search-form" action="/search/site"> 
+        <div class="search-box" id="mobile-searchbox"> 
+         <div class="search-controls"> 
+          <input id="search-box" type="search" class="search-field" placeholder="SEARCH" value="" name="q" autocomplete="off" data-original-title="" title=""> 
+          <input type="submit" class="search-submit" value=""> 
+         </div> 
+        </div> 
+       </form> <a href="/" class="logo"><img src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/images/penguin-random-house-logo-square.png" alt="Penguin Random House" height="30" border="0"></a> <a href="https://cart.penguinrandomhouse.com/cart.php" class="cart"> <i class="fa fa-shopping-cart"></i> 
+        <div class="circle"> 
+         <div class="item-count">
+          2
+         </div> 
+        </div> </a> 
+      </div> 
+     </div> <!-- / End Mobile Header --> <!-- Start Desktop Header --> 
+     <div class="desktop container"> 
+      <div class="row"> 
+       <div class="logo hidden-xs">
+        <a href="/"><img src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/images/prh-logo.png" alt="Penguin Random House"></a>
+       </div> 
+       <div id="toolbar-nav" class="toolbar-nav"> 
+        <div id="social-nav" class="social"></div> 
+        <div class="cart hidden-xs"> <a href="https://cart.penguinrandomhouse.com/cart.php">Cart: <i class="fa fa-shopping-cart"></i></a> <span class="item-count">12</span> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="main-nav"> 
+       <nav id="main-nav" role="navigation"> 
+        <ul> 
+         <li><a class="nav-books" href="/books/">Books</a></li>
+         <li><a class="nav-authors" href="/authors/">Authors</a></li>
+         <li><a class="nav-blog" href="/series/">Series</a></li>
+         <li><a class="nav-aboutus" href="/about-us/">About Us</a></li> 
+         <li class="search-box"> 
+          <form id="seachformglobal" role="search" method="get" class="search-form" action="/search/site"> 
+           <div class="search-controls"> 
+            <input id="search-box" type="search" class="search-field" placeholder="SEARCH BY TITLE, AUTHOR, OR KEYWORD" value="" name="q" autocomplete="off"> 
+            <input type="submit" class="search-submit" value=""> 
+           </div> 
+          </form> </li> 
+        </ul> 
+       </nav> 
+      </div> 
+     </div> <!-- / End Desktop Header --> 
+    </header> 
+   </div> 
+  </div> <!-- container END --> <!-- Start Main Page Wrap --> 
+  <div id="main" class="page-wrap notransition"> <!-- Start Mobile Sidebar --> 
+   <div class="side-nav notransition" id="side-nav"> 
+    <img class="logo" src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/images/prh-logo-sm.png" width="100" height="49" border="0" alt="Penguin Random House"> 
+   </div> <!-- / End Mobile Sidebar --> 
+   <div class="mq-view"></div> <!-- moving also-by-author NONE --> <!--html from front end --> <!-- product info top --> 
+   <script type="text/javascript">
+	var work_not_loyalty = true,
+	curr_dsply_lylty_elig = false,
+	lyltyMssgClass = false,
+	loyalty_link = 'https://account.penguinrandomhouse.com/rewards/';
+</script> <a name="#home" id="home"></a> 
+   <div id="tmpl-indc" class="tmpl-product" data-id="9780807083697,9780807083109,9780807083703"></div> 
+   <div id="signup_loyalty" class="inner-facade signup-loyalty"> 
+    <div class="extendwrap never_show" id="newsletter-mobile-wrap"> 
+     <div class="container"> 
+      <div class="col-xs-1 col-sm-0 col-md-0 col-lg-0"></div> 
+      <div class="main-content col-xs-14 col-sm-16 col-md-16 col-lg-16"> <!-- newsletter --> 
+       <div id="newsletter-wrap-mobile" class="grayab"> 
+        <div class="slot newsletter-signup product"></div>
+       </div> <!-- /newsletter --> 
+      </div> 
+      <div class="col-xs-1 col-sm-0 col-md-0 col-lg-0"></div> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="main_facade" class="inner-facade main-facade"> 
+    <div class="container"> <!-- Start Scaffolding --> 
+     <div class="scaffolding row"> 
+      <div class="col-xs-1 col-sm-0 col-md-0 col-lg-0"></div> 
+      <div class="main-content col-xs-14 col-sm-16 col-md-16 col-lg-16"> 
+       <div class="product-header clearfix"> 
+        <div id="product_jacket" class="slot product-jacket"> 
+         <div class="book-detail"> 
+          <div class="cover-wrapper"> 
+           <div class="enlrgWrap"> <i class="fa fa-arrows-alt excerpt-link enlarge" aria-hidden="true"></i> 
+           </div> 
+           <img src="https://images1.penguinrandomhouse.com/cover/9780807083109" id="coverFormat" class="cover img-responsive" alt="Kindred by Octavia E. Butler"> 
+          </div><!-- /.cover-wrapper --> 
+          <div class="product-format-mobile curr-ttl-mobile isbn-related hidden 9780807083697 dsktop-links"> <button type="button" class="btn buy2 9780807083697" rel="popover">Buy</button> 
+          </div> 
+          <div style="clear:both"></div> 
+          <p class="excerpt-link isbn-related hidden 9780807083697 dsktop-links"> <a href="http://images.randomhouse.com/teachers_guides/9780807083697.pdf" class="download">Teacher’s Guide</a> </p> 
+          <div class="product-format-mobile curr-ttl-mobile isbn-related show 9780807083109 dsktop-links"> <button type="button" class="btn buy2 9780807083109" rel="popover">Buy</button> 
+          </div> 
+          <div style="clear:both"></div> 
+          <p class="excerpt-link isbn-related show 9780807083109 dsktop-links"> <a href="http://images.randomhouse.com/teachers_guides/9780807083697.pdf" class="download">Teacher’s Guide</a> </p> 
+          <div class="product-format-mobile curr-ttl-mobile isbn-related hidden 9780807083703 dsktop-links"> <button type="button" class="btn buy2 9780807083703" rel="popover">Buy</button> 
+          </div> 
+          <div style="clear:both"></div> 
+          <p class="excerpt-link isbn-related hidden 9780807083703 dsktop-links"> <a href="http://images.randomhouse.com/teachers_guides/9780807083697.pdf" class="download">Teacher’s Guide</a> </p> 
+         </div> 
+        </div> 
+        <div class="slot product-title"> 
+         <div class="panel-body"> 
+          <h1>Kindred</h1> 
+          <h2 class="contributors isbn-related 9780807083697 dsktop-links">By <span class="ws-nw role-A"><b>Octavia E. Butler</b></span><br></h2>
+          <h2 class="contributors isbn-related 9780807083697 mbl-links">By <span class="ws-nw role-A">Octavia E. Butler</span><br></h2>
+          <h2 class="contributors isbn-related 9780807083109 show dsktop-links">By <span class="ws-nw role-A"><b>Octavia E. Butler</b></span><br></h2>
+          <h2 class="contributors isbn-related 9780807083109 show mbl-links">By <span class="ws-nw role-A">Octavia E. Butler</span><br></h2>
+          <h2 class="contributors isbn-related 9780807083703 dsktop-links">By <span class="ws-nw role-A"><b>Octavia E. Butler</b></span><br></h2>
+          <h2 class="contributors isbn-related 9780807083703 mbl-links">By <span class="ws-nw role-A">Octavia E. Butler</span><br></h2>
+          <div class="bs-seal">
+           Best Seller
+          </div>
+          <div id="product-top-category">
+           <h4 class="category isbn-related 9780807083697">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4>
+           <h4 class="category isbn-related 9780807083109">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4>
+           <h4 class="category isbn-related 9780807083703">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4>
+          </div> 
+         </div> 
+        </div> 
+        <div class="slot product-format"> 
+         <div class="product-format-tblt"> 
+          <div class="curr-ttl-mobile active isbn-related  9780807083697"> <!-- this is for the active isbn set by PHP --> <a href="#">Paperback</a> <span class="us-price">$16.00</span> 
+           <p class="title-details"> <span> <span class="ws-nw">Feb 01, 2004</span> <span class="ws-nw">| ISBN 9780807083697</span> <!--<span class="ws-nw">| 5-3/8 x 8</span>--> <!--<span class="ws-nw">| ISBN 9780807083697</span>--> <button type="button" class="btn buy2 9780807083697" rel="popover">Buy</button> </span></p> 
+          </div> 
+          <div class="curr-ttl-mobile active isbn-related show 9780807083109"> <!-- this is for the active isbn set by PHP --> <a href="#">Hardcover</a> <span class="us-price">$26.95</span> 
+           <p class="title-details"> <span> <span class="ws-nw">Feb 01, 2009</span> <span class="ws-nw">| ISBN 9780807083109</span> <!--<span class="ws-nw">| 5-3/8 x 8</span>--> <!--<span class="ws-nw">| ISBN 9780807083109</span>--> <button type="button" class="btn buy2 9780807083109" rel="popover">Buy</button> </span></p> 
+          </div> 
+          <div class="curr-ttl-mobile active isbn-related  9780807083703"> <!-- this is for the active isbn set by PHP --> <a href="#">Ebook</a> <span class="us-price">$9.99</span> 
+           <p class="title-details"> <span> <span class="ws-nw">Feb 01, 2004</span> <span class="ws-nw">| ISBN 9780807083703</span> <!--<span class="ws-nw">| ISBN 9780807083703</span>--> <button type="button" class="btn buy2 9780807083703" rel="popover">Buy</button> <span class="no_lylty format_mssg has_red_code"></span> </span></p> 
+          </div> 
+         </div> 
+         <div class="product-format-mobile-link_wrap"> 
+          <div class="product-format-mobile-link-div"> <a href="javascript:;" class="product-format-mobile-link">All Formats
+            <div class="pl_mn_format">
+             +
+            </div></a> 
+           <div class="mobile-formats-div"> 
+            <div class="mobile-formats"> 
+             <ul class="mobile-inner"></ul> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div id="lylty_bluebox_wrap"></div> 
+         <div id="mobileList"> 
+          <div class="activeBookRow"> 
+           <div class="bookRow active" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" format-name="" merchandise="false" isbn="9780807083109" format="HC" categories="" imprint="Beacon Press" division="Beacon Press" price="26.95" is-loyalty="false">
+            <div class="bk_row_wrap"> 
+             <div class="imageDiv"> 
+              <img src="https://images1.penguinrandomhouse.com/cover/9780807083109" class="mblCover img-responsive" alt="Kindred by Octavia E. Butler"> 
+             </div> 
+             <div class="dataDiv"> 
+              <div class="frmtName">
+               Hardcover
+              </div> 
+              <div class="frmtInfo">
+               Feb 01, 2009 | ISBN 9780807083109
+              </div> 
+             </div> 
+             <div class="buyDiv"> <button type="button" class="btn buy2 9780807083109" rel="popover">Buy <i class="fa fa-caret-down" aria-hidden="true"></i></button> 
+             </div>
+            </div> 
+           </div> 
+           <div class="bookBuyLinkList" style="display:none"></div> 
+          </div> 
+          <div class="bookList" style="display:none;"> 
+           <div class="bookRow" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" format-name="Paperback" merchandise="false" isbn="9780807083697" format="TR" categories="" imprint="Beacon Press" division="Beacon Press" price="16.00" is-loyalty="false">
+            <div class="bk_row_wrap"> 
+             <div class="imageDiv"> 
+              <img src="" data-src="https://images4.penguinrandomhouse.com/cover/9780807083697" class="mblCover img-responsive lazyload" alt="Kindred by Octavia E. Butler"> 
+             </div> 
+             <div class="dataDiv"> 
+              <div class="frmtName">
+               Paperback
+              </div> 
+              <div class="frmtInfo">
+               Feb 01, 2004 | ISBN 9780807083697
+              </div> 
+             </div> 
+             <div class="buyDiv"> <button type="button" class="btn buy2 9780807083697" rel="popover">Buy <i class="fa fa-caret-down" aria-hidden="true"></i></button> 
+             </div>
+            </div> 
+           </div> 
+           <div class="bookRow" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" format-name="Ebook" merchandise="false" isbn="9780807083703" format="EL" categories="" imprint="Beacon Press" division="Beacon Press" price="9.99" is-loyalty="false">
+            <div class="bk_row_wrap"> 
+             <div class="imageDiv"> 
+              <img src="" data-src="https://images1.penguinrandomhouse.com/cover/9780807083703" class="mblCover img-responsive lazyload" alt="Kindred by Octavia E. Butler"> 
+             </div> 
+             <div class="dataDiv"> 
+              <div class="frmtName">
+               Ebook
+              </div> 
+              <div class="frmtInfo">
+               Feb 01, 2004 | ISBN 9780807083703
+              </div> 
+             </div> 
+             <div class="buyDiv"> <button type="button" class="btn buy2 9780807083703" rel="popover">Buy <i class="fa fa-caret-down" aria-hidden="true"></i></button> 
+             </div>
+            </div> 
+            <div class="no_lylty format_mssg has_red_code"></div> 
+           </div> 
+          </div> 
+          <div class="format-selection see-button"> <span class="format-cta">See All Formats</span> <span class="format-count">(2)</span> <span class="format-display-symbol">+</span> 
+          </div> 
+         </div> 
+         <div class="panel-group" id="accordion"> 
+          <div class="panel"> 
+           <div class="panel-heading"> 
+            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"> Paperback <span class="countDiv0"></span> 
+              <div class="pl_mn_format">
+               +
+              </div> </a> </h4> 
+           </div> 
+           <div id="collapse1" class="panel-collapse collapse"> 
+            <div class="panel-body"> 
+             <ul class="ttl-data"> 
+              <li class=""> <a href="#9780807083697" class="isbnttl" rel="popover" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" merchandise="false" isbn="9780807083697" format="TR" format-name="Paperback" categories="Historical Fiction | Fiction" imprint="Beacon Press" division="Beacon Press" price="16.00" is-loyalty="false">Paperback</a> <button type="button" class="btn buy2 9780807083697" rel="popover">Buy</button> <span class="us-price">$16.00</span> <p class="title-details"> <span class="ws-nw">Feb 01, 2004</span> <span class="ws-nw">| ISBN 9780807083697</span> <!--<span class="ws-nw">| </span>--> <!--<span class="ws-nw">| ISBN 9780807083697</span>--> </p> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="panel"> 
+           <div class="panel-heading selected"> 
+            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"> Hardcover <span class="countDiv1"></span> 
+              <div class="pl_mn_format">
+               –
+              </div> </a> </h4> 
+           </div> 
+           <div id="collapse2" class="panel-collapse collapse in"> 
+            <div class="panel-body"> 
+             <ul class="ttl-data"> 
+              <li class="active"> <a href="#9780807083109" class="isbnttl" rel="popover" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" merchandise="false" isbn="9780807083109" format="HC" format-name="Hardcover" categories="Historical Fiction | Fiction" imprint="Beacon Press" division="Beacon Press" price="26.95" is-loyalty="false">Hardcover</a> <button type="button" class="btn buy2 9780807083109" rel="popover">Buy</button> <span class="us-price">$26.95</span> <p class="title-details"> <span class="ws-nw">Feb 01, 2009</span> <span class="ws-nw">| ISBN 9780807083109</span> <!--<span class="ws-nw">| </span>--> <!--<span class="ws-nw">| ISBN 9780807083109</span>--> </p> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="panel"> 
+           <div class="panel-heading"> 
+            <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"> Ebook <span class="countDiv2"></span> 
+              <div class="pl_mn_format">
+               +
+              </div> </a> </h4> 
+           </div> 
+           <div id="collapse3" class="panel-collapse collapse"> 
+            <div class="panel-body"> 
+             <ul class="ttl-data"> 
+              <li class=""> <a href="#9780807083703" class="isbnttl" rel="popover" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" merchandise="false" isbn="9780807083703" format="EL" format-name="Ebook" categories="Historical Fiction | Fiction" imprint="Beacon Press" division="Beacon Press" price="9.99" is-loyalty="false">Ebook</a> <button type="button" class="btn buy2 9780807083703" rel="popover">Buy</button> <span class="us-price">$9.99</span> <p class="title-details"> <span class="ws-nw">Feb 01, 2004</span> <span class="ws-nw">| ISBN 9780807083703</span> <!--<span class="ws-nw">| ISBN 9780807083703</span>--> </p> 
+               <div class="no_lylty format_mssg has_red_code"></div> </li> 
+             </ul> 
+            </div> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="no_lylty ttl_mssg">
+          *This title is not eligible for purchase to earn points nor for redemption with your code in the <span>Reader Rewards</span> program
+         </div> 
+        </div> 
+       </div> 
+       <div class="default-retailer"> 
+        <h4 class="buy">Buy the Ebook:</h4> 
+        <ul> 
+         <li><a href="http://links.penguinrandomhouse.com/type/affiliate/isbn/9780807083703/siteId/301/retailerid/1/trackingcode/PRHEFFDF5A7F1" target="_blank">Kobo</a></li>
+         <li><a href="http://links.penguinrandomhouse.com/type/affiliate/isbn/9780807083703/siteId/301/retailerid/2/trackingcode/PRHEFFDF5A7F1" target="_blank">Barnes &amp; Noble</a></li>
+         <li><a href="http://links.penguinrandomhouse.com/type/affiliate/isbn/9780807083703/siteId/301/retailerid/3/trackingcode/PRHEFFDF5A7F1" target="_blank">Apple</a></li>
+         <li><a href="http://links.penguinrandomhouse.com/type/affiliate/isbn/9780807083703/siteId/301/retailerid/5/trackingcode/PRHEFFDF5A7F1" target="_blank">Books A Million</a></li>
+         <li><a href="http://links.penguinrandomhouse.com/type/affiliate/isbn/9780807083703/siteId/301/retailerid/7/trackingcode/randohouseinc7986-20" target="_blank">Amazon</a></li>
+         <li><a href="http://links.penguinrandomhouse.com/type/affiliate/isbn/9780807083703/siteId/301/retailerid/22/trackingcode/PRHEFFDF5A7F1" target="_blank">Google Play Store</a></li> 
+        </ul> 
+       </div> 
+      </div> <!-- main-content --> 
+      <div class="col-xs-1 col-sm-0 col-md-0 col-lg-0"></div> 
+     </div> <!-- scaffolding row --> 
+    </div> <!-- container --> 
+   </div> <!-- inner-facade END --> <!-- end product info top --> <!-- buy options --> 
+   <div class="sticky-buy"> 
+    <div id="buy-options"> 
+     <ul> 
+      <li class="isbn-related 9780807083697 last"> 
+       <form action="https://cart.penguinrandomhouse.com/prhcart/prhcart.php" method="post" content-type="application/x-www-form-urlencoded;charset=UTF-8" enctype="application/x-www-form-urlencoded;charset=UTF-8"> 
+        <img src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/images/logo.gif" class="logo"><button type="submit" class="btn buy">Add to Cart</button> 
+        <input id="itemISBN" type="hidden" name="itemISBN" value="9780807083697"> 
+        <input id="itemQuantity" type="hidden" name="itemQuantity" value="1"> 
+        <input id="siteName" type="hidden" name="siteName" value="prh"> 
+        <input id="referringSite" type="hidden" name="referringSite" value="prh"> 
+        <input id="siteReturnURL" type="hidden" name="siteReturnURL" value="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/9780807083697/"> 
+        <input id="itemReturnURL" type="hidden" name="itemReturnURL" value="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/9780807083697/"> 
+        <input class="nonce" type="hidden" name="nonce" value=""> 
+       </form> </li> 
+      <li class="isbn-related 9780807083109 last"> 
+       <form action="https://cart.penguinrandomhouse.com/prhcart/prhcart.php" method="post" content-type="application/x-www-form-urlencoded;charset=UTF-8" enctype="application/x-www-form-urlencoded;charset=UTF-8"> 
+        <img src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/images/logo.gif" class="logo"><button type="submit" class="btn buy">Add to Cart</button> 
+        <input id="itemISBN" type="hidden" name="itemISBN" value="9780807083109"> 
+        <input id="itemQuantity" type="hidden" name="itemQuantity" value="1"> 
+        <input id="siteName" type="hidden" name="siteName" value="prh"> 
+        <input id="referringSite" type="hidden" name="referringSite" value="prh"> 
+        <input id="siteReturnURL" type="hidden" name="siteReturnURL" value="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/9780807083109/"> 
+        <input id="itemReturnURL" type="hidden" name="itemReturnURL" value="https://www.penguinrandomhouse.com/books/643834/kindred-by-octavia-e-butler/9780807083109/"> 
+        <input class="nonce" type="hidden" name="nonce" value=""> 
+       </form> </li> 
+     </ul> 
+    </div> 
+   </div> <!-- end buy options --> <!-- product info bottom --> 
+   <div class="container"> 
+    <div class="scaffolding row"> 
+     <div class="col-xs-1 col-sm-0 col-md-0 col-lg-0"></div> 
+     <div class="main-content col-xs-14 col-sm-16 col-md-16 col-lg-16"> <!-- Left rail above carousels --> 
+      <div id="left-rail-top" class="product-body clearfix"> <!-- run thru the $mobileContent array until you hit carousels --> 
+       <div id="mobile-about-the-book">
+        <!-- about the book --> <a name="#aboutthebook" id="aboutthebook"></a> 
+        <div class="slot product-about 9780807083697 isbn-related seemoreenable"> 
+         <section class="overview"> 
+          <h4 class="slot-header">About <span>Kindred</span></h4> 
+          <p><b>The visionary author’s masterpiece pulls us—along with her Black female hero—through time to face the horrors of slavery and explore the impacts of racism, sexism, and white supremacy then and now.</b><br><br>Dana, a modern black woman, is celebrating her twenty-sixth birthday with her new husband when she is snatched abruptly from her home in California and transported to the antebellum South. Rufus, the white son of a plantation owner, is drowning, and Dana has been summoned to save him. Dana is drawn back repeatedly through time to the slave quarters, and each time the stay grows longer, more arduous, and more dangerous until it is uncertain whether or not Dana’s life will end, long before it has a chance to begin.</p> 
+         </section> 
+        </div> <a name="#aboutthebook" id="aboutthebook"></a> 
+        <div class="slot product-about 9780807083109 isbn-related seemoreenable show"> 
+         <section class="overview"> 
+          <h4 class="slot-header">About <span>Kindred</span></h4> 
+          <p><b>The visionary author’s masterpiece pulls us—along with her Black female hero—through time to face the horrors of slavery and explore the impacts of racism, sexism, and white supremacy then and now.</b><br><br>Dana, a modern black woman, is celebrating her twenty-sixth birthday with her new husband when she is snatched abruptly from her home in California and transported to the antebellum South. Rufus, the white son of a plantation owner, is drowning, and Dana has been summoned to save him. Dana is drawn back repeatedly through time to the slave quarters, and each time the stay grows longer, more arduous, and more dangerous until it is uncertain whether or not Dana’s life will end, long before it has a chance to begin.</p> 
+         </section> 
+        </div> <a name="#aboutthebook" id="aboutthebook"></a> 
+        <div class="slot product-about 9780807083703 isbn-related seemoreenable"> 
+         <section class="overview"> 
+          <h4 class="slot-header">About <span>Kindred</span></h4> 
+          <p><b>The visionary author’s masterpiece pulls us—along with her Black female hero—through time to face the horrors of slavery and explore the impacts of racism, sexism, and white supremacy then and now.</b><br><br>Dana, a modern black woman, is celebrating her twenty-sixth birthday with her new husband when she is snatched abruptly from her home in California and transported to the antebellum South. Rufus, the white son of a plantation owner, is drowning, and Dana has been summoned to save him. Dana is drawn back repeatedly through time to the slave quarters, and each time the stay grows longer, more arduous, and more dangerous until it is uncertain whether or not Dana’s life will end, long before it has a chance to begin.</p> 
+         </section> 
+        </div> <!-- /about the book --> 
+        <div class="product-look-inside mbl-links"> 
+         <div style="clear:both"></div> 
+         <p class="excerpt-link isbn-related  9780807083697 mbl-links"> <a href="/books/643834/kindred-by-octavia-e-butler/9780807083109/teachers-guide/" target="_blank" id="teacher-guide-link">Teacher’s Guide</a> </p> 
+         <div style="clear:both"></div> 
+         <p class="excerpt-link isbn-related show 9780807083109 mbl-links"> <a href="/books/643834/kindred-by-octavia-e-butler/9780807083109/teachers-guide/" target="_blank" id="teacher-guide-link">Teacher’s Guide</a> </p> 
+         <div style="clear:both"></div> 
+         <p class="excerpt-link isbn-related  9780807083703 mbl-links"> <a href="/books/643834/kindred-by-octavia-e-butler/9780807083109/teachers-guide/" target="_blank" id="teacher-guide-link">Teacher’s Guide</a> </p> 
+        </div> 
+       </div>
+       <div id="mobile-listen-to-a-clip"></div>
+       <div id="mobile-also-in-series">
+        <!-- Also in series --> <!-- div id="also-in-series-mobile" --> <a name="#alsoinseries" id="alsoinseries"></a> <!-- checking NONE --> <!-- checking NONE --> <!-- checking NONE --> <!-- / Also in series --> 
+       </div>
+       <div id="mobile-also-by-author">
+        <!-- Also by author --> <!-- / Also by author --> 
+       </div>
+       <div id="mobile-author-spotlights">
+        <!-- author spotlights --> <!-- /author spotlights --> 
+       </div>
+       <div id="mobile-second-product-detail">
+        <!-- 2nd prod detail --> <a name="#productdetails" id="productdetails"></a> 
+        <div class="slot scnd-prod-detail"> 
+         <div class="product-author-also-by" id="scnd-detail"> 
+          <h4 class="slot-header">Product Details</h4> 
+         </div> 
+         <div class="clearfix isbn-related 9780807083697"> 
+          <h4 class="category">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4> Paperback | $16.00 
+          <br> Published by Beacon Press
+          <br> <span class="ws-nw">Feb 01, 2004</span> <span class="ws-nw">| 264 Pages</span> <span class="ws-nw">| 5-3/8 x 8</span> <span class="ws-nw isbn-row">| ISBN 9780807083697</span> 
+         </div> 
+         <div class="clearfix isbn-related 9780807083109"> 
+          <h4 class="category">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4> Hardcover | $26.95 
+          <br> Published by Beacon Press
+          <br> <span class="ws-nw">Feb 01, 2009</span> <span class="ws-nw">| 264 Pages</span> <span class="ws-nw">| 5-3/8 x 8</span> <span class="ws-nw isbn-row">| ISBN 9780807083109</span> 
+         </div> 
+         <div class="clearfix isbn-related 9780807083703"> 
+          <h4 class="category">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4> Ebook | $9.99 
+          <br> Published by Beacon Press
+          <br> <span class="ws-nw">Feb 01, 2004</span> <span class="ws-nw">| 264 Pages</span> <span class="ws-nw isbn-row">| ISBN 9780807083703</span> 
+         </div> 
+        </div> <!-- / 2nd prod detail --> 
+       </div> 
+      </div> <!-- / Left rail above carousels --> 
+      <script>
+        var rightRailList = {"NONE":["also-by-author","author-spotlights","related-links","audio-extras","related-articles","second-product-detail"]};
+      </script> <!-- Right Rail above carousels - visible on desktop --> 
+      <div id="right-rail-top" class="right-rail"> 
+      </div> <!-- / Right Rail --> <!-- Carousels??? --> 
+      <div class="product-body clearfix"> <!-- people who read --> 
+       <div class="slot product-recommended"> 
+        <h4 class="slot-header">People Who Read <span>Kindred</span> Also Read</h4> 
+        <section class="carousel recommended"> <a class="control left" href="javascript:;"><span class="arrow">‹</span></a> <a class="control right" href="javascript:;"><span class="arrow">›</span></a> 
+         <div class="viewport"> 
+          <div class="slider"> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314878/firebrand-by-kristen-britain/"><img alt="Firebrand" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780756414078?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756414078?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756414078?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756414078?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314878/firebrand-by-kristen-britain/" title="Firebrand">Firebrand</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/238523/kristen-britain/" title="Kristen Britain">Kristen Britain</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315216/a-scandal-in-battersea-by-mercedes-lackey/"><img alt="A Scandal in Battersea" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780756408732?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756408732?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756408732?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756408732?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315216/a-scandal-in-battersea-by-mercedes-lackey/" title="A Scandal in Battersea">A Scandal in Battersea</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/240764/mercedes-lackey/" title="Mercedes Lackey">Mercedes Lackey</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314739/the-brightest-fell-by-seanan-mcguire/"><img alt="The Brightest Fell" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780756413316?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756413316?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756413316?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756413316?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314739/the-brightest-fell-by-seanan-mcguire/" title="The Brightest Fell">The Brightest Fell</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/244505/seanan-mcguire/" title="Seanan McGuire">Seanan McGuire</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315179/the-regional-office-is-under-attack-by-manuel-gonzales/"><img alt="The Regional Office Is Under Attack!" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780399573217?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780399573217?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780399573217?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780399573217?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315179/the-regional-office-is-under-attack-by-manuel-gonzales/" title="The Regional Office Is Under Attack!">The Regional Office Is Under Attack!</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/239843/manuel-gonzales/" title="Manuel Gonzales">Manuel Gonzales</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314491/hungry-ghosts-by-stephen-blackmoore/"><img alt="Hungry Ghosts" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780756409418?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756409418?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756409418?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756409418?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314491/hungry-ghosts-by-stephen-blackmoore/" title="Hungry Ghosts">Hungry Ghosts</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/245004/stephen-blackmoore/" title="Stephen Blackmoore">Stephen Blackmoore</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/317023/unquiet-land-by-sharon-shinn/"><img alt="Unquiet Land" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780425277034?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425277034?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425277034?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425277034?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/317023/unquiet-land-by-sharon-shinn/" title="Unquiet Land">Unquiet Land</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/230565/sharon-shinn/" title="Sharon Shinn">Sharon Shinn</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315165/tower-of-thorns-by-juliet-marillier/"><img alt="Tower of Thorns" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780451467027?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780451467027?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780451467027?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780451467027?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315165/tower-of-thorns-by-juliet-marillier/" title="Tower of Thorns">Tower of Thorns</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/60452/juliet-marillier/" title="Juliet Marillier">Juliet Marillier</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316573/dreamseeker-by-cs-friedman/"><img alt="Dreamseeker" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780756410766?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756410766?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756410766?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756410766?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316573/dreamseeker-by-cs-friedman/" title="Dreamseeker">Dreamseeker</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/229588/cs-friedman/" title="C.S. Friedman">C.S. Friedman</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315100/the-cinder-spires-the-aeronauts-windlass-by-jim-butcher/"><img alt="The Cinder Spires: The Aeronaut's Windlass" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780451466815?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780451466815?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780451466815?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780451466815?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315100/the-cinder-spires-the-aeronauts-windlass-by-jim-butcher/" title="The Cinder Spires: The Aeronaut's Windlass">The Cinder Spires: The Aeronaut's Windlass</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/84567/jim-butcher/" title="Jim Butcher">Jim Butcher</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316942/the-book-of-phoenix-by-nnedi-okorafor/"><img alt="The Book of Phoenix" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780756410780?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756410780?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756410780?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756410780?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316942/the-book-of-phoenix-by-nnedi-okorafor/" title="The Book of Phoenix">The Book of Phoenix</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/241777/nnedi-okorafor/" title="Nnedi Okorafor">Nnedi Okorafor</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314759/javelin-rain-by-myke-cole/"><img alt="Javelin Rain" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780425269657?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425269657?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425269657?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425269657?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314759/javelin-rain-by-myke-cole/" title="Javelin Rain">Javelin Rain</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/241392/myke-cole/" title="Myke Cole">Myke Cole</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314964/magic-shifts-by-ilona-andrews/"><img alt="Magic Shifts" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780425270684?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780425270684?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780425270684?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780425270684?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314964/magic-shifts-by-ilona-andrews/" title="Magic Shifts">Magic Shifts</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/230010/ilona-andrews/" title="Ilona Andrews">Ilona Andrews</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315271/kingfisher-by-patricia-a-mckillip/"><img alt="Kingfisher" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780425271766?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425271766?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425271766?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425271766?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315271/kingfisher-by-patricia-a-mckillip/" title="Kingfisher">Kingfisher</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/20041/patricia-a-mckillip/" title="Patricia A. McKillip">Patricia A. McKillip</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316927/winterwood-by-jacey-bedford/"><img alt="Winterwood" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780756410155?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756410155?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756410155?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756410155?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316927/winterwood-by-jacey-bedford/" title="Winterwood">Winterwood</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/235402/jacey-bedford/" title="Jacey Bedford">Jacey Bedford</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/313886/the-brimstone-deception-by-lisa-shearin/"><img alt="The Brimstone Deception" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780425266939?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425266939?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425266939?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425266939?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/313886/the-brimstone-deception-by-lisa-shearin/" title="The Brimstone Deception">The Brimstone Deception</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/239267/lisa-shearin/" title="Lisa Shearin">Lisa Shearin</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315856/unbound-by-jim-c-hines/"><img alt="Unbound" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780756409692?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756409692?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756409692?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756409692?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315856/unbound-by-jim-c-hines/" title="Unbound">Unbound</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/236600/jim-c-hines/" title="Jim C. Hines">Jim C. Hines</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316906/the-kings-deryni-by-katherine-kurtz/"><img alt="The King's Deryni" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780425276693?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425276693?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425276693?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425276693?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316906/the-kings-deryni-by-katherine-kurtz/" title="The King's Deryni">The King's Deryni</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/16405/katherine-kurtz/" title="Katherine Kurtz">Katherine Kurtz</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315589/the-lesser-dead-by-christopher-buehlman/"><img alt="The Lesser Dead" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780425272626?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425272626?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425272626?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425272626?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315589/the-lesser-dead-by-christopher-buehlman/" title="The Lesser Dead">The Lesser Dead</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/230461/christopher-buehlman/" title="Christopher Buehlman">Christopher Buehlman</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315139/chapelwood-by-cherie-priest/"><img alt="Chapelwood" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780451466983?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780451466983?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780451466983?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780451466983?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315139/chapelwood-by-cherie-priest/" title="Chapelwood">Chapelwood</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/108726/cherie-priest/" title="Cherie Priest">Cherie Priest</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316641/veiled-by-benedict-jacka/"><img alt="Veiled" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780425275757?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425275757?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425275757?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425275757?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316641/veiled-by-benedict-jacka/" title="Veiled">Veiled</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/228892/benedict-jacka/" title="Benedict Jacka">Benedict Jacka</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315219/shattering-the-ley-by-joshua-palmatier/"><img alt="Shattering the Ley" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780756409913?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756409913?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756409913?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756409913?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315219/shattering-the-ley-by-joshua-palmatier/" title="Shattering the Ley">Shattering the Ley</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/237516/joshua-palmatier/" title="Joshua Palmatier">Joshua Palmatier</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314392/prince-of-fools-by-mark-lawrence/"><img alt="Prince of Fools" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780425268797?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425268797?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425268797?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425268797?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314392/prince-of-fools-by-mark-lawrence/" title="Prince of Fools">Prince of Fools</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/240207/mark-lawrence/" title="Mark Lawrence">Mark Lawrence</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316483/oracle-by-michelle-west/"><img alt="Oracle" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780756410094?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780756410094?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780756410094?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780756410094?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316483/oracle-by-michelle-west/" title="Oracle">Oracle</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/241088/michelle-west/" title="Michelle West">Michelle West</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314443/the-shattered-court-by-mj-scott/"><img alt="The Shattered Court" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780451465399?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780451465399?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780451465399?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780451465399?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314443/the-shattered-court-by-mj-scott/" title="The Shattered Court">The Shattered Court</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/239726/mj-scott/" title="M.J. Scott">M.J. Scott</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316172/captive-prince-by-c-s-pacat/"><img alt="Captive Prince" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780425274262?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425274262?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425274262?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425274262?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316172/captive-prince-by-c-s-pacat/" title="Captive Prince">Captive Prince</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/229569/c-s-pacat/" title="C. S. Pacat">C. S. Pacat</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314727/dark-heir-by-faith-hunter/"><img alt="Dark Heir" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780451465962?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780451465962?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780451465962?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780451465962?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314727/dark-heir-by-faith-hunter/" title="Dark Heir">Dark Heir</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/233144/faith-hunter/" title="Faith Hunter">Faith Hunter</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314194/stolen-crown-by-dennis-l-mckiernan/"><img alt="Stolen Crown" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780451419897?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780451419897?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780451419897?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780451419897?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314194/stolen-crown-by-dennis-l-mckiernan/" title="Stolen Crown">Stolen Crown</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/231707/dennis-l-mckiernan/" title="Dennis L. McKiernan">Dennis L. McKiernan</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315632/armageddon-rules-by-j-c-nelson/"><img alt="Armageddon Rules" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780425272909?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425272909?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425272909?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425272909?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315632/armageddon-rules-by-j-c-nelson/" title="Armageddon Rules">Armageddon Rules</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/235273/j-c-nelson/" title="J. C. Nelson">J. C. Nelson</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315482/the-turnip-princess-and-other-newly-discovered-fairy-tales-by-franz-xaver-von-schonwerth-illustrated-by-engelbert-suss/"><img alt="The Turnip Princess and Other Newly Discovered Fairy Tales" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780143107422?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780143107422?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780143107422?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780143107422?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315482/the-turnip-princess-and-other-newly-discovered-fairy-tales-by-franz-xaver-von-schonwerth-illustrated-by-engelbert-suss/" title="The Turnip Princess and Other Newly Discovered Fairy Tales">The Turnip Princess and Other Newly Discovered Fairy Tales</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/233416/franz-xaver-von-schonwerth/" title="Franz Xaver von Schonwerth">Franz Xaver von Schonwerth</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314117/blood-song-by-anthony-ryan/"><img alt="Blood Song" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780425281598?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425281598?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425281598?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425281598?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314117/blood-song-by-anthony-ryan/" title="Blood Song">Blood Song</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/228268/anthony-ryan/" title="Anthony Ryan">Anthony Ryan</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316710/half-resurrection-blues-by-daniel-jose-older/"><img alt="Half-Resurrection Blues" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780425275986?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425275986?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425275986?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425275986?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316710/half-resurrection-blues-by-daniel-jose-older/" title="Half-Resurrection Blues">Half-Resurrection Blues</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/2047894/daniel-jose-older/" title="Daniel José Older">Daniel José Older</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314380/the-witches-of-echo-park-by-amber-benson/"><img alt="The Witches of Echo Park" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780425268674?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780425268674?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780425268674?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780425268674?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314380/the-witches-of-echo-park-by-amber-benson/" title="The Witches of Echo Park">The Witches of Echo Park</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/58695/amber-benson/" title="Amber Benson">Amber Benson</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315586/iron-axe-by-steven-harper/"><img alt="Iron Axe" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780451468468?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780451468468?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780451468468?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780451468468?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315586/iron-axe-by-steven-harper/" title="Iron Axe">Iron Axe</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/245139/steven-harper/" title="Steven Harper">Steven Harper</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314307/a-wind-in-the-night-by-barb-hendee/"><img alt="A Wind in the Night" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780451468147?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780451468147?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780451468147?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780451468147?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314307/a-wind-in-the-night-by-barb-hendee/" title="A Wind in the Night">A Wind in the Night</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/228623/jc-hendee/" title="J.C. Hendee">J.C. Hendee</a> and <a href="/authors/228622/barb-hendee/" title="Barb Hendee">Barb Hendee</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/316938/heart-of-the-sea-by-nora-roberts/"><img alt="Heart of the Sea" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780425271605?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425271605?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425271605?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425271605?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/316938/heart-of-the-sea-by-nora-roberts/" title="Heart of the Sea">Heart of the Sea</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/25754/nora-roberts/" title="Nora Roberts">Nora Roberts</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314832/drawn-blades-by-kelly-mccullough/"><img alt="Drawn Blades" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780425270004?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425270004?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425270004?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425270004?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314832/drawn-blades-by-kelly-mccullough/" title="Drawn Blades">Drawn Blades</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/238266/kelly-mccullough/" title="Kelly McCullough">Kelly McCullough</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315254/house-immortal-by-devon-monk/"><img alt="House Immortal" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9780451467362?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780451467362?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780451467362?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780451467362?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315254/house-immortal-by-devon-monk/" title="House Immortal">House Immortal</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/226073/devon-monk/" title="Devon Monk">Devon Monk</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315488/the-midnight-queen-by-sylvia-izzo-hunter/"><img alt="The Midnight Queen" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780425272459?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780425272459?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780425272459?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780425272459?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315488/the-midnight-queen-by-sylvia-izzo-hunter/" title="The Midnight Queen">The Midnight Queen</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/245437/sylvia-izzo-hunter/" title="Sylvia Izzo Hunter">Sylvia Izzo Hunter</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315656/wickedly-dangerous-by-deborah-blake/"><img alt="Wickedly Dangerous" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780425272923?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425272923?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425272923?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425272923?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315656/wickedly-dangerous-by-deborah-blake/" title="Wickedly Dangerous">Wickedly Dangerous</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/231561/deborah-blake/" title="Deborah Blake">Deborah Blake</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315310/dragon-princess-by-s-andrew-swann/"><img alt="Dragon Princess" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780756409579?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756409579?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756409579?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756409579?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315310/dragon-princess-by-s-andrew-swann/" title="Dragon Princess">Dragon Princess</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/244142/s-andrew-swann/" title="S. Andrew Swann">S. Andrew Swann</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315027/the-dark-eidolon-and-other-fantasies-by-clark-ashton-smith/"><img alt="The Dark Eidolon and Other Fantasies" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images1.penguinrandomhouse.com/cover/9780143107385?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780143107385?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780143107385?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780143107385?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315027/the-dark-eidolon-and-other-fantasies-by-clark-ashton-smith/" title="The Dark Eidolon and Other Fantasies">The Dark Eidolon and Other Fantasies</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/181987/clark-ashton-smith/" title="Clark Ashton Smith">Clark Ashton Smith</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/314046/dawns-early-light-by-pip-ballantine/"><img alt="Dawn's Early Light" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780425267318?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425267318?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425267318?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425267318?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/314046/dawns-early-light-by-pip-ballantine/" title="Dawn's Early Light">Dawn's Early Light</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/242676/pip-ballantine/" title="Pip Ballantine">Pip Ballantine</a> and <a href="/authors/242612/tee-morris/" title="Tee Morris">Tee Morris</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/315550/night-owls-by-lauren-m-roy/"><img alt="Night Owls" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images2.penguinrandomhouse.com/cover/9780425272480?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425272480?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425272480?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425272480?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/315550/night-owls-by-lauren-m-roy/" title="Night Owls">Night Owls</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/238804/lauren-m-roy/" title="Lauren M. Roy">Lauren M. Roy</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/213844/fledgling-by-octavia-e-butler/"><img alt="Fledgling" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images4.penguinrandomhouse.com/cover/9781583226902?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9781583226902?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9781583226902?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9781583226902?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/213844/fledgling-by-octavia-e-butler/" title="Fledgling">Fledgling</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/147255/octavia-e-butler/" title="Octavia E. Butler">Octavia E. Butler</a></div> --> 
+           </div> 
+           <div class="item"> 
+            <div class="img"> <a href="/books/190370/the-sunflower-by-simon-wiesenthal/"><img alt="The Sunflower" src="/wp-content/themes/penguinrandomhouse/images/tmp.gif" data-src="https://images3.penguinrandomhouse.com/cover/9780805210606?width=284&amp;alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780805210606?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780805210606?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780805210606?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+            </div> <!-- <div class="title">
+                    <a href="/books/190370/the-sunflower-by-simon-wiesenthal/" title="The Sunflower">The Sunflower</a>
+                  </div>
+                  <div class="contributor"><a href="/authors/33142/simon-wiesenthal/" title="Simon Wiesenthal">Simon Wiesenthal</a></div> --> 
+           </div> 
+          </div> <!-- slider --> 
+         </div> <!-- viewport --> 
+        </section> 
+       </div> <!-- / people who read --> <!-- recommended for you products --> 
+       <div class="slot product-recommended selected-for-you loading"> 
+        <h4 class="slot-header">Inspired by Your Browsing History</h4> 
+       </div> <!-- / recommended products --> <!-- Also in [category] --> <!-- / Also in [category] --> 
+      </div> 
+     </div> 
+    </div> 
+   </div> <!-- product extended carousel --> 
+   <div class="extendwrap"> 
+    <div id="newsletter-wrap-desktop" class="grayab"> 
+    </div> 
+    <div class="extended-carousel" id="extended-read-carousel-div"> 
+     <div class="line-div"></div> 
+     <div class="container">
+      <h4 class="slot-header">People Who Read <span>Kindred</span> Also Read</h4>
+     </div> 
+     <div id="extended-read-carousel" class="extended-carousel-div loading"> 
+      <div class="item" ttl="Firebrand" url="/books/314878/firebrand-by-kristen-britain/"> 
+       <div class="img"> <a href="/books/314878/firebrand-by-kristen-britain/"><img alt="Firebrand" data-src="https://images1.penguinrandomhouse.com/cover/9780756414078?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756414078?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756414078?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756414078?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="A Scandal in Battersea" url="/books/315216/a-scandal-in-battersea-by-mercedes-lackey/"> 
+       <div class="img"> <a href="/books/315216/a-scandal-in-battersea-by-mercedes-lackey/"><img alt="A Scandal in Battersea" data-src="https://images2.penguinrandomhouse.com/cover/9780756408732?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756408732?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756408732?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756408732?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Brightest Fell" url="/books/314739/the-brightest-fell-by-seanan-mcguire/"> 
+       <div class="img"> <a href="/books/314739/the-brightest-fell-by-seanan-mcguire/"><img alt="The Brightest Fell" data-src="https://images4.penguinrandomhouse.com/cover/9780756413316?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756413316?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756413316?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756413316?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Regional Office Is Under Attack!" url="/books/315179/the-regional-office-is-under-attack-by-manuel-gonzales/"> 
+       <div class="img"> <a href="/books/315179/the-regional-office-is-under-attack-by-manuel-gonzales/"><img alt="The Regional Office Is Under Attack!" data-src="https://images2.penguinrandomhouse.com/cover/9780399573217?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780399573217?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780399573217?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780399573217?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Hungry Ghosts" url="/books/314491/hungry-ghosts-by-stephen-blackmoore/"> 
+       <div class="img"> <a href="/books/314491/hungry-ghosts-by-stephen-blackmoore/"><img alt="Hungry Ghosts" data-src="https://images4.penguinrandomhouse.com/cover/9780756409418?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756409418?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756409418?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756409418?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Unquiet Land" url="/books/317023/unquiet-land-by-sharon-shinn/"> 
+       <div class="img"> <a href="/books/317023/unquiet-land-by-sharon-shinn/"><img alt="Unquiet Land" data-src="https://images1.penguinrandomhouse.com/cover/9780425277034?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425277034?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425277034?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425277034?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Tower of Thorns" url="/books/315165/tower-of-thorns-by-juliet-marillier/"> 
+       <div class="img"> <a href="/books/315165/tower-of-thorns-by-juliet-marillier/"><img alt="Tower of Thorns" data-src="https://images3.penguinrandomhouse.com/cover/9780451467027?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780451467027?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780451467027?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780451467027?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Dreamseeker" url="/books/316573/dreamseeker-by-cs-friedman/"> 
+       <div class="img"> <a href="/books/316573/dreamseeker-by-cs-friedman/"><img alt="Dreamseeker" data-src="https://images2.penguinrandomhouse.com/cover/9780756410766?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756410766?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756410766?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756410766?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Cinder Spires: The Aeronaut's Windlass" url="/books/315100/the-cinder-spires-the-aeronauts-windlass-by-jim-butcher/"> 
+       <div class="img"> <a href="/books/315100/the-cinder-spires-the-aeronauts-windlass-by-jim-butcher/"><img alt="The Cinder Spires: The Aeronaut's Windlass" data-src="https://images2.penguinrandomhouse.com/cover/9780451466815?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780451466815?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780451466815?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780451466815?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Book of Phoenix" url="/books/316942/the-book-of-phoenix-by-nnedi-okorafor/"> 
+       <div class="img"> <a href="/books/316942/the-book-of-phoenix-by-nnedi-okorafor/"><img alt="The Book of Phoenix" data-src="https://images1.penguinrandomhouse.com/cover/9780756410780?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756410780?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756410780?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756410780?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Javelin Rain" url="/books/314759/javelin-rain-by-myke-cole/"> 
+       <div class="img"> <a href="/books/314759/javelin-rain-by-myke-cole/"><img alt="Javelin Rain" data-src="https://images1.penguinrandomhouse.com/cover/9780425269657?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425269657?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425269657?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425269657?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Magic Shifts" url="/books/314964/magic-shifts-by-ilona-andrews/"> 
+       <div class="img"> <a href="/books/314964/magic-shifts-by-ilona-andrews/"><img alt="Magic Shifts" data-src="https://images3.penguinrandomhouse.com/cover/9780425270684?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780425270684?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780425270684?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780425270684?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Kingfisher" url="/books/315271/kingfisher-by-patricia-a-mckillip/"> 
+       <div class="img"> <a href="/books/315271/kingfisher-by-patricia-a-mckillip/"><img alt="Kingfisher" data-src="https://images3.penguinrandomhouse.com/cover/9780425271766?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425271766?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425271766?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425271766?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Winterwood" url="/books/316927/winterwood-by-jacey-bedford/"> 
+       <div class="img"> <a href="/books/316927/winterwood-by-jacey-bedford/"><img alt="Winterwood" data-src="https://images1.penguinrandomhouse.com/cover/9780756410155?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756410155?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756410155?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756410155?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Brimstone Deception" url="/books/313886/the-brimstone-deception-by-lisa-shearin/"> 
+       <div class="img"> <a href="/books/313886/the-brimstone-deception-by-lisa-shearin/"><img alt="The Brimstone Deception" data-src="https://images2.penguinrandomhouse.com/cover/9780425266939?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425266939?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425266939?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425266939?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Unbound" url="/books/315856/unbound-by-jim-c-hines/"> 
+       <div class="img"> <a href="/books/315856/unbound-by-jim-c-hines/"><img alt="Unbound" data-src="https://images4.penguinrandomhouse.com/cover/9780756409692?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756409692?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756409692?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756409692?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The King's Deryni" url="/books/316906/the-kings-deryni-by-katherine-kurtz/"> 
+       <div class="img"> <a href="/books/316906/the-kings-deryni-by-katherine-kurtz/"><img alt="The King's Deryni" data-src="https://images2.penguinrandomhouse.com/cover/9780425276693?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425276693?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425276693?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425276693?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Lesser Dead" url="/books/315589/the-lesser-dead-by-christopher-buehlman/"> 
+       <div class="img"> <a href="/books/315589/the-lesser-dead-by-christopher-buehlman/"><img alt="The Lesser Dead" data-src="https://images3.penguinrandomhouse.com/cover/9780425272626?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425272626?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425272626?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425272626?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Chapelwood" url="/books/315139/chapelwood-by-cherie-priest/"> 
+       <div class="img"> <a href="/books/315139/chapelwood-by-cherie-priest/"><img alt="Chapelwood" data-src="https://images4.penguinrandomhouse.com/cover/9780451466983?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780451466983?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780451466983?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780451466983?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Veiled" url="/books/316641/veiled-by-benedict-jacka/"> 
+       <div class="img"> <a href="/books/316641/veiled-by-benedict-jacka/"><img alt="Veiled" data-src="https://images1.penguinrandomhouse.com/cover/9780425275757?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425275757?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425275757?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425275757?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Shattering the Ley" url="/books/315219/shattering-the-ley-by-joshua-palmatier/"> 
+       <div class="img"> <a href="/books/315219/shattering-the-ley-by-joshua-palmatier/"><img alt="Shattering the Ley" data-src="https://images2.penguinrandomhouse.com/cover/9780756409913?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780756409913?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780756409913?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780756409913?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Prince of Fools" url="/books/314392/prince-of-fools-by-mark-lawrence/"> 
+       <div class="img"> <a href="/books/314392/prince-of-fools-by-mark-lawrence/"><img alt="Prince of Fools" data-src="https://images1.penguinrandomhouse.com/cover/9780425268797?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425268797?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425268797?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425268797?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Oracle" url="/books/316483/oracle-by-michelle-west/"> 
+       <div class="img"> <a href="/books/316483/oracle-by-michelle-west/"><img alt="Oracle" data-src="https://images2.penguinrandomhouse.com/cover/9780756410094?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780756410094?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780756410094?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780756410094?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Shattered Court" url="/books/314443/the-shattered-court-by-mj-scott/"> 
+       <div class="img"> <a href="/books/314443/the-shattered-court-by-mj-scott/"><img alt="The Shattered Court" data-src="https://images1.penguinrandomhouse.com/cover/9780451465399?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780451465399?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780451465399?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780451465399?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Captive Prince" url="/books/316172/captive-prince-by-c-s-pacat/"> 
+       <div class="img"> <a href="/books/316172/captive-prince-by-c-s-pacat/"><img alt="Captive Prince" data-src="https://images3.penguinrandomhouse.com/cover/9780425274262?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425274262?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425274262?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425274262?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Dark Heir" url="/books/314727/dark-heir-by-faith-hunter/"> 
+       <div class="img"> <a href="/books/314727/dark-heir-by-faith-hunter/"><img alt="Dark Heir" data-src="https://images1.penguinrandomhouse.com/cover/9780451465962?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780451465962?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780451465962?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780451465962?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Stolen Crown" url="/books/314194/stolen-crown-by-dennis-l-mckiernan/"> 
+       <div class="img"> <a href="/books/314194/stolen-crown-by-dennis-l-mckiernan/"><img alt="Stolen Crown" data-src="https://images2.penguinrandomhouse.com/cover/9780451419897?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780451419897?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780451419897?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780451419897?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Armageddon Rules" url="/books/315632/armageddon-rules-by-j-c-nelson/"> 
+       <div class="img"> <a href="/books/315632/armageddon-rules-by-j-c-nelson/"><img alt="Armageddon Rules" data-src="https://images4.penguinrandomhouse.com/cover/9780425272909?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425272909?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425272909?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425272909?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Turnip Princess and Other Newly Discovered Fairy Tales" url="/books/315482/the-turnip-princess-and-other-newly-discovered-fairy-tales-by-franz-xaver-von-schonwerth-illustrated-by-engelbert-suss/"> 
+       <div class="img"> <a href="/books/315482/the-turnip-princess-and-other-newly-discovered-fairy-tales-by-franz-xaver-von-schonwerth-illustrated-by-engelbert-suss/"><img alt="The Turnip Princess and Other Newly Discovered Fairy Tales" data-src="https://images4.penguinrandomhouse.com/cover/9780143107422?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780143107422?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780143107422?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780143107422?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Blood Song" url="/books/314117/blood-song-by-anthony-ryan/"> 
+       <div class="img"> <a href="/books/314117/blood-song-by-anthony-ryan/"><img alt="Blood Song" data-src="https://images4.penguinrandomhouse.com/cover/9780425281598?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425281598?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425281598?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425281598?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Half-Resurrection Blues" url="/books/316710/half-resurrection-blues-by-daniel-jose-older/"> 
+       <div class="img"> <a href="/books/316710/half-resurrection-blues-by-daniel-jose-older/"><img alt="Half-Resurrection Blues" data-src="https://images4.penguinrandomhouse.com/cover/9780425275986?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425275986?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425275986?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425275986?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Witches of Echo Park" url="/books/314380/the-witches-of-echo-park-by-amber-benson/"> 
+       <div class="img"> <a href="/books/314380/the-witches-of-echo-park-by-amber-benson/"><img alt="The Witches of Echo Park" data-src="https://images2.penguinrandomhouse.com/cover/9780425268674?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780425268674?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780425268674?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780425268674?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Iron Axe" url="/books/315586/iron-axe-by-steven-harper/"> 
+       <div class="img"> <a href="/books/315586/iron-axe-by-steven-harper/"><img alt="Iron Axe" data-src="https://images3.penguinrandomhouse.com/cover/9780451468468?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780451468468?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780451468468?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780451468468?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="A Wind in the Night" url="/books/314307/a-wind-in-the-night-by-barb-hendee/"> 
+       <div class="img"> <a href="/books/314307/a-wind-in-the-night-by-barb-hendee/"><img alt="A Wind in the Night" data-src="https://images2.penguinrandomhouse.com/cover/9780451468147?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780451468147?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780451468147?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780451468147?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Heart of the Sea" url="/books/316938/heart-of-the-sea-by-nora-roberts/"> 
+       <div class="img"> <a href="/books/316938/heart-of-the-sea-by-nora-roberts/"><img alt="Heart of the Sea" data-src="https://images4.penguinrandomhouse.com/cover/9780425271605?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425271605?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425271605?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425271605?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Drawn Blades" url="/books/314832/drawn-blades-by-kelly-mccullough/"> 
+       <div class="img"> <a href="/books/314832/drawn-blades-by-kelly-mccullough/"><img alt="Drawn Blades" data-src="https://images4.penguinrandomhouse.com/cover/9780425270004?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9780425270004?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9780425270004?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9780425270004?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="House Immortal" url="/books/315254/house-immortal-by-devon-monk/"> 
+       <div class="img"> <a href="/books/315254/house-immortal-by-devon-monk/"><img alt="House Immortal" data-src="https://images3.penguinrandomhouse.com/cover/9780451467362?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780451467362?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780451467362?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780451467362?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Midnight Queen" url="/books/315488/the-midnight-queen-by-sylvia-izzo-hunter/"> 
+       <div class="img"> <a href="/books/315488/the-midnight-queen-by-sylvia-izzo-hunter/"><img alt="The Midnight Queen" data-src="https://images2.penguinrandomhouse.com/cover/9780425272459?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780425272459?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780425272459?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780425272459?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Wickedly Dangerous" url="/books/315656/wickedly-dangerous-by-deborah-blake/"> 
+       <div class="img"> <a href="/books/315656/wickedly-dangerous-by-deborah-blake/"><img alt="Wickedly Dangerous" data-src="https://images2.penguinrandomhouse.com/cover/9780425272923?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425272923?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425272923?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425272923?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Dragon Princess" url="/books/315310/dragon-princess-by-s-andrew-swann/"> 
+       <div class="img"> <a href="/books/315310/dragon-princess-by-s-andrew-swann/"><img alt="Dragon Princess" data-src="https://images1.penguinrandomhouse.com/cover/9780756409579?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780756409579?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780756409579?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780756409579?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Dark Eidolon and Other Fantasies" url="/books/315027/the-dark-eidolon-and-other-fantasies-by-clark-ashton-smith/"> 
+       <div class="img"> <a href="/books/315027/the-dark-eidolon-and-other-fantasies-by-clark-ashton-smith/"><img alt="The Dark Eidolon and Other Fantasies" data-src="https://images3.penguinrandomhouse.com/cover/9780143107385?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780143107385?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780143107385?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780143107385?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Dawn's Early Light" url="/books/314046/dawns-early-light-by-pip-ballantine/"> 
+       <div class="img"> <a href="/books/314046/dawns-early-light-by-pip-ballantine/"><img alt="Dawn's Early Light" data-src="https://images1.penguinrandomhouse.com/cover/9780425267318?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images2.penguinrandomhouse.com/cover/9780425267318?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images1.penguinrandomhouse.com/cover/9780425267318?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images2.penguinrandomhouse.com/cover/9780425267318?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Night Owls" url="/books/315550/night-owls-by-lauren-m-roy/"> 
+       <div class="img"> <a href="/books/315550/night-owls-by-lauren-m-roy/"><img alt="Night Owls" data-src="https://images4.penguinrandomhouse.com/cover/9780425272480?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images1.penguinrandomhouse.com/cover/9780425272480?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images2.penguinrandomhouse.com/cover/9780425272480?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images1.penguinrandomhouse.com/cover/9780425272480?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="Fledgling" url="/books/213844/fledgling-by-octavia-e-butler/"> 
+       <div class="img"> <a href="/books/213844/fledgling-by-octavia-e-butler/"><img alt="Fledgling" data-src="https://images2.penguinrandomhouse.com/cover/9781583226902?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images4.penguinrandomhouse.com/cover/9781583226902?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images3.penguinrandomhouse.com/cover/9781583226902?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images4.penguinrandomhouse.com/cover/9781583226902?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+      <div class="item" ttl="The Sunflower" url="/books/190370/the-sunflower-by-simon-wiesenthal/"> 
+       <div class="img"> <a href="/books/190370/the-sunflower-by-simon-wiesenthal/"><img alt="The Sunflower" data-src="https://images2.penguinrandomhouse.com/cover/9780805210606?alt=cover_coming_soon.jpg" sizes="(max-width: 320px) 125px, (max-width: 360px) 143px, (max-width: 375px) 149px, (max-width: 414px) 166px, (max-width: 568px) 234px, (max-width: 599px) 247px, (max-width: 667px) 173px, (max-width: 736px) 192px, (max-width: 768px) 216px, 107px" data-srcset="https://images3.penguinrandomhouse.com/cover/9780805210606?width=107&amp;alt=cover_coming_soon.jpg 107w, https://images4.penguinrandomhouse.com/cover/9780805210606?width=149&amp;alt=cover_coming_soon.jpg 149w, https://images3.penguinrandomhouse.com/cover/9780805210606?width=247&amp;alt=cover_coming_soon.jpg 247w" class="deferred-view-scroll img-responsive"></a> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="extended-carousel hide" id="extended-recommended-carousel-div"> 
+     <div class="line-div"></div> 
+     <div class="container">
+      <h4 class="slot-header">Inspired by Your Browsing History</h4>
+     </div> 
+     <div id="extended-recommended-carousel" class="extended-carousel-div loading"></div> 
+    </div> 
+   </div> <!-- end product extended carousel --> 
+   <div class="container"> 
+    <div class="scaffolding row"> 
+     <div class="col-xs-1 col-sm-0 col-md-0 col-lg-0"></div> 
+     <div class="main-content col-xs-14 col-sm-16 col-md-16 col-lg-16"> <!-- Left rail below carousels --> 
+      <div id="left-rail-bottom" class="product-body clearfix"> <!-- praise --> 
+       <div id="mobile-praise">
+        <!-- praises --> <a name="#praise" id="praise"></a> 
+        <div class="slot product-praise seemoreenable"> 
+         <h4 class="slot-header">Praise</h4> 
+         <p class="clearfix"> In <i>Kindred</i>, Octavia Butler creates a road for the impossible and a balm for the unbearable. It is everything the literature of science fiction can be.—Walter Mosley<br><br>“Butler’s characters are so vivid and the racist milieu in which they struggle to survive so realistically depicted that one cannot finish <i>Kindred</i> without feeling changed. It is a shattering work of art with much to say about love, hate, slavery, and racial dilemmas, then and now.”—Sam Frank, <i>Los Angeles Herald-Examiner</i><br><br>“Like emotion that uplifts and enriches, like exquisite music or the taste of some special candy remembered from childhood, I never wanted <i>Kindred</i> to end. It overwhelmed me, dominated me, drew me on page after page. To express my total admiration and wonder for the originality of this surpassingly compelling novel, I am driven to a despised cliché: <i>I could not put it down!</i> It is a book that simply will not be denied; its power is hypnotic. <i>Kindred</i> is a story that <i>hurts</i>: I take that to be the surest indicator of genuine Art. It is an <i>important</i> novel, filled with powerful human insight and the shocking impact of the most commonplace experiences viewed in a new way, and it demands that once begun, the reader continue till it has done its work on the heart and mind and soul. Octavia Butler is a writer who will be with us for a long, long time, and <i>Kindred</i> is that rare, magical artifact . . . the novel one returns to, again and again, through the years, to learn, to be humbled, and to be renewed. Do not, I beg you, deny yourself this singular experience.”—Harlan Ellison<br><br>“Truly terrifying. . . . A book you’ll find hard to put down.” —<i>Essence</i><br><br>“Butler’s books are exceptional. . . . She is a realist, writing the most detailed social criticism and creating some of the most fascinating female characters in the genre . . . real women caught in impossible situations.” —Dorothy Allison, <i>The Village Voice</i><br><br>“Butler’s literary craftsmanship is superb.” —<i>The Washington Post Book World</i><br><br>“Her books are disturbing, unsettling… In a field dominated by white male authors, Butler’s African-American feminist perspective is unique, and uniquely suited to reshape the boundaries of the sci-fi genre.” —Bill Glass, <i>L. A. Style</i><br><br>“One of the most original, thought-provoking works examining race and identity.” —Lynell George, <i>Los Angeles Times</i><br><br>“This powerful novel about a modern black woman transported back in time to a slave plantation in the antebellum South is the perfect introduction to Butler’s work and perspectives for those not usually enamored of science fiction. . .A harrowing, haunting story.” —John Marshall, <i>Seattle Post-Intelligencer</i> </p> 
+        </div> <!-- /praises --> 
+       </div><!-- book-awards --> 
+       <div id="mobile-book-awards">
+        <!-- book awards --> <!-- /book awards --> 
+       </div><!-- video-related-links --> 
+       <div id="mobile-video-related-links"> <!-- video related links --> <!-- /video related links --> 
+       </div><!-- author-qa --> 
+       <div id="mobile-author-qa"> <!-- author Q & A's --> <!-- /author Q & A's --> 
+       </div><!-- essays --> 
+       <div id="mobile-essays"> <!-- author essays --> <!-- / author essays --> 
+       </div><!-- slideshow --> 
+       <div id="mobile-slideshow"> <!-- slideshow promo images and slideshow related links --> <!-- / slideshow promo images and slideshow related links --> 
+       </div><!-- table-of-contents --> 
+       <div id="mobile-table-of-contents"> <!-- table of contents --> <!-- /table of contents --> 
+       </div><!-- related-links --> 
+       <div id="mobile-related-links"> <!-- Related Links --> <!-- / Related Links --> 
+       </div><!-- audio-extras --> 
+       <div id="mobile-audio-extras"> <!-- audio extras --> <!-- / audio extras --> 
+       </div><!-- related-articles --> 
+       <div id="mobile-related-articles">
+        <!-- Related Articles --> <!-- Asynchronous Loading Required:  PRHCS-31 - AC #9 --> 
+        <div id="product-articles-wrap-mobile"> <a name="#relatedarticles" id="relatedarticles"></a> 
+         <div class="slot product-articles product-related articles" data-work="feedTagValue:9780807083109^20 OR title_workid:643834^10 OR author_authorId:2205535 OR author_authorid_display_group:/2205535\:[AI].*/^9"> 
+          <h2 class="slot-header">Related Articles</h2> 
+         </div> 
+        </div> <!-- / Related Articles --> 
+       </div><!-- filler --> 
+       <div id="mobile-filler">
+        <!-- filler --> 
+        <div class="slot product-filler seemoreenable">
+          Looking for More Great Reads?
+         <br> <a href="https://www.penguinrandomhouse.com/the-read-down/madelines-picks-winter-2019/">Discover Book Picks from the CEO of Penguin Random House US</a>
+        </div> <!-- /filler --> 
+       </div> 
+      </div> <!-- / Left rail below carousels --> <!-- Right Rail below carousels --> 
+      <div id="right-rail-bottom" class="right-rail"> 
+      </div> <!-- / Right Rail --> 
+     </div> 
+    </div> 
+   </div> <!-- / End Main Content --> 
+   <div class="modal fade product-image" id="modal-product-image" style="display:none;"> 
+    <div class="modal-dialog product-image"> 
+     <div class="modal-content"> 
+      <div class="modal-header product-image"> <button type="button" class="close" data-dismiss="modal"> <span class="fa fa-times">&nbsp;</span> <span class="sr-only">Close</span></button> 
+      </div> 
+      <div class="modal-body"> 
+       <img> 
+       <div class="btn product-image download">
+        <span class="fa fa-download"></span>Download Hi Res
+       </div> 
+      </div> 
+     </div><!-- /.modal-content --> 
+    </div><!-- /.modal-dialog --> 
+   </div><!-- /.modal --> <!-- excerpts --> 
+   <script>
+
+var excerpt_embed_html_list = [];
+var excerpt_text_list = [];
+
+</script> 
+   <div class="modal fade" id="modal-excerpt"> 
+    <div class="modal-dialog"> 
+     <div class="modal-content"> 
+      <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"> <span class="fa fa-times">&nbsp;</span> <span class="sr-only">Close</span></button> 
+       <div class="book"> 
+        <div class="cover"> 
+         <img src> 
+        </div> 
+        <div class="book-meta"> 
+         <div class="book-name">
+          Kindred
+         </div> 
+         <h2 class="contributors"><span class="ws-nw"> </span></h2> 
+         <h4 class="isbn-related 9780807083697">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4>
+         <h4 class="isbn-related 9780807083109">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4>
+         <h4 class="isbn-related 9780807083703">Category: <a href="/books/historical-fiction/">Historical Fiction</a></h4> <!-- newsletter --> 
+         <div id="excerpt-newsletter-wrap-desktop"> 
+          <div class="slot newsletter-signup excerpt static" acq-code="PRH_EXCERPT_STATIC_ONGOING" workid="643834"></div> 
+         </div> <!-- MOBILE EXCERPT SUBSCRIBE MOVED TO SECOND PARAGRAPH OF EXCERPT ITSELF --> <!-- /newsletter --> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="modal-body scrolling"> 
+       <div class="book-name-mobile">
+        Kindred
+       </div> 
+       <div class="modal-body-txt"></div> 
+       <h2 class="exc-buy-now">Buy Now</h2> <!-- --> 
+       <div id="excerptList"> 
+        <div class="activeBookRow"> 
+         <div class="bookRow active" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" merchandise="false" isbn="9780807083109" format="HC" format-name="Hardcover" categories="Historical Fiction | Fiction" imprint="Beacon Press" division="Beacon Press" price="26.95"> 
+          <div class="imageDiv"> 
+           <img src="https://images1.penguinrandomhouse.com/cover/9780807083109" class="mblCover img-responsive" alt="Kindred by Octavia E. Butler"> 
+          </div> 
+          <div class="dataDiv"> 
+           <div class="frmtName">
+            Hardcover
+           </div> 
+           <div class="frmtInfo">
+            Feb 01, 2009 | ISBN 9780807083109
+           </div> 
+          </div> 
+          <div class="buyDiv"> <button type="button" class="btn buy2 9780807083109" rel="popover">Buy <i class="fa fa-caret-down" aria-hidden="true"></i></button> 
+          </div> 
+         </div> 
+         <div class="bookBuyLinkList" style="display:none"></div> 
+        </div> 
+        <div class="bookList" style="display:none;"> 
+         <div class="bookRow" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" merchandise="false" isbn="9780807083697" format="TR" format-name="Paperback" categories="Historical Fiction | Fiction" imprint="Beacon Press" division="Beacon Press" price="16.00"> 
+          <div class="imageDiv"> 
+           <img src="" data-src="https://images4.penguinrandomhouse.com/cover/9780807083697" class="mblCover img-responsive lazyload" alt="Kindred by Octavia E. Butler"> 
+          </div> 
+          <div class="dataDiv"> 
+           <div class="frmtName">
+            Paperback
+           </div> 
+           <div class="frmtInfo">
+            Feb 01, 2004 | ISBN 9780807083697
+           </div> 
+          </div> 
+          <div class="buyDiv"> <button type="button" class="btn buy2 9780807083697" rel="popover">Buy <i class="fa fa-caret-down" aria-hidden="true"></i></button> 
+          </div> 
+         </div> 
+         <div class="bookRow" data-original-title="" title="" insight="" primaryauthors="Octavia E. Butler" primaryauthids="2205535" best-seller="" merchandise="false" isbn="9780807083703" format="EL" format-name="Ebook" categories="Historical Fiction | Fiction" imprint="Beacon Press" division="Beacon Press" price="9.99"> 
+          <div class="imageDiv"> 
+           <img src="" data-src="https://images1.penguinrandomhouse.com/cover/9780807083703" class="mblCover img-responsive lazyload" alt="Kindred by Octavia E. Butler"> 
+          </div> 
+          <div class="dataDiv"> 
+           <div class="frmtName">
+            Ebook
+           </div> 
+           <div class="frmtInfo">
+            Feb 01, 2004 | ISBN 9780807083703
+           </div> 
+          </div> 
+          <div class="buyDiv"> <button type="button" class="btn buy2 9780807083703" rel="popover">Buy <i class="fa fa-caret-down" aria-hidden="true"></i></button> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="format-selection see-button"> <span class="format-cta">See All Formats</span> <span class="format-count">(2)</span> <span class="format-display-symbol">+</span> 
+        </div> 
+       </div> <!-- --> 
+      </div> 
+     </div><!-- /.modal-content --> 
+    </div><!-- /.modal-dialog --> 
+   </div><!-- /.modal --> 
+   <div class="modal fade embedded" id="modal-excerpt-embedded"> 
+    <div class="modal-dialog"> 
+     <div class="modal-content"> 
+      <div class="modal-header"> <button type="button" class="close" data-dismiss="modal"> <span class="fa fa-times">&nbsp;</span> <span class="sr-only">Close</span> </button> 
+      </div> 
+      <div class="modal-body"></div> 
+      <div class="modal-footer"></div> 
+     </div><!-- /.modal-content --> 
+    </div><!-- /.modal-dialog --> 
+   </div><!-- /.modal --> <!-- End Scaffolding --> <!-- container END --> <!-- end product info bottom --> 
+   <script type="text/javascript">
+var specific_to_signup = {"specific_to_type":"product","signup":{"type":"author","id":2205535},"message":"More from Octavia E. Butler and other popular reads delivered right to your inbox","cat_uri":"\/historical-fiction"};
+</script> <!-- Start sticky arrow --> <a href="#top" id="stickyarrow"><span>Back to Top</span></a> <!-- / End sticky arrow --> 
+   <div class="inner-facade-footer"> <!-- Start Footer --> 
+    <footer class="footer-wrap"> 
+     <div class="container"> 
+      <div class="row"> 
+       <div class="main-footer clearfix"> 
+        <ul class="footer-links"> <span class="dsktop-right"> <li>Connect</li> <p class="sgn-mssg">Sign up for news about books, authors, and more from Penguin Random House</p> <button type="button" class="btn share" rel="popover" title=""><i class="fa fa-envelope"></i> Stay in touch</button> 
+          <ul class="socialft"> 
+           <li><a class="fttr social facebook" href="https://www.facebook.com/PenguinRandomHouse" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i></a></li>
+           <li><a class="fttr social twitter" href="https://twitter.com/penguinrandom" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a></li>
+           <li><a class="fttr social youtube-play" href="https://www.youtube.com/channel/UC4OnzY1OgwUE0XPAHpqlcvQ" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-play"></i></a></li>
+           <li><a class="fttr social linkedin" href="https://www.linkedin.com/company/penguin-random-house-publishing" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i></a></li>
+           <li><a class="fttr social pinterest" href="http://pinterest.com/penguinrandom/" target="_blank" rel="noopener noreferrer"><i class="fa fa-pinterest-p"></i></a></li>
+           <li><a class="fttr social instagram" href="http://instagram.com/penguinrandomhouse" target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram"></i></a></li> 
+          </ul> </span> <span> <li>About</li> <li><a href="/about-us/news/" title="" rel="nofollow">News</a></li> <li><a href="https://careers.penguinrandomhouse.com/" title="" target="_blank" rel="nofollow">Careers</a></li> <li><a href="/about-us/contact-us/" title="" rel="nofollow">Contact Us</a></li> <li><a href="/faqs/" title="" rel="nofollow">FAQ</a></li> <li><a href="/preferences/" title="" rel="nofollow">Email Preferences</a></li> <li><a href="/terms/" title="" rel="nofollow">Terms of Use</a></li> <li><a href="/privacy/" title="" rel="nofollow">Privacy Policy</a></li> <li><a href="/privacy/right-to-opt-out-of-sale-form/" title="" rel="nofollow">Do Not Sell My Personal Info</a></li> </span> <span> <li>Resources</li> <li><a href="/faqs/#shopping" title="" rel="nofollow">Shopping &amp; Shipping FAQ</a></li> <li><a href="https://penguinrandomhouseeducation.com/" title="" target="_blank" rel="nofollow">For Educators</a></li> <li><a href="http://www.penguinrandomhouse.biz/" title="" rel="nofollow">penguinrandomhouse.biz</a></li> <li><a href="/media-queries/" title="" rel="nofollow">Media Queries</a></li> <li><a href="http://www.penguinrandomhouse.biz/rights/" title="" target="_blank" rel="nofollow">Subrights</a></li> <li><a href="https://permissions.penguinrandomhouse.com/" title="" target="_blank" rel="nofollow">Permissions</a></li> <li><a href="http://www.prhspeakers.com/" title="" target="_blank" rel="nofollow">Speakers Bureau</a></li> <li><a href="https://companyreads.prhspeakers.com/" title="" rel="nofollow">Company Reads</a></li> </span> <span class="dsktop-left"> <li><a href="/">
+            <div class="footer-logo"></div></a></li> <li><a href="https://global.penguinrandomhouse.com" target="_blank" rel="noopener noreferrer">global.penguinrandomhouse.com</a></li> <li class="ft-cr">© 2020 Penguin Random House</li> </span> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </footer> <!-- / End  Footer --> 
+    <footer class="mobile"> 
+     <div class="bottom-tabs"> 
+      <div class="tab-holder"> 
+       <div class="tab">
+        <a href="/books" class="active">Books</a>
+       </div> 
+       <div class="tab">
+        <a href="/series">Series</a>
+       </div> <!--<div class="tab tab-wide"><a href="/authors">Authors</a></div>--> 
+       <div class="tab tab-wide">
+        <a href="/about-us">
+         <nobr>
+          About Us
+         </nobr></a>
+       </div> 
+       <div class="tab tab-wide" id="myprh-tab-m"></div> 
+      </div> 
+     </div> 
+    </footer> 
+   </div> <!-- inner-facade END --> 
+   <div class="container"> 
+    <p class="footer-bttm-links-visit">Visit other sites in the Penguin Random House Network</p> 
+    <div class="footer-bttm-links"> 
+     <div> <a href="http://www.readbrightly.com/?ref=822975591A1E" title="" class="footer-bttm-link" target="_blank" rel="nofollow"> <img src="https://assets.penguinrandomhouse.com/wp-content/uploads/2015/04/01075801/thumbnail.png" alt=""> </a> 
+      <h4>Brightly</h4> Raise kids who love to read 
+     </div> 
+     <div> <a href="http://www.tastecooking.com/?ref=E8C77968C21F" title="TASTE img" class="footer-bttm-link" target="_blank" rel="nofollow"> <img src="https://assets.penguinrandomhouse.com/wp-content/uploads/2017/03/03173807/tastelogo1.png" alt="TASTE img"> </a> 
+      <h4>TASTE</h4> An online magazine for today’s home cook 
+     </div> 
+     <div> <a href="http://www.litflash.com/" title="" class="footer-bttm-link" target="" rel="nofollow"> <img src="https://assets.penguinrandomhouse.com/wp-content/uploads/2016/08/01074758/litflashlogo68x68.jpg" alt=""> </a> 
+      <h4>LitFlash</h4> The eBooks you want at the lowest prices 
+     </div> 
+     <div> <a href="http://readitforward.com" title="" class="footer-bttm-link" target="" rel="nofollow"> <img src="https://assets.penguinrandomhouse.com/wp-content/uploads/2016/05/01074912/riflogonew.jpg" alt=""> </a> 
+      <h4>Read it Forward</h4> Read it first. Pass it on! 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="ftr-signup" style="display:none;"> <span class="close"></span> 
+   <p class="hdr">Stay in Touch</p> 
+   <form name="newsletter-subform" class="ftr-newsletter-subform" id="ftr-newsletter-subform" action="/ajax/newsletters-sub"> 
+    <input type="hidden" name="acquisition_code" value="PRH_FOOTER_STATIC_ONGOING"> 
+    <input class="newsletter-pref" type="hidden" name="general" id="news-pref1" value="true"> 
+    <div class="email-wrap-div"> 
+     <input type="email" autocomplete="off" title="Email address" name="_email" value="" placeholder="Enter Email" class="email-box" id="newsletter-email-box"> <button class="btn subscribe">Sign up</button> 
+    </div> 
+    <div class="fielderr _email hidden">
+     Please enter a valid email address
+    </div> 
+    <div class="fielderr processing hidden">
+     We are experiencing technical difficulties. Please try again later.
+    </div> 
+    <p class="terms">By clicking Sign Up, I acknowledge that I have read and agree to Penguin Random House's <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Use</a>.</p> 
+   </form> 
+  </div> <!-- / End Main Page Wrap --> 
+  <script type="text/javascript" src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/js/fes.js" defer></script> 
+  <script>var blankPageFix = setTimeout(function(){ try{ var htmlClass = document.getElementsByTagName( "html" )[0].getAttribute( "class" );	if( htmlClass.indexOf( "fouc-factor" ) > -1 ){ document.getElementsByTagName( "html" )[0].setAttribute( "class", htmlClass.replace( /fouc-factor/, "" ) ); }} catch( e ) { document.getElementsByTagName( "html" )[0].setAttribute( "class", htmlClass.replace( /fouc-factor/, "" ) ); }}, 3000 );</script> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js?ver=3.3.1"></script> 
+  <script type="text/javascript" src="https://www.penguinrandomhouse.com/wp-content/themes/penguinrandomhouse/js/global.min.js?ver=cb20200323064246"></script> 
+  <script type="application/ld+json">
+{"@context":"http:\/\/schema.org","@type":"WebPage","mainEntity":{"@type":"Book","author":"Octavia E. Butler","image":"https:\/\/images.penguinrandomhouse.com\/cover\/9780807083109","inLanguage":"English","isbn":"9780807083109","name":"Kindred","numberOfPages":264,"bookFormat":"Hardcover","offers":{"@type":"Offer","availability":"http:\/\/schema.org\/InStock","price":"26.95","priceCurrency":"USD"},"about":"The visionary author&rsquo;s masterpiece pulls us&mdash;along with her Black female hero&mdash;through time to face the horrors of slavery and explore the impacts of racism, sexism, and white supremacy...","publisher":"Beacon Press","publisherImprint":"Beacon Press"}}
+</script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"aff351d92f","applicationID":"72351768","transactionName":"M1ADMhNUD0FSARBfWgoaIAUVXA5cHBIFUVBJWBcF","queueTime":0,"applicationTime":811,"atts":"HxcARFtOHE8=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

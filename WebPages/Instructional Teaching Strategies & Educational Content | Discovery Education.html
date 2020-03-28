@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="format-detection" content="telephone=no"> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge"> 
+  <meta charset="utf-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"b5f6dd9c3e",applicationID:"339658213"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <title>Instructional Teaching Strategies &amp; Educational Content | Discovery Education</title> <!-- This site is optimized with the Yoast SEO plugin v13.1 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Discovery Education Experience is a learning platform combining curriculum resources with teaching strategies personalized for your needs. Request a demo!"> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.discoveryeducation.com/solutions/experience/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="Discovery Education Experience"> 
+  <meta property="og:description" content="Discovery Education Experience’s engaging content contains a rich library of research-based instructional strategies to integrate media in meaningful ways."> 
+  <meta property="og:url" content="https://www.discoveryeducation.com/solutions/experience/"> 
+  <meta property="og:site_name" content="Discovery Education"> 
+  <meta property="og:image" content="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/1280x720-dex-sizzle-video-poster.jpg"> 
+  <meta property="og:image:secure_url" content="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/1280x720-dex-sizzle-video-poster.jpg"> 
+  <meta property="og:image:width" content="1280"> 
+  <meta property="og:image:height" content="720"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:description" content="Discovery Education Experience’s engaging content contains a rich library of research-based instructional strategies to integrate media in meaningful ways."> 
+  <meta name="twitter:title" content="Discovery Education Experience"> 
+  <meta name="twitter:image" content="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/1280x720-dex-sizzle-video-poster.jpg"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.discoveryeducation.com/#website","url":"https://www.discoveryeducation.com/","name":"Discovery Education","inLanguage":"en-US","description":"Transforming the Future of Education","potentialAction":{"@type":"SearchAction","target":"https://www.discoveryeducation.com/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://www.discoveryeducation.com/solutions/experience/#webpage","url":"https://www.discoveryeducation.com/solutions/experience/","name":"Instructional Teaching Strategies &amp; Educational Content | Discovery Education","isPartOf":{"@id":"https://www.discoveryeducation.com/#website"},"inLanguage":"en-US","datePublished":"2019-04-12T14:40:37+00:00","dateModified":"2020-03-17T20:51:10+00:00","description":"Discovery Education Experience is a learning platform combining curriculum resources with teaching strategies personalized for your needs. Request a demo!"}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//www.discoveryeducation.com"> 
+  <link rel="dns-prefetch" href="//player.vimeo.com"> 
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com"> 
+  <link rel="dns-prefetch" href="//maxcdn.bootstrapcdn.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="Discovery Education » Feed" href="https://www.discoveryeducation.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="Discovery Education » Comments Feed" href="https://www.discoveryeducation.com/comments/feed/"> 
+  <link rel="alternate" type="text/calendar" title="Discovery Education » iCal Feed" href="https://www.discoveryeducation.com/all-events/?ical=1"> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.discoveryeducation.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3.2"}};
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="tribe-common-skeleton-style-css" href="https://www.discoveryeducation.com/wp-content/plugins/the-events-calendar/common/src/resources/css/common-skeleton.min.css?ver=4.11.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="tribe-tooltip-css" href="https://www.discoveryeducation.com/wp-content/plugins/the-events-calendar/common/src/resources/css/tooltip.min.css?ver=4.11.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="wp-block-library-css" href="https://www.discoveryeducation.com/wp-includes/css/dist/block-library/style.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="parent-style-css" href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/style.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="comet-wp-style-css" href="https://www.discoveryeducation.com/wp-content/themes/comet-wp-www-us/style.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jquery-modal-css-css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="child-style-css" href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/style-release.css?ver=20200203" type="text/css" media="all"> 
+  <link rel="stylesheet" id="jquery-modal-css-overrides-css" href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/assets/css/modal-overrides.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="animate-css" href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/assets/css/animate.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="owl-carousel-css" href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/assets/owl.carousel.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <link rel="stylesheet" id="load-fa-css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css?ver=5.3.2" type="text/css" media="all"> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script> 
+  <script type="text/javascript" src="https://player.vimeo.com/api/player.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/assets/js/countUp.min.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/assets/js/jquery.paroller.min.js?ver=1"></script> 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js?ver=1"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/assets/js/main.js?ver=1"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/assets/js/main-min.js?ver=1"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/hashtag.js?ver=1"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/url_parameter.js?ver=1"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/trials.js?ver=1"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/jquery.dotdotdot.js?ver=1"></script> 
+  <link rel="https://api.w.org/" href="https://www.discoveryeducation.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.discoveryeducation.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.discoveryeducation.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 5.3.2"> 
+  <link rel="shortlink" href="https://www.discoveryeducation.com/?p=29951"> 
+  <link rel="alternate" type="application/json+oembed" href="https://www.discoveryeducation.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.discoveryeducation.com%2Fsolutions%2Fexperience%2F"> 
+  <link rel="alternate" type="text/xml+oembed" href="https://www.discoveryeducation.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.discoveryeducation.com%2Fsolutions%2Fexperience%2F&amp;format=xml"> <!-- Icons --> 
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/wp-content/uploads/2019/01/apple-touch-icon-144x144-precomposed.png"> 
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/wp-content/uploads/2019/01/apple-touch-icon-114x114-precomposed.png"> 
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/wp-content/uploads/2019/01/apple-touch-icon-72x72-precomposed.png"> 
+  <link rel="apple-touch-icon-precomposed" href="/wp-content/uploads/2019/01/apple-touch-icon-precomposed.png"> 
+  <link rel="shortcut icon" href="/wp-content/uploads/2019/01/favicon.ico"> <!-- Google Tag Manager --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5LMWXB4');</script> <!-- End Google Tag Manager -->
+  <style type="text/css" id="simple-css-output">.product-carousel__controls{display: none;}</style>
+  <meta name="tec-api-version" content="v1">
+  <meta name="tec-api-origin" content="https://www.discoveryeducation.com">
+  <link rel="https://theeventscalendar.com/" href="https://www.discoveryeducation.com/wp-json/tribe/events/v1/">
+  <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><!-- OneTrust Cookies Consent Notice start --> 
+  <script src="https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="c751d035-32d6-4931-9eff-9fd506d77b96"></script> 
+  <script type="text/javascript">
+function OptanonWrapper() { }
+</script> <!-- OneTrust Cookies Consent Notice end -->
+  <link rel="alternate" href="https://www.discoveryeducation.com/solutions/experience/" hreflang="en-us"> 
+  <link rel="alternate" href="http://www.discoveryeducation.ca/Canada/what-we-offer/experience/index.cfm" hreflang="en-ca"> 
+  <meta name="google-site-verification" content="UJWsoAE0Q5MUT9b2Ks6p1_7yvKRJWFv9Cw-xBdALDBM">
+  <script type="application/ld+json">
+{
+	"@context": "http://www.schema.org",
+	"@type": "EducationalOrganization",
+	"name": "Discovery Education",
+	"url": "https://www.discoveryeducation.com/",
+	"description": "Discovery Education ignites student curiosity and inspires educators to reimagine learning with award-winning digital content and professional development. Accelerate student achievement by capturing the minds and imaginations of students. Visit us online and learn more!",
+	"address": {
+		"@type": "PostalAddress",
+		"streetAddress": "4350 Congress St Suite 700",
+		"addressLocality": "Charlotte",
+		"addressRegion": "NC",
+		"postalCode": "28209",
+		"addressCountry": "United States"
+	},
+	"telephone": "1-800-323-9084",
+	"sameAs": ["https://www.facebook.com/discoveryed",
+		"https://twitter.com/DiscoveryEd"
+	]
+}</script> <!-- start Simple Custom CSS and JS --> 
+  <style type="text/css">
+.horizontal-cta__background-video {
+    width: 100% !important;
+}
+
+@media screen and (min-width: 568px) {
+  #experience-hero__header.module-h2 .horizontal-cta {
+  	height: auto;
+  }
+}
+
+
+</style> <!-- end Simple Custom CSS and JS --> <!-- Fonts Plugin CSS - https://fontsplugin.com/ --> 
+  <style>
+		@font-face { font-family:'Raleway';font-style:italic;font-weight:100;font-display:swap;src:local('Raleway Thin Italic'), local('Raleway-ThinItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptqg8zYS_SKggPNyCgwLrFmJfM-235.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:200;font-display:swap;src:local('Raleway ExtraLight Italic'), local('Raleway-ExtraLightItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgwgqB_DNCd-229.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:300;font-display:swap;src:local('Raleway Light Italic'), local('Raleway-LightItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgw5qN_DNCd-223.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:400;font-display:swap;src:local('Raleway Italic'), local('Raleway-Italic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptsg8zYS_SKggPNyCg4Q4Fs-226.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:500;font-display:swap;src:local('Raleway Medium Italic'), local('Raleway-MediumItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgwvqJ_DNCd-227.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:600;font-display:swap;src:local('Raleway SemiBold Italic'), local('Raleway-SemiBoldItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgwkqV_DNCd-223.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:700;font-display:swap;src:local('Raleway Bold Italic'), local('Raleway-BoldItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgw9qR_DNCd-221.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:800;font-display:swap;src:local('Raleway ExtraBold Italic'), local('Raleway-ExtraBoldItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgw6qd_DNCd-218.woff) format('woff');}@font-face { font-family:'Raleway';font-style:italic;font-weight:900;font-display:swap;src:local('Raleway Black Italic'), local('Raleway-BlackItalic'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptpg8zYS_SKggPNyCgwzqZ_DNCd-211.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:100;font-display:swap;src:local('Raleway Thin'), local('Raleway-Thin'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptsg8zYS_SKggPNwE44Q4Fs-215.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:200;font-display:swap;src:local('Raleway ExtraLight'), local('Raleway-ExtraLight'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwOIpWqhPBg-212.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:300;font-display:swap;src:local('Raleway Light'), local('Raleway-Light'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwIYqWqhPBg-214.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:400;font-display:swap;src:local('Raleway'), local('Raleway-Regular'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptug8zYS_SKggPNyCMISQ-215.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:500;font-display:swap;src:local('Raleway Medium'), local('Raleway-Medium'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwN4rWqhPBg-212.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:600;font-display:swap;src:local('Raleway SemiBold'), local('Raleway-SemiBold'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwPIsWqhPBg-209.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:700;font-display:swap;src:local('Raleway Bold'), local('Raleway-Bold'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwJYtWqhPBg-209.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:800;font-display:swap;src:local('Raleway ExtraBold'), local('Raleway-ExtraBold'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwIouWqhPBg-206.woff) format('woff');}@font-face { font-family:'Raleway';font-style:normal;font-weight:900;font-display:swap;src:local('Raleway Black'), local('Raleway-Black'), url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/1Ptrg8zYS_SKggPNwK4vWqhPBg-203.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:100;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojIWmYWRl-206.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:200;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoDISmYWRl-208.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:300;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjo0oSmYWRl-206.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:400;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjojISmYWRl-203.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:500;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjovoSmYWRl-200.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:600;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoUoOmYWRl-204.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:700;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoa4OmYWRl-203.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:800;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoDIOmYWRl-201.woff) format('woff');}@font-face { font-family:'Roboto Slab';font-style:normal;font-weight:900;font-display:swap;src:url(https://www.discoveryeducation.com/wp-content/uploads/2020/03/BngbUXZYTXPIvIBgJJSb6s3BzlRRfKOFbvjoJYOmYWRl-198.woff) format('woff');}body, #content, .entry-content, .post-content, .page-content, .post-excerpt, .entry-summary, .entry-excerpt, .widget-area, .widget, .sidebar, #sidebar, footer, .footer, #footer, .site-footer {
+font-family: "Raleway";
+ }
+#site-title, .site-title, #site-title a, .site-title a, .entry-title, .entry-title a, h1, h2, h3, h4, h5, h6, .widget-title {
+font-family: "Roboto Slab";
+ }
+button, input, select, textarea {
+font-family: "Raleway";
+ }
+	</style> <!-- Fonts Plugin CSS --> 
+ </head> 
+ <body class="page-template page-template-page-individual-product page-template-page-individual-product-php page page-id-29951 page-child parent-pageid-375 tribe-no-js no-sidebar"> 
+  <div class="comet-page-shell"> <a class="comet-screenreader-only comet-skiplinks" href="#content">Skip to content</a> 
+   <nav class="comet-row comet-row--marketing comet-row--dark-background main-nav"> 
+    <div class="comet-row__inner"> 
+     <div class="main-nav__desktop"> 
+      <div class="main-nav__logo"> <a href="https://www.discoveryeducation.com/" class="main-nav__logo-link"> <img src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/images/de-logo-full.png" alt="Discovery Education" class="main-nav__logo-image main-nav__logo-image--white"> <img src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/images/de-logo-full-black.png" alt="Discovery Education" class="main-nav__logo-image main-nav__logo-image--black"> </a> 
+      </div> 
+      <ul class="comet-tabs"> 
+       <li class="comet-tab__label comet-tab__label--solutions comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">SOLUTIONS</button> 
+        <div class="comet-tab__dropdown">
+         <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+          <li class="comet-tab__label comet-tab__label--experience"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/experience/">EXPERIENCE</a></li> 
+          <li class="comet-tab__label comet-tab__label--science-techbook"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/science-techbook/">SCIENCE TECHBOOK</a></li> 
+          <li class="comet-tab__label comet-tab__label--social-studies-techbook"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/social-studies-techbook/">SOCIAL STUDIES TECHBOOK</a></li> 
+          <li class="comet-tab__label comet-tab__label--math-techbook"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/math-techbook/">MATH TECHBOOK</a></li> 
+          <li class="comet-tab__label comet-tab__label--stem"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/stem/">STEM</a></li> 
+          <li class="comet-tab__label comet-tab__label--professional-development"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/professional-development/">PROFESSIONAL DEVELOPMENT</a></li> 
+          <li class="comet-tab__label comet-tab__label--featured-programs"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-education-partnerships/">FEATURED PROGRAMS</a></li> 
+          <li class="comet-tab__label comet-tab__label--immersive"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/immersive/">IMMERSIVE</a></li> 
+          <li class="comet-tab__label comet-tab__label--coding"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/coding/">CODING</a></li> 
+         </ul> 
+        </div></li> 
+       <li class="comet-tab__label comet-tab__label--partner-success comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">PARTNER SUCCESS</button> 
+        <div class="comet-tab__dropdown">
+         <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+          <li class="comet-tab__label comet-tab__label--insights"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/insights/">INSIGHTS</a></li> 
+          <li class="comet-tab__label comet-tab__label--success-stories"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/success-stories/">SUCCESS STORIES</a></li> 
+          <li class="comet-tab__label comet-tab__label--research"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/research/">RESEARCH</a></li> 
+          <li class="comet-tab__label comet-tab__label--partner-success-team"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/partner-success/">PARTNER SUCCESS TEAM</a></li> 
+         </ul> 
+        </div></li> 
+       <li class="comet-tab__label comet-tab__label--community comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">COMMUNITY</button> 
+        <div class="comet-tab__dropdown">
+         <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+          <li class="comet-tab__label comet-tab__label--den-community"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/community/den-community/">DEN COMMUNITY</a></li> 
+          <li class="comet-tab__label comet-tab__label--virtual-field-trips"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/community/virtual-field-trips/">VIRTUAL FIELD TRIPS</a></li> 
+          <li class="comet-tab__label comet-tab__label--events"><a class="comet-tab__label-link" target="_blank" href="https://den.discoveryeducation.com/events/calendar">EVENTS</a></li> 
+          <li class="comet-tab__label comet-tab__label--blog"><a class="comet-tab__label-link" target="_blank" href="http://blog.discoveryeducation.com">BLOG</a></li> 
+         </ul> 
+        </div></li> 
+       <li class="comet-tab__label comet-tab__label--corporate-nonprofits comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">CORPORATE &amp; NONPROFITS</button> 
+        <div class="comet-tab__dropdown">
+         <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+          <li class="comet-tab__label comet-tab__label--corporate-education-partnerships"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-education-partnerships/">CORPORATE EDUCATION PARTNERSHIPS</a></li> 
+          <li class="comet-tab__label comet-tab__label--become-a-corporate-partner"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-underwriting/">BECOME A CORPORATE PARTNER</a></li> 
+          <li class="comet-tab__label comet-tab__label--request-corporate-scholarships"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/scholarships/">REQUEST CORPORATE SCHOLARSHIPS</a></li> 
+          <li class="comet-tab__label comet-tab__label--stem-careers-coalition"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/stem-careers-coalition/">STEM CAREERS COALITION</a></li> 
+         </ul> 
+        </div></li> 
+      </ul> 
+      <div class="main-nav__controls"> 
+       <div class="main-nav__search"> 
+        <form method="get" action="/" class="main-nav__search-form comet-form"> 
+         <input class="comet-form__input main-nav__search-input" type="search" placeholder="Search" name="s" value=""> 
+        </form> <button class="comet-button comet-button--flat comet-button--icon-only main-nav__button main-nav__button--search-trigger" aria-label="Open Search"> 
+         <svg class="comet-button__icon comet-button__icon--left" aria-hidden="true" focusable="false"> <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#search"></use> 
+         </svg> <span class="comet-screenreader-only">Open Search</span> </button> 
+       </div> <a href="https://app.discoveryeducation.com/" class="comet-button comet-button--primary main-nav__button main-nav__button--sign-in">Login</a> <a href="https://www.discoveryeducation.com//help/contact-us/" class="comet-button comet-button--ghost main-nav__button main-nav__button--contact">Contact Us</a> 
+      </div> 
+     </div> 
+     <div class="main-nav__mobile"> 
+      <div class="main-nav__logo"> <a href="https://www.discoveryeducation.com/" class="main-nav__logo-link"> <img src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/images/de-logo-full.png" alt="Discovery Education" class="main-nav__logo-image main-nav__logo-image--white"> <img src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/images/de-logo-full-black.png" alt="Discovery Education" class="main-nav__logo-image main-nav__logo-image--black"> </a> 
+      </div> 
+      <div class="main-nav__menu"> <button class="main-nav__menu-button main-nav__menu-button--visible main-nav__menu-button--open-menu comet-button comet-button--flat comet-button--icon-only"> 
+        <svg class="comet-button__icon comet-button__icon--left" aria-hidden="true" focusable="false"> <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#menu"></use> 
+        </svg> <span class="comet-screenreader-only">Open Menu</span> </button> <button class="main-nav__menu-button main-nav__menu-button--close-menu comet-button comet-button--flat comet-button--icon-only"> 
+        <svg class="comet-button__icon comet-button__icon--left" aria-hidden="true" focusable="false"> <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#x"></use> 
+        </svg> <span class="comet-screenreader-only">Close Menu</span> </button> 
+      </div> 
+     </div> 
+    </div> 
+   </nav> 
+   <div class="main-nav__menu-content-wrapper"> 
+    <div class="main-nav__menu-content"> 
+     <div class="main-nav__controls"> <a href="https://www.discoveryeducation.com//help/contact-us/" class="comet-button comet-button--ghost main-nav__button main-nav__button--contact">Contact Us</a> <a href="//app.discoveryeducation.com" class="comet-button comet-button--primary main-nav__button main-nav__button--sign-in">Login</a> 
+     </div> 
+     <ul class="comet-tabs"> 
+      <li class="comet-tab__label comet-tab__label--solutions comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">SOLUTIONS</button> 
+       <div class="comet-tab__dropdown">
+        <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+         <li class="comet-tab__label comet-tab__label--experience"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/experience/">EXPERIENCE</a></li> 
+         <li class="comet-tab__label comet-tab__label--science-techbook"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/science-techbook/">SCIENCE TECHBOOK</a></li> 
+         <li class="comet-tab__label comet-tab__label--social-studies-techbook"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/social-studies-techbook/">SOCIAL STUDIES TECHBOOK</a></li> 
+         <li class="comet-tab__label comet-tab__label--math-techbook"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/math-techbook/">MATH TECHBOOK</a></li> 
+         <li class="comet-tab__label comet-tab__label--stem"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/stem/">STEM</a></li> 
+         <li class="comet-tab__label comet-tab__label--professional-development"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/professional-development/">PROFESSIONAL DEVELOPMENT</a></li> 
+         <li class="comet-tab__label comet-tab__label--featured-programs"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-education-partnerships/">FEATURED PROGRAMS</a></li> 
+         <li class="comet-tab__label comet-tab__label--immersive"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/immersive/">IMMERSIVE</a></li> 
+         <li class="comet-tab__label comet-tab__label--coding"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/solutions/coding/">CODING</a></li> 
+        </ul> 
+       </div></li> 
+      <li class="comet-tab__label comet-tab__label--partner-success comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">PARTNER SUCCESS</button> 
+       <div class="comet-tab__dropdown">
+        <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+         <li class="comet-tab__label comet-tab__label--insights"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/insights/">INSIGHTS</a></li> 
+         <li class="comet-tab__label comet-tab__label--success-stories"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/success-stories/">SUCCESS STORIES</a></li> 
+         <li class="comet-tab__label comet-tab__label--research"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/research/">RESEARCH</a></li> 
+         <li class="comet-tab__label comet-tab__label--partner-success-team"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/partner-success/">PARTNER SUCCESS TEAM</a></li> 
+        </ul> 
+       </div></li> 
+      <li class="comet-tab__label comet-tab__label--community comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">COMMUNITY</button> 
+       <div class="comet-tab__dropdown">
+        <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+         <li class="comet-tab__label comet-tab__label--den-community"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/community/den-community/">DEN COMMUNITY</a></li> 
+         <li class="comet-tab__label comet-tab__label--virtual-field-trips"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/community/virtual-field-trips/">VIRTUAL FIELD TRIPS</a></li> 
+         <li class="comet-tab__label comet-tab__label--events"><a class="comet-tab__label-link" target="_blank" href="https://den.discoveryeducation.com/events/calendar">EVENTS</a></li> 
+         <li class="comet-tab__label comet-tab__label--blog"><a class="comet-tab__label-link" target="_blank" href="http://blog.discoveryeducation.com">BLOG</a></li> 
+        </ul> 
+       </div></li> 
+      <li class="comet-tab__label comet-tab__label--corporate-nonprofits comet-tab--dropdown-menu"><button class="comet-tab__label-button comet-tab__label-button--dropdown" aria-haspopup="true" aria-expanded="false">CORPORATE &amp; NONPROFITS</button> 
+       <div class="comet-tab__dropdown">
+        <ul class="comet-tab__sub-menu comet-tab__sub-menu--depth-1"> 
+         <li class="comet-tab__label comet-tab__label--corporate-education-partnerships"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-education-partnerships/">CORPORATE EDUCATION PARTNERSHIPS</a></li> 
+         <li class="comet-tab__label comet-tab__label--become-a-corporate-partner"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-underwriting/">BECOME A CORPORATE PARTNER</a></li> 
+         <li class="comet-tab__label comet-tab__label--request-corporate-scholarships"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/scholarships/">REQUEST CORPORATE SCHOLARSHIPS</a></li> 
+         <li class="comet-tab__label comet-tab__label--stem-careers-coalition"><a class="comet-tab__label-link" href="https://www.discoveryeducation.com/corporate-and-non-profits/stem-careers-coalition/">STEM CAREERS COALITION</a></li> 
+        </ul> 
+       </div></li> 
+     </ul> 
+     <div class="main-nav__search--mobile"> 
+      <form method="get" action="/" class="main-nav__search-form comet-form"> 
+       <input class="comet-form__input" type="search" placeholder="Search" name="s" value=""> 
+      </form> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="content" class="comet-row"> 
+    <div class="container"> 
+     <article id="post-29951" class="post-29951 page type-page status-publish hentry"> 
+      <div id="experience-hero__header" class="comet-row comet-row--marketing module-h2"> 
+       <div class="comet-row__inner"> 
+        <div class="module horizontal-cta horizontal-cta--page-header horizontal-cta--height-tall has-vignette color-filter color-filter--hero-gradient horizontal-cta--inverted" style="background-image: url(https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/06/1920x1080-experience-video-still.jpg)"> 
+         <video autoplay loop class="horizontal-cta__background-video" id="video-h2" muted plays-inline> 
+          <source src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/06/1920x1080-experience-video.mp4" type="video/mp4"> 
+         </video> 
+         <h1 class="horizontal-cta__heading">Experience</h1> 
+         <h2 class="horizontal-cta__subheading">Experience a world of instructional possibilities</h2> <a target="" href="https://discoveryeducation.com/experience-access-request" class="comet-button comet-button--primary comet-button--flat btn btn--large btn--transparent" aria-label="Arrow Right"> <span class="comet-button__inner"> <span class="comet-button__text"> Explore the Experience </span> 
+           <svg class="comet-button__icon comet-button__icon--left comet-icon--xl" aria-hidden="true" focusable="false"> <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/comet/2.x/comet.svg#arrow-right"></use> 
+           </svg> </span> </a> <button class="btn--video paused"></button> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-p3 product-overview-row " style="background-image: url()"> 
+       <div class="comet-row__inner"> 
+        <div class="product-overview-wrapper product-overview-wrapper--text-right"> 
+         <div class="cover-image-wrapper"> <a class="cover-image__button" href="#video-overlay-f210e321d18" rel="modal:open" style="background-image: url(https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/1280x720-dex-sizzle-video-poster.jpg)"> <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/1280x720-dex-sizzle-video-poster.jpg" alt="" class="cover-image comet-screenreader-only"> </a> 
+          <div id="video-overlay-f210e321d18" class="modal"> 
+           <div class="iframe-container">
+            <iframe src="https://player.vimeo.com/video/357871116?title=0&amp;byline=0&amp;portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> 
+           </div> <a href="#" rel="modal:close" class="bio-modal__close-button comet-button comet-button--icon-only"> 
+            <svg class="comet-button__icon comet-button__icon--left" aria-hidden="true" focusable="false"> <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#x"></use> 
+            </svg> <span class="comet-screenreader-only">Close Modal</span> </a> 
+          </div> 
+         </div> 
+         <div class="product-overview__text"> 
+          <h2 class="product-overview__header">Get Ready For A New Experience</h2> 
+          <p class="product-overview__description">Introducing Discovery Education Experience, a simple-to-use K-12 learning platform that combines dynamic curated curriculum resources with on-demand teaching strategies, personalized for your needs as an educator. This collection of real world educational content brings excitement and relevancy to the topics you teach, so all students have opportunities to unlock their true potential.</p> 
+          <div class="product-overview__links"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-a1 "> 
+       <div class="comet-row__inner"> 
+        <div class="module horizontal-cta horizontal-cta--height-small  horizontal-cta--inverted" style="background-image: url(https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/06/1920x458-experience-cta.jpg)"> 
+         <h2 class="horizontal-cta__heading"><img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/12/AwardsExc2019-white.png" width="300" height="119"><br> Winner of Best Re-Invention of a Classic Legacy Technology <br> <span style="font-size: 20px; margin-top: 16px; font-weight: 400; font-family: 'Raleway','Helvetica Neue',Helvetica,Arial,sans-serif;">See how Experience can make an impact in your district</span></h2> 
+         <h1></h1> <a target="_blank" class="horizontal-cta-button comet-button comet-button--primary comet-button--small btn btn--light" href="https://discoveryeducation.com/experience-access-request"> Request Access </a> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-c5 product-feature-row " style="background-image: url()"> 
+       <div class="comet-row__inner"> 
+        <div class="product-feature-wrapper product-feature-wrapper--text-left"> 
+         <div class="product-feature__text"> 
+          <h2 class="product-feature__header">EXPERIENCE The Wonder</h2> 
+          <p class="product-feature__description"></p>
+          <h3>Curated One of Kind Content and Experiences</h3> 
+          <br>Unlock the interests of every student with a variety of highly engaging teaching channels from partners like MythBusters, NBA, Reuters, Shark Week, MLB and Ford’s Theatre that are available in Discovery Education Experience. This ever-growing collection offers standards-aligned, multimodal teaching resources that help educators differentiate and that mirrors the unique interests of students, helping them make relevant and lasting connections between the subjects they’re learning and their everyday&nbsp;lives.
+          <p></p> 
+         </div> 
+         <div class="product-feature__visual"> 
+          <div class="product-feature__image-container"> 
+           <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/07/1000x600-experience-the-wonder-curated.jpg" alt="" class="product-feature__image"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-c5 product-feature-row " style="background-image: url()"> 
+       <div class="comet-row__inner"> 
+        <div class="product-feature-wrapper product-feature-wrapper--text-right"> 
+         <div class="product-feature__text"> 
+          <h2 class="product-feature__header">EXPERIENCE The Ease</h2> 
+          <p class="product-feature__description"></p>
+          <h3>Teaching Channels Personalized to Your Interests</h3> 
+          <br>Discovery Education Experience offers personalization functionality, so your dashboard will be populated with curated content channels and teacher resources that support efficient lesson planning. Select preferences and interests to build custom channels that support your subjects and students, all in one easy-to-use interface.
+          <p></p> 
+         </div> 
+         <div class="product-feature__visual"> 
+          <div class="product-feature__image-container"> 
+           <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/07/1000x600-experience-the-ease-personalization.jpg" alt="" class="product-feature__image"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-c5 product-feature-row " style="background-image: url()"> 
+       <div class="comet-row__inner"> 
+        <div class="product-feature-wrapper product-feature-wrapper--text-left"> 
+         <div class="product-feature__text"> 
+          <h2 class="product-feature__header">EXPERIENCE The Support</h2> 
+          <p class="product-feature__description"></p>
+          <h3>Professional Learning &amp; Teaching Strategies On Demand</h3> 
+          <br>Discovery Education Experience offers research-based instructional strategies, step-by-step guides, interactive courses and one of the strongest professional networks for educators in the world - all at your convenience and comfort level. 
+          <ul style="list-style: disc; margin-left: 25px; margin-top: 16px;"> 
+           <li style="margin-bottom: 8px;">Research-based teaching strategies are aligned to McREL International’s 6-Phase Model of Learning and embedded for ease-of-use.</li> 
+           <li style="margin-bottom: 8px;">The Professional Learning Center helps you integrate digital more powerfully with a variety of rich teacher resources like step-by-step guides, interactive courses and easy-to-use strategies.</li> 
+           <li>Trusted by educators for over a decade, the DEN Community offers one of the strongest professional networks for educators in the world.</li> 
+          </ul>
+          <p></p> 
+         </div> 
+         <div class="product-feature__visual"> 
+          <div class="product-feature__image-container"> 
+           <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/06/1000x600-experience-the-support.jpg" alt="" class="product-feature__image"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-c5 product-feature-row " style="background-image: url()"> 
+       <div class="comet-row__inner"> 
+        <div class="product-feature-wrapper product-feature-wrapper--text-right"> 
+         <div class="product-feature__text"> 
+          <h2 class="product-feature__header">EXPERIENCE The Inspiration</h2> 
+          <p class="product-feature__description"></p>
+          <h3>Studio: One Tool to Design, Collaborate &amp; Assign</h3> 
+          <br>Studio is a space where teachers can design and assign highly engaging lesson activities and students can create boards and demonstrate what they know. Based on popular topics in math, science, social studies, ELA, visual and performing arts, and health, grab-and-go lesson activities combine the best Discovery Education content with effective teaching strategies you love—all in a flexible format you can modify to make your own or assign as-is.
+          <p></p> 
+         </div> 
+         <div class="product-feature__visual"> 
+          <div class="product-feature__image-container"> 
+           <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/06/1000x600-experience-inspiration.jpg" alt="" class="product-feature__image"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-open-content content-block-long-form"> 
+       <div class="comet-row__inner"> 
+        <div class="module open-content "> 
+         <div id="whitepaper"></div> 
+         <div class="download-disrupter"> 
+          <div class="section inner"> 
+           <div class="comet-row"> 
+            <div class="comet-row__inner-flex"> 
+             <div class="comet-columns comet-columns--large-8"> 
+              <div class="comet-row"> 
+               <div class="comet-row__inner-flex"> 
+                <div class="comet-columns comet-columns--small-12"> 
+                 <h2>Want to Dive Deeper? Read our White&nbsp;Paper</h2> 
+                </div> 
+                <div class="comet-columns comet-columns--medium-3"> 
+                 <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/experience-whitepaper-preview.jpg" alt="Discovery Education Experience White Paper Preview" class="preview-image"> 
+                </div> 
+                <div class="comet-columns comet-columns--medium-9"> 
+                 <p style="font-size: 20px; line-height: 2rem;">If the goal of K-12 education is to help every student meet rigorous learning expectations, the classroom experience should support each child’s learning process, not just the normative middle. In this research report, learn the use cases for differentiated instruction and personalized learning, and how these are helping to narrow opportunity gaps in education.</p> 
+                 <p></p>
+                </div> 
+               </div> 
+              </div> 
+             </div> 
+             <div class="comet-columns comet-columns--large-4"> 
+              <div class="form-container"> 
+               <h3>Get Started</h3> 
+               <div id="download-form-container"> <iframe id="iframe-download-form" src="https://info.discoveryeducation.com/dex-wp" frameborder="0">Loading&amp;#8230;</iframe> 
+               </div> 
+               <p></p>
+              </div> 
+              <p></p>
+             </div> 
+            </div>
+           </div> 
+           <p></p>
+          </div> 
+         </div> 
+         <style>
+	.content-block-long-form{
+		background: linear-gradient(45deg, rgba(210,98,73,1) 0%, rgba(18,65,103,1) 100%);
+	}
+	/* typography */
+	.download-disrupter h2, .download-disrupter h3 {
+		margin: 0;
+		margin-bottom: 0.6em;
+		font-weight: 300;
+		line-height: 1.5;
+		color: #363c49;
+		font-family: "Roboto Slab",Georgia,Times,"Times New Roman",serif;
+		font-weight: bold;
+	}
+	.download-disrupter h2, .download-disrupter h3 {
+		font-size: 1.5rem;
+	}
+	.download-disrupter h2{
+		color: #fff;
+		padding: 0;
+		text-align: left;
+		color: #fff !important;
+		margin-top: 64px;
+	}
+	.download-disrupter p{
+		margin-top: 0;
+		font-weight: 400;
+		font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+		padding-top: 16px;
+	}
+	/* components */
+	#iframe-download-form{
+		border: 0;
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 99%;
+	}
+	#download-form-container{
+		overflow: hidden;
+		height: 336px;
+		position: relative;
+	}
+	.download-disrupter .form-container{
+		background-color: #fff;
+		padding: 16px 16px 0;
+		box-shadow: 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(0, 0, 0, .3);
+	}
+	.download-disrupter .form-container h3{
+		text-align: center;
+		margin-bottom: 8px;
+		padding-bottom: 0;
+	}
+	.download-disrupter{
+		color: #fff;
+	}
+	.download-disrupter .section{
+		padding: 16px 0 74px;
+	}
+	.download-disrupter p.button-container{
+		margin-bottom: 0;
+	}
+	.download-disrupter img.preview-image{
+		box-shadow: 0 1px 2px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12), 0 2px 1px -2px rgba(0,0,0,0.2);
+		max-width: 250px !important;
+		display: block;
+		margin: auto;
+		width: 100%;
+		vertical-align: middle;
+	}
+	@media only screen and (max-width: 1199px){
+		.download-disrupter h1{
+			padding-bottom: 16px;
+		}
+	}
+	@media only screen and (min-width: 1200px) {
+		.download-disrupter h2, .download-disrupter h3{
+			font-size: 2rem;
+			font-weight: bold;
+		}
+		.download-disrupter .section {
+			padding-left: 0;
+			padding-right: 0;
+			padding-bottom: 86px;
+		}
+		.download-disrupter h1{
+			font-size: 3.5rem;
+		}
+		.download-disrupter .form-container h3{
+			font-size: 1.5rem;
+		}
+		.download-disrupter .form-container{
+			margin-top: 32px;
+		}
+	}
+	@media only screen and (min-width: 768px){
+		#whitepaper{
+			height: 64px;
+		}
+	}
+	@media only screen and (max-width: 767px){
+		#whitepaper{
+			height: 32px;
+		}
+		.download-disrupter .section{
+			padding-bottom: 32px;
+		}
+	}
+	@media only screen and (min-width: 600px){
+		.download-disrupter p{
+			padding-left: 16px;
+			padding-right: 32px;
+			padding-top: 0;
+		}
+	}
+</style> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-p3 product-overview-row " style="background-image: url()"> 
+       <div class="comet-row__inner"> 
+        <div class="product-overview-wrapper product-overview-wrapper--text-right"> 
+         <div class="cover-image-wrapper"> <a class="cover-image__button" href="#video-overlay-f210e32" rel="modal:open" style="background-image: url(https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/experience-teacher-testimonial-video-still.jpg)"> <img src="https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2019/09/experience-teacher-testimonial-video-still.jpg" alt="" class="cover-image comet-screenreader-only"> </a> 
+          <div id="video-overlay-f210e32" class="modal"> 
+           <div class="iframe-container">
+            <iframe src="https://player.vimeo.com/video/356369976?title=0&amp;byline=0&amp;portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+           </div> <a href="#" rel="modal:close" class="bio-modal__close-button comet-button comet-button--icon-only"> 
+            <svg class="comet-button__icon comet-button__icon--left" aria-hidden="true" focusable="false"> <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#x"></use> 
+            </svg> <span class="comet-screenreader-only">Close Modal</span> </a> 
+          </div> 
+         </div> 
+         <div class="product-overview__text"> 
+          <h2 class="product-overview__header">Engage and Differentiate Like Never Before</h2> 
+          <p class="product-overview__description">Educators just participated in an unveiling of Discovery Education Experience, an all-new K-12 learning platform that combines dynamic curated curriculum resources with on-demand teaching strategies, personalized for the educator. The excitement is palpable. See why they’re saying “It’s a game changer.”</p> 
+          <div class="product-overview__links"> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <div id="" class="comet-row comet-row--marketing module-a1 "> 
+       <div class="comet-row__inner"> 
+        <div class="module horizontal-cta horizontal-cta--height-tall color-filter color-filter--blue horizontal-cta--inverted" style="background-image: url(https://s3.amazonaws.com/www.discoveryeducation.com/wp-content/uploads/2018/11/1920x960-cta-us-centric.jpg)"> 
+         <h2 class="horizontal-cta__heading">Join more than 50% of US districts aimed at challenging the status quo.</h2> <a target="_blank" class="horizontal-cta-button comet-button comet-button--primary comet-button--small btn btn--light" href="https://discoveryeducation.com/experience-access-request"> Request Access </a> <a target="" class="horizontal-cta-button comet-button comet-button--primary comet-button--small btn btn--light" href="tel:18003239084"> 1-800-323-9084 </a> 
+        </div> 
+       </div> 
+      </div> 
+     </article><!-- #post-29951 --> 
+    </div><!-- .container --> 
+    <footer class="comet-row comet-row--marketing comet-footer comet-footer--marketing"> 
+     <div class="comet-row__inner"> 
+      <section class="footer-main"> 
+       <div class="footer-main__logo-block"> 
+        <img src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/images/de-logo-full-black.png" alt="Discovery Education" class="footer__logo-image footer__logo-image--black"> 
+       </div> 
+       <div class="footer-main__links"> 
+        <div class="footer-main__link-column"> 
+         <h4 class="footer-main__link-header">Company</h4> 
+         <ul class="footer-main__link-list"> 
+          <li class="footer-main__link-item"><a class="footer-main__link" href="https://www.discoveryeducation.com/company/curriculum-team/">Curriculum Team</a></li> 
+          <li class="footer-main__link-item"><a class="footer-main__link" href="https://www.discoveryeducation.com/corporate-and-non-profits/corporate-underwriting/">Corporate Underwriting</a></li> 
+          <li class="footer-main__link-item"><a class="footer-main__link" target="_blank" href="https://workforcenow.adp.com/jobs/apply/posting.html?client=DISCED&amp;ccId=19000101_000001&amp;type=MP&amp;lang=en_US">Careers</a></li> 
+          <li class="footer-main__link-item"><a class="footer-main__link" href="https://www.discoveryeducation.com/news/">News</a></li> 
+          <li class="footer-main__link-item"><a class="footer-main__link" target="_blank" href="https://den.discoveryeducation.com/events/calendar">Events</a></li> 
+         </ul> 
+        </div> 
+        <div class="footer-main__link-column"> 
+         <div class="footer-main__link-column"> 
+          <h4 class="footer-main__link-header">Tools</h4> 
+          <ul class="footer-main__link-list"> 
+           <li class="footer-main__link-item"><a class="footer-main__link" href="http://puzzlemaker.discoveryeducation.com">Puzzlemaker</a></li> 
+           <li class="footer-main__link-item"><a class="footer-main__link" href="http://www.webmath.com/">WebMath</a></li> 
+          </ul> 
+         </div> 
+         <div class="footer-main__link-column"> 
+          <h4 class="footer-main__link-header">Help</h4> 
+          <ul class="footer-main__link-list"> 
+           <li class="footer-main__link-item"><a class="footer-main__link" href="https://www.discoveryeducation.com/help/contact-us/">Contact Us</a></li> 
+           <li class="footer-main__link-item"><a class="footer-main__link" target="_blank" rel="nofollow" href="https://app.discoveryeducation.com/learn/check-requirements/">Technical Requirements</a></li> 
+           <li class="footer-main__link-item"><a class="footer-main__link" href="http://discoveryed.helpdocsonline.com/home">FAQs</a></li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div> 
+      </section> 
+      <section class="footer-sub"> 
+       <ul class="footer-sub__social-icons"> 
+        <li class="footer-sub__social-item"><a class="comet-button comet-button--flat comet-button--icon-only footer-sub__social-link" target="_blank" href="https://twitter.com/discoveryed">
+          <svg class="comet-button__icon comet-button__icon--left footer-sub__social-icon" aria-hidden="true" focusable="false">
+           <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#twitter"></use>
+          </svg><span class="comet-screenreader-only">twitter</span></a></li> 
+        <li class="footer-sub__social-item"><a class="comet-button comet-button--flat comet-button--icon-only footer-sub__social-link" target="_blank" href="https://www.facebook.com/discoveryed">
+          <svg class="comet-button__icon comet-button__icon--left footer-sub__social-icon" aria-hidden="true" focusable="false">
+           <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#facebook"></use>
+          </svg><span class="comet-screenreader-only">facebook</span></a></li> 
+        <li class="footer-sub__social-item"><a class="comet-button comet-button--flat comet-button--icon-only footer-sub__social-link" target="_blank" href="https://www.instagram.com/discoveryed/">
+          <svg class="comet-button__icon comet-button__icon--left footer-sub__social-icon" aria-hidden="true" focusable="false">
+           <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#instagram"></use>
+          </svg><span class="comet-screenreader-only">instagram</span></a></li> 
+        <li class="footer-sub__social-item"><a class="comet-button comet-button--flat comet-button--icon-only footer-sub__social-link" target="_blank" href="https://www.linkedin.com/company/discoveryed">
+          <svg class="comet-button__icon comet-button__icon--left footer-sub__social-icon" aria-hidden="true" focusable="false">
+           <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#linkedin"></use>
+          </svg><span class="comet-screenreader-only">linkedin</span></a></li> 
+        <li class="footer-sub__social-item"><a class="comet-button comet-button--flat comet-button--icon-only footer-sub__social-link" target="_blank" href="https://www.pinterest.com/discoveryed/">
+          <svg class="comet-button__icon comet-button__icon--left footer-sub__social-icon" aria-hidden="true" focusable="false">
+           <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#pinterest"></use>
+          </svg><span class="comet-screenreader-only">pinterest</span></a></li> 
+        <li class="footer-sub__social-item"><a class="comet-button comet-button--flat comet-button--icon-only footer-sub__social-link" target="_blank" href="https://www.youtube.com/user/DiscoveryEducation">
+          <svg class="comet-button__icon comet-button__icon--left footer-sub__social-icon" aria-hidden="true" focusable="false">
+           <use xlink:href="https://www.discoveryeducation.com/wp-content/themes/comet-wp/css/comet/comet.svg#youtube"></use>
+          </svg><span class="comet-screenreader-only">youtube</span></a></li> 
+       </ul> 
+       <ul class="footer-sub__links"> 
+        <li class="footer-sub__support-item"><a class="footer-sub__support-link" rel="nofollow" href="https://www.discoveryeducation.com/terms-of-use/">Terms of Use</a></li> 
+        <li class="footer-sub__support-item"><a class="footer-sub__support-link" rel="nofollow" href="https://www.discoveryeducation.com/privacy-policy/">Privacy Policy</a></li> 
+        <li class="footer-sub__support-item"><a class="footer-sub__support-link" href="https://www.discoveryeducation.com/sitemap/">Sitemap</a></li> 
+       </ul> 
+      </section> 
+      <div class="comet-footer__legal comet-long-form-text"> 
+       <p>Copyright © 2020 Discovery Education. All rights reserved.</p> 
+      </div> 
+     </div> 
+    </footer> <!-- START Salesforce Live Chat 2020 --> 
+    <style type="text/css">
+    .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #005290;
+        font-family: "Arial", sans-serif;
+    }
+    .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #005290;
+    }
+</style> 
+    <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js"></script> 
+    <script type="text/javascript">
+    var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+        embedded_svc.init(
+            'https://discoveryed.my.salesforce.com',
+            'https://discoveryed.secure.force.com/WebLead',
+            gslbBaseURL,
+            '00D4P000000x3Qz',
+            'Pre_Login_Chat_Team2',
+            {
+                baseLiveAgentContentURL: 'https://c.la3-c1-ia2.salesforceliveagent.com/content',
+                deploymentId: '5724P000000HVP1',
+                buttonId: '5734P000000HXHT',
+                baseLiveAgentURL: 'https://d.la3-c1-ia2.salesforceliveagent.com/chat',
+                eswLiveAgentDevName: 'Pre_Login_Chat_Team2',
+                isOfflineSupportEnabled: false
+            }
+        );
+    };
+    if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://discoveryed.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+            initESW(null);
+        };
+        document.body.appendChild(s);
+    } else {
+        initESW('https://service.force.com');
+    }
+</script> <!-- END Salesforce Live Chat 2020 --> 
+   </div><!-- #content --> 
+  </div><!-- comet-page-shell --> 
+  <script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script> 
+  <script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script>
+  <link rel="stylesheet" id="akismet.css-css" href="https://www.discoveryeducation.com/wp-content/plugins/userway-accessibility-widget/assets/style.css?ver=5.3.2" type="text/css" media="all"> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/svg4everybody.min.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/jquery.waypoints.min.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/shortcuts/sticky.min.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/navigation.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/skip-link-focus-fix.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/sticky-header.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/js/dropdowns.js?ver=20151215"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var userSettings = {"url":"\/","uid":"0","time":"1585338980","secure":"1"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-includes/js/utils.min.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-includes/js/wp-embed.min.js?ver=5.3.2"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/modules/js/h2.js?ver=20181115"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/modules/js/p.js?ver=20151215"></script> 
+  <script type="text/javascript" src="https://www.discoveryeducation.com/wp-content/themes/comet-wp/modules/js/c5.js?ver=20151215"></script> 
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"b5f6dd9c3e","applicationID":"339658213","transactionName":"MlJaN0VYV0BVBRYMCwsYeQBDUFZdGxYDAgFIXlYHXk9QV0EHDkgUF1hcFlRN","queueTime":0,"applicationTime":1968,"atts":"HhVZQQ1CRE4=","errorBeacon":"bam.nr-data.net","agent":""}</script> 
+ </body>
+</html>

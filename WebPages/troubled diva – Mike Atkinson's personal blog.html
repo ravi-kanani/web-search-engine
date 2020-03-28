@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="en" class="no-js"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script> 
+  <title>troubled diva – Mike Atkinson's personal blog</title> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly90cm91YmxlZC1kaXZhLmNvbQ%3D%3D"
+		+ "&wpcomid=12049424"
+		+ "&time=1585341406";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//troubleddiva.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.pubmine.com"> 
+  <link rel="dns-prefetch" href="//x.bidswitch.net"> 
+  <link rel="dns-prefetch" href="//static.criteo.net"> 
+  <link rel="dns-prefetch" href="//ib.adnxs.com"> 
+  <link rel="dns-prefetch" href="//aax.amazon-adsystem.com"> 
+  <link rel="dns-prefetch" href="//bidder.criteo.com"> 
+  <link rel="dns-prefetch" href="//cas.criteo.com"> 
+  <link rel="dns-prefetch" href="//gum.criteo.com"> 
+  <link rel="dns-prefetch" href="//ads.pubmatic.com"> 
+  <link rel="dns-prefetch" href="//gads.pubmatic.com"> 
+  <link rel="dns-prefetch" href="//tpc.googlesyndication.com"> 
+  <link rel="dns-prefetch" href="//ad.doubleclick.net"> 
+  <link rel="dns-prefetch" href="//googleads.g.doubleclick.net"> 
+  <link rel="dns-prefetch" href="//www.googletagservices.com"> 
+  <link rel="dns-prefetch" href="//cdn.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//delivery.g.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//delivery.swid.switchadhub.com"> 
+  <link rel="dns-prefetch" href="//a.teads.tv"> 
+  <link rel="dns-prefetch" href="//prebid.media.net"> 
+  <link rel="dns-prefetch" href="//adserver-us.adtech.advertising.com"> 
+  <link rel="dns-prefetch" href="//fastlane.rubiconproject.com"> 
+  <link rel="dns-prefetch" href="//prebid-server.rubiconproject.com"> 
+  <link rel="dns-prefetch" href="//hb-api.omnitagjs.com"> 
+  <link rel="dns-prefetch" href="//mtrx.go.sonobi.com"> 
+  <link rel="dns-prefetch" href="//apex.go.sonobi.com"> 
+  <link rel="dns-prefetch" href="//u.openx.net"> 
+  <link href="https://fonts.gstatic.com" crossorigin rel="preconnect"> 
+  <link rel="alternate" type="application/rss+xml" title="troubled diva » Feed" href="https://troubled-diva.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="troubled diva » Comments Feed" href="https://troubled-diva.com/comments/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s0.wp.com/_static/??-eJylk+tuwjAMhV9oaVYQdPyY9ixpYzKzXKrYofTtSS9sE2yA1D9V0pzv+DS1ZdeKJngGz9Il0dpk0JPs2iY4QQ4t9Fe7oiF6kX9jTYgg+BMcUD52rWLJXdb0hCcG8DdsbYP5KRqiVpqksaFW9l4d9Hv0yP334kZ8UZqUtzVEI4ZssiqqopR1QquH2s2XsFhHFXtJ3FtYbjN+/BM2I0XyANyqAVd9SCxMRP10kiuLqBi9oQf4PlkrCBkEaByA+U7ldl2uq+1qJ+GY9ZlLnnXo/FRmseslJaMDix4WG06dE4hpTqiRWB4Run9NmzBfWVmsXotSjG09cdNBMYUa/+uCaFMqm31/R7t++3CO5gHKCpcrKbC5szzfwzrUBjjjdFkLhtN9ZBztum4jEIn8dJjcPMID9+Hey83bZr3aVdXucAYN442c?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link crossorigin="anonymous" rel="stylesheet" id="twentysixteen-fonts-css" href="https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&amp;subset=latin%2Clatin-ext" media="all"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s0.wp.com/_static/??-eJyNjcEKgCAQRH8oW6WCLtG/JEtZukm7Uv590qlL0G1484aBMyq7kyAJhKSiT7MjhhkJD1eKj1hb5gpeW1kwIENME8hZQGZ3CSIBS/b4Xy8iTH6323MxhsF0bd8bbRq93nKBQK0=?cssminify=yes" type="text/css" media="all"> <!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='https://s2.wp.com/wp-content/themes/pub/twentysixteen/css/ie.css?m=1448353951h&#038;ver=20160816' media='all' />
+<![endif]--> <!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='https://s2.wp.com/wp-content/themes/pub/twentysixteen/css/ie8.css?m=1493067000h&#038;ver=20160816' media='all' />
+<![endif]--> <!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='https://s2.wp.com/wp-content/themes/pub/twentysixteen/css/ie7.css?m=1448353951h&#038;ver=20160816' media='all' />
+<![endif]--> 
+  <link rel="stylesheet" id="all-css-8-1" href="https://s1.wp.com/_static/??-eJx9kN1uwjAMhV9omdVBO3Yx7VmS4AaD86PGUejbL52KYEL0zic539GxoSZlYxAMAnJCjxlSMSC1PcyZroIYwOYMWWZGVZON/r3pN3gAfVGJi6OQodLRoWTA0n7jhVCxriDoE2vBNWYrwGFUHK0WiuGfUCNrmrbQCQ1H10b31/gutyAKIwWS+eX2W7C2SzOjp/v0ZL95x8KsMgkqPJK0VmsKDLtu9zl8fIHjaHTzLCdaLtXWtmBYh8tT6Fr2tF+hxfDjv7v+0Hd9f+iG8y8JtbD6?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJx9j+EKgzAMhF9otQyp+GfsWdRl2tKkXZOivv0qKIPhBoHA5ePuoueoLA0+P4C1K/PKkNZ9VY4v+h+g0I6pE6jQ0gEPgQRINjYGFgTmboSTK4beelCZIRWApMQ8wzcnExQHHXOvZS7CynYRANoMJkFvzjpy/NT5/dxO3fF2NaatTdOY2r0BviBk1A=="></script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/wp-content/mu-plugins/highlander-comments/style.css?m=1530132353h&amp;cssminify=yes" type="text/css" media="all"> <!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' media='all' />
+<![endif]--> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://troubleddiva.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="shortlink" href="https://wp.me/OyBy"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="troubled diva"> 
+  <meta property="og:description" content="Mike Atkinson's personal blog"> 
+  <meta property="og:url" content="https://troubled-diva.com/"> 
+  <meta property="og:site_name" content="troubled diva"> 
+  <meta property="og:image" content="https://secure.gravatar.com/blavatar/824864b82015d123c0e88ce972d689f3?s=200&amp;ts=1585341406"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="200"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/824864b82015d123c0e88ce972d689f3?s=32" sizes="16x16"> 
+  <link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/824864b82015d123c0e88ce972d689f3?s=32" sizes="16x16"> 
+  <link rel="apple-touch-icon" href="https://secure.gravatar.com/blavatar/824864b82015d123c0e88ce972d689f3?s=114"> 
+  <link rel="openid.server" href="https://troubled-diva.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://troubled-diva.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://troubled-diva.com/osd.xml" title="troubled diva"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style> 
+  <style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style> 
+  <meta name="application-name" content="troubled diva">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="Mike Atkinson's personal blog">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://troubled-diva.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/824864b82015d123c0e88ce972d689f3?s=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Mike Atkinson's personal blog"> 
+  <script type="text/javascript">
+
+			window.doNotSellCallback = function( $ ) {
+
+				var linkElements = [
+					'a[href="https://wordpress.com/?ref=footer_blog"]',
+					'a[href="https://wordpress.com/?ref=footer_website"]',
+					'a[href="https://wordpress.com/?ref=vertical_footer"]',
+					'a[href^="https://wordpress.com/?ref=footer_segment_"]',
+				].join(',');
+
+				var dnsLink = $( '<a href="https://wordpress.com/advertising-program-optout" rel="nofollow" style="margin-left: 0.5em;">Do Not Sell My Personal Information</a>' );
+				var creditLinks = $( linkElements );
+
+				if ( 0 === creditLinks.length ) {
+					return false;
+				}
+
+				creditLinks.after(dnsLink);
+				return true;
+			};
+		</script> 
+  <script type="text/javascript">
+		function __ATA_CC() {var v = document.cookie.match('(^|;) ?personalized-ads-consent=([^;]*)(;|$)');return v ? 1 : 0;}
+		var __ATA_PP = { pt: 0, ht: 0, tn: 'twentysixteen', amp: false, siteid: 8982, blogid: 12049424, consent: __ATA_CC() };
+		var __ATA = __ATA || {};
+		__ATA.cmd = __ATA.cmd || [];
+		__ATA.criteo = __ATA.criteo || {};
+		__ATA.criteo.cmd = __ATA.criteo.cmd || [];
+		</script> 
+  <script type="text/javascript">
+		(function(){var g=Date.now||function(){return+new Date};function h(a,b){a:{for(var c=a.length,d="string"==typeof a?a.split(""):a,e=0;e<c;e++)if(e in d&&b.call(void 0,d[e],e,a)){b=e;break a}b=-1}return 0>b?null:"string"==typeof a?a.charAt(b):a[b]};function k(a,b,c){c=null!=c?"="+encodeURIComponent(String(c)):"";if(b+=c){c=a.indexOf("#");0>c&&(c=a.length);var d=a.indexOf("?");if(0>d||d>c){d=c;var e=""}else e=a.substring(d+1,c);a=[a.substr(0,d),e,a.substr(c)];c=a[1];a[1]=b?c?c+"&"+b:b:c;a=a[0]+(a[1]?"?"+a[1]:"")+a[2]}return a};var l=0;function m(a,b){var c=document.createElement("script");c.src=a;c.onload=function(){b&&b(void 0)};c.onerror=function(){b("error")};a=document.getElementsByTagName("head");var d;a&&0!==a.length?d=a[0]:d=document.documentElement;d.appendChild(c)}function n(a){var b=void 0===b?document.cookie:b;return(b=h(b.split("; "),function(c){return-1!=c.indexOf(a+"=")}))?b.split("=")[1]:""}function p(a){return"string"==typeof a&&0<a.length}
+		function r(a,b,c){b=void 0===b?"":b;c=void 0===c?".":c;var d=[];Object.keys(a).forEach(function(e){var f=a[e],q=typeof f;"object"==q&&null!=f||"function"==q?d.push(r(f,b+e+c)):null!==f&&void 0!==f&&(e=encodeURIComponent(b+e),d.push(e+"="+encodeURIComponent(f)))});return d.filter(p).join("&")}function t(a,b){a||((window.__ATA||{}).config=b.c,m(b.url))}var u=Math.floor(1E13*Math.random()),v=window.__ATA||{};window.__ATA=v;v.rid=u;v.createdAt=g();var w=window.__ATA||{},x="s.pubmine.com";
+		w&&w.serverDomain&&(x=w.serverDomain);var y="//"+x+"/conf",z=window.top===window,A=window.__ATA_PP&&window.__ATA_PP.gdpr_applies,B="boolean"===typeof A?Number(A):null,C=window.__ATA_PP||null,D=z?document.referrer?document.referrer:null:null,E=z?window.location.href:document.referrer?document.referrer:null,F,G=n("__ATA_tuuid");F=G?G:null;var H=window.innerWidth+"x"+window.innerHeight,I=n("usprivacy"),J=r({gdpr:B,pp:C,rid:u,src:D,ref:E,tuuid:F,vp:H,us_privacy:I?I:null},"",".");
+		(function(a){var b=void 0===b?"cb":b;l++;var c="callback__"+g().toString(36)+"_"+l.toString(36);a=k(a,b,c);window[c]=function(d){t(void 0,d)};m(a,function(d){d&&t(d)})})(y+"?"+J);}).call(this);
+		</script>
+  <script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script> 
+  <script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script> 
+ </head> 
+ <body class="home blog custom-background wp-embed-responsive customizer-styles-applied hfeed highlander-enabled highlander-light infinite-scroll neverending"> 
+  <div id="page" class="site"> 
+   <div class="site-inner"> <a class="skip-link screen-reader-text" href="#content">Skip to content</a> 
+    <header id="masthead" class="site-header" role="banner"> 
+     <div class="site-header-main"> 
+      <div class="site-branding"> <a href="https://troubled-diva.com/" class="site-logo-link" rel="home" itemprop="url"></a> 
+       <h1 class="site-title"><a href="https://troubled-diva.com/" rel="home">troubled diva</a></h1> 
+       <p class="site-description">Mike Atkinson's personal blog</p> 
+      </div><!-- .site-branding --> 
+     </div><!-- .site-header-main --> 
+     <div class="header-image"> <a href="https://troubled-diva.com/" rel="home"> <img src="https://troubleddiva.files.wordpress.com/2016/03/coverblogt.jpg" srcset="" sizes="" width="1200" height="280" alt="troubled diva"> </a> 
+     </div><!-- .header-image --> 
+    </header><!-- .site-header --> 
+    <div id="content" class="site-content"> 
+     <div id="primary" class="content-area"> 
+      <main id="main" class="site-main" role="main"> 
+       <article id="post-9607" class="post-9607 post type-post status-publish format-standard hentry category-uncategorized"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2019/12/08/soul-civil-war/" rel="bookmark">Soul Civil War</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p><em>This feature originally appeared in Record Mirror, November 20th 1971.&nbsp;</em></p> 
+         <p><strong>Soul Civil War!</strong><br> <strong>…the feud that rages between North and South</strong><br> <strong>Tony Cummings reports</strong></p> 
+         <p>The pop Press have suddenly wakened up to a situation that the specialist soul Press has been carrying on about for a long time now, that in the North clubs pack ’em in playing soul.</p> 
+         <p>As explained in a previous ‘Echoes’, this doesn’t knock out all Southern soul fans, the media may think the North is heavily into soul but a cynicism has crept into many a Southern soul fan’s assessment of their boogalooing Northern counterparts –</p> 
+         <p><em>‘So a few dedicated soul freaks worry, not without cause, about the deceitful impression given to the massed pop -buyers of what soul is. Oddly enough, the type was originated and is now perpetuated, not by the accursed media, but by a portion of soul fans’</em> (Record Mirror, 11th September 1971).</p> 
+         <p>Do Northerners, or their self-confessed champions agree that their insistence on keeping the discotheques dancing to a never-ending thumpety thump Detroit beat is harming soul or that their liking for old stereotyped trivia has little to do with the passion, the beauty, or the involvement of soul? You must be joking! –</p> 
+         <p><em>‘Record Mirror also carried an article relating to the “up-North soul scene” which, although somewhat ambiguously written, amounted to an attack on the Northern scene in general, condemning it for shallowness and lack of true soul depth! In short, the article was a scurrilous blasphemy and its tone of dogmatic pedantry and doctrinaire authoritarianism was truly in keeping with the times in which we live’</em> (Blues &amp; Soul, 68).</p> 
+         <p>When ‘Black Hits – No Soul’ appeared I expected, and got, a shoal of criticism. Much was irrelevant – all reviewing is of course a statement of personal opinion, such an obvious fact should not need clarification – but a little was well founded – well, it was a long time since I’d journeyed ‘up North’.</p> 
+         <p>I knew the records played but possibly, just possibly, the music needed to be heard in the environment of a Northern club before the hidden depths of musical magic spilled out from the amplifiers blasting ‘<a href="https://www.youtube.com/watch?v=9rI0G6DRVg0">In Orbit</a>‘ or ‘<a href="https://www.youtube.com/watch?v=3ox14YEcIBc">Darkest Days</a>‘. So I, Clive Richardson and Roy Stanton of Shout, Lou McDermott of the London Blues Society and Mike Booth of Record Centre, hired a coach, filled it with R&amp;B fans and set forth to the Blackpool Mecca. And the friendly, soulful North?</p> 
+         <p><em>‘I don’t care how far you’ve bloody well come, you can’t come in with long hair like that’.</em></p> 
+         <p>The speaker was one Mr Pye, the tight-lipped, dinner-jacketed Manager of the Blackpool Mecca. Mr Pye showed an amazing determination to re-enforce the possible prejudice and derision felt by the coach load towards the Northern soul scene without anyone getting near a Ric-Tic rarity.</p> 
+         <p>Mecca establishments have the ties and suits hang-up so restrictions were checked out earlier on the ‘phone – but hair length had mysteriously escaped mention. In an angry editorial in the latest Shout, Roy Stanton questions the morality of a situation where an establishment rejects long-hairs but turns a blind eye to pill pushers, who ‘despite their Edwardian outlook capitalise so obscenely on their younger generation’ and even hints at more sinister reasons for the snub. But the situation for Blackpool soul fans is less involved with such basic moral issues. To hear soul you must restrict your appearance to a carefully defined pattern and when entry is obtained, expect and get a similar restriction on the music played.</p> 
+         <p>These restrictions were obvious to Mike Booth, the only one from the party who entered Mecca’s hallowed gates, though ‘You’re not with those London troublemakers?’ from the man at the door hardly spelt welcome. He was pleased that at least a few non-mid-period Detroit records were played, Paul Humphries and The Cool Aid Chemists and instrumental James Brown, and the deejay was a very nice guy, indeed he pleaded with the management in vain for the lifting of the hair-bar, but monotony could not be avoided as record after record was played with the arrangement, mood and style lifted exactly from the previous one.</p> 
+         <p>Mike met the eccentrics that evening, a guy who has Ric Tic tattooed on his arm, guys who service the deejays with totally unknown mediocrity (do they realise what a come down it is to London fans when they eventually get hold of Mel Hueston’s ‘<a href="https://www.youtube.com/watch?v=qfh-568xiWc#t=6s">Searchin’</a>‘ and find out how mundane it is?) and guys who dismiss every slow record as non-soulful. Mike’s confusion on coming back to the coach is understandable: “the Mecca was like being in a crowd of lunatics all telling you how mad you are.” The saddest part though of the North vs. South affair happened before the turning away of the multitude.</p> 
+         <p>For several meandering columns Blues and Soul’s Dave Godin wrote with unbelievable optimism about how the Ric-Tic groovers are helping service the cause of soul. They are, in fact, damaging the cause of real soul and could conceivably eventually destroy it, as far as British releases go. After mountains of total irrelevancies (and pages still to come no doubt) about purist outlooks and ‘setting ourselves up’ (seen any good Dave Godin Seals Of Approval recently?) he ends with a plea for total soul unity –</p> 
+         <p><em>‘It is unlikely in my opinion that soul music will ever be an overwhelming popular commodity in Britain, like say, the Beatles, the Rolling Stones, etc. so surely it is better to realise our minority position and not let the small differences of opinion that exist become magnified out of all proportion into gigantic issues? It’s a storm in a teacup. You like soul funky? Great. You like it up-tempo? Great. You like it heavy? Great. You like it teeny-bopperish? Great. You like it mean, moody and magnificent? Great. But remember, it’s soul music that you like’.</em> (Blues &amp; Soul, 70).</p> 
+         <p>The obvious inference, of course, be glad that any soul hits. In fact, people who really care about rhythm and blues music seldom are as stupid as this and realise that good pop records are better than bad pop-soul records and that a succession of dancing-string irrelevancies ultimately harms the image of soul, and must affect what sort of black records get released in the UK.</p> 
+         <p>Be joyful that the Tams and Al Green hit, they deserve to, not because they’re by black singers but because they’re good. Let’s hope ‘<a href="https://www.youtube.com/watch?v=nVkJ489QVXc#t=3s">Barefootin’ in China Town</a>‘ or ‘<a href="https://www.youtube.com/watch?v=lgcAaSTVOaY">It Ain’t Necessary</a>‘ never make the charts, their contribution to Northern dancers’ egos may be immense, but their contribution to soul is nil.</p> 
+         <p><em>`How can you call “monotonously, insiduously ordinary” such in-demand records as ‘<a href="https://www.youtube.com/watch?v=w6YYaq4rq1g#t=3s">I Feel An Urge Coming On</a>‘ by Joe Armstead, ‘<a href="https://www.youtube.com/watch?v=LU7mCf63dvg#t=3s">Hit And Run</a>‘ by Rose Battiste, ‘<a href="https://www.youtube.com/watch?v=OB6CeDUBwhw#t=2s">A Mighty Good Way</a>‘ by Robert Banks, ‘<a href="https://www.youtube.com/watch?v=lgcAaSTVOaY">It Ain’t Necessary</a>‘ by Mamie Galore, ‘<a href="https://www.youtube.com/watch?v=4TTcmqfDA50">Little Queenie</a>‘ by Bill Black’s Combo, ‘<a href="https://www.youtube.com/watch?v=XCQA1RDAaZY">The Next In Line</a>‘ by Hoagy Lands, ‘<a href="https://www.youtube.com/watch?v=xI8X-BHTxrs">Feels Good</a>‘ by Bobby Wilson or ‘<a href="https://www.youtube.com/watch?v=jCu82W6UZJY">Every Beat Of My Heart</a>‘ by the Du-Ettes’.</em> (Ian Levine, Blackpool, letter September ’71).</p> 
+         <p>And in the twilight world of Northern soul rarities, records are dropped from clubs’ playlists once the audience get the record as well as the deejays.</p> 
+         <p><em>You prove how ill-informed you are by imagining that “<a href="https://www.youtube.com/watch?v=PfKdXOxV9oU#t=2s">Chains Of Love</a>” by Chuck Jackson, “<a href="https://www.youtube.com/watch?v=IB_mW2HCh5g#t=2s">What’s Wrong With Me Baby</a>” by the Invitations and “<a href="https://www.youtube.com/watch?v=RV_cs-T2Y-Q">I Got A Feeling</a>” by Barbara Randolph are in-demand oldies. The first two lost their popularity over a year ago. The third lost its popularity 2½ years ago’.</em> (Ian Levine).</p> 
+         <p>And what of soul in the South? Is a distorted soul scene better than no scene at all? When soul ceased to have the right sort of image, London, and all points further South, dropped its soul clubs in favour of progressive pop. Now the only London haunts you can hear R&amp;B blasting from a deejay’s sound system are few and far between.</p> 
+         <p>In the West End there’s the Roaring Twenties, the Cue Club or further out obscurer places like the Railway, Harrow or Mr Bee’s, Peckham, but beautiful clubs though they undoubtedly are, the majority of their clientele want the black underground – reggae. If you want more than the occasional James Brown between the latest Jamaican pre-releases, London doesn’t have a soul discotheque … or does it?</p> 
+         <p>Until a couple of weeks ago, what you had to do was come out of Mile End tube station, turn left, walk for a quarter of a mile and there’s a pub, the Fountain. Every Thursday, a deejay, Terry Davis, played the sort of records which persuaded soul fans to journey 10 or 15 or more miles to sit or stand, grabbing the sounds. There were hangups – no dancing; it’s a pub, so youngsters were kept out; and it wasn’t particularly large; but at least it showed that R&amp;B fans do exist in London.</p> 
+         <p>The non-dancing thing oddly proved the Fountain’s greatest advantage. What Terry loses in atmosphere he makes up for in not being restricted to a continual dance beat and played a much larger cross-section of what soul is, and should be made to appear. The Motown oldies, the Jerry-o’s and James Brown’s blasted forth but also Ralfi Pagan’s “<a href="https://www.youtube.com/watch?v=aI0YcHLs9nA">Make It With You</a>,” the Dramatics’ “<a href="https://www.youtube.com/watch?v=PgG6SU8L-dI">What You See Is What You Get</a>,” George Perkins’ “<a href="https://www.youtube.com/watch?v=JNhVm1yGxS8">Crying In The Streets</a>,” even, incredulously, the Showmen’s “<a href="https://www.youtube.com/watch?v=nUwA3NXvYKU">It Will Stand</a>” and Etta James’ “<a href="https://www.youtube.com/watch?v=m8lSifqvhPY">Roll With Me Henry</a>.”</p> 
+         <p>London badly needs some soul discotheques but at least there were Thursdays at the Fountain – until recently. Terry has been sacked, the management decided to turn Thursday’s over to semi-progressive schlock like the other nights. As they said, “We’ll get a bigger crowd with long-hair music.”</p> 
+         <div id="atatags-26942-5e7e63debe336"></div> 
+         <script>
+				__ATA.cmd.push(function() {
+					__ATA.initDynamicSlot({
+						id: 'atatags-26942-5e7e63debe336',
+						location: 120,
+						formFactor: '001',
+						label: {
+							text: 'Advertisements',
+						},
+						creative: {
+							reportAd: {
+								text: 'Report this ad',
+							},
+							privacySettings: {
+								text: 'Privacy settings',
+							}
+						}
+					});
+				});
+			</script> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2019/12/08/soul-civil-war/" rel="bookmark"><time class="entry-date published updated" datetime="2019-12-08T15:08:28+00:00">December 8, 2019</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/uncategorized/" rel="category tag">Uncategorized</a></span><span class="comments-link"><a href="https://troubled-diva.com/2019/12/08/soul-civil-war/#respond">Leave a comment<span class="screen-reader-text"> on Soul Civil War</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <article id="post-9569" class="post-9569 post type-post status-publish format-standard hentry category-uncategorized"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/" rel="bookmark">After ten years on Twitter, it’s time to call a&nbsp;halt.</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p>Ten years ago today, I tweeted for the first time. News of the fledgling venture – then only a few months old, with just over 50,000 users – had reached my corner of blogland, and for a few days there was a small flurry of sign-ups, as we all took turns at answering the question we were being asked: not “What’s happening?”, nor its predecessor “What’s on your mind?”, but simply “What are you doing?”</p> 
+         <p>For those first few months – before @replies, hashtags, retweets, automatically abbreviated URLs and integrated image&nbsp;hosting – we cleaved closely to the strictures of the question, and answered it mainly with present participles. <em>It’s a creative project</em>, we told ourselves: a series of pauses in the day, when we homed in&nbsp;on the here and now, and&nbsp;shared snippets of our realities. Tweets stood alone; conversations were largely frowned upon.</p> 
+         <p>None of us foresaw what Twitter was to become. I had my first hunch when my partner K – who, rather to my dismay, had never bothered much with blogs – became fascinated with my timeline, stealing glimpses&nbsp;whenever he walked past the laptop. I couldn’t quite work out why, when blog posts had left him cold, tweets were drawing him in. But it was happening everywhere, with escalating rapidity, especially after&nbsp;people in the public eye started following the lead of early adopters such as Stephen Fry.</p> 
+         <p>Gradually, the scope of the service expanded. Chatting became easier, and less irksome to onlookers. You could keep up with new&nbsp;blog posts, freed from the bother of feed readers – or you could micro-blog right here, with&nbsp;pics and links. You could commune with celebs. News stories might break here first. Via&nbsp;searches and hashtags, you could gauge responses to issues of the day. You could raise your profile, promote your work, build your brand.&nbsp;The whole world was here now. With minimal effort, you could stay informed, tracking the zeitgeist, swimming at&nbsp;the front of the slipstream.</p> 
+         <p>Spambots were a nuisance, trolls a rarity. That soon switched around. Things started getting nasty. Outrage became a common currency. There were many casualties. But on we scrolled, as our&nbsp;reflective pauses and quick quips&nbsp;mutated into&nbsp;an ever-present dripfeed of hyperbole and hot takes.</p> 
+         <p>Ten years on, the world’s a darker place. Some of us have been here before; the Thatcher-Reagan years felt like a tunnel from which we might never emerge, for instance. But then, there have always been two realities: the global, led by news stories, and the personal, informed by our immediate surroundings and experiences. The former has always had a bearing on the latter, of course – but it feels now as if the boundaries are blurring. By bleeding the two together so seamlessly and efficiently, Twitter is constantly thrusting harsh outer realities into delicate inner receptors.</p> 
+         <p>This no longer feels healthy or useful. Twitter largely stopped being fun a long time ago; now, it feels like a drain on the collective&nbsp;well-being.</p> 
+         <p>I’m dealing with it by re-compartmentalising. I’ll keep up with the news like I used to, at ring-fenced intervals. For the rest of the time, I’d rather be present in my own reality – which, to my great good fortune,&nbsp;happens to be a pleasant place to dwell. And I’d like to recover some of my lost attention span, too. Long reads. Books. Analogue media in general.</p> 
+         <p>I can live with being second to breaking news. Hell, I can positively&nbsp;<em>thrive</em> without having&nbsp;whatever fuckwittery the fuckwits are spouting today repeatedly shoved under my face. I’ve seen enough Express/Mail screengrabs, Hopkins/Mensch smackdowns and Johnson/Trump GIFs for one lifetime, thanks all the same.</p> 
+         <p>Besides which, ten years is long enough to be doing the same thing every day. Most of those formerly blogging early adopters moved on yonks ago, and my real-life friends are almost all on Facebook (which has its own multiple irritations, but compensates for them with companionship, conversation, and a “Hide All From…” option&nbsp;which I take constant glee&nbsp;in wielding). I no longer&nbsp;have stuff to pimp, or a profile to maintain.</p> 
+         <p>I’ve been planning to do this for weeks. As&nbsp;the old saying goes, it feels like unchaining myself from a lunatic.</p> 
+         <p>Adieu, Twitter. We’re done.</p> 
+         <div id="atatags-370373-5e7e63dec1c8c"> 
+          <script type="text/javascript">
+            __ATA.cmd.push(function() {
+                __ATA.initVideoSlot('atatags-370373-5e7e63dec1c8c', {
+                    sectionId: '370373',
+                    format: 'inread'
+                });
+            });
+        </script> 
+         </div> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/" rel="bookmark"><time class="entry-date published updated" datetime="2016-12-08T12:19:48+00:00">December 8, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/uncategorized/" rel="category tag">Uncategorized</a></span><span class="comments-link"><a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/#comments">4 Comments<span class="screen-reader-text"> on After ten years on Twitter, it’s time to call a&nbsp;halt.</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <article id="post-9556" class="post-9556 post type-post status-publish format-standard hentry category-randomising-the-record-collection"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2016/06/29/randomising-the-record-collection-28-simple-minds-promised-you-a-miracle/" rel="bookmark">Randomising the record collection #28: Simple Minds – Promised You A&nbsp;Miracle</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p><strong>#8171 –&nbsp;Simple Minds – Promised You A Miracle</strong><br> (12-inch single, 1982) (<a href="https://www.discogs.com/Simple-Minds-Promised-You-A-Miracle/release/52441">Discogs tracklisting</a>)</p> 
+         <p><img data-attachment-id="9557" data-permalink="https://troubled-diva.com/2016/06/29/randomising-the-record-collection-28-simple-minds-promised-you-a-miracle/28-simple-minds/" data-orig-file="https://troubleddiva.files.wordpress.com/2016/06/28-simple-minds.jpg" data-orig-size="300,300" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="28 simple minds" data-image-description="" data-medium-file="https://troubleddiva.files.wordpress.com/2016/06/28-simple-minds.jpg?w=300" data-large-file="https://troubleddiva.files.wordpress.com/2016/06/28-simple-minds.jpg?w=300" class="alignnone size-full wp-image-9557" src="https://troubleddiva.files.wordpress.com/2016/06/28-simple-minds.jpg?w=840" alt="28 simple minds" srcset="https://troubleddiva.files.wordpress.com/2016/06/28-simple-minds.jpg 300w, https://troubleddiva.files.wordpress.com/2016/06/28-simple-minds.jpg?w=150 150w" sizes="(max-width: 300px) 85vw, 300px"></p> <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Amiketd%3Aplaylist%3A4EN1wNVI1ddxeG4NkZ2OJz" style="display:block; margin:0 auto; width:300px; height:380px;" frameborder="0" allowtransparency="true"></iframe> 
+         <div class="jetpack-video-wrapper">
+          <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="840" height="473" src="https://www.youtube.com/embed/tX55HEX0hb0?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+         </div> 
+         <div class="jetpack-video-wrapper">
+          <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="840" height="473" src="https://www.youtube.com/embed/pJDx-1L3V9U?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+         </div> 
+         <p><em>Aha</em>, I thought, <em>this will be an appropriately sardonic commentary upon our post-Brexit times; what fun I shall have, drawing lines from the past to the present!</em>&nbsp;Far from it, though: this is an almost wholly optimistic love song, shot through with a sense of infinite possibility, which became a hit single at a time when pop itself was probing new possibilities.</p> 
+         <p>Everywhere you looked in the first half of 1982, bands were vaulting from cult acclaim to overground appeal, without (yet?) fatally diluting their original sense of purpose. Just o<span style="line-height:1.75;">ff the top of my head, The Associates, Japan, Echo and the Bunnymen and Bow Wow Wow spring to mind. There were, of course, many more.</span></p> 
+         <p><span style="line-height:1.75;">(Something analogous happened in the mid-Nineties, too –&nbsp;</span><span style="line-height:1.75;">although perhaps the borders were left too open for too long, without an effective points system to hang on where am I going with this shut up move on</span><span style="line-height:1.75;">.)</span></p> 
+         <p>Despite&nbsp;all the praise that was heaped upon them in the corners of the music press which held the most personal sway, Simple Minds were never one of “my” bands, and “Promised You A Miracle” was the only record of theirs which I ever went out and bought. Beyond 1985, I was done with them completely; they had become&nbsp;too broad-brush, too foghorny, too flag-wavy,&nbsp;too stadium. But the “Promised You A Miracle” of my memory was an airy, sprightly, shimmering thing, as much a part of the New Pop as, say, “Poison Arrow” or “Party Fears Two”.</p> 
+         <p>Playing&nbsp;it again today, I can hear more of the band they became, and less of the band I thought they once were. The&nbsp;track strains for the sky, but it never quite breaks its earthly shackles. Perhaps the shackles are at their loosest in the final, repeat-and-vamp-to-fade passage of this extended version, as the band locks into a cyclical progression that can never resolve, while Jim Kerr ecstatically extemporises, leaving language behind.</p> 
+         <p>The two instrumentals on the flip side, both produced by Steve Hillage, have worn pretty well – particularly the icy, magisterial synth-funk of “Theme From Great Cities”, which crossed over onto New York dance floors as electro was starting to emerge. (I know it better from <a href="https://www.youtube.com/watch?v=-VRbBlGMq7A">“The Real Life”</a> a juddering 1988/89 reworking by Freddy Bastone, a.k.a. Corporation Of One, who spliced it with a “Bohemian Rhapsody” vocal sample and&nbsp;placed it somewhere between freestyle house and early techno.) They offer a glimpse of an alternative future for Simple Minds, had the lure of arena-friendly big-statement-rock not proved so&nbsp;strong. Had they followed such a path, I might have walked with them further.</p> 
+         <p>&nbsp;</p> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2016/06/29/randomising-the-record-collection-28-simple-minds-promised-you-a-miracle/" rel="bookmark"><time class="entry-date published" datetime="2016-06-29T15:00:35+00:00">June 29, 2016</time><time class="updated" datetime="2016-06-29T15:09:04+00:00">June 29, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/randomising-the-record-collection/" rel="category tag">Randomising the record collection</a></span><span class="comments-link"><a href="https://troubled-diva.com/2016/06/29/randomising-the-record-collection-28-simple-minds-promised-you-a-miracle/#respond">Leave a comment<span class="screen-reader-text"> on Randomising the record collection #28: Simple Minds – Promised You A&nbsp;Miracle</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <article id="post-8077" class="post-8077 post type-post status-publish format-standard hentry category-randomising-the-record-collection"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2016/06/28/randomising-the-record-collection-27-the-gorillas-shes-my-gal/" rel="bookmark">Randomising the record collection #27: The Gorillas – She’s My&nbsp;Gal</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p><strong>#584 – The Gorillas – She’s My Gal</strong><br> (7-inch single, 1976) (<a href="https://www.discogs.com/The-Gorillas-Shes-My-Gal-Why-Wait-Til-Tomorrow/release/1517240">Discogs tracklisting</a>)</p> 
+         <p><a href="https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg" rel="attachment wp-att-8078"><img data-attachment-id="8078" data-permalink="https://troubled-diva.com/2016/06/28/randomising-the-record-collection-27-the-gorillas-shes-my-gal/27-gorillas/" data-orig-file="https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg" data-orig-size="750,448" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;Expression 1640XL&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;1&quot;}" data-image-title="27 gorillas" data-image-description="" data-medium-file="https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg?w=300" data-large-file="https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg?w=750" class="alignnone size-full wp-image-8078" src="https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg?w=840" alt="27 gorillas" srcset="https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg 750w, https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg?w=150 150w, https://troubleddiva.files.wordpress.com/2016/03/27-gorillas.jpg?w=300 300w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 61vw, (max-width: 1362px) 45vw, 600px"></a></p> <iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A0TSYQalaXhRPh0fEKrkyy3" style="display:block; margin:0 auto; width:300px; height:380px;" frameborder="0" allowtransparency="true"></iframe> 
+         <div class="jetpack-video-wrapper">
+          <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="840" height="473" src="https://www.youtube.com/embed/t83Zkg-rOvo?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+         </div> 
+         <p>I’ve got other, more important stuff to do today. No change there, then – but faced with a need to scale down my obsessive post-referendum news/social media&nbsp;fixation, I must conjure up a fresh&nbsp;displacement activity.&nbsp;And so, as “She’s My Gal” has been in my direct line of vision for the past three months, patiently stacked behind the office hi-fi, perhaps it’s finally time to dispatch it back to its rightful resting place around the corner, nestling between The Go-Go’s and Gorky’s Zygotic Mynci.</p> 
+         <p>In the autumn of 1976, impatient for the arrival of UK punk on record, I was casting around for the nearest substitutes. Six years ago, <a href="http://www.theguardian.com/music/2010/jan/21/pub-rock-dr-feelgood">writing about Dr. Feelgood in The Guardian</a>, I&nbsp;made mention of&nbsp;this transient phase.</p> 
+         <blockquote>
+          <p>For those of us who were impatient for British&nbsp;punk rock to make the leap from enticing music-press buzz to ­tangible vinyl product, Dr Feelgood and their compatriots at the rowdier end of the pub rock scene – Eddie and the Hot Rods, Count Bishops, Tyla Gang – were as close an approximation as we could find to the music we had read about, but could only piece together in our imaginations. Ahead of the punk eruption, these John the Baptist figures were leading the charge, showing that rock music could be reinvigorated by a high-energy, no-nonsense, back to basics approach.</p>
+         </blockquote> 
+         <p>And so it was with <a href="http://www.punk77.co.uk/groups/hammersmith_gorillas.htm">The Gorillas</a>, an equally rowdy product of the London pub-rock circuit, and this release for one of the UK’s first independent labels, Chiswick Records. Having already hoovered up as much as I could find from the Stiff label – Nick Lowe, Tyla Gang, Lew Lewis and, most crucially of all, The Damned – I was&nbsp;now turning my attention to their spiritual counterparts, and “She’s My Gal” duly became the second of five near-consecutive purchases from Chiswick (a run that was only broken by “Anarchy In The U.K.”).</p> 
+         <p>As much a perpetuation of&nbsp;<a href="http://noisey.vice.com/en_uk/blog/bootboy-glam-football-chants-proto-oi-in-1970s-uk">bovver-glam</a>&nbsp;as a prefigurement of punk, the catchy swagger of “She’s My Gal” bridged my listening gap more ably than most. I shall place it back among the G’s with fondness.</p> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2016/06/28/randomising-the-record-collection-27-the-gorillas-shes-my-gal/" rel="bookmark"><time class="entry-date published updated" datetime="2016-06-28T13:24:53+00:00">June 28, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/randomising-the-record-collection/" rel="category tag">Randomising the record collection</a></span><span class="comments-link"><a href="https://troubled-diva.com/2016/06/28/randomising-the-record-collection-27-the-gorillas-shes-my-gal/#respond">Leave a comment<span class="screen-reader-text"> on Randomising the record collection #27: The Gorillas – She’s My&nbsp;Gal</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <article id="post-8024" class="post-8024 post type-post status-publish format-standard hentry category-randomising-the-record-collection"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2016/03/23/randomising-the-record-collection-26-elaine-hudson-no-more-the-fool/" rel="bookmark">Randomising the record collection #26: Elaine Hudson – No More The&nbsp;Fool</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p><strong>#644 – Elaine Hudson – No More The Fool</strong><br> (7-inch single, 1990) (<a href="https://www.discogs.com/Elaine-Hudson-No-More-The-Fool/release/8201768">Discogs tracklisting</a>)</p> 
+         <p><a href="https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg" rel="attachment wp-att-8025"><img data-attachment-id="8025" data-permalink="https://troubled-diva.com/2016/03/23/randomising-the-record-collection-26-elaine-hudson-no-more-the-fool/26-elaine-hudson/" data-orig-file="https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg" data-orig-size="599,599" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="26 elaine hudson" data-image-description="" data-medium-file="https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg?w=300" data-large-file="https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg?w=599" class="alignnone size-full wp-image-8025" src="https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg?w=840" alt="26 elaine hudson" srcset="https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg 599w, https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg?w=150 150w, https://troubleddiva.files.wordpress.com/2016/03/26-elaine-hudson.jpg?w=300 300w" sizes="(max-width: 599px) 85vw, 599px"></a></p> 
+         <p>Elaine Hudson had made her mark in 1989, duetting with Sydney Youngblood on the title track of his successful debut album&nbsp;<em>Feeling Free</em>. Now it was Youngblood’s turn to return the favour, supplying incidental vocals on Hudson’s first single. Indeed, the whole Youngblood songwriting and production crew were pressed into Hudson’s service, with Youngblood himself taking a co-writing credit.</p> 
+         <p><a href="https://www.youtube.com/watch?v=tN8ow4Whjl4">In its 12-inch incarnation</a>, “No More The Fool” is an amiable, well-sung pop take on classic soul tropes, with pleasing piano and strings, that’s only marred by the inclusion of <em>that</em> Soul II Soul rhythm track, which had become ubiquitous around the turn of the Nineties.</p> 
+         <p>In this respect, Team Youngblood – and producer Claus Zundel in particular – had previous form, drawing criticism for their heavy reliance on Jazzie B’s signature sound. Cocking a snook at the finger-waggers, they had even released <a href="https://www.youtube.com/watch?v=wUTY_5DKZUI">a “Jazzy Who?” remix of “Feeling Free”</a>, which committed&nbsp;further&nbsp;acts of plunder. And of course, there was Youngblood’s big hit “If Only I Could”, whose backing track is barely distinguishable from Raze’s “Break 4 Love”.</p> 
+         <p>As shameless as these lifts might have been, at least they were competently executed. But with the 7″ remix of “No More The Fool” – which is the version I own, and you’ll search in vain to hear it online – the machinery jammed. Ditching the Soul II Soul rhythm, Zundel smothered the song&nbsp;with a generic James Brown breakbeat, mixing it so high that the rest of the track fades into murky near-inaudibility. Hudson’s vocals are so buried, that she might as well have been singing beneath six inches of soil, and Youngblood’s vocals are mixed so low that the ear struggles to make them out at all. In fact, the overall sound quality is so utterly, utterly terrible, that it beggars belief that this mix was ever cleared for release. Perhaps it sounded better on the CD single, but all I can hear is the thoughtless ruination of a otherwise pleasant song.</p> 
+         <p>It bombed, of course – and by the end of the year, Hudson’s major label recording career was over. She now works <a href="https://www.gigmasters.com/singer/elaine-hudson">as a wedding singer</a> in Birmingham, Alabama. She <a href="https://www.facebook.com/Elaine-Hudson-189185421118629/photos">looks happy</a>, and I’m glad about that.</p> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2016/03/23/randomising-the-record-collection-26-elaine-hudson-no-more-the-fool/" rel="bookmark"><time class="entry-date published" datetime="2016-03-23T10:53:10+00:00">March 23, 2016</time><time class="updated" datetime="2016-03-23T10:55:16+00:00">March 23, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/randomising-the-record-collection/" rel="category tag">Randomising the record collection</a></span><span class="comments-link"><a href="https://troubled-diva.com/2016/03/23/randomising-the-record-collection-26-elaine-hudson-no-more-the-fool/#comments">1 Comment<span class="screen-reader-text"> on Randomising the record collection #26: Elaine Hudson – No More The&nbsp;Fool</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <article id="post-8010" class="post-8010 post type-post status-publish format-standard hentry category-randomising-the-record-collection"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2016/03/22/randomising-the-record-collection-25-daryl-hall-john-oates-family-man-one-on-one/" rel="bookmark">Randomising the record collection #25: Daryl Hall &amp; John Oates – Family Man / One On&nbsp;One</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p><strong>#600 –&nbsp;Daryl Hall &amp; John Oates – Family Man / One On One</strong><br> (7-inch single, 1983) (<a href="https://www.discogs.com/Daryl-Hall-John-Oates-Family-Man-One-On-One/release/3346928">Discogs tracklisting</a>)</p> 
+         <p><a href="https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg" rel="attachment wp-att-8011"><img data-attachment-id="8011" data-permalink="https://troubled-diva.com/2016/03/22/randomising-the-record-collection-25-daryl-hall-john-oates-family-man-one-on-one/25-hall-oates/" data-orig-file="https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg" data-orig-size="1418,1419" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="25 hall oates" data-image-description="" data-medium-file="https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=300" data-large-file="https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=840" class="alignnone size-large wp-image-8011" src="https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=840&amp;h=841" alt="25 hall oates" width="840" height="841" srcset="https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=840&amp;h=841 840w, https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=150&amp;h=150 150w, https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=300&amp;h=300 300w, https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=768&amp;h=769 768w, https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg?w=1024&amp;h=1024 1024w, https://troubleddiva.files.wordpress.com/2016/03/25-hall-oates.jpg 1418w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px"></a></p> <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Amiketd%3Aplaylist%3A6SKNhcP1sVCH9t9RZt2bUc" style="display:block; margin:0 auto; width:300px; height:380px;" frameborder="0" allowtransparency="true"></iframe> 
+         <div class="jetpack-video-wrapper">
+          <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="840" height="473" src="https://www.youtube.com/embed/wXSeuPf4--U?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+         </div> 
+         <div class="jetpack-video-wrapper">
+          <span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="840" height="473" src="https://www.youtube.com/embed/EXU2tnKEwwo?version=3&amp;rel=1&amp;fs=1&amp;autohide=2&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" allowfullscreen="true" style="border:0;"></iframe></span>
+         </div> 
+         <p><a href="https://troubleddiva.wordpress.com/2016/03/20/randomising-the-record-collection-23-tina-turner-whats-love-got-to-do-with-it/">Two days on from Tina Turner</a>, we’re back with the Finnish DJ’s job lot. This copy is&nbsp;a good deal less battered than “What’s Love Got To Do With It”, with a level of surface noise that’s easier to tune out. “Family Man” is the clear A-side, but for this European release, it’s been bundled with its predecessor “One On One”: an equally big hit in the US, which did much less well over here.</p> 
+         <p>In 1983, Hall and Oates were at the peak of their success.&nbsp;<em>H2O</em>, the album which housed both these tracks, was their eleventh release and their biggest seller; it&nbsp;also gave them their fifth US chart-topper, “Maneater”.</p> 
+         <p>“Family Man”, the album’s sole cover, was&nbsp;released by Mike Oldfield in the spring of 1982, with vocals by Maggie “Moonlight Shadow” Reilly. Although Hall and Oates remain fairly faithful to Oldfield’s arrangement, they’ve taken liberties with the lyrics, adding lines to later verses that make its “hooker rebuffed” story less clear-cut. This time around, the hooker’s prospective client changes his mind too late: “<em>he waited much too long, but by the time he got his courage up, she was gone</em>.”</p> 
+         <p>“One On One” is a gentler affair, more in the tradition of the duo’s blue-eyed soul style, with none of the A-side’s clenched rock bite. It’s a love song wrapped round a sporting metaphor, which talks of playing the game, setting the pace, taking time out and so on.</p> 
+         <p>If I’m sounding neutral here, it’s because I’ve always been basically neutral towards Hall and Oates. Their earlier work – with the exception of the heavenly “She’s Gone” – was too mature&nbsp;for my teenage ears, and their Eighties hits – with the exception of the equally heavenly&nbsp;“I Can’t Go for That (No Can Do)” – didn’t chime with my expectations of Eighties pop. That said, both tracks have worn well; history has been kind to this type of&nbsp;glossy AOR-pop, and it wouldn’t surprise me to hear “Family Man” at retro nights for cool millennials.</p> 
+         <p>So maybe it’s time for me to dig into those early albums – the first two produced by Arif Mardin, the third by Todd Rundgren – and close this gap in my knowledge.</p> 
+         <p>Yeah, I’ll stick them on a playlist. That’s what I’ll do.</p> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2016/03/22/randomising-the-record-collection-25-daryl-hall-john-oates-family-man-one-on-one/" rel="bookmark"><time class="entry-date published updated" datetime="2016-03-22T12:45:10+00:00">March 22, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/randomising-the-record-collection/" rel="category tag">Randomising the record collection</a></span><span class="comments-link"><a href="https://troubled-diva.com/2016/03/22/randomising-the-record-collection-25-daryl-hall-john-oates-family-man-one-on-one/#respond">Leave a comment<span class="screen-reader-text"> on Randomising the record collection #25: Daryl Hall &amp; John Oates – Family Man / One On&nbsp;One</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <article id="post-7993" class="post-7993 post type-post status-publish format-standard hentry category-randomising-the-record-collection"> 
+        <header class="entry-header"> 
+         <h2 class="entry-title"><a href="https://troubled-diva.com/2016/03/21/randomising-the-record-collection-24-quincy-jones-qs-jook-joint/" rel="bookmark">Randomising the record collection #24: Quincy Jones – Q’s Jook&nbsp;Joint</a></h2> 
+        </header><!-- .entry-header --> 
+        <div class="entry-content"> 
+         <p><strong>#2330 –&nbsp;Quincy Jones – Q’s Jook Joint</strong><br> (CD, 1995) (<a href="https://www.discogs.com/Quincy-Jones-Qs-Jook-Joint/release/1570106">Discogs tracklisting</a>)</p> 
+         <p><a href="https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg" rel="attachment wp-att-7994"><img data-attachment-id="7994" data-permalink="https://troubled-diva.com/2016/03/21/randomising-the-record-collection-24-quincy-jones-qs-jook-joint/24-quincy-jones/" data-orig-file="https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg" data-orig-size="1200,1200" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="24 quincy jones" data-image-description="" data-medium-file="https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=300" data-large-file="https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=840" class="alignnone size-full wp-image-7994" src="https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=840" alt="24 quincy jones" srcset="https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=840 840w, https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=150 150w, https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=300 300w, https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=768 768w, https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg?w=1024 1024w, https://troubleddiva.files.wordpress.com/2016/03/24-quincy-jones.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px"></a></p> <iframe src="https://embed.spotify.com/?uri=spotify%3Aalbum%3A4nnrb8iMCWDNkgP9ibskgI" style="display:block; margin:0 auto; width:300px; height:380px;" frameborder="0" allowtransparency="true"></iframe> 
+         <p>Six years after&nbsp;<em>Back On The Block</em>, an album which I loved and played a great deal, came its sequel: another journey through diverse styles of black music, both old and new, which was equally crammed&nbsp;with guest appearances from artists of all generations.</p> 
+         <p>On the 92-second intro, Jones’s&nbsp;guest roster reaches surreal proportions; 29 voices are heard, ranging from Marlon Brando to Queen Latifah, Dizzy Gillespie to&nbsp;Bono. We get the picture; he’s a well-connected guy. The trouble with this approach, though, is that <a href="https://www.discogs.com/Quincy-Jones-Qs-Jook-Joint/release/1570106">the names</a> threaten to distract from the music. You end up forever checking the sleeve notes, just in case a historic collaboration (Ray Charles and Stevie Wonder!) passes you by.</p> 
+         <p>Clocking in at 70 minutes, the album suffers from a certain amount&nbsp;of mid-Nineties fill-up-the-CD bloat; some tracks drag on too long, particularly the closing pair of “quiet storm” wind-downs, and some of the interludes could have been cut. The shiny, brittle, over-separated production also screams “Nineties CD” – you couldn’t ever imagine this on vinyl – but such were the times, and perhaps it’s unfair to slate a Nineties CD for sounding just like a Nineties CD.</p> 
+         <p>There’s also the issue of Sequel Syndrome, and diminishing returns. Where&nbsp;<em>Back On The Block</em> dazzled you with its scope,&nbsp;<em>Q’s Jook Joint</em> sometimes feels too worthy, too cosy, too respectful, too respectable. That said, there are, of course, plenty of delightful moments. With a cast this strong, how could there not be?</p> 
+         <p>I was reading only yesterday, in David Toop’s 1984 history of hip hop <em><a href="http://www.amazon.co.uk/The-Rap-Attack-African-Jive/dp/0896082393">The Rap</a><a href="http://www.amazon.co.uk/The-Rap-Attack-African-Jive/dp/0896082393"> Attack</a></em>, about the vocal freestyles that Eddie Jefferson created from jazz improvisations, and so was particularly struck by Brian McKnight’s&nbsp;fine update of Jefferson’s&nbsp;vocalese style on a reworking of James Moody’s “Moody’s Mood For Love”, complete with a sax solo from Moody himself. Later, I watched Phil Collins performing “If Leaving Me Is Easy” on a 1981&nbsp;<em>Top of the Pops</em>, and found myself marvelling, quite despite myself, at the quality of the&nbsp;vocals, songwriting and arrangement. Collins guests here on Duke Ellington’s “Do Nothin’ Till You Hear From Me” – backed by a large brass section, with great solos from Joshua Redman on sax and Jerry Hey on trumpet – and he acquits himself commendably, which is a big surprise. Elsewhere, there are enjoyable covers of The Brothers Johnson’s “Stomp”, Michael Jackson’s “Rock With You” and Jones’s own “Stuff Like That”, the latter voiced by its composers Ashford &amp; Simpson alongside Brandy, Ray Charles, Chaka Khan and The Gap Band’s Charlie Wilson.</p> 
+         <p>This must have been a massively demanding project logistically, but it’s also manifestly a labour of love, and you can feel that love shining all the way through. These are all people who Jones admires, from living legends to brand new talents, and no-one other than Jones could have brought them all together. Perhaps inevitably, the whole doesn’t exceed the sum of its parts – but you can only applaud its ambition and spirit.</p> 
+        </div><!-- .entry-content --> 
+        <footer class="entry-footer"> <span class="byline"><span class="author vcard"><img alt="" src="https://2.gravatar.com/avatar/eafc19eda5c5ffa5f0fead95d8801c3f?s=49&amp;d=identicon&amp;r=R" class="avatar avatar-49" height="49" width="49"><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://troubled-diva.com/author/mikeatkinson/">Mike A</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://troubled-diva.com/2016/03/21/randomising-the-record-collection-24-quincy-jones-qs-jook-joint/" rel="bookmark"><time class="entry-date published" datetime="2016-03-21T17:51:25+00:00">March 21, 2016</time><time class="updated" datetime="2016-03-21T17:53:36+00:00">March 21, 2016</time></a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://troubled-diva.com/category/randomising-the-record-collection/" rel="category tag">Randomising the record collection</a></span><span class="comments-link"><a href="https://troubled-diva.com/2016/03/21/randomising-the-record-collection-24-quincy-jones-qs-jook-joint/#respond">Leave a comment<span class="screen-reader-text"> on Randomising the record collection #24: Quincy Jones – Q’s Jook&nbsp;Joint</span></a></span> 
+        </footer><!-- .entry-footer --> 
+       </article><!-- #post-## --> 
+       <nav class="navigation pagination" role="navigation" aria-label="Posts"> 
+        <h2 class="screen-reader-text">Posts navigation</h2> 
+        <div class="nav-links">
+         <span aria-current="page" class="page-numbers current"><span class="meta-nav screen-reader-text">Page </span>1</span> <a class="page-numbers" href="https://troubled-diva.com/page/2/"><span class="meta-nav screen-reader-text">Page </span>2</a> <span class="page-numbers dots">…</span> <a class="page-numbers" href="https://troubled-diva.com/page/193/"><span class="meta-nav screen-reader-text">Page </span>193</a> <a class="next page-numbers" href="https://troubled-diva.com/page/2/">Next page</a>
+        </div> 
+       </nav> 
+      </main><!-- .site-main --> 
+     </div><!-- .content-area --> 
+     <aside id="secondary" class="sidebar widget-area" role="complementary"> 
+      <section id="text-3" class="widget widget_text">
+       <h2 class="widget-title">Troubled Diva</h2> 
+       <div class="textwidget">
+        <p><img src="https://troubleddiva.files.wordpress.com/2016/03/mikediscohatputemawayluvlarge-gif.png"></p> 
+        <p>mikejla@btopenworld.com</p> 
+       </div> 
+      </section>
+      <section id="search-3" class="widget widget_search">
+       <h2 class="widget-title">Search</h2> 
+       <form role="search" method="get" class="search-form" action="https://troubled-diva.com/"> <label> <span class="screen-reader-text">Search for:</span> <input type="search" class="search-field" placeholder="Search …" value="" name="s"> </label> <button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button> 
+       </form> 
+      </section>
+      <section id="recent-comments-2" class="widget widget_recent_comments">
+       <h2 class="widget-title">Recent Comments</h2> 
+       <ul id="recentcomments"> 
+        <li class="recentcomments"> <a href="http://gravatar.com/elainehudson57" rel="external nofollow ugc" class="url">elainehudson57</a> on <a href="https://troubled-diva.com/2016/03/23/randomising-the-record-collection-26-elaine-hudson-no-more-the-fool/#comment-3333">Randomising the record collection #26: Elaine Hudson – No More The&nbsp;Fool</a> </li> 
+        <li class="recentcomments"> Wednesday on <a href="https://troubled-diva.com/2004/06/09/daft-meme-thingy-because-its-hot-and-im-feeling-lazy/#comment-3144">Daft meme thingy, because it’s hot and I’m feeling&nbsp;lazy…</a> </li> 
+        <li class="recentcomments"> goblinbox on <a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/#comment-3064">After ten years on Twitter, it’s time to call a&nbsp;halt.</a> </li> 
+        <li class="recentcomments"> <a href="http://www.iand.net/2016/12/weekly-digest-11/" rel="external nofollow ugc" class="url">Weekly Digest – iand.net</a> on <a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/#comment-2434">After ten years on Twitter, it’s time to call a&nbsp;halt.</a> </li> 
+        <li class="recentcomments"> <a href="http://mikeatkinson.wordpress.com" rel="external nofollow ugc" class="url">Mike A</a> on <a href="https://troubled-diva.com/2007/08/24/twenty-five-things-i-want-to-do-before-i-die/#comment-2416">Twenty-Five Things I Want To Do Before I&nbsp;Die.</a> </li> 
+        <li class="recentcomments"> <a href="http://razorbladeoflife.co.uk" rel="external nofollow ugc" class="url">Z</a> on <a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/#comment-2415">After ten years on Twitter, it’s time to call a&nbsp;halt.</a> </li> 
+        <li class="recentcomments"> <a href="http://merialc.wordpress.com" rel="external nofollow ugc" class="url">merialc</a> on <a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/#comment-2414">After ten years on Twitter, it’s time to call a&nbsp;halt.</a> </li> 
+        <li class="recentcomments"> <a href="http://postpunkmonk.wordpress.com" rel="external nofollow ugc" class="url">postpunkmonk</a> on <a href="https://troubled-diva.com/2016/02/23/randomising-the-record-collection-8-roisin-murphy-ruby-blue/#comment-2206">Randomising the record collection #8: Róisín Murphy – Ruby&nbsp;Blue</a> </li> 
+        <li class="recentcomments"> <a href="http://mikeatkinson.wordpress.com" rel="external nofollow ugc" class="url">Mike A</a> on <a href="https://troubled-diva.com/2007/08/24/twenty-five-things-i-want-to-do-before-i-die/#comment-2061">Twenty-Five Things I Want To Do Before I&nbsp;Die.</a> </li> 
+        <li class="recentcomments"> Lizzy on <a href="https://troubled-diva.com/2007/08/24/twenty-five-things-i-want-to-do-before-i-die/#comment-2060">Twenty-Five Things I Want To Do Before I&nbsp;Die.</a> </li> 
+       </ul> 
+      </section> 
+      <section id="recent-posts-2" class="widget widget_recent_entries"> 
+       <h2 class="widget-title">Recent Posts</h2> 
+       <ul> 
+        <li> <a href="https://troubled-diva.com/2019/12/08/soul-civil-war/">Soul Civil War</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/12/08/after-ten-years-on-twitter-its-time-to-call-a-halt/">After ten years on Twitter, it’s time to call a&nbsp;halt.</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/06/29/randomising-the-record-collection-28-simple-minds-promised-you-a-miracle/">Randomising the record collection #28: Simple Minds – Promised You A&nbsp;Miracle</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/06/28/randomising-the-record-collection-27-the-gorillas-shes-my-gal/">Randomising the record collection #27: The Gorillas – She’s My&nbsp;Gal</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/23/randomising-the-record-collection-26-elaine-hudson-no-more-the-fool/">Randomising the record collection #26: Elaine Hudson – No More The&nbsp;Fool</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/22/randomising-the-record-collection-25-daryl-hall-john-oates-family-man-one-on-one/">Randomising the record collection #25: Daryl Hall &amp; John Oates – Family Man / One On&nbsp;One</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/21/randomising-the-record-collection-24-quincy-jones-qs-jook-joint/">Randomising the record collection #24: Quincy Jones – Q’s Jook&nbsp;Joint</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/20/randomising-the-record-collection-23-tina-turner-whats-love-got-to-do-with-it/">Randomising the record collection #23: Tina Turner – What’s Love Got To Do With&nbsp;It</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/18/randomising-the-record-collection-22-the-sweet-co-co/">Randomising the record collection #22: The Sweet –&nbsp;Co-Co</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/17/randomising-the-record-collection-21-polar-bear-held-on-the-tips-of-fingers/">Randomising the record collection #21: Polar Bear – Held On The Tips Of&nbsp;Fingers</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/16/randomising-the-record-collection-round-up-the-first-20-ranked/">Randomising the record collection round-up: the first 20,&nbsp;ranked.</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/16/randomising-the-record-collection-20-basf-c90-no-tracklisting/">Randomising the record collection #20: BASF C90 (no&nbsp;tracklisting)</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/15/randomising-the-record-collection-19-various-artists-folk-awards-2007/">Randomising the record collection #19: Various Artists – Folk Awards&nbsp;2007</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/11/randomising-the-record-collection-18-aivaras-happy-you/">Randomising the record collection #18: Aivaras – Happy&nbsp;You</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/10/randomising-the-record-collection-17-eternal-so-good-cd1/">Randomising the record collection #17: Eternal – So Good&nbsp;(CD1)</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/09/randomising-the-record-collection-16-royal-house-can-you-party/">Randomising the record collection #16: Royal House – Can You&nbsp;Party</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/03/randomising-the-record-collection-15-prince-lovesexy/">Randomising the record collection #15: Prince –&nbsp;Lovesexy</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/02/randomising-the-record-collection-14-beck-odelay/">Randomising the record collection #14: Beck –&nbsp;Odelay</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/03/01/randomising-the-record-collection-13-prince-and-the-revolution-kiss/">Randomising the record collection #13: Prince and the Revolution –&nbsp;Kiss</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/02/29/randomising-the-record-collection-12-can-ege-bamyasi/">Randomising the record collection #12: Can – Ege&nbsp;Bamyasi</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/02/26/randomising-the-record-collection-11-mychael-dannavarious-artists-monsoon-wedding-soundtrack/">Randomising the record collection #11: Mychael Danna/Various Artists – Monsoon Wedding&nbsp;(soundtrack)</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/02/25/randomising-the-record-collection-10-actress-r-i-p/">Randomising the record collection #10: Actress –&nbsp;R.I.P.</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/02/24/randomising-the-record-collection-9-e-u-da-butt/">Randomising the record collection #9: E.U. – Da&nbsp;Butt</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/02/23/randomising-the-record-collection-8-roisin-murphy-ruby-blue/">Randomising the record collection #8: Róisín Murphy – Ruby&nbsp;Blue</a> </li> 
+        <li> <a href="https://troubled-diva.com/2016/02/22/randomising-the-record-collection-7-808-state-bombadin/">Randomising the record collection #7: 808 State –&nbsp;Bombadin</a> </li> 
+       </ul> 
+      </section>
+      <section id="linkcat-1356" class="widget widget_links">
+       <h2 class="widget-title">Blogroll</h2> 
+       <ul class="xoxo blogroll"> 
+        <li><a href="http://www.dummies-for-destruction.co.uk/random/">D4D</a></li> 
+        <li><a href="http://www.davidbelbin.com/">David Belbin</a></li> 
+        <li><a href="http://diamondgeezer.blogspot.com/">Diamond Geezer</a></li> 
+        <li><a href="http://dontgotovegas.blogspot.co.uk/">Don't Go To Vegas</a></li> 
+        <li><a href="http://freakytrigger.co.uk/">Freaky Trigger</a></li> 
+        <li><a href="http://girlwithaonetrackmind.blogspot.co.uk/">Girl With A One-Track Mind</a></li> 
+        <li><a href="http://www.gordonmclean.co.uk/">Happily Imperfect</a></li> 
+        <li><a href="https://jameshamiltonsdiscopage.com/">James Hamilton's Disco Page</a></li> 
+        <li><a href="http://www.timemachinego.com/linkmachinego/">Linkmachinego</a></li> 
+        <li><a href="http://www.themarionfsblog.com/">Marion FS</a></li> 
+        <li><a href="http://musicsoundsbetterwithtwo.blogspot.co.uk/">Music Sounds Better With Two</a></li> 
+        <li><a href="http://www.nonworkingmonkey.com/">Non-Workingmonkey</a></li> 
+        <li><a href="http://www.overyourhead.co.uk/">Overyourhead</a></li> 
+        <li><a href="http://parwich.org/">PARWICH.ORG</a></li> 
+        <li><a href="http://www.privatesecretdiary.com/">Private Secret Diary</a></li> 
+        <li><a href="http://prolific.org/">Prolific</a></li> 
+        <li><a href="http://razorbladeoflife.co.uk/">Razor-Blade Of Life</a></li> 
+        <li><a href="http://www.silentwordsspeakloudest.blogspot.co.uk/">Silent Words Speak Loudest</a></li> 
+        <li><a href="http://www.swisslet.com/">Swisslet</a></li> 
+        <li><a href="http://nobilliards.blogspot.co.uk/">Then Play Long</a></li> 
+        <li><a href="http://uborka.nu/">Uborka</a></li> 
+       </ul> 
+      </section> 
+      <section id="linkcat-2200" class="widget widget_links">
+       <h2 class="widget-title">Links</h2> 
+       <ul class="xoxo blogroll"> 
+        <li><a href="http://www.badgersbadgers.co.uk/p/home.html">Badgers Badgers</a></li> 
+        <li><a href="https://danielingrambrown.wordpress.com/">Daniel Ingram-Brown</a></li> 
+        <li><a href="http://www.frazertheatre.co.uk/">Frazer Theatre Knaresborough</a></li> 
+        <li><a href="http://www.jeaniefinlay.com/wordpress/">Jeanie Finlay</a></li> 
+        <li><a href="http://www.feva.info/">Knaresborough feva festival</a></li> 
+        <li><a href="http://www.leftlion.co.uk/">LeftLion</a></li> 
+        <li><a href="http://moomoosheep.co.uk/">MooMooSheep</a></li> 
+        <li><a href="http://nancypowerprints.com/">Nancy Power Prints</a></li> 
+        <li><a href="http://nickparkhouse.co.uk/">Nick Parkhouse</a></li> 
+        <li><a href="http://www.nusic.org.uk/wordpress/">NUSIC</a></li> 
+        <li><a href="http://orb-arts.org/">Orb Community Arts</a></li> 
+        <li><a href="http://www.rthfestival.co.uk/">Release The Hounds</a></li> 
+        <li><a href="http://suedymokepoetry.com/">Sue Dymoke</a></li> 
+       </ul> 
+      </section> 
+      <section id="linkcat-465460506" class="widget widget_links">
+       <h2 class="widget-title">Me, elsewhere</h2> 
+       <ul class="xoxo blogroll"> 
+        <li><a href="https://www.facebook.com/miketd">miketd on Facebook</a></li> 
+        <li><a href="http://www.last.fm/user/troubleddiva">miketd on last.fm</a></li> 
+        <li><a href="https://soundcloud.com/mike-atkinson-8">miketd on Soundcloud: mixes and playlists</a></li> 
+        <li><a href="https://play.spotify.com/user/miketd">miketd on Spotify</a></li> 
+        <li><a href="http://twitter.com/miketd">miketd on Twitter</a></li> 
+        <li><a href="http://mikeatkinson.wordpress.com/">My freelance press archive blog</a></li> 
+       </ul> 
+      </section> 
+      <section id="categories-2" class="widget widget_categories">
+       <h2 class="widget-title">Categories</h2> 
+       <ul> 
+        <li class="cat-item cat-item-2514"><a href="https://troubled-diva.com/category/archive/">Archive</a> (1,280) </li> 
+        <li class="cat-item cat-item-282944"><a href="https://troubled-diva.com/category/consequences/">Consequences</a> (29) </li> 
+        <li class="cat-item cat-item-481017937"><a href="https://troubled-diva.com/category/dancing-on-the-fourth-plinth/">Dancing on the Fourth Plinth</a> (14) </li> 
+        <li class="cat-item cat-item-952056"><a href="https://troubled-diva.com/category/end-of-year-lists/">End Of Year Lists</a> (29) </li> 
+        <li class="cat-item cat-item-102677"><a href="https://troubled-diva.com/category/eurovision/">Eurovision</a> (43) 
+         <ul class="children"> 
+          <li class="cat-item cat-item-20621845"><a href="https://troubled-diva.com/category/eurovision/eurovision-2003/">Eurovision 2003</a> (1) </li> 
+          <li class="cat-item cat-item-16313131"><a href="https://troubled-diva.com/category/eurovision/eurovision-2004/">Eurovision 2004</a> (5) </li> 
+          <li class="cat-item cat-item-198205"><a href="https://troubled-diva.com/category/eurovision/eurovision-2005/">Eurovision 2005</a> (5) </li> 
+          <li class="cat-item cat-item-172610"><a href="https://troubled-diva.com/category/eurovision/eurovision-2006/">Eurovision 2006</a> (18) </li> 
+          <li class="cat-item cat-item-751890"><a href="https://troubled-diva.com/category/eurovision/eurovision-2007/">Eurovision 2007</a> (7) </li> 
+          <li class="cat-item cat-item-1384119"><a href="https://troubled-diva.com/category/eurovision/eurovision-2008/">Eurovision 2008</a> (2) </li> 
+          <li class="cat-item cat-item-7515353"><a href="https://troubled-diva.com/category/eurovision/eurovision-2009/">Eurovision 2009</a> (4) </li> 
+         </ul> </li> 
+        <li class="cat-item cat-item-462036173"><a href="https://troubled-diva.com/category/format-firsts/">Format Firsts</a> (3) </li> 
+        <li class="cat-item cat-item-125587737"><a href="https://troubled-diva.com/category/guest-posts-elsewhere/">Guest Posts Elsewhere</a> (38) </li> 
+        <li class="cat-item cat-item-271088845"><a href="https://troubled-diva.com/category/guest-weeks/">Guest Weeks</a> (227) 
+         <ul class="children"> 
+          <li class="cat-item cat-item-232804420"><a href="https://troubled-diva.com/category/guest-weeks/guest-week-1/">Guest Week 1</a> (51) </li> 
+          <li class="cat-item cat-item-273767842"><a href="https://troubled-diva.com/category/guest-weeks/guest-week-2/">Guest Week 2</a> (33) </li> 
+          <li class="cat-item cat-item-273838964"><a href="https://troubled-diva.com/category/guest-weeks/guest-week-3/">Guest Week 3</a> (29) </li> 
+          <li class="cat-item cat-item-274175571"><a href="https://troubled-diva.com/category/guest-weeks/guest-week-4/">Guest Week 4</a> (42) </li> 
+          <li class="cat-item cat-item-277191345"><a href="https://troubled-diva.com/category/guest-weeks/guest-week-5/">Guest Week 5</a> (27) </li> 
+          <li class="cat-item cat-item-406132527"><a href="https://troubled-diva.com/category/guest-weeks/guest-week-678/">Guest Week 6/7/8</a> (46) </li> 
+         </ul> </li> 
+        <li class="cat-item cat-item-463622529"><a href="https://troubled-diva.com/category/hangzhou-diary/">Hangzhou Diary</a> (13) </li> 
+        <li class="cat-item cat-item-54001176"><a href="https://troubled-diva.com/category/music-diary-project/">Music Diary Project</a> (7) </li> 
+        <li class="cat-item cat-item-256283824"><a href="https://troubled-diva.com/category/old-curiosity-box/">Old Curiosity Box</a> (5) </li> 
+        <li class="cat-item cat-item-564848"><a href="https://troubled-diva.com/category/post-of-the-week/">Post of the Week</a> (13) </li> 
+        <li class="cat-item cat-item-562"><a href="https://troubled-diva.com/category/questions/">Questions</a> (12) </li> 
+        <li class="cat-item cat-item-461551114"><a href="https://troubled-diva.com/category/randomising-the-record-collection/">Randomising the record collection</a> (29) </li> 
+        <li class="cat-item cat-item-4683385"><a href="https://troubled-diva.com/category/readership-survey/">Readership Survey</a> (9) </li> 
+        <li class="cat-item cat-item-852625"><a href="https://troubled-diva.com/category/shaggy-blog-stories/">Shaggy Blog Stories</a> (16) </li> 
+        <li class="cat-item cat-item-407088351"><a href="https://troubled-diva.com/category/singles-of-2004/">Singles of 2004</a> (91) </li> 
+        <li class="cat-item cat-item-48754456"><a href="https://troubled-diva.com/category/spoticast/">Spoticast</a> (7) </li> 
+        <li class="cat-item cat-item-476144788"><a href="https://troubled-diva.com/category/telegraph-poles-on-snob-alley/">Telegraph Poles On Snob Alley</a> (4) </li> 
+        <li class="cat-item cat-item-478473299"><a href="https://troubled-diva.com/category/the-five-in-five-days-project/">The Five In Five Days Project</a> (5) </li> 
+        <li class="cat-item cat-item-459822"><a href="https://troubled-diva.com/category/top-25/">Top 25</a> (22) </li> 
+        <li class="cat-item cat-item-1"><a href="https://troubled-diva.com/category/uncategorized/">Uncategorized</a> (15) </li> 
+        <li class="cat-item cat-item-10717"><a href="https://troubled-diva.com/category/vietnam/">Vietnam</a> (15) </li> 
+        <li class="cat-item cat-item-463243574"><a href="https://troubled-diva.com/category/walking-the-forest-path/">Walking The Forest Path</a> (5) </li> 
+        <li class="cat-item cat-item-9113631"><a href="https://troubled-diva.com/category/watered-silk/">Watered Silk</a> (5) </li> 
+        <li class="cat-item cat-item-270296992"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/">Which Decade Is Tops For Pops</a> (126) 
+         <ul class="children"> 
+          <li class="cat-item cat-item-270297047"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2003/">Which Decade 2003</a> (20) </li> 
+          <li class="cat-item cat-item-292179901"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2004/">Which Decade 2004</a> (16) </li> 
+          <li class="cat-item cat-item-408349905"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2005/">Which Decade 2005</a> (18) </li> 
+          <li class="cat-item cat-item-465459363"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2006/">Which Decade 2006</a> (16) </li> 
+          <li class="cat-item cat-item-479163988"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2007/">Which Decade 2007</a> (18) </li> 
+          <li class="cat-item cat-item-480544458"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2008/">Which Decade 2008</a> (19) </li> 
+          <li class="cat-item cat-item-480943150"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2009/">Which Decade 2009</a> (18) </li> 
+          <li class="cat-item cat-item-481214155"><a href="https://troubled-diva.com/category/which-decade-is-tops-for-pops/which-decade-2010/">Which Decade 2010</a> (1) </li> 
+         </ul> </li> 
+        <li class="cat-item cat-item-56916560"><a href="https://troubled-diva.com/category/window-into-my-world/">Window Into My World</a> (6) </li> 
+        <li class="cat-item cat-item-12918923"><a href="https://troubled-diva.com/category/xmas-photos/">Xmas photos</a> (6) </li> 
+       </ul> 
+      </section>
+      <section id="archives-3" class="widget widget_archive">
+       <h2 class="widget-title">Archives</h2> 
+       <ul> 
+        <li><a href="https://troubled-diva.com/2019/12/">December 2019</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2016/12/">December 2016</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2016/06/">June 2016</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2016/03/">March 2016</a>&nbsp;(15)</li> 
+        <li><a href="https://troubled-diva.com/2016/02/">February 2016</a>&nbsp;(12)</li> 
+        <li><a href="https://troubled-diva.com/2015/10/">October 2015</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2014/07/">July 2014</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2014/01/">January 2014</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2013/01/">January 2013</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2012/01/">January 2012</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2011/09/">September 2011</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2011/04/">April 2011</a>&nbsp;(7)</li> 
+        <li><a href="https://troubled-diva.com/2011/02/">February 2011</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2011/01/">January 2011</a>&nbsp;(11)</li> 
+        <li><a href="https://troubled-diva.com/2010/12/">December 2010</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2010/11/">November 2010</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2010/05/">May 2010</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2010/02/">February 2010</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2010/01/">January 2010</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2009/12/">December 2009</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2009/09/">September 2009</a>&nbsp;(33)</li> 
+        <li><a href="https://troubled-diva.com/2009/07/">July 2009</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2009/06/">June 2009</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2009/05/">May 2009</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2009/04/">April 2009</a>&nbsp;(10)</li> 
+        <li><a href="https://troubled-diva.com/2009/03/">March 2009</a>&nbsp;(10)</li> 
+        <li><a href="https://troubled-diva.com/2009/02/">February 2009</a>&nbsp;(4)</li> 
+        <li><a href="https://troubled-diva.com/2009/01/">January 2009</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2008/12/">December 2008</a>&nbsp;(6)</li> 
+        <li><a href="https://troubled-diva.com/2008/11/">November 2008</a>&nbsp;(5)</li> 
+        <li><a href="https://troubled-diva.com/2008/10/">October 2008</a>&nbsp;(7)</li> 
+        <li><a href="https://troubled-diva.com/2008/09/">September 2008</a>&nbsp;(7)</li> 
+        <li><a href="https://troubled-diva.com/2008/08/">August 2008</a>&nbsp;(14)</li> 
+        <li><a href="https://troubled-diva.com/2008/06/">June 2008</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2008/05/">May 2008</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2008/04/">April 2008</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2008/03/">March 2008</a>&nbsp;(14)</li> 
+        <li><a href="https://troubled-diva.com/2008/02/">February 2008</a>&nbsp;(13)</li> 
+        <li><a href="https://troubled-diva.com/2008/01/">January 2008</a>&nbsp;(5)</li> 
+        <li><a href="https://troubled-diva.com/2007/12/">December 2007</a>&nbsp;(6)</li> 
+        <li><a href="https://troubled-diva.com/2007/11/">November 2007</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2007/10/">October 2007</a>&nbsp;(8)</li> 
+        <li><a href="https://troubled-diva.com/2007/09/">September 2007</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2007/08/">August 2007</a>&nbsp;(21)</li> 
+        <li><a href="https://troubled-diva.com/2007/07/">July 2007</a>&nbsp;(5)</li> 
+        <li><a href="https://troubled-diva.com/2007/06/">June 2007</a>&nbsp;(4)</li> 
+        <li><a href="https://troubled-diva.com/2007/05/">May 2007</a>&nbsp;(14)</li> 
+        <li><a href="https://troubled-diva.com/2007/04/">April 2007</a>&nbsp;(16)</li> 
+        <li><a href="https://troubled-diva.com/2007/03/">March 2007</a>&nbsp;(27)</li> 
+        <li><a href="https://troubled-diva.com/2007/02/">February 2007</a>&nbsp;(21)</li> 
+        <li><a href="https://troubled-diva.com/2007/01/">January 2007</a>&nbsp;(28)</li> 
+        <li><a href="https://troubled-diva.com/2006/12/">December 2006</a>&nbsp;(20)</li> 
+        <li><a href="https://troubled-diva.com/2006/11/">November 2006</a>&nbsp;(6)</li> 
+        <li><a href="https://troubled-diva.com/2006/10/">October 2006</a>&nbsp;(18)</li> 
+        <li><a href="https://troubled-diva.com/2006/09/">September 2006</a>&nbsp;(35)</li> 
+        <li><a href="https://troubled-diva.com/2006/08/">August 2006</a>&nbsp;(27)</li> 
+        <li><a href="https://troubled-diva.com/2006/07/">July 2006</a>&nbsp;(24)</li> 
+        <li><a href="https://troubled-diva.com/2006/06/">June 2006</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2006/05/">May 2006</a>&nbsp;(23)</li> 
+        <li><a href="https://troubled-diva.com/2006/04/">April 2006</a>&nbsp;(6)</li> 
+        <li><a href="https://troubled-diva.com/2006/03/">March 2006</a>&nbsp;(6)</li> 
+        <li><a href="https://troubled-diva.com/2006/02/">February 2006</a>&nbsp;(13)</li> 
+        <li><a href="https://troubled-diva.com/2006/01/">January 2006</a>&nbsp;(30)</li> 
+        <li><a href="https://troubled-diva.com/2005/12/">December 2005</a>&nbsp;(30)</li> 
+        <li><a href="https://troubled-diva.com/2005/11/">November 2005</a>&nbsp;(27)</li> 
+        <li><a href="https://troubled-diva.com/2005/10/">October 2005</a>&nbsp;(15)</li> 
+        <li><a href="https://troubled-diva.com/2005/09/">September 2005</a>&nbsp;(19)</li> 
+        <li><a href="https://troubled-diva.com/2005/08/">August 2005</a>&nbsp;(13)</li> 
+        <li><a href="https://troubled-diva.com/2005/07/">July 2005</a>&nbsp;(40)</li> 
+        <li><a href="https://troubled-diva.com/2005/06/">June 2005</a>&nbsp;(28)</li> 
+        <li><a href="https://troubled-diva.com/2005/05/">May 2005</a>&nbsp;(19)</li> 
+        <li><a href="https://troubled-diva.com/2005/04/">April 2005</a>&nbsp;(20)</li> 
+        <li><a href="https://troubled-diva.com/2005/03/">March 2005</a>&nbsp;(25)</li> 
+        <li><a href="https://troubled-diva.com/2005/02/">February 2005</a>&nbsp;(25)</li> 
+        <li><a href="https://troubled-diva.com/2005/01/">January 2005</a>&nbsp;(66)</li> 
+        <li><a href="https://troubled-diva.com/2004/12/">December 2004</a>&nbsp;(36)</li> 
+        <li><a href="https://troubled-diva.com/2004/11/">November 2004</a>&nbsp;(4)</li> 
+        <li><a href="https://troubled-diva.com/2004/10/">October 2004</a>&nbsp;(11)</li> 
+        <li><a href="https://troubled-diva.com/2004/09/">September 2004</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/2004/08/">August 2004</a>&nbsp;(15)</li> 
+        <li><a href="https://troubled-diva.com/2004/07/">July 2004</a>&nbsp;(42)</li> 
+        <li><a href="https://troubled-diva.com/2004/06/">June 2004</a>&nbsp;(14)</li> 
+        <li><a href="https://troubled-diva.com/2004/05/">May 2004</a>&nbsp;(20)</li> 
+        <li><a href="https://troubled-diva.com/2004/04/">April 2004</a>&nbsp;(23)</li> 
+        <li><a href="https://troubled-diva.com/2004/03/">March 2004</a>&nbsp;(14)</li> 
+        <li><a href="https://troubled-diva.com/2004/02/">February 2004</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2004/01/">January 2004</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2003/12/">December 2003</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2003/11/">November 2003</a>&nbsp;(15)</li> 
+        <li><a href="https://troubled-diva.com/2003/10/">October 2003</a>&nbsp;(127)</li> 
+        <li><a href="https://troubled-diva.com/2003/09/">September 2003</a>&nbsp;(5)</li> 
+        <li><a href="https://troubled-diva.com/2003/08/">August 2003</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2003/05/">May 2003</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2003/04/">April 2003</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2003/03/">March 2003</a>&nbsp;(61)</li> 
+        <li><a href="https://troubled-diva.com/2003/02/">February 2003</a>&nbsp;(11)</li> 
+        <li><a href="https://troubled-diva.com/2003/01/">January 2003</a>&nbsp;(5)</li> 
+        <li><a href="https://troubled-diva.com/2002/12/">December 2002</a>&nbsp;(5)</li> 
+        <li><a href="https://troubled-diva.com/2002/10/">October 2002</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2002/09/">September 2002</a>&nbsp;(9)</li> 
+        <li><a href="https://troubled-diva.com/2002/08/">August 2002</a>&nbsp;(4)</li> 
+        <li><a href="https://troubled-diva.com/2002/07/">July 2002</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2002/06/">June 2002</a>&nbsp;(2)</li> 
+        <li><a href="https://troubled-diva.com/2002/01/">January 2002</a>&nbsp;(1)</li> 
+        <li><a href="https://troubled-diva.com/2001/12/">December 2001</a>&nbsp;(3)</li> 
+        <li><a href="https://troubled-diva.com/1982/03/">March 1982</a>&nbsp;(1)</li> 
+       </ul> 
+      </section> 
+      <div id="atatags-286348-5e7e63ded894d"></div> 
+      <script>
+				__ATA.cmd.push(function() {
+					__ATA.initDynamicSlot({
+						id: 'atatags-286348-5e7e63ded894d',
+						location: 140,
+						formFactor: '003',
+						label: {
+							text: 'Advertisements',
+						},
+						creative: {
+							reportAd: {
+								text: 'Report this ad',
+							},
+							privacySettings: {
+								text: 'Privacy settings',
+							}
+						}
+					});
+				});
+			</script> 
+     </aside><!-- .sidebar .widget-area --> 
+    </div><!-- .site-content --> 
+    <footer id="colophon" class="site-footer" role="contentinfo"> 
+     <div class="site-info"> <span class="site-title"><a href="https://troubled-diva.com/" rel="home">troubled diva</a></span> <a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a> 
+     </div><!-- .site-info --> 
+    </footer><!-- .site-footer --> 
+   </div><!-- .site-inner --> 
+  </div><!-- .site --> 
+  <script type="text/javascript">
+		//<![CDATA[
+		var infiniteScroll = JSON.parse( decodeURIComponent( '%7B%22settings%22%3A%7B%22id%22%3A%22main%22%2C%22ajaxurl%22%3A%22https%3A%5C%2F%5C%2Ftroubled-diva.com%5C%2F%3Finfinity%3Dscrolling%22%2C%22type%22%3A%22scroll%22%2C%22wrapper%22%3Atrue%2C%22wrapper_class%22%3A%22infinite-wrap%22%2C%22footer%22%3A%22content%22%2C%22click_handle%22%3A%221%22%2C%22text%22%3A%22Older%20posts%22%2C%22totop%22%3A%22Scroll%20back%20to%20top%22%2C%22currentday%22%3A%2221.03.16%22%2C%22order%22%3A%22DESC%22%2C%22scripts%22%3A%5B%5D%2C%22styles%22%3A%5B%5D%2C%22google_analytics%22%3Afalse%2C%22offset%22%3A0%2C%22history%22%3A%7B%22host%22%3A%22troubled-diva.com%22%2C%22path%22%3A%22%5C%2Fpage%5C%2F%25d%5C%2F%22%2C%22use_trailing_slashes%22%3Atrue%2C%22parameters%22%3A%22%22%7D%2C%22query_args%22%3A%7B%22error%22%3A%22%22%2C%22m%22%3A%22%22%2C%22p%22%3A0%2C%22post_parent%22%3A%22%22%2C%22subpost%22%3A%22%22%2C%22subpost_id%22%3A%22%22%2C%22attachment%22%3A%22%22%2C%22attachment_id%22%3A0%2C%22name%22%3A%22%22%2C%22pagename%22%3A%22%22%2C%22page_id%22%3A0%2C%22second%22%3A%22%22%2C%22minute%22%3A%22%22%2C%22hour%22%3A%22%22%2C%22day%22%3A0%2C%22monthnum%22%3A0%2C%22year%22%3A0%2C%22w%22%3A0%2C%22category_name%22%3A%22%22%2C%22tag%22%3A%22%22%2C%22cat%22%3A%22%22%2C%22tag_id%22%3A%22%22%2C%22author%22%3A%22%22%2C%22author_name%22%3A%22%22%2C%22feed%22%3A%22%22%2C%22tb%22%3A%22%22%2C%22paged%22%3A0%2C%22meta_key%22%3A%22%22%2C%22meta_value%22%3A%22%22%2C%22preview%22%3A%22%22%2C%22s%22%3A%22%22%2C%22sentence%22%3A%22%22%2C%22title%22%3A%22%22%2C%22fields%22%3A%22%22%2C%22menu_order%22%3A%22%22%2C%22embed%22%3A%22%22%2C%22category__in%22%3A%5B%5D%2C%22category__not_in%22%3A%5B%5D%2C%22category__and%22%3A%5B%5D%2C%22post__in%22%3A%5B%5D%2C%22post__not_in%22%3A%5B%5D%2C%22post_name__in%22%3A%5B%5D%2C%22tag__in%22%3A%5B%5D%2C%22tag__not_in%22%3A%5B%5D%2C%22tag__and%22%3A%5B%5D%2C%22tag_slug__in%22%3A%5B%5D%2C%22tag_slug__and%22%3A%5B%5D%2C%22post_parent__in%22%3A%5B%5D%2C%22post_parent__not_in%22%3A%5B%5D%2C%22author__in%22%3A%5B%5D%2C%22author__not_in%22%3A%5B%5D%2C%22posts_per_page%22%3A7%2C%22ignore_sticky_posts%22%3Afalse%2C%22suppress_filters%22%3Afalse%2C%22cache_results%22%3Afalse%2C%22update_post_term_cache%22%3Atrue%2C%22lazy_load_term_meta%22%3Atrue%2C%22update_post_meta_cache%22%3Atrue%2C%22post_type%22%3A%22%22%2C%22nopaging%22%3Afalse%2C%22comments_per_page%22%3A%2250%22%2C%22no_found_rows%22%3Afalse%2C%22order%22%3A%22DESC%22%7D%2C%22last_post_date%22%3A%222016-03-21%2017%3A51%3A25%22%2C%22stats%22%3A%22blog%3D12049424%26v%3Dwpcom%26tz%3D0%26user_id%3D0%26subd%3Dtroubleddiva%26x_pagetype%3Dinfinite%22%7D%7D' ) );
+		//]]>
+		</script> <!--  --> 
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+   <div class="grofile-hash-map-eafc19eda5c5ffa5f0fead95d8801c3f"> 
+   </div> 
+  </div> 
+  <script>
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/troubleddiva.wordpress.com\/public.api\/connect\/?action=request&domain=troubled-diva.com","logoutURL":"https:\/\/troubleddiva.wordpress.com\/wp-login.php?action=logout&_wpnonce=800df7e55e","homeURL":"https:\/\/troubled-diva.com\/","postID":"9607","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1573483029j"></script> 
+  <div id="infinite-footer"> 
+   <div class="container"> 
+    <div class="blog-info"> <a id="infinity-blog-title" href="https://troubled-diva.com/" rel="home"> troubled diva </a> 
+    </div> 
+    <div class="blog-credits"> <a href="https://wordpress.com/?ref=footer_website" rel="nofollow">Create a free website or blog at WordPress.com.</a> 
+    </div> 
+   </div> 
+  </div><!-- #infinite-footer --> <!-- CCPA [start] --> 
+  <script type="text/javascript">
+				( function () {
+
+					var setupPrivacy = function() {
+
+						var $ = window.jQuery;
+						if ( ! $ ) return; // jQuery required
+
+						$( document ).ready( function() {
+
+							// Minimal Mozilla Cookie library
+							// https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+							var cookieLib = {getItem:function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},setItem:function(e,o,n,t,r,i){if(!e||/^(?:expires|max\-age|path|domain|secure)$/i.test(e))return!1;var c="";if(n)switch(n.constructor){case Number:c=n===1/0?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+n;break;case String:c="; expires="+n;break;case Date:c="; expires="+n.toUTCString()}return"rootDomain"!==r&&".rootDomain"!==r||(r=(".rootDomain"===r?".":"")+document.location.hostname.split(".").slice(-2).join(".")),document.cookie=encodeURIComponent(e)+"="+encodeURIComponent(o)+c+(r?"; domain="+r:"")+(t?"; path="+t:"")+(i?"; secure":""),!0}};
+
+							var setDefaultOptInCookie = function() {
+								var value = '1YNN';
+								cookieLib.setItem( 'usprivacy', value, 365 * 24 * 60 * 60, '/', '.rootDomain' );
+							};
+
+							var setCcpaAppliesCookie = function( value ) {
+								cookieLib.setItem( 'ccpa_applies', value, 24 * 60 * 60, '/', '.rootDomain' );
+							}
+
+							var maybeCallDoNotSellCallback = function() {
+								if ( 'function' === typeof window.doNotSellCallback ) {
+									return window.doNotSellCallback( $ );
+								}
+
+								return false;
+							}
+
+							var usprivacyCookie = cookieLib.getItem( 'usprivacy' );
+
+							if ( null !== usprivacyCookie ) {
+								maybeCallDoNotSellCallback();
+								return;
+							}
+
+							var ccpaCookie = cookieLib.getItem( 'ccpa_applies' );
+
+							if ( null === ccpaCookie ) {
+								$.ajax({
+									type: 'GET',
+									dataType: "json",
+									cache: false,
+									url: 'https://public-api.wordpress.com/geo/',
+									success: function( data ) {
+										var ccpa_applies = data['region'] && data['region'].toLowerCase() === 'california';
+
+										setCcpaAppliesCookie( ccpa_applies );
+
+										if ( ccpa_applies ) {
+											if ( maybeCallDoNotSellCallback() ) {
+												setDefaultOptInCookie();
+											}
+										}
+									},
+									error: function() {
+										setCcpaAppliesCookie( true );
+										if ( maybeCallDoNotSellCallback() ) {
+											setDefaultOptInCookie();
+										}
+									},
+								} );
+							} else {
+								if ( ccpaCookie === 'true' ) {
+									if ( maybeCallDoNotSellCallback() ) {
+										setDefaultOptInCookie();
+									}
+								}
+							}
+						} );
+					};
+
+					if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+						defQueue.items.push( setupPrivacy );
+					} else {
+						setupPrivacy();
+					}
+
+				} )();
+			</script> <!-- CCPA [end] --> 
+  <script type="text/javascript">
+			( function( $ ) {
+				$( document.body ).on( 'post-load', function () {
+					if ( typeof __ATA.insertInlineAds === 'function' ) {
+						__ATA.insertInlineAds();
+					}
+				} );
+			} )( jQuery );
+			</script> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="12049424"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://troubled-diva.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="troubled diva"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <div class="widget widget_eu_cookie_law_widget">
+   <div class="hide-on-button ads-active" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law"> 
+    <form method="post"> 
+     <input type="submit" value="Close and accept" class="accept"> Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. 
+     <br> To find out more, including how to control cookies, see here: <a href="https://automattic.com/cookies"> Cookie Policy </a> 
+    </form> 
+   </div> 
+  </div>
+  <link rel="stylesheet" id="all-css-0-3" href="https://s0.wp.com/_static/??-eJx9jlEKwjAQRC/kukgt1A/xLGmyhrTbbMgmld7eClYUpJ/zhjcMPhJYiYViwcTVh6jo6xp7yh56FjsqDlSSsSOwWaQW8Dk4fFf3vMpHq3rAr6WpwjaWSZNEDTPBHBzJH7KnW5OlKvHnwwb2pBKYHHjDTHn5TS/tNl1Pbdd0zfnStsMTODFhTg==?cssminify=yes" type="text/css" media="all"> 
+  <script>
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+</script> 
+  <script>
+var actionbardata = {"siteID":"12049424","siteName":"troubled diva","siteURL":"https:\/\/troubled-diva.com","icon":"<img alt='' src='https:\/\/secure.gravatar.com\/blavatar\/824864b82015d123c0e88ce972d689f3?s=50&d=https%3A%2F%2Fs2.wp.com%2Fi%2Flogo%2Fwpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/twentysixteen","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Ftroubled-diva.com%2F2019%2F12%2F08%2Fsoul-civil-war%2F&signup_flow=account&domain=troubled-diva.com","themeURL":"https:\/\/wordpress.com\/theme\/twentysixteen\/","xhrURL":"https:\/\/troubled-diva.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"bc295554c1\" \/>","referer":"https:\/\/troubled-diva.com\/","canFollow":"1","feedID":"46767253","statusMessage":"","customizeLink":"https:\/\/troubleddiva.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Ftroubleddiva.wordpress.com%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Twenty Sixteen","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Ftroubled-diva.com%2F2019%2F12%2F08%2Fsoul-civil-war%2F&signup_flow=account&domain=troubled-diva.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/troubled-diva.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/troubleddiva.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Ftroubled-diva.com%2F2016%2F06%2F29%2Frandomising-the-record-collection-28-simple-minds-promised-you-a-miracle%2F","blog_id":"12049424","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=12049424&v=wpcom&tz=0&user_id=0&subd=troubleddiva","is_public":"1","reblog_enabled":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJydUttugzAM/aFlUVu1XR+mfUsIhhlCEsUOlL+fQbTqWIe0vUTOsX18fNFDVDZ4Bs+6IV1Cjxbi9bWhF/3g6rKKLtfoSaOv0COPd+MWi966XALNPEise/BlSJMrBjdW6Nxrh35NfeOtsnOKkEFBiYy+Xirq02F3OJ/2F124IGAgJiWmbZcqCMP/OUFEsuRlz2UY/EI8v7R2rqvwJ3TSbsyF5kGAkfDKAH4aALUYlUPfqirYTKrCHzPdSq+yt4zB08YiBixrYFGZxRtaBOXMoBm66AzDCt/gMaVsRRUm6c4QQxJLhR5SwmmZd+yPDJyMjHAraW5wSrpbG9EJKMo4sAfVi67wBHl2XA8M1qSQCZxugKNoUzfg2f3SUIWiAcu/XdZcUhuiaQPN8o+iaatlRgelqo1zkMbvP8n66N53x7fjYX85ny/NF8kHWf0="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script type="text/javascript">
+			jQuery.extend( infiniteScroll.settings.scripts, ["jquery-core","jquery-migrate","jquery","postmessage","mobile-useragent-info","twentysixteen-html5","spin","jquery.spin","grofiles-cards","wpgroho","jquery.autoresize","highlander-comments","devicepx","the-neverending-homepage","wp-polyfill","blog-posts-block-view","event-countdown-js","twentysixteen-skip-link-focus-fix","twentysixteen-script","eu-cookie-law-script","wpcom-masterbar-js","wpcom-masterbar-tracks-js","wpcom-actionbar-bar","jetpack-responsive-videos-min-script","jetpack-carousel","swfobject","videopress","tiled-gallery"] );
+			jQuery.extend( infiniteScroll.settings.styles, ["wpcom-smileys","twentysixteen-jetpack","wordads-global","the-neverending-homepage","wp-block-library","wp-block-library-theme","jetpack-layout-grid","jetpack-ratings","jetpack-event-countdown","jetpack-timeline","blog-posts-block-view","coblocks-frontend","posts-list-block-style","wpcom-core-compat-playlist-styles","wpcom-text-widget-styles","wpcom-bbpress2-staff-css","genericons","twentysixteen-style","twentysixteen-block-style","twentysixteen-wpcom-style","eu-cookie-law-style","geo-location-flair","reblogging","infinity-twentysixteen","wpcom-actionbar-bar","jetpack-global-styles-frontend-style","h4-global","twentysixteen-fonts","twentysixteen-ie","twentysixteen-ie8","twentysixteen-ie7","highlander-comments","highlander-comments-ie7","wpcom-layout-grid-front","jetpack-responsive-videos-style","jetpack-carousel","tiled-gallery"] );
+		</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'12049424','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'12049424','v':'wpcom','tz':'0','user_id':'0','subd':'troubleddiva'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3BxTi9jQ2xTcExndUZKNnR+VmJBLWNTd3M2amg1MWwrSFNfUn5+dWpkdk12VHx8P203d241ajVxMlg/c29jZzdjW3NRR3c5NkcxYk9GSEN1USt6ZHp3PzAybkkmW2Y1ZEUwL1VKMm9YV0k/WU1vaEJrOT1JMF1lamdqQnRWandhRU9KSEVkMkJ1VVk5UXZUcS55PWEtRGRzbmNfayVvRytqLFImL0pDMWVZNCYmNX5tcHZYTTh4OX5RZExIXSY5Qkd6UnhVfFcyYUdTRnBYZ0YyVmhWYjZaL2ctY2h5bWJEbT1abTg='}]);
+_stq.push([ 'clickTrackerInit', '12049424', '0' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+ </body>
+</html>

@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta name="google-site-verification" content="X5sd8PEDJqYLSR98RKgSozn-0RNpknXFlGoA-UXe5K0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#d33a2c">
+  <meta property="fb:pages" content="45576747489">
+  <meta name="flattr:id" content="glyg5e">
+  <link rel="icon" type="image/png" href="/images/favicon/favicon.png">
+  <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon-iphone-60x60.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-touch-icon-ipad-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-touch-icon-iphone-retina-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-touch-icon-ipad-retina-152x152.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/images/favicon/app-icon-256x256.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/images/favicon/app-icon-512x512.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="description" content="Editor’s note: Please note that this article is quite lengthy, and contains dozens of CodePen embeds for an interactive view. The page might take a little while to load, so please be patient.
+This article explains how Flexbox and CSS Grid fit together, and how we can build resilient and flexible layouts today while providing a decent fallback for older browsers.">
+  <meta name="robots" content="noodp">
+  <link rel="canonical" href="https://www.smashingmagazine.com/2016/11/css-grids-flexbox-box-alignment-new-layout-standard/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The New Layout Standard For The Web: CSS Grid, Flexbox And Box Alignment — Smashing Magazine">
+  <meta property="og:description" content="Editor’s note: Please note that this article is quite lengthy, and contains dozens of CodePen embeds for an interactive view. The page might take a little while to load, so please be patient.
+This article explains how Flexbox and CSS Grid fit together, and how we can build resilient and flexible layouts today while providing a decent fallback for older browsers.">
+  <meta property="og:url" content="https://www.smashingmagazine.com/2016/11/css-grids-flexbox-box-alignment-new-layout-standard/">
+  <meta property="og:site_name" content="Smashing Magazine">
+  <meta property="article:publisher" content="https://www.facebook.com/smashmag">
+  <meta property="article:author" content="https://www.smashingmagazine.com/author/rachel-andrew/">
+  <meta property="article:tag" content>
+  <meta property="article:section" content="General">
+  <meta property="article:published_time" content="2016-11-08 21:12:40 +0000 UTC">
+  <meta property="article:modified_time" content="2016-11-08 21:12:40 +0000 UTC">
+  <meta property="og:updated_time" content="2016-11-08 21:12:40 +0000 UTC">
+  <meta property="og:image" content="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/9ef65019-11a6-4199-9f36-ba30420df25a/flexbox-equal-height-columns-codepen-screenshot-opt.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:description" content="Editor’s note: Please note that this article is quite lengthy, and contains dozens of CodePen embeds for an interactive view. The page might take a little while to load, so please be patient.
+This article explains how Flexbox and CSS Grid fit together, and how we can build resilient and flexible layouts today while providing a decent fallback for older browsers.">
+  <meta name="twitter:title" content="The New Layout Standard For The Web: CSS Grid, Flexbox And Box Alignment — Smashing Magazine">
+  <meta name="twitter:site" content="@smashingmag">
+  <meta name="twitter:image" content="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/9ef65019-11a6-4199-9f36-ba30420df25a/flexbox-equal-height-columns-codepen-screenshot-opt.png">
+  <meta name="twitter:creator" content="@rachelandrew">
+  <meta property="DC.date.issued" content="2016-11-08 21:12:40 +0000 UTC">
+  <link rel="dns-prefetch" href="https://www.gravatar.com/">
+  <link rel="dns-prefetch" href="https://cloud.netlifyusercontent.com/">
+  <link rel="dns-prefetch" href="https://smashingcomments.netlify.com/">
+  <link rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/">
+  <link rel="dns-prefetch" href="https://consent.cookiebot.com/">
+  <link rel="dns-prefetch" href="https://consentcdn.cookiebot.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+  <link rel="dns-prefetch" href="https://res.cloudinary.com/">
+  <link rel="dns-prefetch" href="https://cats.smashing.services/">
+  <link rel="dns-prefetch" href="https://smashingconf.com/">
+  <link rel="dns-prefetch" href="https://smashed.by/">
+  <link rel="preconnect" href="https://www.gravatar.com/">
+  <link rel="preconnect" href="https://smashingcomments.netlify.com/">
+  <link rel="preconnect" href="https://cloud.netlifyusercontent.com/">
+  <link rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/">
+  <link rel="preconnect" href="https://consent.cookiebot.com/">
+  <link rel="preconnect" href="https://consentcdn.cookiebot.com">
+  <link rel="preconnect" href="https://www.google-analytics.com/">
+  <link rel="preconnect" href="https://res.cloudinary.com/">
+  <link rel="preconnect" href="https://cats.smashing.services/">
+  <link rel="preconnect" href="https://smashingconf.com/">
+  <link rel="preconnect" href="https://smashed.by/">
+  <title>The New Layout Standard For The Web: CSS Grid, Flexbox And Box Alignment — Smashing Magazine</title>
+  <link rel="alternate" type="application/rss+xml" title="Smashing Magazine &amp;raquo; Feed" href="https://www.smashingmagazine.com/feed/">
+  <style>@font-face{font-family:ElenaInitial;src:url("https://d33wubrfki0l68.cloudfront.net/a978f759fa0230c1e590d1bdb5a1c03ceb538cec/fed6b/fonts/elenawebregular/elenawebregular.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/9c2752fab289f61c6ed3a1f78ab60fb2034103b7/bf691/fonts/elenawebregular/elenawebregular.woff") format("woff")}@font-face{font-family:Elena;src:url("https://d33wubrfki0l68.cloudfront.net/a978f759fa0230c1e590d1bdb5a1c03ceb538cec/fed6b/fonts/elenawebregular/elenawebregular.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/9c2752fab289f61c6ed3a1f78ab60fb2034103b7/bf691/fonts/elenawebregular/elenawebregular.woff") format("woff")}@font-face{font-family:Elena;src:url("https://d33wubrfki0l68.cloudfront.net/151446eb4ad2f20af89f3132f66d03cc92c856f4/74612/fonts/elenawebregularitalic/elenawebregularitalic.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/a6275674bf99f00da2e019547d61933d074f2ae7/51beb/fonts/elenawebregularitalic/elenawebregularitalic.woff") format("woff");font-style:italic}@font-face{font-family:Elena;src:url("https://d33wubrfki0l68.cloudfront.net/a7cc92a2d6ae8ea43370e14b53d2ce89a2b2b5ab/7cca9/fonts/elenawebbold/elenawebbold.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/c2ebb4866cc6ce6d5ffdb22b616cb3dde4274107/c6bc6/fonts/elenawebbold/elenawebbold.woff") format("woff");font-weight:700}@font-face{font-family:Elena;src:url("https://d33wubrfki0l68.cloudfront.net/bbc71fd1b91cc1a4ede7ea378a8bf30b9e32173e/93eeb/fonts/elenawebbolditalic/elenawebbolditalic.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/56129334a763b7d04f2f34cbbd3b4f68f72bb6d7/8045a/fonts/elenawebbolditalic/elenawebbolditalic.woff") format("woff");font-weight:700;font-style:italic}@font-face{font-family:MijaInitial;src:url("https://d33wubrfki0l68.cloudfront.net/ac1833dce386eb55d8e105248ef9126622e8e3e9/03f2d/fonts/mijaregular/mija_regular-webfont.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/0e0910ceb0e2f9adffd9db31665dafa4ec5c10ff/7214b/fonts/mijaregular/mija_regular-webfont.woff") format("woff")}@font-face{font-family:Mija;src:url("https://d33wubrfki0l68.cloudfront.net/ac1833dce386eb55d8e105248ef9126622e8e3e9/03f2d/fonts/mijaregular/mija_regular-webfont.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/0e0910ceb0e2f9adffd9db31665dafa4ec5c10ff/7214b/fonts/mijaregular/mija_regular-webfont.woff") format("woff")}@font-face{font-family:Mija;src:url("https://d33wubrfki0l68.cloudfront.net/94691bb5497213e09480b17ef68446d2b85667e9/d58ec/fonts/mijabold/mija_bold-webfont.woff2") format("woff2"),url("https://d33wubrfki0l68.cloudfront.net/1d162cc7792bc1f04919a5a344b4082087b9e012/855b4/fonts/mijabold/mija_bold-webfont.woff") format("woff");font-weight:700}</style>
+  <script>var fontsInServiceWorker=sessionStorage.foutFontsStage1Loaded&&sessionStorage.foutFontsStage2Loaded||('serviceWorker'in navigator&&navigator.serviceWorker.controller!==null&&navigator.serviceWorker.controller.state==='activated')
+if(!fontsInServiceWorker&&'fonts'in document){function fetchFonts(fonts){return Promise.all(fonts.map(function(font){return document.fonts.load(font);}));}
+fetchFonts(['1em ElenaInitial','1em MijaInitial']).then(function(){var docEl=document.documentElement;docEl.classList.add('wf-loaded-stage1');sessionStorage.foutFontsStage1Loaded=true;fetchFonts(['1em Elena','700 1em Elena','italic 1em Elena','italic 700 1em Elena','1em Mija','700 1em Mija']).then(function(){docEl.classList.add('wf-loaded-stage2');sessionStorage.foutFontsStage2Loaded=true;});});}</script>
+  <style>@charset "UTF-8";article,header,nav{display:block}strong{font-weight:inherit}strong{font-weight:bolder;letter-spacing:.25px}button,input{font:inherit;margin:0}button{text-transform:none}[type=submit],button{-webkit-appearance:button}[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}.c-garfield-the-cat figcaption a:not(.btn){color:#666;background-image:-webkit-gradient(linear,left top,left bottom,from(#666),to(#666));background-image:linear-gradient(#666,#666)}@media all and (min-width:1100px){@supports(grid-row-gap:0){.c-garfield-the-cat{display:grid;grid-template-columns:11rem repeat(12,minmax(0,1fr)) 15rem;grid-row-gap:calc(1em + .5vw);margin:0 auto}.c-garfield-the-cat>h3{margin-top:calc(1.5 * (1em + .5vw));margin-bottom:0}.c-garfield-the-cat>h4{margin-top:calc(1em + .5vw);margin-bottom:calc(-1 * (1em + .5vw)/2)}.c-garfield-the-cat>*{grid-column-start:3;grid-column-end:13;margin-top:0;margin-bottom:0}.c-garfield-the-cat>table{margin-bottom:calc(1em + .5vw)}.c-garfield-the-cat .c-garfield-bio{grid-column-start:1;grid-column-end:2;grid-row:span 3;align-self:start}.c-garfield-the-cat .c-garfield-header{grid-column-end:15}.c-garfield-the-cat .c-garfield-aside--newsletter{grid-column-start:14;grid-column-end:15;grid-row-start:3;grid-row-end:11;align-self:start}.c-garfield-the-cat .c-garfield-aside--meta{grid-column-start:14;grid-column-end:15;grid-row-start:2;grid-row-end:4;align-self:start;margin:0;overflow:hidden}.c-garfield-the-cat>.break-out{grid-column-start:1;grid-column-end:15;max-width:50em;margin-left:auto;margin-right:auto;width:100%}.c-garfield-the-cat>.break-out img{margin:0 auto}.c-garfield-the-cat>.break-out figcaption{max-width:50em}.article__content .c-garfield-the-cat figcaption{padding-top:calc((1em + .5vw)/2);padding-bottom:0;margin:0 auto}.c-garfield-the-cat>ul li{margin-bottom:calc((1em + .5vw)/2)}.c-garfield-the-cat .c-garfield-native-panel{grid-column-start:1;grid-column-end:2;grid-row-start:4;grid-row-end:10;align-self:start;text-align:center;margin-top:-2em}.c-garfield-the-cat .c-garfield-native-panel__below{grid-row-start:15;grid-row-end:20}.c-garfield-aside--newsletter{display:block}}}strong{letter-spacing:0}figcaption a{color:inherit}.article h1,.article h2,.article h3,.article h4{position:relative}.btn span{color:#811d15;font-size:.8em;margin-left:5px;margin-top:.5em;line-height:1}.btn span.ladda-label{color:inherit;font-size:inherit;margin:0;line-height:inherit}.btn--green{background-color:#41b14f;background-image:-webkit-gradient(linear,left top,left bottom,from(#9ec14c),to(#41b14f));background-image:linear-gradient(#9ec14c,#41b14f);color:#fff}.btn--green span{color:rgba(0,0,0,.5)}.btn.btn--medium{font-size:calc(.9em + .1vw);padding:.75em 1em}.ladda-button{position:relative}.ladda-button .ladda-spinner{position:absolute;z-index:2;display:inline-block;width:32px;height:32px;top:50%;margin-top:0;opacity:0}.ladda-button .ladda-label{position:relative;z-index:3}.ladda-button[data-style=expand-right] .ladda-spinner{right:-6px}.btn span.nl__form__arrow{color:inherit;margin-left:.35em;margin-right:.25em}.article__content figure:not(.bio-image),.article__image{padding:0;margin:1em auto}.article__content figure:not(.bio-image) img,.article__image img{display:block;width:auto;max-width:100%;margin:0 auto;height:auto}.article__content figure:not(.bio-image)>a,.article__image>a{display:block;background:0 0;position:relative;z-index:99}.article__content figure:not(.bio-image) figcaption,.article__image figcaption{color:#666;font-size:calc(.8em + .2vw);font-style:italic;padding:.75em 2em .75em 0;display:table}.article__content figure:not(.bio-image) figcaption a,.article__image figcaption a{color:#666}.article__content figure:not(.bio-image) figcaption::before,.article__image figcaption::before{content:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNyAxMy4wOSI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNjMmMyYzJ9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmNhbWVyYTwvdGl0bGU+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOC41IDUuNDRhMi4yMSAyLjIxLjAgMSAwIDIuMjEgMi4yMUEyLjIxIDIuMjEuMCAwIDAgOC41IDUuNDR6TTE0Ljc5IDIuMjFoLTIuNTVhMi4yMSAyLjIxLjAgMCAwLTIuMjQtMi4yMWgtM2EyLjIxIDIuMjEuMCAwIDAtMi4yNCAyLjIxaC0yLjU1YTIuMjEgMi4yMS4wIDAgMC0yLjIxIDIuMjF2Ni40NmEyLjIxIDIuMjEuMCAwIDAgMi4yMSAyLjIxaDEyLjU4YTIuMjEgMi4yMS4wIDAgMCAyLjIxLTIuMjF2LTYuNDZhMi4yMSAyLjIxLjAgMCAwLTIuMjEtMi4yMXptLTYuMjkgOS4zNWEzLjkxIDMuOTEuMCAxIDEgMy45MS0zLjkxIDMuOTEgMy45MS4wIDAgMS0zLjkxIDMuOTF6Ii8+PC9zdmc+);height:1em;width:1.5em;padding-right:.6em;display:table-cell;vertical-align:baseline;position:relative;top:.05em}table{width:100%;border-collapse:collapse;margin-bottom:calc(2em + 2vw);clear:both;font-size:calc(.9em + .05vw)}tr{border-bottom:1px solid #ddd}td{padding:1em 1.5em;border:none;text-align:left}tbody td{text-align:left;color:#000;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 tbody td{font-family:ElenaInitial}.wf-loaded-stage2 tbody td{font-family:Elena}.tablesaw td{line-height:150%;text-align:left;vertical-align:middle}.tablesaw td{vertical-align:middle;font-size:calc(.9em + .05vw)}tbody tr:nth-child(2n) td{background-color:#f7f7f7}.btn--promo-newsletter{display:block;width:100%;text-shadow:1px 1px 1px rgba(0,0,0,.25)}html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,header,nav,section{display:block}figcaption,figure,main{display:block}figure{margin:0}a{background-color:transparent;-webkit-text-decoration-skip:objects}img{border-style:none}svg:not(:root){overflow:hidden}input{font:inherit;margin:0}[type=submit]{-webkit-appearance:button}[type=submit]::-moz-focus-inner{border-style:none;padding:0}[type=submit]:-moz-focusring{outline:ButtonText dotted 1px}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}.sr-only{display:inline-block;height:0;width:0;line-height:0;overflow:hidden}.hidden{display:none!important}.container{margin-right:auto;margin-left:auto}.row{-webkit-box-sizing:border-box;box-sizing:border-box;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:0;-ms-flex:0 1 auto;flex:0 1 auto;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:0;margin-left:0}[class*=col-]{-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-box-flex:0;-ms-flex:0 0 auto;flex:0 0 auto;padding-right:1rem;padding-left:1rem}@media(min-width:48em){.container{width:52rem}}@media(min-width:64em){.container{width:68rem}}@media(min-width:75em){.container{width:79rem}}.row::after{clear:both}.col-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}@media screen and (min-width:48em){.col-12{-ms-flex-preferred-size:100%;flex-basis:100%;max-width:100%}}.container{width:calc(100% - .5em);max-width:1440px;margin:0 auto;z-index:1;position:relative}.container::after{content:'';display:table;clear:both}@media screen and (min-width:40em){.container{width:92vw}}@media screen and (min-width:48em){.container{width:85vw}}@media screen and (min-width:64em){.container{width:94vw}}.c-garfield-the-cat>p:first-of-type{font-size:1.1em;line-height:1.55em}@media(max-width:1024px){.row{margin-left:0;margin-right:0}.article__content{float:none;margin-top:50px}.article__content::before{display:none}}body,html{min-height:100%;overflow-x:hidden}#main{position:relative;z-index:1;background-color:#fff}.c-garfield-header{clear:both}.c-garfield-the-cat a:not(.btn){color:#006fc6}.c-promo-box{font-size:.9em;border-radius:11px}.c-promo-box a:not(.btn){color:#006fc6}.c-promo-box--ad::before{display:block;white-space:pre-wrap;padding:0 0 1.5em;font-size:.75em;font-style:italic;color:#666}.c-garfield-the-cat .author__desc{font-size:calc(.8em + .15vw);color:#555}.article__summary::before{content:'Quick summary ↬ ';display:inline;font-style:normal;letter-spacing:2px;font-size:.75em;margin:0;font-weight:600;color:var(--THEME_COLOR,#d33a2c);text-transform:uppercase}.c-promo-box--wide::before{margin-top:1em;border-top:8px solid #eee;padding:2em 0 3em;content:'Our friends and supporters. You know, they help us pay the bills ↓';text-align:center}.c-promo-box--wide{padding:0;background:0 0;margin:0 auto}.c-promo-box--ad ul{padding-left:0;margin:0}.bnnr-list{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;text-align:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-ms-flex-direction:row;flex-direction:row}.sponsors.c-promo-box:not(.c-promo-box--wide) .bnnr-list{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.c-garfield-the-cat{padding:0 1em}.c-garfield-aside--newsletter{display:none}@media all and (min-width:1100px){@supports(grid-row-gap:0){.c-garfield-the-cat{display:grid;grid-template-columns:11rem repeat(12,minmax(0,1fr)) 15rem;grid-row-gap:calc(1em + .5vw);margin:0 auto}.c-garfield-the-cat>h3{margin-top:calc(1.5 * (1em + .5vw));margin-bottom:0}.c-garfield-the-cat>*{grid-column-start:3;grid-column-end:13;margin-top:0;margin-bottom:0}.c-garfield-the-cat .c-garfield-bio{grid-column-start:1;grid-column-end:2;grid-row:span 3;align-self:start}.c-garfield-the-cat .c-garfield-header{grid-column-end:15}.c-garfield-the-cat .c-garfield-aside--newsletter{grid-column-start:14;grid-column-end:15;grid-row-start:3;grid-row-end:11;align-self:start}.c-garfield-the-cat .c-garfield-aside--meta{grid-column-start:14;grid-column-end:15;grid-row-start:2;grid-row-end:4;align-self:start;margin:0;overflow:hidden}.c-garfield-the-cat .c-garfield-native-panel{grid-column-start:1;grid-column-end:2;grid-row-start:4;grid-row-end:10;align-self:start;text-align:center;margin-top:-2em}.c-garfield-aside--newsletter{display:block}}}@media screen and (min-width:80em){.c-garfield-the-cat{display:grid;grid-template-columns:15rem repeat(12,minmax(0,1fr)) 17.5rem}}body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;background-color:#fff}body.articlepage{background-color:#fff}img{max-width:100%}:focus{outline:#811d15 dotted 3px!important}.main-header{padding:1em 0;background:var(--THEME_COLOR,#d33a2c);background:var(--THEME_COLOR,var(--THEME_COLOR,#d33a2c));position:relative;min-height:6.2375rem}@media all and (max-width:901px){.main-header{padding:1em 0 0 .5em}}.header__head{width:100%;padding:0 2em;position:relative;color:#fff}@media(max-width:64em){.header__head{padding:0 1em}}.header__head:after,.header__head:before{content:' ';display:table;clear:both}a.skip-main{left:-999px;position:absolute;top:auto;width:1px;height:1px;overflow:hidden;z-index:-999}body{-webkit-font-feature-settings:'onum' 1;font-feature-settings:'onum' 1;color:#333;overflow:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 body{font-family:ElenaInitial}.wf-loaded-stage2 body{font-family:Elena}body{font-size:1.125em}@media screen and (min-width:48em){body{font-size:calc(.35842vw + .95296em)}}body .form__field__label,body figcaption,body li,body p{line-height:calc(1.5em + .2vw);word-break:break-word}body h1,body h2,body h3{line-height:1.2}body h4{line-height:calc(1.3em + (1.5 - 1.3) * ((100vw - 21em)/(35 - 21)))}@supports(-ms-ime-align:auto){.article__content figure:not(.bio-image) figcaption,.article__image figcaption{display:inline-block}.article__content figure:not(.bio-image) figcaption::before,.article__image figcaption::before{display:inline-block}body{-webkit-font-feature-settings:normal;font-feature-settings:normal}}::-webkit-input-placeholder{color:#666}:-moz-placeholder{color:#666}::-moz-placeholder{color:#666}:-ms-input-placeholder{color:#666}.article-header--meta-item__date,time{font-size:.8em;color:#666;text-transform:lowercase;-webkit-font-feature-settings:'smcp' 1,'c2sc' 1;font-feature-settings:'smcp' 1,'c2sc' 1;letter-spacing:1px;font-variant:small-caps;text-transform:lowercase;background-position:50% 72%;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .article-header--meta-item__date,.wf-loaded-stage1 time{font-family:ElenaInitial}.wf-loaded-stage2 .article-header--meta-item__date,.wf-loaded-stage2 time{font-family:Elena}p{margin:calc(1em + .5vw) 0}figure{margin:0;padding:0}figure:after,figure:before{content:' ';display:table;clear:both}a{text-decoration:none;padding:10px 0;background-image:-webkit-gradient(linear,left top,left bottom,from(currentColor),to(currentColor));background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-size:100% 1.5px;background-position:center bottom 29%;background-origin:padding-box;text-shadow:3px 0 #fff,2px 0 #fff,1px 0 #fff,-1px 0 #fff,-2px 0 #fff,-3px 0 #fff;color:#006fc6}@supports(-ms-ime-align:auto){a{text-shadow:none}}h1{font-size:calc(1.625rem + 1.6vw);margin:0;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 h1{font-family:MijaInitial}.wf-loaded-stage2 h1{font-family:Mija}.h2,h2{font-size:calc(1.375rem + 1.6vw);margin:0;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .h2,.wf-loaded-stage1 h2{font-family:MijaInitial}.wf-loaded-stage2 .h2,.wf-loaded-stage2 h2{font-family:Mija}h3{font-size:calc(1.5rem + .25vw);margin:2em 0 .75em;text-transform:capitalize;color:#333;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 h3{font-family:ElenaInitial}.wf-loaded-stage2 h3{font-family:Elena}h4{font-size:calc(1.125rem + .25vw);text-transform:uppercase;letter-spacing:1px;margin-top:2em;margin-bottom:1em;color:#333}@media all and (min-width:1550px){h1{font-size:2.13894em}.h2,h2{font-size:2.14857em}}.article h1,.article h2,.article h3{position:relative}ul{padding:0;margin:1em 0;max-width:100%}ul{list-style:none;padding-left:calc(1.4em + .7vw);list-style-image:url("https://d33wubrfki0l68.cloudfront.net/5242cdc0f8a0d710a02b6dcdd43ef5002bf5ae89/77199/images/bullet.svg")}ul>li{margin-bottom:.5em;padding-left:.25em}ul>li p{margin-top:0}.main-nav__dropdown{position:relative;float:left;width:calc(100% - 18em)}@media all and (max-width:1349px){.main-nav__dropdown{width:calc(100% - 10em)}}@media all and (max-width:900px){.main-nav__dropdown{width:80%}}@media(max-width:48em){.main-nav__dropdown{width:75%}}.main-nav{margin:0;overflow:hidden;text-align:center}.main-nav:after,.main-nav:before{content:' ';display:table;clear:both}.main-nav__list{overflow:hidden;list-style:none;margin:0;padding:0;text-align:center;width:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-pack:distribute;justify-content:space-around}@media(max-width:40em){.main-nav__dropdown{width:100%;float:none;clear:both}.main-nav__list{display:block}}.main-nav__item{padding:0;-webkit-box-flex:9999;-ms-flex:9999;flex:9999}@media screen and (-ms-high-contrast:active),screen and (-ms-high-contrast:none){.main-nav__item{width:18%!important}}@media all and (min-width:850px){.main-nav__item{width:20%}}.main-nav__item a{display:block;padding:0}.enhanced .closed{max-height:0}.enhanced .closed .main-nav__item{opacity:1;-webkit-transform:none;transform:none}@media all and (max-width:901px){.enhanced .closed .main-nav__item{opacity:0}}.enhanced .closed .main-nav__item .main-nav__icon{-webkit-transform:none;transform:none}@media all and (max-width:880px){.enhanced .closed .main-nav__item .main-nav__icon{-webkit-transform:translateY(-.25em);transform:translateY(-.25em)}}.open .main-nav__item{display:inline-block;text-align:center;margin-bottom:-4px;padding:.5em;opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}@media all and (min-width:1600px){.open .main-nav__item{font-size:1.2em}}@media all and (max-width:1100px){.open .main-nav__item{margin:0;text-align:center;padding:.5em}}@media all and (max-width:640px){.open .main-nav__item{width:50%;margin-right:0;float:left;font-size:1.1em}.open .main-nav__item a{display:block;width:100%;height:100%}.open .main-nav__item:nth-of-type(3n+1){background-color:#bc3428}.open .main-nav__item:nth-of-type(3n+2){background-color:#d7372a}.open .main-nav__item:nth-of-type(3n+3){background-color:#c13125}}.open .main-nav__item:last-of-type{width:100%;margin-top:1em;-webkit-font-feature-settings:'smcp' 1,'c2sc' 1;font-feature-settings:'smcp' 1,'c2sc' 1;letter-spacing:1px;font-variant:small-caps;text-transform:lowercase;background-position:50% 72%;display:none}.open .main-nav__item:last-of-type a{background-position:50% 72%;color:#000;display:inline-block;border-bottom:1px solid;padding:0}.open .main-nav__item .main-nav__icon{display:block;margin:0 auto;position:relative;-webkit-transform:translateY(0);transform:translateY(0);width:1.5em;margin-bottom:.25em}.open .main-nav__item .main-nav__icon::before{display:block;content:'';position:absolute;background-image:url(https://d33wubrfki0l68.cloudfront.net/10f9f40f8856e393ab4525a46bd8e60af9580324/0ab7a/images/shadow.png);background-size:100%;background-repeat:no-repeat;right:0;-webkit-transform-origin:30% 50%;transform-origin:30% 50%;top:65%;width:120%;left:-15%;height:10px}.open .main-nav__item .main-nav__icon img{will-change:transform;-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transform:rotate(-11deg);transform:rotate(-11deg)}@media(max-width:40em){.main-nav__item a{padding:.5em 0}.open .main-nav__item .main-nav__icon{display:none!important}}.open .main-nav__item figure{margin:0;padding:0}.open .main-nav__item a{background:0 0;text-shadow:none;color:#fff}.open .main-nav__item.active a{color:#390c09;text-shadow:none}.open .main-nav__item.active h2{text-shadow:none}.open .main-nav__item figcaption h2{font-size:calc(.8em + .6vw);color:inherit;text-shadow:1px 1px 1px rgba(0,0,0,.25);white-space:nowrap}.open .main-nav__item figcaption p{font-style:italic;font-size:calc(.7em + .15vw);max-width:100%;margin:.2em auto;display:none}@media screen and (-ms-high-contrast:active),screen and (-ms-high-contrast:none){.open .main-nav__item figcaption p{font-size:16px!important;letter-spacing:-.5px!important}}@media all and (min-width:1000px){.open .main-nav__item figcaption p{display:block;opacity:0;position:absolute}}@media all and (min-width:901px){.enhanced .slideUp.main-nav{max-height:10em}}.btn{display:inline-block;border-radius:11px;padding:.5em 1em;text-align:center;color:#fff;border:none;font-weight:700;background:0 0;background-color:var(--THEME_COLOR,#d33a2c);background-image:-webkit-gradient(linear,left top,left bottom,from(#f88040),to(#d33a2c));background-image:linear-gradient(to bottom,#f88040,#d33a2c);font-size:.9em;outline:0;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .btn{font-family:MijaInitial}.wf-loaded-stage2 .btn{font-family:Mija}.menu-trigger{background:0 0;text-shadow:none;color:inherit;padding:0;border:3px solid #fff;font-size:calc(.9em + .1vw);font-weight:700;color:#fff;float:right;border-radius:8px;padding:calc(.4em + .2vw) .5em calc(.4em + .2vw) .7em;width:6.25em;position:relative;z-index:1;margin-top:.3em;white-space:nowrap;text-shadow:1px 1px 1px rgba(0,0,0,.25);display:none;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .menu-trigger{font-family:MijaInitial}.wf-loaded-stage2 .menu-trigger{font-family:Mija}@media all and (max-width:900px){.menu-trigger{position:absolute;top:0;right:1em;width:5.5em}}@media all and (min-width:900px){.menu-trigger{margin-top:calc(1.5em + .2vw)}}@media all and (min-width:1101px){.open .main-nav__item{min-height:8.35rem}.open .main-nav__item figcaption p{opacity:1;position:static;white-space:nowrap}.menu-trigger{margin-top:calc(1.5em + .7vw)}}.enhanced .menu-trigger{display:inline-block}@supports(display:flex){.enhanced .menu-trigger{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.enhanced .menu-trigger svg{position:relative;margin-top:-1px;margin-right:10px}}.header__topics{text-align:center;display:none;clear:both;width:100%;margin:0 auto}@media(max-width:48em){.header__topics{width:100%}}.enhanced .closed .header__topics{max-height:0;overflow:hidden;display:block;height:0}.header__topics__title{color:#fff;font-size:.9em;margin:3.5em 0 2.5em}.header__topics__list{padding:0}.header__topics__list:after,.header__topics__list:before{content:' ';display:table;clear:both}.closed .header__topics__list,.closed .header__topics__title{opacity:0;-webkit-transform:translateY(2em);transform:translateY(2em)}.search-topics-dropdown{overflow:hidden;clear:both;max-width:calc(900px + 15vw);margin:0 auto}.header__search{width:100%;margin:calc(.5em + 3vh) 50px 0 0;padding:0 0 calc(.5em + .5vw)}@media(max-width:64em){.header__search{margin-right:5vw}}.header__search input[type=search]{border:none;display:block;width:100%;font-size:calc(1em + .2vw);color:#333;background-color:#fff;padding:.8em 1em;padding-left:2.5em;background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgaGVpZ2h0PSIyNCIgd2lkdGg9IjI0Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudCIgeDE9IjIyLjMxIiB5MT0iMjMuNjIiIHgyPSIzLjczIiB5Mj0iMy4wNSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U5MzcyMiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2Y4NmYyNSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjx0aXRsZT5NYWduaWZpZXI8L3RpdGxlPjxwYXRoIGZpbGw9InVybCgjbGluZWFyLWdyYWRpZW50KSIgZD0iTTIzLjMzIDIwLjFsLTQuNzMtNC43NGExMC4wNiAxMC4wNi4wIDEgMC0zLjIzIDMuMjNsNC43NCA0Ljc0YTIuMjkgMi4yOS4wIDEgMCAzLjIyLTMuMjN6bS0xNy40OC01Ljg0YTUuOTQgNS45NC4wIDEgMSA4LjQyLjAgNiA2IDAgMCAxLTguNDIuMHoiLz48L3N2Zz4=);background-repeat:no-repeat;background-size:1em;background-position:.75em;border-radius:11px;outline:0}@media all and (max-width:480px){.header__search{margin-right:0}.header__search input[type=search]{font-size:.7em;padding:.9em 1.2em;padding-left:2.5em;background-position:.8em}}.header__search input[type=search]::-ms-clear{display:none}.header__search input[type=search]::-webkit-input-placeholder{color:#666}.header__search input[type=search]::-moz-placeholder{color:#666}.header__search input[type=search]:-ms-input-placeholder{color:#666}.header__search input[type=submit]{width:0;height:0;padding:0}.enhanced .header__search input[type=submit]{display:none}@media screen and (-webkit-min-device-pixel-ratio:0){.header__search input[type=search]{font-size:calc(1em + .2vw)}}.search-input-wrapper{position:relative}.search-clear-button{background:0 0;border:none;padding:0 .5em 0 .75em;position:absolute;right:13px;top:30%;-webkit-transform:translateY(5px);transform:translateY(5px);opacity:0}.closed .header__search{opacity:0;-webkit-transform:translateY(2em);transform:translateY(2em)}.no-js .closed .header__search{opacity:1;-webkit-transform:none;transform:none}.header__search-logo{margin-top:.8em;clear:both}.header__search-logo img{float:right;height:16px;width:130px}.logo{font-size:1em;float:left;line-height:0;width:3em;position:relative;z-index:1}@media all and (min-width:900px){.logo{margin-top:1em}}@media all and (min-width:1350px){.logo{width:10.5em;margin-top:1.5em}}.logo a{display:block;background:0 0;outline:0;padding:0;color:transparent;text-shadow:none}.logo a picture{display:block}.logo img{height:3.75em}a.back-to-top{display:block;background:0 0;width:50px;height:50px;opacity:.7;text-shadow:none;border-radius:11px;padding:12.5px;-webkit-transform-origin:bottom left;transform-origin:bottom left;will-change:transform;-webkit-transform:rotate(-11deg);transform:rotate(-11deg);background-color:#666}a.back-to-top svg{display:block}.back-to-top-wrapper{width:50px;height:50px;display:none;position:fixed;bottom:1em;right:1em;z-index:9}.back-to-top-wrapper::before{display:block;content:'';height:90%;width:160%;position:absolute;background-image:url(https://d33wubrfki0l68.cloudfront.net/10f9f40f8856e393ab4525a46bd8e60af9580324/0ab7a/images/shadow.png);background-size:100%;background-repeat:no-repeat;top:89%;left:-30%;right:0;-webkit-transform-origin:30% 50%;transform-origin:30% 50%}@media(min-height:600px){.back-to-top-wrapper{display:block}}label{max-width:100%}.form__field{display:block;font-size:.9em;width:100%;margin-bottom:1.5em}.form__field__input,input[type=email]{background:#fff;border:1px solid #bbb;background-position:right 1.35em center;background-size:.25em .25em;background-repeat:no-repeat;margin-bottom:5px;border-radius:11px;padding:1.35em 2em .6em 1em;display:block;width:100%;outline:0;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .form__field__input,.wf-loaded-stage1 input[type=email]{font-family:ElenaInitial}.wf-loaded-stage2 .form__field__input,.wf-loaded-stage2 input[type=email]{font-family:Elena}.form__field__label{display:block;margin-bottom:.5em}input{border-color:#aaa}.enhanced .form__field--floating{position:relative}.enhanced .form__field--floating .form__field__label{position:absolute;top:8px;left:1.25em;color:#aaa;font-size:calc(.8em + .1vw);padding:8px 0;z-index:1}.back-to-top-wrapper{will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}.cookies{background-color:#fff;border-radius:11px;position:fixed;width:calc(10em + 1vw);padding:1em;z-index:99;-webkit-box-shadow:0 6px 40px rgba(0,0,0,.3);box-shadow:0 6px 40px rgba(0,0,0,.3);bottom:1em;left:1em}.cookies p{margin-top:0;font-size:.75em}@media screen and (max-width:420px){.cookies{right:0;left:0;width:100%;border-radius:0;bottom:0}.cookies p{margin-top:1em}}@media screen and (max-width:380px){.cookies p{margin-top:0}}.cookies--image{display:none;margin:0 auto;max-width:100px;float:left;margin-right:1em;margin-bottom:1em}.cookies--btn{width:100%}.cookies--btn:first-of-type{margin-bottom:.5em}.sponsors ul{padding-left:0;text-align:center}.sponsors__lead{position:relative}.sponsors__lead::before{position:absolute;border-bottom:8px solid #eee;left:0;-webkit-transform:translate(0,-100%);transform:translate(0,-100%);top:-12px;content:'Caution: shameless plug ahead! Continue reading below ↓';font-size:.7em;color:#666;padding-bottom:10px;width:100%;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .sponsors__lead::before{font-family:MijaInitial}.wf-loaded-stage2 .sponsors__lead::before{font-family:Mija}.sponsors.sponsors__lead{width:100%;grid-column-start:2;grid-column-end:14;margin:4.5em auto 2em}img{position:relative}img::before{height:2.5em;display:block;top:2em;content:' ';width:100%;z-index:2;left:0}img::after{content:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHN0eWxlPSJtYXJnaW4tcmlnaHQ6MTBweCI+PHBhdGggZmlsbD0iIzc3NyIgZD0iTTI2IDI4SDZ2LTRsNi0xMCA4LjIxOSAxMEwyNiAyMHY4eiIvPjxwYXRoIGZpbGw9IiM3NzciIGQ9Ik0yNiAxNWMwIDEuNjU3LTEuMzQzIDMtMyAzcy0zLTEuMzQzLTMtMyAxLjM0My0zIDMtM2MxLjY1Ny4wIDMgMS4zNDMgMyAzeiIvPjxwYXRoIGZpbGw9IiM3NzciIGQ9Ik0yOC42ODEgNy4xNTljLS42OTQtLjk0Ny0xLjY2Mi0yLjA1My0yLjcyNC0zLjExNnMtMi4xNjktMi4wMy0zLjExNi0yLjcyNGMtMS42MTItMS4xODItMi4zOTMtMS4zMTktMi44NDEtMS4zMTlINC41Yy0xLjM3OC4wLTIuNSAxLjEyMS0yLjUgMi41djI3QzIgMzAuODc4IDMuMTIyIDMyIDQuNSAzMmgyM2MxLjM3OC4wIDIuNS0xLjEyMiAyLjUtMi41VjEwYzAtLjQ0OC0uMTM3LTEuMjMtMS4zMTktMi44NDF6TTI0LjU0MyA1LjQ1N2MuOTU5Ljk1OSAxLjcxMiAxLjgyNSAyLjI2OCAyLjU0M0gyMlYzLjE4OWMuNzE4LjU1NiAxLjU4NCAxLjMwOSAyLjU0MyAyLjI2OHpNMjggMjkuNWMwIC4yNzEtLjIyOS41LS41LjVoLTIzYy0uMjcxLjAtLjUtLjIyOS0uNS0uNXYtMjdjMC0uMjcxLjIyOS0uNS41LS41LjAuMCAxNS40OTkuMCAxNS41LjB2N2MwIC41NTIuNDQ4IDEgMSAxaDd2MTkuNXoiLz48L3N2Zz4=) " " attr(alt);font-size:.9em;display:block;color:#666;line-height:1.5;position:absolute;font-style:italic;z-index:2;top:calc(2em - 35px);text-align:center;width:104%;left:-2%;padding:2.25em 1em;text-shadow:none;background-color:#eee;border-radius:11px}@media screen and (min-width:40em){.author__desc{margin-left:1em}}.author__desc{font-size:.8em;position:relative;font-style:normal!important;color:#333;padding:0!important;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .author__desc{font-family:ElenaInitial}.wf-loaded-stage2 .author__desc{font-family:Elena}.author__desc p{margin:1em 0}.author__desc__title{color:#666;text-transform:uppercase;letter-spacing:2px;font-size:.9em;margin:0;font-weight:400;font-family:AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .author__desc__title{font-family:ElenaInitial}.wf-loaded-stage2 .author__desc__title{font-family:Elena}@media(max-width:40em){.author__desc{width:100%}}.l-author-bio{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}.l-author-bio-image{-ms-flex-preferred-size:178px;flex-basis:178px;-ms-flex-negative:0;flex-shrink:0;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0}.l-author-bio-content{-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;-ms-flex-negative:1;flex-shrink:1;-ms-flex-preferred-size:300px;flex-basis:300px}.feature-panel-container{grid-column-start:1;grid-column-end:15;margin-top:3.5em;margin-bottom:2.5em}@media(min-width:800px){.feature-panel-container{margin-top:5em}}.article{padding-top:calc(.5em + 3vw)}.c-garfield-the-cat .article__summary{position:initial}.article__summary{-ms-flex-item-align:center;align-self:center;font-size:1.15em;margin-top:0}.article__summary{line-height:1.55em;color:#666;font-style:italic;position:relative;padding-bottom:1.5em;border-bottom:3px solid #e5e5e5;margin-bottom:.5em}@media all and (max-width:420px){.article__content{margin-top:0}}.article__content [data-src],[data-src]{display:block;width:100%}.article__content [data-src]:not([data-component]){min-height:350px}.article__content{line-height:1.5;padding:0}.article__content a:not(.btn){color:#006fc6}.drop-caps+p::first-line{font-weight:700;font-variant:all-small-caps;text-transform:lowercase;letter-spacing:.5px;font-size:1.1em}.drop-caps{width:calc(96px + 1vw);height:calc(120px + 4vw);float:left;margin-right:1.5em;position:relative;left:calc(-1.3em - .5vw);top:.5vw}@media all and (min-width:500px){.drop-caps{width:150px;height:186px;min-width:100px;margin-left:0}}@media screen and (min-width:64em){.author__desc{margin-left:0}.drop-caps{display:none}}.drop-caps img{max-width:100%}.drop-caps img:nth-of-type(2){position:absolute;bottom:0;right:-40px;width:75%}@media all and (min-height:500px){body.articlepage{overflow:initial}}::-moz-range-track,::-ms-track{background-color:#3f91e5;width:100%}.form__field__label--extra{display:inline}@media(max-width:64em){a.back-to-top{opacity:.3}.form__field__label--extra{display:none}}.hidden{display:none}.article-header{margin:0 0 .5em}@media all and (max-width:1099px){.sponsors:not(.sponsors__lead):not(.sponsors-leaderboard):not(#sponsors-article-end):not(.sponsors__mobile){display:none}.article-header--title{margin-bottom:1em}}.article-header--meta{display:-webkit-box;display:-ms-flexbox;display:flex;list-style:none;padding:0;margin:0;margin:1em 0;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .article-header--meta{font-family:MijaInitial}.wf-loaded-stage2 .article-header--meta{font-family:Mija}.article-header--meta li{padding:0;margin:0;margin-right:0}.article-header--meta li::before{display:none}.article-header--meta li::after{content:'•';font-size:.8em;color:var(--THEME_COLOR,#d33a2c);display:inline-block;margin:0 .4em}.article-header--meta li:last-of-type::after{display:none}.article-header--date{color:#666;font-size:inherit;font-family:inherit}.article-header--meta-item{font-size:.9em;font-family:inherit;display:-webkit-box;display:-ms-flexbox;display:flex}.article-header--comments{font-size:.9em}.meta-box{background:#f6f6f6;padding:1em;margin:0 0 2em;list-style:none;width:100%;border-radius:11px;font-size:.8em;font-family:Calibri Bold,AvenirNext,Avenir,-apple-system,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Oxygen-Sans,Ubuntu,Cantarell,Georgia,serif}.wf-loaded-stage1 .meta-box{font-family:MijaInitial}.wf-loaded-stage2 .meta-box{font-family:Mija}.meta-box li,.meta-box--item{line-height:1.4;padding-left:calc(1em + .5em);background-size:auto 1em;background-repeat:no-repeat;background-position:0 0;margin-bottom:.5em}.meta-box li:last-child{margin-bottom:0}.meta-box--item:last-child{margin-bottom:0}.meta-box--tags{background-image:url(https://www.smashingmagazine.com/images/icons/tags.svg)}.meta-box--share{background-image:url(//res.cloudinary.com/indysigner/image/upload/v1530815949/bird_j6gn7w.svg)}.meta-box--published{background-image:url(https://www.smashingmagazine.com/images/icons/published.svg)}.article__content .meta-box{margin-bottom:2em}.meta-box a{text-shadow:3px 0 #f6f6f6,2px 0 #f6f6f6,1px 0 #f6f6f6,-1px 0 #f6f6f6,-2px 0 #f6f6f6,-3px 0 #f6f6f6}@media all and (max-width:640px){.enhanced .form__field--floating .form__field__label{font-size:.8em;padding:10px 0}.meta-box{margin-bottom:2em}}.promo-newsletter{position:relative;display:inline-block;background:#f6f6f6;padding:1.25em;margin-top:50%;padding-top:50%;width:100%;border-radius:11px}.promo-newsletter-image-wrapper{position:absolute;left:50%;top:0;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);width:80%}.promo-newsletter-image-link{position:relative;display:block;width:100%;padding-top:calc(100% * 1.25);background:0 0}.promo-newsletter-image{position:absolute;top:0;left:0;height:100%;width:100%;-o-object-fit:contain;object-fit:contain}.promo-newsletter-title{margin-top:20px;font-size:calc(1.25em + .5vw)}.promo-newsletter--article{grid-column-start:2;grid-column-end:14;margin:calc(((1.25/2) * 200px) - 1.5em) auto}@media screen and (max-width:1099px){.promo-newsletter--article{max-width:30em}}.promo-newsletter-description a{text-shadow:3px 0 #f6f6f6,2px 0 #f6f6f6,1px 0 #f6f6f6,-1px 0 #f6f6f6,-2px 0 #f6f6f6,-3px 0 #f6f6f6}.bio-image{--bio-image-border-color:var(--THEME_COLOR, #d33a2c);--bio-image-border-width:5px}.bio-image,.bio-image *,.bio-image :after,.bio-image :before{-webkit-box-sizing:border-box;box-sizing:border-box}.bio-image{padding:0;margin:0;display:block;position:relative}.bio-image::before{display:block;content:'';height:90%;width:160%;position:absolute;background-image:url(https://d33wubrfki0l68.cloudfront.net/10f9f40f8856e393ab4525a46bd8e60af9580324/0ab7a/images/shadow.png);background-size:100%;background-repeat:no-repeat;top:89%;left:-30%;right:0;-webkit-transform-origin:30% 50%;transform-origin:30% 50%}@media screen and (min-width:40em){.bio-image{display:-webkit-box;display:-ms-flexbox;display:flex}}@media screen and (min-width:64em){.bio-image{--bio-image-border-width:8px;display:block}}.bio-image-wrapper{background:var(--bio-image-background-color,var(--bio-image-border-color,var(--THEME_COLOR,#d33a2c)));border:solid var(--bio-image-border-width,8px) var(--bio-image-border-color,var(--THEME_COLOR,#d33a2c));border-radius:var(--bio-image-border-radius,22px);-webkit-transform:scale(.84) translateX(15%) rotateZ(calc(-1 * (11 * 1deg)));transform:scale(.84) translateX(15%) rotateZ(calc(-1 * (11 * 1deg)));-webkit-transform-origin:0 100%;transform-origin:0 100%;overflow:hidden}.bio-image-image{width:100%;-o-object-fit:cover;object-fit:cover;display:block;-webkit-transform:scale(1.2) rotateZ(calc(11 * 1deg));transform:scale(1.2) rotateZ(calc(11 * 1deg))}a.bio-image-link{background:0 0;text-shadow:none;color:inherit;padding:0;display:block;width:100%}.bio-image-image[data-src]{min-height:0!important;padding-top:100%}.clearfix:after,.clearfix:before{content:' ';display:table;clear:both}*,::after,::before{-webkit-box-sizing:border-box;box-sizing:border-box}.mbl{margin-bottom:20px!important}</style>
+  <link id="mainCSS" rel="stylesheet" media="print" href="https://d33wubrfki0l68.cloudfront.net/css/c358fe472782e0c1dfd78bca53271eedfacf038b/css/main.css">
+  <script>document.getElementById('mainCSS').media='all';</script>
+  <script>if(sessionStorage.foutFontsStage1Loaded&&sessionStorage.foutFontsStage2Loaded||('serviceWorker'in navigator&&navigator.serviceWorker.controller!==null&&navigator.serviceWorker.controller.state==='activated')){var docEl=document.documentElement;docEl.classList.add('wf-loaded-stage1');docEl.classList.add('wf-loaded-stage2');}
+if('serviceWorker'in navigator&&!localStorage.getItem('no_sw')){navigator.serviceWorker.register('/sw.js').then(function(reg){window.sw=reg
+window.caches.keys().then(function(cacheNames){cacheName=cacheNames.filter(function(cacheName){return cacheName.indexOf("smashing-mag")!==-1;})[0]
+caches.open(cacheName).then(function(cache){return cache.keys().then(function(requests){var urls=requests.filter(function(request){return request.url.match(/[0-9]{4}\/[0-9]{2}\/[^images].*\//);}).slice(0,5).map(function(request){return request.url;});return urls.sort();})}).then(function(cachedArticles){if(cachedArticles.length){var listItem=document.createElement('li')
+var innerList=cachedArticles.map(function(url){return '<li><a href="'+url+'">'+url+'</a></li>'}).join('')
+listItem.innerHTML="Recently viewed aritcles: <ul>"+innerList+"</ul>"
+var list=document.querySelector('.offline-articles-list')
+list&&list.appendChild(listItem)}})})}).catch(function(err){console.error('Failed to load service worker')});}
+if(!('querySelector')in document&&"addEventListener"in window&&"getComputedStyle"in window){window.document.documentElement.className+=" no-js";}
+window.document.documentElement.className+=" enhanced js";window.TablesawConfig={i18n:{swipePreviousColumn:'',swipeNextColumn:''}}</script>
+ </head>
+ <body class="no-js  articlepage">
+  <div data-handler="PreLoad" id="top"></div><a href="#main" class="skip-main">Skip to main content</a> <a href="#article__content" class="skip-main">Start reading the article</a> <a href="/articles" class="skip-main">Jump to list of all articles</a>
+  <header class="main-header block" data-handler="MenuButton">
+   <div class="container--header">
+    <div class="header__head" role="navigation">
+     <div class="logo">
+      <a href="/" title="← Back to the homepage">
+       <picture> 
+        <source media="(min-width: 1350px)" srcset="https://d33wubrfki0l68.cloudfront.net/81fa290218cedc39d32be7b1f1aba58a25829ebe/0a05f/images/logo--full.svg">
+        <img src="https://d33wubrfki0l68.cloudfront.net/3fbf6ef77e5e00aea7a22423087373169b52ae7e/413ff/images/logo/logo.svg" alt="Smashing Magazine">
+       </picture></a>
+     </div>
+     <div class="menu-button-and-menu">
+      <a href="#footer" class="menu-trigger" id="menu-button" aria-controls="main-nav" role="button" aria-expanded="false">
+       <svg tabindex="-1" viewbox="0 0 24 24" height=".85em" width=".85em" style="position:relative;margin-right:8px">
+        <title>Search</title><path fill="#fff" d="M23.33 20.1l-4.73-4.74a10.06 10.06.0 1 0-3.23 3.23l4.74 4.74a2.29 2.29.0 1 0 3.22-3.23zm-17.48-5.84a5.94 5.94.0 1 1 8.42.0 6 6 0 0 1-8.42.0z" />
+       </svg>Topics <script type="text/javascript">var menuButton=document.getElementById('menu-button');function makeLinksUnfocusable(links){links&&Array.from(links).forEach(function(link){link.setAttribute('tabindex','-1');});}
+function makeLinksFocusable(links){links&&Array.from(links).forEach(function(link){link.removeAttribute('tabindex');});}
+menuButton.addEventListener('click',function(){let expanded=this.getAttribute('aria-expanded')==='true'?true:false;if(expanded){makeLinksUnfocusable();}else{makeLinksFocusable();}
+this.setAttribute('aria-expanded',(!expanded).toString());});function menuButtonTextHandler(){var navigation=document.getElementById('main-nav');var navigationLinks=navigation.querySelectorAll('a');if(window.matchMedia("(min-width: 901px)").matches){menuButton.innerHTML='<svg viewBox="0 0 24 24" height=".85em" width=".85em" style="position: relative; margin-right: 8px;"><title>Search</title><path fill="#fff" d="M23.33 20.1l-4.73-4.74a10.06 10.06 0 1 0-3.23 3.23l4.74 4.74a2.29 2.29 0 1 0 3.22-3.23zm-17.48-5.84a5.94 5.94 0 1 1 8.42 0 6 6 0 0 1-8.42 0z"/></svg> Topics';makeLinksFocusable(navigationLinks);}
+else{menuButton.innerHTML='<svg viewBox="0 0 24 24" height=".85em" width=".85em" style="position: relative; margin-right: 8px;"><title>Search</title><path fill="#fff" d="M23.33 20.1l-4.73-4.74a10.06 10.06 0 1 0-3.23 3.23l4.74 4.74a2.29 2.29 0 1 0 3.22-3.23zm-17.48-5.84a5.94 5.94 0 1 1 8.42 0 6 6 0 0 1-8.42 0z"/></svg> Menu';makeLinksUnfocusable(navigationLinks);}}
+window.addEventListener('DOMContentLoaded',menuButtonTextHandler,false);window.addEventListener('resize',menuButtonTextHandler,false);</script></a>
+      <div class="main-nav__dropdown clearfix" id="menu">
+       <nav role="presentation" class="main-nav closed slideUp" id="main-nav">
+        <ul class="main-nav__list open" id="js-main-nav__list">
+         <li class="main-nav__item active"><a href="/articles/">
+           <figure role="presentation">
+            <span class="main-nav__icon"><img src="https://d33wubrfki0l68.cloudfront.net/2bc30327ebf529a249e825447d86f18546a1d6db/36b19/images/nav-icons/articles.svg" alt width="39" height="44"></span>
+            <figcaption role="presentation">
+             <h2 class="main-nav__item__title" role="presentation"><span>Articles <span class="sr-only">.</span></span></h2>
+             <p>Design &amp; development</p>
+            </figcaption>
+           </figure></a></li>
+         <li class="main-nav__item"><a href="/printed-books/">
+           <figure role="presentation">
+            <span class="main-nav__icon"><img src="https://d33wubrfki0l68.cloudfront.net/9b4ab044835dfde9adcfb5433a36be21a66cee4c/5b489/images/nav-icons/books.svg" alt width="39" height="44"></span>
+            <figcaption role="presentation">
+             <h2 class="main-nav__item__title" role="presentation"><span>Books <span class="sr-only">.</span></span></h2>
+             <p class="main-nav__figcaption">Physical &amp; digital books</p>
+            </figcaption>
+           </figure></a></li>
+         <li class="main-nav__item"><a href="/events/">
+           <figure role="presentation">
+            <span class="main-nav__icon"><img src="https://d33wubrfki0l68.cloudfront.net/5831a43ae2230e30a035539e7c2b831561d2d2fd/86bab/images/nav-icons/events.svg" alt width="39" height="44"></span>
+            <figcaption role="presentation">
+             <h2 class="main-nav__item__title" role="presentation"><span>Events <span class="sr-only">.</span></span></h2>
+             <p class="main-nav__item__figcaption">Conferences &amp; workshops</p>
+            </figcaption>
+           </figure></a></li>
+         <li class="main-nav__item"><a href="/jobs">
+           <figure role="presentation">
+            <span class="main-nav__icon"><img src="https://d33wubrfki0l68.cloudfront.net/0b5647613c9ac6cfb7358e2c12d2912daa78af4f/15c46/images/nav-icons/jobs.svg" alt width="39" height="44"></span>
+            <figcaption role="presentation">
+             <h2 class="main-nav__item__title" role="presentation"><span>Jobs <span class="sr-only">.</span></span></h2>
+             <p class="main-nav__item__figcaption">Find work &amp; employees</p>
+            </figcaption>
+           </figure></a></li>
+         <li class="main-nav__item"><a href="/membership">
+           <figure role="presentation">
+            <span class="main-nav__icon"><img src="https://d33wubrfki0l68.cloudfront.net/75778fbc97d23f2fca1610f78b2d7226b137fbfc/acdc3/images/nav-icons/membership.svg" alt width="39" height="44"></span>
+            <figcaption role="presentation">
+             <h2 class="main-nav__item__title" role="presentation"><span>Membership <span class="sr-only">.</span></span></h2>
+             <p class="main-nav__item__figcaption">Webinars &amp; early-birds</p>
+            </figcaption>
+           </figure></a></li>
+         <li class="main-nav__item"><a href="#topics" id="js-topics-fallback">Browse All Topics</a></li>
+        </ul>
+       </nav>
+      </div>
+     </div>
+     <div class="search-topics-dropdown container--header closed" id="header-dropdown">
+      <div class="header__search">
+       <form data-handler="Search" id="js-search-form" class="search-form" method="get" action="https://www.google.com/webhp?q=site:smashingmagazine.com">
+        <label for="js-search-input"></label>
+        <div class="search-input-wrapper">
+         <input type="search" name="q" id="js-search-input" autocomplete="off" placeholder="Search Smashing..." aria-label="Search Smashing"> 
+         <input type="hidden" name="sitesearch" value="smashingmagazine.com"> <a id="js-search-clear-button" class="search-clear-button" tabindex="-1" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.35 15.36" width="16" height="16" tabind="-1">
+           <title>Clear Search</title><path fill="#e33b2a" d="M8.38 11.41c-.5-.5-.78-.52-1.33.0l-3.05 3.08c-1.18 1.18-1.7 1.18-3-.16s-1.18-2-.18-3l3.18-3.19a.69.69.0 0 0-.07-1.14l-3-3c-1-1-1.13-1.81.0-3s1.9-1.21 3.13.0l2.94 3a.66.66.0 0 0 1.11.0c.63-.65 2.49-2.51 3.28-3.35a1.46 1.46.0 0 1 2.3-.15c.24.24.47.42.89.84.86.86.94 1.57.05 2.46l-3.27 3.26c-.36.34-.52.58-.16.94l3.27 3.27c1.1 1.1 1.23 1.7.05 2.88l-.58.58a1.59 1.59.0 0 1-2.46-.21z" />
+          </svg></a>
+        </div>
+        <input type="submit" name="submit" value="Search" class="btn" id="js-search-submit">
+       </form>
+       <div class="header__search-logo">
+        <a href="https://www.algolia.com/"><img src="https://d33wubrfki0l68.cloudfront.net/11a5e7690621ea3c342176fe395f8ab04e74b963/24691/images/search-by-algolia-white.svg" alt="Search powered by our good friends at Algolia"></a>
+       </div>
+      </div>
+      <div data-component="SearchResults" data-lite="true"></div>
+      <div class="header__topics" id="topics-list">
+       <h4 class="header__topics__title">Browse All Topics</h4>
+       <ul class="header__topics__list">
+        <li class="header__topics__item"><a href="/category/accessibility" tabindex="-1">Accessibility</a></li>
+        <li class="header__topics__item"><a href="/category/android" tabindex="-1">Android</a></li>
+        <li class="header__topics__item"><a href="/category/animation" tabindex="-1">Animation</a></li>
+        <li class="header__topics__item"><a href="/category/apps" tabindex="-1">Apps</a></li>
+        <li class="header__topics__item"><a href="/category/css" tabindex="-1">CSS</a></li>
+        <li class="header__topics__item"><a href="/category/design" tabindex="-1">Design</a></li>
+        <li class="header__topics__item"><a href="/category/design-patterns" tabindex="-1">Design Patterns</a></li>
+        <li class="header__topics__item"><a href="/category/design-systems" tabindex="-1">Design Systems</a></li>
+        <li class="header__topics__item"><a href="/category/e-commerce" tabindex="-1">E-Commerce</a></li>
+        <li class="header__topics__item"><a href="/category/freebies" tabindex="-1">Freebies</a></li>
+        <li class="header__topics__item"><a href="/category/graphics" tabindex="-1">Graphics</a></li>
+        <li class="header__topics__item"><a href="/category/html" tabindex="-1">HTML</a></li>
+        <li class="header__topics__item"><a href="/category/illustrator" tabindex="-1">Illustrator</a></li>
+        <li class="header__topics__item"><a href="/category/inspiration" tabindex="-1">Inspiration</a></li>
+        <li class="header__topics__item"><a href="/category/ios" tabindex="-1">iOS</a></li>
+        <li class="header__topics__item"><a href="/category/javascript" tabindex="-1">JavaScript</a></li>
+        <li class="header__topics__item"><a href="/category/mobile" tabindex="-1">Mobile</a></li>
+        <li class="header__topics__item"><a href="/category/pattern-libraries" tabindex="-1">Pattern Libraries</a></li>
+        <li class="header__topics__item"><a href="/category/performance" tabindex="-1">Performance</a></li>
+        <li class="header__topics__item"><a href="/category/photoshop" tabindex="-1">Photoshop</a></li>
+        <li class="header__topics__item"><a href="/category/plugins" tabindex="-1">Plugins</a></li>
+        <li class="header__topics__item"><a href="/category/react" tabindex="-1">React</a></li>
+        <li class="header__topics__item"><a href="/category/responsive-web-design" tabindex="-1">Responsive Web Design</a></li>
+        <li class="header__topics__item"><a href="/category/service-workers" tabindex="-1">Service Workers</a></li>
+        <li class="header__topics__item"><a href="/category/sketch" tabindex="-1">Sketch</a></li>
+        <li class="header__topics__item"><a href="/category/typography" tabindex="-1">Typography</a></li>
+        <li class="header__topics__item"><a href="/category/ui" tabindex="-1">UI</a></li>
+        <li class="header__topics__item"><a href="/category/usability" tabindex="-1">Usability</a></li>
+        <li class="header__topics__item"><a href="/category/user-experience" tabindex="-1">User Experience</a></li>
+        <li class="header__topics__item"><a href="/category/wallpapers" tabindex="-1">Wallpapers</a></li>
+        <li class="header__topics__item"><a href="/category/web-design" tabindex="-1">Web Design</a></li>
+        <li class="header__topics__item"><a href="/category/wordpress" tabindex="-1">WordPress</a></li>
+        <li class="header__topics__item"><a href="/category/workflow" tabindex="-1">Workflow</a></li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+  </header>
+  <main id="main" tabindex="-1">
+   <script id="gotell" type="application/json">{"created_at":"2016-11-08T21:12:40Z"}</script>
+   <article class="block article" role="main">
+    <div class="container article-container">
+     <div class="row">
+      <div class="col-12 article__content" id="article__content">
+       <div class="c-garfield-the-cat">
+        <div class="c-garfield-bio">
+         <div class="l-author-bio">
+          <div class="l-author-bio-image mbl">
+           <figure role="presentation" class="bio-image">
+            <a href="/author/rachel-andrew" class="bio-image-link">
+             <div class="bio-image-wrapper">
+              <div data-size="400" class="bio-image-image" data-src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/82c26edc-5500-42a6-87a9-62e84b998433/rachel-andrew-tw-profile.jpg" data-alt="Rachel Andrew"></div>
+             </div></a>
+           </figure>
+          </div>
+          <div class="l-author-bio-content author__desc" id="author__desc">
+           <h3 class="author__desc__title">About The Author</h3>
+           <p>Rachel Andrew is not only Editor in Chief of Smashing Magazine, but also a web developer, writer and speaker. She is the author of a number of books, including … <a href="/author/rachel-andrew" class="show-more-link">More about <span>Rachel Andrew </span>…</a></p>
+          </div>
+         </div>
+        </div>
+        <div class="c-garfield-header">
+         <header class="article-header">
+          <ul class="article-header--meta">
+           <li class="article-header--meta-item article-header--meta-item__date"><time class="article-header--date" datetime="2016-11-08">November 8, 2016</time></li>
+           <li class="article-header--meta-item"><span class="article-header--comments"><a href="#comments-css-grids-flexbox-box-alignment-new-layout-standard"><span data-component="CommentsCount" data-insert="true" data-thread="/2016/11/css-grids-flexbox-box-alignment-new-layout-standard/" data-article="articles/2016-11-08-css-grids-flexbox-box-alignment-new-layout-standard.md">Leave a comment</span></a></span></li>
+          </ul>
+          <h1 class="article-header--title">The New Layout Standard For The Web: CSS Grid, Flexbox And Box Alignment</h1>
+          <div data-component="EditButton" data-collection="articles" data-path="articles/2016-11-08-css-grids-flexbox-box-alignment-new-layout-standard.md"></div>
+         </header>
+        </div>
+        <div class="c-garfield-aside--meta">
+         <ul class="meta-box meta-box--article">
+          <li class="meta-box--item meta-box--published">22 min read</li>
+          <li class="meta-box--item meta-box--tags"><a href="/category/css">CSS</a>, <a href="/category/flexbox">Flexbox</a>, <a href="/category/css-grid">CSS Grid</a></li>
+          <li class="meta-box--item meta-box--share">
+           <section>
+            Share on <a href="https://TwItTeR.CoM/intent/tweet?text=The%20New%20Layout%20Standard%20For%20The%20Web%3a%20CSS%20Grid%2c%20Flexbox%20And%20Box%20Alignment&amp;url=https%3A%2F%2Fwww.smashingmagazine.com%2f2016%2f11%2fcss-grids-flexbox-box-alignment-new-layout-standard%2f&amp;via=smashingmag">Twitter</a> or&nbsp;<a href="https://cats.smashing.services/ball?uri=//www.linkedin.com/shareArticle?url=https://www.smashingmagazine.com%2f2016%2f11%2fcss-grids-flexbox-box-alignment-new-layout-standard%2f&amp;title=The%20New%20Layout%20Standard%20For%20The%20Web%3a%20CSS%20Grid%2c%20Flexbox%20And%20Box%20Alignment">LinkedIn</a>
+           </section></li>
+         </ul>
+        </div>
+        <div class="c-garfield-aside--newsletter">
+         <div class="c-promo-box c-promo-box--newsletter">
+          <div class="promo-newsletter--article">
+           <div class="promo-newsletter">
+            <div class="promo-newsletter-image-wrapper">
+             <a href="/the-smashing-newsletter/" class="promo-newsletter-image-link"><img src="https://d33wubrfki0l68.cloudfront.net/1dbc465f56f3a812f09666f522fa226efd947cfa/a4d9f/images/smashing-cat/newsletter-fish-cat.svg" width="224" height="290" loading="lazy" class="promo-newsletter-image" alt="A postcat. Sign up for our Smashing Newsletter."></a>
+            </div>
+            <h2 class="h2 promo-newsletter-title">Smashing Newsletter</h2>
+            <p class="promo-newsletter-description">Upgrade your inbox and get our editors’ picks 2× a month — delivered right into your inbox. <a href="https://www.smashingmagazine.com/the-smashing-newsletter/">Earlier issues.</a></p>
+            <div class="promo-newsletter-form-wrapper">
+             <div class="nl__form-wrapper">
+              <form method="post" action="//smashingmagazine.us1.list-manage.com/subscribe/post?u=16b832d9ad4b28edf261f34df&amp;id=a1666656e0" class="nl__form">
+               <div class="input-wrapper">
+                <label for="email" class="form__field js-form-field form__field--floating nl__form__content"><span class="form__field__label">Your <span class="form__field__label--extra">(smashing)</span> email</span> <input autocomplete="off" class="form__field__input" type="email" pattern="(.+)@(.+){2,}\.(.+){2,}" name="EMAIL" id="email" required></label> <button data-event-category="Button" data-event-action="click" data-event-label="Newsletter Box" type="submit" class="btn btn--medium  btn--green btn--promo-newsletter   ladda-button ladda-button--fixed" data-style="expand-right" onclick="this.form&amp;&amp;this.form.submit()" value="Submit"> <span class="ladda-label">Subscribe <span class="nl__form__arrow">→</span> <wbr></span><span class="ladda-spinner"></span></button>
+               </div>
+              </form>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="c-garfield-native-panel">
+         <div class="c-promo-box c-promo-box--ad sponsors sponsors__native" data-audience="non-subscriber" data-remove="true" data-rendered="true">
+          <ul class="bnnr-list"></ul>
+         </div>
+        </div>
+        <div class="c-garfield-native-panel c-garfield-native-panel__below">
+         <div class="c-promo-box c-promo-box--ad sponsors sponsors__native" data-audience="non-subscriber" data-remove="true" data-rendered="true">
+          <ul class="bnnr-list"></ul>
+         </div>
+        </div>
+        <div class="c-garfield-summary">
+         <section aria-label="quick summary" class="article__summary">
+          Editor’s note: Please note that this article is quite lengthy, and contains dozens of CodePen embeds for an interactive view. The page might take a little while to load, so please be patient. This article explains how Flexbox and CSS Grid fit together, and how we can build resilient and flexible layouts today while providing a decent fallback for older browsers.
+         </section>
+        </div>
+        <div class="drop-caps" aria-hidden="true">
+         <img src="https://d33wubrfki0l68.cloudfront.net/73ae9a5f3947dc0730d42afa48120e36f5c13df0/0b5f8/images/drop-caps/l.svg" alt> 
+         <img src="https://d33wubrfki0l68.cloudfront.net/7a5300157f0903533585a464a32d8d4acbe6ecba/9a85d/images/drop-caps/character-9.svg" alt>
+        </div>
+        <p><strong>Layout on the web is hard.</strong> The reason it is so hard is that the layout methods we’ve relied on ever since using CSS for layout became possible were not really designed for complex layout. While we were able to achieve quite a lot in a fixed-width world with hacks such as faux columns, these methods fell apart with responsive design.</p>
+        <figure>
+         <img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6ef3d417-c5db-43dd-a988-b2713ce17ee6/01-susy-grid-opt.jpg" alt="01-susy-grid-opt" width="923" height="662" alt="css grid" title="CSS Grid – Flexbox And Box Alignment For Web Layout" class="alignnone size-full wp-image-222550">
+        </figure>
+        <p>Thankfully, we have hope, in the form of flexbox — which many readers will already be using — CSS Grid Layout and the box alignment module.</p>
+        <p>In this article, I’m going to explain how these fit together, and you’ll discover that by understanding flexbox you are very close to understanding much of grid layout.</p>
+        <p></p>
+        <h3 id="new-values-for-display">New Values For Display</h3>
+        <p>Both <code>grid</code> and <code>flexbox</code> are new values for the <code>display</code> property. To make an element a flex container, we use <code>display: flex</code>; to make it a grid container, we use <code>display: grid</code>.</p>
+        <div data-component="FeaturePanel" data-audience="non-subscriber" data-remove="true" class="feature-panel-container hidden"></div>
+        <p>As soon as we do so, the immediate children of our flex or grid container become flex or grid items. Those immediate children take on the initial values of flex or grid items.</p>
+        <p></p>
+        <h4 id="display-flex">display: flex</h4>
+        <p>In the first example, we have three elements in a wrapper element set to <code>display: flex</code>. That’s all we need to do to start using flexbox.</p>
+        <p>Unless we add the following properties with different values, the initial values for the flex container are:</p>
+        <ul>
+         <li><code>flex-direction: row</code></li>
+         <li><code>flex-wrap: no-wrap</code></li>
+         <li><code>align-items: stretch</code></li>
+         <li><code>justify-content: flex-start</code></li>
+        </ul>
+        <p>The initial values for our flex items are:</p>
+        <ul>
+         <li><code>flex-grow: 0</code></li>
+         <li><code>flex-shrink: 1</code></li>
+         <li><code>flex-basis: auto</code></li>
+        </ul>
+        <p>We’ll look at how these properties and values work later in this article. For now, all you need to do is set <code>display: flex</code> on a parent, and flexbox will begin to work.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="ZOpOqB" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/ZOpOqB/">Flexbox defaults</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/ZOpOqB/">Flexbox defaults</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <h4 id="display-grid">display: grid</h4>
+        <p>To lay out items on a grid, we use <code>display: grid</code>. In order that we can see the grid’s behavior, this example has five cards to lay out.</p>
+        <p>Adding <code>display: grid</code> won’t make a dramatic change; however, our child items are all now grid items. They have fallen into a single-column track grid, displaying one below the other, the grid creating implicit row tracks to hold each item.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="QEKGNm" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/QEKGNm/">Grid defaults</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/QEKGNm/">Grid defaults</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>We can take our grid a step further and make it more grid-like by creating some columns. We use the <code>grid-template-rows</code> property to do this.</p>
+        <p>In this next example, I’ve created three equal-width column tracks using a new unit that has been created for <code>grid</code>. The <code>fr</code> unit is a fraction unit signifying the fraction of available space this column should take up. You can see how our grid items have immediately laid themselves out on the grid, one in each created cell of our explicitly defined columns. The grid is still creating <em>implicit</em> rows; as we fill up the available cells created by our columns, new rows are created to hold more items.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="LZRbRV" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/LZRbRV/">Grid columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/LZRbRV/">Grid columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>Once again, we have some default behavior in evidence. We haven’t positioned any of these grid items, but they are placing themselves onto our grid, one per cell of the grid. The initial values of the grid container are:</p>
+        <ul>
+         <li><code>grid-auto-flow: row</code></li>
+         <li><code>grid-auto-rows: auto</code></li>
+         <li><code>align-items: stretch</code></li>
+         <li><code>justify-items: stretch</code></li>
+         <li><code>grid-gap: 0</code></li>
+        </ul>
+        <p>These initial values mean that our grid items are placed one into each cell of the grid, working across the rows. Because we have a three-column track grid, after filling the grid cell of the third column, a new row is created for the rest of the items. This row is auto-sized, so will expand to fit the content. Items stretch in both directions, horizontal and vertical, filling the grid area.</p>
+        <p></p>
+        <h3 id="box-alignment">Box Alignment</h3>
+        <p>In both of these simple examples, we are already seeing values defined in the box alignment module in use. “Box Alignment Module Level 3” essentially takes all of the alignment and space distribution defined in flexbox and makes it available to other modules. So, if you already use flexbox, then you are already using box alignment.</p>
+        <p>Let’s look at how box alignment works in flexbox and grid, and the problems that it helps us solve.</p>
+        <p></p>
+        <h4 id="equal-height-columns">Equal-Height Columns</h4>
+        <p>Something that was very easy to create with old-school table-based layouts, yet fiendishly difficult using positioning and floats, is equal-height columns. In the floated example below, our cards contain unequal amounts of content. We have no way of indicating to the other cards that they should visually take on the same height as the first card — they have no relationship to each other.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="YWGrPy" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/YWGrPy/">Floated columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/YWGrPy/">Floated columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>As soon as we set the <code>display</code> property to <code>grid</code> or <code>flex</code> on a parent, we give the children a relationship to each other. That relationship enables the box-alignment properties to work, making equal-height columns simple.</p>
+        <p>In the flex example below, our items have unequal amounts of content. While the background on each lines up, it doesn’t sit behind the content as it would for floated elements. Because these items are displayed in a row, the property that controls this behavior is <code>align-items</code>. Creating equal-height columns requires that the value be <code>stretch</code> — the initial value for this property.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="ZOpXEM" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/ZOpXEM/">Flexbox equal-height columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/ZOpXEM/">Flexbox equal-height columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>We see the same with grid layouts. Below is the simplest of grid layouts, two columns with a sidebar and main content. I’m using those fraction units again; the sidebar has 1 fraction of the available space, and the main content 3 fractions. The background color on the sidebar runs to the bottom of the content. Once again, the default value of <code>align-items</code> is <code>stretch</code>.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="GqjMJj" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/GqjMJj/">Grid equal-height columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/GqjMJj/">Grid equal-height columns</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <h4 id="alignment-in-flexbox">Alignment in Flexbox</h4>
+        <p>We’ve seen how the default value of <code>align-items</code> for both <code>grid</code> and <code>flexbox</code> is <code>stretch</code>.</p>
+        <p>For flexbox, when we use <code>align-items</code>, we are aligning them inside the flex container, on the cross axis. The main axis is the one defined by the <code>flex-direction</code> property. In this first example, the main axis is the row; we are then stretching the items on the cross axis to the height of the flex container. The height of the flex container is, in this case, determined by the item with the most content.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/93877106-6b52-4d83-a395-6a04fd6af1dd/01-flex-row-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/ddb7096e-5e8a-4db3-a079-5feff041fe38/01-flex-row-preview-650px-opt.png" alt="01-flex-row-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/93877106-6b52-4d83-a395-6a04fd6af1dd/01-flex-row-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>I could give the wrapper a height, and in this case the height of the flex container would be defined by that height.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/f987ed76-88ae-4b73-a9ab-4ccbe2e9fef9/02-flex-row-height-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/b90748e0-65e1-40ad-81bf-579825da405c/02-flex-row-height-preview-650px-opt.png" alt="02-flex-row-height-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/f987ed76-88ae-4b73-a9ab-4ccbe2e9fef9/02-flex-row-height-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>We can use other values, instead of the default <code>stretch</code>:</p>
+        <ul>
+         <li><code>flex-start</code></li>
+         <li><code>flex-end</code></li>
+         <li><code>baseline</code></li>
+         <li><code>stretch</code></li>
+        </ul>
+        <p>To control the alignment on the main axis, use the <code>justify-content</code> property. The default value is <code>flex-start</code>, which is why our items are all aligned against the left margin. We could instead use any of the following values:</p>
+        <ul>
+         <li><code>flex-start</code></li>
+         <li><code>flex-end</code></li>
+         <li><code>center</code></li>
+         <li><code>space-around</code></li>
+         <li><code>space-between</code></li>
+        </ul>
+        <p>The <code>space-between</code> and <code>space-around</code> keywords are especially interesting. With <code>space-between</code>, the space left over after the flex items have been displayed is distributed evenly between the items.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6b52bdd9-1abd-4908-8077-95c7757f8da8/03-flex-space-between-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/0dbe3c19-0ee6-4f53-afd6-da2b5e3ec8a5/03-flex-space-between-preview-650px-opt.png" alt="03-flex-space-between-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6b52bdd9-1abd-4908-8077-95c7757f8da8/03-flex-space-between-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>Using <code>space-around</code> is similar except that the space left over is distributed on both sides of the items. You get a half-sized gap on each end.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/af341f9b-e1cb-4a19-ad57-002960f7d578/04-flex-space-around-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/1089f9b8-b099-49d3-955f-771403c2c5b2/04-flex-space-around-preview-650px-opt.png" alt="04-flex-space-around-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/af341f9b-e1cb-4a19-ad57-002960f7d578/04-flex-space-around-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>You can see these properties and values in the CodePen below.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="8287" data-slug-hash data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/32a53959ea2287ba69c130ff9872790b/">Flexbox align and justify on a row</a> by Rachel (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/32a53959ea2287ba69c130ff9872790b/">Flexbox align and justify on a row</a> by Rachel (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="PzGJzm" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/PzGJzm/">Flexbox alignment flex-direction: row</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/PzGJzm/">Flexbox alignment flex-direction: row</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>We can display flex items as a column rather than a row. If we change the value of <code>flex-direction</code> to <code>column</code>, then the main axis becomes the column, and the cross axis is along the row — <code>align-items</code> is still <code>stretch</code> by default, and so stretches the items across row-wise.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/a57ed32f-36ea-440d-abd1-893ac27dc9dd/05-flex-column-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e1c884e9-2ced-4030-bc2e-9c3b42061e34/05-flex-column-preview-650px-opt.png" alt="05-flex-column-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/a57ed32f-36ea-440d-abd1-893ac27dc9dd/05-flex-column-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>If instead we want them to align to the start of the flex container, we use <code>flex-start</code>.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/1a7c0741-a6b2-4de1-a8a9-86c02c53b91c/06-flex-column-start-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/0dcad186-36f7-4681-94b9-443e2f907c75/06-flex-column-start-preview-650px-opt.png" alt="06-flex-column-start-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/1a7c0741-a6b2-4de1-a8a9-86c02c53b91c/06-flex-column-start-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>We can use <code>justify-items</code>, too, including <code>space-between</code> and <code>space-around</code>. The container needs to have enough height for you to see each in action, though!</p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/bad794ea-7deb-47ae-9cd9-2a5894508c93/07-flex-column-space-between-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/a09ee44b-8d46-4253-be0c-3113bb8ce764/07-flex-column-space-between-preview-650px-opt.png" alt="07-flex-column-space-between-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/bad794ea-7deb-47ae-9cd9-2a5894508c93/07-flex-column-space-between-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="JKRrvY" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/JKRrvY/">Flexbox alignment flex-direction: column</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/JKRrvY/">Flexbox alignment flex-direction: column</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <h4 id="alignment-in-grid-layout">Alignment in Grid Layout</h4>
+        <p>In a grid layout, the behavior is similar, except that we are aligning items within the defined grid area. In flexbox, we talk about the main and cross axis; with grids, we use the terms “block” or “column axis” to describe the axis defining our columns, and “inline” or “row axis” to describe the axis defining our rows.</p>
+        <p>We can align content inside a grid area using the properties and values described in the box alignment specification.</p>
+        <p>A grid area is one or more grid cells. In the example below, we have a four-column and four-row track grid. The tracks are separated by a grid gap of 10 pixels, and I have created three grid areas using line-based positioning. We’ll look at this positioning properly later in this guide, but the value before the <code>/</code> is the line that the content starts on, and the value after where it ends.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="EygpMv" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/EygpMv/">Grid alignment: align-items and justify-items</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/EygpMv/">Grid alignment: align-items and justify-items</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>The dotted border is on a background image, to help us see the defined areas. So, in the first example, each area uses the defaults of <code>stretch</code> for both <code>align-items</code> on the column axis and <code>justify-items</code> on the row axis. This means that the content stretches to completely fill the defined area.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/0a1a6d57-525e-40bf-8248-b59fa7485926/08-grid-default-align-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/d324a09c-179e-43c6-83fa-a1a1ac17c25a/08-grid-default-align-preview-650px-opt.png" alt="08-grid-default-align-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/0a1a6d57-525e-40bf-8248-b59fa7485926/08-grid-default-align-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>In the second example, I have changed the value of <code>align-items</code> on the grid container to <code>center</code>. We can also change this value on an individual grid item using the <code>align-self</code> property. In this case, I have set all items to <code>center</code>, but item two to <code>stretch</code>.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/ab746eb9-e569-4286-b59a-9fc95b0938d2/09-grid-align-items-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/7a18cd5d-5c17-48d7-af02-4ec92512744f/09-grid-align-items-preview-650px-opt.png" alt="09-grid-align-items-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/ab746eb9-e569-4286-b59a-9fc95b0938d2/09-grid-align-items-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>In the third example, I have changed the value of <code>justify-items</code> and <code>justify-self</code> again, setting these to <code>center</code> and <code>stretch</code>.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/75f7d0c0-3777-4f1d-8765-1e9e6cac9394/10-grid-justify-items-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/0b4a07d5-fb2d-43eb-9fe3-e758ace13ffa/10-grid-justify-items-preview-650px-opt.png" alt="10-grid-justify-items-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/75f7d0c0-3777-4f1d-8765-1e9e6cac9394/10-grid-justify-items-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>In all of the examples above, I have aligned the content of the grid areas, the areas defined by the start and end grid lines.</p>
+        <p>We can also align the entire grid inside the container, if our grid tracks are sized so that they take up less space than the container that has been set to <code>display: grid</code>. In this case, we use the <code>align-content</code> and <code>justify-content</code> properties, as with flexbox.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="aZBozX" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/aZBozX/">Grid alignment: aligning the grid</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/aZBozX/">Grid alignment: aligning the grid</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>In the first example, we see the default alignment of a grid where the columns and rows have been defined in absolute units and take up less space than the fixed-sized wrapper allows for. The default values for both are <code>start</code>.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e92f32c4-0b80-4180-a163-86cff57407a4/11-grid-align-start-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/f64b35ee-360b-4bd5-ad4b-1e5a3219da15/11-grid-align-start-preview-650px-opt.png" alt="11-grid-align-start-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e92f32c4-0b80-4180-a163-86cff57407a4/11-grid-align-start-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>To move the tracks to the bottom right, we change the values to <code>end</code>.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/b7cf15d6-154d-4014-8c87-aabe157b4329/12-grid-align-end-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/ad8460a1-b3ed-4f59-a8d2-de11e352006c/12-grid-align-end-preview-650px-opt.png" alt="12-grid-align-end-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/b7cf15d6-154d-4014-8c87-aabe157b4329/12-grid-align-end-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>Just as with flexbox, we can use <code>space-around</code> and <code>space-between</code>. This might cause some behavior that we don’t want as the grid gaps essentially become wider. However, as you can see from the image below and in the third example in the CodePen, we get the same space between or around the tracks as we see with flexbox.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/468525a7-63b2-4e9c-a6ca-059cca50a42a/13-grid-align-space-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/52a1692e-df2f-41c8-84b5-8cb15704c231/13-grid-align-space-preview-650px-opt.png" alt="13-grid-align-space-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/468525a7-63b2-4e9c-a6ca-059cca50a42a/13-grid-align-space-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>The fixed-sized tracks will gain additional space if they span more than one track. Element two and four in our example are wider and three is taller because they are given the extra space assigned to the gap they span over.</p>
+        <p>We can completely center the grid by setting both values to <code>center</code>, as shown in the last example.</p>
+        <p></p>
+        <figure>
+         <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/4b7be767-aa1d-4657-bfcf-518e52a65123/14-grid-align-center-opt.png"><img src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/9dea112c-8821-4360-be7a-2712e0f7622d/14-grid-align-center-preview-650px-opt.png" alt="14-grid-align-center-preview-650px-opt" width="6520"></a>
+         <figcaption>
+          (<a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/4b7be767-aa1d-4657-bfcf-518e52a65123/14-grid-align-center-opt.png">View large version</a>)
+         </figcaption>
+        </figure>
+        <p>We have very nice alignment abilities in both flexbox and grid, and they work in a generally consistent way. We can align individual items and groups of items in a way that is responsive and prevents overlap — something the web has lacked until now!</p>
+        <h3 id="responsive-by-default">Responsive By Default</h3>
+        <p>In the last section, we looked at alignment. The box-alignment properties as used in grid and flexbox layouts are one area where we see how these specifications have emerged in a world where responsive design is just how things are done. Values such as <code>space-between</code>, <code>space-around</code> and <code>stretch</code> allow for responsiveness, distributing content equally among or between items.</p>
+        <p>There is more, however. Responsive design is often about maintaining proportion. When we calculate columns for a responsive design using the <code>target ÷ context</code> approach, we maintain the proportions of the original absolute-width design. Flexbox and grid layouts give us far simpler ways to deal with proportions in our designs.</p>
+        <p>Flexbox gives us a <strong>content-out</strong> approach to flexibility. We see this when we use a keyword value of <code>space-between</code> to space our items evenly. First, the amount of space taken up by our items is calculated, and then the remaining space in the container is divided up and used evenly to space out the items. We can get more control of content distribution by way of properties that we apply to the flex items themselves:</p>
+        <ul>
+         <li><code>flex-grow</code></li>
+         <li><code>flex-shrink</code></li>
+         <li><code>flex-basis</code></li>
+        </ul>
+        <p>These three properties are more usually described by the shorthand <code>flex</code> property. If we add <code>flex: 1 1 300px</code> to an item, we are stating that <code>flex-grow</code> should be <code>1</code> so that items can grow, <code>flex-shrink</code> should be <code>1</code> so that items can shrink, and the <code>flex-basis</code> should be 300 pixels. Applying this to our cards layout gives us the example below.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="gMLrEG" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/gMLrEG/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/gMLrEG/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>Our <code>flex-basis</code> here is 300 pixels, and we have three cards in a row. If the flex container is wider than 900 pixels, then the remaining space is divided into three and distributed between the items equally. This is because we have set <code>flex-grow</code> to <code>1</code> so that our items can grow from the <code>flex-basis</code>. We have also set <code>flex-shrink</code> to <code>1</code>, which means that, where we don’t have space for three 300-pixel columns, space will be removed equally.</p>
+        <p>If we want these items to grow in different proportions, then we can change the <code>flex-grow</code> value on one or more items. If we would like the first item to get three times the available space distributed to it, we would set <code>flex-grow</code> to <code>3</code>.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="NrbNmz" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/NrbNmz/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/NrbNmz/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>The available space is distributed <em>after</em> the amount needed for <code>flex-basis</code> has been taken into account. This is why our first item is not three times the size of our other items, but instead gets a share of three parts of the remaining space. You will see a bigger change by setting the value for <code>flex-basis</code> to <code>0</code>, in which case we wouldn’t have a starting value to remove from the overall container. Then, the entire width of the container could be distributed in proportion to our items.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="jrVqoQ" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/jrVqoQ/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/jrVqoQ/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>A very useful tool to help you understand these values is <a href="https://madebymike.com.au/demos/flexbox-tester/">Flexbox Tester</a>. Pop the different values into the tester, and it calculates the actual sizes at which your items will end up, and explains why they end up at that size.</p>
+        <p>If you use <code>auto</code> as your <code>flex-basis</code> value, it will use any size set on the flex item as the <code>flex-basis</code> value. If there is no size, then it defaults to be the same as the value of <code>content</code>, which is the content’s width. Using <code>auto</code> is, therefore, very useful for reusable components that might need to have a set size on an item. You can use <code>auto</code> and be sure that if the item needs to be around a size defined on it, flexbox will respect it.</p>
+        <p>In the next example, I have set the <code>flex-basis</code> on all cards to <code>auto</code>. I then gave the first card a width of 350 pixels. So, the <code>flex-basis</code> of that first card is now 350 pixels, which is used to work out how to distribute space. The other two cards have a <code>flex-basis</code> based on their content’s width.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="mEOPZM" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/mEOPZM/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/mEOPZM/">Flexbox: flex properties</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>If we go back to our original <code>flex: 1 1 300px</code>, add more items to our example and set <code>flex-wrap: wrap</code> on the container, the items will wrap in order to maintain as near as possible the <code>flex-basis</code> value. If we have five images and three fit onto one row, then the next two will wrap onto a new row. As the items are allowed to grow, they both grow equally, and so we get two equal-sized items on the bottom row and three in the row above.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="QEGNeZ" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/QEGNeZ/">Flexbox: wrapping</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/QEGNeZ/">Flexbox: wrapping</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>The question then asked is often, “How can I get the items on the bottom row to line up with the ones on the top, leaving a gap at the end?” The answer is that you don’t, not with flexbox. For that kind of behavior you need a grid layout.</p>
+        <p></p>
+        <h4 id="keeping-things-in-proportion-with-grid-layout">Keeping Things in Proportion With Grid Layout</h4>
+        <p>Grid layouts, as we have already seen, have a concept of creating column and row <strong>tracks</strong> into which items can be positioned. When we create a flexible grid layout, we set the proportions when defining the tracks on the grid container — rather than on the items, as with flexbox. We encountered the <code>fr</code> unit when we created our grids earlier. This unit works in a similar way to <code>flex-grow</code> when you have a <code>flex-basis</code> of <code>0</code>. It assigns a fraction of the available space in the grid container.</p>
+        <p>In this code example, the first column track has been given <code>2fr</code>, the other two <code>1fr</code>. So, we divide the space into four and assign two parts to the first track and one part each to the remaining two.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="xOROVO" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/xOROVO/">Simple grid showing fraction units</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/xOROVO/">Simple grid showing fraction units</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>Mixing absolute units and <code>fr</code> units is valid. In this next example, we have a <code>2fr</code> track, a <code>1fr</code> track and a 300-pixel track. First, the absolute width is taken away, and then the remaining space is divided into three and assigned three parts to track 1 and one part to track 2.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="rLWLLa" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/rLWLLa/">Grid: Mixing absolute and fraction units</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/rLWLLa/">Grid: Mixing absolute and fraction units</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>What you can also see from this example is that our items fit into the defined tracks — they don’t distribute across the row, as they do in the flexbox example. This is because, with grid layouts, we are creating a two-dimensional layout, then putting items into it. With flexbox, we get our content and work out how much will fit in a single dimension in a row or column, treating additional rows or columns as entirely new flex containers.</p>
+        <p>What would be nice, however, is to still have a way to create <strong>as many columns of a certain size as will fit into the container</strong>. We can do this with <code>grid</code> and the <code>repeat</code> syntax.</p>
+        <p>In the next example, I will use the <code>repeat</code> syntax to create as many 200-pixel columns as will fit in our container. I am using the <code>repeat</code> syntax for the track listing, with a keyword value of <code>auto-fill</code> and then the size that I want the repeated tracks to be.</p>
+        <p>(At the time of writing, this was not implemented in Chrome, but works in Firefox Developer Edition.)</p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="Pzbzze" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/Pzbzze/">Grid: As many 200-pixel tracks as will fit</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/Pzbzze/">Grid: As many 200-pixel tracks as will fit</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>We can go a step further than that and combine fraction units and an absolute width to tell the grid to create as many 200-pixel tracks as will fit in the container and to distribute the remainder equally.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="EyNyNK" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/EyNyNK/">Grid: As many 200-pixel tracks as will fit, distributing remaining space evenly</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/EyNyNK/">Grid: As many 200-pixel tracks as will fit, distributing remaining space evenly</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>In this way, we get the benefits of a two-dimensional layout but still have flexible quantities of tracks — all without using any media queries. What we also see here is the grid and flexbox specifications diverging. Where flexbox ends with distributing items in one dimension, grid is just getting started.</p>
+        <p></p>
+        <h4 id="a-separation-of-source-order-and-visual-display">A Separation of Source Order and Visual Display</h4>
+        <p>With flexbox, we can’t do a lot in terms of positioning our flex items. We can choose the direction in which they flow, by setting <code>flex-direction</code> to <code>row</code>, <code>row-reverse</code> or <code>column</code>, <code>column-reverse</code>, and we can set an order, which controls the visual order in which the items display.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="YWpWVE" data-user="rachelandrew" data-default-tab="result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/YWpWVE/">Flexbox: order</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/YWpWVE/">Flexbox: order</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>With grid layouts, we get to properly position child items onto the grid we have defined. In most of the examples above, we have been relying on grid auto-placement, the rules that define how items we have not positioned are laid out. In the example below, I am using line-based positioning to position the items on the grid.</p>
+        <p>The <code>grid-column</code> and <code>grid-row</code> properties are a shorthand for <code>grid-column-start</code>, <code>grid-row-start</code>, <code>grid-column-end</code> and <code>grid-row-end</code>. The value before the <code>/</code> is the line that the content starts on, while the value after is the line it ends on.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="rLWLwO" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/rLWLwO/">Grid: line-based positioning</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/rLWLwO/">Grid: line-based positioning</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>You can also name your lines. This happens when you create your grid on the grid container. Name the lines in brackets, and then position the items as before but using the names instead of the line index.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="aZBZEB" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/aZBZEB/">Grid: line-based positioning, named lines</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/aZBZEB/">Grid: line-based positioning, named lines</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>You can have multiple lines with the same name, and then target them by line name and index.</p>
+        <p></p>
+        <figure></figure>
+        <p>You can use a <code>span</code> keyword, spanning a number of lines or, for example, to the third line named <code>col</code>. This type of positioning is useful for creating components that sit in various places in the layout. In the example below, I want some elements to span six column tracks and others to span three. I am using auto-placement to lay out the items, but when the grid encounters an item with a class of <code>wide</code>, the start value will be <code>auto</code> and the end value will be <code>span 2</code>; so, it will start on the line it would normally start on based on the auto-placement rules, but span two lines.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="LZbZdj" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/LZbZdj/">Grid: multiple lines with the same name</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/LZbZdj/">Grid: multiple lines with the same name</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>Using auto-placement with some rules in this way will likely leave some gaps in our grid as the grid encounters items that need two tracks and has space for only one. By default, the grid progresses forward; so, once it leaves a gap, it doesn’t go back to place things in it — unless we set <code>grid-auto-flow</code> to a value of <code>dense</code>, in which case, the grid will actually backfill the gaps left, taking the content out of DOM order.</p>
+        <p></p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="beBeKJ" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/beBeKJ/">Grid: grid-auto-flow: dense</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/beBeKJ/">Grid: grid-auto-flow: dense</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>There is also a whole different method of positioning items using the grid layout — by creating a visual representation of our layout right in the value of the <code>grid-template-areas</code> property. To do this, you first need to name each direct child of the grid container that you want to position.</p>
+        <p>We then lay the items out in this ASCII art manner as the value of <code>grid-template-areas</code>. If you wanted to entirely redefine the layout based on media queries, you could do so just by changing the value of this one property!</p>
+        <figure>
+         <figure>
+          <p data-height="500" data-theme-id="0" data-slug-hash="oLYLMo" data-user="rachelandrew" data-default-tab="html,result" class="codepen">See the Pen <a href="http://codepen.io/rachelandrew/pen/oLYLMo/">Grid: template areas</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+          <figcaption>
+           See the Pen <a href="http://codepen.io/rachelandrew/pen/oLYLMo/">Grid: template areas</a> by rachelandrew (<a href="http://codepen.io/rachelandrew">@rachelandrew</a>) on <a href="http://codepen.io">CodePen</a>.
+          </figcaption>
+         </figure>
+        </figure>
+        <p>As you can see from the example, to leave a cell empty, we use a full stop or a series of full stops with no white space between them. To cause an element to span a number of tracks, we repeat the name.</p>
+        <p></p>
+        <h4 id="accessibility-implications-of-reordering">Accessibility Implications of Reordering</h4>
+        <p>For flexbox and even more so for grid layouts, we need to take great care when using these methods to reorder content. The specification for flexbox states:</p>
+        <blockquote>
+         <p>Authors must use order only for visual, not logical, reordering of content. Style sheets that use order to perform logical reordering are non-conforming.</p>
+        </blockquote>
+        <p>For grids, we are warned:</p>
+        <blockquote>
+         <p>Grid layout gives authors great powers of rearrangement over the document. However, these are not a substitute for correct ordering of the document source. The order property and grid placement do not affect ordering in non-visual media (such as speech). Likewise, rearranging grid items visually does not affect the default traversal order of sequential navigation modes (such as cycling through links).</p>
+        </blockquote>
+        <p>In both cases, as currently defined, the reordering is only visual. It does not change the logical order of the document. In addition, we need to take great care in considering sighted keyboard users. It would be incredibly simple to cause someone tabbing through the document to tab along the navigation at the top and then suddenly be taken to the bottom of the document due to a grid item that appears early in the source being positioned there.</p>
+        <p></p>
+        <h3 id="a-new-system-for-css-grid-layout">A New System For CSS Grid Layout</h3>
+        <p>I’ve not covered every aspect of Grid and Flexbox in this guide - my aim being to show the similarities and differences between the specifications, and to throw Box Alignment into the mix. To demonstrate that what these specifications are bringing us is a new layout system, one that understands the kind of sites and applications we are building today.</p>
+        <p>Do play with the examples in the article, and there is a whole host of other stuff detailed in the resources below. I would be especially interested in use cases that you can’t achieve with these layout methods. If you find one let me know, I’m interested in finding the edges of the specifications we have so welcome a challenge.</p>
+        <p></p>
+        <h3 id="watch-my-talk">Watch My Talk</h3>
+        <figure class="video-container">
+         <iframe data-src="https://player.vimeo.com/video/215091807" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </figure>
+        <h4 id="resources">Resources</h4>
+        <p>Here are some resources to help you explore these specifications further.</p>
+        <ul>
+         <li><a href="http://gridbyexample.com">Grid by Example</a>, Rachel Andrew</li>
+         <li>“<a href="https://www.youtube.com/watch?v=ibeF6rbzD70">Laying Out The Future With Grid And Flexbox</a>” (video), Rachel Andrew, Mozilla Hacks</li>
+        </ul>
+        <div class="signature">
+         <img src="https://www.smashingmagazine.com/images/logo/logo--red.png" alt="Smashing Editorial"> <span>(ms, vf, ml, rb, al, il)</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="c-promo-box sponsors sponsors__lead hidden sponsors__external" data-audience="non-subscriber" data-remove="true" data-amount="1"></div>
+     <div class="c-promo-box sponsors sponsors__lead hidden sponsors__external" data-audience="non-subscriber" data-remove="true" data-amount="1"></div>
+     <div id="sponsors-article-end" data-impression="true" class="c-promo-box c-promo-box--ad c-promo-box--wide sponsors sponsors__row hidden sponsors__external" data-audience="non-subscriber" data-remove="true"></div>
+     <div data-component="CommentsArea" id="comments-css-grids-flexbox-box-alignment-new-layout-standard" data-thread="/2016/11/css-grids-flexbox-box-alignment-new-layout-standard/" data-date="2016-11-08 21:12:40 +0000 UTC"></div>
+    </div>
+   </article>
+  </main>
+  <footer class="main-footer">
+   <div class="container">
+    <div class="col-12">
+     <div class="footer__topics open">
+      <h4 class="footer__topics__title" id="topics">Browse All Smashing Magazine Topics</h4>
+      <ul class="footer__topics__list">
+       <li class="footer__topics__item"><a href="/category/accessibility">Accessibility</a></li>
+       <li class="footer__topics__item"><a href="/category/android">Android</a></li>
+       <li class="footer__topics__item"><a href="/category/animation">Animation</a></li>
+       <li class="footer__topics__item"><a href="/category/apps">Apps</a></li>
+       <li class="footer__topics__item"><a href="/category/css">CSS</a></li>
+       <li class="footer__topics__item"><a href="/category/design">Design</a></li>
+       <li class="footer__topics__item"><a href="/category/design-patterns">Design Patterns</a></li>
+       <li class="footer__topics__item"><a href="/category/design-systems">Design Systems</a></li>
+       <li class="footer__topics__item"><a href="/category/e-commerce">E-Commerce</a></li>
+       <li class="footer__topics__item"><a href="/category/freebies">Freebies</a></li>
+       <li class="footer__topics__item"><a href="/category/graphics">Graphics</a></li>
+       <li class="footer__topics__item"><a href="/category/html">HTML</a></li>
+       <li class="footer__topics__item"><a href="/category/illustrator">Illustrator</a></li>
+       <li class="footer__topics__item"><a href="/category/inspiration">Inspiration</a></li>
+       <li class="footer__topics__item"><a href="/category/ios">iOS</a></li>
+       <li class="footer__topics__item"><a href="/category/javascript">JavaScript</a></li>
+       <li class="footer__topics__item"><a href="/category/mobile">Mobile</a></li>
+       <li class="footer__topics__item"><a href="/category/pattern-libraries">Pattern Libraries</a></li>
+       <li class="footer__topics__item"><a href="/category/performance">Performance</a></li>
+       <li class="footer__topics__item"><a href="/category/photoshop">Photoshop</a></li>
+       <li class="footer__topics__item"><a href="/category/plugins">Plugins</a></li>
+       <li class="footer__topics__item"><a href="/category/react">React</a></li>
+       <li class="footer__topics__item"><a href="/category/responsive-web-design">Responsive Web Design</a></li>
+       <li class="footer__topics__item"><a href="/category/service-workers">Service Workers</a></li>
+       <li class="footer__topics__item"><a href="/category/sketch">Sketch</a></li>
+       <li class="footer__topics__item"><a href="/category/typography">Typography</a></li>
+       <li class="footer__topics__item"><a href="/category/ui">UI</a></li>
+       <li class="footer__topics__item"><a href="/category/usability">Usability</a></li>
+       <li class="footer__topics__item"><a href="/category/user-experience">User Experience</a></li>
+       <li class="footer__topics__item"><a href="/category/wallpapers">Wallpapers</a></li>
+       <li class="footer__topics__item"><a href="/category/web-design">Web Design</a></li>
+       <li class="footer__topics__item"><a href="/category/wordpress">WordPress</a></li>
+       <li class="footer__topics__item"><a href="/category/workflow">Workflow</a></li>
+      </ul>
+     </div>
+    </div>
+    <div class="col-12">
+     <div class="footer__notes">
+      <p>With a commitment to quality content for the design community.</p>
+      <p>Founded by Vitaly Friedman and Sven Lennartz. <span class="lining-figures">2006–2020</span>.</p>
+      <p>Smashing is proudly running on <a href="https://www.netlify.com/?utm_source=link&amp;utm_medium=parter&amp;utm_campaign=sm-footer">Netlify</a>.</p>
+      <p>Fonts by <a href="http://latinotype.com/">Latinotype</a>.</p>
+     </div>
+     <ul class="footer__links">
+      <li>✎ <a href="/write-for-us/">Write for us</a></li>
+      <li><a href="/contact/">Contact us</a></li>
+      <li><a href="/about/">About us (Impressum)</a></li>
+      <li><a href="/privacy-policy">Privacy policy</a></li>
+      <li><a href="/auth/">Membership login</a></li>
+      <li><a href="/delivery-times/">Delivery times</a></li>
+      <li><a href="mailto:advertising@smashingmagazine.com?subject=Let’s talk about advertising">Advertise</a></li>
+     </ul>
+    </div>
+   </div>
+   <div class="back-to-top-wrapper" id="back_top">
+    <a href="#top" data-scroll="#top" class="back-to-top" title="Back to top">
+     <svg viewbox="0 0 100 100" width="25" height="25" tabindex="-1" role="img" aria-labelledby="title">
+      <title id="title">Back to top</title><path d="M10 50l50 50L70 90 30 50 70 10 60 0z" transform="translate(0 0) rotate(90 50 50)" fill="#fff" stroke="#fff" /><image src="https://d33wubrfki0l68.cloudfront.net/a0a37998d83f76d320162750bc965f3ee67980be/820d5/images/back-to-top-arrow.png" alt="Back to top arrow" width="100%" height="100%" />
+     </svg></a>
+   </div>
+   <div id="cart" class="cart-wrapper" data-component="MiniCart"></div>
+  </footer>
+  <div data-handler="PostLoad"></div>
+  <script>window.PRERELEASES={}</script>
+  <script defer src="https://d33wubrfki0l68.cloudfront.net/js/d7823d7870a3e8ccfb05b6e6a3b4a226104fe203/js/ga.js"></script>
+  <script defer type="text/plain" data-cookieconsent="statistics" src="https://www.google-analytics.com/analytics.js"></script>
+  <script defer src="https://d33wubrfki0l68.cloudfront.net/js/8ffa244a7992a11c2a32ae921602b572fe2e7e83/js/app.js"></script>
+  <link rel="stylesheet" type="text/css" media="print" href="https://d33wubrfki0l68.cloudfront.net/css/2886fb6db82c27d95feb58031e86df7ee6bae8c8/css/print.css">
+  <script>function CookiebotCallback_OnLoad(){Cookiebot&&Cookiebot.runScripts()}
+function CookiebotCallback_OnAccept(){Cookiebot&&Cookiebot.runScripts()}</script>
+  <script defer id="Cookiebot" src="https://consent.cookiebot.com/uc.js" importance="low" data-cbid="477cf258-f4e3-42e2-811d-73547904d716" type="text/javascript"></script>
+  <script class="js-additional" defer src="https://d33wubrfki0l68.cloudfront.net/bundles/8f3b4e8fbec0795ac2a9ecdeceff4cea7b73ecd6.js"></script>
+ </body>
+</html>

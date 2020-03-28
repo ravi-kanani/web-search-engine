@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"> 
+ <head profile="http://gmpg.org/xfn/11"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>November | 2004 | petite anglaise</title> 
+  <link rel="pingback" href="https://petiteanglaise.com/xmlrpc.php"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9wZXRpdGVhbmdsYWlzZS5jb20%3D"
+		+ "&wpcomid=14262311"
+		+ "&time=1585342271";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//petiteanglaise.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Feed" href="https://petiteanglaise.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Comments Feed" href="https://petiteanglaise.com/comments/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s0.wp.com/_static/??-eJylkttuwjAMhl9oaVZQgV1Me5akNZlZDlXsUHj7uRQEG6KTxk0VH77ff+LqoVdtigyRde+Lw0jaFQktZCeVDHpdrata24K+09an9kt5tNnkoyY+eqhaohc9K3OiSO+AezPi5pgKK5ex+69ENozR0R/4tnivCBkUdDgCaqro1bJerleLNw176ReuRO7SEKcxT6teXDIG8BjhaUGxJclETGeHHRLrPcLwULRN5yerq8VrVauhb1OYuKlQTaZOe33C2uTKi+6ttd/ZuwGhqKvTDJIPveGxI8gkAx6CtM1hA3YOWHC6nBXDYR4Z30BZ22cgUvINWILiT5lFd9yU1n2xuvWGCNsHa7wZ4CApua78nCn+CNTWG8xzaIZxyXJ0pxtdwxH6CO91s2nqptnUq903FYZfPw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link rel="stylesheet" id="print-css-1-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s1.wp.com/_static/??-eJxlzEEOwiAQheELiROsYF0YzwKIdHQYms40xttbkxpN3L3F9354jCY11swKdTYjzQVZICTFxjFM37VNIhv44R97nYmMoGaTL6jIZa2A72x38LsjFGoxLEaflAVEg2KCSIHvf1Edcl3MsF9Pb3CuJ+t6Z53rrb+9ACKOP/E=?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJx9zUsKgDAMBNALWYtIixvxLH6itJhUmxTx9lbQnQgDs5gHo49NORrXNAFrn7MniOdTpedC/wGFbom9QImOXjwGEiC57RZYEJj7BT5WDINbQSWGmAFJvplDdh22lTFNbaw1tb8AOGU7DA=="></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://petiteanglaise.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="November 2004 – petite anglaise"> 
+  <meta property="og:site_name" content="petite anglaise"> 
+  <meta property="og:image" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="200"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="openid.server" href="https://petiteanglaise.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://petiteanglaise.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://petiteanglaise.com/osd.xml" title="petite anglaise"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style> 
+  <meta name="application-name" content="petite anglaise">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://petiteanglaise.com/feed/;icon-uri=https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="4 posts published by petiteanglaiseparis during November 2004"> 
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta name="msapplication-TileImage" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&amp;csblog=XQhh&amp;cscache=6&amp;csrev=77"> 
+ </head> 
+ <body class="archive date customizer-styles-applied highlander-enabled highlander-light"> 
+  <div id="rap"> 
+   <h1 id="header"><a href="https://petiteanglaise.com/">petite anglaise</a></h1> 
+   <div id="content"> <!-- end header --> 
+    <h2>November 30, 2004</h2> 
+    <div class="post-137 post type-post status-publish format-standard hentry category-miam" id="post-137"> 
+     <h3 class="storytitle"> <a href="https://petiteanglaise.com/2004/11/30/say-cheese/" rel="bookmark">crawling off the&nbsp;plate</a> </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/miam/" rel="category tag">miam</a> — petiteanglaiseparis @ 10:39 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <img data-attachment-id="1861" data-permalink="https://petiteanglaise.com/2004/11/30/say-cheese/fromage/" data-orig-file="https://petiteanglaise.files.wordpress.com/2004/11/fromage.jpg" data-orig-size="172,180" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="fromage" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2004/11/fromage.jpg?w=172" data-large-file="https://petiteanglaise.files.wordpress.com/2004/11/fromage.jpg?w=172" src="https://petiteanglaise.files.wordpress.com/2004/11/fromage.jpg?w=172&amp;h=180" alt="" title="fromage" width="172" height="180" class="alignnone size-full wp-image-1861" srcset="https://petiteanglaise.files.wordpress.com/2004/11/fromage.jpg 172w, https://petiteanglaise.files.wordpress.com/2004/11/fromage.jpg?w=143&amp;h=150 143w" sizes="(max-width: 172px) 100vw, 172px">
+      </div> 
+      <div align="justify"> 
+       <p>Well, I don’t suppose any of you thought I’d let <a href="http://www.guardian.co.uk/uk_news/story/0,,1360073,00.html">another opportunity</a> to talk about food pass me by. Especially cheese of the ‘akin to socks worn for ten days with trainers and athletes foot’ variety. I am nothing if not predictable.</p> 
+       <p>To get to the kitchen from the bedroom in our apartment, one has to cross the living room, walk down a corridor, and turn to the left. It is 45 fairy steps from bed to fridge (I just checked – the Frog thinks it’s still the drugs). However when the Frog opens the fridge door, I can distinguish <strong>from my bed</strong> whether there is an unpasteurised <em>Camembert Le Rustique</em> skulking in there. Or perhaps a couple of goats cheeses lurking out of sight. The little egg shaped plastic thing which also lives in the fridge and claims to neutralise all forms of pong, whiff and odour remains powerless against the pungency of these cheeses. Emprisoning the cheese in a tupperware container works, but creates a ticking time bomb: it is advisable to wear goggles/nose-peg when you decide to liberate the contents.</p> 
+       <p>The cheeses mentioned above are freely available in our local Franprix supermarket. Kept refrigerated, and securely wrapped in clingfilm. In a proper cheese shop, or at an outdoor market they are just sprawled out on a counter, and ooze merrily in all directions. I would probably be able to smell those in my fridge if I was collecting the post from my letterbox five storeys below.</p> 
+       <p>Coming from a family of mild white (or red) Cheddar eaters, who might also treat themselves to a slab of Wensleydale with their Christmas cake, I think my palate has made considerable progress since living in France. It has been more of a slow progression than a sudden epiphany. First I learnt to appreciate cheeses similar to English and Dutch cheeses with which I was already familiar, like <em>Cantal</em>, <em>Emmental</em> and Swiss <em>Gruyère</em>. Later I was introduced to proper non-pasteurised <em>Brie</em> and <em>Camembert</em> during my year in Normandy. The family I stayed with had their cheeses on a platter in a cupboard, never in the fridge, and it all looked worse for wear when it emerged at mealtimes, tough outer crusts with lots of messy oozing in the middle. But once I got past the offputting pong and appearance there were some surprises in store. (Sometimes blocking my nose and letting my tastebuds continue unbiased helped.)</p> 
+       <p>Traveling around France has also been a source of inspiration. On my regular trips to the Jura I have been initiated to regional cheeses: runny garlicy <em>Cancaillotte</em>, made in a factory where Mr Frog once had a holiday job, <em>Morbier</em>, <em>Mont d’Or</em>, nutty earthy <em>Comté</em>. I’m now also very partial to ewes milk cheese from the Basque region (<em>Ossau Irraty, Etorki</em>), and <em>Brocciu</em> from Corsica.</p> 
+       <p>I do have my limits though. Green veined <em>Roquefort</em> I can handle. But anything which has a layer of festering mould on the outer skin, or that ressembles a sheeps dropping someone found at the back of the barn several months later is unlikely to meet with an enthusiastic response, no matter how good the glass of red that accompanies it. A cheese with worms crawling inside it is not making it onto my plate. (I didn’t make that up – read ‘<a href="http://www.amazon.fr/exec/obidos/ASIN/1857883160/402-0396008-0071342">Almost French</a>‘.) I’m not much good when faced with washed rind cheeses. I just can’t get past the odour of the rind, I don’t care how good the innards are supposed to taste. So I don’t think the Vieux Boulogne (the cheese with the title ‘smelliest cheese’ was bestowed upon) would be my cup of tea.</p> 
+       <p>Extract from the <a href="http://www.guardian.co.uk/uk_news/story/0,,1360073,00.html">Guardian article</a> by Patrick Barkham, “Smelliest Cheese Honour”, 26/11/04:</p> 
+       <blockquote>
+        <p> “The odour of rotting vegetables and the scent of a goat on heat wafted down Farringdon Road a full five minutes before the cheese strolled in the door. “It’s gone to the post room,” said the man in the courier hut. “It was smelling the place out.”</p> 
+        <p>…</p> 
+        <p>Unwrapped from its plastic covering the Vieux Boulogne sent an aroma of six-week-old earwax floating through the Guardian’s offices. From a safe distance of 50 metres, the cheese emitted a pleasant eau de farmyard, replete with dung and Barbour jackets. Close up, its firm orange flesh, flecked with a delicate mould, recalled varnish.” </p>
+       </blockquote> 
+       <p>However I might be willing to sample it for a price, especially as it is described as ‘a cure for winter colds’. How about I add a paypal button and when the price is right, I’ll broadcast the Vieux Bologne sampling fest via webcam?</p> 
+       <p>I feel I have to warn you though, it might end up looking like the Jackass egg eating competition. </p> 
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2004/11/30/say-cheese/#comments">Comments (18)</a> 
+     </div> 
+    </div> 
+    <h2>November 29, 2004</h2> 
+    <div class="post-136 post type-post status-publish format-standard hentry category-uncategorized" id="post-136"> 
+     <h3 class="storytitle"> <a href="https://petiteanglaise.com/2004/11/29/songs-about-plucking/" rel="bookmark">songs about plucking</a> </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/uncategorized/" rel="category tag">Uncategorized</a> — petiteanglaiseparis @ 10:33 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <img data-attachment-id="1863" data-permalink="https://petiteanglaise.com/2004/11/29/songs-about-plucking/songbook/" data-orig-file="https://petiteanglaise.files.wordpress.com/2004/11/songbook.jpg" data-orig-size="285,207" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="songbook" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2004/11/songbook.jpg?w=285" data-large-file="https://petiteanglaise.files.wordpress.com/2004/11/songbook.jpg?w=285" src="https://petiteanglaise.files.wordpress.com/2004/11/songbook.jpg?w=285&amp;h=207" alt="" title="songbook" width="285" height="207" class="alignnone size-full wp-image-1863" srcset="https://petiteanglaise.files.wordpress.com/2004/11/songbook.jpg 285w, https://petiteanglaise.files.wordpress.com/2004/11/songbook.jpg?w=150&amp;h=109 150w" sizes="(max-width: 285px) 100vw, 285px">
+      </div> 
+      <div align="justify"> 
+       <p>Tadpole has started singing. Mostly nonsense words, but it sounds incredibly cute all the same. She has a little electronic nursery rhyme book which sings to her in French. I had a problem with this at first, as it sounds like my mother in law’s voice on the recording, but I’m over it now. Anyway, I thought I’d have a look for the full lyrics of some French nursery rhymes on the interweb, as the book sings the first few lines and then just plays the music and I don’t know how the songs are supposed to continue.</p> 
+       <p>Mr Frog, needless to say, can’t remember any of the words. I sometimes wonder if he really is French? Or whether he had a childhood. Maybe he’s actually an alien masquerading as a French person. I haven’t seen any evidence of super powers so far, but if I do you will be the first to know.</p> 
+       <p>What I like about English nursery rhymes are the references to comforting things like tea – ‘Polly put the kettle on’, ‘I’m a little teapot’. Of course I am aware that some of our best loved nursery rhymes were inspired by rather unpalatable historical events: ‘Mary Mary quite contrary’, which appears to be Tadpole’s favourite, allegedly recounts the persecution of protestants during the reign of catholic Mary Tudor (the garden being a graveyard and the silver bells and cockle shells being instruments of torture according to one source). But let’s face it, to Tadpole it is just song about a garden with pretty things in it.</p> 
+       <p>I can’t help however being a little perturbed after reading the full lyrics for <em>Alouette</em>, one of the best known French <em>contines</em>.</p> 
+       <blockquote> 
+        <p align="center"> Alouette, gentille Alouette,<br> Alouette je te plumerai,<br> Alouette, gentille Alouette,<br> Alouette je te plumerai,<br> Je te plumerai la tête,<br> Je te plumerai la tête,<br> Et la tête, et la tête,<br> Alouette, Alouette,<br> O-o-o-o-oh,<br> Alouette, gentille Alouette,<br> Alouette je te plumerai… </p> 
+       </blockquote> 
+       <p>So what do we have here? A song about a lovely lark. Getting plucked.</p> 
+       <blockquote> 
+        <p align="center"> Lark, lovely lark,<br> Lark, lovely lark,<br> Lark, I’m going to pluck you,<br> Lark, lovely lark,<br> Lark, I’m going to pluck you<br> I’m going to pluck your head,<br> I’m going to pluck your head,<br> And the head, and the head,<br> Lark, lark,<br> O-o-o-o-oh,<br> Lark, lovely lark,<br> Lark, I’m going to pluck you… </p> 
+       </blockquote> 
+       <p>The song can be repeated substituting the word ‘head’ for other body parts (nose, eyes, wings, whatever). I cannot help but be reminded of all those bucolic French films with close up shots of rabbits being skinned and pheasants being plucked. But are larks even edible?</p> 
+       <p>I am not looking forward to the day in the not too distant future when Tadpole inevitably asks me to explain what ‘plucking’ means and why the poor lark is getting it.</p> 
+       <p>The upshot of all this is that I think I’ll stick to my English nursery rhymes after all. Preferably the ones about making tea.</p> 
+       <p>*<em>I think I may be delirious – I have an ear infection and sinus infection and am taking very strong drugs today – so please bear with me if this is utter nonsense. But I was getting blogging withdrawal symptoms.</em> </p> 
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2004/11/29/songs-about-plucking/#comments">Comments (17)</a> 
+     </div> 
+    </div> 
+    <h2>November 26, 2004</h2> 
+    <div class="post-135 post type-post status-publish format-standard hentry category-navel-gazing category-tadpole-rearing" id="post-135"> 
+     <h3 class="storytitle"> <a href="https://petiteanglaise.com/2004/11/26/fall-from-grace/" rel="bookmark">fall from grace</a> </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/navel-gazing/" rel="category tag">navel gazing</a>, <a href="https://petiteanglaise.com/category/tadpole-rearing/" rel="category tag">Tadpole rearing</a> — petiteanglaiseparis @ 2:37 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <img data-attachment-id="1865" data-permalink="https://petiteanglaise.com/2004/11/26/fall-from-grace/a-team/" data-orig-file="https://petiteanglaise.files.wordpress.com/2004/11/a-team.jpg" data-orig-size="122,158" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="a-team" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2004/11/a-team.jpg?w=122" data-large-file="https://petiteanglaise.files.wordpress.com/2004/11/a-team.jpg?w=122" src="https://petiteanglaise.files.wordpress.com/2004/11/a-team.jpg?w=122&amp;h=158" alt="" title="a-team" width="122" height="158" class="alignnone size-full wp-image-1865">
+      </div> 
+      <div align="justify"> 
+       <p>I would describe myself as an agnostic, I think. I don’t have any strong beliefs about the existence or non-existence of some kind of deity. But I don’t have any certainty either, so I don’t think the word ‘atheist’ is appropriate.</p> 
+       <p>I was christened Church of England, and as a child went to both the C of E and Methodist Sunday schools in my village. Not simultaneously, I hasten to add. I ‘defected’ to the Methodists because my friends went there and it was more laid back; I crossed back over to the other side when I was too old for Sunday school to join the choir. The Methodist choir in the village church was made up of old ladies with pink rinses and thin, reedy voices, the attraction of the C of E choir on the other hand was the ‘proper’ flowing robes and wooden crucifixes on a string and that musically they took themselves rather more seriously. And if my memory serves me correctly I think there may have been a boy I was interested in. Although quite how I thought I’d make an impression wearing my NHS glasses and choir robes I really don’t know. I quite enjoyed the singing, but I remember the Sunday services being particularly tedious as the priest wasn’t much of an orator and his sermons were long drawn out affairs.</p> 
+       <p>My subsequent fall from grace came about for several reasons.</p> 
+       <p>I got lazier and I started to want a lie-in on a Sunday. I also started to resent being ‘forced’ to do anything. On principle. I was entering a phase where I questioned everything, religion included. I wasn’t at all sure I believed in any of it, and even if I did, I failed to see how attending church every week was necessary.</p> 
+       <p>And then there was the A-Team. Choir practice was on Friday evenings. So was the A-Team. <strong>Everyone</strong> at school watched it and I hated feeling left out. Faced with such powerful arguments, and after I’d <em>accidentally</em> overslept three Sundays in a row, my mother realised there was no point forcing the issue. I was eleven years old. I’ve attended a couple of weddings and carol services since. Other than that, I tend to visit churches to admire their architecture when we’re on holiday.</p> 
+       <p>Now I am a parent. We live in a country where catholicism is the main religion, but state institutions (and therefore all schools) are secular. The Frog is a non-practising Catholic, although he did attend a private Catholic infant school with real nuns (ostensibly because it was close to his mother’s place of work) and even went on a school trip to the Vatican to see the Pope one Easter.</p> 
+       <p>My dilemma is this: what do I teach the Tadpole about religion? Should I buy her a book of bible stories some day – for her general culture and because I think many of the principles taught by Christianity are sound guidelines to live by – and explain that some people believe in God, but that I’m not one of them?</p> 
+       <p>Am I going to deprive her of the magic of seeing a nativity play at Christmas and singing carols? The right to have a crush on a guitar playing Sunday school teacher or choirboy? How will I explain to her what happens to people when they die when the time comes without upsetting her if I’m going to leave angels and heaven out of the equation?</p> 
+       <p>Clearly the Frog and I both had some religious education and then were free to make up our own minds when we were old enough to do so. How can I give Tadpole the same freedom? </p> 
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2004/11/26/fall-from-grace/#comments">Comments (21)</a> 
+     </div> 
+    </div> 
+    <h2>November 24, 2004</h2> 
+    <div class="post-132 post type-post status-publish format-standard hentry category-miam category-missing-blighty" id="post-132"> 
+     <h3 class="storytitle"> <a href="https://petiteanglaise.com/2004/11/24/a-nice-bit-of-crumpet/" rel="bookmark">a nice bit of&nbsp;crumpet</a> </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/miam/" rel="category tag">miam</a>, <a href="https://petiteanglaise.com/category/missing-blighty/" rel="category tag">missing blighty</a> — petiteanglaiseparis @ 3:35 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <img data-attachment-id="1867" data-permalink="https://petiteanglaise.com/2004/11/24/a-nice-bit-of-crumpet/crumpets/" data-orig-file="https://petiteanglaise.files.wordpress.com/2004/11/crumpets.jpg" data-orig-size="150,94" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="crumpets" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2004/11/crumpets.jpg?w=150" data-large-file="https://petiteanglaise.files.wordpress.com/2004/11/crumpets.jpg?w=150" src="https://petiteanglaise.files.wordpress.com/2004/11/crumpets.jpg?w=150&amp;h=94" alt="" title="crumpets" width="150" height="94" class="alignnone size-full wp-image-1867">
+      </div> 
+      <div align="justify"> 
+       <p>The 22nd of December 2001 was a black day for English expats in Paris: Marks and Spencer finally closed down their Paris Haussmann and Rivoli branches.</p> 
+       <p>In a last desperate bid to stock up on crumpets, English breakfast tea and mature cheddar I braved the closing day 40%-off-sale hordes. Anarchy reigned. Protestors were making their anger felt by tearing the wrappers off triangle sandwiches in the food hall and scoffing them without paying. The clothes section looked like a jumble sale. Extra security guards had reportedly been taken on for the day to keep the peace.</p> 
+       <p>Once the store closed, I began to fully comprehend what I had lost. Never again when feeling a bit low or homesick could I turn to English comfort foods like toasted teacakes and hot cross buns to munch in front of Eastenders. There were to be no more properly spiced chicken biryani ready meals. Crispy duck with pancakes, plum sauce and a side order of crispy seaweed was a thing of the past. (Parisian Chinese restaurants don’t seem to serve this, my favourite dish, more’s the pity.) Rice pudding, custard, cheddar and stilton were definitively off the menu. I would have to learn to recover from hangovers without the help of a bacon and tomato ketchup sandwich.</p> 
+       <p>When I first moved to Paris, I started off terribly enthusiastic about all things French. Thus I watched the French terrestrial TV channels, read only (terribly serious) French novels, and ate 100% French food. As the months stretched into years and it was clear that France was to be my permanent home I started to crave a bit of English food, English language literature and television programmes. Nowadays I have gone to the opposite extreme and watch exclusively English/American films and TV programmes on cable TV (apart from the odd good French programme on Canal+ like ‘+Clair’ or ’90 minutes’) and order English/American fiction via Amazon. I watch Eastenders religiously every night, even when it is going through a bad patch. I read Heat magazine when I can lay my hands on it (even though I’ve never seen the English version of any of the reality shows they harp on about ad nauseam). In my former life in the UK I wouldn’t have been seen dead reading a gossip mag and I didn’t follow Eastenders. I suppose I clutch at any Englishness I can get my hands on these days.</p> 
+       <p>Don’t get me wrong, my love affair with France is by no means over. I just missed my English side a little bit. Especially during the period where I worked for Franco-French companies and spoke <strong>only</strong> French all day long. My Englishness is an important part of who I am, and I want to preserve it.</p> 
+       <p>And I feel the best way to cultivate this is by eating crumpets and drinking tea. </p> 
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2004/11/24/a-nice-bit-of-crumpet/#comments">Comments (43)</a> 
+     </div> 
+    </div> <a href="https://petiteanglaise.com/2004/11/page/2/">Older Posts »</a> <!-- begin footer --> 
+   </div> <!-- begin sidebar --> 
+   <div id="menu"> 
+    <ul> 
+     <li id="search-15" class="widget widget_search">
+      <form role="search" method="get" id="searchform" class="searchform" action="https://petiteanglaise.com/"> 
+       <div> <label class="screen-reader-text" for="s">Search for:</label> 
+        <input type="text" value="" name="s" id="s"> 
+        <input type="submit" id="searchsubmit" value="Search"> 
+       </div> 
+      </form></li> 
+     <li id="text-21" class="widget widget_text"> 
+      <div class="textwidget">
+       <ul> 
+        <li id="text" style="list-style-type:none;"> 
+         <ul> 
+          <li><a title="about this site" href="https://petiteanglaise.wordpress.com/about-this-site/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/union-jack2.jpg" alt="union-jack2.jpg"> about</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/book/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/book.png" alt="book.png"> books</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/press/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/press.jpg" alt="press.jpg"> press</a></li> 
+          <li><a title="Petite Anglaise fan page" href="http://www.facebook.com/pages/Petite-Anglaise/8204603380" target="_TOP" rel="noopener noreferrer"><img src="https://petiteanglaise.files.wordpress.com/2010/06/facebook1.png" alt="facebook.png"> fbk</a></li> 
+         </ul> 
+         <ul> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031190?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031190"><img src="https://petiteanglaise.files.wordpress.com/2010/06/petite-paperback1.gif" alt="buy from amazon uk"></a></li> 
+          <li><a title="buy from amazon us" href="http://www.amazon.com/gp/product/0385522800?ie=UTF8&amp;tag=petiteanglais-20&amp;linkCode=xm2&amp;camp=1789&amp;creativeASIN=0385522800"><img src="https://petiteanglaise.files.wordpress.com/2009/11/petitepbusa.jpg" alt="buy from amazon us"></a></li> 
+          <li><a title="buy from amazon.fr" href="http://www.amazon.fr/Petite-anglaise-Catherine-Sanderson/dp/2702140394/ref=sr_1_2?ie=UTF8&amp;s=books&amp;qid=1258292753&amp;sr=8-2"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french_petite.jpg" alt="buy from amazon france"></a></li> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031247?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031247"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french-kissing_web1.jpg" alt="buy from amazon uk"></a></li> 
+         </ul> </li> 
+        <li id="text">potted petite 
+         <ul> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2004/12/02/adoption/">prologue</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/10/burned/">burned</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/22/null-and-void/">null and void</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/29/slacker-mum/">part time mummy</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/03/baggage/">baggage</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/11/23/song/">singing in tongues</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/03/14/eleven-days-later/">eleven days later</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/04/06/semi-detached/">semi-detached</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/07/20/suspendered/">suspend<span style="text-decoration:line-through;">er</span>ed</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2007/06/03/sunday/">sunday</a></li> 
+         </ul> </li> 
+        <li id="text">archives 
+         <ul> 
+          <li><a title="January 2011" href="https://petiteanglaise.com/2011/01/">January 2011</a></li> 
+          <li><a title="November 2009" href="https://petiteanglaise.com/2009/11/">November 2009</a></li> 
+          <li><a title="September 2009" href="https://petiteanglaise.com/2009/09/">September 2009</a></li> 
+          <li><a title="August 2009" href="https://petiteanglaise.com/2009/08/">August 2009</a></li> 
+          <li><a title="July 2009" href="https://petiteanglaise.com/2009/07/">July 2009</a></li> 
+          <li><a title="June 2009" href="https://petiteanglaise.com/2009/06/">June 2009</a></li> 
+          <li><a title="May 2009" href="https://petiteanglaise.com/2009/05/">May 2009</a></li> 
+          <li><a title="April 2009" href="https://petiteanglaise.com/2009/04/">April 2009</a></li> 
+          <li><a title="March 2009" href="https://petiteanglaise.com/2009/03/">March 2009</a></li> 
+          <li><a title="February 2009" href="https://petiteanglaise.com/2009/02/">February 2009</a></li> 
+          <li><a title="January 2009" href="https://petiteanglaise.com/2009/01/">January 2009</a></li> 
+          <li><a title="December 2008" href="https://petiteanglaise.com/2008/12/">December 2008</a></li> 
+          <li><a title="November 2008" href="https://petiteanglaise.com/2008/11/">November 2008</a></li> 
+          <li><a title="October 2008" href="https://petiteanglaise.com/2008/10/">October 2008</a></li> 
+          <li><a title="September 2008" href="https://petiteanglaise.com/2008/09/">September 2008</a></li> 
+          <li><a title="August 2008" href="https://petiteanglaise.com/2008/08/">August 2008</a></li> 
+          <li><a title="July 2008" href="https://petiteanglaise.com/2008/07/">July 2008</a></li> 
+          <li><a title="June 2008" href="https://petiteanglaise.com/2008/06/">June 2008</a></li> 
+          <li><a title="May 2008" href="https://petiteanglaise.com/2008/05/">May 2008</a></li> 
+          <li><a title="April 2008" href="https://petiteanglaise.com/2008/04/">April 2008</a></li> 
+          <li><a title="March 2008" href="https://petiteanglaise.com/2008/03/">March 2008</a></li> 
+          <li><a title="February 2008" href="https://petiteanglaise.com/2008/02/">February 2008</a></li> 
+          <li><a title="January 2008" href="https://petiteanglaise.com/2008/01/">January 2008</a></li> 
+          <li><a title="December 2007" href="https://petiteanglaise.com/2007/12/">December 2007</a></li> 
+          <li><a title="November 2007" href="https://petiteanglaise.com/2007/11/">November 2007</a></li> 
+          <li><a title="October 2007" href="https://petiteanglaise.com/2007/10/">October 2007</a></li> 
+          <li><a title="September 2007" href="https://petiteanglaise.com/2007/09/">September 2007</a></li> 
+          <li><a title="August 2007" href="https://petiteanglaise.com/2007/08/">August 2007</a></li> 
+          <li><a title="July 2007" href="https://petiteanglaise.com/2007/07/">July 2007</a></li> 
+          <li><a title="June 2007" href="https://petiteanglaise.com/2007/06/">June 2007</a></li> 
+          <li><a title="May 2007" href="https://petiteanglaise.com/2007/05/">May 2007</a></li> 
+          <li><a title="April 2007" href="https://petiteanglaise.com/2007/04/">April 2007</a></li> 
+          <li><a title="March 2007" href="https://petiteanglaise.com/2007/03/">March 2007</a></li> 
+          <li><a title="February 2007" href="https://petiteanglaise.com/2007/02/">February 2007</a></li> 
+          <li><a title="January 2007" href="https://petiteanglaise.com/2007/01/">January 2007</a></li> 
+          <li><a title="December 2006" href="https://petiteanglaise.com/2006/12/">December 2006</a></li> 
+          <li><a title="November 2006" href="https://petiteanglaise.com/2006/11/">November 2006</a></li> 
+          <li><a title="October 2006" href="https://petiteanglaise.com/2006/10/">October 2006</a></li> 
+          <li><a title="September 2006" href="https://petiteanglaise.com/2006/09/">September 2006</a></li> 
+          <li><a title="August 2006" href="https://petiteanglaise.com/2006/08/">August 2006</a></li> 
+          <li><a title="July 2006" href="https://petiteanglaise.com/2006/07/">July 2006</a></li> 
+          <li><a title="June 2006" href="https://petiteanglaise.com/2006/06/">June 2006</a></li> 
+          <li><a title="May 2006" href="https://petiteanglaise.com/2006/05/">May 2006</a></li> 
+          <li><a title="April 2006" href="https://petiteanglaise.com/2006/04/">April 2006</a></li> 
+          <li><a title="March 2006" href="https://petiteanglaise.com/2006/03/">March 2006</a></li> 
+          <li><a title="February 2006" href="https://petiteanglaise.com/2006/02/">February 2006</a></li> 
+          <li><a title="January 2006" href="https://petiteanglaise.com/2006/01/">January 2006</a></li> 
+          <li><a title="December 2005" href="https://petiteanglaise.com/2005/12/">December 2005</a></li> 
+          <li><a title="November 2005" href="https://petiteanglaise.com/2005/11/">November 2005</a></li> 
+          <li><a title="October 2005" href="https://petiteanglaise.com/2005/10/">October 2005</a></li> 
+          <li><a title="September 2005" href="https://petiteanglaise.com/2005/09/">September 2005</a></li> 
+          <li><a title="August 2005" href="https://petiteanglaise.com/2005/08/">August 2005</a></li> 
+          <li><a title="July 2005" href="https://petiteanglaise.com/2005/07/">July 2005</a></li> 
+          <li><a title="June 2005" href="https://petiteanglaise.com/2005/06/">June 2005</a></li> 
+          <li><a title="May 2005" href="https://petiteanglaise.com/2005/05/">May 2005</a></li> 
+          <li><a title="April 2005" href="https://petiteanglaise.com/2005/04/">April 2005</a></li> 
+          <li><a title="March 2005" href="https://petiteanglaise.com/2005/03/">March 2005</a></li> 
+          <li><a title="February 2005" href="https://petiteanglaise.com/2005/02/">February 2005</a></li> 
+          <li><a title="January 2005" href="https://petiteanglaise.com/2005/01/">January 2005</a></li> 
+          <li><a title="December 2004" href="https://petiteanglaise.com/2004/12/">December 2004</a></li> 
+          <li><a title="November 2004" href="https://petiteanglaise.com/2004/11/">November 2004</a></li> 
+          <li><a title="October 2004" href="https://petiteanglaise.com/2004/10/">October 2004</a></li> 
+          <li><a title="September 2004" href="https://petiteanglaise.com/2004/09/">September 2004</a></li> 
+          <li><a title="August 2004" href="https://petiteanglaise.com/2004/08/">August 2004</a></li> 
+          <li><a title="July 2004" href="https://petiteanglaise.com/2004/07/">July 2004</a></li> 
+         </ul> </li> 
+        <li id="text">categories 
+         <ul> 
+          <li class="cat-item cat-item-19290"><a title="View all posts filed under adoption" href="https://petiteanglaise.com/category/adoption/">adoption</a></li> 
+          <li class="cat-item cat-item-101238"><a title="View all posts filed under book stuff" href="https://petiteanglaise.com/category/book-stuff/">book stuff</a></li> 
+          <li class="cat-item cat-item-269813"><a title="on Paris and Parisians" href="https://petiteanglaise.com/category/city-of-light/">city of light</a></li> 
+          <li class="cat-item cat-item-777392"><a title="View all posts filed under french touch" href="https://petiteanglaise.com/category/french-touch/">french touch</a></li> 
+          <li class="cat-item cat-item-37959060"><a title="View all posts filed under good time girl" href="https://petiteanglaise.com/category/good-time-girl/">good time girl</a></li> 
+          <li class="cat-item cat-item-36442"><a title="View all posts filed under knocked up" href="https://petiteanglaise.com/category/knocked-up/">knocked up</a></li> 
+          <li class="cat-item cat-item-214948"><a title="View all posts filed under knot tying" href="https://petiteanglaise.com/category/knot-tying/">knot tying</a></li> 
+          <li class="cat-item cat-item-34596"><a title="food for thought" href="https://petiteanglaise.com/category/miam/">miam</a></li> 
+          <li class="cat-item cat-item-1455466"><a title="View all posts filed under mills &amp; boon" href="https://petiteanglaise.com/category/mills-boon/">mills &amp; boon</a></li> 
+          <li class="cat-item cat-item-277"><a title="View all posts filed under misc" href="https://petiteanglaise.com/category/misc/">misc</a></li> 
+          <li class="cat-item cat-item-37959061"><a title="England through rose tinted spectacles" href="https://petiteanglaise.com/category/missing-blighty/">missing blighty</a></li> 
+          <li class="cat-item cat-item-7289"><a title="me me me me me" href="https://petiteanglaise.com/category/navel-gazing/">navel gazing</a></li> 
+          <li class="cat-item cat-item-4358"><a title="View all posts filed under on the road" href="https://petiteanglaise.com/category/on-the-road/">on the road</a></li> 
+          <li class="cat-item cat-item-2439939"><a title="View all posts filed under parting ways" href="https://petiteanglaise.com/category/parting-ways/">parting ways</a></li> 
+          <li class="cat-item cat-item-178503"><a title="View all posts filed under single life" href="https://petiteanglaise.com/category/single-life/">single life</a></li> 
+          <li class="cat-item cat-item-37959062"><a title="View all posts filed under Tadpole rearing" href="https://petiteanglaise.com/category/tadpole-rearing/">Tadpole rearing</a></li> 
+          <li class="cat-item cat-item-37959063"><a title="View all posts filed under Tadpole says" href="https://petiteanglaise.com/category/tadpole-says/">Tadpole says</a></li> 
+          <li class="cat-item cat-item-37959065"><a title="View all posts filed under Tadpole sings" href="https://petiteanglaise.com/category/tadpole-sings/">Tadpole sings</a></li> 
+          <li class="cat-item cat-item-1"><a title="View all posts filed under Uncategorized" href="https://petiteanglaise.com/category/uncategorized/">Uncategorized</a></li> 
+          <li class="cat-item cat-item-4612"><a title="View all posts filed under working girl" href="https://petiteanglaise.com/category/working-girl/">working girl</a></li> 
+         </ul> </li> 
+        <li id="text">stats 
+         <ul> 
+          <li>638 posts</li> 
+          <li>27,981 comments</li> 
+          <li><strong>©</strong> catherine sanderson 2004-2009</li> 
+         </ul> </li> 
+       </ul> 
+       <div style="clear:both;"></div> 
+      </div> </li> 
+    </ul> 
+   </div> 
+   <p class="credit"> <a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></p> 
+  </div> <!--  --> 
+  <div style="display:none"> 
+  </div> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="14262311"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://petiteanglaise.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="petite anglaise"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/2004/11/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/_static/??/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css,/wp-content/mu-plugins/carousel/jetpack-carousel.css?m=1583834955j&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"14262311","siteName":"petite anglaise","siteURL":"https:\/\/petiteanglaise.com","icon":"<img alt='' src='https:\/\/petiteanglaise.files.wordpress.com\/2017\/07\/cropped-union-jack.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/classic","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F11%2F30%2Fsay-cheese%2F&signup_flow=account&domain=petiteanglaise.com","themeURL":"","xhrURL":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"fe4c42e1ec\" \/>","referer":"https:\/\/petiteanglaise.com\/2004\/11\/","canFollow":"1","feedID":"269408","statusMessage":"","customizeLink":"https:\/\/petiteanglaise.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fpetiteanglaise.wordpress.com%2F2004%2F11%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: WordPress Classic","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 104 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F11%2F30%2Fsay-cheese%2F&signup_flow=account&domain=petiteanglaise.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/petiteanglaise.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2004%2F11%2F30%2Fsay-cheese%2F","blog_id":"14262311","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=14262311&v=wpcom&tz=2&user_id=0&subd=petiteanglaise","is_public":"1","reblog_enabled":""};
+</script> 
+  <script type="text/javascript" src="https://s2.wp.com/_static/??-eJydUdFuwyAM/KERK6uSdg/TvoWCW5kRYNgk7d+PdElbVdWk7QWsO9+dMTAlZWIQDAKOweJIBtOpcfwClaJgfLHIF45YYMRgY56pFP35QN43A4W1fXVKvhwpMByK94pJUKEloXBUPwz0m3az7V/fYO9jBSMLq1qazyWFcPq/J9YhpepKEBunsBhfTn4kH1OGotYgbevL1F5nGDQL5lqpOGLONC/kiv3RQbKuY/wmMkIxzKJr9ew3ON3Wfo+7r4L5vFzNfdeTLKNzLIweHEqqc6kVqJqP4b3tdl3bdbu2d988Bsx0"></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'14262311','blog_tz':'2','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'14262311','v':'wpcom','tz':'2','user_id':'0','subd':'petiteanglaise'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlXzhxdW0vQ1hzcFE3aUFOUjg2Z2sxLXYlMXwsPVRFfjk1RkZUKz9jTHFvci9mNzJHb2NHVj15R1lydlUtaj1vMU1UMkFYQS5GR3dMZkkuLlZCN3VZVHpRWU1PNElzektmQ1h3TGIzMWZVVzIlX2hlMVkwaW1oWVF2bk1mTFJ6UG9KRGZjPU1STXdDa2VzUGx0LnMlQiwuLXwxY2g0b0JPPTJdU1s0SXctQjRRS25udFpDeTc0PXF+MnxDQ1Rr'}]);
+_stq.push([ 'clickTrackerInit', '14262311', '0' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+ </body>
+</html>

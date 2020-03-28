@@ -1,0 +1,80 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / articles / value bubbles for range inputs author chris coyier 16 comments join conversation published mar 26, 2020 personalized marketing with mailchimp range inputs in html are like this: <input type="range" name="quantity" min="1" max="10"> in browsers that support them, they look like this: now that's great and all. you could use it for anything where you want to collect a number from a user that has an enforced minimum and maximum value. but notice anything weird? all by itself, that range input doesn't communicate to the user what number they will actually be submitting. now if your input is something like "how are you feeling? left for sad, right for happy." - then fine, you probably don't need to show the user a number. but i would wager it's more common that you'll need to show the number than not show it. to be fair, the spec says: the input element represents a control for setting the element's value to a string representing a number, but with the caveat that the exact value is not important, letting uas provide a simpler interface than they do for the number state. but c'mon, just because we want a cool slider doesn't automatically mean we should prevent the user from knowing the submitted value. i wouldn't necessarily say browsers should alter their ui control to show that number. i am saying we should build that ourselves! this is the perfect use case for the <output> tag, which is specifically for values calculated by form elements. here is a super simple implementation of how you might use it: <input type="range" name="foo">
+<output for="foo" onforminput="value = foo.valueasnumber;"></output> update! new version with vanilla javascript that also works better. our goal here is to display a "bubble" that shows the current value of a range input. setting the value of our "bubble" from the value of the input is a matter of pulling the range value and plopping it in the bubble: range.addeventlistener("input", () => {
+  bubble.innerhtml = rangel.value;
+}); the trick is positioning the bubble along the range input so it slides alongside the "thumb". to do that, we'll need to calculate what % the bubble needs to be scooted to the left. so let's make a function to do that to keep things a smidge cleaner: range.addeventlistener("input", () => {
+  setbubble(range, bubble);
+});
+
+function setbubble(range, bubble) {
+  const val = range.value;
+  const min = range.min ? range.min : 0;
+  const max = range.max ? range.max : 100;
+  const newval = number(((val - min) * 100) / (max - min));
+  bubble.innerhtml = val;
+
+  // sorta magic numbers based on size of the native ui thumb
+  bubble.style.left = newval = "%";
+} here we're making sure we account for the range inputs min and max attributes and calculating a % position between 0-100 based on the current value in that range. not all ranges are the default 0-100 numbers, so say a range was at value 50 in a range of 0 to 200, that would be 25% of the way. this accounts for that. but it has one annoying flaw: the bubble is too far to the left at the start and too far to the right at the end. on range inputs, the thumb doesn't hang off the left edge so it's center is at the start, and same at the end. like a scrollbar, the edges of the thumb stop within the track. we can use some magic numbers there that seem to work decently well across browsers: // sorta magic numbers based on size of the native ui thumb
+  bubble.style.left = `calc(${newval}% + (${8 - newval * 0.15}px))`; here's that final demo: codepen embed fallback i was inspired to poke around with this because reader max globa wrote in with their version which i'll post here: codepen embed fallback a cool aspect of max's version is that the range input is css-styled, so the exact size of the thumb is known. there are some numbers that feel rather magic in the javascript math, but at least they are based on real numbers set in the css about the size of the thumb. other versions dave olsen ported the (original) idea to not have a dependency on jquery. here's that version: codepen embed fallback sean stopnik: codepen embed fallback simurai: codepen embed fallback vincent durand: codepen embed fallback don't forget range input can have datalists which put little notches on them which is kinda cool. ana tudor has a massive collection, many of which indicate the current value through their design. 😬 old version from original version of this post (jquery, plus doesn't work as well) just leaving this in here for historical reasons. let's pull in our friend jquery and get our css on. this goal is below. any range input, any time, any min/max/step - we put a bubble above it showing the current value. let's style the output element first. we'll absolutely position it above the input. that gives us the ability to adjust the left value as well, once we figure out with javascript what it should be. we'll fancy it up with gradients and border-radius, and even add a little pointer triangle with a pseudo-element. output { 
+  position: absolute;
+  background-image: linear-gradient(top, #444444, #999999);
+  width: 40px; 
+  height: 30px; 
+  text-align: center; 
+  color: white; 
+  border-radius: 10px; 
+  display: inline-block; 
+  font: bold 15px/30px georgia;
+  bottom: 175%;
+  left: 0;
+  margin-left: -1%;
+}
+output:after { 
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid #999999;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -1px;
+} now what we need to do is watch all range inputs for a change in their value. our goal is to shift the left position of the bubble in pace with the slider. that's not the simplest thing in the world, being that sliders can be of any width and any minimum or maximum value. we're going to have to do a little math. here's all the jquery javascript, commented up: // dom ready
+$(function() {
+ var el, newpoint, newplace, offset;
+ 
+ // select all range inputs, watch for change
+ $("input[type='range']").change(function() {
+ 
+   // cache this for efficiency
+   el = $(this);
+   
+   // measure width of range input
+   width = el.width();
+   
+   // figure out placement percentage between left and right of input
+   newpoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
+   
+   // janky value to get pointer to line up better
+   offset = -1.3;
+   
+   // prevent bubble from going beyond left or right (unsupported browsers)
+   if (newpoint < 0) { newplace = 0; }
+   else if (newpoint > 1) { newplace = width; }
+   else { newplace = width * newpoint + offset; offset -= newpoint; }
+   
+   // move bubble
+   el
+     .next("output")
+     .css({
+       left: newplace,
+       marginleft: offset + "%"
+     })
+     .text(el.val());
+ })
+ // fake a change to position bubble at page load
+ .trigger('change');
+}); the one gross part in there is that 1.3 value. i was trying to line up the tip of the bubble's triangle with the center of the slider. it's not easy, because the slider's center is never 100% left or right. that value isn't perfect, nor perfectly implemented, but it's better than not having it. as a bonus, browsers that don't support the range input still get the bubble action. the above code depends on the range inputs having a specified min and max value. if they don't it kinda breaks. i think it would be weird to use a range input without specifying these things, although if you don't it seems they default to 0 and 100. to bulletproof this, you'd grab each attribute, test it, and if it didn't look right fix it. something like: var minvalue, maxvalue;
+if (!el.attr("min")) { minvalue = 0; } else { minvalue = el.attr("min"); } ...then use the minvalue variable in the math. and do similar for max. anyway, here's the live demo: codepen embed fallback our learning partner need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. need some front-end development training? frontend masters is the best place to get it. they have courses on all the most important front-end technologies, from react to css, from vue to d3, and beyond with node.js and full stack. comments david clarke permalink to comment# april 13, 2011 this is pretty sweet! thanks chris! how about bubbles that only appear as you slide, then fade out when you release? :p reply aaron stone permalink to comment# april 13, 2011 they’re not bad, but then, if this were implemented natively, it would’ve been really cool. by the way, if the ‘janky’ value could be random (within a range of course) every time the slider’s value changes, then the odd-looking offset seen in windows (mac and windows sliders line up differently) would be less prominent. but then, you tried your best, and it’s better than other ‘complex’ mathematical approaches would yield. also, dimming <output> when the mouse isn’t on the slider would be cool. oh, this brings a question in my mind: if you, for example, reduce the opacity of the <output> element, then would it also affect the opacity of the :after pseudo-element? reply josh l permalink to comment# april 13, 2011 awesome. i can’t wait to do stuff like this natively. your example is exactly what i do in one of my company’s apps: http://www.carprices.com/research.rpro.html click “search by price range” to see a slider with a pseudo “output” element. as you can see i’ve encountered similar difficulties getting the value bubble to line up with the center of the range slider’s “thumb”. interesting that html5’s range slider has no concept of a “thumb” or its position, leaving you to calculate its position yourself. hopefully that is something that will change by the time we see wide support for this. reply michał czernow permalink to comment# april 13, 2011 this site: http://wufoo.com/html5/types/8-range.html seems to be totally blank at least in new opera 11.10. looks like problem with z-index. it’s a bit irony, because opera is the only browser listed on the site, that fully supports range input :). reply chris coyier permalink to comment# april 14, 2011 uh oh, that’s weird. i can’t reproduce it though. running 11.10 here and it loads fine. michał czernow permalink to comment# april 14, 2011 oh! you’re right, works perfectly. though i checked it on windows 7. i noticed the bug on windows xp. hm… i’ll check it again and if something still will be wrong, i’ll let you know. michał czernow permalink to comment# april 16, 2011 ok, bug still exists, but apparently on windows xp (sp 3). i haven’t checked it on vista. i had to only turn off those declarations: left: -3500px; opacity: 0; for “#content, h1 section” selector and content becomes accessible. amit permalink to comment# april 14, 2011 chris, great post! you can do some really cool effects with this! i’ll definitely try it myself. thanks reply joe permalink to comment# april 14, 2011 why is it a a bonus that browsers that don’t support the range input still get the bubble action? you get the exact same value twice… as long as one doesn’t replace that fallback-inputfield with a slider via javascript the bubble is unnecessary reply html codes dude permalink to comment# april 14, 2011 brilliant stuff. for one i love how you style the bubble. secondly it’s relatively simple way to add a lot better usability to the slider element. reply jatin permalink to comment# april 14, 2011 brilliantly written article. 3 cheers to chris. reply ion permalink to comment# april 15, 2011 how about ie reply branden permalink to comment# april 15, 2011 on the “note”, because jquery’s $().attr() function returns undefined if the attribute does not exist you may do something like this to simplify and shorten the code for that. var minval, maxval; minval = el.attr("min") || 0; maxval = el.attr("max") || 0; reply shane permalink to comment# april 19, 2011 i wish i could do this stuff natively, then i wouldn’t have to use 5000 lines of code/libraries just to do these simple sliders: http://www.zirgo.com/ reply huang47 permalink to comment# december 15, 2013 it’s awesome i was trying to create several variations by range input, however, the behavior is a bit different on ios webkit which can not “tap and set value” like the other webkit can do http://codepen.io/huang47/full/ndcji any insights? reply nyemcsok janos permalink to comment# april 18, 2014 the solution is straight. replace the range thumb with output :before/after reply leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter notify me of follow-up comments by email. copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. related how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

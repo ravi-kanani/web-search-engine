@@ -1,0 +1,535 @@
+<!doctype html>
+<html class="no-js" lang=""> 
+ <head> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="x-ua-compatible" content="ie=edge"> 
+  <title>Privacy Requests Form</title> 
+  <link rel="icon" type="image/png" href="/bd/assets/img/favicon.ico"> 
+  <meta name="description" content=""> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="assets/css/main.css"> <!-- Bootstrap CSS --> 
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> <!-- Include the stylesheet for country select --> 
+  <link rel="stylesheet" href="assets/css/bootstrap-formhelpers.css"> 
+  <script src="/bd/assets/js/jquery-3.2.1.min.js"></script> 
+  <script src="/bd/assets/js/bootstrap.3.3.7.min.js"></script> <!-- Include the js for country select --> 
+  <script src="assets/js/bootstrap-formhelpers.js"></script> 
+  <style>
+        body {
+            font-family: "Open Sans","Century Gothic", Gadget, sans-serif;
+        }
+
+        .checkbox+.checkbox, .radio+.radio {
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 992px) {
+            .container {
+                margin: 5px 15px !important;
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="dsar-content" style="display: none;"> 
+   <div class="container" style="margin-top: 20px;"> 
+    <div class="row bottom"> 
+     <div id="header-logo">
+      <img src="assets/img/default.png">
+     </div>
+     <hr> 
+     <h1 class="dsar-title">Privacy Requests Form</h1> 
+     <p class="dsar-descr">This form should be used to make privacy requests or to ask privacy-related questions. For an overview of rights that may be available to you, please refer to our <a href="https://www.endurance.com/privacy/privacy" target="_blank">Privacy Notice</a>. </p> 
+     <p> If you are seeking correction of your personal information, please log in to your account and update your information or contact your customer support team. </p> 
+     <p> If you are making a request on behalf of someone else, please use the form located <a href="https://endurance.clarip.com/dsr/authorize">here</a>. </p> 
+    </div> 
+    <div class="row"> 
+     <p style="font-size: 12px;">* All fields are required unless marked optional.</p> 
+    </div> 
+    <div class="row"> 
+     <div class="col-md-4"> 
+      <div id="submit-form-message" class="messages"></div> 
+     </div> 
+    </div> 
+    <div class="row"> 
+     <div class="col-md-8"> 
+      <form id="dsar-form" class="validate-form" novalidate> 
+       <div id="details-container"> 
+        <div id="personal-section"> 
+         <div class="row"> 
+          <div class="col-md-6"> 
+           <fieldset id="user-metadata"> 
+            <div class="row"> 
+             <div class="col-md-12"> 
+              <h4 id="your-info-header" class="form-heading-subtitle" style="display: none;">Individual's Information</h4> 
+              <div class="form-group"> 
+               <input id="first-name" name="firstName" maxlength="100" type="text" class="form-control" placeholder="First Name" required> 
+              </div> 
+              <div class="form-group"> 
+               <input id="last-name" name="lastName" maxlength="100" type="text" class="form-control" placeholder="Last Name" required> 
+              </div> 
+              <div class="form-group"> 
+               <input id="email" name="email" maxlength="100" class="form-control" placeholder="Email" required> 
+              </div> 
+              <div class="form-group"> 
+               <input id="phone-number" name="phoneNumber" maxlength="20" type="text" class="form-control" placeholder="Phone Number" required> 
+              </div> 
+              <div class="form-group"> 
+               <input id="address1" name="address1" maxlength="200" type="text" class="form-control" placeholder="Address 1" required> 
+              </div> 
+              <div class="form-group"> 
+               <input id="address2" name="address2" maxlength="200" type="text" class="form-control" placeholder="Address 2 (optional)"> 
+              </div> 
+              <div class="form-group"> 
+               <input id="city" name="city" maxlength="100" type="text" class="form-control" placeholder="City" required> 
+              </div> 
+             </div> 
+            </div> 
+           </fieldset> 
+          </div> 
+         </div> 
+         <div class="row state-row"> 
+          <div class="col-md-6"> 
+           <h3 class="form-heading-title">State of residence</h3> 
+           <div class="form-group"> <select id="form-state" name="state" class="form-control input-large bfh-states" data-country="US" required></select> <small id="state-notification" class="help-block" data-bv-validator="notEmpty" data-bv-for="import-input" data-bv-result="INVALID" style="display:none">This form is currently available to California residents only. However, you can rest assured, we do not “sell” your information in the traditional sense of the word. We may use cookies, beacons or similar technologies to improve your website experience with us. If you have questions about our use of cookies, please review our <a href="https://www.endurance.com/privacy/privacy" target="_blank">Privacy Notice</a>.</small> 
+           </div> 
+          </div> 
+         </div> 
+         <fieldset id="zip-fieldset"> 
+          <div class="row"> 
+           <div class="col-md-6"> 
+            <div class="form-group"> 
+             <input id="zip" name="zip" type="text" maxlength="10" class="form-control" placeholder="Zip Code" required> 
+            </div> 
+           </div> 
+          </div> 
+         </fieldset> 
+         <div class="row"> 
+          <div class="col-md-6"> 
+           <h3 class="form-heading-title">Country of residence</h3> 
+           <div class="form-group"> <select id="form-country" name="country" class="form-control input-large bfh-countries" data-country="US" required></select> 
+           </div> 
+          </div> 
+         </div> 
+         <h4 class="form-heading-subtitle">Which company is this request intended for?</h4> 
+         <div id="brand-group" class="bottom form-group"> 
+          <div class="row"> 
+           <div class="col-md-6"> 
+            <div class="form-group"> <select id="brand-select" name="brand" class="form-control input-large" required> <option value="default"></option> <option value="a_small_orange">A Small Orange</option> <option value="app_machine">AppMachine</option> <option value="arvixe">Arvixe</option> <option value="big_rock">BigRock</option> <option value="bizland">Bizland</option> <option value="bluehost">Bluehost</option> <option value="buy_domains">BuyDomains</option> <option value="constant_contact">Constant Contact</option> <option value="domain_dot_com">Domain.com</option> <option value="dotster">Dotster</option> <option value="ecomdash">Ecomdash</option> <option value="e_host">eHost</option> <option value="fast_domain">FastDomain</option> <option value="fat_cow">FatCow</option> <option value="homestead">Homestead Technologies, INC</option> <option value="host_gator">HostGator</option> <option value="host_monster">HostMonster</option> <option value="i_page">iPage</option> <option value="i_power">IPOWER</option> <option value="jdi_backup">JDI Backup</option> <option value="just_cloud">JustCloud</option> <option value="just_host">JustHost</option> <option value="logic_boxes">LogicBoxes</option> <option value="mojo_marketplace">MOJO Marketplace</option> <option value="public_domain_registry">Public Domain Registry</option> <option value="reseller_club">ResellerClub</option> <option value="site_5">Site5</option> <option value="site_blog">SiteBlog</option> <option value="sitebuilder">Sitebuilder</option> <option value="sitelio">Sitelio</option> <option value="sitey">Sitey</option> <option value="social_booster">Social Booster</option> <option value="typepad">Typepad</option> <option value="vpslink">VPSLink</option> <option value="websitebuilder">WebsiteBuilder</option> <option value="other">Other</option> </select> 
+            </div> 
+           </div> 
+           <div class="col-md-4" style="display:none;"> 
+            <input id="brand-other-text" name="brand-other-text" type="text" class="form-control" placeholder="Brand Name" required> 
+           </div> 
+          </div> 
+         </div> 
+         <div id="brand-section-placeholder" class="row">
+          &nbsp;
+         </div> 
+         <div id="brand-section" style="display:none;"> 
+          <h4 class="form-heading-subtitle">What would you like to do?</h4> 
+          <div id="request-type-group" class="bottom form-group"> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Access" required> <span class="cr"><i class="cr-icon dot"></i></span> <span class="text default-text">Obtain the information we have about you</span> <span class="text non-ca-alt-text" style="display:none">Receive a copy of the information we have about you for yourself or to provide to a third party</span> <span class="text ca-alt-text">Access the information we have about you</span> <span class="text eea-alt-text">Access the information we have about you</span> </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Correction" required> <span class="cr"><i class="cr-icon dot"></i></span> Correct the information we have about you </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Deletion" required> <span class="cr"><i class="cr-icon dot"></i></span> Delete the information we have about you </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Portability" required> <span class="cr"><i class="cr-icon dot"></i></span> Ask us to transfer your information to a third party or to provide you with a copy of your information in a portable format to provide to a third party. </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Do Not Sell" required> <span class="cr"><i class="cr-icon dot"></i></span> Ask us not to sell the information we have about you to a third party </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Processing Objection" required> <span class="cr"><i class="cr-icon dot"></i></span> Ask us not to use the information we have about you in certain ways </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Automated Decision Objection" required> <span class="cr"><i class="cr-icon dot"></i></span> Ask us not to make decisions about you using your information without human intervention </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Feedback" required> <span class="cr"><i class="cr-icon dot"></i></span> Provide us with feedback </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Unsubscribe" required> <span class="cr"><i class="cr-icon dot"></i></span> Ask us to stop sending you marketing messages </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-12"> <label> <input type="radio" name="requestType" value="Inquiry" required> <span class="cr"><i class="cr-icon dot"></i></span> Ask us a privacy question </label> 
+            </div> 
+           </div> 
+           <div class="radio row"> 
+            <div class="col-md-3"> <label> <input type="radio" name="requestType" value="Other" required> <span class="cr"><i class="cr-icon dot"></i></span> Something else </label> 
+            </div> 
+            <div class="col-md-3"> 
+             <input id="other-text" name="other-text" type="text" class="form-control" placeholder="Description" style="display:none;" required> 
+            </div> 
+           </div> 
+          </div> 
+          <div class="row" style="margin-bottom: 30px;"> 
+           <div class="col-md-6"> 
+            <div class="form-group"> <textarea name="requestDescr" id="request-descr" class="form-control" cols="8" rows="5" placeholder="Please provide us with more details regarding this request." required></textarea> 
+            </div> 
+           </div> 
+          </div> 
+          <div id="verification-section"> 
+           <h3 class="form-heading-title">Verify Your Identity</h3> 
+           <p class="section2-descr"> In order to respond to your request, we need you to verify your identity. Please provide as much information as you can to help us respond to your request. </p> 
+           <div class="row"></div> 
+           <h4 class="form-heading-subtitle">Please provide us with more details regarding this request</h4> 
+           <p>Please provide us with your username and your main account email address or domain name.</p> 
+           <div class="row"> 
+            <div class="col-md-6"> 
+             <fieldset id="username-fieldset"> 
+              <div class="form-group"> 
+               <input id="username" name="username" maxlength="100" type="text" class="form-control" placeholder="Username" required> 
+              </div> 
+             </fieldset> 
+            </div> 
+           </div> 
+           <div class="or-group row"> 
+            <div class="form-group col-md-6"> 
+             <input id="account-email" name="account_email" maxlength="100" type="text" class="form-control" placeholder="Account Email" required> 
+            </div> 
+            <div class="col-md-6"> 
+             <div class="row"> 
+              <div class="col-md-1 boolean">
+                Or 
+              </div> 
+              <div class="form-group col-md-11"> 
+               <input id="domain-name" name="domain_name" maxlength="100" type="text" class="form-control" placeholder="Domain Name" required> 
+              </div> 
+             </div> 
+            </div> 
+           </div> <!-- brand-specifiic verification fields --> 
+           <div id="brand-specific-verification"> 
+            <div id="constant_contact-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="billing-contact" name="billing_contact" maxlength="100" type="text" class="form-control" placeholder="Billing Contact" required> 
+                 </div> 
+                </div> 
+                <div class="or-group row"> 
+                 <div class="form-group col-md-6"> 
+                  <input id="address" name="address" maxlength="200" type="text" class="form-control" placeholder="Address" required> 
+                 </div> 
+                 <div class="col-md-6"> 
+                  <div class="row"> 
+                   <div class="col-md-1 boolean">
+                     Or 
+                   </div> 
+                   <div class="form-group col-md-11"> 
+                    <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number" required> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <p>Please provide 2 out of 4 of the following:</p> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="date-last-login" name="date_last_login" maxlength="100" type="text" class="form-control" placeholder="Date of Last Login" required> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="additional-products" name="additional_products" maxlength="100" type="text" class="form-control" placeholder="Additional Products in the Account" required> 
+                 </div> 
+                </div> 
+                <h3 class="form-heading-subtitle">What payment method does your account use?</h3> 
+                <div class="form-group row"> 
+                 <div class="radio col-md-3"> <label> <input type="radio" name="payment" value="prepay" required> <span class="cr"><i class="cr-icon dot"></i></span> Prepay </label> 
+                 </div> 
+                 <div class="radio col-md-4"> <label> <input type="radio" name="payment" value="monthly_pay" required> <span class="cr"><i class="cr-icon dot"></i></span> Monthly Pay </label> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="contact-list" name="contact_list" maxlength="100" type="text" class="form-control" placeholder="Name of a Contact List in the Account" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="host_gator-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with one of the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="security-pin" name="security_pin" maxlength="100" type="text" class="form-control" placeholder="Security PIN" required> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="billing-password" name="billing_password" maxlength="100" type="text" class="form-control" placeholder="Billing Password" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="bluehost-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with one of the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="password-last-four" name="password_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Characters of Main Account Password" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="domain_dot_com-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with one of the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="i_page-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with one of the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="builder-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with one of the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="security-pin" name="security_pin" maxlength="100" type="text" class="form-control" placeholder="Security PIN" required> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="homestead-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with one of the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="security-pin" name="security_pin" maxlength="100" type="text" class="form-control" placeholder="Security PIN" required> 
+                 </div> 
+                </div> 
+                <div class="or-group row"> 
+                 <div class="form-group col-md-6"> 
+                  <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number" required> 
+                 </div> 
+                 <div class="col-md-6"> 
+                  <div class="row"> 
+                   <div class="col-md-1 boolean">
+                     Or 
+                   </div> 
+                   <div class="form-group col-md-11"> 
+                    <input id="billing-zip" name="billing_zip" maxlength="10" type="text" class="form-control" placeholder="Billing Zip Code" required> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="cc-fullname" name="cc_fullname" maxlength="100" type="text" class="form-control" placeholder="Full Name on Credit Card" required> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="a_small_orange-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="billing-zip" name="billing_zip" maxlength="100" type="text" class="form-control" placeholder="Billing Zip Code" required> 
+                 </div> 
+                </div> 
+                <div class="or-group row"> 
+                 <div class="form-group col-md-6"> 
+                  <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number" required> 
+                 </div> 
+                 <div class="col-md-6"> 
+                  <div class="row"> 
+                   <div class="col-md-1 boolean">
+                     Or 
+                   </div> 
+                   <div class="form-group col-md-11"> 
+                    <input id="last-paypall-trans-id" name="last_paypal_trans_id" maxlength="100" type="text" class="form-control" placeholder="Last PayPal Transaction ID" required> 
+                   </div> 
+                  </div> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+            <div id="default-verification" class="verification-options"> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <p>Please provide us with the following identity verification options located below.</p> 
+              </div> 
+             </div> 
+             <div class="row"> 
+              <div class="col-md-12"> 
+               <fieldset> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="security-pin" name="security_pin" maxlength="100" type="text" class="form-control" placeholder="Security PIN"> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="password-last-four" name="password_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Characters of Main Account Password"> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="last-invoice-amount" name="last_invoice_amount" maxlength="100" type="text" class="form-control" placeholder="Last Invoice Amount"> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="cc-last-four" name="cc_last_four" maxlength="4" type="text" class="form-control" placeholder="Last Four Digits of Credit Card Number"> 
+                 </div> 
+                </div> 
+                <div class="form-group row"> 
+                 <div class="col-md-6"> 
+                  <input id="last-paypall-trans-id" name="last_paypal_trans_id" maxlength="100" type="text" class="form-control" placeholder="Last PayPal Transaction ID"> 
+                 </div> 
+                </div> 
+               </fieldset> 
+              </div> 
+             </div> 
+            </div> 
+           </div> <!-- END brand-specifiic verification fields --> 
+          </div> <!-- END #verification-section --> 
+          <div class="row bottom"> 
+           <div class="col-md-6"> 
+            <img id="captcha" src="/securimage/securimage_show.php" alt="CAPTCHA Image" style="margin-bottom: 20px;"> 
+            <div class="form-group"> 
+             <input id="captcha-code" name="captchaCode" type="text" class="form-control" maxlength="6" required> 
+            </div> <a href="#" onclick="document.getElementById('captcha').src = '/securimage/securimage_show.php?' + Math.random(); return false">Change Image</a> 
+           </div> 
+          </div> 
+          <div class="row bottom"> 
+           <div class="col-md-6"> 
+            <input id="dsar-submit-btn" type="submit" class="dsar-submit-btn" value="Submit"> 
+           </div> 
+          </div> <!-- END brand-section --> 
+         </div> <!-- END personal-section --> 
+        </div> <!-- END details-container --> 
+       </div> 
+      </form> <!-- END col-md-8 --> 
+     </div> <!-- END row --> 
+    </div> <!-- END container --> 
+   </div> <!-- END dsar-content --> 
+  </div> 
+  <script type="text/javascript" src="assets/js/bootstrapValidator.min.js"> </script> 
+  <script src="assets/js/main.js"></script> 
+  <script>
+
+    function getFirstName() {
+                return $('#first-name').val();
+            }
+
+    function getLastName() {
+                return $('#last-name').val();
+            }
+
+    function getEmail() {
+                return $('#email').val();
+            }
+
+	function getRequestType() {
+                	return $('#request-type-group .radio:visible').find('input[name=requestType]:checked').val();
+        	}
+
+	function getRequestDescr() {
+        			return $('textarea#request-descr').val();
+        	}
+
+</script>  
+ </body>
+</html>

@@ -1,0 +1,835 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US"> 
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- This is Squarespace. --><!-- sirlin --> 
+  <base href=""> 
+  <meta charset="utf-8"> 
+  <title>Designing Puzzle Strike — Sirlin.Net — Game Design</title> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1407150974055-CY221FA56K86CJUX44RL/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico?format="> 
+  <link rel="canonical" href="http://www.sirlin.net/articles/designing-puzzle-strike"> 
+  <meta property="og:site_name" content="Sirlin.Net — Game Design"> 
+  <meta property="og:title" content="Designing Puzzle Strike — Sirlin.Net — Game Design"> 
+  <meta property="og:latitude" content="40.68640015743611"> 
+  <meta property="og:longitude" content="-74.02857044306643"> 
+  <meta property="og:url" content="http://www.sirlin.net/articles/designing-puzzle-strike"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:description" content="Puzzle Strike’s gameplay centers around the  crash gem system  which was inspired by  Puzzle Fighter &amp;nbsp;(which I was also lead designer of). The dynamics that result from it are interesting when played at high skill level or a low skill level so that gives the game a solid foundation to appea"> 
+  <meta property="og:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff376e4b0bbe0fce8a375/1412730094932/?format=1500w"> 
+  <meta property="og:image:width" content="800"> 
+  <meta property="og:image:height" content="450"> 
+  <meta itemprop="name" content="Designing Puzzle Strike — Sirlin.Net — Game Design"> 
+  <meta itemprop="url" content="http://www.sirlin.net/articles/designing-puzzle-strike"> 
+  <meta itemprop="description" content="Puzzle Strike’s gameplay centers around the  crash gem system  which was inspired by  Puzzle Fighter &amp;nbsp;(which I was also lead designer of). The dynamics that result from it are interesting when played at high skill level or a low skill level so that gives the game a solid foundation to appea"> 
+  <meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff376e4b0bbe0fce8a375/1412730094932/?format=1500w"> 
+  <link rel="image_src" href="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff376e4b0bbe0fce8a375/1412730094932/?format=1500w"> 
+  <meta itemprop="image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff376e4b0bbe0fce8a375/1412730094932/?format=1500w"> 
+  <meta itemprop="author" content="David Sirlin"> 
+  <meta itemprop="datePublished" content="2014-08-17T19:03:00-0700"> 
+  <meta itemprop="headline" content="Designing Puzzle Strike"> 
+  <meta itemprop="publisher" content="Sirlin.Net — Game Design"> 
+  <meta name="twitter:title" content="Designing Puzzle Strike — Sirlin.Net — Game Design"> 
+  <meta name="twitter:image" content="http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff376e4b0bbe0fce8a375/1412730094932/?format=1500w"> 
+  <meta name="twitter:url" content="http://www.sirlin.net/articles/designing-puzzle-strike"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Puzzle Strike’s gameplay centers around the  crash gem system  which was inspired by  Puzzle Fighter &amp;nbsp;(which I was also lead designer of). The dynamics that result from it are interesting when played at high skill level or a low skill level so that gives the game a solid foundation to appea"> 
+  <meta name="description" content=""> 
+  <script type="text/javascript" src="//use.typekit.net/ik/au4t79rroqWoEa7xdWAV5Rg1u2QKPWEFWo-obOQO2nMfel92fFHN4UJLFRbh52jhWD93ZRIXZ2wuZQsKwebaweBKFAZRFejkFgT0HKoD-W4C-At0SaBujW48Sagyjh90jhNlOeUzjhBC-eNDifUD-W4C-At0dcmXOYFTScUTdKoDSWmyScmDSeBRZPoRdhXCiaiaO1FTScUTdKo0ZWbCiaiaO1FTScUTdKoDSWmyScmDSeBRZPoRdhXK2YgkdayTdAIldcNhjPJ4Z1mXiW4yOWgXH6qJ73IbMg6gJMJ7fbKCMsMMeMC6MKG4f5J7IMMjMkMfH6qJtkGbMg6FJMJ7fbKzMsMMeMb6MKG4fOMgIMMj2KMfH6GJCwbgIMMjgPMfH6GJCSbgIMMj2kMfH6qJnbIbMg6eJMJ7fbK0MsMMegM6MKG4fJCgIMMjgkMfH6qJRMIbMg6sJMJ7fbKTMsMMeM66MKG4fHGgIMMjIKMfH6qJKbIbMg64JMJ7fbKHMsMMegw6MKG4fJZmIMIjMkMfH6qJ6u9bMs6FJMJ7fbKImsMgeMb6MKG4fJmmIMIj2KMfH6qJxubbMs6BJMJ7fbKMmsMgeMv6MKG4fJBmIMIjgkMfH6qJ689bMs6sJMJ7fbKYmsMgeM66MKG4fJymIMIjIKMfqMYEhzRggb.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cabin:700,700italic|Oswald:400|Rosarivo:400italic"> 
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script> 
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/commerce-bafd90bcf66e0ff16f8dc-min.en-US.js"></script>
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].css = ["//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css"]; })(SQUARESPACE_ROLLUPS, 'squarespace-commerce');</script> 
+  <link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/styles-compressed/commerce-5613ac0e38e3dfd8012aa6a57ae14c04-min.css">
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/performance-05c26a7ba97ad91a6081b-min.en-US.js" defer></script>
+  <script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/announcement-bar-e2fbe92a3604cd7ec3932-min.en-US.js"},"squarespace-audio-player":{"css":"//assets.squarespace.com/universal/styles-compressed/audio-player-52bdd87acccf92a19703e60e09c654bd-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/audio-player-991e7e1c1b3308738ed15-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-342036262b204974aa269-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-4d22db9ba7880e24bcd44-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-51aceea076ad0ff8aa83b-min.en-US.js"},"squarespace-comments":{"css":"//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/comments-e64031ca98dbe63037354-min.en-US.js"},"squarespace-commerce-cart":{"js":"//assets.squarespace.com/universal/scripts-compressed/commerce-cart-574df707b74266010398b-min.en-US.js"},"squarespace-dialog":{"css":"//assets.squarespace.com/universal/styles-compressed/dialog-afeb96ba160fb642a2d98c892a956065-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/dialog-bec10fad5a854d9b8562f-min.en-US.js"},"squarespace-events-collection":{"css":"//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/events-collection-f75316a66b099d806a536-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-fde3933cf0271ba5b3f63-min.en-US.js"},"squarespace-forms":{"css":"//assets.squarespace.com/universal/styles-compressed/forms-d21f3e517c32f4caba9f220beea0666d-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/forms-24ee632e09d923de05536-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-e23ee315df466f1dba9ec-min.en-US.js"},"squarespace-image-zoom":{"css":"//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/image-zoom-5a660e03e667b16c7a076-min.en-US.js"},"squarespace-pinterest":{"css":"//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/pinterest-4725f00d98ee2610ca950-min.en-US.js"},"squarespace-popup-overlay":{"css":"//assets.squarespace.com/universal/styles-compressed/popup-overlay-e984c5797664760d617b07bce15392a1-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/popup-overlay-08ddb1d2260e55deba97d-min.en-US.js"},"squarespace-product-quick-view":{"css":"//assets.squarespace.com/universal/styles-compressed/product-quick-view-3fa8fd4df0755e7a7878e60166ca3d61-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/product-quick-view-cc9a2874f8c4b6a3f27e6-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-828c2fbae302bd3e4fe16-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-f260a4594424060b57c10-min.en-US.js"},"squarespace-search-page":{"css":"//assets.squarespace.com/universal/styles-compressed/search-page-207da8872118254c0a795bf9b187c205-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/search-page-a3d76808795360256a5a6-min.en-US.js"},"squarespace-search-preview":{"js":"//assets.squarespace.com/universal/scripts-compressed/search-preview-9acb915547fb6c41d5a99-min.en-US.js"},"squarespace-share-buttons":{"js":"//assets.squarespace.com/universal/scripts-compressed/share-buttons-b7c8ee26ec3639fa3da50-min.en-US.js"},"squarespace-simple-liking":{"css":"//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/simple-liking-89bbd9e8e108b969eb994-min.en-US.js"},"squarespace-social-buttons":{"css":"//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/social-buttons-547a9a0004ff7f9768043-min.en-US.js"},"squarespace-tourdates":{"css":"//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/tourdates-69d260a4100c302369d4e-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-43724a83fe4cb8b953146-min.en-US.js"}},"pageType":50,"website":{"id":"50f14d35e4b0d70ab5fc4f24","identifier":"sirlin","websiteType":1,"contentModifiedOn":1564017090920,"cloneable":false,"siteStatus":{},"language":"en-US","timeZone":"America/Los_Angeles","machineTimeZoneOffset":-25200000,"timeZoneOffset":-25200000,"timeZoneAbbr":"PDT","siteTitle":"Sirlin.Net \u2014 Game Design","fullSiteTitle":"Designing Puzzle Strike \u2014 Sirlin.Net \u2014 Game Design","siteDescription":"<p>Site description goes here.</p>","location":{"mapZoom":11.0,"mapLat":40.68640015743611,"mapLng":-74.02857044306641,"addressTitle":"","addressLine1":"","addressLine2":"","addressCountry":""},"logoImageId":"538a6c53e4b07541307ca12b","shareButtonOptions":{},"logoImageUrl":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","authenticUrl":"http://www.sirlin.net","internalUrl":"http://sirlin.squarespace.com","baseUrl":"http://www.sirlin.net","primaryDomain":"www.sirlin.net","socialAccounts":[{"serviceId":2,"userId":"759231843","userName":"david.sirlin","screenname":"Sirlin Games","addedOn":1401585908216,"profileUrl":"http://www.facebook.com/SirlinGames","iconUrl":"http://graph.facebook.com/759231843/picture?type=square","metaData":{"service":"facebook"},"iconEnabled":true,"serviceName":"facebook"},{"serviceId":4,"userId":"64127998","userName":"Sirlin","screenname":"David Sirlin","addedOn":1416883541216,"profileUrl":"https://twitter.com/Sirlin","iconUrl":"http://pbs.twimg.com/profile_images/2194481794/pic4b_normal.jpg","collectionId":"5473ed55e4b029492ac9d740","iconEnabled":true,"serviceName":"twitter"}],"typekitId":"","statsMigrated":true,"imageMetadataProcessingEnabled":false,"screenshotId":"57e6e910","showOwnerLogin":false},"websiteSettings":{"id":"50f14d35e4b0d70ab5fc4f25","websiteId":"50f14d35e4b0d70ab5fc4f24","type":"Business","subjects":[{"systemSubject":"other","otherSubject":"Design/Art"},{"systemSubject":"design"}],"country":"US","state":"CA","simpleLikingEnabled":true,"mobileInfoBarSettings":{"style":1,"isContactEmailEnabled":true,"isContactPhoneNumberEnabled":true,"isLocationEnabled":true,"isBusinessHoursEnabled":true},"announcementBarSettings":{"style":1,"text":"<p>test announcement is&nbsp;here, this is it.</p>","clickthroughUrl":{"url":"http://www.cnn.com","newWindow":true}},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":true,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":false,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"storeSettings":{"returnPolicy":"","termsOfService":"","privacyPolicy":"","expressCheckout":true,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"currenciesSupported":["USD","AUD","CAD","CHF","EUR","GBP"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"orderConfirmationInjectCode":"","showCustomCheckoutForm":false,"enableMailingListOptInByDefault":true,"sameAsRetailLocation":false,"merchandisingSettings":{"scarcityEnabledOnProductItems":false,"scarcityEnabledOnProductBlocks":false,"scarcityMessageType":"DEFAULT_SCARCITY_MESSAGE","scarcityThreshold":10,"multipleQuantityAllowedForServices":true,"restockNotificationsEnabled":false,"restockNotificationsMailingListSignUpEnabled":false,"relatedProductsEnabled":false,"relatedProductsOrdering":"random","soldOutVariantsDropdownDisabled":false},"isLive":true,"multipleQuantityAllowedForServices":true},"useEscapeKeyToLogin":true,"trialAssistantEnabled":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled","size":"small","shape":"rect","color":"white"},"ampEnabled":false},"cookieSettings":{"isCookieBannerEnabled":false,"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false,"cookieBannerText":"","cookieBannerTheme":"","cookieBannerVariant":"","cookieBannerPosition":"","cookieBannerCtaVariant":"","cookieBannerCtaText":""},"websiteCloneable":false,"collection":{"title":"Articles","id":"53ded0ace4b0ec2792626d72","fullUrl":"/articles","type":1},"item":{"title":"Designing Puzzle Strike","id":"53fff376e4b0bbe0fce8a375","fullUrl":"/articles/designing-puzzle-strike","publicCommentCount":0,"commentState":2,"recordType":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"TGutter":"3%","TMaxWidth":"300","TPerRow":"3","gallery-auto-play":"false","galleryPlaySpeed":"3.0","hide-thumbnail-titles":"true","outerPadding":"75px","pagePadding":"30px","product-gallery-auto-crop":"false","product-image-auto-crop":"true","thumbnail-layout":"Basic Grid","topPadding":"10px","tweak-v1-related-products-title-spacing":"50px"},"templateId":"4fd11f32c4aad9b01c9e624c","templateVersion":"7","pageFeatures":[1,2,4],"gmRenderKey":"QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4","betaFeatureFlags":["ORDERS-SERVICE-check-digital-good-access-with-service","ORDERS-SERVICE-reset-digital-goods-access-with-service","ORDER_SERVICE-submit-subscription-order-through-service","ORDER_SERVICE-submit-reoccurring-subscription-order-through-service","dg_downloads_from_fastly","generic_iframe_loader_for_campaigns","donations_customer_accounts","product-retriever-v2-enabled","domain_registration_via_registrar_service","domain_locking_via_registrar_service","domain_deletion_via_registrar_service","domain_info_via_registrar_service","content_item_settings","seven_one_image_overlay_opacity","commerce_restock_notifications","newsletter_block_captcha","new_billing_system","gallery_settings_71","commerce_onboarding_wizard","seven_one_portfolio_hover_layouts","commerce_onboarding_wizard_phase_two","domains_allow_async_gsuite"],"yuiEliminationExperimentList":[{"name":"statsMigrationJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"ContributionConfirmed-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"TextPusher-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MenuItemWithProgress-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"billingNewsletters-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"imageProcJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"QuantityChangePreview-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CompositeModel-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"HasPusherMixin-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"INACTIVE"},{"name":"ProviderList-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MediaTracker-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"pushJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"internal-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"BillingPanel-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"PopupOverlayEditor-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CoverPagePicker-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"}],"impersonatedSession":false,"tzData":{"zones":[[-480,"US","P%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}}};</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://www.sirlin.net/articles?format=rss"> 
+  <script type="application/ld+json">{"url":"http://www.sirlin.net","name":"Sirlin.Net \u2014 Game Design","description":"<p>Site description goes here.</p>","image":"//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <script type="application/ld+json">{"name":"Designing Puzzle Strike \u2014 Sirlin.Net \u2014 Game Design","url":"http://www.sirlin.net/articles/designing-puzzle-strike","datePublished":"2014-08-17T19:03:00-0700","headline":"Designing Puzzle Strike","author":"David Sirlin","publisher":{"name":"Sirlin.Net \u2014 Game Design","logo":{"@type":"ImageObject","url":"https://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/"},"@context":"http://schema.org","@type":"Organization"},"image":"http://static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/53ded0ace4b0ec2792626d72/53fff376e4b0bbe0fce8a375/1412730094932/?format=1500w","@context":"http://schema.org","@type":"Article"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&part=4"/><![endif]--> <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]--> <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/50f14d35e4b0d70ab5fc4f24/445/4fd11f32c4aad9b01c9e624c/50f14d36e4b0d70ab5fc5027/1353-05142015/1563941229235/site.css?&amp;filterFeatures=false"><!-- <![endif]--> 
+  <script type="text/javascript">
+  var ShopifyStoreConfig = {shop:"sirlin.myshopify.com", collections:[8156021]};
+  (function() {
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; 
+    s.src = "http://widgets.shopifyapps.com/assets/shopifystore.js";
+    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+  })();  
+</script> 
+  <noscript>
+   Please enable javascript, visit the &lt;a href="http://sirlin.myshopify.com"&gt;Sirlin Games Tabletop Store.
+  </noscript> <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53dddd843aed3211"></script> <!--Share This --> 
+  <script type="text/javascript">var switchTo5x=true;</script> 
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script> 
+  <script type="text/javascript">stLight.options({publisher: "63e23d4f-8cab-4d21-ba0d-bbfb30801340", doNotHash: true, doNotCopy: false, hashAddressBar: false});</script> <!--Shareaholic
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+    var shr = document.createElement('script');
+    shr.setAttribute('data-cfasync', 'false');
+    shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+    shr.type = 'text/javascript'; shr.async = 'true';
+    shr.onload = shr.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      var site_id = 'f85ba2f3bf2982871221fa38b75a6419';
+      try { Shareaholic.init(site_id); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(shr, s);
+  })();
+//]]>
+</script>
+-->
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script> 
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-776666-1', 'auto');ga('send', 'pageview');</script><!-- End of Squarespace Headers --> 
+ </head> 
+ <body class="blog-sidebar-display-right index-thumb-title-position-below index-item-layout-auto thumbnail-layout-basic-grid thumbnails-on-open-page-show-all hide-thumbnail-titles  layout-style-center page-borders-dotted  gallery-page-controls-tiny-thumbnails  social-icon-style-normal  hide-social-icons     event-thumbnails event-thumbnail-size-32-standard event-date-label event-date-label-time event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts  event-item-back-link    product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing tweak-v1-related-products-image-aspect-ratio-11-square tweak-v1-related-products-details-alignment-center newsletter-style-dark  opentable-style-light small-button-style-solid small-button-shape-rounded medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-square tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd collection-53ded0ace4b0ec2792626d72 view-item collection-type-blog collection-layout-default mobile-style-available logo-image has-primary-nav" id="item-53fff376e4b0bbe0fce8a375"> 
+  <div id="canvas"> 
+   <div id="mobileNav" class=""> 
+    <div id="mobileNavWrapper" class="wrapper"> 
+     <nav class="main-nav mobileNav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=" external-link"> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </div> 
+   <div id="mobileMenuLink">
+    <a>Menu</a>
+   </div> 
+   <header id="header"> 
+    <div id="logo" data-content-field="site-title"> 
+     <h1 class="logo"><a href="/"><img src="//static1.squarespace.com/static/50f14d35e4b0d70ab5fc4f24/t/538a6c53e4b07541307ca12b/1564017090920/?format=1000w" alt="Sirlin.Net — Game Design"></a></h1> 
+    </div> 
+    <script>
+        Y.use('squarespace-ui-base', function(Y) {
+          Y.all("#header .logo, #header .logo-subtitle").each(function (text) {
+            text.plug(Y.Squarespace.TextShrink, {
+              parentEl: Y.one('#header'),
+              triggerWidth: 750
+            });
+          });
+        });
+
+        // Show spinner on page load if loading bookmarked url
+        if (window.location.hash && window.location.hash !== '#') {
+          document.querySelector('body').className += ' index-loading';
+        }
+      </script> 
+    <div id="topNav" data-content-field="navigation"> 
+     <nav class="main-nav"> 
+      <ul> 
+       <li class="blog-collection"> <a href="/">Home</a> </li> 
+       <li class="page-collection"> <a href="/article-archive">Articles</a> </li> 
+       <li class="page-collection"> <a href="/podcast">Podcast</a> </li> 
+       <li class=""> <a href="http://www.sirlingames.com" target="_blank">Tabletop</a> </li> 
+       <li class="index-collection"> <a href="/graphic-design">Graphic Design</a> </li> 
+       <li class="page-collection"> <a href="/about">About</a> </li> 
+      </ul> 
+     </nav> 
+    </div> 
+   </header> 
+   <div class="page-divider"></div> 
+   <div class="extra-wrapper page-header"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Header Content: Articles" data-type="block-field" id="page-header-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <section id="page" role="main" data-content-field="main-content"> <!-- CATEGORY NAV --> 
+    <div class="article-wrapper"> 
+     <article class="hentry tag-set1 author-david-sirlin post-type-text" id="article-53fff376e4b0bbe0fce8a375" data-item-id="53fff376e4b0bbe0fce8a375"> <!--SPECIAL CONTENT--> <!--POST HEADER--> 
+      <header> 
+       <h1 class="entry-title"> <a href="/articles/designing-puzzle-strike" data-content-field="title">Designing Puzzle Strike</a> </h1> 
+       <div class="meta"> <span class="date"><time class="published" datetime="2014-08-17">August 17, 2014</time></span> 
+       </div> 
+      </header> <!--POST BODY--> 
+      <div class="body entry-content">
+       <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Post Body" data-type="item" data-updated-on="1409283260915" id="item-53fff376e4b0bbe0fce8a375">
+        <div class="row sqs-row">
+         <div class="col sqs-col-12 span-12">
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-1cba859093928d8f7554">
+           <div class="sqs-block-content">
+            <p>Puzzle Strike’s gameplay centers around the <em>crash gem system</em> which was inspired by <a href="/articles/balancing-puzzle-fighter">Puzzle Fighter</a>&nbsp;(which I was also lead designer of). The dynamics that result from it are interesting when played at high skill level or a low skill level so that gives the game a solid foundation to appeal to hardcore players and casual players. I’ll explain much more about what goes into pleasing each audience, but first let’s examine the crash gem system.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_68352">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:2500.0px;"> 
+              <div style="padding-bottom:56.63999938964844%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793824993-W0C1NC4BR0AD9SRDKKH1/ke17ZwdGBToddI8pDm48kEQlQCkXtWVeWnnwRQehYnd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0h8vX1l9k24HMAg-S2AFiem2KWmFPEhSHk5-oMjPHK2iTdkS4NiOng0hPWbyhNvlhQ/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793824993-W0C1NC4BR0AD9SRDKKH1/ke17ZwdGBToddI8pDm48kEQlQCkXtWVeWnnwRQehYnd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0h8vX1l9k24HMAg-S2AFiem2KWmFPEhSHk5-oMjPHK2iTdkS4NiOng0hPWbyhNvlhQ/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793824993-W0C1NC4BR0AD9SRDKKH1/ke17ZwdGBToddI8pDm48kEQlQCkXtWVeWnnwRQehYnd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0h8vX1l9k24HMAg-S2AFiem2KWmFPEhSHk5-oMjPHK2iTdkS4NiOng0hPWbyhNvlhQ/image-asset.jpeg" data-image-dimensions="2500x1416" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407bf20e4b05b80996165b0" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-5 span-5 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_39177">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:535.0px;"> 
+              <div style="padding-bottom:199.4392547607422%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793031355-2CU1839WQBJMB1UVD597/ke17ZwdGBToddI8pDm48kOh5GpYJuliG6Rx6ACfBk48UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdKsILvqri9VYjYaTtUbqsJthYrSjsuZxaEJcTeStFO_n2D-vlvcb9rwjDl9fL-JAvk/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793031355-2CU1839WQBJMB1UVD597/ke17ZwdGBToddI8pDm48kOh5GpYJuliG6Rx6ACfBk48UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdKsILvqri9VYjYaTtUbqsJthYrSjsuZxaEJcTeStFO_n2D-vlvcb9rwjDl9fL-JAvk/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793031355-2CU1839WQBJMB1UVD597/ke17ZwdGBToddI8pDm48kOh5GpYJuliG6Rx6ACfBk48UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8GRo6ASst2s6pLvNAu_PZdKsILvqri9VYjYaTtUbqsJthYrSjsuZxaEJcTeStFO_n2D-vlvcb9rwjDl9fL-JAvk/image-asset.png" data-image-dimensions="535x1067" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407bc07e4b010adbe15b750" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_51387">
+           <div class="sqs-block-content"> 
+            <h2 id="yui_3_17_2_1_1409792845655_51898">Crash Gem System</h2>
+            <h3 id="yui_3_17_2_1_1409792845655_51899">Gem Pile</h3>
+            <p id="yui_3_17_2_1_1409792845655_51900">Each player has a<em> gem pile</em> zone. Your gem pile fills up over time and if you end a turn with too many gems, you lose. Just before you lose, you’re usually at your most powerful though. You can use <em>crash gems</em> to break (remove) your gems and send them to an opponent. The more gems you have, the more ammunition you have. Also, the <em>height bonus</em> rule lets you draw more chips the more gems you have in your gem pile. Drawing more chips gives you a higher chance of drawing crash gems and other combo pieces that let you take more actions on your turn.</p>
+            <p id="yui_3_17_2_1_1409792845655_51901">You always pass through a period of being very powerful just before you lose. Just before you lose is when you have the most ammo and the biggest height bonus to draw more chips. This specific way of handling the comeback mechanism tends to make games close and intense. This same mechanism worked great in Puzzle Fighter and my goal was to translate that to board game form.</p> 
+            <h3 id="yui_3_17_2_1_1409792845655_56623">Combine</h3> 
+            <p id="yui_3_17_2_1_1409792845655_70964">You can use a Combine chip to join two gems in your gem pile together into a bigger gem. For example, combining two 1-gems gives you a single 2-gem. Combining a 1-gem and a 2-gem gives you a 3-gem. The largest gem you can have is a 4-gem.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_54320">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:558.0px;"> 
+              <div style="padding-bottom:24.19354820251465%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795755682-YDQSEVV0CGXLDUUF66RL/ke17ZwdGBToddI8pDm48kLSl9FsCYywMfOcJIE0n07BZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwGYzceU25_CZl99kwlnKv7gFDvY_KwLS1VG1oE3Gkr4ai8ZZTSJOfkMYF2r2kNMxg/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795755682-YDQSEVV0CGXLDUUF66RL/ke17ZwdGBToddI8pDm48kLSl9FsCYywMfOcJIE0n07BZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwGYzceU25_CZl99kwlnKv7gFDvY_KwLS1VG1oE3Gkr4ai8ZZTSJOfkMYF2r2kNMxg/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795755682-YDQSEVV0CGXLDUUF66RL/ke17ZwdGBToddI8pDm48kLSl9FsCYywMfOcJIE0n07BZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwGYzceU25_CZl99kwlnKv7gFDvY_KwLS1VG1oE3Gkr4ai8ZZTSJOfkMYF2r2kNMxg/image-asset.jpeg" data-image-dimensions="558x135" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c6abe4b020fb2b1424e7" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_72053">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1409794566197_64830">Combining makes your crashes stronger. A crash gem only breaks open a single one of your gems. If you use it on a 1-gem, it only reduces your pile height by 1 and only sends 1 gem to your opponent. If you use it on a 4-gem, it reduces your pile height by 4 and it sends 4 1-gems to your opponent. Then your opponent will have to deal with combining those before they can easily crash them back.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-6 span-6 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_61918">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:230.0px;"> 
+              <div style="padding-bottom:100.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795860045-T902UUZ0DCFHJEOJDKRB/ke17ZwdGBToddI8pDm48kFyvQgpE-cDbRnfvTlXH-IZZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7UAwRg-drVjy0tH40Gqh4FM6jvYyUIqPP6XKF1pKwp7mtAdYevOHKIsmBwRoZrJiTw/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795860045-T902UUZ0DCFHJEOJDKRB/ke17ZwdGBToddI8pDm48kFyvQgpE-cDbRnfvTlXH-IZZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7UAwRg-drVjy0tH40Gqh4FM6jvYyUIqPP6XKF1pKwp7mtAdYevOHKIsmBwRoZrJiTw/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795860045-T902UUZ0DCFHJEOJDKRB/ke17ZwdGBToddI8pDm48kFyvQgpE-cDbRnfvTlXH-IZZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7UAwRg-drVjy0tH40Gqh4FM6jvYyUIqPP6XKF1pKwp7mtAdYevOHKIsmBwRoZrJiTw/image-asset.png" data-image-dimensions="230x230" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c714e4b09b78e4e5dfee" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409794566197_65853">
+           <div class="sqs-block-content">
+            <h3>Counter-Crashing</h3>
+            <p>Counter-crashing lets you stop an opponent’s crashed gems from reaching you. This lets you control the pace of the game in a strategic way. If no one ever crashed any gems, the game would end after 10 turns. That’s because each player antes a 1-gem at the start of their turn and the game ends whenever a player ends their turn with a pile height of 10 or more. If you crash gems at someone, you might end the game sooner because you’re giving your opponent gems. That said, your opponent might crash gems right back at you later, so on average it still might take about 10 turns to end.</p>
+            <p>Counter-crashing lets you actually extend the game though because it removes gems from the system. Whenever an opponent crashes gems to you, before those gems reach your gem pile, you have the opportunity to counter-crash. To do that, you use a crash gem to break gems in your own pile and cancel out some of the incoming gems. For example, if 3 gems were coming at you, if you crashed 2 gems of your own, you’d cancel out 2 of the 3 incoming gems. That removed a total of 4 gems from the system (2 in your gem pile, and 2 of the incoming gems). If you counter-crash repeatedly, you’re buying yourself more turns. If your strategy involves getting lots of money and spending it later, or building up a powerful combo and unleashing it later, you need to make sure there <em>is</em> a later. On the other hand, if your strategy is all about rushdown as hard as possible, you want to end the game as soon as possible before other players build up powerful late-game combos.</p>
+            <p>This diagram shows how rushdown, economy, and defense strategies relate to each other as well as how good each of the 20 characters is at executing that kind of strategy:</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_30850">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1050.0px;"> 
+              <div style="padding-bottom:100.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795124852-UMT7Y3NYYX0E6UFR1OZ6/ke17ZwdGBToddI8pDm48kDkt_mEUwPAwWp3BKCAozPR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTm1v6GcKqh6mrhfxzW2tqo79JMOdxdw3gZxKvUtNIhuIodLUO5vPPWIex2d798oGnj/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795124852-UMT7Y3NYYX0E6UFR1OZ6/ke17ZwdGBToddI8pDm48kDkt_mEUwPAwWp3BKCAozPR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTm1v6GcKqh6mrhfxzW2tqo79JMOdxdw3gZxKvUtNIhuIodLUO5vPPWIex2d798oGnj/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795124852-UMT7Y3NYYX0E6UFR1OZ6/ke17ZwdGBToddI8pDm48kDkt_mEUwPAwWp3BKCAozPR7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTm1v6GcKqh6mrhfxzW2tqo79JMOdxdw3gZxKvUtNIhuIodLUO5vPPWIex2d798oGnj/image-asset.jpeg" data-image-dimensions="1050x1050" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c434e4b020fb2b142066" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-5 span-5 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_58091">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:950.0px;"> 
+              <div style="padding-bottom:100.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795833117-JJALZ499F8NWKN4MPMXQ/ke17ZwdGBToddI8pDm48kL7-Fwch-HI7maaYwSVFCKRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIZIeP51CWkoM8MFvrwwi0zonCjl4lHiV9Cye-EQWhHs4/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795833117-JJALZ499F8NWKN4MPMXQ/ke17ZwdGBToddI8pDm48kL7-Fwch-HI7maaYwSVFCKRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIZIeP51CWkoM8MFvrwwi0zonCjl4lHiV9Cye-EQWhHs4/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795833117-JJALZ499F8NWKN4MPMXQ/ke17ZwdGBToddI8pDm48kL7-Fwch-HI7maaYwSVFCKRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIZIeP51CWkoM8MFvrwwi0zonCjl4lHiV9Cye-EQWhHs4/image-asset.png" data-image-dimensions="950x950" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c6f9e4b09b78e4e5dfba" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409794566197_31114">
+           <div class="sqs-block-content">
+            <h3>Money System</h3>
+            <p>The money system is related to the crash gem system. You use money to buy more chips to add to your deck. Some of those chips give you more money themselves. Having a lot of money chips means you’ll be able to afford other more powerful chips that actually do something, but it’s a common mistake to put too much money in your deck in Puzzle Strike. You need to have Combines, Crash Gems, and various puzzle chips that actually do things.</p>
+            <p>Crashing and combining gems affects how much money you have. Each time you crash a gem, you get an extra +$1 to spend that turn. (If you crash a larger gem such as 3-gem, you still get only $1.) On the other hand, each time you combine two gems, you get a -$1 modifier on your money that turn. Breaking open gems releases the gem power inside, but it requires energy to fuse two gems together. And if you counter-crash (break open your gems on another player’s turn while they’re crashing at you), you don’t actually get to used that released energy; the $1 bonus disappears before you get reach your next buy phase.</p>
+            <p>Here’s a short summary of that:</p>
+            <p style="margin-left:40px">crash a gem: +$1<br>counter-crash a gem: +$0 (effectively)<br>combine two gems: -$1</p>
+            <p>What that means for strategy is that a rushdown strategy has a built-in drawback. If you want to be very aggressive, you’ll very quickly combine your gems into large gems and that will put you behind on money. You’ll then crash your big gems at your opponent(s) and hope to end the game very soon before your lack of money mattered.</p>
+            <p>The opposite strategy is to counter-crash a lot. That will remove gems from the system and give you more time (more turns) to develop a strong late-game deck. You’re still paying for the right to have more turns though in a way. At least you didn’t lose as much money as those paying for lots of combines, but you also didn’t gain the money you could have by crashing gems on your <em>own</em> turn.</p>
+            <p>Crashing gems on your own turn while only combining and counter-crashing the minimum amount you can get away with gives you the most money bonus. There are lots of tradeoffs here.</p>
+            <h2>Tournament Level Play</h2>
+            <p>It’s a good sign if a game is of high enough quality that it’s suitable to play at a tournament level. Even if you don’t care about ever attending a tournament for it, it means the game is solid enough to stand up to experts playing it. I find that reassuring because it means you can invest as much time in a game like that as you want and you don’t have to worry about it falling apart or becoming degenerate or boring if you ever get “too good” at it.</p>
+            <p>Here are the qualities I wanted, to ensure interesting play at high skill levels:</p>
+            <ul>
+             <li>Strategically interesting dynamics</li>
+             <li>Player interaction</li>
+             <li>Asymmetric design</li>
+             <li>Getting to the meat of the game quickly</li>
+             <li>Exciting moments built into the system</li>
+             <li>Solid rules</li>
+            </ul>
+            <h3>Strategically interesting dynamics</h3>
+            <p>We’ve already covered a lot of this part. The crash gem system and its interaction with the money system create unusual and interesting dynamics. There’s a lot for expert players to explore and a lot of ways they can express themselves in the game system.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_58927">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:980.0px;"> 
+              <div style="padding-bottom:34.08163070678711%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793327708-DWRLW868B6NNBXB0X9JM/ke17ZwdGBToddI8pDm48kDFhxwNWQ5Ocwhvi1S6Ar9tZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI3cepGdEqHgus2wg2y1YY7AFaR3OB6P8P9tDCld_IYMI/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793327708-DWRLW868B6NNBXB0X9JM/ke17ZwdGBToddI8pDm48kDFhxwNWQ5Ocwhvi1S6Ar9tZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI3cepGdEqHgus2wg2y1YY7AFaR3OB6P8P9tDCld_IYMI/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793327708-DWRLW868B6NNBXB0X9JM/ke17ZwdGBToddI8pDm48kDFhxwNWQ5Ocwhvi1S6Ar9tZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI3cepGdEqHgus2wg2y1YY7AFaR3OB6P8P9tDCld_IYMI/image-asset.png" data-image-dimensions="980x334" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407bd2fe4b0053aba2dcbb2" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_76269">
+           <div class="sqs-block-content">
+            <h3 id="yui_3_17_2_1_1409792845655_72903">Player interaction</h3>
+            <p id="yui_3_17_2_1_1409792845655_72904">A good competitive game needs lots of player interaction—the more the better. Games that are mostly solitaire that you play alongside other people and compare scores are really lacking in drama. They also lack in the primary skill test that you’d hope a competitive game would be about: how you act upon and react against an opponent.</p>
+            <p id="yui_3_17_2_1_1409792845655_72905">Puzzle Strike’s core mechansim is inherently interactive. Crashing your gems at an opponent affects that opponent and they can counter-crash to interact back with you. Separately from this, there are also “attack” chips (red fist) and “defense” chips (blue shield) that add yet another layer of interacting and reacting to opponents. Puzzle Strike is not a passive-aggressive game of indirect interaction—it’s highly interactive so that there’s more ways to get advantages over your opponents and more ways they can avoid that, too.&nbsp;</p>
+            <h3 id="yui_3_17_2_1_1409792845655_72906">Asymmetric design</h3>
+            <p id="yui_3_17_2_1_1409792845655_72907">Symmetric games are kind of a flat experience after you’ve been exposed to just how rich and varied asymmetric games are. Puzzle Strike has 20 characters, which means there’s 210 different character matchups in just the 1v1 mode of the game. Different matchups play very differently, which is interesting. Different characters allow players to find ones that match their own personality and playstyle. Also, it’s a wonderful property in any asymmetric game that you can learn just one character (or perhaps a small number of characters) and yet still participate in a system far more varied and nuanced than one without different characters to choose from.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_62410">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:901.0px;"> 
+              <div style="padding-bottom:35.62708282470703%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793409847-INWJWJK72KLANBW671DK/ke17ZwdGBToddI8pDm48kLF-quWIsKZvN7Z7vqRqDj9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI6yHP0apdaXrGnfHo1m6vCJxcGhWGgQdgLJDLBCkCVnA/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793409847-INWJWJK72KLANBW671DK/ke17ZwdGBToddI8pDm48kLF-quWIsKZvN7Z7vqRqDj9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI6yHP0apdaXrGnfHo1m6vCJxcGhWGgQdgLJDLBCkCVnA/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793409847-INWJWJK72KLANBW671DK/ke17ZwdGBToddI8pDm48kLF-quWIsKZvN7Z7vqRqDj9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PI6yHP0apdaXrGnfHo1m6vCJxcGhWGgQdgLJDLBCkCVnA/image-asset.png" data-image-dimensions="901x321" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407bd81e4b049b05127686f" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_62677">
+           <div class="sqs-block-content">
+            <p>Or to put it more bluntly, asymmetric games are just more hype in competitive play. The different characters in Street Fighter, the races in StarCraft, and the decks in Magic: the Gathering have all created tons of hype and excitement that wouldn’t have been possible with a single character, single race, and single deck that everyone plays.</p>
+            <h3>Getting to the meat of the game quickly</h3>
+            <p>This may not sound like an important property, but it really is in competitive play. The game needs to be as efficient as possible because if you have an event where you’re trying to get through many matches with many players (in swiss, or double elimination for example) then you need those matches to be as short as possible or else the tournament becomes too long to comfortably run. Every turn in the game should pull its weight. Even if you never play in a tournament, you should appreciate this anyway. Removing filler turns gets you to the fun that much faster.</p>
+            <p>Some deckbuilding games start you with what are basically blank cards in your deck, usually victory point cards that get added up at the end of the game. Puzzle Strike replaces those blank cards with your character chips. So your most interesting actions are there from the start, and you can actually start doing stuff on turn 1 and 2.</p>
+            <h3>Exciting Moments Built Into the System</h3>
+            <p>Any game that can hold up to competitive play is probably capable of generating exciting moments. That said, we can certainly influence how often these moments happen by adjusting the game design. Puzzle Strike is specifically tuned to intentionally create exciting moments often.</p>
+            <p>A lot of this is from the crash gem system, as described above. Players are inherently more powerful as they are about to lose, so close games are frequent. Another thing that makes exciting moments even more frequent is the way the game checks the lose condition. If you end your turn with a pile height of 10 or more, you lose, but you CAN have more than that during your turn. An opponent might send a lot of gems to you and you might start your turn with a total of 15 or more. Dire straits! But over the course of your turn, you might be able to do a huge combo that digs yourself down to 9 or fewer gems. The height bonus lets you draw the maximum number of chips in this case, so you’re actually more likely to pull off a spectacular turn that barely saves you.</p>
+            <h3>Solid rules</h3>
+            <p>This could be a whole article in itself, but basically game rules need to be very solid to allow experts to play as hard as they can. You can’t have rules that involve judgment calls of some third party. You can’t have rules that say you can’t make a certain kind of move “too much.” You can't require shuffling of cards that have different card backs.&nbsp;You can’t have rules about communication with other players that say “you can talk, but you can’t share certain types of information.” You can't have legal moves that make the game degenerate to play and then say it's "not in the spirit in of the game" to use those moves. There’s a whole lot of sloppy things you can’t do. Puzzle Strike is designed with serious play in mind, and has rules suitable for players who are trying their hardest to win.</p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_65712">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1500.0px;"> 
+              <div style="padding-bottom:60.66666793823242%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793566082-TH27RDJX7XVOXB9Z3XKC/ke17ZwdGBToddI8pDm48kL9Ph3rNDz_gH_sju8G15z0UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2duBAsBfTQHXrKAzoQRiI40TnCyul9jLWMDGWiGFmWEaUJvwGh1qtNWvMhYKnvaKhbA/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793566082-TH27RDJX7XVOXB9Z3XKC/ke17ZwdGBToddI8pDm48kL9Ph3rNDz_gH_sju8G15z0UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2duBAsBfTQHXrKAzoQRiI40TnCyul9jLWMDGWiGFmWEaUJvwGh1qtNWvMhYKnvaKhbA/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409793566082-TH27RDJX7XVOXB9Z3XKC/ke17ZwdGBToddI8pDm48kL9Ph3rNDz_gH_sju8G15z0UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2duBAsBfTQHXrKAzoQRiI40TnCyul9jLWMDGWiGFmWEaUJvwGh1qtNWvMhYKnvaKhbA/image-asset.jpeg" data-image-dimensions="1500x910" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407be1ee4b04f2a4fe945cd" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image sqs-col-5 span-5 float float-right" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_45854">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:299.0px;"> 
+              <div style="padding-bottom:161.5384521484375%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795694305-7S6E8ZYJG8PG5Z0I762I/ke17ZwdGBToddI8pDm48kOT9KInFBuypmTWv4dazSMJZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Yd9JIcDlHYnKy8BqcTBsOUcV_ruQCnBVYN4LxYZC_Fj-KNuCiVgASp9IQsRdYU6Xg/image-asset.png" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795694305-7S6E8ZYJG8PG5Z0I762I/ke17ZwdGBToddI8pDm48kOT9KInFBuypmTWv4dazSMJZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Yd9JIcDlHYnKy8BqcTBsOUcV_ruQCnBVYN4LxYZC_Fj-KNuCiVgASp9IQsRdYU6Xg/image-asset.png" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795694305-7S6E8ZYJG8PG5Z0I762I/ke17ZwdGBToddI8pDm48kOT9KInFBuypmTWv4dazSMJZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Yd9JIcDlHYnKy8BqcTBsOUcV_ruQCnBVYN4LxYZC_Fj-KNuCiVgASp9IQsRdYU6Xg/image-asset.png" data-image-dimensions="299x483" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c66ee4b020fb2b142441" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_59199">
+           <div class="sqs-block-content">
+            <h2>Casual Play</h2>
+            <p>For a game to have casual appeal, it actually needs some of the same things we just mentioned. Most importantly, it still needs interesting dynamics, it’s just that those must be apparent right away, even if you’re bad at the game. All the things that make Puzzle Strike interesting to experts still count here because even beginners can see how the crash gem system works.</p>
+            <p>Another element of casual play is being able to involve more players. Puzzle Strike has a 2v2 mode and a 3p and 4p free-for-all mode. The free-for-all mode is very interesting and I’d go so far as to say that it’s my contribution to the field of how to make free-for-all modes.</p>
+            <h3>Free-for-All</h3>
+            <p>A common problem with free-for-all modes is that they are too dominated by pre-game alliances. That means if you and a friend play with two other strangers, your ability to team up (even if it’s kind of unconsciously) with your friend can be too overwhelming. If a game is decided before you even start just because you have a friend in it, that’s poor design even for casual play.</p>
+            <p>Another common problem with free-for-all modes is that doing nothing is the best strategy. Let other players fight each other and weaken themselves, while you grow stronger. That’s really boring, yet it’s almost the default way that most free-for-all games work.</p>
+            <p>Finally, kingmaker and lame duck are common (and bad) qualities in free-for-all games. Kingmaker is when a player who can’t possibly win gets to decide who does win. Lame duck is when a player who can’t possibly win is technically still playing. This feels stupid and pointless to the lame duck player, and allowing this situation to happen at all greatly increases the chance of kingmaker situations.</p>
+            <p>Puzzle Strike’s free-for-all mode avoids and minimizes ALL of those problems. It works in a fairly unusual way. You are able to crash gems at any opponent you want, but you can’t actually gang up to eliminate someone that way. That’s because there’s no player elimination; instead, the game ends the moment that anyone ends their turn with a full gem pile. The player with the least gems in their gem pile wins.</p>
+            <p>Whenever someone is about to lose in this free-for-all mode, someone else is about to win. And anyone <em>else</em> playing has incentive to help the would-be loser to prevent the game from suddenly ending. They can do that by counter-crashing for that victim to help them out. To put it another way, whenever you’re about to lose, you always have at least one friend in the game whose incentive it is to help you. Who that friend is depends on the pile heights and what’s happening in the game, not on who you’re real life friends with outside of the game.</p>
+            <p>Furthermore, there isn’t really lame duck. If you’re still playing, you can still win. And the lack of lame duck means that kingmaker is minimized. There’s even a special rule to minimize it more: if you have a ton of gems in your gem pile and you’ll surely lose, you can’t just crash some in such a way as to decide the winner. Your crashed gems remain “floating” until you prove that you can dig yourself out below 10.</p>
+            <h3>Components</h3>
+            <p>I talked a lot about game dynamics that are fun in a casual setting, but there’s also a tactile and visual element to it all that’s really important.</p>
+            <p><strong>Boards</strong></p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_23343">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1000.0px;"> 
+              <div style="padding-bottom:84.19999694824219%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409794596823-L94JD5J4OJ4TWXTO4JWZ/ke17ZwdGBToddI8pDm48kCsccP8bkY9XyIv971O3ImwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcgr46KaSNloVBTPMVoGpJFRMhEZdlyhkQniMBeXfi9M-2dNEk7Fpg1s71OWgZIL4l/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409794596823-L94JD5J4OJ4TWXTO4JWZ/ke17ZwdGBToddI8pDm48kCsccP8bkY9XyIv971O3ImwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcgr46KaSNloVBTPMVoGpJFRMhEZdlyhkQniMBeXfi9M-2dNEk7Fpg1s71OWgZIL4l/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409794596823-L94JD5J4OJ4TWXTO4JWZ/ke17ZwdGBToddI8pDm48kCsccP8bkY9XyIv971O3ImwUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcgr46KaSNloVBTPMVoGpJFRMhEZdlyhkQniMBeXfi9M-2dNEk7Fpg1s71OWgZIL4l/image-asset.jpeg" data-image-dimensions="1000x842" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c224e4b0371c21180a66" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409794566197_40475">
+           <div class="sqs-block-content">
+            <p>The boards in Puzzle Strike help you organize your gem pile and other zones, and have some helpful reminder text. They also look like a video game (like Puzzle Fighter sort of) and that gets you in the spirit of things.</p>
+            <p><strong>Screens</strong></p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409794566197_42969">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1600.0px;"> 
+              <div style="padding-bottom:75.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795598068-QJMQCXDUJ8HYZUXCMTE1/ke17ZwdGBToddI8pDm48kCPztTQZpDiZMOuuCfUxiyx7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UYlQ-m0oNUh_9buvyC-f1CSdhG_dNlqULB2ZTz-ses64A-QPhXXvNcU0N8wN7BGx0g/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795598068-QJMQCXDUJ8HYZUXCMTE1/ke17ZwdGBToddI8pDm48kCPztTQZpDiZMOuuCfUxiyx7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UYlQ-m0oNUh_9buvyC-f1CSdhG_dNlqULB2ZTz-ses64A-QPhXXvNcU0N8wN7BGx0g/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795598068-QJMQCXDUJ8HYZUXCMTE1/ke17ZwdGBToddI8pDm48kCPztTQZpDiZMOuuCfUxiyx7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UYlQ-m0oNUh_9buvyC-f1CSdhG_dNlqULB2ZTz-ses64A-QPhXXvNcU0N8wN7BGx0g/image-asset.jpeg" data-image-dimensions="1600x1200" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c60ee4b0a69dedca2f43" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409794566197_43186">
+           <div class="sqs-block-content">
+            <p id="yui_3_17_2_1_1409794566197_43169">The screens (or “shields”) let you hide your chips from other players if you’re having trouble holding them in your hand. They’re pastel colored and they each depict a different game rule in Puzzle Strike in a fun way using 8-bit versions of the characters.</p>
+            <p><strong>Chips</strong></p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_33402">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:550.0px;"> 
+              <div style="padding-bottom:51.45454406738281%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409792875597-9IZZMWNKVZ41G8D39DNU/ke17ZwdGBToddI8pDm48kP4sHxRaKY4Vi3tOXVzATLVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpz2LbNwtOi2Fb1vuZpDqm-n8xwSPIJKg3-s2bTWMF0Z6WIcHxOKGs77Fmbez-AmV70/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409792875597-9IZZMWNKVZ41G8D39DNU/ke17ZwdGBToddI8pDm48kP4sHxRaKY4Vi3tOXVzATLVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpz2LbNwtOi2Fb1vuZpDqm-n8xwSPIJKg3-s2bTWMF0Z6WIcHxOKGs77Fmbez-AmV70/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409792875597-9IZZMWNKVZ41G8D39DNU/ke17ZwdGBToddI8pDm48kP4sHxRaKY4Vi3tOXVzATLVZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpz2LbNwtOi2Fb1vuZpDqm-n8xwSPIJKg3-s2bTWMF0Z6WIcHxOKGs77Fmbez-AmV70/image-asset.jpeg" data-image-dimensions="550x283" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407bb6be4b007c7983fde1e" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_33685">
+           <div class="sqs-block-content">
+            <p>Most deckbuilding games are playing with cards. These types of games require a lot of shuffling though, and the form factor of chips allows you to draw them from a bag without having to worry so much about frequently shuffling cards. Players who are bad at shuffling, and even players who are good at shuffling have often said the unusual form factor is kind of charming.</p>
+            <p><strong>The Box</strong></p>
+           </div>
+          </div>
+          <div class="sqs-block image-block sqs-block-image" data-block-type="5" id="block-yui_3_17_2_1_1409792845655_37209">
+           <div class="sqs-block-content"> 
+            <div class="
+          image-block-outer-wrapper
+          layout-caption-below
+          design-layout-inline
+          
+          
+          
+        " data-test="image-block-inline-outer-wrapper"> 
+             <figure class="
+              sqs-block-image-figure
+              intrinsic
+            " style="max-width:1000.0px;"> 
+              <div style="padding-bottom:100.0%;" class="
+                image-block-wrapper
+                
+                
+          
+        
+                has-aspect-ratio
+              " data-animation-role="image" data-description="" data-animation-override> 
+               <noscript>
+                <img src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795417407-6RBF0B3G3K1XO5QPNIEQ/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg" alt="">
+               </noscript>
+               <img class="thumb-image" data-src="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795417407-6RBF0B3G3K1XO5QPNIEQ/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg" data-image="https://images.squarespace-cdn.com/content/v1/50f14d35e4b0d70ab5fc4f24/1409795417407-6RBF0B3G3K1XO5QPNIEQ/ke17ZwdGBToddI8pDm48kPJXHKy2-mnvrsdpGQjlhod7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmihaE5rlzFBImxTetd_yW5btdZx37rH5fuWDtePBPDaHF5LxdCVHkNEqSYPsUQCdT/image-asset.jpeg" data-image-dimensions="1000x1000" data-image-focal-point="0.5,0.5" alt="" data-load="false" data-image-id="5407c559e4b06893c0ba3339" data-type="image"> 
+              </div> 
+             </figure> 
+            </div> 
+           </div>
+          </div>
+          <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1409792845655_37432">
+           <div class="sqs-block-content">
+            <p>It’s kind of bold to have a pink box! The cute characters and distinctive pink box have gotten a lot of people to try the game who would have been intimidated by a more serious looking box. Silly as that sounds, the packaging matters!</p>
+            <h2>Conclusion</h2>
+            <p>The crash gem system that’s the core of Puzzle Strike captures some of the best qualities of the Puzzle Fighter. It’s strategically interesting to experts, yet still accessible to beginners. Puzzle Strike is designed to be a solid tournament game, yet didn’t really have to sacrifice much of anything to have plenty of casual appeal too.</p>
+            <p>You can get the tabletop version <a href="http://www.sirlingames.com/collections/puzzle-strike">here</a> or play it online <a target="_blank" href="http://www.fantasystrike.com">here</a>.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div> <!--POST FOOTER--> 
+      <footer> 
+       <div class="meta"> 
+        <div class="first meta-row"> <span class="tags"><span class="tags-title">Tags</span> <a href="/articles/tag/set1" rel="tag">set1</a></span> 
+        </div> 
+        <div class="second meta-row"> <span class="sqs-simple-like" data-item-id="53fff376e4b0bbe0fce8a375" data-like-count="10"> <span class="like-icon"></span> <span class="like-count"></span> </span> 
+        </div> 
+       </div> 
+      </footer> 
+     </article> <!--PAGINATION--> 
+     <nav class="pagination clear"> <a class="prev-item" href="/articles/game-balance-and-yomi">← Game Balance and Yomi</a><a class="next-item" href="/articles/balancing-multiplayer-games-part-1-definitions">Balancing Multiplayer Games, Part 1: Definitions →</a> 
+     </nav> <!-- COMMENTS --> 
+     <section id="comments-" class="comments-wrapper"> 
+      <div class="squarespace-comments" id="comments-53fff376e4b0bbe0fce8a375" data-item-id="53fff376e4b0bbe0fce8a375" data-public-comment-count="0" data-comment-state="2"></div> 
+     </section> 
+    </div> 
+    <aside id="sidebar">
+     <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Blog Sidebar" data-type="block-field" data-updated-on="1491168332520" id="sidebarBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1">
+        <div class="sqs-block search-block sqs-block-search" data-block-type="33" id="block-yui_3_10_1_1_1401522710068_7239">
+         <div class="sqs-block-content"> 
+          <div class="sqs-search-ui-text-input sqs-search-ui-button-wrapper color-dark" data-source="block" data-preview="false" data-collection=""> 
+           <div class="spinner-wrapper"></div> 
+           <input type="search" class="search-input" value="" placeholder="Search"> 
+          </div> 
+         </div>
+        </div>
+        <div class="sqs-block markdown-block sqs-block-markdown" data-block-type="44" id="block-yui_3_17_2_1_1406864496533_163579">
+         <div class="sqs-block-content">
+          <h4 data-preserve-html-node="true">Best of Sirlin.net</h4>
+         </div>
+        </div>
+        <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1406864496533_163676">
+         <div class="sqs-block-content">
+          <p><a href="/ptw">Playing to Win book</a></p>
+          <p><a href="/codex">Codex Design (23 Articles)</a><br><a href="/articles/designing-pandante">Designing Pandante</a><br><a href="/articles/blivand-design">Blivand Design</a><br><a href="/articles/designing-yomi">Designing Yomi</a><br><a href="/articles/game-balance-and-yomi">Game Balance and Yomi</a><br><a href="/articles/designing-puzzle-strike">Designing Puzzle Strike</a></p>
+          <p><a href="/articles/sf">Street Fighter HDR Articles</a><br><a href="/articles/balancing-puzzle-fighter">Balancing Puzzle Fighter</a></p>
+          <p><a href="/articles/solvability">Solvability</a><br><a href="/articles/slippery-slope-and-perpetual-comeback">Slippery Slope</a><br><a href="/articles/subtractive-design">Subtractive Design</a></p>
+          <p><span style="font-size:15px">Multiplayer Game Balance:</span><br><a href="/articles/balancing-multiplayer-games-part-1-definitions">Part 1: Definitions</a><br><a href="/articles/balancing-multiplayer-games-part-2-viable-options">Part 2: Viable Options</a><br><a href="/articles/balancing-multiplayer-games-part-3-fairness">Part 3: Fairness</a><br><a href="/articles/balancing-multiplayer-games-part-4-intuition">Part 4: Intuition</a><br><a target="_blank" href="/s/GDC-2009-sirlin-handout6.pdf"><span style="font-size:15px">Game Balance Handout</span></a></p>
+          <p>Tutorial Videos:<br><a href="/articles/street-fighter-tutorial-videos">Street Fighter Tutorial</a><br><a href="/articles/smash-bros-brawl-tutorial-videos">Smash Bros. Brawl Tutorial</a></p>
+          <p><a href="/article-archive">More articles...</a></p>
+         </div>
+        </div>
+        <div class="sqs-block code-block sqs-block-code" data-block-type="23" id="block-yui_3_17_2_2_1491167759049_17133">
+         <div class="sqs-block-content">
+          <!--
+<div class="section" id="chatbutton">
+                    <a class="btn btnChat" href='/' 
+ onclick='window.open("http://widget.mibbit.com/?channel=%23sirlin&nick=LameGuest_%3F%3F%3F&settings=84a6b1d147e4438f1f78873d04c9ebd4&customloading=waiting%20for%20the%20IRC-server%20...&autoConnect=0","","status=no, toolbar=no, menubar=no, location=no, width=999,height=555")' title="Stop by the community chat room">Chat</a>
+</div>
+--> 
+          <div class="section" id="chatbutton"> <a class="btn btnChat" href="https://discord.gg/Q3qrGUq" title="Stop by the community chat room">Chat</a> 
+          </div> 
+          <p> </p>
+          <div class="section" id="stayConnected"> 
+           <ul> 
+            <li><a class="btn btnTwt" href="http://twitter.com/SirlinGames" title="Follow Sirlin Games on Twitter"></a></li> 
+            <li><a class="btn btnFb" href="http://www.facebook.com/SirlinGames" title="Like Sirlin Games on Facebook"></a></li> 
+            <li><a class="btn btnTwitch" href="http://www.twitch.tv/sirlingames" title="Watch Sirlin Games on Twitch TV"></a></li> 
+            <li><a class="btn btnRss" href="http://sirlin.squarespace.com/?format=rss" title="Subscribe to the Sirlin.net RSS"></a></li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </aside> 
+   </section> 
+   <div class="extra-wrapper page-footer"> 
+    <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Footer Content: Articles" data-type="block-field" data-updated-on="1408693965564" id="page-footer-53ded0ace4b0ec2792626d72">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12"></div>
+     </div>
+    </div> 
+   </div> 
+   <div class="page-divider"></div> 
+   <footer id="footer"> 
+    <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1410685816526" id="footerBlock">
+     <div class="row sqs-row">
+      <div class="col sqs-col-1 span-1">
+       <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-d3a95877fceaec72ddc3">
+        <div class="sqs-block-content">
+         <pre class="text-align-center"><a target="_blank" href="http://www.sirlingames.com">My tabletop games</a> | <a href="http://www.fantasystrike.com">My online games</a> | <a href="/ptw">Playing to Win</a> | <a href="/recommended-books">Recommended Books</a> | <a href="/about">About</a> | <a href="/contact">Contact</a></pre>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div id="socialLinks" class="social-links sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://www.facebook.com/SirlinGames" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+       </svg> 
+      </div> </a> <a href="https://twitter.com/Sirlin" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+      <div> 
+       <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+       </svg> 
+      </div> </a> 
+    </div> 
+   </footer> 
+  </div> 
+  <div></div> 
+  <script src="https://static1.squarespace.com/static/ta/4fd1028ee4b02be53c65dfb3/1353/scripts/site-bundle.js" type="text/javascript"></script> 
+  <script type="text/javascript" data-sqs-type="imageloader-bootstrapper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none" data-usage="social-icons-svg">
+   <symbol id="facebook-icon" viewbox="0 0 64 64">
+    <path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+   </symbol><symbol id="facebook-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+   </symbol><symbol id="twitter-icon" viewbox="0 0 64 64">
+    <path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" />
+   </symbol><symbol id="twitter-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z" />
+   </symbol>
+  </svg>  
+ </body>
+</html>

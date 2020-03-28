@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en-US"> 
+ <head> 
+  <meta charset="UTF-8">
+  <script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"073b4df364",applicationID:"70582482"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>The Professional Hobo - Traveling full-time in a financially sustainable way</title> 
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- This site is optimized with the Yoast SEO plugin v13.3 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="The adventures of Nora Dunn, who traveled full-time for 12 years as The Professional Hobo. Learn how to travel full-time in a financially sustianable way here !"> 
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"> 
+  <link rel="canonical" href="https://www.theprofessionalhobo.com/"> 
+  <link rel="next" href="https://www.theprofessionalhobo.com/page/2/"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="The Professional Hobo - Traveling full-time in a financially sustainable way"> 
+  <meta property="og:description" content="The adventures of Nora Dunn, who traveled full-time for 12 years as The Professional Hobo. Learn how to travel full-time in a financially sustianable way here !"> 
+  <meta property="og:url" content="https://www.theprofessionalhobo.com/"> 
+  <meta property="og:site_name" content="The Professional Hobo"> 
+  <meta name="p:domain_verify" content="481b0fe4c213c145aa6741e31f5a014c"> 
+  <script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.theprofessionalhobo.com/#organization","name":"The Professional Hobo","url":"https://www.theprofessionalhobo.com/","sameAs":["https://facebook.com/TheProfessionalHobo","https://twitter.com/hobonora"],"logo":{"@type":"ImageObject","@id":"https://www.theprofessionalhobo.com/#logo","inLanguage":"en-US","url":"https://s23639.pcdn.co/wp-content/uploads/2019/04/Hobo-Lady-Avatar.jpg","width":250,"height":250,"caption":"The Professional Hobo"},"image":{"@id":"https://www.theprofessionalhobo.com/#logo"}},{"@type":"WebSite","@id":"https://www.theprofessionalhobo.com/#website","url":"https://www.theprofessionalhobo.com/","name":"The Professional Hobo","inLanguage":"en-US","description":"Traveling full-time in a financially sustainable way","publisher":{"@id":"https://www.theprofessionalhobo.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.theprofessionalhobo.com/?s={search_term_string}","query-input":"required name=search_term_string"}]},{"@type":"CollectionPage","@id":"https://www.theprofessionalhobo.com/#webpage","url":"https://www.theprofessionalhobo.com/","name":"The Professional Hobo - Traveling full-time in a financially sustainable way","isPartOf":{"@id":"https://www.theprofessionalhobo.com/#website"},"inLanguage":"en-US","about":{"@id":"https://www.theprofessionalhobo.com/#organization"},"description":"The adventures of Nora Dunn, who traveled full-time for 12 years as The Professional Hobo. Learn how to travel full-time in a financially sustianable way here !"}]}</script> <!-- / Yoast SEO plugin. --> 
+  <link rel="dns-prefetch" href="//www.theprofessionalhobo.com"> 
+  <link rel="dns-prefetch" href="//scripts.mediavine.com"> 
+  <link rel="dns-prefetch" href="//fonts.googleapis.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="The Professional Hobo » Feed" href="https://www.theprofessionalhobo.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="The Professional Hobo » Comments Feed" href="https://www.theprofessionalhobo.com/comments/feed/"> 
+  <link id="wellness-pro-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/cache/css/472a2057876202a4e8f66d9b74026fd4.min.css" type="text/css" media="all">
+  <style id="wellness-pro-inline-css" type="text/css">
+.front-page-1 { background-image: url(//s23639.pcdn.co/wp-content/uploads/2017/07/Front-Page-widget-1.jpg); }.front-page-3 { background-image: url(//s23639.pcdn.co/wp-content/uploads/2017/07/Screen-Shot-2017-07-13-at-3.18.45-PM.png); }.front-page-5 { background-image: url(//s23639.pcdn.co/wp-content/uploads/2017/07/WP_20140502_13_26_24_Pro20140503145435.jpg); }
+
+		.footer-widgets a:focus,
+		.footer-widgets a:hover,
+		.genesis-nav-menu .sub-menu .current-menu-item > a:focus,
+		.genesis-nav-menu .sub-menu .current-menu-item > a:hover,
+		.genesis-nav-menu .sub-menu a:focus,
+		.genesis-nav-menu .sub-menu a:hover,
+		.site-footer a:focus,
+		.site-footer a:hover {
+			color: #84ba55;
+		}
+
+		button:focus,
+		button:hover,
+		input:focus[type="button"],
+		input:focus[type="reset"],
+		input:focus[type="submit"],
+		input:hover[type="button"],
+		input:hover[type="reset"],
+		input:hover[type="submit"],
+		.button:focus,
+		.button:hover,
+		.entry-content .button:focus,
+		.entry-content .button:hover,
+		.featured-content .book-featured-text-banner {
+			background-color: #84ba55;
+			color: #333333;
+		}
+
+		.button:focus:after,
+		.button:focus:before,
+		.button:hover:after,
+		.button:hover:before,
+		.genesis-nav-menu > .highlight a {
+			border-bottom-color: #84ba55;
+			border-top-color: #84ba55;
+		}
+
+		
+</style> 
+  <link id="wp-block-library-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-includes/css/dist/block-library/style.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundry-lazy-load-style-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/mu-plugins/foundry-mu/inc/performance/assets/css/lazy-load.min.css?ver=1.9.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundrysl-fa-css-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/social-networks-links-by-performance-foundry/assets/css/font-awesome.min.css?ver=0.1.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="foundrysl-css-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/social-networks-links-by-performance-foundry/assets/css/foundrysl.css?ver=0.1.1" type="text/css" media="none" onload="this.media='all'">
+  <link id="stcr-font-awesome-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/plugins/subscribe-to-comments-reloaded/includes/css/font-awesome.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="wellness-fonts-css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A400%2C700%7CArbutus+Slab&amp;ver=1.1.3" type="text/css" media="none" onload="this.media='all'">
+  <link id="dashicons-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-includes/css/dashicons.min.css?ver=5.3.2" type="text/css" media="none" onload="this.media='all'">
+  <link id="wellness-front-styles-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/cache/css/e36a21a0e5c65430430dc99d3d29a4d6.min.css" type="text/css" media="all">
+  <link id="foundry-styles-css" rel="stylesheet" href="https://s23639.pcdn.co/wp-content/cache/css/b2c23987a33f58d0f09d4916b8b236f0.min.css" type="text/css" media="none" onload="this.media='all'">
+  <script type="text/javascript" async data-noptimize="1" data-cfasync="false" src="https://scripts.mediavine.com/tags/the-professional-hobo.js?ver=5.3.2" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp"></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/cache/js/0ab5c658d1a29ec136d1c09d80480862.min.js" defer></script>
+  <link rel="https://api.w.org/" href="https://www.theprofessionalhobo.com/wp-json/"> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.theprofessionalhobo.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s23639.pcdn.co/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress 5.3.2"> <!-- BirdSend Pixel Start --> 
+  <script>
+	var _bsfInfo = {
+		wp: true,
+		ptype: 'post',
+		pcats: [ 'travel-gear' ],
+		ptags: [ '' ],
+	};
+	var _bsq = _bsq || []; _bsq.push(['init', '151']); _bsq.push(['track', 'PageView']); (function(w, d, s, id){ var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) { return; } js = d.createElement(s); js.id = id; js.src = 'https://cdn.birdsend.co/assets/static/js/pixel/main.js'; fjs.parentNode.insertBefore(js, fjs); }(window, document, 'script', 'birdsend-pixel-js'));	</script> <!-- BirdSend Pixel End --> 
+  <script type="text/javascript" async defer data-pin-color="red" data-pin-hover="true" src="https://s23639.pcdn.co/wp-content/plugins/pinterest-pin-it-button-on-image-hover-and-post/js/pinit.js"></script> 
+  <script>
+		jQuery(document).ready(function(){
+		jQuery(".is-cropped img").each(function(){
+			jQuery(this).attr("style", "min-height: 120px;min-width: 100px;");
+
+		});
+		jQuery('.avatar').attr('style', 'min-width: unset; min-height: unset;');
+	});
+		</script> 
+  <link rel="pingback" href="https://www.theprofessionalhobo.com/xmlrpc.php"> 
+  <meta name="\&quot;google-site-verification\&quot;" content="\&quot;dQ-HUt-flKU5LDdaZ0vacyp4M_uiJf52Rlvn9IxIgRo\&quot;"> <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-16446938-1"></script> 
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-16446938-1');
+</script> 
+  <style type="text/css">.site-title a { background: url(https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Header.png) no-repeat !important; }</style> 
+  <link rel="icon" href="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg" sizes="32x32"> 
+  <link rel="icon" href="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg" sizes="192x192"> 
+  <link rel="apple-touch-icon-precomposed" href="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg"> 
+  <meta name="msapplication-TileImage" content="https://s23639.pcdn.co/wp-content/uploads/2017/07/cropped-Hobo-Lady-Avatar-BIG-300x200.jpg"> 
+  <style type="text/css" id="wp-custom-css">
+			/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/		</style> 
+ </head> 
+ <body class="home blog custom-header header-image full-width-content genesis-breadcrumbs-hidden front-page">
+  <div class="sticky-message widget-area">
+   <div class="wrap">
+    <section id="text-456322515" class="widget widget_text">
+     <div class="widget-wrap">
+      <h3 class="widgettitle widget-title">Welcome!</h3> 
+      <div class="textwidget">
+       <p>Thanks for visiting. Check out my free <a href="https://www.theprofessionalhobo.com/category/travel-lifestyle-guides/" target="_blank" rel="noopener noreferrer">Travel Lifestyle Guides</a> to get started on your own travel journey!</p> 
+      </div> 
+     </div>
+    </section> <a class="dismiss dashicons dashicons-no-alt" href="#"><span class="screen-reader-text">Dismiss</span></a>
+   </div>
+  </div>
+  <div class="site-container">
+   <ul class="genesis-skip-link">
+    <li><a href="#genesis-nav-primary" class="screen-reader-shortcut"> Skip to primary navigation</a></li>
+    <li><a href="#genesis-content" class="screen-reader-shortcut"> Skip to main content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut"> Skip to footer</a></li>
+   </ul>
+   <header class="site-header">
+    <div class="wrap">
+     <div class="title-area">
+      <h1 class="site-title"><a href="https://www.theprofessionalhobo.com/">The Professional Hobo</a></h1>
+      <p class="site-description">Traveling full-time in a financially sustainable way</p>
+     </div>
+     <div class="widget-area header-widget-area">
+      <section id="foundry_social_links-2" class="widget widget_foundry_social_links">
+       <div class="widget-wrap"> 
+        <div class="foundry-social"> 
+         <div class="foundry-social__wrapper"> <a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.facebook.com/TheProfessionalHobo"><i class="fa fa-facebook foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.twitter.com/hobonora"><i class="fa fa-twitter foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://youtube.com/norablueskies"><i class="fa fa-youtube foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://feeds.feedburner.com/TheProfessionalHobo"><i class="fa fa-rss foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.pinterest.com/theprofessionalhobo/"><i class="fa fa-pinterest foundry-social__icon " aria-hidden="true"></i></a> 
+         </div> 
+        </div> 
+       </div>
+      </section> 
+     </div>
+    </div>
+   </header>
+   <nav class="nav-primary" aria-label="Main" id="genesis-nav-primary">
+    <div class="wrap">
+     <ul id="menu-main" class="menu genesis-nav-menu menu-primary js-superfish">
+      <li id="menu-item-4076" class="aboutLink menu-item menu-item-type-post_type menu-item-object-page menu-item-4076"><a href="https://www.theprofessionalhobo.com/about-the-professional-hobo/"><span>ABOUT</span></a></li> 
+      <li id="menu-item-9609" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9609"><a href="https://www.theprofessionalhobo.com/blog-latest-posts/"><span>BLOG</span></a></li> 
+      <li id="menu-item-9610" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9610"><a href="https://www.theprofessionalhobo.com/destinations-where-ive-been/"><span>DESTINATIONS MAP</span></a></li> 
+      <li id="menu-item-4072" class="travelLink menu-item menu-item-type-post_type menu-item-object-page menu-item-4072"><a href="https://www.theprofessionalhobo.com/travel-tips-resources/"><span>TRAVEL STUFF</span></a></li> 
+      <li id="menu-item-4075" class="contactLink menu-item menu-item-type-post_type menu-item-object-page menu-item-4075"><a href="https://www.theprofessionalhobo.com/contact/"><span>CONTACT</span></a></li> 
+      <li id="menu-item-11251" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11251"><a href="https://www.theprofessionalhobo.com/books-and-courses/"><span>BOOKS/COURSES</span></a></li> 
+     </ul>
+    </div>
+   </nav>
+   <div class="site-inner">
+    <div class="content-sidebar-wrap">
+     <main class="content" id="genesis-content">
+      <h2 class="screen-reader-text">Main Content</h2>
+      <div id="front-page-1" class="front-page-1 image-section">
+       <div class="flexible-widgets widget-area widget-full">
+        <div class="wrap">
+         <section id="text-456322499" class="widget widget_text">
+          <div class="widget-wrap"> 
+           <div class="textwidget">
+            <h3 class="large-title accent-color">Hi! I'm Nora.</h3> 
+            <p>I traveled full-time for 12 years (and I still travel half the year). I've lived in and traveled through 60+ countries and counting - in STYLE. And it all cost me way less than you might think. </p> 
+            <p>Stick around and I'll share my story and teach you my tricks. </p> 
+            <p><a class="button hexagon" href="https://www.theprofessionalhobo.com/welcome-professional-hobo/">New to the Site?<br> Start Here.</a></p> 
+           </div> 
+          </div>
+         </section> 
+        </div>
+       </div>
+      </div>
+      <div id="front-page-2" class="front-page-2">
+       <div class="flexible-widgets widget-area widget-fourths">
+        <div class="wrap">
+         <section id="featured-post-2" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">LATEST POSTS</h3> 
+           <article class="post-12822 post type-post status-publish format-standard has-post-thumbnail category-travel-gear entry">
+            <a href="https://www.theprofessionalhobo.com/pro-packing-hacks-here-are-the-best-travel-accessories/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/03/Pro-Packing-Hacks-Best-Travel-Accessories-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Pro Packing Hacks - Best Travel Accessories">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2020/03/Pro-Packing-Hacks-Best-Travel-Accessories-300x200.jpg" class="entry-image attachment-post" alt="Pro Packing Hacks - Best Travel Accessories">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/pro-packing-hacks-here-are-the-best-travel-accessories/">Pro Packing Hacks: Here are the Best Travel Accessories</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-4" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-12816 post type-post status-publish format-standard has-post-thumbnail category-uncategorized entry">
+            <a href="https://www.theprofessionalhobo.com/financial-case-study-phoebe-gill-freelance-seo-consultant-and-blogger/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/03/Phoebe-Gill-Your-Green-Grass-Project-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Phoebe Gill, Freelance SEO expert at Your Green Grass Project">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2020/03/Phoebe-Gill-Your-Green-Grass-Project-300x200.jpg" class="entry-image attachment-post" alt="Phoebe Gill, Freelance SEO expert at Your Green Grass Project">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-case-study-phoebe-gill-freelance-seo-consultant-and-blogger/">Financial Case Study: Phoebe Gill, Freelance SEO Consultant and Blogger</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-5" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-12783 post type-post status-publish format-standard has-post-thumbnail category-annual-expense-income-reviews entry">
+            <a href="https://www.theprofessionalhobo.com/my-location-independent-life-2019-expense-report/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/02/2019-Expense-Report-The-Professional-Hobo-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="2019 Expense Report - The Location Independent Life of The Professional Hobo">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2020/02/2019-Expense-Report-The-Professional-Hobo-300x200.jpg" class="entry-image attachment-post" alt="2019 Expense Report - The Location Independent Life of The Professional Hobo">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/my-location-independent-life-2019-expense-report/">My Location Independent Life: 2019 Expense Report</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-6" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-7038 post type-post status-publish format-standard has-post-thumbnail category-financial-case-studies entry">
+            <a href="https://www.theprofessionalhobo.com/financial-case-study-rachel-denning-family-online-teacher-and-web-services/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2015/10/The-Denning-Family-Rachel-and-Greg-Denning-and-their-children-traveling-full-time-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="The Denning Family, Rachel and Greg Denning and their children, traveling full-time!">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2015/10/The-Denning-Family-Rachel-and-Greg-Denning-and-their-children-traveling-full-time-300x200.jpg" class="entry-image attachment-post" alt="The Denning Family, Rachel and Greg Denning and their children, traveling full-time!">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-case-study-rachel-denning-family-online-teacher-and-web-services/">Financial Case Study: The Denning Family, Online Teacher and WorldSchool Academy</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+        </div>
+       </div>
+      </div>
+      <div id="front-page-3" class="front-page-3 image-section">
+       <div class="flexible-widgets widget-area widget-full">
+        <div class="wrap">
+         <section id="text-456322501" class="widget widget_text">
+          <div class="widget-wrap"> 
+           <div class="textwidget">
+            <p><object align="middle">
+              <center>
+               <p></p> 
+               <h3 class="accent-color">DESTINATIONS</h3> 
+               <p>Learn about the 60+ countries that I've lived in or traveled through. </p> 
+               <p><a class="button hexagon" href="https://www.theprofessionalhobo.com/destinations-where-ive-been/">Click Here!</a><br> </p>
+              </center></object></p> 
+           </div> 
+          </div>
+         </section> 
+        </div>
+       </div>
+      </div>
+      <div id="front-page-4" class="front-page-4">
+       <div class="flexible-widgets widget-area widget-fourths">
+        <div class="wrap">
+         <section id="featured-post-8" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">TOP POSTS</h3> 
+           <article class="post-11526 post type-post status-publish format-standard has-post-thumbnail category-top-posts category-travel-gear category-travel-lifestyle-guides entry">
+            <a href="https://www.theprofessionalhobo.com/checked-vs-carry-on-luggage-and-why-checked-is-best/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2018/05/Checked-vs.-Carry-On-Luggage-1-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Checked vs. Carry-On Luggage">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2018/05/Checked-vs.-Carry-On-Luggage-1-300x200.jpg" class="entry-image attachment-post" alt="Checked vs. Carry-On Luggage">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/checked-vs-carry-on-luggage-and-why-checked-is-best/">Checked vs. Carry-On Luggage (and Why Checked is Best)</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-9" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-5716 post type-post status-publish format-standard has-post-thumbnail category-financial-travel-tips category-top-posts entry">
+            <a href="https://www.theprofessionalhobo.com/financial-travel-tip-109-virtual-mailing-services/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2014/02/Your-Guide-to-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Virtual Mailing Services for travelers">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2014/02/Your-Guide-to-300x200.jpg" class="entry-image attachment-post" alt="Virtual Mailing Services for travelers">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-travel-tip-109-virtual-mailing-services/">Virtual Mailbox: The Easy Way to Get Mail When You Travel</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-10" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-9509 post type-post status-publish format-standard has-post-thumbnail category-life-as-a-full-time-traveler category-top-posts entry">
+            <a href="https://www.theprofessionalhobo.com/sordid-attempts-finding-love-on-the-road/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2017/07/Love-on-the-Road-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="finding love on the road feature pic">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2017/07/Love-on-the-Road-300x200.jpg" class="entry-image attachment-post" alt="finding love on the road feature pic">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/sordid-attempts-finding-love-on-the-road/">My Sordid Attempts at Finding Love on the Road</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-11" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-4984 post type-post status-publish format-standard has-post-thumbnail category-life-as-a-full-time-traveler category-top-posts entry">
+            <a href="https://www.theprofessionalhobo.com/brace-yourself-travel-isnt-all-roses-and-lollipops/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2013/06/Muskoka-HDR-4-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="travel isn't all roses and lollipops">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2013/06/Muskoka-HDR-4-300x200.jpg" class="entry-image attachment-post" alt="travel isn't all roses and lollipops">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/brace-yourself-travel-isnt-all-roses-and-lollipops/">Brace Yourself: Travel Isn’t All Roses and Lollipops</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-32" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">HOW-TO GUIDES</h3> 
+           <article class="post-6502 post type-post status-publish format-standard has-post-thumbnail category-life-as-a-full-time-traveler category-travel-lifestyle-guides entry">
+            <a href="https://www.theprofessionalhobo.com/how-to-become-fluent-in-spanish-and-other-languages/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2014/10/Become-Fluent-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="How to Become Fluent in Spanish (and other Languages)">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2014/10/Become-Fluent-300x200.jpg" class="entry-image attachment-post" alt="How to Become Fluent in Spanish (and other Languages)">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/how-to-become-fluent-in-spanish-and-other-languages/">How to Become Fluent in Spanish (and Other Languages)</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-33" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-4995 post type-post status-publish format-standard has-post-thumbnail category-financial-travel-tips category-travel-lifestyle-guides category-travel-planning entry">
+            <a href="https://www.theprofessionalhobo.com/financial-travel-tip-84-being-a-first-class-flyer/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2018/10/Frequent-Flyer-Miles-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Frequent Flyer Miles for beginners">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2018/10/Frequent-Flyer-Miles-300x200.jpg" class="entry-image attachment-post" alt="Frequent Flyer Miles for beginners">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-travel-tip-84-being-a-first-class-flyer/">A Beginner’s Guide to Frequent Flyer Miles and How to Start Travel Hacking Like a Pro</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-34" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-12454 post type-post status-publish format-standard has-post-thumbnail category-travel-gear category-travel-lifestyle-guides entry">
+            <a href="https://www.theprofessionalhobo.com/my-zero-waste-kit-for-travel-and-home/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2019/08/How-to-Travel-With-a-Zero-Waste-Kit-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="How to Travel With a Zero Waste Kit">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2019/08/How-to-Travel-With-a-Zero-Waste-Kit-300x200.jpg" class="entry-image attachment-post" alt="How to Travel With a Zero Waste Kit">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/my-zero-waste-kit-for-travel-and-home/">My Zero Waste Kit for Travel (and Home)</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-35" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-6516 post type-post status-publish format-standard has-post-thumbnail category-travel-gear category-travel-lifestyle-guides entry">
+            <a href="https://www.theprofessionalhobo.com/dealing-parasites-guide-clean-water-around-world/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2014/10/Clean-Drinking-Water-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="How to Get Clean Drinking Water Around the World">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2014/10/Clean-Drinking-Water-300x200.jpg" class="entry-image attachment-post" alt="How to Get Clean Drinking Water Around the World">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/dealing-parasites-guide-clean-water-around-world/">Dealing with Parasites: A Guide to Clean Water Around the World</a></h4>
+            </header>
+           </article>
+           <p class="more-from-category"><a href="https://www.theprofessionalhobo.com/category/travel-lifestyle-guides/" title="Travel Lifestyle Guides">More Travel Lifestyle Guides</a></p>
+          </div>
+         </section> 
+        </div>
+       </div>
+      </div>
+      <div id="front-page-5" class="front-page-5 image-section">
+       <div class="flexible-widgets widget-area widget-full">
+        <div class="wrap">
+         <section id="text-456322503" class="widget widget_text">
+          <div class="widget-wrap"> 
+           <div class="textwidget">
+            <h3 class="accent-color">Want Proof?</h3> 
+            <p>Full-Time travel can take many forms, and with my annual income and expense reports, I prove that it can be financially sustainable. </p> 
+            <p><a class="button hexagon" href="https://www.theprofessionalhobo.com/category/annual-expense-income-reviews/">See my Reports Here</a></p> 
+           </div> 
+          </div>
+         </section> 
+        </div>
+       </div>
+      </div>
+      <div id="front-page-6" class="front-page-6">
+       <div class="flexible-widgets widget-area widget-thirds">
+        <div class="wrap">
+         <section id="featured-post-29" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">Life on the Road / Travel Tales</h3> 
+           <article class="post-12726 post type-post status-publish format-standard has-post-thumbnail category-annual-expense-income-reviews category-life-as-a-full-time-traveler entry">
+            <a href="https://www.theprofessionalhobo.com/redefining-my-travels-in-2019-where-i-went/" class="alignnone" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2020/01/2019-recap-The-Professional-Hobo-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="2019 recap The Professional Hobo">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2020/01/2019-recap-The-Professional-Hobo-300x200.jpg" class="entry-image attachment-post" alt="2019 recap The Professional Hobo">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/redefining-my-travels-in-2019-where-i-went/">Redefining My Travels in 2019 (Where I Went)</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-30" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-5115 post type-post status-publish format-standard has-post-thumbnail category-life-as-a-full-time-traveler category-travel-gear category-travel-planning entry">
+            <a href="https://www.theprofessionalhobo.com/the-ultimate-packing-list-for-full-time-travel/" class="alignnone" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2013/07/The-Ultimate-Packing-List-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="The Ultimate Packing List for Full-Time Travel">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2013/07/The-Ultimate-Packing-List-300x200.jpg" class="entry-image attachment-post" alt="The Ultimate Packing List for Full-Time Travel">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/the-ultimate-packing-list-for-full-time-travel/">The Ultimate Packing List for Full-Time Travel and Long-Term Travel</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-31" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-12431 post type-post status-publish format-standard has-post-thumbnail category-life-as-a-full-time-traveler entry">
+            <a href="https://www.theprofessionalhobo.com/the-10-commandments-for-all-travelers/" class="alignnone" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2019/07/The-10-COMMANDMENTS-for-all-Travelers-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="The 10 COMMANDMENTS for all Travelers">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2019/07/The-10-COMMANDMENTS-for-all-Travelers-300x200.jpg" class="entry-image attachment-post" alt="The 10 COMMANDMENTS for all Travelers">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/the-10-commandments-for-all-travelers/">The 10 Commandments For All Travelers</a></h4>
+            </header>
+           </article>
+           <p class="more-from-category"><a href="https://www.theprofessionalhobo.com/category/life-as-a-full-time-traveler/" title="Life as a full-time traveler">More of Nora's Travel Tales</a></p>
+          </div>
+         </section> 
+         <section id="featured-post-25" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">Latest Vlogs</h3> 
+           <article class="post-12600 post type-post status-publish format-standard has-post-thumbnail category-canada category-vlog entry">
+            <a href="https://www.theprofessionalhobo.com/this-is-the-best-way-to-visit-newfoundland/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2019/10/How-Best-to-Visit-Newfoundland-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="How Best to Visit Newfoundland">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2019/10/How-Best-to-Visit-Newfoundland-300x200.jpg" class="entry-image attachment-post" alt="How Best to Visit Newfoundland">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/this-is-the-best-way-to-visit-newfoundland/">This is the Best Way to Visit Newfoundland</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-26" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-11787 post type-post status-publish format-standard has-post-thumbnail category-travel-gear category-travel-planning category-vlog entry">
+            <a href="https://www.theprofessionalhobo.com/my-travel-capsule-wardrobe-best-wrinkle-free-travel-clothes-for-women/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2018/09/My-Anatomie-Travel-Wardrobe-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="My Anatomie Travel Capsule Wardrobe: Best Wrinkle Free Travel Clothes for Women">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2018/09/My-Anatomie-Travel-Wardrobe-300x200.jpg" class="entry-image attachment-post" alt="My Anatomie Travel Capsule Wardrobe: Best Wrinkle Free Travel Clothes for Women">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/my-travel-capsule-wardrobe-best-wrinkle-free-travel-clothes-for-women/">My Travel Capsule Wardrobe: Best Wrinkle Free Travel Clothes for Women</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-27" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-5188 post type-post status-publish format-standard has-post-thumbnail category-travel-gear category-vlog entry">
+            <a href="https://www.theprofessionalhobo.com/my-search-for-the-perfect-travel-sandal/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2013/08/Perfect-Travel-Sandal-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="The Perfect Travel Sandal, revealed!">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2013/08/Perfect-Travel-Sandal-300x200.jpg" class="entry-image attachment-post" alt="The Perfect Travel Sandal, revealed!">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/my-search-for-the-perfect-travel-sandal/">My Search for the Perfect Travel Sandal</a></h4>
+            </header>
+           </article>
+           <p class="more-from-category"><a href="https://www.theprofessionalhobo.com/category/vlog/" title="Vlog">More Vlog Posts</a></p>
+          </div>
+         </section> 
+         <section id="featured-post-22" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">Financial Case Studies</h3> 
+           <article class="post-7024 post type-post status-publish format-standard has-post-thumbnail category-financial-case-studies entry">
+            <a href="https://www.theprofessionalhobo.com/financial-case-study-deborah-benbrook-rehoming-street-dogs/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2015/09/JAN-Deborah-Benbrook-Financial-Case-Study-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Deborah Benbrook Financial Case Study">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2015/09/JAN-Deborah-Benbrook-Financial-Case-Study-300x200.jpg" class="entry-image attachment-post" alt="Deborah Benbrook Financial Case Study">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-case-study-deborah-benbrook-rehoming-street-dogs/">Financial Case Study: Deborah Benbrook – Working Along the Way</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-23" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-7049 post type-post status-publish format-standard has-post-thumbnail category-financial-case-studies entry">
+            <a href="https://www.theprofessionalhobo.com/financial-case-study-dalene-and-pete-heck-writers-photographers-media-marketers/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2015/10/Dalene-and-Pete-Heck-of-Hecktic-Travels-Media-Marketers-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Dalene and Pete Heck of Hecktic Travels, Media Marketers">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2015/10/Dalene-and-Pete-Heck-of-Hecktic-Travels-Media-Marketers-300x200.jpg" class="entry-image attachment-post" alt="Dalene and Pete Heck of Hecktic Travels, Media Marketers">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-case-study-dalene-and-pete-heck-writers-photographers-media-marketers/">Financial Case Study: Dalene and Pete Heck – Writers, Photographers, Media Marketers</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-24" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-7011 post type-post status-publish format-standard has-post-thumbnail category-financial-case-studies entry">
+            <a href="https://www.theprofessionalhobo.com/financial-case-study-janet-brent-graphic-designer/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2015/09/Janet-Brent-Graphic-Designer-Financial-Case-Study-Update-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Janet Brent, Graphic Designer, Financial Case Study Update">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2015/09/Janet-Brent-Graphic-Designer-Financial-Case-Study-Update-300x200.jpg" class="entry-image attachment-post" alt="Janet Brent, Graphic Designer, Financial Case Study Update">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-case-study-janet-brent-graphic-designer/">Financial Case Study: Janet Brent, Graphic Designer turned Digital Storyteller</a></h4>
+            </header>
+           </article>
+           <p class="more-from-category"><a href="https://www.theprofessionalhobo.com/category/financial-case-studies/" title="Financial Case Studies">More Financial Case Studies</a></p>
+          </div>
+         </section> 
+         <section id="featured-post-18" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">MORE AMAZING GUIDES</h3> 
+           <article class="post-12404 post type-post status-publish format-standard has-post-thumbnail category-travel-gear category-travel-lifestyle-guides category-travel-planning entry">
+            <a href="https://www.theprofessionalhobo.com/cell-phone-travel-basics-international-phone-plans-sim-cards-and-more/" class="aligncenter" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2019/06/HOW-to-use-your-cell-phone-While-Traveling-300x200.png" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="How to Use Your Cell Phone While Traveling">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2019/06/HOW-to-use-your-cell-phone-While-Traveling-300x200.png" class="entry-image attachment-post" alt="How to Use Your Cell Phone While Traveling">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/cell-phone-travel-basics-international-phone-plans-sim-cards-and-more/">Cell Phone Travel Basics: International Phone Plans, SIM Cards, and More</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-19" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-5825 post type-post status-publish format-standard has-post-thumbnail category-financial-travel-tips category-travel-lifestyle-guides category-travel-planning entry">
+            <a href="https://www.theprofessionalhobo.com/financial-travel-tip-112-50-airfare-mystery-shopping/" class="alignnone" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2014/04/TRAVEL-MYSTERY-SHOPPING-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Get 50% off Airfare With TRAVEL MYSTERY SHOPPING">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2014/04/TRAVEL-MYSTERY-SHOPPING-300x200.jpg" class="entry-image attachment-post" alt="Get 50% off Airfare With TRAVEL MYSTERY SHOPPING">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/financial-travel-tip-112-50-airfare-mystery-shopping/">How to Get 50% off Airfare With Travel Mystery Shopping</a></h4>
+            </header>
+           </article>
+          </div>
+         </section> 
+         <section id="featured-post-20" class="widget featured-content featuredpost">
+          <div class="widget-wrap">
+           <h3 class="widgettitle widget-title">.</h3> 
+           <article class="post-2145 post type-post status-publish format-standard has-post-thumbnail category-travel-lifestyle-guides category-travel-planning entry">
+            <a href="https://www.theprofessionalhobo.com/16-useful-travel-applications-and-websites/" class="alignnone" aria-hidden="true" tabindex="-1"><i class="ferrari--spinner"></i><img width="300" height="200" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-lazy-type="image" data-src="https://s23639.pcdn.co/wp-content/uploads/2019/02/Best-Travel-Websites-300x200.jpg" class="ferrari__img ferrari--not-loaded entry-image attachment-post" alt="Best Travel Websites Ever">
+             <noscript>
+              <img width="300" height="200" src="https://s23639.pcdn.co/wp-content/uploads/2019/02/Best-Travel-Websites-300x200.jpg" class="entry-image attachment-post" alt="Best Travel Websites Ever">
+             </noscript></a>
+            <header class="entry-header">
+             <h4 class="entry-title"><a href="https://www.theprofessionalhobo.com/16-useful-travel-applications-and-websites/">The Best Travel Websites: Super Useful Sites You’ll Use All The Time</a></h4>
+            </header>
+           </article>
+           <p class="more-from-category"><a href="https://www.theprofessionalhobo.com/category/travel-lifestyle-guides/" title="Travel Lifestyle Guides">More Travel Lifestyle Guides</a></p>
+          </div>
+         </section> 
+        </div>
+       </div>
+      </div>
+     </main>
+    </div>
+   </div>
+   <div id="before-footer" class="before-footer">
+    <h2 class="genesis-sidebar-title screen-reader-text">Before Footer</h2>
+    <div class="flexible-widgets widget-area  widget-full">
+     <div class="wrap">
+      <section id="media_image-9" class="widget widget_media_image">
+       <div class="widget-wrap">
+        <img width="2000" height="703" src="https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more.jpg" class="image wp-image-12533  attachment-full size-full" alt="Nora Dunn The Professional Hobo Featured in Conde Nast Traveler, Forbes, MSN Money, Yahoo, Lonely Planet, Wise Bread, Business Insider, and many more" style="max-width: 100%; height: auto;" srcset="https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more.jpg 2000w, https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more-600x211.jpg 600w, https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more-768x270.jpg 768w, https://s23639.pcdn.co/wp-content/uploads/2019/09/Nora-Dunn-The-Professional-Hobo-Featured-in-Conde-Nast-Traveler-Forbes-MSN-Money-Yahoo-Lonely-Planet-Wise-Bread-Business-Insider-and-many-more-1024x360.jpg 1024w" sizes="(max-width: 2000px) 100vw, 2000px">
+       </div>
+      </section> 
+     </div>
+    </div>
+   </div>
+   <div id="footer" class="flex-footer footer-widgets">
+    <h2 class="genesis-sidebar-title screen-reader-text">Footer</h2>
+    <div class="flexible-widgets widget-area  widget-thirds">
+     <div class="wrap">
+      <section id="text-456322505" class="widget widget_text">
+       <div class="widget-wrap">
+        <h3 class="widgettitle widget-title">About This Website</h3> 
+        <div class="textwidget">
+         <p>The Professional Hobo is about how to travel full-time in a financially sustainable way, as experienced since 2006 by Nora Dunn, former financial planner and current world traveler/writer. </p> 
+         <div class="one-half first"> 
+          <ul> 
+           <li><a href="https://www.theprofessionalhobo.com/writing-publicity/">Writing Portfolio &amp; Speaking Credits</a></li> 
+           <li><a href="https://www.theprofessionalhobo.com/contact/">Contact</a></li> 
+          </ul> 
+         </div> 
+         <div class="one-half"> 
+          <ul> 
+           <li><a href="https://www.theprofessionalhobo.com/faqs/">FAQs</a></li> 
+           <li><a href="https://www.theprofessionalhobo.com/travel-tips-resources/">Travel Resources</a></li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div>
+      </section> 
+      <section id="foundry_social_links-5" class="widget widget_foundry_social_links">
+       <div class="widget-wrap"> 
+        <div class="foundry-social"> 
+         <div class="foundry-social__wrapper"> <a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.facebook.com/TheProfessionalHobo"><i class="fa fa-facebook foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.twitter.com/hobonora"><i class="fa fa-twitter foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://youtube.com/norablueskies"><i class="fa fa-youtube foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://feeds.feedburner.com/TheProfessionalHobo"><i class="fa fa-rss foundry-social__icon " aria-hidden="true"></i></a><a style="background-color: #84ba55" class="foundry-social__link   " href="https://www.pinterest.com/theprofessionalhobo/"><i class="fa fa-pinterest foundry-social__icon " aria-hidden="true"></i></a> 
+         </div> 
+        </div> 
+       </div>
+      </section> 
+      <section id="custom_html-6" class="widget_text widget widget_custom_html">
+       <div class="widget_text widget-wrap">
+        <div class="textwidget custom-html-widget">
+         <div data-birdsend-form="2408"></div>
+        </div>
+       </div>
+      </section> 
+     </div>
+    </div>
+   </div>
+   <footer class="site-footer">
+    <div class="wrap">
+     <font size="1"> Copyright © 2009-2020 TheProfessionalHobo.com. All Rights Reserved. <br><br> <b>Disclosure:</b> In accordance with FTC guidelines, I disclose that I may be compensated if consumers choose to utilize links located throughout the content on this site. Additionally, some posts might be sponsored to support this blog. Please do the appropriate research before participating in any third party offers. All opinions are my own.<br> We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites.<br><br> <b>Privacy Policy:</b> While you may rest assured that we at The Professional Hobo are not using your information for evil purposes, here is everything you need to know about our <a href="https://www.theprofessionalhobo.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>. </font>
+    </div>
+   </footer>
+  </div>
+  <script type="\&quot;text/javascript\&quot;">
+
+var _gaq = _gaq || [];
+_gaq.push([\'_setAccount\', \'UA-16446938-1\']);
+_gaq.push([\'_setDomainName\', \'theprofessionalhobo.com\']);
+_gaq.push([\'_setAllowLinker\', true]);
+_gaq.push([\'_trackPageview\']);
+
+(function() {
+var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.async = true;
+ga.src = (\'https:\' == document.location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';
+var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script> 
+  <div id="amzn-assoc-ad-558d724c-b26b-4bd7-885e-ec8a7b2eb6d0"></div>
+  <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&amp;adInstanceId=558d724c-b26b-4bd7-885e-ec8a7b2eb6d0"></script> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var foundryLazySettings = {"aggressive":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/mu-plugins/foundry-mu/inc/performance/assets/js/lazy-load.min.js?ver=1.9.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/hoverIntent.min.js?ver=1.8.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/genesis/lib/js/menu/superfish.min.js?ver=1.7.10" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/genesis/lib/js/menu/superfish.args.min.js?ver=3.3.1" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/genesis/lib/js/skip-links.min.js?ver=3.3.1" defer></script>
+  <script type="text/javascript">
+/* <![CDATA[ */
+var genesis_responsive_menu = {"mainMenu":"Menu","subMenu":"Submenu","menuClasses":{"combine":[".nav-header",".nav-primary"]}};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/themes/wellness-pro/js/responsive-menus.min.js?ver=1.1.3" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-content/cache/js/0b9101391a083cec8156f6523818cc7d.min.js" defer></script>
+  <script type="text/javascript" src="https://s23639.pcdn.co/wp-includes/js/wp-embed.min.js?ver=5.3.2" defer></script>
+  <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"073b4df364","applicationID":"70582482","transactionName":"ZQZWMhBXVxYAUxdYDFxMdQUWX1YLTlYRXg1GTkQHBVM=","queueTime":0,"applicationTime":696,"atts":"SUFVRFhNRBg=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+ </body>
+</html>

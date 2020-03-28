@@ -1,0 +1,786 @@
+<!doctype html>
+<html> 
+ <head> 
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="icon" type="image/png" href="/assets/favicon-32x32.png"> 
+  <title>CSS Viewport Units</title> 
+  <meta name="description" content="CSS Viewport units have been around for the last few years, and by time, I see them being used more and more by developers. Their benefit lies in providing u..."> 
+  <meta name="description" content="Ahmad Shadeed - CSS Viewport Units"> 
+  <meta name="keywords" content="front end, css, svg, developer, palestine, front-end, html"> 
+  <meta name="author" content="iShadeed"> 
+  <meta property="og:title" content="CSS Viewport Units - Ahmad Shadeed"> 
+  <meta property="og:url" content="http://ishadeed.com/article/viewport-units/"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:image" content="https://ishadeed.com/assets/viewport-units/spacing-modal.png"> 
+  <meta property="og:description" content=""> 
+  <meta property="og:site_name" content="Ahmad Shadeed Blog"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:site" content="@shadeed9"> 
+  <meta name="twitter:title" content="CSS Viewport Units - Ahmad Shadeed"> 
+  <meta name="twitter:url" content="http://ishadeed.com/article/viewport-units/"> 
+  <meta name="twitter:description" content=""> 
+  <meta name="twitter:image" content="https://ishadeed.com/assets/viewport-units/spacing-modal.png"> 
+  <link rel="stylesheet" href="/css/main.css"> 
+  <link href="//plus.google.com/+AhmadShadeed" rel="author"> 
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700&amp;display=swap" rel="stylesheet"> 
+  <link rel="alternate" type="application/rss+xml" title="Ahmad Shadeed Blog" href="http://ishadeed.com/feed.xml"> 
+ </head> 
+ <body> 
+  <div class="c-banner"> 
+   <p>Hey <span aria-hidden="true">👋</span>! I published a guide about Right-to-left Styling in CSS. <a class="c-link" href="http://rtlstyling.com/">Check it out 
+     <svg width="20" height="20" viewbox="0 0 24 24"> <use xlink:href="#arrow-right"></use> 
+     </svg></a></p> 
+  </div> 
+  <svg style="display: none;"> <symbol id="arrow-right" width="23.114" height="23.114" viewbox="0 0 23.114 23.114"> 
+    <g id="np_arrow_1921082_000000" transform="translate(-2.5 -2.5)"> 
+     <path id="Path_18" data-name="Path 18" d="M25.614,14.057A11.557,11.557,0,1,0,14.057,25.614,11.568,11.568,0,0,0,25.614,14.057Zm-21.46,0a9.9,9.9,0,1,1,9.9,9.9,9.927,9.927,0,0,1-9.9-9.9Z" /> 
+     <path id="Path_19" data-name="Path 19" d="M45.262,34.182a.821.821,0,0,0,0-1.167L40.81,28.562a.826.826,0,0,0-1.168,1.168L43.486,33.6l-3.845,3.845a.791.791,0,0,0-.243.584.754.754,0,0,0,.243.584.837.837,0,0,0,1.168,0Z" transform="translate(-27.921 -19.541)" /> 
+    </g> 
+   </symbol> <symbol id="link-external" width="16.067" height="16.078" viewbox="0 0 16.067 16.078"> 
+    <g fill="#3863d9"> 
+     <path data-name="Path 20" d="M14.137 1.15h-3.159a.774.774 0 0 1-.093-.013.551.551 0 0 1-.2-.09.565.565 0 0 1-.235-.488.531.531 0 0 1 .031-.153.543.543 0 0 1 .091-.164.552.552 0 0 1 .167-.141.572.572 0 0 1 .177-.062c.028 0 .035 0 .063-.007q2.262-.063 4.524 0h.049a.491.491 0 0 1 .082.016l.035.01h.011l.019.007h.006a.523.523 0 0 1 .078.041.563.563 0 0 1 .175.174.512.512 0 0 1 .044.084.553.553 0 0 1 .032.108v.075c.042 1.5 0 3.006 0 4.51a.459.459 0 0 1 0 .063.579.579 0 0 1-.052.18.56.56 0 0 1-.131.174.531.531 0 0 1-.131.087.565.565 0 0 1-.567-.048.558.558 0 0 1-.228-.363.517.517 0 0 1-.007-.093V1.943L7.663 9.198a.5.5 0 0 1-.063.054.56.56 0 0 1-.147.078.549.549 0 0 1-.205.031.566.566 0 0 1-.453-.261.574.574 0 0 1-.067-.153.554.554 0 0 1-.019-.166.562.562 0 0 1 .086-.277.656.656 0 0 1 .078-.1l7.255-7.255z" fill-rule="evenodd" /> 
+     <path data-name="Path 21" d="M7.331 1.526a.505.505 0 0 1 .1.021.557.557 0 0 1 .265.17.522.522 0 0 1 .086.134.554.554 0 0 1 .045.153.565.565 0 0 1-.131.446.548.548 0 0 1-.166.131.556.556 0 0 1-.2.06H6.1c-.634 0-1.269.008-1.9.043a10.457 10.457 0 0 0-1.052.1q-.141.022-.283.05-.1.02-.19.045a1.954 1.954 0 0 0-.816.389 1.26 1.26 0 0 0-.121.123 1.6 1.6 0 0 0-.263.452 3.281 3.281 0 0 0-.17.607 7.787 7.787 0 0 0-.112.883c-.04.5-.053 1-.062 1.5-.007.45-.008.9-.008 1.35v1.224c0 .569 0 1.139.017 1.709.013.5.033 1 .09 1.495a8.5 8.5 0 0 0 .054.39 3.713 3.713 0 0 0 .179.7 1.646 1.646 0 0 0 .3.516 1.9 1.9 0 0 0 1.021.522 6.066 6.066 0 0 0 .534.096 14.66 14.66 0 0 0 1.54.1c.606.017 1.214.019 1.82.019H7.89c.49 0 .979 0 1.469-.011s.982-.024 1.47-.068a7.177 7.177 0 0 0 .857-.119 2.844 2.844 0 0 0 .7-.228 1.445 1.445 0 0 0 .355-.247 1.921 1.921 0 0 0 .474-.95 6.313 6.313 0 0 0 .092-.491 9.4 9.4 0 0 0 .049-.411c.043-.439.061-.881.072-1.323.02-.771.017-1.542.017-2.314v-.053c0-.018 0-.035.007-.053a.547.547 0 0 1 .079-.2.536.536 0 0 1 .1-.12.563.563 0 0 1 .446-.131.545.545 0 0 1 .153.045.561.561 0 0 1 .317.4.579.579 0 0 1 .01.106v1.18c0 .387-.006.774-.015 1.161-.007.264-.016.528-.031.792q-.017.305-.046.61a9.298 9.298 0 0 1-.083.639 3.761 3.761 0 0 1-.581 1.571 2.38 2.38 0 0 1-.451.48 2.633 2.633 0 0 1-.5.315 4.49 4.49 0 0 1-1.275.368c-.315.049-.634.079-.952.1s-.668.035-1 .043c-.481.012-.961.015-1.442.017H6.675c-.577 0-1.154 0-1.732-.017a18.4 18.4 0 0 1-1.592-.094 8.742 8.742 0 0 1-.362-.049 3.862 3.862 0 0 1-1.658-.592 2.552 2.552 0 0 1-.2-.159 2.431 2.431 0 0 1-.256-.263 2.234 2.234 0 0 1-.154-.206 3.836 3.836 0 0 1-.539-1.51 8.474 8.474 0 0 1-.092-.737 14.337 14.337 0 0 1-.042-.62c-.016-.31-.024-.62-.031-.929-.007-.4-.01-.8-.011-1.2v-1.51c0-.538 0-1.077.013-1.614.007-.3.016-.609.033-.913a14.246 14.246 0 0 1 .099-1.075c.012-.088.026-.174.042-.261a3.673 3.673 0 0 1 .562-1.485 2.38 2.38 0 0 1 .451-.48 2.664 2.664 0 0 1 .534-.33 4.435 4.435 0 0 1 1.153-.336c.277-.047.557-.077.837-.1s.57-.037.857-.047c.413-.015.828-.021 1.241-.023h1.509z" /> 
+    </g> 
+   </symbol> <symbol id="send" width="36.258" height="35.835" viewbox="0 0 36.258 35.835"> 
+    <path d="M25.339 13.557a.836.836 0 0 0-1.2-1.153L9.151 25.155l-7.915-3.062a1.925 1.925 0 0 1-.223-3.492L33.871.194a1.619 1.619 0 0 1 2.38 1.579l-2.882 30.045a1.989 1.989 0 0 1-2.72 1.66l-9.633-3.729-6.048 5.665a1.561 1.561 0 0 1-2.628-1.153v-4.45z" /> 
+   </symbol> <symbol id="arrow-up" width="24.737" height="23.502" viewbox="0 0 24.737 23.502"> 
+    <path data-name="Path 25" d="M13.244.362a1.236 1.236 0 0 0-1.749 0L.363 11.494a1.237 1.237 0 1 0 1.749 1.749l9.019-9.019v18.041a1.237 1.237 0 1 0 2.474 0V4.224l9.019 9.019a1.237 1.237 0 1 0 1.751-1.747z" fill="#fff" /> 
+   </symbol> 
+  </svg> 
+  <header id="header" class="c-header" role="banner"> <a href="/" class="c-logo"> <img src="../../assets/shadeed.jpg" alt="Photo of Ahmad Shadeed"> <span>Ahmad <strong>Shadeed</strong></span> 
+    <div class="c-lamp"></div> </a> 
+   <nav class="c-nav"> 
+    <div class="c-nav__wrapper"> 
+     <ul> 
+      <li class="c-nav__item"> <a href="/">Home</a> </li> 
+      <li class="c-nav__item"> <a href="/works">Works</a> </li> 
+      <li class="c-nav__item"> <a href="/articles">Articles</a> </li> 
+      <li class="c-nav__item"> <a href="/about">About</a> </li> 
+      <li class="c-nav__item"> <a href="/hire-me">Hire me</a> </li> <button class="c-nav__close"> 
+       <svg width="17" height="17" viewbox="0 0 17 17"> <path d="M16.91 2.663a1.487 1.487 0 0 0 0-2.1l-.131-.131a1.483 1.483 0 0 0-2.1 0L8.936 6.179a.371.371 0 0 1-.528 0L2.663.434a1.487 1.487 0 0 0-2.1 0L.432.565a1.483 1.483 0 0 0 0 2.1L6.177 8.41a.371.371 0 0 1 0 .528L.432 14.683a1.487 1.487 0 0 0 0 2.1l.131.131a1.483 1.483 0 0 0 2.1 0l5.745-5.745a.371.371 0 0 1 .528 0l5.745 5.745a1.487 1.487 0 0 0 2.1 0l.131-.131a1.483 1.483 0 0 0 0-2.1l-5.747-5.747a.371.371 0 0 1 0-.528z" fill="#60c46f" /> 
+       </svg> </button> 
+     </ul> 
+     <svg class="nav-landscape" viewbox="0 0 700 194" aria-hidden="true"> <path d="M253 21L700 0v115l-222-1-478-2V28c72 0 156-2 253-7z" fill="#499554" /> <path d="M700 79v90L0 175V59c41 2 80 4 110 7 78 8 227 23 590 13z" fill="#52a85f" /> <path d="M700 106v88H0v-51c78-2 172-7 282-17 61-5 127-9 196-12l222-8z" fill="#60c46f" /> 
+     </svg> 
+     <div class="c-nav__overlay"></div> 
+    </div> <button class="c-nav__toggle"> <span></span> </button> 
+   </nav> <a class="c-header__follow" target="_blank" href="https://twitter.com/shadeed9"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="22.75" viewbox="0 0 28 22.75"> <g data-name="Group 1"> 
+      <path data-name="Path 1" d="M28 2.693a11.968 11.968 0 0 1-3.307.907A5.708 5.708 0 0 0 27.218.427a11.472 11.472 0 0 1-3.64 1.389 5.74 5.74 0 0 0-9.93 3.925 5.911 5.911 0 0 0 .133 1.309 16.248 16.248 0 0 1-11.832-6 5.742 5.742 0 0 0 1.764 7.672 5.669 5.669 0 0 1-2.594-.707v.063a5.767 5.767 0 0 0 4.6 5.64 5.729 5.729 0 0 1-1.5.189 5.075 5.075 0 0 1-1.087-.1 5.8 5.8 0 0 0 5.364 4 11.534 11.534 0 0 1-7.117 2.448A10.755 10.755 0 0 1 0 20.174a16.16 16.16 0 0 0 8.806 2.576c10.563 0 16.338-8.75 16.338-16.335 0-.254-.009-.5-.021-.742A11.451 11.451 0 0 0 28 2.693z" /> 
+     </g> 
+    </svg> <span>@shadeed9</span> </a> 
+  </header> 
+  <div class="c-section c-section--article"> 
+   <header class="post-header"> 
+    <h1 class="post-header__title">CSS Viewport Units</h1> 
+    <div class="post-header__date">
+     12 Mar 2020
+    </div> 
+    <div class="post-header__reading-time" style="display: none;">
+      Reading time: ~ 22 mins 
+    </div> 
+   </header> 
+   <div class="post-content"> 
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7DV277&amp;placement=wwwishadeedcom" id="_carbonads_js"></script> 
+    <p>CSS Viewport units have been around for the last few years, and by time, I see them being used more and more by developers. Their benefit lies in providing us with a way to size things in a fluid and dynamic way, without the need to use JavaScript. Also, it’s easy to provide a fallback if they fail.</p> 
+    <p>In this article, we will learn about CSS viewport units and how to use them, along with some use-cases and solutions for common issues. Let’s start and dig in!</p> 
+    <h2 id="introduction">Introduction</h2> 
+    <p>According to the <a href="https://www.w3.org/TR/css-values-3/#viewport-relative-lengths]">CSS spec</a>, viewport-percentage units are relative to the size of the <strong>initial containing block</strong>, which is the root element of a web page.</p> 
+    <p>The viewport units are: <code class="highlighter-rouge">vw</code>, <code class="highlighter-rouge">vh</code>, <code class="highlighter-rouge">vmin</code>, and <code class="highlighter-rouge">vmax</code>.</p> 
+    <h3 id="viewport-width">Viewport Width</h3> 
+    <p>The <code class="highlighter-rouge">vw</code> unit represents a percentage of the root element width. One <code class="highlighter-rouge">vw</code> is equal to 1% of the viewport width.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/intro.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>We have an element with the following CSS:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.element</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">50vw</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>When the width of the viewport is <code class="highlighter-rouge">500px</code>, the <code class="highlighter-rouge">50vw</code> will be calculated as below:</p> 
+    <blockquote> 
+     <p>width = 500*50% = 250px</p> 
+    </blockquote> 
+    <h2 id="viewport-height">Viewport Height</h2> 
+    <p>The <code class="highlighter-rouge">vh</code> unit represents a percentage of the root element height. One <code class="highlighter-rouge">vh</code> is equal to 1% of the viewport height.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/intro-2.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>We have an element with the following CSS:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.element</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">50vh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>When the height of the viewport is <code class="highlighter-rouge">290px</code>, the <code class="highlighter-rouge">70vh</code> will be calculated as below:</p> 
+    <blockquote> 
+     <p>height = 290*70% = 202px</p> 
+    </blockquote> 
+    <p>That’s it. Let’s move to a different kind of viewport units!</p> 
+    <h2 id="vmin-unit"><code class="highlighter-rouge">vmin</code> Unit</h2> 
+    <p>The <code class="highlighter-rouge">vmin</code> represents the value of the minimum of the width and height of the viewport. If the viewport width is greater than its height, then the value will be calculated based on the height.</p> 
+    <p>Let’s take the following example.</p> 
+    <p>We have a mobile in landscape mode, and an element has the <code class="highlighter-rouge">vmin</code> unit. In that case, the value will be calculated based on the viewport height, because it’s less than the width.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/intro-3.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.element</span> <span class="p">{</span>
+    <span class="nl">padding-top</span><span class="p">:</span> <span class="m">10vmin</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10vmin</span><span class="p">;</span>
+<span class="err">{</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>Here is how <code class="highlighter-rouge">vmin</code> will be calculated:</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/vmin.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>As you might guessed it, the result will be calculated as the below:</p> 
+    <blockquote> 
+     <p>padding-top = (10% of height) = 10% * 164 = 32px padding-bottom = (10% of height) = 10% * 164 = 32px</p> 
+    </blockquote> 
+    <h2 id="vmax-unit"><code class="highlighter-rouge">vmax</code> unit</h2> 
+    <p>It’s the opposite of <code class="highlighter-rouge">vmin</code>. The value is calculated based on the maximum width and height.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/intro-4.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>Let’s take the following example.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.element</span> <span class="p">{</span>
+    <span class="nl">padding-top</span><span class="p">:</span> <span class="m">10vmax</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10vmax</span><span class="p">;</span>
+<span class="err">{</span>
+</code></pre>
+     </div>
+    </div> 
+    <figure> 
+     <img src="../../assets/viewport-units/vmax.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>The result will be calculated as the below:</p> 
+    <blockquote> 
+     <p>padding-top = (10% of width) = 10% * 350 = 35px padding-bottom = (10% of width) = 10% * 350 = px</p> 
+    </blockquote> 
+    <h2 id="how-viewport-units-are-different-from-percentages">How Viewport Units Are Different From Percentages?</h2> 
+    <p>Viewport units are based on the root element of the page, while the percentage is based on the container they are in. For that reason, they’re different from each other and each one has its use cases.</p> 
+    <h2 id="use-cases-for-viewport-units">Use Cases For Viewport Units</h2> 
+    <p>In the following sections, I will explore some use cases for viewport units and how to implement them in your project.</p> 
+    <h3 id="font-size">Font Size</h3> 
+    <figure> 
+     <img src="../../assets/viewport-units/font-size-1.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>CSS viewport units are perfect for responsive typography. For example, we can use the following for an article title:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.title</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">5vw</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>The title’s <code class="highlighter-rouge">font-size</code> will increase or shrink based on the viewport width. It’s like giving a font size of 5% of the viewport width. However, it might be tempting to just use it without proper testing. Let’s see the video below:</p> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/font-size-issue.mp4" type="video/mp4"> 
+    </video> 
+    <p>Notice that the font size became very small in mobile sizing, this is bad for accessibility and user experience. As far as I know, the minimum font size on a mobile device shouldn’t go beyond <code class="highlighter-rouge">14px</code>. In the GIF, the font size went below <code class="highlighter-rouge">10px</code>.</p> 
+    <p>To solve that issue, we need to give the title a <strong>minimum</strong> font size that it can’t go below it. CSS <code class="highlighter-rouge">calc()</code> to the rescue!</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.title</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">14px</span> <span class="err">+</span> <span class="m">2vw</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>The <code class="highlighter-rouge">calc()</code> CSS function will have a base <code class="highlighter-rouge">14px</code> value, and it will add <code class="highlighter-rouge">2vw</code> to it. With that in hand, the font-size value won’t become too small.</p> 
+    <p>Another important thing to consider is how the font size will behave on large screens, for example, a 27” iMac. What will happen? Well, you guessed it. The font size went to around <code class="highlighter-rouge">95px</code>, which a huge value. To prevent that, we should use <strong>media queries</strong> at certain breakpoints and change the <code class="highlighter-rouge">font-size</code>.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="p">:</span> <span class="m">1800px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">.title</span> <span class="p">{</span>
+        <span class="nl">font-size</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>By resetting the <code class="highlighter-rouge">font-size</code>, we can be sure that the size won’t go too huge. You might also need to add multiple media queries, but it’s up to you and depends on the context of your project.</p> 
+    <p><a href="https://codepen.io/shadeed/pen/fa989837c6379770cce49f0be6daa3e3">Demo</a></p> 
+    <h3 id="full-screen-sections">Full Screen Sections</h3> 
+    <p>Sometimes, we need a section to take 100% of the viewport height. This is known as ** full-screen sections**. To do so, we can use the viewport height unit.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/section-full-height.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.section</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100vh</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+    <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>By adding <code class="highlighter-rouge">height: 100vh</code>, we can ensure that the section height will take 100% of the viewport. Also, I added some flexbox to handle centering the content horizontally and vertically.</p> 
+    <p><a href="https://codepen.io/shadeed/pen/dc4e82f3c873cc64ae5c5bc4a3f4ef9f?editors=1100">Demo</a></p> 
+    <h3 id="sticky-footer">Sticky Footer</h3> 
+    <p>On a large screen, you might notice that website content is short, and the footer is not stuck to the bottom. That’s normal, and it’s not considered as a bad practice. However, there is room for enhancement. Consider the following figure that represents the issue:</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/sticky-footer.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>To solve that, we need to give the main content a height that is equal to <strong>viewport height - (header + footer)</strong>. It’s tricky to do that dynamically, but with CSS viewport units, it’s quite easy.</p> 
+    <h4 id="1-first-solution-calc-and-viewport-units">1. First Solution: Calc and Viewport Units</h4> 
+    <p>If the header and footer height is fixed, it’s possible to combine both CSS calc() function with viewport units. Here is how:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nt">header</span><span class="o">,</span>
+<span class="nt">footer</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">70px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">main</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">100vh</span> <span class="n">-</span> <span class="m">70px</span> <span class="n">-</span> <span class="m">70px</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>This solution is not guaranteed to work all the time, especially for the footer. In my career, I haven’t used a footer with a fixed height, because it’s not doable, for example, on different screen sizes.</p> 
+    <h4 id="2-second-solution-flexbox-and-viewport-units-recommended">2. Second Solution: Flexbox and Viewport Units (<strong>Recommended</strong>)</h4> 
+    <p>By adding the <code class="highlighter-rouge">100vh</code> as a height for the body element, we can then use flexbox to make the main element take the remaining space.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">min-height</span><span class="p">:</span> <span class="m">100vh</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span>
+    <span class="n">flex-direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+<span class="err">{</span>
+
+<span class="err">main</span> <span class="err">{</span>
+    <span class="c">/* This will make the main element take the remaining space dynamically */</span>
+    <span class="nl">flex-grow</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>With that, the issue is fixed and we have a sticky footer regardless of the content length.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/sticky-footer-solved.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p><a href="https://codepen.io/shadeed/pen/c735b26b8fa97ee685b38084448b3f85?editors=1100">Demo</a></p> 
+    <h2 id="responsive-elements">Responsive Elements</h2> 
+    <p>I stumbled upon <a href="https://properdesign.co.uk/grid-viewport-units-site-previews/">this</a> article while researching, and I really liked it, so I will re-take the use-case and explain it my way.</p> 
+    <p>Suppose that we have a portfolio to showcase our responsive design work, and we have three devices (mobile, tablet, and laptop). Each device contains an image. The goal is to make this 100% responsive in CSS.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/responsive-devices.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>By using CSS grid and viewport units, we can make this fully responsive and dynamic.</p> 
+    <div class="language-html highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrapper"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"device laptop"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"device mobile"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"device tablet"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>Notice that viewport units are used in the <code class="highlighter-rouge">grid-*</code> properties. They’re also used for the <code class="highlighter-rouge">border</code>, <code class="highlighter-rouge">border-radius</code>, and other properties. All of this will result in a fluid design.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.wrapper</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+  <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="m">5vw</span><span class="p">);</span> 
+  <span class="py">grid-auto-rows</span><span class="p">:</span> <span class="m">6vw</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.mobile</span> <span class="p">{</span> 
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="nl">z-index</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">grid-column</span><span class="p">:</span> <span class="m">2</span> <span class="p">/</span> <span class="n">span</span> <span class="m">3</span><span class="p">;</span>
+  <span class="nl">grid-row</span><span class="p">:</span> <span class="m">3</span> <span class="p">/</span> <span class="n">span</span> <span class="m">5</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="nc">.tablet</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="nl">z-index</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">grid-column</span><span class="p">:</span> <span class="m">13</span> <span class="p">/</span> <span class="n">span</span> <span class="m">7</span><span class="p">;</span> 
+  <span class="nl">grid-row</span><span class="p">:</span> <span class="m">4</span> <span class="p">/</span> <span class="n">span</span> <span class="m">4</span><span class="p">;</span>
+  <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">1vw</span> <span class="nb">solid</span> <span class="m">#a9B9dd</span><span class="p">;</span>
+  <span class="nl">border-right</span><span class="p">:</span> <span class="nb">solid</span> <span class="m">3vw</span> <span class="m">#a9B9dd</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="nc">.laptop</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="nl">grid-column</span><span class="p">:</span> <span class="m">3</span><span class="p">/</span><span class="n">span</span> <span class="m">13</span><span class="p">;</span>
+  <span class="nl">grid-row</span><span class="p">:</span> <span class="m">2</span> <span class="p">/</span> <span class="n">span</span> <span class="m">8</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Viewport units are used for the bottom, left, right, height, and border-radius. Isn't that cool? */</span>
+<span class="nc">.laptop</span><span class="nd">:after</span> <span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span><span class="s1">""</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span><span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">bottom</span><span class="p">:</span> <span class="m">-3vw</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">-5.5vw</span><span class="p">;</span>
+    <span class="nl">right</span><span class="p">:</span> <span class="m">-5.5vw</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">3vw</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#a9B9dd</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">1vw</span> <span class="m">1vw</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/devices.mp4" type="video/mp4"> 
+    </video> 
+    <p><a href="https://codepen.io/shadeed/pen/2da0f2b70699769f8de3220ff4465bc6?editors=1100">Demo</a></p> 
+    <h2 id="breaking-out-of-the-container">Breaking Out Of The Container</h2> 
+    <p>I have noticed a use case which is most suitable for editorial layouts. A child element that takes 100% width of the viewport, even if its parent width is limited. Consider the below figure:</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/breaking-out.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>To achieve a similar effect, we can use viewport units and some positioning properties. Here is the CSS:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.break-out</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100vw</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">right</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">-50vw</span><span class="p">;</span>
+    <span class="nl">margin-right</span><span class="p">:</span> <span class="m">-50vw</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>Let’s break it down so we understand how all of this works bit by bit.</p> 
+    <h4 id="1-adding-width-100vw">1. Adding <code class="highlighter-rouge">width: 100vw</code></h4> 
+    <p>The most important step, which will give the image a width equal to 100% of the viewport.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/step-1.jpg" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <h4 id="2-adding-margin-left--50vw">2. Adding <code class="highlighter-rouge">margin-left: -50vw</code></h4> 
+    <p>To center the image, we will need to give it a negative margin with half of the viewport width.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/step-2.jpg" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <h4 id="3-adding-left-50">3. Adding <code class="highlighter-rouge">left: 50%</code></h4> 
+    <p>Finally, we will need to push the image to the right with a value of 50% of its parent width.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/step-3.jpg" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p><a href="https://codepen.io/shadeed/pen/828f12b1ef7fa7211584ff5c7b82d2fa?editors=1100">Demo</a></p> 
+    <h2 id="vertical-and-horizontal-spacing">Vertical and Horizontal Spacing</h2> 
+    <p>Another interesting use-case that I thought about is using viewport units for spacing between elements. This can be used with values like <code class="highlighter-rouge">margin</code>, <code class="highlighter-rouge">top</code>, <code class="highlighter-rouge">bottom</code>, and <code class="highlighter-rouge">grid-gap</code>. When used, the spacing will be based on the viewport width or height, which might be useful to make a layout more dynamic.</p> 
+    <h3 id="modal">Modal</h3> 
+    <p>For modals, we need to push them from the top of the viewport. Often, I made this with the <code class="highlighter-rouge">top</code> property and I use either percentage or pixel value. However, with viewport units, we can add a spacing that can change based on the viewport’s height.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/spacing-modal.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.modal-body</span> <span class="p">{</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">20vh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>See the video below for the final result.</p> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/spacing-modal-final.mp4" type="video/mp4"> 
+    </video> 
+    <p><a href="https://codepen.io/shadeed/pen/f77a0d58947c64c2b3dadbd887700db5?editors=1100">Demo</a></p> 
+    <h3 id="page-header">Page Header</h3> 
+    <p>A page header is a section that acts as an introduction for a page. It often has a title and a description, and among that there is either a fixed height or padding for the top and bottom edges. We’re interested in the padding thing.</p> 
+    <p>For example, here is how the CSS looks:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.page-header</span> <span class="p">{</span>
+    <span class="nl">padding-top</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="p">:</span> <span class="m">800px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">.page-header</span> <span class="p">{</span>
+        <span class="nl">padding-top</span><span class="p">:</span> <span class="m">4rem</span><span class="p">;</span>
+        <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">4rem</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>The vertical padding is small on mobile, and it gets larger on greater viewports. What about using viewport units? Let’s explore that.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.page-header</span> <span class="p">{</span>
+    <span class="nl">padding-top</span><span class="p">:</span> <span class="m">10vh</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10vh</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.page-header</span> <span class="nt">h2</span> <span class="p">{</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">1.5vh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>I used <code class="highlighter-rouge">vh</code> unit for the padding of the page header, and the margin below the title. Notice how the spacing changes!</p> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/spacing-page-header.mp4" type="video/mp4"> 
+    </video> 
+    <p><a href="https://codepen.io/shadeed/pen/43024fa031519e316e95bb3ce47f2b22?editors=1100">Demo</a></p> 
+    <h3 id="grid-of-items">Grid of Items</h3> 
+    <p>Another use case for the dynamic spacing is a grid of items. It can for anything, like a grid of articles, services section.. etc. For our case, we will take a look at how to use that for an article grid.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/spacing-articles.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>By using viewport units inside <code class="highlighter-rouge">grid-gap</code>, we can get the desired result. Notice that I used CSS <code class="highlighter-rouge">calc()</code> function as well. The goal of using <code class="highlighter-rouge">calc()</code> is to have a base vertical and horizontal gap.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.wrapper</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">grid</span><span class="p">;</span>
+    <span class="py">grid-template-columns</span><span class="p">:</span> <span class="nb">repeat</span><span class="p">(</span><span class="n">auto-fit</span><span class="p">,</span> <span class="n">minmax</span><span class="p">(</span><span class="m">250px</span><span class="p">,</span> <span class="m">1</span><span class="n">fr</span><span class="p">));</span>
+    <span class="py">grid-gap</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">14px</span> <span class="err">+</span> <span class="m">1vh</span><span class="p">)</span> <span class="n">calc</span><span class="p">(</span><span class="m">14px</span> <span class="err">+</span> <span class="m">0.5vw</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p><a href="https://codepen.io/shadeed/pen/9ad7324888b6ca9bf3689491f2a864a8?editors=1100">Demo</a></p> 
+    <h2 id="vmin-and-vmax-use-cases">Vmin and Vmax Use Cases</h2> 
+    <p>While researching about use-cases for these two values, I didn’t find anything but <a href="https://css-tricks.com/simple-little-use-case-vmin/">this</a> one from CSS-Tricks.</p> 
+    <p>The use-case is about the top and bottom padding for a page header element. The padding is often reduced when the viewport is small (mobile). By using <code class="highlighter-rouge">vmin</code>, we can have a fluid top and bottom padding based on the viewport smaller dimension (width or height).</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.page-header</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10vmin</span> <span class="m">1rem</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/vmin-use.mp4" type="video/mp4"> 
+    </video> 
+    <p><a href="https://codepen.io/shadeed/pen/f335c2f43b960a2c70ea057228ddc5b9?editors=0100">Demo</a></p> 
+    <h2 id="vertical-media-queries-and-viewport-units">Vertical Media Queries and Viewport Units</h2> 
+    <p>Four years ago, I wrote an <a href="https://ishadeed.com/article/vertical-media-queries/">article</a> about vertical media queries. I want to shed light on this topic since it’s related to this article that you’re reading now</p> 
+    <h3 id="full-height-sections-in-landscape-mode">Full Height Sections in Landscape Mode</h3> 
+    <p>By using vertical media queries, we can check if the user phone or tablet is in landscape mode. If it is, then it won’t make sense to have a section taking the full height of the viewport by using <code class="highlighter-rouge">height: 100vh</code>.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/full-height-landscape.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>To solve that issue, we can do the following:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="k">@media</span> <span class="p">(</span><span class="n">min-height</span><span class="p">:</span> <span class="m">400px</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">.section</span> <span class="p">{</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">100vh</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>Or we can use the orientation media query:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="k">@media</span> <span class="p">(</span><span class="n">orientation</span><span class="p">:</span> <span class="nb">landscape</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">.section</span> <span class="p">{</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">100vh</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <h3 id="aspect-ratio">Aspect Ratio</h3> 
+    <p>We can use <code class="highlighter-rouge">vw</code> unit to create responsive elements that maintain its aspect ratio regardless of the viewport size. Let’s explore that.</p> 
+    <p>We will need to decide on the aspect ratio we need. For this example, I will use <code class="highlighter-rouge">9/16</code>.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nt">section</span> <span class="p">{</span>
+    <span class="c">/* 9/16 * 100 */</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">56.25vw</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/aspect-ratio.mp4" type="video/mp4"> 
+    </video> 
+    <p><a href="https://codepen.io/shadeed/pen/dc4e82f3c873cc64ae5c5bc4a3f4ef9f?editors=0100">Demo</a></p> 
+    <h3 id="using-viewport-units-for-graphical-elements">Using Viewport Units For Graphical Elements</h3> 
+    <p>I’m not sure if my naming for this is correct, but I hope you will get my point from the following visual examples.</p> 
+    <h4 id="the-popular-top-border">The Popular Top Border</h4> 
+    <p>Do you know that top border which is most of the websites use these days? Mostly, its color is the same as the brand color – which will give some personality.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/header-top-border.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>Let’s support that the initial value for the border is <code class="highlighter-rouge">3px</code>. How to convert that fixed value to a viewport thing? Well, here is how to calculate the <code class="highlighter-rouge">vw</code> equivalent of it.</p> 
+    <blockquote> 
+     <p>vw = (Pixel Value / Viewport width) * 100</p> 
+    </blockquote> 
+    <p>The viewport width is used to estimate the ratio between the pixel value and the desired <code class="highlighter-rouge">vw</code> unit.</p> 
+    <p>For our example, here is how the top border added:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.header</span> <span class="p">{</span>
+    <span class="nl">border-top</span><span class="p">:</span> <span class="m">4px</span> <span class="nb">solid</span> <span class="m">#8f7ebc</span><span class="p">;</span>  
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>In my case, the viewport width is <strong>1440</strong> (This is not a fixed number, replace it with your own)</p> 
+    <blockquote> 
+     <p>vw = (4 / 1440) * 100 = 0.277</p> 
+    </blockquote> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.header</span> <span class="p">{</span>
+    <span class="nl">border-top</span><span class="p">:</span> <span class="m">0.277vw</span> <span class="nb">solid</span> <span class="m">#8f7ebc</span><span class="p">;</span>  
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>Even better, we can use a base pixel value, and the viewport unit can be an addition.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.header</span> <span class="p">{</span>
+    <span class="nl">border-top</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">2px</span> <span class="err">+</span> <span class="m">0.138vw</span><span class="p">)</span> <span class="nb">solid</span> <span class="err">$</span><span class="n">color-main</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <h4 id="section-numbering">Section Numbering</h4> 
+    <p>For section items with a counter or an icon, we can leverage the usage of viewport units. See the mockup below:</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/section-numbers.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>We have a circle containing a number, and there is text content. Both of them need to be sized fluidly with viewport units. Let’s explore how!</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="c">/**
+1. Using a fluid value for the flex, width, and height properties.
+2. The line-height is used to center the text vertically
+3. Font size
+4. The spacing between the circle and the text
+**/</span>
+<span class="nc">.point</span><span class="nd">:before</span> <span class="p">{</span>
+    <span class="nl">flex</span><span class="p">:</span> <span class="m">0</span> <span class="m">0</span> <span class="n">calc</span><span class="p">(</span><span class="m">24px</span> <span class="err">+</span> <span class="m">4vw</span><span class="p">);</span> <span class="c">/* [1] */</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">24px</span> <span class="err">+</span> <span class="m">4vw</span><span class="p">);</span> <span class="c">/* [1] */</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">24px</span> <span class="err">+</span> <span class="m">4vw</span><span class="p">);</span> <span class="c">/* [1] */</span>
+    <span class="nl">line-height</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">24px</span> <span class="err">+</span> <span class="m">4vw</span><span class="p">);</span> <span class="c">/* [2] */</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">14px</span> <span class="err">+</span> <span class="m">1vw</span><span class="p">);</span> <span class="c">/* [3] */</span>
+    <span class="nl">margin-right</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">10px</span> <span class="err">+</span> <span class="m">0.5vw</span><span class="p">);</span> <span class="c">/* [4] */</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <figure> 
+     <img src="../../assets/viewport-units/section-numbers-2.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p><a href="https://codepen.io/shadeed/pen/ca6ffb8b39c03ef7683eb15a7d53e195?editors=0100">Demo</a></p> 
+    <h2 id="viewport-units-watcher">Viewport Units Watcher</h2> 
+    <p>I made a tool to help me in checking the current computed value elements with viewport units. Consider the below:</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/vu-watcher.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>I added the class name and property for each element, and on viewport resize, the values are updated dynamically. This is much better than inspecting DevTools and going to the <strong>computed</strong> for each specific element.</p> 
+    <video controls="" style="width: initial;"> 
+     <source src="../../assets/viewport-units/vu-watcher.mp4" type="video/mp4"> 
+    </video> 
+    <p><a href="https://codepen.io/shadeed/pen/a531488bfdb9056b27f92f5dd190d257?editors=0100">Try it yourself</a></p> 
+    <h2 id="scroll-issue-on-mobile">Scroll Issue On Mobile</h2> 
+    <p>There is a common issue in mobile which cases a scroll, even if <code class="highlighter-rouge">100vh</code> is used. The reason is that the address bar height is in view. Louis Hoebregts wrote an <a href="https://css-tricks.com/the-trick-to-viewport-units-on-mobile/">article</a> about that with a simple and easy fix.</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.my-element</span> <span class="p">{</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">100vh</span><span class="p">;</span> <span class="c">/* Fallback for browsers that do not support Custom Properties */</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="n">var</span><span class="p">(</span><span class="n">--vh</span><span class="p">,</span> <span class="m">1vh</span><span class="p">)</span> <span class="err">*</span> <span class="m">100</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <div class="language-js highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="c1">// First we get the viewport height and we multiple it by 1% to get a value for a vh unit</span>
+<span class="kd">let</span> <span class="nx">vh</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">;</span>
+<span class="c1">// Then we set the value in the --vh custom property to the root of the document</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">setProperty</span><span class="p">(</span><span class="s1">'--vh'</span><span class="p">,</span> <span class="s2">`</span><span class="p">${</span><span class="nx">vh</span><span class="p">}</span><span class="s2">px`</span><span class="p">);</span>
+</code></pre>
+     </div>
+    </div> 
+    <figure> 
+     <img src="../../assets/viewport-units/scroll-issue.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p><a href="https://codepen.io/shadeed/pen/1d18ca2d23ec0038c759dc62dc3fd8c3?editors=0110">Demo</a></p> 
+    <h2 id="using-100vw-is-an-antipattern">Using <code class="highlighter-rouge">100vw</code> Is An Antipattern</h2> 
+    <p>When using <code class="highlighter-rouge">100vw</code> to give an element the full width of the viewport, things might work great if you’re a Mac OS user because the vertical scrollbar is hidden by default. As a result, the scrollbar width is added to the total width.</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/body-100vw.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>However, on a Windows machine, you will notice a horizontal scrolling in the page, because the width of the scrollbar is being added to the width. Let’s say you added the following:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.element</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100vw</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>On windows, the computed width of the <code class="highlighter-rouge">.element</code> will be <code class="highlighter-rouge">100vw + 8.5px</code>, where <code class="highlighter-rouge">8.5px</code> is the width of the vertical scrollbar. This is not good!</p> 
+    <figure> 
+     <img src="../../assets/viewport-units/body-100vw-1.png" alt=""> 
+     <figcaption></figcaption> 
+    </figure> 
+    <p>As far from what I know, there is no solution for this unless we use Javascript, and I don’t recommended that. It’s better to avoid <code class="highlighter-rouge">100vw</code> and use an alternative. For example, we can use CSS grid to have make an element break out of its container, see <a href="https://cloudfour.com/thinks/breaking-out-with-css-grid-layout/">this</a> article on Cloudfour.</p> 
+    <p>Thanks a lot to <a href="https://chrismorgan.info/">Chris Morgan</a> and <a href="https://twitter.com/kilianvalkhof/status/1237290552074395648">Kilian Valkhof</a> for warning me about that issue.</p> 
+    <h2 id="accessibility-is-important">Accessibility Is Important</h2> 
+    <p>When using viewport units extensively in a project, like for building a whole layout with it, accessibility is important. When a layout is zoomed in/out, the elements with viewport units won’t scale as you might expect. This will cause an issue to users who rely on zoom to browse the web.</p> 
+    <p>As per this <a href="https://twitter.com/sarasoueidan/status/1121645149983891457?lang=en">tweet</a> by Sāra Soueidān, using viewport units alone for font sizing is bad for accessibility. It’s better to combine them with fixed values, like the below:</p> 
+    <div class="language-css highlighter-rouge">
+     <div class="highlight">
+      <pre class="highlight"><code><span class="nc">.title</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="n">calc</span><span class="p">(</span><span class="m">16px</span> <span class="err">+</span> <span class="m">.3vw</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+     </div>
+    </div> 
+    <p>..and it will be good to go. Please make sure that using viewport units is suitable for what you’re doing, and test well.</p> 
+    <h2 id="useful-tools">Useful Tools</h2> 
+    <ul> 
+     <li>I found <a href="https://pxtovw.dev-calc.space/">this</a> little <strong>px to vw</strong> converter which might help you in your project.</li> 
+    </ul> 
+    <p>Do you have a useful tool? Please let me know at <a href="https://twitter.com/shadeed9">@shadeed9</a></p> 
+    <h2 id="resources--related-articles">Resources &amp; Related Articles</h2> 
+    <ul> 
+     <li><a href="https://css-tricks.com/full-width-containers-limited-width-parents/">Full Width Containers in Limited Width Parents</a></li> 
+     <li><a href="https://css-tricks.com/fun-viewport-units/">Fun with Viewport Units</a></li> 
+     <li><a href="https://css-tricks.com/simple-little-use-case-vmin/">Simple Little Use Case for <code class="highlighter-rouge">vmin</code> </a></li> 
+     <li><a href="https://thenewcode.com/1137/MinMaxing-Understanding-vMin-and-vMax-in-CSS">MinMaxing: Understanding vMin and vMax in CSS</a></li> 
+    </ul> 
+    <h2 id="the-end">The End</h2> 
+    <p>That’s a wrap. Do you have a comment or a suggestion? Please feel free to ping me on <a href="https://twitter.com/shadeed9">@shadeed9</a>.</p> 
+   </div> 
+   <div class="o-wrapper o-wrapper--small"> 
+    <section class="c-section--more"> 
+     <h2 class="visually-hidden">More articles</h2> 
+     <div class="c-section--more__content"> 
+      <div class="c-section--more__item prev"> 
+       <h3>Previous Article</h3> <a class="c-block--more__link prev" href="/article/learn-box-alignment/"> Learn Box Alignment</a> 
+      </div> 
+      <div class="c-section--more__item next"> 
+       <h3>Next Article</h3> <a class="c-block--more__link next" href="/article/auto-css/"> Everything About Auto in CSS </a> 
+      </div> 
+     </div> 
+    </section> 
+    <p class="rss-feed">Subscribe to my <a class="u-link" href="https://ishadeed.com/feed.xml">RSS feed</a></p> 
+   </div> 
+   <footer class="post-footer"> 
+    <div class="post-author"> 
+     <img src="../../assets/shadeed.jpg" alt="Avatar: Ahmad Shadeed" class="post-author__avatar"> 
+     <div> 
+      <h2 class="post-author__name">Ahmad Shadeed</h2> 
+      <p class="post-author__bio">UI, UX Designer &amp; Front-End Developer. <strong>You can <a href="/hire-me">hire me</a></strong>. I Write about web accessibility on <a href="https://twitter.com/weba11ymatters">@weba11ymatters</a> and share articles on my blog.</p> 
+     </div> 
+    </div> 
+   </footer> 
+  </div> 
+  <footer class="c-section c-section--footer full footer-simple"> 
+   <div class="footer-row"> 
+    <h3 class="c-section__title footer-copyrights"> The online studio of Ahmad Shadeed. <span>© 2012–2020 Copyright Ahmad Shadeed. All rights reserved.</span> </h3> 
+    <div> 
+     <h3 class="social-title">Find me online</h3> 
+     <ul> 
+      <li><a href="https://www.instagram.com/ishadeed" class="instagram" target="_blank">Instagram</a></li> 
+      <li><a href="https://twitter.com/shadeed9" class="twitter">Twitter</a></li> 
+      <li><a href="https://www.behance.net/ishadeed" class="behance">Behance</a></li> 
+      <li><a href="https://codepen.io/shadeed/" class="linkedin">CodePen</a></li> 
+      <li><a href="https://github.com/shadeed" class="instagram">Github</a></li> 
+      <li><a href="https://ishadeed.com/feed.xml">RSS Feed</a></li> 
+     </ul> 
+    </div> 
+   </div> <a href="#header" class="go-up" aria-label="Go up"> 
+    <svg width="20" height="20" viewbox="0 0 24 24"> <use xlink:href="#arrow-up"></use> 
+    </svg> </a> 
+  </footer> 
+  <script>
+    	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    	ga('create', 'UA-42479265-2', 'auto');
+    	ga('send', 'pageview');
+
+</script> 
+  <script>
+    var menuToggle = document.querySelector('.c-nav__toggle');
+    var navWrapper = document.querySelector('.c-nav__wrapper');
+    var closeNav = document.querySelector('.c-nav__close');
+
+    menuToggle.addEventListener('click', function () {
+        navWrapper.classList.add('is-active');
+    });
+
+    closeNav.addEventListener('click', function () {
+        navWrapper.classList.remove('is-active');
+    });
+
+    /*let targetElement = document.querySelector('.c-section--footer');
+    let cricketsAudio = document.querySelector('#crickets');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0
+    };
+
+    function callback (entries, observer) {
+        //console.log(observer);
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                cricketsAudio.play();
+            } else {
+                cricketsAudio.pause();
+            }
+        });
+    }
+
+    let observer = new IntersectionObserver(callback, options);
+    observer.observe(targetElement);*/
+</script>  
+ </body>
+</html>

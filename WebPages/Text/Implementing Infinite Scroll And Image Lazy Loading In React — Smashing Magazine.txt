@@ -1,0 +1,244 @@
+skip to main content start reading the article jump to list of all articles search topics articles . design & development books . physical & digital books events . conferences & workshops jobs . find work & employees membership . webinars & early-birds browse all topics clear search browse all topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow about the author awesome frontend developer who loves everything coding. i’m a lover of choral music and i’m working to make it more accessible to the world, one upload at a … more about chidi … march 16, 2020 leave a comment implementing infinite scroll and image lazy loading in react 15 min read api, react, performance share on twitter or linkedin smashing newsletter upgrade your inbox and get our editors’ picks 2× a month — delivered right into your inbox. earlier issues. your (smashing) email subscribe → in this tutorial, we’re going to learn how to use the html intersection observer api to implement infinite scrolling and image lazy loading in a react functional component. in the process, we’ll learn how to use some of react’s hooks and how to create custom hooks. if you have been looking for an alternative to pagination, infinite scroll is a good consideration. in this article, we’re going to explore some use cases for the intersection observer api in the context of a react functional component. the reader should possess a working knowledge of react functional components. some familiarity with react hooks will be beneficial but not required, as we will be taking a look at a few. our goal is that at the end of this article, we will have implemented infinite scroll and image lazy loading using a native html api. we would also have learned a few more things about react hooks. with that you can be able to implement infinite scroll and image lazy loading in your react application where necessary. let’s get started. creating maps with react and leaflet grasping information from a csv or a json file isn’t only complicated, but is also tedious. representing the same data in the form of visual aid is simpler. shajia abidi explains how powerful of a tool leaflet is, and how a lot of different kinds of maps can be created. read article → the intersection observer api according to the mdn docs, “the intersection observer api provides a way to asynchronously observe changes in the intersection of a target element with an ancestor element or with a top-level document’s viewport”. this api allows us to implement cool features such as infinite scroll and image lazy loading. the intersection observer is created by calling its constructor and passing it a callback and an options object. the callback is invoked whenever one element, called the target, intersects either the device viewport or a specified element, called the root. we can specify a custom root in the options argument or use the default value. let observer = new intersectionobserver(callback, options); the api is straightforward to use. a typical example looks like this: var intobserver = new intersectionobserver(entries => {
+    entries.foreach(entry => {
+      console.log(entry)
+      console.log(entry.isintersecting) // returns true if the target intersects the root element
+    })
+  },
+  {
+    // default options
+  }
+);
+let target = document.queryselector('#targetid');
+intobserver.observe(target); // start observation entries is a list of intersectionobserverentry objects. the intersectionobserverentry object describes an intersection change for one observed target element. note that the callback should not handle any time-consuming task as it runs on the main thread. the intersection observer api currently enjoys broad browser support, as shown on caniuse. intersection observer browser support. (large preview) you can read more about the api in the links provided in the resources section. let us now look at how to make use of this api in a real react app. the final version of our app will be a page of pictures that scrolls infinitely and will have each image loaded lazily. making api calls with the useeffect hook to get started, clone the starter project from this url. it has minimal setup and a few styles defined. i’ve also added a link to bootstrap’s css in the public/index.html file as i’ll be using its classes for styling. feel free to create a new project if you like. make sure you have yarn package manager installed if you want to follow with the repo. you can find the installation instructions for your specific operating system here. for this tutorial, we’re going to be grabbing pictures from a public api and displaying them on the page. we will be using the lorem picsum apis. for this tutorial, we’ll be using the endpoint, https://picsum.photos/v2/list?page=0&limit=10, which returns an array of picture objects. to get the next ten pictures, we change the value of page to 1, then 2, and so on. we will now build the app component piece by piece. open up src/app.js and enter the following code. import react, { useeffect, usereducer } from 'react';
+
+import './index.css';
+
+function app() {
+  const imgreducer = (state, action) => {
+    switch (action.type) {
+      case 'stack_images':
+        return { ...state, images: state.images.concat(action.images) }
+      case 'fetching_images':
+        return { ...state, fetching: action.fetching }
+      default:
+        return state;
+    }
+  }
+  const [imgdata, imgdispatch] = usereducer(imgreducer,{ images:[], fetching: true})
+  // next code block goes here
+} firstly, we define a reducer function, imgreducer. this reducer handles two actions. the stack_images action concatenates the images array. fetching_images action toggles the value of the fetching variable between true and false. the next step is to wire up this reducer to a usereducer hook. once that is done, we get back two things: imgdata, which contains two variables: images is the array of picture objects. fetching is a boolean which tells us if the api call is in progress or not. imgdispatch, which is a function for updating the reducer object. you can learn more about the usereducer hook in the react documentation. the next part of the code is where we make the api call. paste the following code below the previous code block in app.js. // make api calls
+useeffect(() => {
+  imgdispatch({ type: 'fetching_images', fetching: true })
+  fetch('https://picsum.photos/v2/list?page=0&limit=10')
+    .then(data => data.json())
+    .then(images => {
+      imgdispatch({ type: 'stack_images', images })
+      imgdispatch({ type: 'fetching_images', fetching: false })
+    })
+    .catch(e => {
+      // handle error
+      imgdispatch({ type: 'fetching_images', fetching: false })
+      return e
+    })
+}, [ imgdispatch ])
+
+// next code block goes here inside the useeffect hook, we make a call to the api endpoint with fetch api. we then update the images array with the result of the api call by dispatching the stack_images action. we also dispatch the fetching_images action once the api call completes. the next block of code defines the return value of the function. enter the following code after the useeffect hook. return (
+  <div classname="">
+    <nav classname="navbar bg-light">
+      <div classname="container">
+        <a classname="navbar-brand" href="/#">
+          <h2>infinite scroll + image lazy loading</h2>
+        </a>
+      </div>
+    </navv
+    <div id='images' classname="container">
+      <div classname="row">
+        {imgdata.images.map((image, index) => {
+          const { author, download_url } = image
+          return (
+            <div key={index} classname="card">
+              <div classname="card-body ">
+                <img
+                  alt={author}
+                  classname="card-img-top"
+                  src={download_url}
+                />
+              </div>
+              <div classname="card-footer">
+                <p classname="card-text text-center text-capitalize text-primary">shot by: {author}</p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  </div>
+); to display the images, we map over the images array in the imgdata object. now start the app and view the page in the browser. you should see the images nicely displayed in a responsive grid. the last bit is to export the app component. export default app; pictures in responsive grid. (large preview) the corresponding branch at this point is 01-make-api-calls. let’s now extend this by displaying more pictures as the page scrolls. implementing infinite scroll we aim to present more pictures as the page scrolls. from the url of the api endpoint, https://picsum.photos/v2/list?page=0&limit=10, we know that to get a new set of photos, we only need to increment the value of page. we also need to do this when we have run out of pictures to show. for our purpose here, we’ll know we have run out of images when we hit the bottom of the page. it’s time to see how the intersection observer api helps us achieve that. open up src/app.js and create a new reducer, pagereducer, below imgreducer. // app.js
+const imgreducer = (state, action) => {
+  ...
+}
+const pagereducer = (state, action) => {
+  switch (action.type) {
+    case 'advance_page':
+      return { ...state, page: state.page + 1 }
+    default:
+      return state;
+  }
+}
+const [ pager, pagerdispatch ] = usereducer(pagereducer, { page: 0 }) we define only one action type. each time the advance_page action is triggered, the value of page is incremented by 1. update the url in the fetch function to accept page numbers dynamically as shown below. fetch(`https://picsum.photos/v2/list?page=${pager.page}&limit=10`) add pager.page to the dependency array alongside imgdata. doing this ensures that the api call will run whenever pager.page changes. useeffect(() => {
+...
+}, [ imgdispatch, pager.page ]) after the useeffect hook for the api call, enter the below code. update your import line as well. // app.js
+import react, { useeffect, usereducer, usecallback, useref } from 'react';
+useeffect(() => {
+  ...
+}, [ imgdispatch, pager.page ])
+
+// implement infinite scrolling with intersection observer
+let bottomboundaryref = useref(null);
+const scrollobserver = usecallback(
+  node => {
+    new intersectionobserver(entries => {
+      entries.foreach(en => {
+        if (en.intersectionratio > 0) {
+          pagerdispatch({ type: 'advance_page' });
+        }
+      });
+    }).observe(node);
+  },
+  [pagerdispatch]
+);
+useeffect(() => {
+  if (bottomboundaryref.current) {
+    scrollobserver(bottomboundaryref.current);
+  }
+}, [scrollobserver, bottomboundaryref]); we define a variable bottomboundaryref and set its value to useref(null). useref lets variables preserve their values across component renders, i.e. the current value of the variable persists when the containing component re-renders. the only way to change its value is by re-assigning the .current property on that variable. in our case, bottomboundaryref.current starts with a value of null. as the page rendering cycle proceeds, we set its current property to be the node <div id='page-bottom-boundary'>. we use the assignment statement ref={bottomboundaryref} to tell react to set bottomboundaryref.current to be the div where this assignment is declared. thus, bottomboundaryref.current = null at the end of the rendering cycle, becomes: bottomboundaryref.current = <div id="page-bottom-boundary" style="border: 1px solid red;"></div> we shall see where this assignment is done in a minute. next, we define a scrollobserver function, in which to set the observer. this function accepts a dom node to observe. the main point to note here is that whenever we hit the intersection under observation, we dispatch the advance_page action. the effect is to increment the value of pager.page by 1. once this happens, the useeffect hook that has it as a dependency is re-run. this re-run, in turn, invokes the fetch call with the new page number. the event procession looks like this. hit intersection under observation → call advance_page action → increment value of pager.page by 1 → useeffect hook for fetch call runs → fetch call is run → returned images are concatenated to the images array. we invoke scrollobserver in a useeffect hook so that the function will run only when any of the hook’s dependencies change. if we didn’t call the function inside a useeffect hook, the function would run on every page render. recall that bottomboundaryref.current refers to <div id="page-bottom-boundary" style="border: 1px solid red;"></div>. we check that its value is not null before passing it to scrollobserver. otherwise, the intersectionobserver constructor would return an error. because we used scrollobserver in a useeffect hook, we have to wrap it in a usecallback hook to prevent un-ending component re-renders. you can learn more about usecallback in the react docs. enter the below code after the <div id='images'> div. // app.js
+<div id='image'>
+...
+</div>
+{imgdata.fetching && (
+  <div classname="text-center bg-secondary m-auto p-3">
+    <p classname="m-0 text-white">getting images</p>
+  </div>
+)}
+<div id='page-bottom-boundary' style={{ border: '1px solid red' }} ref={bottomboundaryref}></div> when the api call starts, we set fetching to true, and the text getting images becomes visible. as soon as it finishes, we set fetching to false, and the text gets hidden. we could also trigger the api call before hitting the boundary exactly by setting a different threshold in the constructor options object. the red line at the end lets us see exactly when we hit the page boundary. the corresponding branch at this point is 02-infinite-scroll. we will now implement image lazy loading. implementing image lazy loading if you inspect the network tab as you scroll down, you’ll see that as soon as you hit the red line (the bottom boundary), the api call happens, and all the images start loading even when you haven’t gotten to viewing them. there are a variety of reasons why this might not be desirable behavior. we may want to save network calls until the user wants to see an image. in such a case, we could opt for loading the images lazily, i.e., we won’t load an image until it scrolls into view. open up src/app.js. just below the infinite scrolling functions, enter the following code. // app.js
+
+// lazy loads images with intersection observer
+// only swap out the image source if the new url exists
+const imagesref = useref(null);
+const imgobserver = usecallback(node => {
+  const intobs = new intersectionobserver(entries => {
+    entries.foreach(en => {
+      if (en.intersectionratio > 0) {
+        const currentimg = en.target;
+        const newimgsrc = currentimg.dataset.src;
+        // only swap out the image source if the new url exists
+        if (!newimgsrc) {
+          console.error('image source is invalid');
+        } else {
+          currentimg.src = newimgsrc;
+        }
+        intobs.unobserve(node); // detach the observer when done
+      }
+    });
+  })
+  intobs.observe(node);
+}, []);
+useeffect(() => {
+  imagesref.current = document.queryselectorall('.card-img-top');
+  if (imagesref.current) {
+    imagesref.current.foreach(img => imgobserver(img));
+  }
+}, [imgobserver, imagesref, imgdata.images]);
+ as with scrollobserver, we define a function, imgobserver, which accepts a node to observe. when the page hits an intersection, as determined by en.intersectionratio > 0, we swap the image source on the element. notice that we first check if the new image source exists before doing the swap. as with the scrollobserver function, we wrap imgobserver in a usecallback hook to prevent un-ending component re-render. also note that we stop observing an img element once we’re done with the substitution. we do this with the unobserve method. in the following useeffect hook, we grab all the images with a class of .card-img-top on the page with document.queryselectorall. then we iterate over each image and set an observer on it. note that we added imgdata.images as a dependency of the useeffect hook. when this changes it triggers the useeffect hook and in turn imgobserver get called with each <img classname='card-img-top'> element. update the <img classname='card-img-top'/> element as shown below. <img
+  alt={author}
+  data-src={download_url}
+  classname="card-img-top"
+  src={'https://picsum.photos/id/870/300/300?grayscale&blur=2'}
+/> we set a default source for every <img classname='card-img-top'/> element and store the image we want to show on the data-src property. the default image usually has a small size so that we’re downloading as little as possible. when the <img/> element comes into view, the value on the data-src property replaces the default image. in the picture below, we see the default lighthouse image still showing in some of the spaces. images being lazily loaded. (large preview) the corresponding branch at this point is 03-lazy-loading. let’s now see how we can abstract all these functions so that they’re re-usable. abstracting fetch, infinite scroll and lazy loading into custom hooks we have successfully implemented fetch, infinite scroll, and image lazy loading. we might have another component in our application that needs similar functionality. in that case, we could abstract and reuse these functions. all we have to do is move them inside a separate file and import them where we need them. we want to turn them into custom hooks. the react documentation defines a custom hook as a javascript function whose name starts with "use" and that may call other hooks. in our case, we want to create three hooks, usefetch, useinfinitescroll, uselazyloading. create a file inside the src/ folder. name it customhooks.js and paste the code below inside. // customhooks.js
+
+import { useeffect, usecallback, useref } from 'react';
+// make api calls and pass the returned data via dispatch
+export const usefetch = (data, dispatch) => {
+  useeffect(() => {
+    dispatch({ type: 'fetching_images', fetching: true });
+    fetch(`https://picsum.photos/v2/list?page=${data.page}&limit=10`)
+      .then(data => data.json())
+      .then(images => {
+        dispatch({ type: 'stack_images', images });
+        dispatch({ type: 'fetching_images', fetching: false });
+      })
+      .catch(e => {
+        dispatch({ type: 'fetching_images', fetching: false });
+        return e;
+      })
+  }, [dispatch, data.page])
+}
+
+// next code block here the usefetch hook accepts a dispatch function and a data object. the dispatch function passes the data from the api call to the app component, while the data object lets us update the api endpoint url. // infinite scrolling with intersection observer
+export const useinfinitescroll = (scrollref, dispatch) => {
+  const scrollobserver = usecallback(
+    node => {
+      new intersectionobserver(entries => {
+        entries.foreach(en => {
+          if (en.intersectionratio > 0) {
+            dispatch({ type: 'advance_page' });
+          }
+        });
+      }).observe(node);
+    },
+    [dispatch]
+  );
+  useeffect(() => {
+    if (scrollref.current) {
+      scrollobserver(scrollref.current);
+    }
+  }, [scrollobserver, scrollref]);
+}
+
+// next code block here the useinfinitescroll hook accepts a scrollref and a dispatch function. the scrollref helps us set up the observer, as already discussed in the section where we implemented it. the dispatch function gives a way to trigger an action that updates the page number in the api endpoint url. // lazy load images with intersection observer
+export const uselazyloading = (imgselector, items) => {
+  const imgobserver = usecallback(node => {
+  const intobs = new intersectionobserver(entries => {
+    entries.foreach(en => {
+      if (en.intersectionratio > 0) {
+        const currentimg = en.target;
+        const newimgsrc = currentimg.dataset.src;
+        // only swap out the image source if the new url exists
+        if (!newimgsrc) {
+          console.error('image source is invalid');
+        } else {
+          currentimg.src = newimgsrc;
+        }
+        intobs.unobserve(node); // detach the observer when done
+      }
+    });
+  })
+  intobs.observe(node);
+  }, []);
+  const imagesref = useref(null);
+  useeffect(() => {
+    imagesref.current = document.queryselectorall(imgselector);
+    if (imagesref.current) {
+      imagesref.current.foreach(img => imgobserver(img));
+    }
+  }, [imgobserver, imagesref, imgselector, items])
+}
+ the uselazyloading hook receives a selector and an array. the selector is used to find the images. any change in the array triggers the useeffect hook that sets up the observer on each image. we can see that it is the same functions we have in src/app.js that we have extracted to a new file. the good thing now is that we can pass arguments dynamically. let’s now use these custom hooks in the app component. open src/app.js. import the custom hooks and delete the functions we defined for fetching data, infinite scroll, and image lazy loading. leave the reducers and the sections where we make use of usereducer. paste in the below code. // app.js
+
+// import custom hooks
+import { usefetch, useinfinitescroll, uselazyloading } from './customhooks'
+
+  const imgreducer = (state, action) => { ... } // retain this
+  const pagereducer = (state, action) => { ... } // retain this
+  const [pager, pagerdispatch] = usereducer(pagereducer, { page: 0 }) // retain this
+  const [imgdata, imgdispatch] = usereducer(imgreducer,{ images:[], fetching: true }) // retain this
+
+let bottomboundaryref = useref(null);
+usefetch(pager, imgdispatch);
+uselazyloading('.card-img-top', imgdata.images)
+useinfinitescroll(bottomboundaryref, pagerdispatch);
+
+// retain the return block
+return (
+  ...
+) we have already talked about bottomboundaryref in the section on infinite scroll. we pass the pager object and the imgdispatch function to usefetch. uselazyloading accepts the class name .card-img-top. note the . included in the class name. by doing this, we don’t need to specify it document.queryselectorall. useinfinitescroll accepts both a ref and the dispatch function for incrementing the value of page. the corresponding branch at this point is 04-custom-hooks. conclusion html is getting better at providing nice apis for implementing cool features. in this post, we’ve seen how easy it is to use the intersection observer in a react functional component. in the process, we learned how to use some of react’s hooks and how to write our own hooks. resources “infinite scroll + image lazy loading,” orji chidi matthew, github “infinite scrolling, pagination or “load more” buttons? usability findings in ecommerce,” christian holst, smashing magazine “lorem picsum,” david marby & nijiko yonskai “intersectionobserver’s coming into view,” surma, web fundamentals can i use…intersectionobserver “intersection observer api,” mdn web docs “components and props,” react “usecallback,” react “usereducer,” react (ks, ra, yk, il) browse all smashing magazine topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow with a commitment to quality content for the design community. founded by vitaly friedman and sven lennartz. 2006–2020. smashing is proudly running on netlify. fonts by latinotype. ✎ write for us contact us about us (impressum) privacy policy membership login delivery times advertise back to top

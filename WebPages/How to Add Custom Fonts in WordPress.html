@@ -1,0 +1,1825 @@
+<!doctype html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>How to Add Custom Fonts in WordPress</title>
+  <link rel="preconnect" href="https://use.typekit.net">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//use.typekit.net/mxa2dsh.js"></script> 
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script type="text/javascript">function parentIsEvil() { var html = null; try { var doc = top.location.pathname; } catch(err){ }; if(typeof doc === "undefined") { return true } else { return false }; }; if (parentIsEvil()) { top.location = self.location.href; };var url = "https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/";if(url.indexOf("stfi.re") != -1) { var canonical = ""; var links = document.getElementsByTagName("link"); for (var i = 0; i < links.length; i ++) { if (links[i].getAttribute("rel") === "canonical") { canonical = links[i].getAttribute("href")}}; canonical = canonical.replace("?sfr=1", "");top.location = canonical; console.log(canonical);};</script> <!-- This site is optimized with the Yoast SEO Premium plugin v2.3.5 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Want to use beautiful custom fonts in your WordPress theme? Learn how to add custom fonts in WordPress with CSS3 @font-face, Google Fonts, Typekit, and more."> 
+  <meta name="keywords" content="custom fonts wordpress plugin, custom fonts demo, cufon fonts wordpress, how to add fonts to wordpress, wordpress font plugin, wordpress font size plugin, install font wordpress, embed font wordpress"> 
+  <link rel="canonical" href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/"> 
+  <link rel="publisher" href="https://plus.google.com/101634180904808003404/posts"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="How to Add Custom Fonts in WordPress"> 
+  <meta property="og:description" content="Want to use beautiful custom fonts in your WordPress theme? Learn how to add custom fonts in WordPress with CSS3 @font-face, Google Fonts, Typekit, and more."> 
+  <meta property="og:url" content="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/"> 
+  <meta property="og:site_name" content="WPBeginner"> 
+  <meta property="article:publisher" content="http://facebook.com/wpbeginner"> 
+  <meta property="article:author" content="http://facebook.com/syedbalkhi"> 
+  <meta property="article:tag" content="custom fonts in wordpress"> 
+  <meta property="article:tag" content="google fonts in wordpress"> 
+  <meta property="article:tag" content="typekit fonts in wordpress"> 
+  <meta property="article:section" content="Themes"> 
+  <meta property="article:published_time" content="2020-03-12T07:00:26+00:00"> 
+  <meta property="article:modified_time" content="2020-03-12T07:18:19+00:00"> 
+  <meta property="og:updated_time" content="2020-03-12T07:18:19+00:00"> 
+  <meta property="fb:admins" content="1107000098"> 
+  <meta property="og:image" content="https://cdn2.wpbeginner.com/wp-content/uploads/2020/03/customfonts-og.png"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Want to use beautiful custom fonts in your WordPress theme? Learn how to add custom fonts in WordPress with CSS3 @font-face, Google Fonts, Typekit, and more."> 
+  <meta name="twitter:title" content="How to Add Custom Fonts in WordPress"> 
+  <meta name="twitter:site" content="@wpbeginner"> 
+  <meta name="twitter:domain" content="WPBeginner"> 
+  <meta name="twitter:image" content="https://cdn2.wpbeginner.com/wp-content/uploads/2020/03/customfonts-og.png"> 
+  <meta name="twitter:creator" content="@wpbeginner"> <!-- / Yoast SEO Premium plugin. --> 
+  <link rel="dns-prefetch" href="//ajax.googleapis.com"> 
+  <link rel="dns-prefetch" href="//a.opmnstr.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » Feed" href="https://www.wpbeginner.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » Comments Feed" href="https://www.wpbeginner.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » How to Add Custom Fonts in WordPress Comments Feed" href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/feed/"> 
+  <meta name="revised" content="Thursday, March 12, 2020, 7:18 am"> 
+  <meta name="theme-color" content="#ff6200"> <!-- This site uses the Google Analytics by MonsterInsights plugin v7.10.4 - Using Analytics tracking - https://www.monsterinsights.com/ --> 
+  <script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-15913772-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-15913772-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('set', 'dimension1', 'wp-themes');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script> <!-- / Google Analytics by MonsterInsights --> 
+  <link rel="stylesheet" id="child-theme-css" href="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/style.css?ver=1.2.5" type="text/css" media="all"> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"pdf,doc,ppt,xls,zip,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/refer\\\/\",\"label\":\"aff\"}]","home_url":"https:\/\/www.wpbeginner.com","hash_tracking":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/google-analytics-premium/assets/js/frontend.min.js?ver=7.10.4"></script> <!--[if lt IE 9]>
+<script type='text/javascript' src='https://cdn2.wpbeginner.com/wp-content/themes/genesis/lib/js/html5shiv.js?ver=3.7.3'></script>
+<![endif]--> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js?ver=1.11.1"></script> 
+  <script type="text/javascript" async src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/scripts/main.js?ver=1.0"></script> 
+  <script type="text/javascript" data-cfasync="false" id="omapi-script" async src="https://a.opmnstr.com/app/js/api.min.js"></script> 
+  <link rel="shortlink" href="http://wpbeg.in/1C8Expa"> 
+  <link rel="icon" href="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/favicon.ico"> 
+  <meta property="twitter:account_id" content="40516848"> 
+  <script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '831611416873998']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script> 
+  <noscript>
+   &lt;img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=831611416873998&amp;amp;ev=PixelInitialized"&gt;
+  </noscript> 
+  <meta name="onesignal" content="wordpress-plugin"> 
+  <link rel="manifest" href="https://www.wpbeginner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/manifest.json.php?gcm_sender_id="> 
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script> 
+  <script>
+
+      window.OneSignal = window.OneSignal || [];
+
+      OneSignal.push( function() {
+        OneSignal.SERVICE_WORKER_UPDATER_PATH = "OneSignalSDKUpdaterWorker.js.php";
+        OneSignal.SERVICE_WORKER_PATH = "OneSignalSDKWorker.js.php";
+        OneSignal.SERVICE_WORKER_PARAM = { scope: '/' };
+
+        OneSignal.setDefaultNotificationUrl("https://www.wpbeginner.com");
+        var oneSignal_options = {};
+        window._oneSignalInitOptions = oneSignal_options;
+
+        oneSignal_options['wordpress'] = true;
+oneSignal_options['appId'] = '65a3e2ee-e808-42f3-912d-a6ea51cb11ca';
+oneSignal_options['autoRegister'] = true;
+oneSignal_options['welcomeNotification'] = { };
+oneSignal_options['welcomeNotification']['title'] = "WPBeginner";
+oneSignal_options['welcomeNotification']['message'] = "Thanks for subscribing to WPBeginner!";
+oneSignal_options['welcomeNotification']['url'] = "https://www.wpbeginner.com/";
+oneSignal_options['path'] = "https://www.wpbeginner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/";
+oneSignal_options['safari_web_id'] = "web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f";
+oneSignal_options['promptOptions'] = { };
+              OneSignal.init(window._oneSignalInitOptions);
+                    });
+
+      function documentInitOneSignal() {
+        var oneSignal_elements = document.getElementsByClassName("OneSignal-prompt");
+
+        var oneSignalLinkClickHandler = function(event) { OneSignal.push(['registerForPushNotifications']); event.preventDefault(); };        for(var i = 0; i < oneSignal_elements.length; i++)
+          oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false);
+      }
+
+      if (document.readyState === 'complete') {
+           documentInitOneSignal();
+      }
+      else {
+           window.addEventListener("load", function(event){
+               documentInitOneSignal();
+          });
+      }
+    </script> 
+  <style type="text/css" id="syntaxhighlighteranchor"></style> 
+ </head> 
+ <body class="post-template-default single single-post postid-26336 single-format-standard header-image content-sidebar" itemscope itemtype="https://schema.org/WebPage">
+  <div class="site-container">
+   <header class="site-header" itemscope itemtype="https://schema.org/WPHeader">
+    <div class="wrap">
+     <div id="title-area">
+      <span id="title"><a href="https://www.wpbeginner.com/" title="WPBeginner - Beginner's Guide for WordPress">WPBeginner</a></span>
+      <p id="description">Beginner's Guide for WordPress</p>
+     </div><!-- end #title-area --> 
+     <div class="widget-area"> 
+      <div id="menu-primary-container"> 
+       <div class="menu-wpbv5-header-menu-container">
+        <ul id="menu-wpbv5-header-menu" class="menu">
+         <li id="menu-item-38548" class="menu-item menu-item-has-children"><a title="Blog" href="https://www.wpbeginner.com/blog/" itemprop="url">Blog <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-38551" class="menu-item"><a href="https://www.wpbeginner.com/category/beginners-guide/" itemprop="url">Beginners Guide</a></li> 
+           <li id="menu-item-38552" class="menu-item"><a href="https://www.wpbeginner.com/category/news/" itemprop="url">News</a></li> 
+           <li id="menu-item-38555" class="menu-item"><a href="https://www.wpbeginner.com/category/opinion/" itemprop="url">Opinion</a></li> 
+           <li id="menu-item-38554" class="menu-item"><a href="https://www.wpbeginner.com/category/showcase/" itemprop="url">Showcase</a></li> 
+           <li id="menu-item-38553" class="menu-item"><a href="https://www.wpbeginner.com/category/wp-themes/" itemprop="url">Themes</a></li> 
+           <li id="menu-item-38550" class="menu-item"><a href="https://www.wpbeginner.com/category/wp-tutorials/" itemprop="url">Tutorials</a></li> 
+           <li id="menu-item-38549" class="menu-item"><a href="https://www.wpbeginner.com/category/plugins/" itemprop="url">WordPress Plugins</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38556" class="menu-item menu-item-has-children"><a href="https://www.wpbeginner.com/start-here/" itemprop="url">Start Here <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-58934" class="menu-item"><a href="https://www.wpbeginner.com/start-a-wordpress-blog/" itemprop="url">How to Start a Blog</a></li> 
+           <li id="menu-item-58936" class="menu-item"><a href="https://www.wpbeginner.com/guides/" itemprop="url">Create a Website</a></li> 
+           <li id="menu-item-58937" class="menu-item"><a href="https://www.wpbeginner.com/wp-tutorials/how-to-start-an-online-store/" itemprop="url">Start an Online Store</a></li> 
+           <li id="menu-item-58938" class="menu-item"><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-website-builder/" itemprop="url">Best Website Builder</a></li> 
+           <li id="menu-item-58939" class="menu-item"><a href="https://www.wpbeginner.com/showcase/best-email-marketing-services/" itemprop="url">Email Marketing</a></li> 
+           <li id="menu-item-58942" class="menu-item"><a href="https://www.wpbeginner.com/wordpress-hosting/" itemprop="url">WordPress Hosting</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38557" class="menu-item menu-item-has-children"><a href="https://www.wpbeginner.com/deals/" itemprop="url">Deals <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-64580" class="menu-item"><a href="https://www.wpbeginner.com/deals/bluehost-coupon/" itemprop="url">Bluehost Coupon</a></li> 
+           <li id="menu-item-64582" class="menu-item"><a href="https://www.wpbeginner.com/deals/siteground-coupon/" itemprop="url">SiteGround Coupon</a></li> 
+           <li id="menu-item-64583" class="menu-item"><a href="https://www.wpbeginner.com/deals/wpengine-coupon/" itemprop="url">WP Engine Coupon</a></li> 
+           <li id="menu-item-64581" class="menu-item"><a href="https://www.wpbeginner.com/deals/hostgator-coupon/" itemprop="url">HostGator Coupon</a></li> 
+           <li id="menu-item-64584" class="menu-item"><a href="https://www.wpbeginner.com/deals/domain-com-coupon/" itemprop="url">Domain.com Coupon</a></li> 
+           <li id="menu-item-64585" class="menu-item"><a href="https://www.wpbeginner.com/deals/constant-contact-coupon/" itemprop="url">Constant Contact</a></li> 
+           <li id="menu-item-64586" class="menu-item"><a href="https://www.wpbeginner.com/deals/" itemprop="url">View All Deals »</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38559" class="menu-item"><a href="https://www.wpbeginner.com/glossary/" itemprop="url">Glossary</a></li> 
+         <li id="menu-item-38560" class="menu-item"><a href="https://videos.wpbeginner.com/" itemprop="url">Videos</a></li> 
+         <li id="menu-item-38561" class="menu-item"><a href="https://www.wpbeginner.com/wordpress-plugins/" itemprop="url">Products</a></li> 
+        </ul>
+       </div> 
+      </div> 
+     </div> 
+     <div class="searchicon"> <a href="#search"><i class="fa fa-search"></i></a> 
+     </div> 
+     <div id="fullscreensearch"> 
+      <div class="closesearch">
+       <a href="#searchclose">X</a>
+      </div> 
+      <form method="get" class="searchform search-form" action="https://www.wpbeginner.com/search"> 
+       <input type="text" value="" placeholder="Search WPBeginner..." name="q" class="s search-input" autocomplete="off"> 
+       <input type="submit" class="searchsubmit search-submit" value="Search"> 
+      </form>
+     </div> <a href="#menutoggle" id="menutoggle">☰</a> 
+     <div id="mobile-menu-container"></div> 
+    </div>
+   </header>
+   <div class="orangeribbon"> 
+    <div class="wrap"> <a href="#" class="ribbonlink" id="guides-slidetoggle"><span class="ribboncaps">Beginner's Guide for WordPress</span> <span class="ribbonsep">/</span> <span class="ribbonlower">Start your WordPress Blog in minutes</span><i class="fa fa-angle-right" aria-hidden="true"></i> </a> 
+    </div> 
+   </div> 
+   <div class="guidesdropdown" style="display: none;"> 
+    <div class="wrap"> <a href="https://www.wpbeginner.com/wordpress-hosting/" class="dropdownhosting" title="Choosing the best WordPress Hosting">Choosing the Best<br>WordPress Hosting</a> <a href="https://www.wpbeginner.com/how-to-install-wordpress/" class="dropdownthemes" title="How to Install WordPress - Complete WordPress Installation Tutorial">How to Easily <br>Install WordPress</a> <a href="https://www.wpbeginner.com/showcase/24-must-have-wordpress-plugins-for-business-websites/" class="dropdownplugins" title="Recommended WordPress Plugins">Recommended<br>WordPress Plugins</a> <a href="https://www.wpbeginner.com/guides/" class="viewallguides" title="View all Guides">View all Guides</a> 
+    </div> 
+   </div> 
+   <div class="clear"></div> 
+   <div class="site-inner">
+    <div class="content-sidebar-wrap">
+     <main class="content">
+      <div class="content-block">
+       <div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+        <p id="breadcrumbs"><!-- Breadcrumb NavXT 6.3.0 --> <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to WPBeginner." href="https://www.wpbeginner.com" class="home"><span property="name">WPBeginner</span></a>
+          <meta property="position" content="1"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Blog." href="https://www.wpbeginner.com/blog/" class="post-root post-post"><span property="name">Blog</span></a>
+          <meta property="position" content="2"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the Themes category archives." href="https://www.wpbeginner.com/category/wp-themes/" class="taxonomy category"><span property="name">Themes</span></a>
+          <meta property="position" content="3"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><span property="name">How to Add Custom Fonts in WordPress</span>
+          <meta property="position" content="4"></span></p>
+       </div>
+       <article class="post type-post entry" itemscope itemtype="https://schema.org/CreativeWork">
+        <header class="entry-header">
+         <h1 class="entry-title" itemprop="headline">How to Add Custom Fonts in WordPress</h1> 
+        </header>
+        <div class="singlepostinfo">
+          Last updated on <time itemprop="dateModified" datetime="2020-03-12T07:18:19+00:00">March 12th, 2020</time> by <a href="https://www.wpbeginner.com/author/wpbeginner/" title="Posts by Editorial Staff" rel="author">Editorial Staff</a> 
+        </div>
+        <div id="horizontalsocial" class="horizontalsocial social-buttons"> 
+         <div class="sharertitle"> <span class="total-count">811</span> <span class="total-text">Shares</span> 
+         </div> 
+         <div class="sharerfacebook sharebutton"> <a href="http://www.facebook.com/sharer.php?u=https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" class="facebook" data-href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook"><span class="count">Share</span></a> 
+         </div> 
+         <div class="sharertwitter sharebutton"> <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wpbeginner.com&amp;source=tweetbutton&amp;text=How+to+Add+Custom+Fonts+in+WordPress&amp;url=https%3A%2F%2Fwww.wpbeginner.com%2Fwp-themes%2Fhow-to-add-custom-fonts-in-wordpress%2F&amp;via=wpbeginner" class="twitter" data-text="How to Add Custom Fonts in WordPress" data-url="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" data-count="horizontal" data-via="wpbeginner" data-related="syedbalkhi : Founder of WPBeginner" rel="nofollow noopener noreferrer" target="_blank" title="Share on Twitter"><span class="count">Tweet</span></a> 
+         </div> 
+         <div class="sharerlinkedin sharebutton"> <a href="https://www.linkedin.com/cws/share?url=https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" class="linkedin" data-size="medium" data-href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn"><span class="count">Share</span></a> 
+         </div> 
+         <div class="sharerpinterest sharebutton"> <a href="https://pinterest.com/pin/create/button/?url=https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/&amp;media=https://cdn4.wpbeginner.com/wp-content/uploads/2015/04/how-to-add-custom-fonts-in-wordpress-pinterest.jpg&amp;description=Want to use beautiful custom fonts in your WordPress theme? Learn how to add custom fonts in WordPress with CSS3 @font-face, Google Fonts, Typekit, and more." class="pinterest" data-size="medium" data-href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" rel="nofollow" target="_blank" title="Share on Pinterest"><span class="count">Pin</span></a> 
+         </div> 
+        </div> 
+        <div class="singleadthumbcontainer"> 
+         <div class="wpbthumb">
+          <a target="_blank" rel="nofollow" href="https://youtube.com/wpbeginner?sub_confirmation=1" title="Free WordPress Video Tutorials on YouTube by WPBeginner"><img src="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/images/wpbyt.png" alt="Free WordPress Video Tutorials on YouTube by WPBeginner"></a>
+         </div> 
+         <div class="singlethumb"> 
+          <img src="https://cdn2.wpbeginner.com/wp-content/uploads/2015/03/customfonts-180x180.jpg" title="How to Add Custom Fonts in WordPress" alt="How to Add Custom Fonts in WordPress" class="attachment-singlethumbnail size-singlethumbnail wp-post-image" data-pin-media="https://cdn2.wpbeginner.com/wp-content/uploads/2015/04/how-to-add-custom-fonts-in-wordpress-pinterest.jpg"> 
+         </div> 
+        </div>
+        <div class="entry-content" itemprop="text">
+         <p>Do you want to add custom fonts in WordPress? Custom fonts allow you to use beautiful combination of different fonts on your website to improve typography and user experience. </p> 
+         <p>Apart from looking good, custom fonts can also help you improve readability, create a brand image, and increase time users spend on your website. </p> 
+         <p>In this article, we will show you how to add custom fonts in WordPress using Google Fonts, TypeKit, and CSS3 @Font-Face method.</p> 
+         <p><img title="Adding custom fonts in WordPress" src="https://cdn2.wpbeginner.com/wp-content/uploads/2020/03/customfonts-og.png" alt="Adding custom fonts in WordPress" width="550" height="340" class="alignnone size-full wp-image-74767"></p> 
+         <p><strong>Note:</strong> Loading too many fonts can slow down your website. We recommend choosing two fonts and use them across your website. We’ll also show you how to properly load them without slowing down your website. </p> 
+         <p>Before we look at how to add custom fonts in WordPress, let’s take a look at finding custom fonts that you can use. </p> 
+         <h4>How to Find Custom Fonts to Use in WordPress</h4> 
+         <p>Fonts used to be expensive, but not any more. There are many places to find great free web fonts such as <a title="Google Fonts" href="http://www.google.com/fonts" target="_blank" rel="nofollow noopener">Google Fonts</a>, <a title="Typekit" href="http://www.typekit.com" target="_blank" rel="nofollow noopener">Typekit</a>, <a title="FontSquirrel" href="http://www.fontsquirrel.com/" target="_blank" rel="nofollow noopener">FontSquirrel</a>, and <a title="Fonts.com" href="http://www.fonts.com" target="_blank" rel="nofollow noopener">fonts.com</a>.</p> 
+         <p>If you don’t know how to mix and match fonts, then try <a title="Font Pair" href="http://fontpair.co/" target="_blank" rel="nofollow noopener">Font Pair</a>. It helps designers pair beautiful Google fonts together.</p> 
+         <p>As you are picking your fonts, remember that using too many custom fonts will slow down your website. This is why you should select two fonts and use them throughout your design. This will also bring consistency to your design.</p> 
+         <h4>Video Tutorial</h4> 
+         <p><span class="embed-youtube" style="text-align:center; display: block;"><iframe class="youtube-player" type="text/html" width="520" height="323" src="https://www.youtube.com/embed/zo_TIv5TyWE?version=3&amp;rel=0&amp;fs=1&amp;showsearch=0&amp;showinfo=1&amp;iv_load_policy=1&amp;wmode=transparent" frameborder="0" allowfullscreen></iframe></span></p> 
+         <div class="yt-sbscrb-bar"> 
+          <div>
+           Subscribe to WPBeginner
+          </div> 
+          <div>
+           <iframe src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channel=wpbeginner&amp;layout=default&amp;count=default&amp;origin=http%3A%2F%2Fwpbeginner.com&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en_GB.Rx51stRkYnQ.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCM5XUrLkPZ9aFXqtSLivsifryqsUA#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1448178294715&amp;parent=http%3A%2F%2Fwpbeginner.com"></iframe>
+          </div> 
+          <div class="clear"></div> 
+         </div> 
+         <p>If you don’t like the video or prefer the written guide, then please continue reading.</p> 
+         <h4>Adding Custom Fonts in WordPress from Google Fonts</h4> 
+         <p><img title="Preview of Google Fonts" src="https://cdn4.wpbeginner.com/wp-content/uploads/2020/03/fontspreview.jpg" alt="Preview of Google Fonts" width="550" height="215" class="alignnone size-full wp-image-74720"></p> 
+         <p>Google Fonts is the largest, free, and most commonly used font library among website developers. There are multiple ways you can add and use Google Fonts in WordPress.</p> 
+         <h4>Method 1: Adding Custom Fonts Using Easy Google Fonts Plugin</h4> 
+         <p>If you want to add and use Google Fonts on your website, then this method is by far the easiest and recommended for beginners.</p> 
+         <p>First thing you need to do is install and activate the <a title="Easy Google Fonts" href="https://wordpress.org/plugins/easy-google-fonts/" target="_blank" rel="nofollow noopener">Easy Google Fonts</a> plugin. For more details, see our step by step guide on <a title="Step by Step Guide to Install a WordPress Plugin for Beginners" href="https://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/">how to install a WordPress plugin</a>.</p> 
+         <p>Upon activation, you can go to <strong>Appearance » Customizer</strong> page. This will open the live theme customizer interface where you’ll see the new Typography section.</p> 
+         <p><img title="Customizer typography" src="https://cdn4.wpbeginner.com/wp-content/uploads/2020/03/typographytab.jpg" alt="Customizer typography" width="550" height="307" class="alignnone size-full wp-image-74724"></p> 
+         <p>Clicking on Typography will you show different sections of your website where you can apply Google Fonts. Simply click on ‘Edit Font’ below the section you want to edit.</p> 
+         <p><img title="Typography settings" src="https://cdn4.wpbeginner.com/wp-content/uploads/2020/03/typography-settings.jpg" alt="Typography settings" width="550" height="333" class="alignnone size-full wp-image-74725"></p> 
+         <p>Under the font family section, you can choose any Google Font you want to use on your website. You can also choose font style, font size, padding, margin, and more.</p> 
+         <p>Depending on your theme, the number of sections here could be limited and you may not be able to directly change font selection for many different areas of your website.</p> 
+         <p>To fix this, the plugin also allows you to create your own controls and use them to change fonts on your website.</p> 
+         <p>First, you need to visit <strong>Settings » Google Fonts</strong> page and provide a name for your font control. Use something that helps you quickly understand where you will be using this font control.</p> 
+         <p><img title="Font control section" src="https://cdn2.wpbeginner.com/wp-content/uploads/2020/03/fontcontrol.png" alt="Font control section" width="550" height="318" class="alignnone size-full wp-image-74726"></p> 
+         <p>Next, click on the ‘Create font control’ button and then you will be asked to enter CSS selectors. </p> 
+         <p>You can add HTML elements you want to target (for instance, h1, h2, p, blockquote) or use CSS classes. </p> 
+         <p>You can use <a title="Basics of Inspect Element: Customizing WordPress for DIY Users" href="https://www.wpbeginner.com/wp-tutorials/basics-of-inspect-element-with-your-wordpress-site/">Inspect tool</a> in your browser to find out which CSS classes are used by the particular area you want to change.</p> 
+         <p><img title="Add CSS selectors" src="https://cdn3.wpbeginner.com/wp-content/uploads/2020/03/css-selectors.png" alt="Add CSS selectors" width="550" height="321" class="alignnone size-full wp-image-74727"></p> 
+         <p>Now click on the ‘Save font control’ button to store your settings. You can create as many font controllers as you need for different sections of your website.</p> 
+         <p>To use these font controllers, you need to head over to <strong>Appearance » Customizer</strong> and click on the Typography tab.</p> 
+         <p>Under Typography, you will now see a ‘Theme Typography’ Option as well. Clicking on it will show your custom font controls you created earlier. You can now just click on the edit button to select the fonts and appearance for this control.</p> 
+         <p><img class="alignnone size-full wp-image-50883" title="Theme typography option" src="https://cdn4.wpbeginner.com/wp-content/uploads/2015/04/themetypography.png" alt="Theme typography option" width="550" height="295"></p> 
+         <p>Don’t forget to click on the save or publish button to save your changes.</p> 
+         <h4>Method 2: Manually Add Google Fonts in WordPress</h4> 
+         <p>This method requires you to add code to your WordPress theme files. If you haven’t done this before, then see our guide on how to <a title="Beginner’s Guide to Pasting Snippets from the Web into WordPress" href="https://www.wpbeginner.com/beginners-guide/beginners-guide-to-pasting-snippets-from-the-web-into-wordpress/">copy and paste code in WordPress</a>.</p> 
+         <p>First, visit the <a title="Google Fonts" href="http://www.google.com/fonts" target="_blank" rel="nofollow noopener">Google fonts library</a> and select a font that you want to use. Next, click on the quick use button below the font.</p> 
+         <p><img title="Select font styles you want to use" src="https://cdn2.wpbeginner.com/wp-content/uploads/2020/03/select-font.png" alt="Select font styles you want to use" width="550" height="371" class="alignnone size-full wp-image-74730"></p> 
+         <p>On the font page, you’ll see the styles available for that font. Select the styles that you want to use in your project and then click on the sidebar button at the top. </p> 
+         <p><img title="Get the font embed link" src="https://cdn3.wpbeginner.com/wp-content/uploads/2020/03/embedfont.png" alt="Get the font embed link" width="550" height="322" class="alignnone size-full wp-image-74731"></p> 
+         <p>Next, you will need to switch to the ‘Embed’ tab in the sidebar to copy the embed code. </p> 
+         <p>There are two ways you can add this code to your WordPress site. </p> 
+         <p>First, you can simply edit your theme’s header.php file and paste the code before the <code>&lt;body&gt;</code> tag. </p> 
+         <p>However, if you are unfamiliar with code editing in WordPress, then you can use a plugin to add this code. </p> 
+         <p>Simply install and activate the <a href="https://wordpress.org/plugins/insert-headers-and-footers/" title="Insert Headers and Footers" rel="noopener nofollow" target="_blank">Insert Headers and Footers</a> plugin. For more details, see our step by step guide on <a href="http://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/" title="Step by Step Guide to Install a WordPress Plugin for Beginners">how to install a WordPress plugin</a>.</p> 
+         <p>Upon activation, go to <strong>Settings » Insert Headers and Footers</strong> page and paste the embed code in the ‘Scripts in header’ box. </p> 
+         <p><img title="Add font code to your WordPress site" src="https://cdn4.wpbeginner.com/wp-content/uploads/2020/03/addfontcode.png" alt="Add font code to your WordPress site" width="550" height="343" class="alignnone size-full wp-image-74732"></p> 
+         <p>Don’t forget to click on the Save button to store your changes. The plugin will now start loading the Google Font embed code on all pages of your website. </p> 
+         <p>You can use this font in your theme’s stylesheet like this:</p> 
+         <pre class="brush: css; title: ; notranslate" title="">
+.h1 site-title { 
+font-family: 'Open Sans', Arial, sans-serif; 
+}
+</pre> 
+         <p>For more detailed instructions see our guide on how to <a title="How to Add Google Web Fonts in WordPress Themes the “Right” way" href="https://www.wpbeginner.com/wp-themes/how-add-google-web-fonts-wordpress-themes/">add Google fonts in WordPress</a> themes.</p> 
+         <h4>Adding Custom Fonts in WordPress Using Typekit</h4> 
+         <p><img title="Typekit Adobe Fonts" src="https://cdn4.wpbeginner.com/wp-content/uploads/2020/03/typekit.jpg" alt="Typekit Adobe Fonts" width="550" height="344" class="alignnone size-full wp-image-74733"></p> 
+         <p><a href="https://fonts.adobe.com/" title="Typekit by Adobe Fonts" rel="noopener nofollow" target="_blank">Typekit by Adobe Fonts</a> is another free and premium resource for awesome fonts that you can use in your design projects. They have a paid subscription as well as a limited free plan that you can use.</p> 
+         <p>Simply signup for an Adobe Fonts account and visit the browse fonts section. From here you need to click on the <code>&lt;/&gt;</code> button to select a font and create a project. </p> 
+         <p><img title="Add typekit font to a project" src="https://cdn4.wpbeginner.com/wp-content/uploads/2020/03/addtypekitfont.jpg" alt="Add typekit font to a project" width="550" height="283" class="alignnone size-full wp-image-74734"></p> 
+         <p>Next, you’ll see the embed code with your project ID. It will also show you how to use the font in your theme’s CSS. </p> 
+         <p>You need to copy and paste this code inside the &lt;head&gt; section of your website. </p> 
+         <p><img title="Typekit font embed code" src="https://cdn.wpbeginner.com/wp-content/uploads/2020/03/typekitfontcode.jpg" alt="Typekit font embed code" width="550" height="313" class="alignnone size-full wp-image-74761"></p> 
+         <p>There are two ways you can add this code to your WordPress site. </p> 
+         <p>First, you can simply edit your theme’s header.php file and paste the code before the <code>&lt;body&gt;</code> tag. </p> 
+         <p>However, if you are unfamiliar with code editing in WordPress, then you can use a plugin to add this code. </p> 
+         <p>Simply install and activate the <a href="https://wordpress.org/plugins/insert-headers-and-footers/" title="Insert Headers and Footers" rel="noopener nofollow" target="_blank">Insert Headers and Footers</a> plugin. </p> 
+         <p>Upon activation, go to <strong>Settings » Insert Headers and Footers</strong> page and paste the embed code in the ‘Scripts in header’ box.</p> 
+         <p><img title="Adding Typekit by Adobe Fonts in WordPress" src="https://cdn3.wpbeginner.com/wp-content/uploads/2020/03/typekit-wpaddcode.jpg" alt="Adding Typekit by Adobe Fonts in WordPress" width="550" height="322" class="alignnone size-full wp-image-74762"></p> 
+         <p>That’s all, you can now use the Typekit font you selected in your WordPress theme’s stylesheet like this:</p> 
+         <pre class="brush: css; title: ; notranslate" title="">
+h1 .site-title { 
+font-family: gilbert, sans-serif;
+} 
+</pre> 
+         <p>For more detailed instructions check out our tutorial how to <a title="How to add Awesome Typography in WordPress with Typekit" href="https://www.wpbeginner.com/plugins/how-to-add-awesome-typography-in-wordpress-with-typekit/">add awesome typography in WordPress using Typekit</a>.</p> 
+         <h4>Adding Custom Fonts in WordPress Using CSS3 @font-face</h4> 
+         <p>The most direct way of adding custom fonts in WordPress is by adding the fonts using CSS3 <code>@font-face</code> method. This method allows you to use any font that you like on your website.</p> 
+         <p>First thing you need to do is download the font that you like in a web format. If you do not have the web format for your font, then you can convert it using the <a title="Webfont Generator" href="http://www.fontsquirrel.com/tools/webfont-generator" target="_blank" rel="nofollow noopener">FontSquirrel Webfont generator</a>.</p> 
+         <p>Once you have the webfont files, you would need to upload it on your <a href="https://www.wpbeginner.com/wordpress-hosting/" title="How to Choose the Best WordPress Hosting in 2020 (Compared)">WordPress hosting</a> server.</p> 
+         <p>The best place to upload the fonts is inside a new “fonts” folder in your theme or <a title="How to Create a WordPress Child Theme" href="https://www.wpbeginner.com/wp-themes/how-to-create-a-wordpress-child-theme-video/">child theme</a>‘s directory.</p> 
+         <p>You can <a title="How to use FTP to upload files to WordPress for Beginners" href="https://www.wpbeginner.com/beginners-guide/how-to-use-ftp-to-upload-files-to-wordpress-for-beginners/">use FTP</a> or File Manager of your <a href="https://www.wpbeginner.com/glossary/cpanel/" title="cPanel">cPanel</a> to upload the font.</p> 
+         <p>Once you have uploaded the font, you need to load the font in your theme’s stylesheet using CSS3 @font-face rule like this:</p> 
+         <pre class="brush: css; title: ; notranslate" title="">
+@font-face {
+	font-family: Arvo;  
+	src: url(http://www.example.com/wp-content/themes/your-theme/fonts/Arvo-Regular.ttf);  
+	font-weight: normal;  
+}
+</pre> 
+         <p>Don’t forget to replace the font-family and URL with your own.</p> 
+         <p>After that you can use that font anywhere in your theme’s stylesheet like this:</p> 
+         <pre class="brush: css; title: ; notranslate" title="">
+.h1 site-title { 
+font-family: "Arvo", Arial, sans-serif; 
+}
+</pre> 
+         <p>Loading fonts directly using CSS3 @font-face is not always the best solution. If you are using a font from Google Fonts or Typekit, then it is best to serve the font directly from their server for optimal performance.</p> 
+         <p>That’s all, we hope this article helped you add custom fonts in WordPress. You may also want to checkout our guide on how to <a title="How to Use Icon Fonts in WordPress Post Editor" href="https://www.wpbeginner.com/plugins/how-to-use-icon-fonts-in-wordpress-post-editor/">use icon fonts in WordPress</a> and how to <a title="How to Change the Font Size in WordPress" href="https://www.wpbeginner.com/beginners-guide/how-to-change-the-font-size-in-wordpress/">change the font size in WordPress</a>.</p> 
+         <p>If you liked this article, then please subscribe to our <a title="WPBeginner on YouTube" href="http://youtube.com/wpbeginner" target="_blank" rel="nofollow noopener">YouTube Channel</a> for WordPress video tutorials. You can also find us on <a title="WPBeginner on Twitter" href="http://twitter.com/wpbeginner" target="_blank" rel="nofollow noopener">Twitter</a> and <a title="WPBginner on Facebook" href="https://www.facebook.com/wpbeginner" target="_blank" rel="nofollow noopener">Facebook</a>.</p> 
+        </div>
+        <footer class="entry-footer">
+         <div id="horizontalsocial" class="horizontalsocial social-buttons"> 
+          <div class="sharertitle"> <span class="total-count">811</span> <span class="total-text">Shares</span> 
+          </div> 
+          <div class="sharerfacebook sharebutton"> <a href="http://www.facebook.com/sharer.php?u=https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" class="facebook" data-href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook"><span class="count">Share</span></a> 
+          </div> 
+          <div class="sharertwitter sharebutton"> <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wpbeginner.com&amp;source=tweetbutton&amp;text=How+to+Add+Custom+Fonts+in+WordPress&amp;url=https%3A%2F%2Fwww.wpbeginner.com%2Fwp-themes%2Fhow-to-add-custom-fonts-in-wordpress%2F&amp;via=wpbeginner" class="twitter" data-text="How to Add Custom Fonts in WordPress" data-url="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" data-count="horizontal" data-via="wpbeginner" data-related="syedbalkhi : Founder of WPBeginner" rel="nofollow noopener noreferrer" target="_blank" title="Share on Twitter"><span class="count">Tweet</span></a> 
+          </div> 
+          <div class="sharerlinkedin sharebutton"> <a href="https://www.linkedin.com/cws/share?url=https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" class="linkedin" data-size="medium" data-href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn"><span class="count">Share</span></a> 
+          </div> 
+          <div class="sharerpinterest sharebutton"> <a href="https://pinterest.com/pin/create/button/?url=https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/&amp;media=https://cdn4.wpbeginner.com/wp-content/uploads/2015/04/how-to-add-custom-fonts-in-wordpress-pinterest.jpg&amp;description=Want to use beautiful custom fonts in your WordPress theme? Learn how to add custom fonts in WordPress with CSS3 @font-face, Google Fonts, Typekit, and more." class="pinterest" data-size="medium" data-href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/" rel="nofollow" target="_blank" title="Share on Pinterest"><span class="count">Pin</span></a> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+         <div class="singlerelated"> 
+          <div class="headingbig">
+           Popular on WPBeginner <span class="headingorange">Right Now!</span>
+          </div> 
+          <div class="relatedentry"> 
+           <ul> 
+            <li class="odd"> <a href="https://www.wpbeginner.com/wp-tutorials/step-by-step-guide-how-to-start-a-podcast-with-wordpress/" title="How to Start Your Own Podcast (Step by Step)"> <img width="96" height="96" src="https://cdn.wpbeginner.com/wp-content/uploads/2018/10/wppodcast-96x96.png" class="relatedthumb wp-post-image" alt="How to Start Your Own Podcast (Step by Step)" title="How to Start Your Own Podcast (Step by Step)"></a> <p class="title"><a href="https://www.wpbeginner.com/wp-tutorials/step-by-step-guide-how-to-start-a-podcast-with-wordpress/" title="How to Start Your Own Podcast (Step by Step)">How to Start Your Own Podcast (Step by Step)</a></p> </li> 
+            <li class="even"> <a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" title="Revealed: Why Building an Email List is so Important Today (6 Reasons)"> <img width="96" height="96" src="https://cdn2.wpbeginner.com/wp-content/uploads/2018/12/emaillistbuilding-96x96.png" class="relatedthumb wp-post-image" alt="Revealed: Why Building an Email List is so Important Today (6 Reasons)" title="Revealed: Why Building an Email List is so Important Today (6 Reasons)"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" title="Revealed: Why Building an Email List is so Important Today (6 Reasons)">Revealed: Why Building an Email List is so Important Today (6 Reasons)</a></p> </li> 
+            <li class="odd"> <a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners"> <img width="96" height="96" src="https://cdn2.wpbeginner.com/wp-content/uploads/2010/04/googleanalyticsthumb-96x96.jpg" class="relatedthumb wp-post-image" alt="Google Analytics in WordPress" title="How to Install Google Analytics in WordPress for Beginners"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners">How to Install Google Analytics in WordPress for Beginners</a></p> </li> 
+            <li class="even"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" title="How to Fix the Error Establishing a Database Connection in WordPress"> <img width="96" height="96" src="https://cdn3.wpbeginner.com/wp-content/uploads/2020/01/fixdatabaseconnectionerror-th-96x96.png" class="relatedthumb wp-post-image" alt="How to Fix the Error Establishing a Database Connection in WordPress" title="How to Fix the Error Establishing a Database Connection in WordPress"></a> <p class="title"><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" title="How to Fix the Error Establishing a Database Connection in WordPress">How to Fix the Error Establishing a Database Connection in WordPress</a></p> </li> 
+           </ul> 
+          </div> 
+         </div> 
+         <div class="clear"></div>
+        </footer>
+        <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
+         <img alt="" src="https://secure.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=70&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=140&amp;d=mm&amp;r=g 2x" class="avatar avatar-70 photo" height="70" width="70">
+         <h4 class="author-box-title"><a href="https://www.wpbeginner.com/author/wpbeginner/" class="aboutauthor" rel="author">About the Editorial Staff</a></h4>
+         <div class="author-box-content" itemprop="description">
+          <p>Editorial Staff at WPBeginner is a team of WordPress experts led by Syed Balkhi. Trusted by over 1.3 million readers worldwide.</p> 
+         </div>
+        </section> 
+       </article>
+      </div> <a href="#" title="Download the Ultimate WordPress Toolkit" class="manual-optin-trigger wptoolkit" data-optin-slug="faamjcr6mcotuufr"> <img src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/ultimatewptoolkit.jpg" alt="The Ultimate WordPress Toolkit" data-pin-media="https://cdn2.wpbeginner.com/wp-content/uploads/2015/04/how-to-add-custom-fonts-in-wordpress-pinterest.jpg"> </a> 
+      <div class="content-block"> 
+       <div class="clear"></div>
+       <div class="entry-comments" id="comments">
+        <h3 class="titlecomments">51 Comments</h3><a href="#respond" class="leavereplybutton">Leave a Reply</a>
+        <ol class="comment-list"> 
+         <li class="comment even thread-even depth-1" id="comment-819273"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a41ec267fdd386228c71427f579efe73?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a41ec267fdd386228c71427f579efe73?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Tarun Kashyap</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-819273">Mar 19, 2020 at 5:04 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Which font are you using on this site ? It looks very attractive </p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-819273" onclick="return addComment.moveForm( &quot;comment-819273&quot;, &quot;819273&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Tarun Kashyap">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-819535"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-819535">Mar 20, 2020 at 9:09 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>We’re currently using Proxima Nova <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-819535" onclick="return addComment.moveForm( &quot;comment-819535&quot;, &quot;819535&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-815120"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/7b63ee16ec4cfcc95419f472526dfaf0?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/7b63ee16ec4cfcc95419f472526dfaf0?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Joshua</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-815120">Mar 13, 2020 at 6:39 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Can you pleaseee tell me how do you make such beautiful animated photos for you blog? Which software do you use?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-815120" onclick="return addComment.moveForm( &quot;comment-815120&quot;, &quot;815120&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Joshua">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-815133"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-815133">Mar 13, 2020 at 8:46 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>There are multiple tools, for the moment you may want to take a look at Recordit for an option for creating a GIF <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-815133" onclick="return addComment.moveForm( &quot;comment-815133&quot;, &quot;815133&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-798677"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a50e48ac63c22abee2eab3e031246728?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a50e48ac63c22abee2eab3e031246728?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Manuel</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-798677">Feb 5, 2020 at 11:45 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks a lot, I was trying @font-face on WordPress but the font was not displaying, so I followed the recommendations to place the fonts inside the theme directory and voila!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-798677" onclick="return addComment.moveForm( &quot;comment-798677&quot;, &quot;798677&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Manuel">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-799211"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-799211">Feb 6, 2020 at 8:50 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Glad our recommendation could help <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-799211" onclick="return addComment.moveForm( &quot;comment-799211&quot;, &quot;799211&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-612476"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/d91577a55af8b9d72ff9e47f3662903a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d91577a55af8b9d72ff9e47f3662903a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Roshni Kanchan</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-612476">Apr 11, 2019 at 12:19 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you once again for a useful article.</p> 
+            <p>Would you know why my font is displaying correctly on laptop but not on mobile phone?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-612476" onclick="return addComment.moveForm( &quot;comment-612476&quot;, &quot;612476&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Roshni Kanchan">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-613072"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-613072">Apr 12, 2019 at 10:50 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Your specific theme may have device-specific CSS that is overwriting the font you added. If you check with your theme’s support they should be able to let you know.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-613072" onclick="return addComment.moveForm( &quot;comment-613072&quot;, &quot;613072&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-607952"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/599b5d6c1678339fabd75e73fef5b4b9?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/599b5d6c1678339fabd75e73fef5b4b9?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Vlad</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-607952">Apr 2, 2019 at 5:56 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you very much!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-607952" onclick="return addComment.moveForm( &quot;comment-607952&quot;, &quot;607952&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Vlad">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-608266"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-608266">Apr 3, 2019 at 10:53 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You’re welcome <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-608266" onclick="return addComment.moveForm( &quot;comment-608266&quot;, &quot;608266&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-563450"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/296f3f7af8dc4627a6b7c517e9be1346?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/296f3f7af8dc4627a6b7c517e9be1346?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Katherine</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-563450">Dec 11, 2018 at 5:36 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you for making this simple video. Fixed my font in minutes with the second method. You saved me a lot of time messing with my theme code. Much appreciated!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-563450" onclick="return addComment.moveForm( &quot;comment-563450&quot;, &quot;563450&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Katherine">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-563541"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-563541">Dec 11, 2018 at 11:56 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hey Katherine, </p> 
+              <p>You are welcome. We are glad you found it helpful.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-563541" onclick="return addComment.moveForm( &quot;comment-563541&quot;, &quot;563541&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-558688"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/0b815302c62f0ce46d566482d0c195d6?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/0b815302c62f0ce46d566482d0c195d6?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Or</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-558688">Nov 28, 2018 at 9:56 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hey, my font is not a Google font. I uploaded it using font face, but I don’t see it on my theme’s customizer. Any advice?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-558688" onclick="return addComment.moveForm( &quot;comment-558688&quot;, &quot;558688&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Or">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-549637"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/29ed8c865680223e2bfdfd242e1463cd?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/29ed8c865680223e2bfdfd242e1463cd?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">giri</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-549637">Nov 9, 2018 at 4:32 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, i absolutely got tons of value from your post. Please i have 2 quick questions.<br> 1. What is the number of plugins every blogger shouldn’t exceed? I currently have about 18 installed, would you consider that number outrageous. Please could you also check out my site and offer me a<br> 2. Your font is really beautiful. would you suggest plugins that would give me beautiful fonts just like yours?<br> Finally, would you spare a few seco</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-549637" onclick="return addComment.moveForm( &quot;comment-549637&quot;, &quot;549637&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to giri">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-550994"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-550994">Nov 12, 2018 at 7:00 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi Giri,</p> 
+              <p>1. Please see our article on <a href="https://www.wpbeginner.com/opinion/how-many-wordpress-plugins-should-you-install-on-your-site/" title="How Many WordPress Plugins Should You Install on Your Site?">how many WordPress plugins should you install on your site</a>. </p> 
+              <p>2. For fonts, pleasesee <a href="https://www.wpbeginner.com/showcase/best-wordpress-typography-plugins-to-improve-your-design/" title="16 Best WordPress Typography Plugins to Improve Your Design">best typography plugins for WordPress</a>.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-550994" onclick="return addComment.moveForm( &quot;comment-550994&quot;, &quot;550994&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-548325"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/7bd5f3f759b2be8db84f061bfec8f235?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/7bd5f3f759b2be8db84f061bfec8f235?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Roshani</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-548325">Nov 6, 2018 at 6:29 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I have uploaded custom fonts url in font-face but its showing error of 404 on developer tools. Prior of loading the web page it shows normal fonts.<br> Please help me with this</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-548325" onclick="return addComment.moveForm( &quot;comment-548325&quot;, &quot;548325&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Roshani">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-488666"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/9310178612ee3d92aeb8092a0b9bf777?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/9310178612ee3d92aeb8092a0b9bf777?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Chamnan</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-488666">Jun 7, 2018 at 3:52 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I’m having issue with for Khmer font while using Google Font. The problem is that some of the texts are showing symbol.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-488666" onclick="return addComment.moveForm( &quot;comment-488666&quot;, &quot;488666&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Chamnan">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-487997"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/71a4ca1324f0cba5574e11c235367ded?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/71a4ca1324f0cba5574e11c235367ded?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">ahmed aboubakr</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-487997">Jun 5, 2018 at 2:19 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>thanks for your tutorials , really it helps , and thanks for your kind effort</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-487997" onclick="return addComment.moveForm( &quot;comment-487997&quot;, &quot;487997&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to ahmed aboubakr">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-480028"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/4a980be3fdf9d0b9476f577953817c48?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/4a980be3fdf9d0b9476f577953817c48?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Fadl</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-480028">May 14, 2018 at 7:47 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Okay, never mind… I could figure it out by removing the @font-face code from the custom css field</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-480028" onclick="return addComment.moveForm( &quot;comment-480028&quot;, &quot;480028&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Fadl">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-474685"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/553978028222d10769922a74a167137a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/553978028222d10769922a74a167137a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Amy</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-474685">May 4, 2018 at 3:29 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>This is truly the best guide to adding fonts that I’ve found. All methods are in one place and each method is easy to follow. I’ve spent the past couple of days searching the internet trying to figure out how to add a custom font that was not from Google or Typekit, and finally I found a guide that was easy to follow. Thank you!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-474685" onclick="return addComment.moveForm( &quot;comment-474685&quot;, &quot;474685&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Amy">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-444736"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/29a85dae0610c3e869d9d2afa5aeeaa4?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/29a85dae0610c3e869d9d2afa5aeeaa4?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Amber</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-444736">Mar 3, 2018 at 11:09 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Okay, so I used Font Squirrel and got the @font-face kits. I uploaded to my theme in Siteground. Then I made sure to change the URL in WP Editor -&gt; Fonts. Here’s an example of what I did:</p> 
+            <p>@font-face {<br> font-family: ‘walpurgis_nightregular’;<br> src: url(‘www.example.com/public_html/wp-content/themes/pique/fonts/walpurgisnight-regular-webfont.woff2’) format(‘woff2’),<br> url(‘www.wanderlustconqueror.com/public_html/wp-content/themes/pique/fonts/walpurgisnight-regular-webfont.woff’) format(‘woff’);<br> font-weight: normal;<br> font-style: normal;</p> 
+            <p>}</p> 
+            <p>Despite doing this, the font will not come up in the “Typography” section of the customization options. I thought perhaps I was also supposed to add it to the “Additional CSS Editor” so I put it there too. That didn’t seem to work either. </p> 
+            <p>I just want to be able to use my font for my Headers. What am I doing wrong here? For this tutorial to be for beginners, it’s making me feel really stupid. Am I missing a step? Is there a better, more in-depth tutorial on just using the Font Face option? Help!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-444736" onclick="return addComment.moveForm( &quot;comment-444736&quot;, &quot;444736&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Amber">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-445055"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-445055">Mar 4, 2018 at 7:58 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi Amber, </p> 
+              <p>We are not sure. Please try following the steps mentioned above once again.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-445055" onclick="return addComment.moveForm( &quot;comment-445055&quot;, &quot;445055&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment even depth-3" id="comment-456789"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/34c63a8c1912e1ffe447ee73283e65f1?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/34c63a8c1912e1ffe447ee73283e65f1?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Dan</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-456789">Apr 5, 2018 at 2:47 pm</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>I am having a similar problem as Amber. Despite following the step by step instructions, my fonts still are not loading. </p> 
+                <p>I am using a custom theme based off of the twenty seventeen theme. My css file is located at wp-content/themes/twentyseventeen-child. This is also where I have placed my fonts. In the css file I have the following:</p> 
+                <p>However, my site is still not showing this font! What am I doing wrong?</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-456789" onclick="return addComment.moveForm( &quot;comment-456789&quot;, &quot;456789&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Dan">Reply</a> 
+               </div> 
+              </article> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-429727"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/3ca8fdb9a88d70f399b4af97a9db742a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/3ca8fdb9a88d70f399b4af97a9db742a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Syed Abbas Ali Shah</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-429727">Jan 13, 2018 at 1:51 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I have a question too. I have uploaded the .ttf files in my </p> 
+            <p>publichtml/folder-name-of-web/wp-content/theme/font</p> 
+            <p>and I have added the name of the font in stylesheet css of theme in wordpress editor. But it is not picking the font. </p> 
+            <p>Kindly give me the solution</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-429727" onclick="return addComment.moveForm( &quot;comment-429727&quot;, &quot;429727&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Syed Abbas Ali Shah">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-412235"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/b9ad5cd697e46cdeccb3c836349026a9?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b9ad5cd697e46cdeccb3c836349026a9?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Raghava</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-412235">Nov 3, 2017 at 5:42 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks for the valuable information. I tried and it’s working good. I used two fonts from google, when using google fonts website performance is bit slow.</p> 
+            <p>if you can post in detailed how to upload fonts directly into the word press it would be appreciated.</p> 
+            <p>Thanks,<br> Raghava <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-412235" onclick="return addComment.moveForm( &quot;comment-412235&quot;, &quot;412235&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Raghava">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-378188"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/987e18d9d4f84d3890298e35a780ab85?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/987e18d9d4f84d3890298e35a780ab85?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Allix</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-378188">May 3, 2017 at 11:27 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>If I am viewing a “glyph” through Photoshop that is a special character in a font I had purchased – how can I transfer this glyph into Photoshop?</p> 
+            <p>Thank you!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-378188" onclick="return addComment.moveForm( &quot;comment-378188&quot;, &quot;378188&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Allix">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-373092"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/c8db0668fb67ee798a053e41c87bd9ee?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/c8db0668fb67ee798a053e41c87bd9ee?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">dsb</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-373092">Apr 8, 2017 at 10:10 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>silly questions im sure! But, in the url- where it reads ‘your theme’ this is to be replaced with the title of our theme, correct? Or do we leave that part as is?<br> Also, for fonts that have long names, do you just need to leave spaces in between or add + signs or anything?<br> for example:</p> 
+            <pre class="brush: css; title: ; notranslate" title="">@font-face {
+	font-family: Arvo example one;  
+	src: url(http://www.example.com/wp-content/themes/your-theme/fonts/Arvo example one-Regular.ttf);  
+	font-weight: normal;  
+}
+
+</pre> 
+            <p>Thank you so much</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-373092" onclick="return addComment.moveForm( &quot;comment-373092&quot;, &quot;373092&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to dsb">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-373352"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-373352">Apr 10, 2017 at 12:04 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi dsb, </p> 
+              <p>Yes you will need to replace your-theme with the actual name of your theme folder. If you uploaded your font to your current theme’s fonts directory, then you can see what the font file is called. or Copy the file name and just paste it in CSS.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-373352" onclick="return addComment.moveForm( &quot;comment-373352&quot;, &quot;373352&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-363624"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/b0c648ee28f51c13428df98d8c13b652?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b0c648ee28f51c13428df98d8c13b652?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Vincent</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-363624">Feb 13, 2017 at 6:42 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>“The best place to upload the fonts is inside a new “fonts” folder in your theme or child theme‘s directory.”</p> 
+            <p>Why is this the best place, exactly? Creating a child theme for a single font is a little annoying, but uploading it inside the theme itself means it could disappear when the theme has an update, right? Or will it still be safe from that as it’s technically an unrelated file?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-363624" onclick="return addComment.moveForm( &quot;comment-363624&quot;, &quot;363624&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Vincent">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-390004"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d5a361184aa24c9522444f213303e769?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d5a361184aa24c9522444f213303e769?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Andrew</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-390004">Jul 8, 2017 at 9:33 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>I would probably say it’s silly to not have a child theme in general, regardless of what you’re using it for. </p> 
+              <p>And no, it wouldn’t be safe if your theme gets an update. It would be overwritten by the update.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-390004" onclick="return addComment.moveForm( &quot;comment-390004&quot;, &quot;390004&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Andrew">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment even depth-3" id="comment-390221"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/b0c648ee28f51c13428df98d8c13b652?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b0c648ee28f51c13428df98d8c13b652?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">DaVince</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-390221">Jul 10, 2017 at 10:38 am</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>&gt; I would probably say it’s silly to not have a child theme in general, regardless of what you’re using it for.</p> 
+                <p>Why do you think so? Consider the case where someone is not changing the theme in any way, shape or form whatsoever. It would be entirely pointless to run a child theme, and adds just another layer of code on top of everything in this case.</p> 
+                <p>&gt; And no, it wouldn’t be safe if your theme gets an update. It would be overwritten by the update.</p> 
+                <p>I kinda figured. I feel like this should be highlighted in the article or it’s going to make some people unhappy.</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-390221" onclick="return addComment.moveForm( &quot;comment-390221&quot;, &quot;390221&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to DaVince">Reply</a> 
+               </div> 
+              </article> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-347018"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/37651040c9e183dce6853fbd0646f1e3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/37651040c9e183dce6853fbd0646f1e3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Shah</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-347018">Nov 9, 2016 at 12:04 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi,</p> 
+            <p>I don’t have any problem with adding custom fonts anywhere in m theme, just when I was going to change the font in wp-embed-template.php my custom fonts don’t work. I mean it’s like they are not @font-faced at all.</p> 
+            <p>Would you please help me to change the fonts in the wordpress embed part? Should I add @font-face again in the php? It is already added though!</p> 
+            <p>Many thanks in advance,</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-347018" onclick="return addComment.moveForm( &quot;comment-347018&quot;, &quot;347018&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Shah">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-345227"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a04d34693309d4fe7ac8f081327d9628?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a04d34693309d4fe7ac8f081327d9628?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Robin</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-345227">Oct 26, 2016 at 2:04 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you for your help!</p> 
+            <p>Once I’ve upload the font to my fonts folder, do I add this to my CSS? Do I leave the font family that is there? Because I’m using that mostly. This is a specialized font only used for specific occasions. </p> 
+            <p>I’m so confused.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-345227" onclick="return addComment.moveForm( &quot;comment-345227&quot;, &quot;345227&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Robin">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-344738"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/5395fbf37c0b3592f40791e17a2764d9?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/5395fbf37c0b3592f40791e17a2764d9?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Alice</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-344738">Oct 22, 2016 at 12:05 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Really great! Been struggling a while (I’m quite new to all this) but now it works <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_biggrin.gif" alt=":D" class="wp-smiley"> Thanks a lot!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-344738" onclick="return addComment.moveForm( &quot;comment-344738&quot;, &quot;344738&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Alice">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-343563"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/3f91e83ac6f346e7400c72c8a1506cdf?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/3f91e83ac6f346e7400c72c8a1506cdf?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Nicole</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-343563">Oct 13, 2016 at 1:41 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi. Thanks for this. How do I find the licensing information for a font? Some fonts are all over the web, and I want to use one but it’s hard to find the EULA info</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-343563" onclick="return addComment.moveForm( &quot;comment-343563&quot;, &quot;343563&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Nicole">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-363626"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/b0c648ee28f51c13428df98d8c13b652?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b0c648ee28f51c13428df98d8c13b652?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Vincent</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-363626">Feb 13, 2017 at 6:45 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>It’s usually included in the font’s own metadata. In Windows, you can right-click and view the properties of a font. If that’s not enough, you might want to download a full-featured font viewer that supports showing font metadata.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-363626" onclick="return addComment.moveForm( &quot;comment-363626&quot;, &quot;363626&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Vincent">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-342263"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/6613b450270ffb79562c3cc056b3533e?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/6613b450270ffb79562c3cc056b3533e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Andrea</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-342263">Oct 1, 2016 at 2:07 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello, which extension should has the font to be installed on wordpress?<br> Cause i am having issue to install mine</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-342263" onclick="return addComment.moveForm( &quot;comment-342263&quot;, &quot;342263&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Andrea">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-335037"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/c45c7c0d188c1d64fdf0b386c5059141?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/c45c7c0d188c1d64fdf0b386c5059141?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Mike</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-335037">Aug 2, 2016 at 11:37 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi guys I used the last technique (@fontface), it has added the font to wordpress but it has made it the default font. I only wanted it to be an option on my fonts list. Can you help?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-335037" onclick="return addComment.moveForm( &quot;comment-335037&quot;, &quot;335037&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Mike">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-332948"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/d811cb49edf4925e20759c63456ccd6b?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d811cb49edf4925e20759c63456ccd6b?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">ep</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-332948">Jul 16, 2016 at 3:10 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Used CSS @font-face method. Works like a charm. Thanks.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-332948" onclick="return addComment.moveForm( &quot;comment-332948&quot;, &quot;332948&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to ep">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-329828"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/90c6cd93ac5945cfe45c8a798c7538df?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/90c6cd93ac5945cfe45c8a798c7538df?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Abdul Manan Abbasi</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-329828">Jun 18, 2016 at 5:25 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Assalam o Alaikum!<br> I am a beginner in wordpress. I want to add Noori Nastaleeq font to my website. How could i done so. I need your help.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-329828" onclick="return addComment.moveForm( &quot;comment-329828&quot;, &quot;329828&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Abdul Manan Abbasi">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-317853"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/8defeabb9baf81e30ba16773413e2619?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8defeabb9baf81e30ba16773413e2619?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Ildiko</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-317853">Mar 18, 2016 at 10:22 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Can you provide performance comparison between these methods?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-317853" onclick="return addComment.moveForm( &quot;comment-317853&quot;, &quot;317853&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Ildiko">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-303651"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/7db5c718366133138b52617d03f246bb?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/7db5c718366133138b52617d03f246bb?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Asiyah</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-303651">Nov 17, 2015 at 3:33 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi,</p> 
+            <p>I’m completely new to wordpress so I hope you can help me. I have just literally bought a custom domain from bluehost, then installed wordpress and lastly installed and activated the so simple theme. So what I want to know is will my font changes be lost if I update my theme in the future, if so how do I prevent that?</p> 
+            <p>It’s just I’ve noticed a lot of other sites advise adding a custom css plugin first and I have no idea how to do that.</p> 
+            <p>Kind regards</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-303651" onclick="return addComment.moveForm( &quot;comment-303651&quot;, &quot;303651&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Asiyah">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-303798"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-303798">Nov 18, 2015 at 4:44 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Please take a look at our guide on <a href="https://www.wpbeginner.com/plugins/how-to-easily-add-custom-css-to-your-wordpress-site/" rel="nofollow">how to easily add custom CSS to your WordPress site</a>.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-303798" onclick="return addComment.moveForm( &quot;comment-303798&quot;, &quot;303798&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-301280"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/dda90ae253461b3f39bfbe7ae07bafc7?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/dda90ae253461b3f39bfbe7ae07bafc7?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Vikram</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-301280">Oct 30, 2015 at 2:21 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks a lot.It helped</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-301280" onclick="return addComment.moveForm( &quot;comment-301280&quot;, &quot;301280&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Vikram">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-298442"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/cc7f4a6ded981151ca9187ad1681afa0?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/cc7f4a6ded981151ca9187ad1681afa0?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Hashim Naushahi</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-298442">Oct 8, 2015 at 5:21 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>This was truly helpful! Thank you very much!!!</p> 
+            <p>Just a quick question…</p> 
+            <p>How would I adjust the code if I have a font with different weights?</p> 
+            <p>I’ve got a regular and bold version of the font I’d like to use installed on my laptop. I used FontSquirrel to convert those in webfonts. And I uploaded those webfonts to a folder in my child theme like you explained. I just don’t know how to use @font-face to use both weights.</p> 
+            <p>I’m really looking forward to your reply. The way you explained this is great!</p> 
+            <p>Thank you in advance!</p> 
+            <p>Sincerely,</p> 
+            <p>Hashim</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-298442" onclick="return addComment.moveForm( &quot;comment-298442&quot;, &quot;298442&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Hashim Naushahi">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-298529"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-298529">Oct 9, 2015 at 1:27 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You will use font-weight in CSS. Like this: </p> 
+              <pre class="brush: css; title: ; notranslate" title="">h1 { 
+font-family: 'Open Sans', Arial, serif;
+font-weight: 400;
+ }
+</pre> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-298529" onclick="return addComment.moveForm( &quot;comment-298529&quot;, &quot;298529&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-294857"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/084249d92e7c2b6a98273e620b81e340?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/084249d92e7c2b6a98273e620b81e340?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Christina</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-294857">Sep 11, 2015 at 1:56 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I don’t see the “editor” button in my wordpress under appearance. I used font squirrel to upload my font but when I went to add it in the theme editor that wasn’t an option. Maybe I have a different version of wordpress. Please help. Thank you.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-294857" onclick="return addComment.moveForm( &quot;comment-294857&quot;, &quot;294857&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Christina">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-293147"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/aaa814f9fa7d5ee5e9fc73acf4c157c0?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/aaa814f9fa7d5ee5e9fc73acf4c157c0?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Michelle</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-293147">Sep 3, 2015 at 1:17 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Can you give a sample of the URL source for the @fontface example? I’m doing g something wrong and feel like pulling all my hair out :/</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-293147" onclick="return addComment.moveForm( &quot;comment-293147&quot;, &quot;293147&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Michelle">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-291894"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/76731f7cd2e46801440a8eb32f6ebbf3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/76731f7cd2e46801440a8eb32f6ebbf3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Mr.T</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-291894">Aug 21, 2015 at 7:47 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Isn’t the correct way of adding custom google fonts is by using enqueue_script function?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-291894" onclick="return addComment.moveForm( &quot;comment-291894&quot;, &quot;291894&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to Mr.T">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-291903"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-291903">Aug 21, 2015 at 10:45 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>It is ideal but not necessary. This method is correct too, and easier for beginners.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-291903" onclick="return addComment.moveForm( &quot;comment-291903&quot;, &quot;291903&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-261101"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/9299e0afcc50c6337ca2e99738a052f7?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/9299e0afcc50c6337ca2e99738a052f7?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">James</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-themes/how-to-add-custom-fonts-in-wordpress/#comment-261101">Apr 7, 2015 at 4:35 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi guys</p> 
+            <p>I always read your posts and love the site, great work you always help me out. I’ve been stuck on moving a site for a customer and needed to change the font. I thought I had done everything , copies the css files etc, but it was reading this that made me realise I hadn’t changed the code in the header. </p> 
+            <p>Been stuck on this for a week!</p> 
+            <p>Anyway just wanted to say thanks <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-261101" onclick="return addComment.moveForm( &quot;comment-261101&quot;, &quot;261101&quot;, &quot;respond&quot;, &quot;26336&quot; )" aria-label="Reply to James">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+        </ol>
+       </div>
+       <div class="pagination comment-pagination"></div> 
+       <div id="respond" class="comment-respond"> 
+        <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wp-themes/how-to-add-custom-fonts-in-wordpress/#respond" style="display:none;">Cancel reply</a></small></h3> 
+        <form action="https://www.wpbeginner.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate> 
+         <p class="commentpolicy">Thanks for choosing to leave a comment. Please keep in mind that all comments are moderated according to our <a href="https://www.wpbeginner.com/comment-policy/" title="WPBeginner Comment Policy">comment policy</a>, and your email address will NOT be published. Please Do NOT use keywords in the name field. Let's have a personal and meaningful conversation.</p>
+         <div class="commentfields-left">
+          <p class="comment-form-author"><input x-autocompletetype="name-full" id="author" name="author" type="text" value="" placeholder="Your Real Name" size="30" tabindex="1" aria-required="true"><label for="author"></label> <span class="required"></span></p><!-- #form-section-author .form-section --> 
+          <p class="comment-form-email"><input x-autocompletetype="email" id="email" name="email" type="text" value="" placeholder="Email Address..." size="30" tabindex="2" aria-required="true"><label for="email"></label> <span class="required"></span></p><!-- #form-section-email .form-section --> 
+         </div><!-- #form-section-url .form-section --> 
+         <p class="comment-form-comment"><textarea autocomplete="nope" id="a49e87b4b2" name="a49e87b4b2" cols="45" rows="8" tabindex="4" aria-required="true"></textarea><textarea id="comment" aria-hidden="true" name="comment" autocomplete="nope" style="padding:0;clip:rect(1px, 1px, 1px, 1px);position:absolute !important;white-space:nowrap;height:1px;width:1px;overflow:hidden;" tabindex="-1"></textarea><script type="text/javascript">document.getElementById("comment").setAttribute( "id", "a1cedb4b1694249d3610a9a298a154c9" );document.getElementById("a49e87b4b2").setAttribute( "id", "comment" );</script></p><!-- #form-section-comment .form-section --><!-- Subscribe to Comments Reloaded version 180225 --><!-- Subscribe to comments Reloaded MP: '/manage-subscriptions/' --><!-- BEGIN: subscribe to comments reloaded -->
+         <p class="comment-form-subscriptions"><label for="subscribe-reloaded"><select name="subscribe-reloaded" id="subscribe-reloaded"> <option value="none" selected>Don't subscribe</option> <option value="yes">All</option> <option value="replies">Replies to my comments</option> </select> Notify me of followup comments via e-mail. You can also <a href="https://www.wpbeginner.com/manage-subscriptions/?srp=26336&amp;srk=73b8227bdd81bbf20bba6554090cd5a7&amp;sra=s&amp;srsrc=f">subscribe</a> without commenting.</label></p><!-- END: subscribe to comments reloaded -->
+         <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit Comment"> <input type="hidden" name="comment_post_ID" value="26336" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"> </p>
+         <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="d98b7289dc"></p>
+         <p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="171"></p> 
+        </form> 
+       </div><!-- #respond --> 
+      </div>
+     </main>
+     <aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar">
+      <!-- WPBeginner Subscribe --> 
+      <div class="wpbsubscribe widget"> 
+       <div class="widgetheading">
+         Over 1,320,000+ Readers 
+        <p>Get fresh content from WPBeginner</p> 
+       </div> 
+       <div class="socialicons"> <a href="https://facebook.com/wpbeginner" class="fbicon" target="_blank" rel="nofollow" title="Join WPBeginner on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="https://twitter.com/wpbeginner" class="twittericon" target="_blank" rel="nofollow" title="Follow WPBeginner on Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://youtube.com/wpbeginner?sub_confirmation=1" class="yticon" target="_blank" rel="nofollow" title="Subscribe to WPBeginner on YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a> <a href="https://www.linkedin.com/company/wpbeginner/" class="linkedinicon" target="_blank" rel="nofollow" title="Join WPBeginner on LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a> <a href="https://www.pinterest.com/wpbeginner/" class="pinteresticon" target="_blank" rel="nofollow" title="Follow WPBeginner on Pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a> <a href="#" data-optin-slug="mukj2ocfysjzidb5" class="manual-optin-trigger emailicon" title="Join WPBeginner Weekly Email Newsletter"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
+       </div> 
+      </div> <!-- End WPBeginner Subscribe --> 
+      <div class="featuredplugins sidebardeals widget"> 
+       <div class="widgetheading">
+        <span class="headingred">Featured</span> WordPress Plugin
+       </div> 
+       <div class="relatedentry"> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.seedprod.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="SeedProd" target="_blank"><img width="96" height="96" src="https://cdn3.wpbeginner.com/wp-content/uploads/2018/10/seedprodthumbnail-96x96.png" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="SeedProd WordPress Coming Soon Page Plugin" title="SeedProd"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.seedprod.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="SeedProd" target="_blank">SeedProd</a>
+          </div> Jump start your website with viral coming soon pages. <a href="https://www.seedprod.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="SeedProd" target="_blank">Learn More »</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a href="https://www.wpbeginner.com/start-a-wordpress-blog/" title="How to Start a Blog (Step by Step)" class="startablog"><img src="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/images/startablog.png" alt="How to Start a Blog"></a> <a href="https://www.wpbeginner.com/blueprint/" title="WPBeginner WordPress Blueprint" class="blueprint"><img src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/blueprint.jpg" alt="How to Start a Blog"></a> 
+      <div class="clear"></div> <!-- WordPress Pillar Articles --> 
+      <div class="sidebarhelpwith widget"> 
+       <div class="widgetheading">
+         I need help with ... 
+       </div> 
+       <div class="guideicons"> <a href="https://www.wpbeginner.com/start-a-wordpress-blog/" class="guideicon starting">Starting a<br>Blog</a> <a href="https://www.wpbeginner.com/wordpress-performance-speed/" class="guideicon speed">WordPress<br>Performance</a> <a href="https://www.wpbeginner.com/wordpress-security/" class="guideicon security">WordPress<br>Security</a> <a href="https://www.wpbeginner.com/wordpress-seo/" class="guideicon seo">WordPress<br>SEO</a> <a href="https://www.wpbeginner.com/common-wordpress-errors-and-how-to-fix-them/" class="guideicon errors">WordPress<br>Errors</a> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-start-an-online-store/" class="guideicon store">Building an<br>Online Store</a> 
+       </div> 
+       <div class="guidesearch"> 
+        <form method="get" class="searchform search-form" action="https://www.wpbeginner.com/search"> 
+         <input type="text" value="" placeholder="Search WPBeginner..." name="q" class="s search-input" autocomplete="off"> <button class="guide-submit"></button> 
+        </form> 
+       </div> 
+      </div> <!-- WordPress Guides --> 
+      <div class="sidebarwordpressguides widget"> 
+       <div class="widgetheading"> <span class="headingorange">Useful</span> WordPress Guides 
+       </div> 
+       <div id="unslider"> 
+        <ul> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/plugins/7-best-wordpress-backup-plugins-compared-pros-and-cons/" data-category="guides">7 Best WordPress Backup Plugins Compared (Pros and Cons)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" data-category="guides">How to Fix the Error Establishing a Database Connection in WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-you-need-a-cdn-for-your-wordpress-blog-infographic/" data-category="guides">Why You Need a CDN for your WordPress Blog? [Infographic]</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/make-money-online/" data-category="guides">25 Legit Ways to Make Money Online Blogging with WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/self-hosted-wordpress-org-vs-free-wordpress-com-infograph/" data-category="guides">Self Hosted WordPress.org vs. Free WordPress.com [Infograph]</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/free-recording-wordpress-workshop-for-beginners/" data-category="guides">Free Recording: WordPress Workshop for Beginners</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/24-must-have-wordpress-plugins-for-business-websites/" data-category="guides">24 Must Have WordPress Plugins for Business Websites</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-your-blog-from-wordpress-com-to-wordpress-org/" data-category="guides">How to Properly Move Your Blog from WordPress.com to WordPress.org</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/5-best-contact-form-plugins-for-wordpress-compared/" data-category="guides">5 Best Contact Form Plugins for WordPress Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/best-wordpress-popup-plugin/" data-category="guides">Which is the Best WordPress Popup Plugin? (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/best-woocommerce-hosting/" data-category="guides">Best WooCommerce Hosting in 2020 (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-internal-server-error-in-wordpress/" data-category="guides">How to Fix the Internal Server Error in WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/how-to-install-wordpress/" data-category="guides">How to Install WordPress - Complete WordPress Installation Tutorial</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" data-category="guides">Why You Should Start Building an Email List Right Away</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-wordpress-to-a-new-domain-without-losing-seo/" data-category="guides">How to Properly Move WordPress to a New Domain Without Losing SEO</a></li> 
+           <li><a href="https://www.wpbeginner.com/wordpress-hosting/" data-category="guides">How to Choose the Best WordPress Hosting for Your Website</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-blogging-platform/" data-category="guides">How to Choose the Best Blogging Platform (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/category/wp-tutorials/" data-category="guides">WordPress Tutorials - 200+ Step by Step WordPress Tutorials</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/best-wordpress-ecommerce-plugins-compared/" data-category="guides">5 Best WordPress Ecommerce Plugins Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/5-best-wordpress-membership-plugins-compared/" data-category="guides">5 Best WordPress Membership Plugins (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/best-email-marketing-services/" data-category="guides">7 Best Email Marketing Services for Small Business (2020)</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-domain-registrar/" data-category="guides">How to Choose the Best Domain Registrar (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/the-truth-about-shared-wordpress-web-hosting/" data-category="guides">The Truth About Shared WordPress Web Hosting</a></li> 
+           <li><a href="https://www.wpbeginner.com/managed-wordpress-hosting/" data-category="guides">When Do You Really Need Managed WordPress Hosting?</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/best-drag-and-drop-page-builders-for-wordpress/" data-category="guides">5 Best Drag and Drop WordPress Page Builders Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-switch-from-blogger-to-wordpress-without-losing-google-rankings/" data-category="guides">How to Switch from Blogger to WordPress without Losing Google Rankings</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-switch-from-wix-to-wordpress-step-by-step/" data-category="guides">How to Properly Switch From Wix to WordPress (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-from-weebly-to-wordpress/" data-category="guides">How to Properly Move from Weebly to WordPress (Step by Step)</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/best-vps-hosting-compared/" data-category="guides">Do You Really Need a VPS? Best WordPress VPS Hosting Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-from-squarespace-to-wordpress/" data-category="guides">How to Properly Move from Squarespace to WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-register-a-domain-name-simple-tip-to-get-it-for-free/" data-category="guides">How to Register a Domain Name (+ tip to get it for FREE)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/hostgator/" data-category="guides">HostGator Review - An Honest Look at Speed &amp; Uptime (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/siteground/" data-category="guides">SiteGround Reviews from 1032 Users &amp; Our Experts (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/bluehost/" data-category="guides">Bluehost Review from Real Users + Performance Stats (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-much-does-it-cost-to-build-a-wordpress-website/" data-category="guides">How Much Does It Really Cost to Build a WordPress Website?</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-create-an-email-newsletter/" data-category="guides">How to Create an Email Newsletter the RIGHT WAY (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/best-crm-software-for-small-businesses-compared/" data-category="guides">7 Best CRM Software for Small Businesses (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-create-a-free-business-email-address-in-5-minutes-step-by-step/" data-category="guides">How to Create a Free Business Email Address in 5 Minutes (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" data-category="guides">How to Install Google Analytics in WordPress for Beginners</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-move-wordpress-to-a-new-host-or-server-with-no-downtime/" data-category="guides">How to Move WordPress to a New Host or Server With No Downtime</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-is-wordpress-free-what-are-the-costs-what-is-the-catch/" data-category="guides">Why is WordPress Free? What are the Costs? What is the Catch?</a></li> 
+           <li><a href="https://www.wpbeginner.com/guides/" data-category="guides">How to Make a Website in 2020 – Step by Step Guide</a></li> 
+          </ul> </li> 
+        </ul> 
+       </div> 
+      </div> <!-- End WordPress Guides --> 
+      <div class="sidebardeals widget"> 
+       <div class="widgetheading">
+        Deals &amp; Coupons <a href="https://www.wpbeginner.com/deals/" class="viewdeals">(view all)</a>
+       </div> 
+       <div class="relatedentry"> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.wpbeginner.com/deals/wpeka-coupon/" title="WPeka Coupon"> <img width="96" height="96" src="https://cdn.wpbeginner.com/wp-content/uploads/2018/12/wpeka-96x96.png" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="WPeka" title="WPeka Coupon"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.wpbeginner.com/deals/wpeka-coupon/" title="WPeka Coupon">WPeka Coupon</a>
+          </div> Get 25% OFF on WPeka premium WordPress plugins and themes.
+         </div> 
+        </div> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.wpbeginner.com/deals/aweber-coupon/" title="AWeber Coupon"> <img width="96" height="96" src="https://cdn4.wpbeginner.com/wp-content/uploads/2012/06/aweber-96x96.gif" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="Aweber" title="AWeber Coupon"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.wpbeginner.com/deals/aweber-coupon/" title="AWeber Coupon">AWeber Coupon</a>
+          </div> Get 100% off for your first month with AWeber. Start your first month for free.
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </aside>
+    </div>
+   </div>
+   <div class="clear"></div>
+   <div class="footer-press">
+    <div class="wrap"> <span>Featured In</span> 
+     <div class="logo-wrap"> 
+      <div class="press-logo sprite-inc"></div> 
+      <div class="press-logo sprite-fox"></div> 
+      <div class="press-logo sprite-vb"></div> 
+      <div class="press-logo sprite-huffpost"></div> 
+      <div class="press-logo sprite-yahoo"></div> 
+      <div class="press-logo sprite-entrepreneur"></div> 
+     </div> 
+    </div>
+   </div>
+   <div class="clear"></div>
+   <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
+    <div class="wrap">
+     <div class="aboutwpbeginner footer-widget"> 
+      <div class="footer-heading">
+       About WPBeginner®
+      </div> 
+      <p>WPBeginner is a free WordPress resource site for Beginners. WPBeginner was founded in July 2009 by <u><a href="https://syedbalkhi.com/" title="Syed Balkhi" target="_blank">Syed Balkhi</a></u>. The main goal of this site is to provide quality tips, tricks, hacks, and other WordPress resources that allows WordPress beginners to improve their site(s).</p> 
+     </div> 
+     <div class="site-links footer-widget"> 
+      <div class="footer-heading">
+       Site Links
+      </div> 
+      <ul> 
+       <li><a href="https://www.wpbeginner.com/about-wpbeginner/">About Us</a></li> 
+       <li><a href="https://www.wpbeginner.com/contact/">Contact Us</a></li> 
+       <li><a href="https://www.wpbeginner.com/wpbeginner-disclaimer/">FTC Disclosure</a></li> 
+       <li><a href="https://www.wpbeginner.com/privacy-policy/">Privacy Policy</a></li> 
+       <li><a href="https://www.wpbeginner.com/terms-of-use/">Terms of Service</a></li> 
+       <li><a href="https://www.wpbeginner.com/free-wordpress-blog-setup/">Free Blog Setup</a></li> 
+      </ul> 
+     </div> 
+     <div class="our-sites footer-widget"> 
+      <div class="footer-heading">
+       Our Sites
+      </div> 
+      <ul> 
+       <li><a href="https://optinmonster.com/" target="_blank" title="OptinMonster - Best WordPress Lead Generation Plugin">OptinMonster</a></li> 
+       <li><a href="https://www.monsterinsights.com/" target="_blank" title="MonsterInsights - Best Google Analytics Plugin For WordPress">MonsterInsights</a></li> 
+       <li><a href="https://wpforms.com/" target="_blank" title="WPForms - Best WordPress Contact Form Plugin">WPForms</a></li> 
+       <li><a href="https://www.seedprod.com/" target="_blank" title="SeedProd - Best Coming Soon Page Plugin">SeedProd</a></li> 
+       <li><a href="https://www.nameboy.com/" target="_blank" title="The best domain name generator run by Syed Balkhi">Nameboy</a></li> 
+       <li><a href="https://rafflepress.com/" target="_blank" title="RafflePress - Best WordPress giveaway plugin">RafflePress</a></li> 
+      </ul> 
+     </div> 
+     <div class="clear"></div> 
+    </div>
+   </footer>
+   <div class="footer-copyright">
+    <div class="wrap"> 
+     <p>Copyright © 2009 - 2020 WPBeginner LLC. All Rights Reserved. WPBeginner® is a registered trademark.</p>
+     <p> Managed by <u><a href="https://awesomemotive.com" target="_blank" rel="noopener">Awesome Motive</a></u> | <a href="https://www.wpbeginner.com/wordpress-hosting/" title="How to Choose the Best WordPress Hosting?">WordPress hosting</a> by <u><a href="https://www.wpbeginner.com/refer/siteground/" target="_blank" rel="nofollow">SiteGround</a></u> | WordPress CDN by <u><a href="https://www.wpbeginner.com/blueprint/maxcdn/" title="Why we use MaxCDN">MaxCDN</a></u> | <a href="https://www.wpbeginner.com/wordpress-security/" title="Ultimate WordPress Security Guide">WordPress Security</a> by <u><a href="https://www.wpbeginner.com/opinion/sucuri-review-how-sucuri-helped-us-block-450000-wordpress-attacks-in-3-months/" title="Why we use Sucuri">Sucuri</a></u>.</p>
+     <p> </p>
+    </div>
+   </div>
+  </div><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPBeginner FB Group Slide-in -->
+  <script type="text/javascript" src="https://a.opmnstr.com/app/js/api.min.js" data-campaign="yh0pc4ukorc33zei8rba" data-user="1" data-env="production"></script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPB Exit Weekly -->
+  <div id="om-af1jimjo7o-lightbox-holder"></div>
+  <script>var af1jimjo7o_lightbox,af1jimjo7o_lightbox_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){af1jimjo7o_lightbox_poll(function(){if(window['om_loaded']){if(!af1jimjo7o_lightbox){af1jimjo7o_lightbox=new OptinMonsterApp();return af1jimjo7o_lightbox.init({"u":"1.155459","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;af1jimjo7o_lightbox=new OptinMonsterApp();af1jimjo7o_lightbox.init({"u":"1.155459","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: Ultimate WordPress Toolkit -->
+  <div id="om-faamjcr6mcotuufr-holder"></div>
+  <script>var faamjcr6mcotuufr,faamjcr6mcotuufr_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){faamjcr6mcotuufr_poll(function(){if(window['om_loaded']){if(!faamjcr6mcotuufr){faamjcr6mcotuufr=new OptinMonsterApp();return faamjcr6mcotuufr.init({"u":"1.449354","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;faamjcr6mcotuufr=new OptinMonsterApp();faamjcr6mcotuufr.init({"u":"1.449354","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPBeginner Newsletter Monsterlink -->
+  <div id="om-mukj2ocfysjzidb5-holder"></div>
+  <script>var mukj2ocfysjzidb5,mukj2ocfysjzidb5_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){mukj2ocfysjzidb5_poll(function(){if(window['om_loaded']){if(!mukj2ocfysjzidb5){mukj2ocfysjzidb5=new OptinMonsterApp();return mukj2ocfysjzidb5.init({"u":"1.449662","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;mukj2ocfysjzidb5=new OptinMonsterApp();mukj2ocfysjzidb5.init({"u":"1.449662","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster -->
+  <script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script> 
+  <script type="text/javascript">var yh0pc4ukorc33zei8rba_shortcode = true;var af1jimjo7o_lightbox_shortcode = true;var faamjcr6mcotuufr_shortcode = true;var mukj2ocfysjzidb5_shortcode = true;</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b"></script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.9b"></script> 
+  <script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://cdn4.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://cdn3.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['auto-links'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/youtube-fit-videos-hide-related/js/fitvids-ui.min.js"></script> 
+  <script type="text/javascript" async src="https://cdn2.wpbeginner.com/wp-includes/js/comment-reply.min.js?ver=4.9.13"></script> 
+  <script async type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.3"></script> 
+  <script type="text/javascript">var omapi_localized = { ajax: 'https://www.wpbeginner.com/wp-admin/admin-ajax.php?optin-monster-ajax-route=1', nonce: 'd56631279e', slugs: {"yh0pc4ukorc33zei8rba":{"slug":"yh0pc4ukorc33zei8rba","mailpoet":false},"af1jimjo7o_lightbox":{"slug":"af1jimjo7o_lightbox","mailpoet":false},"faamjcr6mcotuufr":{"slug":"faamjcr6mcotuufr","mailpoet":false},"mukj2ocfysjzidb5":{"slug":"mukj2ocfysjzidb5","mailpoet":false}} };</script> 
+  <script type="text/javascript">var omapi_data = {"wc_cart":[],"object_id":26336,"object_key":"post","object_type":"post","term_ids":[4,5295,5296,5297]};</script> <!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 0/596 objects using apc
+Page Caching using disk: enhanced 
+Content Delivery Network via cdn.wpbeginner.com
+
+Served from: www.wpbeginner.com @ 2020-03-27 09:30:11 by W3 Total Cache
+-->
+ </body>
+</html>

@@ -1,0 +1,2018 @@
+<!doctype html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>How to Add a Forum in WordPress with bbPress</title>
+  <link rel="preconnect" href="https://use.typekit.net">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//use.typekit.net/mxa2dsh.js"></script> 
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script type="text/javascript">function parentIsEvil() { var html = null; try { var doc = top.location.pathname; } catch(err){ }; if(typeof doc === "undefined") { return true } else { return false }; }; if (parentIsEvil()) { top.location = self.location.href; };var url = "https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/";if(url.indexOf("stfi.re") != -1) { var canonical = ""; var links = document.getElementsByTagName("link"); for (var i = 0; i < links.length; i ++) { if (links[i].getAttribute("rel") === "canonical") { canonical = links[i].getAttribute("href")}}; canonical = canonical.replace("?sfr=1", "");top.location = canonical; console.log(canonical);};</script> <!-- This site is optimized with the Yoast SEO Premium plugin v2.3.5 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Step by step guide on how to add a forum in WordPress with bbPress. The tutorial include: how to install bbPress, how to configure bbPress, and more."> 
+  <meta name="keywords" content="bbpress, community, engagement, forums, user engagement"> 
+  <link rel="canonical" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/"> 
+  <link rel="publisher" href="https://plus.google.com/101634180904808003404/posts"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="How to Add a Forum in WordPress with bbPress"> 
+  <meta property="og:description" content="Step by step guide on how to add a forum in WordPress with bbPress. The tutorial include: how to install bbPress, how to configure bbPress, and more."> 
+  <meta property="og:url" content="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/"> 
+  <meta property="og:site_name" content="WPBeginner"> 
+  <meta property="article:publisher" content="http://facebook.com/wpbeginner"> 
+  <meta property="article:author" content="http://facebook.com/syedbalkhi"> 
+  <meta property="article:tag" content="bbpress"> 
+  <meta property="article:tag" content="community"> 
+  <meta property="article:tag" content="engagement"> 
+  <meta property="article:tag" content="forums"> 
+  <meta property="article:tag" content="user engagement"> 
+  <meta property="article:section" content="Tutorials"> 
+  <meta property="article:published_time" content="2019-12-30T03:00:03+00:00"> 
+  <meta property="article:modified_time" content="2019-12-30T04:03:04+00:00"> 
+  <meta property="og:updated_time" content="2019-12-30T04:03:04+00:00"> 
+  <meta property="fb:admins" content="1107000098"> 
+  <meta property="og:image" content="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/bbpressforum-th.png"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Step by step guide on how to add a forum in WordPress with bbPress. The tutorial include: how to install bbPress, how to configure bbPress, and more."> 
+  <meta name="twitter:title" content="How to Add a Forum in WordPress with bbPress"> 
+  <meta name="twitter:site" content="@wpbeginner"> 
+  <meta name="twitter:domain" content="WPBeginner"> 
+  <meta name="twitter:image" content="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/bbpressforum-th.png"> 
+  <meta name="twitter:creator" content="@wpbeginner"> <!-- / Yoast SEO Premium plugin. --> 
+  <link rel="dns-prefetch" href="//ajax.googleapis.com"> 
+  <link rel="dns-prefetch" href="//a.opmnstr.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » Feed" href="https://www.wpbeginner.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » Comments Feed" href="https://www.wpbeginner.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » How to Add a Forum in WordPress with bbPress Comments Feed" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/feed/"> 
+  <meta name="revised" content="Monday, December 30, 2019, 4:03 am"> 
+  <meta name="theme-color" content="#ff6200"> <!-- This site uses the Google Analytics by MonsterInsights plugin v7.10.4 - Using Analytics tracking - https://www.monsterinsights.com/ --> 
+  <script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-15913772-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-15913772-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('set', 'dimension1', 'wp-tutorials');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script> <!-- / Google Analytics by MonsterInsights --> 
+  <link rel="stylesheet" id="child-theme-css" href="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/style.css?ver=1.2.5" type="text/css" media="all"> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"pdf,doc,ppt,xls,zip,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/refer\\\/\",\"label\":\"aff\"}]","home_url":"https:\/\/www.wpbeginner.com","hash_tracking":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/google-analytics-premium/assets/js/frontend.min.js?ver=7.10.4"></script> <!--[if lt IE 9]>
+<script type='text/javascript' src='https://cdn2.wpbeginner.com/wp-content/themes/genesis/lib/js/html5shiv.js?ver=3.7.3'></script>
+<![endif]--> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js?ver=1.11.1"></script> 
+  <script type="text/javascript" async src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/scripts/main.js?ver=1.0"></script> 
+  <script type="text/javascript" data-cfasync="false" id="omapi-script" async src="https://a.opmnstr.com/app/js/api.min.js"></script> 
+  <link rel="shortlink" href="http://wpbeg.in/YSrQL1"> 
+  <link rel="icon" href="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/favicon.ico"> 
+  <meta property="twitter:account_id" content="40516848"> 
+  <script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '831611416873998']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script> 
+  <noscript>
+   &lt;img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=831611416873998&amp;amp;ev=PixelInitialized"&gt;
+  </noscript> 
+  <meta name="onesignal" content="wordpress-plugin"> 
+  <link rel="manifest" href="https://www.wpbeginner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/manifest.json.php?gcm_sender_id="> 
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script> 
+  <script>
+
+      window.OneSignal = window.OneSignal || [];
+
+      OneSignal.push( function() {
+        OneSignal.SERVICE_WORKER_UPDATER_PATH = "OneSignalSDKUpdaterWorker.js.php";
+        OneSignal.SERVICE_WORKER_PATH = "OneSignalSDKWorker.js.php";
+        OneSignal.SERVICE_WORKER_PARAM = { scope: '/' };
+
+        OneSignal.setDefaultNotificationUrl("https://www.wpbeginner.com");
+        var oneSignal_options = {};
+        window._oneSignalInitOptions = oneSignal_options;
+
+        oneSignal_options['wordpress'] = true;
+oneSignal_options['appId'] = '65a3e2ee-e808-42f3-912d-a6ea51cb11ca';
+oneSignal_options['autoRegister'] = true;
+oneSignal_options['welcomeNotification'] = { };
+oneSignal_options['welcomeNotification']['title'] = "WPBeginner";
+oneSignal_options['welcomeNotification']['message'] = "Thanks for subscribing to WPBeginner!";
+oneSignal_options['welcomeNotification']['url'] = "https://www.wpbeginner.com/";
+oneSignal_options['path'] = "https://www.wpbeginner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/";
+oneSignal_options['safari_web_id'] = "web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f";
+oneSignal_options['promptOptions'] = { };
+              OneSignal.init(window._oneSignalInitOptions);
+                    });
+
+      function documentInitOneSignal() {
+        var oneSignal_elements = document.getElementsByClassName("OneSignal-prompt");
+
+        var oneSignalLinkClickHandler = function(event) { OneSignal.push(['registerForPushNotifications']); event.preventDefault(); };        for(var i = 0; i < oneSignal_elements.length; i++)
+          oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false);
+      }
+
+      if (document.readyState === 'complete') {
+           documentInitOneSignal();
+      }
+      else {
+           window.addEventListener("load", function(event){
+               documentInitOneSignal();
+          });
+      }
+    </script> 
+  <style type="text/css" id="syntaxhighlighteranchor"></style> 
+ </head> 
+ <body class="post-template-default single single-post postid-10155 single-format-standard header-image content-sidebar" itemscope itemtype="https://schema.org/WebPage">
+  <div class="site-container">
+   <header class="site-header" itemscope itemtype="https://schema.org/WPHeader">
+    <div class="wrap">
+     <div id="title-area">
+      <span id="title"><a href="https://www.wpbeginner.com/" title="WPBeginner - Beginner's Guide for WordPress">WPBeginner</a></span>
+      <p id="description">Beginner's Guide for WordPress</p>
+     </div><!-- end #title-area --> 
+     <div class="widget-area"> 
+      <div id="menu-primary-container"> 
+       <div class="menu-wpbv5-header-menu-container">
+        <ul id="menu-wpbv5-header-menu" class="menu">
+         <li id="menu-item-38548" class="menu-item menu-item-has-children"><a title="Blog" href="https://www.wpbeginner.com/blog/" itemprop="url">Blog <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-38551" class="menu-item"><a href="https://www.wpbeginner.com/category/beginners-guide/" itemprop="url">Beginners Guide</a></li> 
+           <li id="menu-item-38552" class="menu-item"><a href="https://www.wpbeginner.com/category/news/" itemprop="url">News</a></li> 
+           <li id="menu-item-38555" class="menu-item"><a href="https://www.wpbeginner.com/category/opinion/" itemprop="url">Opinion</a></li> 
+           <li id="menu-item-38554" class="menu-item"><a href="https://www.wpbeginner.com/category/showcase/" itemprop="url">Showcase</a></li> 
+           <li id="menu-item-38553" class="menu-item"><a href="https://www.wpbeginner.com/category/wp-themes/" itemprop="url">Themes</a></li> 
+           <li id="menu-item-38550" class="menu-item"><a href="https://www.wpbeginner.com/category/wp-tutorials/" itemprop="url">Tutorials</a></li> 
+           <li id="menu-item-38549" class="menu-item"><a href="https://www.wpbeginner.com/category/plugins/" itemprop="url">WordPress Plugins</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38556" class="menu-item menu-item-has-children"><a href="https://www.wpbeginner.com/start-here/" itemprop="url">Start Here <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-58934" class="menu-item"><a href="https://www.wpbeginner.com/start-a-wordpress-blog/" itemprop="url">How to Start a Blog</a></li> 
+           <li id="menu-item-58936" class="menu-item"><a href="https://www.wpbeginner.com/guides/" itemprop="url">Create a Website</a></li> 
+           <li id="menu-item-58937" class="menu-item"><a href="https://www.wpbeginner.com/wp-tutorials/how-to-start-an-online-store/" itemprop="url">Start an Online Store</a></li> 
+           <li id="menu-item-58938" class="menu-item"><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-website-builder/" itemprop="url">Best Website Builder</a></li> 
+           <li id="menu-item-58939" class="menu-item"><a href="https://www.wpbeginner.com/showcase/best-email-marketing-services/" itemprop="url">Email Marketing</a></li> 
+           <li id="menu-item-58942" class="menu-item"><a href="https://www.wpbeginner.com/wordpress-hosting/" itemprop="url">WordPress Hosting</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38557" class="menu-item menu-item-has-children"><a href="https://www.wpbeginner.com/deals/" itemprop="url">Deals <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-64580" class="menu-item"><a href="https://www.wpbeginner.com/deals/bluehost-coupon/" itemprop="url">Bluehost Coupon</a></li> 
+           <li id="menu-item-64582" class="menu-item"><a href="https://www.wpbeginner.com/deals/siteground-coupon/" itemprop="url">SiteGround Coupon</a></li> 
+           <li id="menu-item-64583" class="menu-item"><a href="https://www.wpbeginner.com/deals/wpengine-coupon/" itemprop="url">WP Engine Coupon</a></li> 
+           <li id="menu-item-64581" class="menu-item"><a href="https://www.wpbeginner.com/deals/hostgator-coupon/" itemprop="url">HostGator Coupon</a></li> 
+           <li id="menu-item-64584" class="menu-item"><a href="https://www.wpbeginner.com/deals/domain-com-coupon/" itemprop="url">Domain.com Coupon</a></li> 
+           <li id="menu-item-64585" class="menu-item"><a href="https://www.wpbeginner.com/deals/constant-contact-coupon/" itemprop="url">Constant Contact</a></li> 
+           <li id="menu-item-64586" class="menu-item"><a href="https://www.wpbeginner.com/deals/" itemprop="url">View All Deals »</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38559" class="menu-item"><a href="https://www.wpbeginner.com/glossary/" itemprop="url">Glossary</a></li> 
+         <li id="menu-item-38560" class="menu-item"><a href="https://videos.wpbeginner.com/" itemprop="url">Videos</a></li> 
+         <li id="menu-item-38561" class="menu-item"><a href="https://www.wpbeginner.com/wordpress-plugins/" itemprop="url">Products</a></li> 
+        </ul>
+       </div> 
+      </div> 
+     </div> 
+     <div class="searchicon"> <a href="#search"><i class="fa fa-search"></i></a> 
+     </div> 
+     <div id="fullscreensearch"> 
+      <div class="closesearch">
+       <a href="#searchclose">X</a>
+      </div> 
+      <form method="get" class="searchform search-form" action="https://www.wpbeginner.com/search"> 
+       <input type="text" value="" placeholder="Search WPBeginner..." name="q" class="s search-input" autocomplete="off"> 
+       <input type="submit" class="searchsubmit search-submit" value="Search"> 
+      </form>
+     </div> <a href="#menutoggle" id="menutoggle">☰</a> 
+     <div id="mobile-menu-container"></div> 
+    </div>
+   </header>
+   <div class="orangeribbon"> 
+    <div class="wrap"> <a href="#" class="ribbonlink" id="guides-slidetoggle"><span class="ribboncaps">Beginner's Guide for WordPress</span> <span class="ribbonsep">/</span> <span class="ribbonlower">Start your WordPress Blog in minutes</span><i class="fa fa-angle-right" aria-hidden="true"></i> </a> 
+    </div> 
+   </div> 
+   <div class="guidesdropdown" style="display: none;"> 
+    <div class="wrap"> <a href="https://www.wpbeginner.com/wordpress-hosting/" class="dropdownhosting" title="Choosing the best WordPress Hosting">Choosing the Best<br>WordPress Hosting</a> <a href="https://www.wpbeginner.com/how-to-install-wordpress/" class="dropdownthemes" title="How to Install WordPress - Complete WordPress Installation Tutorial">How to Easily <br>Install WordPress</a> <a href="https://www.wpbeginner.com/showcase/24-must-have-wordpress-plugins-for-business-websites/" class="dropdownplugins" title="Recommended WordPress Plugins">Recommended<br>WordPress Plugins</a> <a href="https://www.wpbeginner.com/guides/" class="viewallguides" title="View all Guides">View all Guides</a> 
+    </div> 
+   </div> 
+   <div class="clear"></div> 
+   <div class="site-inner">
+    <div class="content-sidebar-wrap">
+     <main class="content">
+      <div class="content-block">
+       <div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+        <p id="breadcrumbs"><!-- Breadcrumb NavXT 6.3.0 --> <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to WPBeginner." href="https://www.wpbeginner.com" class="home"><span property="name">WPBeginner</span></a>
+          <meta property="position" content="1"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Blog." href="https://www.wpbeginner.com/blog/" class="post-root post-post"><span property="name">Blog</span></a>
+          <meta property="position" content="2"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the Tutorials category archives." href="https://www.wpbeginner.com/category/wp-tutorials/" class="taxonomy category"><span property="name">Tutorials</span></a>
+          <meta property="position" content="3"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><span property="name">How to Add a Forum in WordPress with bbPress</span>
+          <meta property="position" content="4"></span></p>
+       </div>
+       <article class="post type-post entry" itemscope itemtype="https://schema.org/CreativeWork">
+        <header class="entry-header">
+         <h1 class="entry-title" itemprop="headline">How to Add a Forum in WordPress with bbPress</h1> 
+        </header>
+        <div class="singlepostinfo">
+          Last updated on <time itemprop="dateModified" datetime="2019-12-30T04:03:04+00:00">December 30th, 2019</time> by <a href="https://www.wpbeginner.com/author/wpbeginner/" title="Posts by Editorial Staff" rel="author">Editorial Staff</a> 
+        </div>
+        <div id="horizontalsocial" class="horizontalsocial social-buttons"> 
+         <div class="sharertitle"> <span class="total-count">287</span> <span class="total-text">Shares</span> 
+         </div> 
+         <div class="sharerfacebook sharebutton"> <a href="http://www.facebook.com/sharer.php?u=https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" class="facebook" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook"><span class="count">Share</span></a> 
+         </div> 
+         <div class="sharertwitter sharebutton"> <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wpbeginner.com&amp;source=tweetbutton&amp;text=How+to+Add+a+Forum+in+WordPress+with+bbPress&amp;url=https%3A%2F%2Fwww.wpbeginner.com%2Fwp-tutorials%2Fhow-to-add-a-forum-in-wordpress-with-bbpress%2F&amp;via=wpbeginner" class="twitter" data-text="How to Add a Forum in WordPress with bbPress" data-url="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" data-count="horizontal" data-via="wpbeginner" data-related="syedbalkhi : Founder of WPBeginner" rel="nofollow noopener noreferrer" target="_blank" title="Share on Twitter"><span class="count">Tweet</span></a> 
+         </div> 
+         <div class="sharerlinkedin sharebutton"> <a href="https://www.linkedin.com/cws/share?url=https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" class="linkedin" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn"><span class="count">Share</span></a> 
+         </div> 
+         <div class="sharerpinterest sharebutton"> <a href="https://pinterest.com/pin/create/button/?url=https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/&amp;media=https://cdn4.wpbeginner.com/wp-content/uploads/2019/12/foruminwpbbpress-pinterest.png&amp;description=Do you want to add a forum to your website? Learn how to easily add a forum in WordPress with bbPress in this step by step tutorial. " class="pinterest" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" rel="nofollow" target="_blank" title="Share on Pinterest"><span class="count">Pin</span></a> 
+         </div> 
+        </div> 
+        <div class="singleadthumbcontainer"> 
+         <div class="wpbthumb">
+          <a target="_blank" rel="nofollow" href="https://youtube.com/wpbeginner?sub_confirmation=1" title="Free WordPress Video Tutorials on YouTube by WPBeginner"><img src="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/images/wpbyt.png" alt="Free WordPress Video Tutorials on YouTube by WPBeginner"></a>
+         </div> 
+         <div class="singlethumb"> 
+          <img src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/bbpressforum-small-180x180.png" title="How to Add a Forum in WordPress with bbPress" alt="How to Add a Forum in WordPress with bbPress" class="attachment-singlethumbnail size-singlethumbnail wp-post-image" data-pin-media="https://cdn.wpbeginner.com/wp-content/uploads/2019/12/foruminwpbbpress-pinterest.png"> 
+         </div> 
+        </div>
+        <div class="entry-content" itemprop="text">
+         <p>Bulletin boards and forums are good old reliable tools to build online communities. </p> 
+         <p>While there are plenty of open-source forum software, integrating a third-party forum with WordPress can be a mess. That’s where bbPress comes in.</p> 
+         <p>In this article, we will show you how to easily add a forum in WordPress with bbPress.</p> 
+         <p><img title="Adding a forum in WordPress using bbPress" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/bbpressforum-th.png" alt="Adding a forum in WordPress using bbPress" width="550" height="340" class="alignnone size-full wp-image-71028"></p> 
+         <h4>What is bbPress?</h4> 
+         <p>bbPress is a forum software built the WordPress way. It runs on top of WordPress, which is the <a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-website-builder/" title="How to Choose the Best Website Builder in 2019 (Compared)">best website builder</a> in the world. </p> 
+         <p>Just like WordPress, bbPress is extensible, and you can install add-on plugins to add more functionality to your forums. It is also very light-weight and faster than other popular open-source forum software. </p> 
+         <h4>What You Need to Make an Online Forum with bbPress?</h4> 
+         <p>If you already have a WordPress website where you want to add a forum, then you can skip this section. On the other hand, if you are just getting started then continue reading. </p> 
+         <p>First, you’ll need to sign up for a web hosting account. This is where you will store all the files for your online forum. </p> 
+         <p>You’ll also need a <a href="https://www.wpbeginner.com/beginners-guide/how-to-register-a-domain-name-simple-tip-to-get-it-for-free/" title="How to Register a Domain Name (+ simple tip to get it for FREE)">domain name</a>. This will be your website’s address on the internet and what users will type in their browsers to find your online forum. </p> 
+         <p>Normally, website hosting costs $7.99 per month and domain name would cost you around $14.99 per year. </p> 
+         <p>This is a lot of money if you are just getting started. </p> 
+         <p>Luckily, <a title="Bluehost" href="https://www.wpbeginner.com/refer/bluehost/" rel="nofollow noopener" target="_blank">Bluehost</a> has agreed to offer WPBeginner users a discount on hosting with a free domain name. Basically, you’ll be able to get started for just $2.75 per month. </p> 
+         <p><a title="Bluehost" href="https://www.wpbeginner.com/refer/bluehost/" rel="nofollow noopener" target="_blank" class="orangecta">→ Click Here to Claim This Exclusive Bluehost Offer ←</a></p> 
+         <p><a title="Bluehost" href="https://www.wpbeginner.com/refer/bluehost/" rel="nofollow noopener" target="_blank">Bluehost</a> is one of the biggest <a href="https://www.wpbeginner.com/wordpress-hosting/" title="How to Choose the Best WordPress Hosting in 2020 (Compared)">WordPress hosting</a> companies in the world and an officially recommended WordPress hosting provider. </p> 
+         <p>Once you have signed up for hosting, you can follow our guide on <a href="https://www.wpbeginner.com/guides/" title="Ultimate Guide: How to Make a Website in 2019 – Step by Step Guide (Free)">how to make a website</a> for complete installation instructions. </p> 
+         <p>After setting up WordPress, you will be ready to install bbPress and start your own online community. </p> 
+         <h4>How to Install bbPress</h4> 
+         <p>bbPress is available as a WordPress plugin. You can install it like you would <a href="https://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/" title="How to Install a WordPress Plugin – Step by Step for Beginners">install any WordPress plugin</a>. </p> 
+         <p>Simply log in to your WordPress admin area and go to <strong>Plugins » Add New </strong>. Search for bbPress and then select bbPress from results. </p> 
+         <p>Install and activate the plugin. Upon activation, you will see the welcome screen for bbPress. </p> 
+         <p><img title="Welcome to bbPress" src="https://cdn.wpbeginner.com/wp-content/uploads/2019/12/welcome-bbpress.png" alt="Welcome to bbPress" width="550" height="343" class="alignnone size-full wp-image-71011"></p> 
+         <h4>Creating a Forum with bbPress in WordPress</h4> 
+         <p>Once installed, bbPress adds Forums, Topics and Replies menu items in your WordPress admin. </p> 
+         <p><img title="Add new forum" src="https://cdn4.wpbeginner.com/wp-content/uploads/2019/12/addnewforum.png" alt="Add new forum" width="550" height="228" class="alignnone size-full wp-image-71013"></p> 
+         <p>First, you need to click on <strong>Forums » Add New</strong> link from the menu. This will take you to a screen similar to the WordPress post edit area. </p> 
+         <p>Provide a title for your forum and enter a little description of it. Then press the publish button. </p> 
+         <p><img title="Forum title and description" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/createforum.png" alt="Forum title and description" width="550" height="298" class="alignnone size-full wp-image-71014"></p> 
+         <p>You can create as many forums as you need for different discussions and topics. </p> 
+         <h4>Displaying bbPress Forum in the Front End of WordPress</h4> 
+         <p>Now that you have created a few forums, it is time to display those forums on the front end of your WordPress website. </p> 
+         <p>Create a new WordPress page. Give this page a title, like Forum, Community, Support Forums, etc. </p> 
+         <p>After that, simply paste the following <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-shortcode-in-wordpress/" title="How to Add a Shortcode in WordPress? (Beginner’s Guide)">shortcode</a> in your page:</p> 
+         <p><code>[bbp-forum-index]</code></p> 
+         <p>Don’t forget to click on the publish button to save your changes and make your forum page visible on your website. </p> 
+         <p>You can now visit the page in a web browser to see a preview of your forums. </p> 
+         <p><img title="Forums page preview" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/forumspagepreview.png" alt="Forums page preview" width="550" height="322" class="alignnone size-full wp-image-71015"></p> 
+         <p>Next, you need to help users find the forum on your website. To do that, let’s put a link to your forum page on top <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-a-dropdown-menu-in-wordpress-beginners-guide/" title="How to Create a Dropdown Menu in WordPress (Beginners Guide)">navigation menu</a>. </p> 
+         <p>Go to <strong>Appearance » Menus</strong> and add the forum page to your navigation menu.</p> 
+         <p><img title="Add forum link to navigation menu" src="https://cdn.wpbeginner.com/wp-content/uploads/2019/12/addforumlink.png" alt="Add forum link to navigation menu" width="550" height="331" class="alignnone size-full wp-image-71016"></p> 
+         <p>Users can now access the forum index page by clicking on the link in the main menu. </p> 
+         <h4>Integrating bbPress with your WordPress Theme</h4> 
+         <p>In most cases, you would probably want to open your forum for new registrations. To do that, you need to open your website for registrations. </p> 
+         <p>Simply go to <strong>Settings » General</strong>, and check the box next to “Any one can register” to allow registrations on your website. </p> 
+         <p><img title="Open your forum for user registration" src="https://cdn2.wpbeginner.com/wp-content/uploads/2019/12/openregistration.png" alt="Open your forum for user registration" width="550" height="234" class="alignnone size-full wp-image-71017"></p> 
+         <p>Don’t forget to click on the save changes button to store your settings. </p> 
+         <p>Now that your website is open for registration, the first thing that your forum participants would look for is a <a href="https://www.wpbeginner.com/plugins/how-to-create-a-custom-user-registration-form-in-wordpress/" title="How to Create a Custom User Registration Form in WordPress">registration page</a>. </p> 
+         <p>Let’s make one. </p> 
+         <p>Simply create a WordPress page, and give it a title, e.g. <em>Register</em>. Add shortcode <code>[bbp-register]</code> and publish the page.</p> 
+         <p><img title="Making aa bbPress registration page" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/registerpage.png" alt="Making aa bbPress registration page" width="550" height="271" class="alignnone size-full wp-image-71018"></p> 
+         <p>You can now preview this page. It will show a user registration form to all non-logged in users. </p> 
+         <p>Another page your users would need is the lost password recovery page. This is where they will be recover their lost passwords. </p> 
+         <p>Create another WordPress page and give it a title e.g. <em>Lost Password</em>. After that, add this shortcode <code>[bbp-lost-pass]</code> and publish the page.</p> 
+         <p><img title="Lost password page" src="https://cdn4.wpbeginner.com/wp-content/uploads/2019/12/lostpassword.png" alt="Lost password page" width="550" height="271" class="alignnone size-full wp-image-71019"></p> 
+         <p>Finally, you need to add a <a href="https://www.wpbeginner.com/plugins/how-to-create-custom-login-page-for-wordpress/" title="How to Create a Custom WordPress Login Page (Ultimate Guide)">login form</a> to your website so that forum users can easily login from anywhere on your website. </p> 
+         <p>bbPress comes with a handful of widgets and one of them is a login form widget. </p> 
+         <p>Go to <strong>Appearance » Widgets</strong> and simply drag and drop Login Widget to your sidebar or any other widget area. </p> 
+         <p>You will be asked to provide the URLs for the registration and lost password pages you created earlier. After entering them you need to click on the Save button to store your widget settings. </p> 
+         <p><img title="Login widget settings" src="https://cdn2.wpbeginner.com/wp-content/uploads/2019/12/loginwidget.png" alt="Login widget settings" width="550" height="314" class="alignnone size-full wp-image-71020"></p> 
+         <p>Now a login form with links to registration and lost password recovery pages will appear in your sidebar. Logged in users would see their usernames and a logout link instead of the form. </p> 
+         <p><img title="Login form preview" src="https://cdn.wpbeginner.com/wp-content/uploads/2019/12/loginwidget-preview.png" alt="Login form preview" width="550" height="348" class="alignnone size-full wp-image-71021"></p> 
+         <h4>Managing bbPress Forum Settings</h4> 
+         <p>Unlike other popular forum software, bbPress has a very simplified configuration page. To manage settings for your bbPress forums, go to <strong>Settings » Forums</strong> page. </p> 
+         <p><img title="Forum settings page" src="https://cdn2.wpbeginner.com/wp-content/uploads/2019/12/forumsettingspage.png" alt="Forum settings page" width="550" height="287" class="alignnone size-full wp-image-71022"></p> 
+         <p>The default options on this page would work for most forum websites. We’ll take a look at all of them, just in case you want to change anything. </p> 
+         <p>The first option you would see here is to ‘Automatically give registered visitors the participant forum role’. You can select a <a href="https://www.wpbeginner.com/beginners-guide/wordpress-user-roles-and-permissions/" title="Beginner’s Guide to WordPress User Roles and Permissions">user role</a> or uncheck the option to manually assign user roles to each user when they register. </p> 
+         <p>The next option adds a 10-second delay between subsequent forum posts to prevent forum flooding and spam. You can increase or decrease the delay period here. </p> 
+         <p>The Editing option allows users to edit their forum posts 5 minutes after they publish them. You can uncheck this option but that would prevent your users from correcting spelling errors or edit their posts if they missed something. </p> 
+         <p>After that, you’ll find the forum features section. From here, you can turn forum features on and off. </p> 
+         <p><img title="Add remove forum features" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/forumfeatures.png" alt="Add remove forum features" width="550" height="269" class="alignnone size-full wp-image-71023"></p> 
+         <p>Below that, you’ll see forum display features. From here, you can select a bbPress template, number of posts and topics to display on forum pages and inside the forum <a href="https://www.wpbeginner.com/beginners-guide/what-is-rss-how-to-use-rss-in-wordpress/" title="What is RSS? How to use RSS in WordPress?">RSS feed</a>. </p> 
+         <p><img title="Forum display settings" src="https://cdn4.wpbeginner.com/wp-content/uploads/2019/12/forumdisplay.png" alt="Forum display settings" width="550" height="357" class="alignnone size-full wp-image-71024"></p> 
+         <p>Finally, you’ll see options to select URL slugs for different sections and forum pages. Slugs are the SEO friendly URL names used by WordPress.</p> 
+         <p><img title="Change forum URL slugs" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/12/forumslugs.png" alt="Change forum URL slugs" width="550" height="338" class="alignnone size-full wp-image-71025"></p> 
+         <p>The default URL slugs are meaningful and SEO friendly out of the box but if you need to change them, then you can do so here. </p> 
+         <p>Don’t forget to click on the ‘Save changes’ button to store your forum settings. </p> 
+         <h4>User Roles in bbPress</h4> 
+         <p>WordPress comes with its own <a href="https://www.wpbeginner.com/beginners-guide/wordpress-user-roles-and-permissions/" title="Beginner’s Guide to WordPress User Roles and Permissions">user role management system</a> which allows you to assign users roles with different permissions. </p> 
+         <p>bbPress extends the WordPress user roles by adding its own five pre-defined user roles with different capabilities. </p> 
+         <p><strong>1. Keymaster</strong> – The website owner or the WordPress administrator is automatically assigned the Keymaster role when they install bbPress. A Keymaster can delete and create forums, can create, edit, delete all posts, topics, forums. </p> 
+         <p><strong>2. Moderators</strong> – Users with moderator user role have access to moderation tools, which they can use to moderate forums, topics, and posts. </p> 
+         <p><strong>3. Participants</strong> – This is the default user role, participants can create and edit their own topics and posts, they can favorite and subscribe to topics. </p> 
+         <p><strong>4. Spectators</strong> – Spectators have a read-only access to public forums, topics, and posts. </p> 
+         <p><strong>5. Blocked</strong> – When a user is blocked all their capabilities are blocked. They can still read publicly viewable topics and posts, but can not participate in the forums. </p> 
+         <h4>Extending and Promoting Your bbPress Forum</h4> 
+         <p>Now that your bbPress forum is all set up and running. It is time to learn how to extend and promote it. </p> 
+         <p>Let’s start with the appearance first. bbPress works with any WordPress theme and themes can also add custom styles to bbPress. </p> 
+         <p>All top WordPress themes come with custom bbPress styles to make your forum look beautiful. </p> 
+         <p>For more choices, see our pick of the <a href="https://www.wpbeginner.com/showcase/best-wordpress-themes-for-bbpress/" title="24 Best WordPress Themes for bbPress">best WordPress themes for bbPress</a>. </p> 
+         <p>Next, you would want to add new features to your forum so that you can quickly get new members and grow your online community. </p> 
+         <p>The following are some of the plugins that will help you grow your online forum much quickly. </p> 
+         <p><strong><a href="https://rafflepress.com" title="RafflePress" rel="noopener" target="_blank">1. RafflePress</a></strong> </p> 
+         <p><a href="https://rafflepress.com" title="RafflePress" rel="noopener" target="_blank"><img title="RafflePress" src="https://cdn4.wpbeginner.com/wp-content/uploads/2019/07/rafflepress.png" alt="RafflePress" width="550" height="300" class="alignnone size-full wp-image-65947"></a></p> 
+         <p>RafflePress allows you to create viral giveaways and contests in WordPress. These interactive contests and giveaways are a sure-fire way to instantly get a ton of new users to your online forum. </p> 
+         <p>See our guide on <a href="https://www.wpbeginner.com/plugins/how-to-run-a-giveaway-contest-in-wordpress-with-rafflepress/" title="How to Run a Giveaway / Contest in WordPress with RafflePress">how to create a viral giveaway contest</a> for more information. </p> 
+         <p><strong><a title="MemberPress" href="https://www.wpbeginner.com/refer/memberpress/" rel="nofollow noopener" target="_blank">2. MemberPress</a></strong></p> 
+         <p><a title="MemberPress" href="https://www.wpbeginner.com/refer/memberpress/" rel="nofollow noopener" target="_blank"><img title="MemberPress" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/01/memberpress.png" alt="MemberPress" width="550" height="300" class="alignnone size-full wp-image-59061"></a></p> 
+         <p><a rel="nofollow noopener" target="_blank" title="MemberPress" href="https://www.wpbeginner.com/refer/memberpress/" data-shortcode="true">MemberPress</a> is the <a href="https://www.wpbeginner.com/plugins/5-best-wordpress-membership-plugins-compared/" title="5 Best WordPress Membership Plugins (Compared) – 2019">best WordPress membership plugin</a>. It allows you to <a href="https://www.wpbeginner.com/beginners-guide/make-money-online/" title="30 “Proven” Ways to Make Money Online Blogging with WordPress">make money online</a> from your forum by adding subscription layers to your online community. </p> 
+         <p>For more information, take a look at our guide on <a href="https://www.wpbeginner.com/wp-tutorials/ultimate-guide-to-creating-a-wordpress-membership-site/" title="Ultimate Guide to Creating a WordPress Membership Site">how to make a membership website</a>. </p> 
+         <p><strong><a href="https://monsterinsights.com" title="MonsterInsights" rel="noopener" target="_blank">3. MonsterInsights</a></strong></p> 
+         <p><a href="https://monsterinsights.com" title="MonsterInsights" rel="noopener" target="_blank"><img title="MonsterInsights" src="https://cdn3.wpbeginner.com/wp-content/uploads/2019/10/monsterinsights.jpg" alt="MonsterInsights" width="550" height="275" class="alignnone size-full wp-image-69055"></a></p> 
+         <p>Want to know which forum topics and discussions are more popular on your website? MonsterInsights helps you easily track all your website traffic <a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners">using Google Analytics</a>. </p> 
+         <p><strong><a href="https://wpforms.com" title="WPForms" rel="noopener" target="_blank">4. WPForms</a></strong></p> 
+         <p><a href="https://wpforms.com" title="WPForms" rel="noopener" target="_blank"><img title="WPForms" src="https://cdn.wpbeginner.com/wp-content/uploads/2019/08/wpforms.png" alt="WPForms" width="550" height="300" class="alignnone size-full wp-image-67472"></a></p> 
+         <p>WPForms is the best WordPress contact form plugin. It allows you to easily create beautiful forms for your website. You can also use it to <a href="https://www.wpbeginner.com/plugins/how-to-create-custom-login-page-for-wordpress/" title="How to Create a Custom WordPress Login Page (Ultimate Guide)">create custom login page</a>, user registration page, or to <a href="https://www.wpbeginner.com/plugins/how-to-create-a-survey-in-wordpress-with-beautiful-reports/" title="How to Create a Survey in WordPress (with Beautiful Reports)">add surveys and polls</a> to your bbPress forum. </p> 
+         <p>We hope that this article helped you learn how to add a forum in WordPress and how to install and configure bbPress. You may also want to see our complete <a href="https://www.wpbeginner.com/wordpress-seo/" title="Ultimate WordPress SEO Guide for Beginners (Step by Step)">WordPress SEO guide</a> to help you get even more traffic. </p> 
+         <p>If you liked this article, then please subscribe to our <a href="http://youtube.com/wpbeginner?sub_confirmation=1" title="WPBeginner on YouTube" target="_blank" rel="nofollow">YouTube Channel</a> for WordPress video tutorials. You can also find us on <a href="http://twitter.com/wpbeginner" title="WPBeginner on Twitter" target="_blank" rel="nofollow">Twitter</a> and <a href="https://www.facebook.com/wpbeginner" title="WPBeginner on Facebook" target="_blank" rel="nofollow">Facebook</a>.</p> 
+        </div>
+        <footer class="entry-footer">
+         <div id="horizontalsocial" class="horizontalsocial social-buttons"> 
+          <div class="sharertitle"> <span class="total-count">287</span> <span class="total-text">Shares</span> 
+          </div> 
+          <div class="sharerfacebook sharebutton"> <a href="http://www.facebook.com/sharer.php?u=https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" class="facebook" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook"><span class="count">Share</span></a> 
+          </div> 
+          <div class="sharertwitter sharebutton"> <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wpbeginner.com&amp;source=tweetbutton&amp;text=How+to+Add+a+Forum+in+WordPress+with+bbPress&amp;url=https%3A%2F%2Fwww.wpbeginner.com%2Fwp-tutorials%2Fhow-to-add-a-forum-in-wordpress-with-bbpress%2F&amp;via=wpbeginner" class="twitter" data-text="How to Add a Forum in WordPress with bbPress" data-url="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" data-count="horizontal" data-via="wpbeginner" data-related="syedbalkhi : Founder of WPBeginner" rel="nofollow noopener noreferrer" target="_blank" title="Share on Twitter"><span class="count">Tweet</span></a> 
+          </div> 
+          <div class="sharerlinkedin sharebutton"> <a href="https://www.linkedin.com/cws/share?url=https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" class="linkedin" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn"><span class="count">Share</span></a> 
+          </div> 
+          <div class="sharerpinterest sharebutton"> <a href="https://pinterest.com/pin/create/button/?url=https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/&amp;media=https://cdn4.wpbeginner.com/wp-content/uploads/2019/12/foruminwpbbpress-pinterest.png&amp;description=Do you want to add a forum to your website? Learn how to easily add a forum in WordPress with bbPress in this step by step tutorial. " class="pinterest" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/" rel="nofollow" target="_blank" title="Share on Pinterest"><span class="count">Pin</span></a> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+         <div class="singlerelated"> 
+          <div class="headingbig">
+           Popular on WPBeginner <span class="headingorange">Right Now!</span>
+          </div> 
+          <div class="relatedentry"> 
+           <ul> 
+            <li class="odd"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-your-blog-from-wordpress-com-to-wordpress-org/" title="How to Properly Move Your Blog from WordPress.com to WordPress.org"> <img width="96" height="96" src="https://cdn3.wpbeginner.com/wp-content/uploads/2012/12/switchingfromwpcom-96x96.png" class="relatedthumb wp-post-image" alt="" title="How to Properly Move Your Blog from WordPress.com to WordPress.org"></a> <p class="title"><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-your-blog-from-wordpress-com-to-wordpress-org/" title="How to Properly Move Your Blog from WordPress.com to WordPress.org">How to Properly Move Your Blog from WordPress.com to WordPress.org</a></p> </li> 
+            <li class="even"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" title="How to Fix the Error Establishing a Database Connection in WordPress"> <img width="96" height="96" src="https://cdn3.wpbeginner.com/wp-content/uploads/2020/01/fixdatabaseconnectionerror-th-96x96.png" class="relatedthumb wp-post-image" alt="How to Fix the Error Establishing a Database Connection in WordPress" title="How to Fix the Error Establishing a Database Connection in WordPress"></a> <p class="title"><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" title="How to Fix the Error Establishing a Database Connection in WordPress">How to Fix the Error Establishing a Database Connection in WordPress</a></p> </li> 
+            <li class="odd"> <a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners"> <img width="96" height="96" src="https://cdn2.wpbeginner.com/wp-content/uploads/2010/04/googleanalyticsthumb-96x96.jpg" class="relatedthumb wp-post-image" alt="Google Analytics in WordPress" title="How to Install Google Analytics in WordPress for Beginners"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners">How to Install Google Analytics in WordPress for Beginners</a></p> </li> 
+            <li class="even"> <a href="https://www.wpbeginner.com/beginners-guide/checklist-15-things-you-must-do-before-changing-wordpress-themes/" title="Checklist: 15 Things You MUST DO Before Changing WordPress Themes"> <img width="96" height="96" src="https://cdn.wpbeginner.com/wp-content/uploads/2012/01/checklist-96x96.gif" class="relatedthumb wp-post-image" alt="Checklist" title="Checklist: 15 Things You MUST DO Before Changing WordPress Themes"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/checklist-15-things-you-must-do-before-changing-wordpress-themes/" title="Checklist: 15 Things You MUST DO Before Changing WordPress Themes">Checklist: 15 Things You MUST DO Before Changing WordPress Themes</a></p> </li> 
+           </ul> 
+          </div> 
+         </div> 
+         <div class="clear"></div>
+        </footer>
+        <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
+         <img alt="" src="https://secure.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=70&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=140&amp;d=mm&amp;r=g 2x" class="avatar avatar-70 photo" height="70" width="70">
+         <h4 class="author-box-title"><a href="https://www.wpbeginner.com/author/wpbeginner/" class="aboutauthor" rel="author">About the Editorial Staff</a></h4>
+         <div class="author-box-content" itemprop="description">
+          <p>Editorial Staff at WPBeginner is a team of WordPress experts led by Syed Balkhi. Trusted by over 1.3 million readers worldwide.</p> 
+         </div>
+        </section> 
+       </article>
+      </div> <a href="#" title="Download the Ultimate WordPress Toolkit" class="manual-optin-trigger wptoolkit" data-optin-slug="faamjcr6mcotuufr"> <img src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/ultimatewptoolkit.jpg" alt="The Ultimate WordPress Toolkit" data-pin-media="https://cdn.wpbeginner.com/wp-content/uploads/2019/12/foruminwpbbpress-pinterest.png"> </a> 
+      <div class="content-block"> 
+       <div class="clear"></div>
+       <div class="entry-comments" id="comments">
+        <h3 class="titlecomments">186 Comments</h3><a href="#respond" class="leavereplybutton">Leave a Reply</a>
+        <ol class="comment-list"> 
+         <li class="comment even thread-even depth-1" id="comment-690266"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/bf7a353274cb19768b9b016ccbc7e962?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/bf7a353274cb19768b9b016ccbc7e962?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Danijel</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-690266">Aug 9, 2019 at 4:30 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I set everything up , and login widget, and when click on register I got blank page with this link listed in bar: about:blank#blocked<br> ? Do you know how to fix this and what id blocking the option to register. I set in setting the option that everyone can register as subscriber.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-690266" onclick="return addComment.moveForm( &quot;comment-690266&quot;, &quot;690266&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Danijel">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-690923"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-690923">Aug 12, 2019 at 10:12 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You may want to try resaving your permalinks using one of the methods in our guide here: <a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-wordpress-posts-returning-404-error/" rel="nofollow">https://www.wpbeginner.com/wp-tutorials/how-to-fix-wordpress-posts-returning-404-error/</a><br> and should that not work you may need to check through your security plugins to see if one of those could be the root of the issue.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-690923" onclick="return addComment.moveForm( &quot;comment-690923&quot;, &quot;690923&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-579043"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/4be7d6a04a6fb9710f2184579aa50c7b?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/4be7d6a04a6fb9710f2184579aa50c7b?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Marc</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-579043">Jan 14, 2019 at 1:39 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I have a host gator site , one of the default pages is a blog page. I am interested in converting this blog page to a forum page. Can I get a quick overview how this can be done ?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-579043" onclick="return addComment.moveForm( &quot;comment-579043&quot;, &quot;579043&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Marc">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-jeremycomments odd alt depth-2" id="comment-579841"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d64f78407b1f506c062de43cd880d883?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-579841">Jan 15, 2019 at 1:52 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You would edit your menu to link to the forum page of your could not set a posts page if that is what you’re wanting to do.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-579841" onclick="return addComment.moveForm( &quot;comment-579841&quot;, &quot;579841&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-556243"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/4d58a76189e5572a0a39957c51d0ecbe?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/4d58a76189e5572a0a39957c51d0ecbe?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Christian</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-556243">Nov 24, 2018 at 6:59 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi</p> 
+            <p>Is it possible to just give access to a specific group of members? The members only should be able to read and write within the forum.<br> n<br> Christia</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-556243" onclick="return addComment.moveForm( &quot;comment-556243&quot;, &quot;556243&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Christian">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-552452"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/039161182fdcb104748f6a4a2e788a14?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/039161182fdcb104748f6a4a2e788a14?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Emmanuel Viardo</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-552452">Nov 14, 2018 at 7:54 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I have a WordPress blog and recently put another registered domain in as an add on domain. How do I install WordPress bb on this add on domain.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-552452" onclick="return addComment.moveForm( &quot;comment-552452&quot;, &quot;552452&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Emmanuel Viardo">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-501417"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/6dedc6e9d450f3d0295cfd162f5b6755?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/6dedc6e9d450f3d0295cfd162f5b6755?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Numan</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-501417">Jul 4, 2018 at 8:49 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi<br> I want to create a forum but I want to use buddy press is it better than bbpress or which theme will be perfect for it and my last question is should I use subdomain for my forum<br> This article is last updated since 2013 I hope you will write a new one also using other plugins and themes<br> Please reply</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-501417" onclick="return addComment.moveForm( &quot;comment-501417&quot;, &quot;501417&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Numan">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-491886"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/ffc6ec3d4706d37fb3669d6f9e74ac33?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/ffc6ec3d4706d37fb3669d6f9e74ac33?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Pawan Kr Singh</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-491886">Jun 15, 2018 at 5:00 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>The details above were really user friendly and immensely easy to follow. I have successfully configured my web site using your instructions. Thank you so much for such articles. I would additionally wish to learn how to add user account login and registration on my store or blog page. Waiting to hear from you soon.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-491886" onclick="return addComment.moveForm( &quot;comment-491886&quot;, &quot;491886&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Pawan Kr Singh">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-491935"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-491935">Jun 15, 2018 at 11:30 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi Pawan, </p> 
+              <p>For a blog, you can see our article on <a href="https://www.wpbeginner.com/beginners-guide/how-to-allow-user-registration-on-your-wordpress-site/" title="How to Allow User Registration on Your WordPress Site">how to allow users to register on your WordPress</a> site. For online store, you will find the option in your WooCommerce settings where you can ask customers to register before checkout.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-491935" onclick="return addComment.moveForm( &quot;comment-491935&quot;, &quot;491935&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-454533"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/1545926d4948e27861a6c97851828ee7?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/1545926d4948e27861a6c97851828ee7?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Dilfgem</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-454533">Mar 29, 2018 at 10:54 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Good but i am running entertainment blog before so i want to add a forum page there , please how can i display the forum in my entertainment landing page so people will just click on the forum name then will now refer them to forum where registration or log in will take place</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-454533" onclick="return addComment.moveForm( &quot;comment-454533&quot;, &quot;454533&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Dilfgem">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-432908"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/d308ff3edffc5e4ca15e147b53b9b689?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d308ff3edffc5e4ca15e147b53b9b689?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Patricia May</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-432908">Jan 25, 2018 at 12:13 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I already have user registration on my site, how can I set up bbpress so my registered users dont have to register again for the forum.<br> Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-432908" onclick="return addComment.moveForm( &quot;comment-432908&quot;, &quot;432908&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Patricia May">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-428143"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/745ce7984b3735882c2655ab82c4380a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/745ce7984b3735882c2655ab82c4380a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Joe</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-428143">Jan 6, 2018 at 7:04 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks! Huge help! Now let’s see if I can get a community built =)</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-428143" onclick="return addComment.moveForm( &quot;comment-428143&quot;, &quot;428143&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Joe">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-422778"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/ee4cf7384f7725817c532f3c808e1aa5?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/ee4cf7384f7725817c532f3c808e1aa5?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Yogen Basnet</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-422778">Dec 12, 2017 at 11:32 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I can start off by saying, thank you so much for this nice piece of information.</p> 
+            <p>I like bbPress but I love Question2Answer. This is the reason why I am unable to decide which one would be more community driven.</p> 
+            <p>Feature wise I think question2Answer rocks but support and Integration wise bbpress is the best. Could you write your view on this so that I can analyze and make a rightful decision?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-422778" onclick="return addComment.moveForm( &quot;comment-422778&quot;, &quot;422778&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Yogen Basnet">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-419946"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/0a271d5f1cdb618d1df97533d26b7ced?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/0a271d5f1cdb618d1df97533d26b7ced?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Mick E</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-419946">Nov 30, 2017 at 10:45 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Can I place the forum in a members area (page) , this is password protected</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-419946" onclick="return addComment.moveForm( &quot;comment-419946&quot;, &quot;419946&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Mick E">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-415918"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a66a906411718f0f8be182e7bd984492?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a66a906411718f0f8be182e7bd984492?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Juan Ruiz</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-415918">Nov 16, 2017 at 3:59 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Does this plugin is compatible with optimizepress theme?</p> 
+            <p>Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-415918" onclick="return addComment.moveForm( &quot;comment-415918&quot;, &quot;415918&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Juan Ruiz">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-416072"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-416072">Nov 17, 2017 at 8:39 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi Juan, </p> 
+              <p>It is compatible with all standard compliant WordPress themes. You can also checkout our list of <a href="https://www.wpbeginner.com/showcase/best-wordpress-themes-for-bbpress/" title="24 Best WordPress Themes for bbPress">best WordPress themes for bbPress</a>.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-416072" onclick="return addComment.moveForm( &quot;comment-416072&quot;, &quot;416072&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-410448"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/3b515a9efc3613c8c24eb429970c8131?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/3b515a9efc3613c8c24eb429970c8131?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">muazzam</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-410448">Oct 28, 2017 at 12:36 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Very simple and easy tutorial i have followed all this procedures but if i click the registar button it shows nothing found on the page.</p> 
+            <p>Please how can i add the registration?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-410448" onclick="return addComment.moveForm( &quot;comment-410448&quot;, &quot;410448&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to muazzam">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-408539"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/f6f79f1c7534a89e0a4ea347876befd4?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/f6f79f1c7534a89e0a4ea347876befd4?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">derek</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-408539">Oct 20, 2017 at 6:23 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Good helpful article – I am looking forward to having a go at it</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-408539" onclick="return addComment.moveForm( &quot;comment-408539&quot;, &quot;408539&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to derek">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-404182"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/59fdadf4885047c2dfae5c518a65d8c7?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/59fdadf4885047c2dfae5c518a65d8c7?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Martin Rathmanner</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-404182">Sep 30, 2017 at 5:13 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi!</p> 
+            <p>my Page uses WP-Members to limit some Content to registered users only</p> 
+            <p>If i show the forum pages only to “members” – do they need to register to bbPress again to post/create?</p> 
+            <p>thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-404182" onclick="return addComment.moveForm( &quot;comment-404182&quot;, &quot;404182&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Martin Rathmanner">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-402772"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/78f4de66b97216f8b75eebd5590e66bc?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/78f4de66b97216f8b75eebd5590e66bc?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Mo</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-402772">Sep 23, 2017 at 6:30 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>is there a wp plugin that can show thumbnails of post content previews in the admin panel?</p> 
+            <p>I am familiar with the plugin ‘Featured Image Admin Thumb’,but it is not what I need.</p> 
+            <p>I am looking for a similar concept, however I need to preview the actual post content via a thumbnail so I can quickly review actual post content.</p> 
+            <p>Any suggestions?</p> 
+            <p>Thanks!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-402772" onclick="return addComment.moveForm( &quot;comment-402772&quot;, &quot;402772&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Mo">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-399668"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/577ee5bee6f1b289d966d07b01490722?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/577ee5bee6f1b289d966d07b01490722?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Nana Kwenu</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-399668">Sep 6, 2017 at 3:28 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Am grateful for the article, God bless you. After following this article to create a forum with bbpress, my register page and lost password page comes empty, What should I do please.<br> Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-399668" onclick="return addComment.moveForm( &quot;comment-399668&quot;, &quot;399668&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Nana Kwenu">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-394089"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/b3840060e92c9c1fc335c929485e7480?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b3840060e92c9c1fc335c929485e7480?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Peter</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-394089">Aug 2, 2017 at 9:45 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>The instructions are very clear but registration doesn’t work. If I visit my site and try to register I get the following error:</p> 
+            <p>“Authorization Required</p> 
+            <p>This server could not verify that you are authorized to access the document requested. Either you supplied the wrong credentials (e.g., bad password), or your browser doesn’t understand how to supply the credentials required. ”</p> 
+            <p>I’ve been working on this problem long before I came to this site. I’ve been to bbpress support forums. People say it’s a server issue and to contact my host. I’ve been to my host and they are no help. They referred me to the bbpress forums. I told them I had been to the forums and then they asked me </p> 
+            <p>“Is bbPress a plugin which requires outgoing connection from the server to it’s API?” </p> 
+            <p>I think they asked that question because they knew I wouldn’t know the answer and it would end the conversation. Do you know the answer to their question?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-394089" onclick="return addComment.moveForm( &quot;comment-394089&quot;, &quot;394089&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Peter">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-394103"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-394103">Aug 2, 2017 at 11:44 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi Peter, </p> 
+              <p>No, it does not require an outgoing connection.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-394103" onclick="return addComment.moveForm( &quot;comment-394103&quot;, &quot;394103&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-391418"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/22280313576d2cd8488915a2ff832418?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/22280313576d2cd8488915a2ff832418?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jamal Smith</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-391418">Jul 18, 2017 at 9:48 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello. Thank you for this super clear explanation.<br> Somehow I don’t get the email with my password.<br> Have I done something wrong ?</p> 
+            <p>And also is it possible to change the language?</p> 
+            <p>Thank you</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-391418" onclick="return addComment.moveForm( &quot;comment-391418&quot;, &quot;391418&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Jamal Smith">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-391486"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-391486">Jul 18, 2017 at 8:30 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hello Jamal, </p> 
+              <p>Did you check the Spam folder? If it isn’t there, then WordPress probably failed to send email. See our guide on how to <a href="https://www.wpbeginner.com/beginners-guide/how-to-reset-a-wordpress-password-from-phpmyadmin/" title="How to Reset a WordPress Password from phpMyAdmin">reset WordPress password using phpmyadmin.</a> Yes you can change language on Settings page inside WordPress admin area.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-391486" onclick="return addComment.moveForm( &quot;comment-391486&quot;, &quot;391486&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment odd alt depth-3" id="comment-391564"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/1c808e2a7976b54b001272ac1f7d6409?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/1c808e2a7976b54b001272ac1f7d6409?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Sheldon McMeekan</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-391564">Jul 19, 2017 at 11:15 am</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>I’m finding the same issue. I get the admin email saying a new user registered, but the new user never receives their password email to be able to use the site.</p> 
+                <p>Nothing goes into spam.</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-391564" onclick="return addComment.moveForm( &quot;comment-391564&quot;, &quot;391564&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Sheldon McMeekan">Reply</a> 
+               </div> 
+              </article> 
+              <ul class="children"> 
+               <li class="comment byuser comment-author-noumaancomment even depth-4" id="comment-391862"> 
+                <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+                 <header class="comment-header"> 
+                  <div class="comment-author vcard"> 
+                   <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+                  </div><!-- end .comment-author --> 
+                  <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-391862">Jul 20, 2017 at 9:58 pm</a> 
+                  </div><!-- end .comment-meta --> 
+                 </header> 
+                 <div class="comment-content"> 
+                  <p>Hi Sheldon, </p> 
+                  <p>For more information, please take a look at our article on how to fix <a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-wordpress-not-sending-email-issue/" title="How to Fix WordPress Not Sending Email Issue">WordPress not sending email</a> issue.</p> 
+                 </div><!-- end .comment-content --> 
+                 <div class="reply"> 
+                 </div> 
+                </article> </li><!-- #comment-## --> 
+              </ul><!-- .children --> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-377883"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/ed56c0ab745d5e77b01b4aa671291565?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/ed56c0ab745d5e77b01b4aa671291565?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">marjan</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-377883">May 2, 2017 at 10:03 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I’ve followed the instructions but oddly enough when someone registers they have acces to the wordpress dashboard (and see the black bar above the site). I only want them to have access to the forum. Where did i go wrong??</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-377883" onclick="return addComment.moveForm( &quot;comment-377883&quot;, &quot;377883&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to marjan">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-370800"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/42dfe13a47b9ae821f33838d82675b83?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/42dfe13a47b9ae821f33838d82675b83?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Wendy</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-370800">Mar 28, 2017 at 2:49 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you for this information. Is there an additional plug-in or way to create forum categories.</p> 
+            <p>Category A<br> Forum 1<br> Forum 2</p> 
+            <p>Category B<br> Forum 3<br> Forum 4</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-370800" onclick="return addComment.moveForm( &quot;comment-370800&quot;, &quot;370800&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Wendy">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-368106"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/5dd5f2e562ce84a2ffcbb0b151e8351d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/5dd5f2e562ce84a2ffcbb0b151e8351d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Kaushal Bhatt</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-368106">Mar 11, 2017 at 2:40 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks for such a well described and insightful post.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-368106" onclick="return addComment.moveForm( &quot;comment-368106&quot;, &quot;368106&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Kaushal Bhatt">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-366383"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/bd40aa8f7bd63651082adef426365426?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/bd40aa8f7bd63651082adef426365426?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Inna</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-366383">Mar 1, 2017 at 8:24 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Actually it’s hard to build something unique using a theme. I couldn’t sort it out.<br> A friend of mine showed me a good theme, I tried it out and managed to create something. Turned out that it required a bit more effort to create a good site. </p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-366383" onclick="return addComment.moveForm( &quot;comment-366383&quot;, &quot;366383&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Inna">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-363317"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/484e10aa0cc5fb24824171f3deabbc58?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/484e10aa0cc5fb24824171f3deabbc58?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Heather Brooks</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-363317">Feb 11, 2017 at 10:15 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>EXCELLENT post. This article made the difference for me. I literally followed it step by step, and got my forum up and running in less than 15 minutes. No video needed, in my opinion.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-363317" onclick="return addComment.moveForm( &quot;comment-363317&quot;, &quot;363317&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Heather Brooks">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-363540"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-363540">Feb 12, 2017 at 4:12 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Hi Heather, </p> 
+              <p>Thanks for the kind words. We are glad you found it help. Don’t forget to sign up for our free newsletter or follow us on <a href="https://www.facebook.com/wpbeginner" title="WPBeginner on Facebook" rel="nofollow">Facebook</a> for more WordPress tips and tutorials.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-363540" onclick="return addComment.moveForm( &quot;comment-363540&quot;, &quot;363540&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-361882"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/cb9605e5fcb886835574f55419b0aa1e?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/cb9605e5fcb886835574f55419b0aa1e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Ghulam</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-361882">Feb 3, 2017 at 12:00 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>This Article Do not have any Video????<br> If it has then Please upload it.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-361882" onclick="return addComment.moveForm( &quot;comment-361882&quot;, &quot;361882&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Ghulam">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-360732"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/78e1ae5529e72cb3b6e0162827f9a41b?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/78e1ae5529e72cb3b6e0162827f9a41b?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">VoN</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-360732">Jan 26, 2017 at 7:30 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>This really helped thanks. Eternally grateful. Setting up my forum was a breeze and it was just because of your grand simple and thorough help. Thanks again.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-360732" onclick="return addComment.moveForm( &quot;comment-360732&quot;, &quot;360732&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to VoN">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-358622"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/124abbe2b50ffae425250b349f23028b?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/124abbe2b50ffae425250b349f23028b?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">anudeep ananth</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-358622">Jan 17, 2017 at 1:07 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Is there a way we can add the feature for users to include audio and images in forums ?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-358622" onclick="return addComment.moveForm( &quot;comment-358622&quot;, &quot;358622&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to anudeep ananth">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-349621"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/25045f4ef03cb1a64f96b44c09e42da3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/25045f4ef03cb1a64f96b44c09e42da3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Bangi</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-349621">Nov 26, 2016 at 5:18 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Very helpful and precise.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-349621" onclick="return addComment.moveForm( &quot;comment-349621&quot;, &quot;349621&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Bangi">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-347898"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/37513aeae1fb2f7edcd5bbda08b6dbb5?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/37513aeae1fb2f7edcd5bbda08b6dbb5?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Martin</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-347898">Nov 15, 2016 at 7:43 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>I am using pilotpress to run a membership site and I would like to include a forum without people having to re-log in (as they have done it via pilotpress). Do you have any suggestion for doing this integration?</p> 
+            <p>Thanks!</p> 
+            <p>Martin</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-347898" onclick="return addComment.moveForm( &quot;comment-347898&quot;, &quot;347898&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Martin">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-347587"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/e3cdf76147a243f4b9f57f0a9bd12486?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/e3cdf76147a243f4b9f57f0a9bd12486?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Williams</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-347587">Nov 12, 2016 at 5:21 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>thanks, very helpful</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-347587" onclick="return addComment.moveForm( &quot;comment-347587&quot;, &quot;347587&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Williams">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-345083"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/1ac3fd1fad61ac1c6b169782a06a602d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/1ac3fd1fad61ac1c6b169782a06a602d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Iwuala Valentine</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-345083">Oct 25, 2016 at 1:23 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks so much because you really help me, am so much in love with all your posts because the are all helpful and straight to the topic</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-345083" onclick="return addComment.moveForm( &quot;comment-345083&quot;, &quot;345083&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Iwuala Valentine">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-343904"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/c9a13b8b54e2fe81f7cce685f88b976b?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/c9a13b8b54e2fe81f7cce685f88b976b?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Showhan Ahmed</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-343904">Oct 16, 2016 at 1:33 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Nice article. Thanks so much.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-343904" onclick="return addComment.moveForm( &quot;comment-343904&quot;, &quot;343904&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Showhan Ahmed">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-340560"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/83754d92f19b3782461be9f6fe371edb?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/83754d92f19b3782461be9f6fe371edb?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Joseph</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-340560">Sep 17, 2016 at 6:26 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>please how do I paste the code in the page?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-340560" onclick="return addComment.moveForm( &quot;comment-340560&quot;, &quot;340560&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Joseph">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-337355"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/eccd309ef64ab236558930356e76bb67?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/eccd309ef64ab236558930356e76bb67?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">michael solomon</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-337355">Aug 21, 2016 at 2:03 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>thanks for this article. please if i click on any topic on my forum it usually take me back or rather redirect me to my main home page.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-337355" onclick="return addComment.moveForm( &quot;comment-337355&quot;, &quot;337355&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to michael solomon">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-329588"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/6c7d6592e182d839eeba7c05680282ad?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/6c7d6592e182d839eeba7c05680282ad?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Isaac</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-329588">Jun 16, 2016 at 11:24 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>1. Please i have a wordpress blog before now and i want to create forum as a category on the site.. Will that be a good idea?<br> 2. When i choose the option ANYBODY CAN REGISTER, will it not affect my blog too because i am the only one that wants be posting on the blog, while forum anybody can post or register.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-329588" onclick="return addComment.moveForm( &quot;comment-329588&quot;, &quot;329588&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Isaac">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-324927"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/2335ee4dcbc624040dda58e244ed568e?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/2335ee4dcbc624040dda58e244ed568e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Renu Bakshi</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-324927">May 2, 2016 at 11:05 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>For my site I am using woedpress 4.5.1 version and Modern Blogger Pro child theme of Genesis. I have installed and activated bbPress. But bbPress has not added Forums, Topics and Replies menu items in my WordPress admin. So, I can’t make forums. </p> 
+            <p>Please help…..</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-324927" onclick="return addComment.moveForm( &quot;comment-324927&quot;, &quot;324927&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Renu Bakshi">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-320778"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/f9b675934bea2e4041e69e2225e4428f?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/f9b675934bea2e4041e69e2225e4428f?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Glen</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-320778">Apr 14, 2016 at 11:25 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Is it possible to setup multiple forum pages? E.g one forum page for each admin member?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-320778" onclick="return addComment.moveForm( &quot;comment-320778&quot;, &quot;320778&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Glen">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-318429"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/ffd0f862216a7a2f0d590bb2fa0dba51?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/ffd0f862216a7a2f0d590bb2fa0dba51?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Swagatam</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-318429">Mar 25, 2016 at 12:29 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks for this detailed info! I had a question which is perhaps not yet answered anywhere so far.</p> 
+            <p>I have a website hosted by Hostgator but it’s operated as a custom domain from my earlier blogger interface.</p> 
+            <p>I am interested to use my wordpress.org software which is lying idle in hostagtor to create a forum by using the method explained in the above article.</p> 
+            <p>Kindly advise, would this be possible without having a prior wordpress.org site.</p> 
+            <p>Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-318429" onclick="return addComment.moveForm( &quot;comment-318429&quot;, &quot;318429&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Swagatam">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-316721"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/dab3a3e47e88a601cf504b1a8df4443e?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/dab3a3e47e88a601cf504b1a8df4443e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Projjal</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-316721">Mar 8, 2016 at 9:33 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you very much for this tutorial. Now i have built my forum. However i am not sure that should i noindex-follow my forum or index and follow my forum?<br> Do let me know.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-316721" onclick="return addComment.moveForm( &quot;comment-316721&quot;, &quot;316721&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Projjal">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-313289"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/ce8046bb1fd80cd86397de4353e4c3f3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/ce8046bb1fd80cd86397de4353e4c3f3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">vicky</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-313289">Feb 8, 2016 at 1:57 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>how to add theme in bbpress</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-313289" onclick="return addComment.moveForm( &quot;comment-313289&quot;, &quot;313289&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to vicky">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-312463"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/763cf4329428a2bfa117af8eaa7c2e9a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/763cf4329428a2bfa117af8eaa7c2e9a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Carolyn</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-312463">Jan 30, 2016 at 11:22 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you for this clear, concise manual for setting up bbPress. Your instructions were far superior to the guide provided on bbPress website. I’ll be reading your blog regularly now.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-312463" onclick="return addComment.moveForm( &quot;comment-312463&quot;, &quot;312463&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Carolyn">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-312579"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-312579">Jan 31, 2016 at 5:14 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Glad you found it helpful.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-312579" onclick="return addComment.moveForm( &quot;comment-312579&quot;, &quot;312579&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-310980"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/189a5b56b0731ae70eadb7b3127d55a6?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/189a5b56b0731ae70eadb7b3127d55a6?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">mohanad</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-310980">Jan 14, 2016 at 1:36 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, I installed the forum and it is ok when I use it with my log in, but when I want to register as a new user it shows only an empty page!.<br> what can I do to solve this issue??</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-310980" onclick="return addComment.moveForm( &quot;comment-310980&quot;, &quot;310980&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to mohanad">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-310988"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-310988">Jan 14, 2016 at 1:45 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Try updating your permalinks. Go to Settings &gt; Permalinks and click on save changes button without making any changes.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-310988" onclick="return addComment.moveForm( &quot;comment-310988&quot;, &quot;310988&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-310779"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/5474bfc6dc2db21fe2ca7264ae7182a0?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/5474bfc6dc2db21fe2ca7264ae7182a0?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">seth</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-310779">Jan 12, 2016 at 5:23 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Your post on How To Add a Forum…BBpress was very helpful and quickly got my forum all set up. A couple extra questions:</p> 
+            <p>– As shown, I added both a registration page and a lost password page, and inserted the proper shortcodes, and I added the login widget to my right sidebar. My understanding is that a new visitor to my site who wants to subscribe to &amp; post on the forums, will see a username &amp; login box in the right sidebar. plus the links Register and Lost Password. If they click Register and fill in their choice of User/Pass, will it then automatically be sent to my email for approval &amp; verification?</p> 
+            <p>– AS Keymaster, when I want to start a new topic in one of my forums, I click on that forum title and it takes me to a page with an empty title &amp; text editing box. Is that what subscribed users will see too, so that they may also easily get to start new topics?</p> 
+            <p>— On the Forums index page, how do we get the forum titles in that nice teal-blue color instead of black. It is taking the titles from Forums I created, and the WP text editor allows you to select text color for the content body text, but not for the title box?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-310779" onclick="return addComment.moveForm( &quot;comment-310779&quot;, &quot;310779&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to seth">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-307142"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/839c5ca7da7462ad178fee9df8aa27d7?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/839c5ca7da7462ad178fee9df8aa27d7?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Kelly Drury</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-307142">Dec 11, 2015 at 4:51 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I have installed bbPress on my website. I want to allow automatic registration. I clicked on “anyone can register” and set this for “participant” level. However, my website still requires users to enter their name and email address and then wait for an email with a link to a long password, etc. This is too cumbersome. I assume this is the manual sign up. If so, how do I get rid of this? In the automatic registration, can users simply establish their own user name and password and automatically be registered?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-307142" onclick="return addComment.moveForm( &quot;comment-307142&quot;, &quot;307142&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Kelly Drury">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-302773"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/285933bc09333efb04eaed2b229086ea?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/285933bc09333efb04eaed2b229086ea?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Julie Maxwell</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-302773">Nov 10, 2015 at 10:55 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, I have it set up but the people that are requesting membership are not getting the emails. plus when I approve them on the backside, they are not showing up under members. </p> 
+            <p>Also, do I need both bbpress and buddy press or just one? and which is the best one. </p> 
+            <p>Julie</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-302773" onclick="return addComment.moveForm( &quot;comment-302773&quot;, &quot;302773&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Julie Maxwell">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-302779"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-302779">Nov 10, 2015 at 11:22 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>For emails please see our guide on how to fix WordPress not sending emails issue. bbPress and BuddyPress are both different software. They can work together too. You need to set them up based on your requirements.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-302779" onclick="return addComment.moveForm( &quot;comment-302779&quot;, &quot;302779&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment odd alt depth-3" id="comment-302780"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/285933bc09333efb04eaed2b229086ea?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/285933bc09333efb04eaed2b229086ea?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Julie Maxwell</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-302780">Nov 10, 2015 at 11:25 am</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>Thank you. Which is the better software? also why am i not seeing approved members in the list?</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-302780" onclick="return addComment.moveForm( &quot;comment-302780&quot;, &quot;302780&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Julie Maxwell">Reply</a> 
+               </div> 
+              </article> 
+              <ul class="children"> 
+               <li class="comment even depth-4" id="comment-304314"> 
+                <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+                 <header class="comment-header"> 
+                  <div class="comment-author vcard"> 
+                   <img alt="" src="https://secure.gravatar.com/avatar/f9389b79432e03d574a6177a46b02017?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/f9389b79432e03d574a6177a46b02017?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Kimberly</cite> <span class="says">says:</span> 
+                  </div><!-- end .comment-author --> 
+                  <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-304314">Nov 22, 2015 at 9:15 pm</a> 
+                  </div><!-- end .comment-meta --> 
+                 </header> 
+                 <div class="comment-content"> 
+                  <p>They are two different things that can run separately/independently. bbPress is a forum and BuddyPress is more like social network and discussion. You can have both or just one. I started off with both, but now I am not so sure I need BuddyPress. Can’t answer the other question….since I am just now installing it.</p> 
+                 </div><!-- end .comment-content --> 
+                 <div class="reply"> 
+                 </div> 
+                </article> </li><!-- #comment-## --> 
+              </ul><!-- .children --> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-300890"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/7aab83d4c4a71f1e6e24dda04e927c78?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/7aab83d4c4a71f1e6e24dda04e927c78?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Brian</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-300890">Oct 26, 2015 at 12:43 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, is it possible to create a forum where user access is only allowed by a certain subscription level defined in the membership rules of a WordPress site. For example a visitor purchases a level 3 subscription and by doing so they now have access to what is effectively a private forum. </p> 
+            <p>Hope that makes sense and thanks in advance.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-300890" onclick="return addComment.moveForm( &quot;comment-300890&quot;, &quot;300890&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Brian">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-299979"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/efe6c6a43514bdf1eb4b87038293e856?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/efe6c6a43514bdf1eb4b87038293e856?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Doug</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-299979">Oct 18, 2015 at 1:16 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi,<br> I have followed your instructions and all went well until I published my forum (index) page. The formatting is all wrong. I don’t know if it’s due to my theme or some other reason. For your info., I am using a 3rd party child theme on a Genesis Framework. Also, I have installed the “bbPress Genesis Extend” plugin, but that hasn’t helped.</p> 
+            <p>Thanks,<br> Doug</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-299979" onclick="return addComment.moveForm( &quot;comment-299979&quot;, &quot;299979&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Doug">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-299993"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-299993">Oct 18, 2015 at 6:49 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You can switch to a default WordPress theme to see if it resolves the issue. If it does, then you may want to contact your theme’s support.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-299993" onclick="return addComment.moveForm( &quot;comment-299993&quot;, &quot;299993&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-298043"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/761b2a70d01b34e629ab94e339f64117?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/761b2a70d01b34e629ab94e339f64117?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Banks</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-298043">Oct 5, 2015 at 1:37 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>hello admin,i created the forum page succesfully,but when i post a new topic,its doesnt appear in the forum page. Any help?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-298043" onclick="return addComment.moveForm( &quot;comment-298043&quot;, &quot;298043&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Banks">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-298070"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-298070">Oct 5, 2015 at 3:19 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You also need to create a forum first and then add a topic. The forum index page, displays forums not the topics.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-298070" onclick="return addComment.moveForm( &quot;comment-298070&quot;, &quot;298070&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment even depth-3" id="comment-298077"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/761b2a70d01b34e629ab94e339f64117?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/761b2a70d01b34e629ab94e339f64117?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">BANKS</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-298077">Oct 5, 2015 at 4:19 pm</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>okay thanks,so how can i locate the topic that i have published?</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-298077" onclick="return addComment.moveForm( &quot;comment-298077&quot;, &quot;298077&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to BANKS">Reply</a> 
+               </div> 
+              </article> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-296760"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a51a61d8e34c758f64046450a2e038b2?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a51a61d8e34c758f64046450a2e038b2?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Pete Chapman</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-296760">Sep 26, 2015 at 2:52 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Great forum plugin. Very easy to use, but is there anyway to lock a forum post ?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-296760" onclick="return addComment.moveForm( &quot;comment-296760&quot;, &quot;296760&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Pete Chapman">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-292408"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/920227be902b15fcbf9a31628ce7e9dd?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/920227be902b15fcbf9a31628ce7e9dd?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Rahul</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-3/#comment-292408">Aug 27, 2015 at 6:50 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Why dont you have installed any GOOD comment system…………something SOCIAL</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-292408" onclick="return addComment.moveForm( &quot;comment-292408&quot;, &quot;292408&quot;, &quot;respond&quot;, &quot;10155&quot; )" aria-label="Reply to Rahul">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+        </ol>
+       </div>
+       <div class="pagination comment-pagination">
+        <a class="prev page-numbers" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-2/#comments">«</a> <a class="page-numbers" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-1/#comments">1</a> <a class="page-numbers" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/comment-page-2/#comments">2</a> <span aria-current="page" class="page-numbers current">3</span>
+       </div> 
+       <div id="respond" class="comment-respond"> 
+        <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wp-tutorials/how-to-add-a-forum-in-wordpress-with-bbpress/#respond" style="display:none;">Cancel reply</a></small></h3> 
+        <form action="https://www.wpbeginner.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate> 
+         <p class="commentpolicy">Thanks for choosing to leave a comment. Please keep in mind that all comments are moderated according to our <a href="https://www.wpbeginner.com/comment-policy/" title="WPBeginner Comment Policy">comment policy</a>, and your email address will NOT be published. Please Do NOT use keywords in the name field. Let's have a personal and meaningful conversation.</p>
+         <div class="commentfields-left">
+          <p class="comment-form-author"><input x-autocompletetype="name-full" id="author" name="author" type="text" value="" placeholder="Your Real Name" size="30" tabindex="1" aria-required="true"><label for="author"></label> <span class="required"></span></p><!-- #form-section-author .form-section --> 
+          <p class="comment-form-email"><input x-autocompletetype="email" id="email" name="email" type="text" value="" placeholder="Email Address..." size="30" tabindex="2" aria-required="true"><label for="email"></label> <span class="required"></span></p><!-- #form-section-email .form-section --> 
+         </div><!-- #form-section-url .form-section --> 
+         <p class="comment-form-comment"><textarea autocomplete="nope" id="ad8b1305d5" name="ad8b1305d5" cols="45" rows="8" tabindex="4" aria-required="true"></textarea><textarea id="comment" aria-hidden="true" name="comment" autocomplete="nope" style="padding:0;clip:rect(1px, 1px, 1px, 1px);position:absolute !important;white-space:nowrap;height:1px;width:1px;overflow:hidden;" tabindex="-1"></textarea><script type="text/javascript">document.getElementById("comment").setAttribute( "id", "a943423ec7a63db43959ab26c3e79cde" );document.getElementById("ad8b1305d5").setAttribute( "id", "comment" );</script></p><!-- #form-section-comment .form-section --><!-- Subscribe to Comments Reloaded version 180225 --><!-- Subscribe to comments Reloaded MP: '/manage-subscriptions/' --><!-- BEGIN: subscribe to comments reloaded -->
+         <p class="comment-form-subscriptions"><label for="subscribe-reloaded"><select name="subscribe-reloaded" id="subscribe-reloaded"> <option value="none" selected>Don't subscribe</option> <option value="yes">All</option> <option value="replies">Replies to my comments</option> </select> Notify me of followup comments via e-mail. You can also <a href="https://www.wpbeginner.com/manage-subscriptions/?srp=10155&amp;srk=73b8227bdd81bbf20bba6554090cd5a7&amp;sra=s&amp;srsrc=f">subscribe</a> without commenting.</label></p><!-- END: subscribe to comments reloaded -->
+         <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit Comment"> <input type="hidden" name="comment_post_ID" value="10155" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"> </p>
+         <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="c1eee450f8"></p>
+         <p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="120"></p> 
+        </form> 
+       </div><!-- #respond --> 
+      </div>
+     </main>
+     <aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar">
+      <!-- WPBeginner Subscribe --> 
+      <div class="wpbsubscribe widget"> 
+       <div class="widgetheading">
+         Over 1,320,000+ Readers 
+        <p>Get fresh content from WPBeginner</p> 
+       </div> 
+       <div class="socialicons"> <a href="https://facebook.com/wpbeginner" class="fbicon" target="_blank" rel="nofollow" title="Join WPBeginner on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="https://twitter.com/wpbeginner" class="twittericon" target="_blank" rel="nofollow" title="Follow WPBeginner on Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://youtube.com/wpbeginner?sub_confirmation=1" class="yticon" target="_blank" rel="nofollow" title="Subscribe to WPBeginner on YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a> <a href="https://www.linkedin.com/company/wpbeginner/" class="linkedinicon" target="_blank" rel="nofollow" title="Join WPBeginner on LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a> <a href="https://www.pinterest.com/wpbeginner/" class="pinteresticon" target="_blank" rel="nofollow" title="Follow WPBeginner on Pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a> <a href="#" data-optin-slug="mukj2ocfysjzidb5" class="manual-optin-trigger emailicon" title="Join WPBeginner Weekly Email Newsletter"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
+       </div> 
+      </div> <!-- End WPBeginner Subscribe --> 
+      <div class="featuredplugins sidebardeals widget"> 
+       <div class="widgetheading">
+        <span class="headingred">Featured</span> WordPress Plugin
+       </div> 
+       <div class="relatedentry"> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.seedprod.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="SeedProd" target="_blank"><img width="96" height="96" src="https://cdn3.wpbeginner.com/wp-content/uploads/2018/10/seedprodthumbnail-96x96.png" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="SeedProd WordPress Coming Soon Page Plugin" title="SeedProd"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.seedprod.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="SeedProd" target="_blank">SeedProd</a>
+          </div> Jump start your website with viral coming soon pages. <a href="https://www.seedprod.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="SeedProd" target="_blank">Learn More »</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a href="https://www.wpbeginner.com/start-a-wordpress-blog/" title="How to Start a Blog (Step by Step)" class="startablog"><img src="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/images/startablog.png" alt="How to Start a Blog"></a> <a href="https://www.wpbeginner.com/blueprint/" title="WPBeginner WordPress Blueprint" class="blueprint"><img src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/blueprint.jpg" alt="How to Start a Blog"></a> 
+      <div class="clear"></div> <!-- WordPress Pillar Articles --> 
+      <div class="sidebarhelpwith widget"> 
+       <div class="widgetheading">
+         I need help with ... 
+       </div> 
+       <div class="guideicons"> <a href="https://www.wpbeginner.com/start-a-wordpress-blog/" class="guideicon starting">Starting a<br>Blog</a> <a href="https://www.wpbeginner.com/wordpress-performance-speed/" class="guideicon speed">WordPress<br>Performance</a> <a href="https://www.wpbeginner.com/wordpress-security/" class="guideicon security">WordPress<br>Security</a> <a href="https://www.wpbeginner.com/wordpress-seo/" class="guideicon seo">WordPress<br>SEO</a> <a href="https://www.wpbeginner.com/common-wordpress-errors-and-how-to-fix-them/" class="guideicon errors">WordPress<br>Errors</a> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-start-an-online-store/" class="guideicon store">Building an<br>Online Store</a> 
+       </div> 
+       <div class="guidesearch"> 
+        <form method="get" class="searchform search-form" action="https://www.wpbeginner.com/search"> 
+         <input type="text" value="" placeholder="Search WPBeginner..." name="q" class="s search-input" autocomplete="off"> <button class="guide-submit"></button> 
+        </form> 
+       </div> 
+      </div> <!-- WordPress Guides --> 
+      <div class="sidebarwordpressguides widget"> 
+       <div class="widgetheading"> <span class="headingorange">Useful</span> WordPress Guides 
+       </div> 
+       <div id="unslider"> 
+        <ul> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/plugins/7-best-wordpress-backup-plugins-compared-pros-and-cons/" data-category="guides">7 Best WordPress Backup Plugins Compared (Pros and Cons)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" data-category="guides">How to Fix the Error Establishing a Database Connection in WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-you-need-a-cdn-for-your-wordpress-blog-infographic/" data-category="guides">Why You Need a CDN for your WordPress Blog? [Infographic]</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/make-money-online/" data-category="guides">25 Legit Ways to Make Money Online Blogging with WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/self-hosted-wordpress-org-vs-free-wordpress-com-infograph/" data-category="guides">Self Hosted WordPress.org vs. Free WordPress.com [Infograph]</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/free-recording-wordpress-workshop-for-beginners/" data-category="guides">Free Recording: WordPress Workshop for Beginners</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/24-must-have-wordpress-plugins-for-business-websites/" data-category="guides">24 Must Have WordPress Plugins for Business Websites</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-your-blog-from-wordpress-com-to-wordpress-org/" data-category="guides">How to Properly Move Your Blog from WordPress.com to WordPress.org</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/5-best-contact-form-plugins-for-wordpress-compared/" data-category="guides">5 Best Contact Form Plugins for WordPress Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/best-wordpress-popup-plugin/" data-category="guides">Which is the Best WordPress Popup Plugin? (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/best-woocommerce-hosting/" data-category="guides">Best WooCommerce Hosting in 2020 (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-internal-server-error-in-wordpress/" data-category="guides">How to Fix the Internal Server Error in WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/how-to-install-wordpress/" data-category="guides">How to Install WordPress - Complete WordPress Installation Tutorial</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" data-category="guides">Why You Should Start Building an Email List Right Away</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-wordpress-to-a-new-domain-without-losing-seo/" data-category="guides">How to Properly Move WordPress to a New Domain Without Losing SEO</a></li> 
+           <li><a href="https://www.wpbeginner.com/wordpress-hosting/" data-category="guides">How to Choose the Best WordPress Hosting for Your Website</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-blogging-platform/" data-category="guides">How to Choose the Best Blogging Platform (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/category/wp-tutorials/" data-category="guides">WordPress Tutorials - 200+ Step by Step WordPress Tutorials</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/best-wordpress-ecommerce-plugins-compared/" data-category="guides">5 Best WordPress Ecommerce Plugins Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/5-best-wordpress-membership-plugins-compared/" data-category="guides">5 Best WordPress Membership Plugins (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/best-email-marketing-services/" data-category="guides">7 Best Email Marketing Services for Small Business (2020)</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-domain-registrar/" data-category="guides">How to Choose the Best Domain Registrar (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/the-truth-about-shared-wordpress-web-hosting/" data-category="guides">The Truth About Shared WordPress Web Hosting</a></li> 
+           <li><a href="https://www.wpbeginner.com/managed-wordpress-hosting/" data-category="guides">When Do You Really Need Managed WordPress Hosting?</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/best-drag-and-drop-page-builders-for-wordpress/" data-category="guides">5 Best Drag and Drop WordPress Page Builders Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-switch-from-blogger-to-wordpress-without-losing-google-rankings/" data-category="guides">How to Switch from Blogger to WordPress without Losing Google Rankings</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-switch-from-wix-to-wordpress-step-by-step/" data-category="guides">How to Properly Switch From Wix to WordPress (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-from-weebly-to-wordpress/" data-category="guides">How to Properly Move from Weebly to WordPress (Step by Step)</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/best-vps-hosting-compared/" data-category="guides">Do You Really Need a VPS? Best WordPress VPS Hosting Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-from-squarespace-to-wordpress/" data-category="guides">How to Properly Move from Squarespace to WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-register-a-domain-name-simple-tip-to-get-it-for-free/" data-category="guides">How to Register a Domain Name (+ tip to get it for FREE)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/hostgator/" data-category="guides">HostGator Review - An Honest Look at Speed &amp; Uptime (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/siteground/" data-category="guides">SiteGround Reviews from 1032 Users &amp; Our Experts (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/bluehost/" data-category="guides">Bluehost Review from Real Users + Performance Stats (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-much-does-it-cost-to-build-a-wordpress-website/" data-category="guides">How Much Does It Really Cost to Build a WordPress Website?</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-create-an-email-newsletter/" data-category="guides">How to Create an Email Newsletter the RIGHT WAY (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/best-crm-software-for-small-businesses-compared/" data-category="guides">7 Best CRM Software for Small Businesses (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-create-a-free-business-email-address-in-5-minutes-step-by-step/" data-category="guides">How to Create a Free Business Email Address in 5 Minutes (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" data-category="guides">How to Install Google Analytics in WordPress for Beginners</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-move-wordpress-to-a-new-host-or-server-with-no-downtime/" data-category="guides">How to Move WordPress to a New Host or Server With No Downtime</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-is-wordpress-free-what-are-the-costs-what-is-the-catch/" data-category="guides">Why is WordPress Free? What are the Costs? What is the Catch?</a></li> 
+           <li><a href="https://www.wpbeginner.com/guides/" data-category="guides">How to Make a Website in 2020 – Step by Step Guide</a></li> 
+          </ul> </li> 
+        </ul> 
+       </div> 
+      </div> <!-- End WordPress Guides --> 
+      <div class="sidebardeals widget"> 
+       <div class="widgetheading">
+        Deals &amp; Coupons <a href="https://www.wpbeginner.com/deals/" class="viewdeals">(view all)</a>
+       </div> 
+       <div class="relatedentry"> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.wpbeginner.com/deals/media-temple-coupon/" title="Media Temple Coupon"> <img width="96" height="96" src="https://cdn4.wpbeginner.com/wp-content/uploads/2015/08/mediatemple-96x96.jpg" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="Media Temple" title="Media Temple Coupon"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.wpbeginner.com/deals/media-temple-coupon/" title="Media Temple Coupon">Media Temple Coupon</a>
+          </div> Get 20% OFF on all Media Temple hosting plans.
+         </div> 
+        </div> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.wpbeginner.com/deals/all-in-one-seo-pro-coupon/" title="All in One SEO Pro Coupon"> <img width="96" height="96" src="https://cdn2.wpbeginner.com/wp-content/uploads/2016/03/aioseopro-96x96.png" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="All in One SEO Pro Coupon" title="All in One SEO Pro Coupon"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.wpbeginner.com/deals/all-in-one-seo-pro-coupon/" title="All in One SEO Pro Coupon">All in One SEO Pro Coupon</a>
+          </div> Get 50% off All in One SEO Pack Pro, the most popular WordPress SEO plugin in the market.
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </aside>
+    </div>
+   </div>
+   <div class="clear"></div>
+   <div class="footer-press">
+    <div class="wrap"> <span>Featured In</span> 
+     <div class="logo-wrap"> 
+      <div class="press-logo sprite-inc"></div> 
+      <div class="press-logo sprite-fox"></div> 
+      <div class="press-logo sprite-vb"></div> 
+      <div class="press-logo sprite-huffpost"></div> 
+      <div class="press-logo sprite-yahoo"></div> 
+      <div class="press-logo sprite-entrepreneur"></div> 
+     </div> 
+    </div>
+   </div>
+   <div class="clear"></div>
+   <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
+    <div class="wrap">
+     <div class="aboutwpbeginner footer-widget"> 
+      <div class="footer-heading">
+       About WPBeginner®
+      </div> 
+      <p>WPBeginner is a free WordPress resource site for Beginners. WPBeginner was founded in July 2009 by <u><a href="https://syedbalkhi.com/" title="Syed Balkhi" target="_blank">Syed Balkhi</a></u>. The main goal of this site is to provide quality tips, tricks, hacks, and other WordPress resources that allows WordPress beginners to improve their site(s).</p> 
+     </div> 
+     <div class="site-links footer-widget"> 
+      <div class="footer-heading">
+       Site Links
+      </div> 
+      <ul> 
+       <li><a href="https://www.wpbeginner.com/about-wpbeginner/">About Us</a></li> 
+       <li><a href="https://www.wpbeginner.com/contact/">Contact Us</a></li> 
+       <li><a href="https://www.wpbeginner.com/wpbeginner-disclaimer/">FTC Disclosure</a></li> 
+       <li><a href="https://www.wpbeginner.com/privacy-policy/">Privacy Policy</a></li> 
+       <li><a href="https://www.wpbeginner.com/terms-of-use/">Terms of Service</a></li> 
+       <li><a href="https://www.wpbeginner.com/free-wordpress-blog-setup/">Free Blog Setup</a></li> 
+      </ul> 
+     </div> 
+     <div class="our-sites footer-widget"> 
+      <div class="footer-heading">
+       Our Sites
+      </div> 
+      <ul> 
+       <li><a href="https://optinmonster.com/" target="_blank" title="OptinMonster - Best WordPress Lead Generation Plugin">OptinMonster</a></li> 
+       <li><a href="https://www.monsterinsights.com/" target="_blank" title="MonsterInsights - Best Google Analytics Plugin For WordPress">MonsterInsights</a></li> 
+       <li><a href="https://wpforms.com/" target="_blank" title="WPForms - Best WordPress Contact Form Plugin">WPForms</a></li> 
+       <li><a href="https://www.seedprod.com/" target="_blank" title="SeedProd - Best Coming Soon Page Plugin">SeedProd</a></li> 
+       <li><a href="https://www.nameboy.com/" target="_blank" title="The best domain name generator run by Syed Balkhi">Nameboy</a></li> 
+       <li><a href="https://rafflepress.com/" target="_blank" title="RafflePress - Best WordPress giveaway plugin">RafflePress</a></li> 
+      </ul> 
+     </div> 
+     <div class="clear"></div> 
+    </div>
+   </footer>
+   <div class="footer-copyright">
+    <div class="wrap"> 
+     <p>Copyright © 2009 - 2020 WPBeginner LLC. All Rights Reserved. WPBeginner® is a registered trademark.</p>
+     <p> Managed by <u><a href="https://awesomemotive.com" target="_blank" rel="noopener">Awesome Motive</a></u> | <a href="https://www.wpbeginner.com/wordpress-hosting/" title="How to Choose the Best WordPress Hosting?">WordPress hosting</a> by <u><a href="https://www.wpbeginner.com/refer/siteground/" target="_blank" rel="nofollow">SiteGround</a></u> | WordPress CDN by <u><a href="https://www.wpbeginner.com/blueprint/maxcdn/" title="Why we use MaxCDN">MaxCDN</a></u> | <a href="https://www.wpbeginner.com/wordpress-security/" title="Ultimate WordPress Security Guide">WordPress Security</a> by <u><a href="https://www.wpbeginner.com/opinion/sucuri-review-how-sucuri-helped-us-block-450000-wordpress-attacks-in-3-months/" title="Why we use Sucuri">Sucuri</a></u>.</p>
+     <p> </p>
+    </div>
+   </div>
+  </div><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPBeginner FB Group Slide-in -->
+  <script type="text/javascript" src="https://a.opmnstr.com/app/js/api.min.js" data-campaign="yh0pc4ukorc33zei8rba" data-user="1" data-env="production"></script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPB Exit Weekly -->
+  <div id="om-af1jimjo7o-lightbox-holder"></div>
+  <script>var af1jimjo7o_lightbox,af1jimjo7o_lightbox_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){af1jimjo7o_lightbox_poll(function(){if(window['om_loaded']){if(!af1jimjo7o_lightbox){af1jimjo7o_lightbox=new OptinMonsterApp();return af1jimjo7o_lightbox.init({"u":"1.155459","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;af1jimjo7o_lightbox=new OptinMonsterApp();af1jimjo7o_lightbox.init({"u":"1.155459","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: Ultimate WordPress Toolkit -->
+  <div id="om-faamjcr6mcotuufr-holder"></div>
+  <script>var faamjcr6mcotuufr,faamjcr6mcotuufr_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){faamjcr6mcotuufr_poll(function(){if(window['om_loaded']){if(!faamjcr6mcotuufr){faamjcr6mcotuufr=new OptinMonsterApp();return faamjcr6mcotuufr.init({"u":"1.449354","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;faamjcr6mcotuufr=new OptinMonsterApp();faamjcr6mcotuufr.init({"u":"1.449354","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPBeginner Newsletter Monsterlink -->
+  <div id="om-mukj2ocfysjzidb5-holder"></div>
+  <script>var mukj2ocfysjzidb5,mukj2ocfysjzidb5_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){mukj2ocfysjzidb5_poll(function(){if(window['om_loaded']){if(!mukj2ocfysjzidb5){mukj2ocfysjzidb5=new OptinMonsterApp();return mukj2ocfysjzidb5.init({"u":"1.449662","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;mukj2ocfysjzidb5=new OptinMonsterApp();mukj2ocfysjzidb5.init({"u":"1.449662","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster -->
+  <script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script> 
+  <script type="text/javascript">var yh0pc4ukorc33zei8rba_shortcode = true;var af1jimjo7o_lightbox_shortcode = true;var faamjcr6mcotuufr_shortcode = true;var mukj2ocfysjzidb5_shortcode = true;</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/youtube-fit-videos-hide-related/js/fitvids-ui.min.js"></script> 
+  <script type="text/javascript" async src="https://cdn2.wpbeginner.com/wp-includes/js/comment-reply.min.js?ver=4.9.13"></script> 
+  <script async type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.3"></script> 
+  <script type="text/javascript">var omapi_localized = { ajax: 'https://www.wpbeginner.com/wp-admin/admin-ajax.php?optin-monster-ajax-route=1', nonce: '1f0a19995d', slugs: {"yh0pc4ukorc33zei8rba":{"slug":"yh0pc4ukorc33zei8rba","mailpoet":false},"af1jimjo7o_lightbox":{"slug":"af1jimjo7o_lightbox","mailpoet":false},"faamjcr6mcotuufr":{"slug":"faamjcr6mcotuufr","mailpoet":false},"mukj2ocfysjzidb5":{"slug":"mukj2ocfysjzidb5","mailpoet":false}} };</script> 
+  <script type="text/javascript">var omapi_data = {"wc_cart":[],"object_id":10155,"object_key":"post","object_type":"post","term_ids":[5,3814,3523,3633,3815,3670]};</script> <!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 0/637 objects using apc
+Page Caching using disk: enhanced 
+Content Delivery Network via cdn.wpbeginner.com
+
+Served from: www.wpbeginner.com @ 2020-03-24 08:59:22 by W3 Total Cache
+-->
+ </body>
+</html>

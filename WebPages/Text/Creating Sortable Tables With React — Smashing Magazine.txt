@@ -1,0 +1,203 @@
+skip to main content start reading the article jump to list of all articles search topics articles . design & development books . physical & digital books events . conferences & workshops jobs . find work & employees membership . webinars & early-birds browse all topics clear search browse all topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow about the author kristofer is the react lead at bekk, and has worked on numerous large projects for the last 6 years. he hosts a beer based programming meetup, tries to keep his … more about kristofer … march 20, 2020 leave a comment creating sortable tables with react 9 min read react, tools, techniques share on twitter or linkedin smashing newsletter upgrade your inbox and get our editors’ picks 2× a month — delivered right into your inbox. earlier issues. your (smashing) email subscribe → making your tables sortable in react might sound like a daunting task, but it doesn’t have to be too difficult. in this article, we’re going to implement all you need to sort out all of your table sorting needs. table sorting has always been a pretty hard issue to get right. there’s a lot of interactions to keep track of, extensive dom mutations to do and even intricate sorting algorithms, too. it’s just one of those challenges that are hard to get right. right? instead of pulling in external libraries, let’s try to make stuff ourselves. in this article, we’re going to create a reusable way to sort your tabular data in react. we’ll go through each step in detail, and learn a bunch of useful techniques along the way. we won’t go through basic react or javascript syntax, but you don’t have to be an expert in react to follow along. creating a table with react first, let’s create a sample table component. it’ll accept an array of products, and output a very basic table, listing out a row per product. function producttable(props) {
+  const { products } = props;
+  return (
+    <table>
+      <caption>our products</caption>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>price</th>
+          <th>in stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map(product => (
+          <tr key={product.id}>
+            <td>{product.name}</td>
+            <td>{product.price}</td>
+            <td>{product.stock}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+} here, we accept an array of products and loop them out into our table. it’s static and not sortable at the moment, but that’s fine for now. sorting the data if you’d believe all the whiteboard interviewers, you’d think software development was almost all sorting algorithms. luckily, we won’t be looking into a quick sort or bubble sort here. sorting data in javascript is pretty straightforward, thanks to the built-in array function sort(). it’ll sort arrays of numbers and strings without an extra argument: const array = ['mozzarella', 'gouda', 'cheddar'];
+array.sort();
+console.log(array); // ['cheddar', 'gouda', 'mozzarella'] if you want something a bit more clever, you can pass it a sorting function. this function is given two items in the list as arguments, and will place one in front of the other based on what you decide. let’s start by sorting the data we get alphabetically by name. function producttable(props) {
+  const { products } = props;
+  let sortedproducts = [...products];
+  sortedproducts.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+  return (
+    <table>
+      {/* as before */}
+    </table>
+  );
+} so what’s going on here? first, we create a copy of the products prop, which we can alter and change as we please. we need to do this because the array.prototype.sort function alters the original array instead of returning a new sorted copy. next, we call sortedproducts.sort, and pass it a sorting function. we check if the name property of the first argument a is before the second argument b, and if so, return a negative value. this indicates that a should come before b in the list. if the first argument’s name is after the second argument’s name, we return a positive number, indicating that we should place b before a. if the two are equal (i.e. both have the same name), we return 0 to preserve the order. making our table sortable so now we can make sure the table is sorted by name — but how can we change the sorting order ourselves? to change what field we sort by, we need to remember the currently sorted field. we’ll do that with the usestate hook. a hook is a special kind of function that lets us “hook” into some of react’s core functionality, like managing state and triggering side effects. this particular hook lets us maintain a piece of internal state in our component, and change it if we want to. this is what we’ll add: const [sortedfield, setsortedfield] = react.usestate(null); we start by not sorting anything at all. next, let’s alter the table headings to include a way to change what field we want to sort by. const productstable = (props) => {
+  const { products } = props;
+  const [sortedfield, setsortedfield] = react.usestate(null);
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <button type="button" onclick={() => setsortedfield('name')}>
+              name
+            </button>
+          </th>
+          <th>
+            <button type="button" onclick={() => setsortedfield('price')}>
+              price
+            </button>
+          </th>
+          <th>
+            <button type="button" onclick={() => setsortedfield('stock')}>
+              in stock
+            </button>
+          </th>
+        </tr>
+      </thead>
+      {/* as before */}
+    </table>
+  );
+}; now, whenever we click a table heading, we update the field we want to sort by. neat-o! we’re not doing any actual sorting yet though, so let’s fix that. remember the sorting algorithm from before? here it is, just slightly altered to work with any of our field names. const productstable = (props) => {
+  const { products } = props;
+  const [sortedfield, setsortedfield] = react.usestate(null);
+  let sortedproducts = [...products];
+  if (sortedfield !== null) {
+    sortedproducts.sort((a, b) => {
+      if (a[sortedfield] < b[sortedfield]) {
+        return -1;
+      }
+      if (a[sortedfield] > b[sortedfield]) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  return (
+    <table> we first make sure we’ve chosen a field to sort by, and if so, we sort the products by that field. ascending vs descending the next feature we want to see is a way to switch between ascending and descending order. we’ll switch between ascending and descending order by clicking the table heading one more time. to implement this, we’ll need to introduce a second piece of state — the sort order. we’ll refactor our current sortedfield state variable to keep both the field name and its direction. instead of containing a string, this state variable will contain an object with a key (the field name) and a direction. we’ll rename it to sortconfig to be a bit clearer. here’s the new sorting function:  sortedproducts.sort((a, b) => {
+  if (a[sortconfig.key] < b[sortconfig.key]) {
+    return sortconfig.direction === 'ascending' ? -1 : 1;
+  }
+  if (a[sortconfig.key] > b[sortconfig.key]) {
+    return sortconfig.direction === 'ascending' ? 1 : -1;
+  }
+  return 0;
+}); now, if the direction is ‘ascending’, we’ll do as we did previously. if it’s not, we’ll do the opposite, giving us descending ordering. next up, we’ll create a new function — requestsort — which will accept the field name, and update the state accordingly. const requestsort = key => {
+  let direction = 'ascending';
+  if (sortconfig.key === key && sortconfig.direction === 'ascending') {
+    direction = 'descending';
+  }
+  setsortconfig({ key, direction });
+} we’ll also have to change our click handlers to use this new function! return (
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <button type="button" onclick={() => requestsort('name')}>
+            name
+          </button>
+        </th>
+        <th>
+          <button type="button" onclick={() => requestsort('price')}>
+            price
+          </button>
+        </th>
+        <th>
+          <button type="button" onclick={() => requestsort('stock')}>
+            in stock
+          </button>
+        </th>
+      </tr>
+    </thead>
+  {/* as before */}
+  </table>
+); now we’re starting to look pretty feature-complete, but there’s still one big thing left to do. we need to make sure that we only sort our data when we need to. currently, we’re sorting all of our data on every render, which will lead to all sorts of performance issues down the line. instead, let’s use the built-in usememo hook to memoize all the slow parts! const productstable = (props) => {
+  const { products } = props;
+  const [sortconfig, setsortconfig] = react.usestate(null);
+  
+  react.usememo(() => {
+    let sortedproducts = [...products];
+    if (sortedfield !== null) {
+      sortedproducts.sort((a, b) => {
+        if (a[sortconfig.key] < b[sortconfig.key]) {
+          return sortconfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortconfig.key] > b[sortconfig.key]) {
+          return sortconfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortedproducts;
+  }, [products, sortconfig]); if you haven’t seen it before, usememo is a way to cache — or memoize — expensive computations. so given the same input, it doesn’t have to sort the products twice if we re-render our component for some reason. note that we want to trigger a new sort whenever our products change, or the field or direction we sort by changes. wrapping our code in this function will have huge performance implications for our table sorting! making it all reusable one of the best things about hooks is how easy it is to make logic reusable. you’ll probably be sorting all types of tables throughout your application, and having to reimplement the same stuff all over again sounds like a drag. react has this feature called custom hooks. they sound fancy, but all they are are regular functions that use other hooks inside of them. let’s refactor our code to be contained in a custom hook, so we can use it all over the place! const usesortabledata = (items, config = null) => {
+  const [sortconfig, setsortconfig] = react.usestate(config);
+  
+  const sorteditems = react.usememo(() => {
+    let sortableitems = [...items];
+    if (sortconfig !== null) {
+      sortableitems.sort((a, b) => {
+        if (a[sortconfig.key] < b[sortconfig.key]) {
+          return sortconfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortconfig.key] > b[sortconfig.key]) {
+          return sortconfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableitems;
+  }, [items, sortconfig]);
+
+  const requestsort = key => {
+    let direction = 'ascending';
+    if (sortconfig && sortconfig.key === key && sortconfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setsortconfig({ key, direction });
+  }
+
+  return { items, requestsort };
+} this is pretty much copy and paste from our previous code, with a bit of renaming thrown in. usesortabledata accepts the items, and an optional initial sort state. it returns an object with the sorted items, and a function to re-sort the items. our table code now looks like this: const productstable = (props) => {
+  const { products } = props;
+  const { items, requestsort } = usesortabledata(products);
+  return (
+    <table>{/* ... */}</table>
+  );
+}; a last touch there’s one tiny piece missing — a way to indicate how the table is sorted. in order to indicate that in our design, we need to return the internal state as well — the sortconfig. let’s return that as well, and use it to generate styles we can apply to our table headings! const producttable = (props) => {
+  const { items, requestsort, sortconfig } = usesortabledata(props.products);
+  const getclassnamesfor = (name) => {
+    if (!sortconfig) {
+      return;
+    }
+    return sortconfig.key === name ? sortconfig.direction : undefined;
+  };
+  return (
+    <table>
+      <caption>products</caption>
+      <thead>
+        <tr>
+          <th>
+            <button
+              type="button"
+              onclick={() => requestsort('name')}
+              classname={getclassnamesfor('name')}
+            >
+              name
+            </button>
+          </th>
+         {/* … */}
+        </tr>
+      </thead>
+      {/* … */}
+    </table>
+  );
+}; and with that, we’re done! wrapping up as it turns out, creating your own table sorting algorithm wasn’t an impossible feat after all. we found a way to model our state, we wrote a generic sorting function, and we wrote a way to update what our sorting preferences are. we made sure everything was performant and refactored it all into a custom hook. finally, we provided a way to indicate the sort order to the user. you can see a demo of the table in this codesandbox: (ra, yk, il) browse all smashing magazine topics accessibility android animation apps css design design patterns design systems e-commerce freebies graphics html illustrator inspiration ios javascript mobile pattern libraries performance photoshop plugins react responsive web design service workers sketch typography ui usability user experience wallpapers web design wordpress workflow with a commitment to quality content for the design community. founded by vitaly friedman and sven lennartz. 2006–2020. smashing is proudly running on netlify. fonts by latinotype. ✎ write for us contact us about us (impressum) privacy policy membership login delivery times advertise back to top

@@ -1,0 +1,1955 @@
+<!doctype html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>How to Create Custom RSS Feed in WordPress</title>
+  <link rel="preconnect" href="https://use.typekit.net">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//use.typekit.net/mxa2dsh.js"></script> 
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script type="text/javascript">function parentIsEvil() { var html = null; try { var doc = top.location.pathname; } catch(err){ }; if(typeof doc === "undefined") { return true } else { return false }; }; if (parentIsEvil()) { top.location = self.location.href; };var url = "https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/";if(url.indexOf("stfi.re") != -1) { var canonical = ""; var links = document.getElementsByTagName("link"); for (var i = 0; i < links.length; i ++) { if (links[i].getAttribute("rel") === "canonical") { canonical = links[i].getAttribute("href")}}; canonical = canonical.replace("?sfr=1", "");top.location = canonical; console.log(canonical);};</script> <!-- This site is optimized with the Yoast SEO Premium plugin v2.3.5 - https://yoast.com/wordpress/plugins/seo/ --> 
+  <meta name="description" content="Do you want to modify the default WordPress RSS Feeds and create a custom RSS Feed? Learn how to create your own custom RSS feed in WordPress."> 
+  <meta name="keywords" content="rss feed in wordpress, rss feeds, wordpress custom rss feed"> 
+  <link rel="canonical" href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/"> 
+  <link rel="publisher" href="https://plus.google.com/101634180904808003404/posts"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="How to Create Custom RSS Feed in WordPress"> 
+  <meta property="og:description" content="Do you want to modify the default WordPress RSS Feeds and create a custom RSS Feed? Learn how to create your own custom RSS feed in WordPress."> 
+  <meta property="og:url" content="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/"> 
+  <meta property="og:site_name" content="WPBeginner"> 
+  <meta property="article:publisher" content="http://facebook.com/wpbeginner"> 
+  <meta property="article:author" content="http://facebook.com/syedbalkhi"> 
+  <meta property="article:tag" content="rss feed in wordpress"> 
+  <meta property="article:tag" content="rss feeds"> 
+  <meta property="article:tag" content="wordpress custom rss feed"> 
+  <meta property="article:section" content="Tutorials"> 
+  <meta property="article:published_time" content="2013-10-14T08:23:37+00:00"> 
+  <meta property="article:modified_time" content="2016-02-19T12:08:02+00:00"> 
+  <meta property="og:updated_time" content="2016-02-19T12:08:02+00:00"> 
+  <meta property="fb:admins" content="1107000098"> 
+  <meta property="og:image" content="https://cdn4.wpbeginner.com/wp-content/uploads/2010/01/customcontentrss.gif"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="Do you want to modify the default WordPress RSS Feeds and create a custom RSS Feed? Learn how to create your own custom RSS feed in WordPress."> 
+  <meta name="twitter:title" content="How to Create Custom RSS Feed in WordPress"> 
+  <meta name="twitter:site" content="@wpbeginner"> 
+  <meta name="twitter:domain" content="WPBeginner"> 
+  <meta name="twitter:image" content="https://cdn4.wpbeginner.com/wp-content/uploads/2010/01/customcontentrss.gif"> 
+  <meta name="twitter:creator" content="@wpbeginner"> <!-- / Yoast SEO Premium plugin. --> 
+  <link rel="dns-prefetch" href="//ajax.googleapis.com"> 
+  <link rel="dns-prefetch" href="//a.opmnstr.com"> 
+  <link rel="dns-prefetch" href="//s.w.org"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » Feed" href="https://www.wpbeginner.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » Comments Feed" href="https://www.wpbeginner.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WPBeginner » How to Create Custom RSS Feeds in WordPress Comments Feed" href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/feed/"> 
+  <meta name="revised" content="Friday, February 19, 2016, 12:08 pm"> 
+  <meta name="theme-color" content="#ff6200"> <!-- This site uses the Google Analytics by MonsterInsights plugin v7.10.4 - Using Analytics tracking - https://www.monsterinsights.com/ --> 
+  <script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-15913772-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-15913772-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('set', 'dimension1', 'wp-tutorials');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script> <!-- / Google Analytics by MonsterInsights --> 
+  <link rel="stylesheet" id="child-theme-css" href="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/style.css?ver=1.2.5" type="text/css" media="all"> 
+  <script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"pdf,doc,ppt,xls,zip,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/refer\\\/\",\"label\":\"aff\"}]","home_url":"https:\/\/www.wpbeginner.com","hash_tracking":"false"};
+/* ]]> */
+</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/google-analytics-premium/assets/js/frontend.min.js?ver=7.10.4"></script> <!--[if lt IE 9]>
+<script type='text/javascript' src='https://cdn2.wpbeginner.com/wp-content/themes/genesis/lib/js/html5shiv.js?ver=3.7.3'></script>
+<![endif]--> 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js?ver=1.11.1"></script> 
+  <script type="text/javascript" async src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/scripts/main.js?ver=1.0"></script> 
+  <script type="text/javascript" data-cfasync="false" id="omapi-script" async src="https://a.opmnstr.com/app/js/api.min.js"></script> 
+  <link rel="shortlink" href="http://wpbeg.in/1akNi0U"> 
+  <link rel="icon" href="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/favicon.ico"> 
+  <meta property="twitter:account_id" content="40516848"> 
+  <script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '831611416873998']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script> 
+  <noscript>
+   &lt;img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=831611416873998&amp;amp;ev=PixelInitialized"&gt;
+  </noscript> 
+  <meta name="onesignal" content="wordpress-plugin"> 
+  <link rel="manifest" href="https://www.wpbeginner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/manifest.json.php?gcm_sender_id="> 
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script> 
+  <script>
+
+      window.OneSignal = window.OneSignal || [];
+
+      OneSignal.push( function() {
+        OneSignal.SERVICE_WORKER_UPDATER_PATH = "OneSignalSDKUpdaterWorker.js.php";
+        OneSignal.SERVICE_WORKER_PATH = "OneSignalSDKWorker.js.php";
+        OneSignal.SERVICE_WORKER_PARAM = { scope: '/' };
+
+        OneSignal.setDefaultNotificationUrl("https://www.wpbeginner.com");
+        var oneSignal_options = {};
+        window._oneSignalInitOptions = oneSignal_options;
+
+        oneSignal_options['wordpress'] = true;
+oneSignal_options['appId'] = '65a3e2ee-e808-42f3-912d-a6ea51cb11ca';
+oneSignal_options['autoRegister'] = true;
+oneSignal_options['welcomeNotification'] = { };
+oneSignal_options['welcomeNotification']['title'] = "WPBeginner";
+oneSignal_options['welcomeNotification']['message'] = "Thanks for subscribing to WPBeginner!";
+oneSignal_options['welcomeNotification']['url'] = "https://www.wpbeginner.com/";
+oneSignal_options['path'] = "https://www.wpbeginner.com/wp-content/plugins/onesignal-free-web-push-notifications/sdk_files/";
+oneSignal_options['safari_web_id'] = "web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f";
+oneSignal_options['promptOptions'] = { };
+              OneSignal.init(window._oneSignalInitOptions);
+                    });
+
+      function documentInitOneSignal() {
+        var oneSignal_elements = document.getElementsByClassName("OneSignal-prompt");
+
+        var oneSignalLinkClickHandler = function(event) { OneSignal.push(['registerForPushNotifications']); event.preventDefault(); };        for(var i = 0; i < oneSignal_elements.length; i++)
+          oneSignal_elements[i].addEventListener('click', oneSignalLinkClickHandler, false);
+      }
+
+      if (document.readyState === 'complete') {
+           documentInitOneSignal();
+      }
+      else {
+           window.addEventListener("load", function(event){
+               documentInitOneSignal();
+          });
+      }
+    </script> 
+  <style type="text/css" id="syntaxhighlighteranchor"></style> 
+ </head> 
+ <body class="post-template-default single single-post postid-16953 single-format-standard header-image content-sidebar" itemscope itemtype="https://schema.org/WebPage">
+  <div class="site-container">
+   <header class="site-header" itemscope itemtype="https://schema.org/WPHeader">
+    <div class="wrap">
+     <div id="title-area">
+      <span id="title"><a href="https://www.wpbeginner.com/" title="WPBeginner - Beginner's Guide for WordPress">WPBeginner</a></span>
+      <p id="description">Beginner's Guide for WordPress</p>
+     </div><!-- end #title-area --> 
+     <div class="widget-area"> 
+      <div id="menu-primary-container"> 
+       <div class="menu-wpbv5-header-menu-container">
+        <ul id="menu-wpbv5-header-menu" class="menu">
+         <li id="menu-item-38548" class="menu-item menu-item-has-children"><a title="Blog" href="https://www.wpbeginner.com/blog/" itemprop="url">Blog <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-38551" class="menu-item"><a href="https://www.wpbeginner.com/category/beginners-guide/" itemprop="url">Beginners Guide</a></li> 
+           <li id="menu-item-38552" class="menu-item"><a href="https://www.wpbeginner.com/category/news/" itemprop="url">News</a></li> 
+           <li id="menu-item-38555" class="menu-item"><a href="https://www.wpbeginner.com/category/opinion/" itemprop="url">Opinion</a></li> 
+           <li id="menu-item-38554" class="menu-item"><a href="https://www.wpbeginner.com/category/showcase/" itemprop="url">Showcase</a></li> 
+           <li id="menu-item-38553" class="menu-item"><a href="https://www.wpbeginner.com/category/wp-themes/" itemprop="url">Themes</a></li> 
+           <li id="menu-item-38550" class="menu-item"><a href="https://www.wpbeginner.com/category/wp-tutorials/" itemprop="url">Tutorials</a></li> 
+           <li id="menu-item-38549" class="menu-item"><a href="https://www.wpbeginner.com/category/plugins/" itemprop="url">WordPress Plugins</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38556" class="menu-item menu-item-has-children"><a href="https://www.wpbeginner.com/start-here/" itemprop="url">Start Here <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-58934" class="menu-item"><a href="https://www.wpbeginner.com/start-a-wordpress-blog/" itemprop="url">How to Start a Blog</a></li> 
+           <li id="menu-item-58936" class="menu-item"><a href="https://www.wpbeginner.com/guides/" itemprop="url">Create a Website</a></li> 
+           <li id="menu-item-58937" class="menu-item"><a href="https://www.wpbeginner.com/wp-tutorials/how-to-start-an-online-store/" itemprop="url">Start an Online Store</a></li> 
+           <li id="menu-item-58938" class="menu-item"><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-website-builder/" itemprop="url">Best Website Builder</a></li> 
+           <li id="menu-item-58939" class="menu-item"><a href="https://www.wpbeginner.com/showcase/best-email-marketing-services/" itemprop="url">Email Marketing</a></li> 
+           <li id="menu-item-58942" class="menu-item"><a href="https://www.wpbeginner.com/wordpress-hosting/" itemprop="url">WordPress Hosting</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38557" class="menu-item menu-item-has-children"><a href="https://www.wpbeginner.com/deals/" itemprop="url">Deals <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+          <ul class="sub-menu"> 
+           <li id="menu-item-64580" class="menu-item"><a href="https://www.wpbeginner.com/deals/bluehost-coupon/" itemprop="url">Bluehost Coupon</a></li> 
+           <li id="menu-item-64582" class="menu-item"><a href="https://www.wpbeginner.com/deals/siteground-coupon/" itemprop="url">SiteGround Coupon</a></li> 
+           <li id="menu-item-64583" class="menu-item"><a href="https://www.wpbeginner.com/deals/wpengine-coupon/" itemprop="url">WP Engine Coupon</a></li> 
+           <li id="menu-item-64581" class="menu-item"><a href="https://www.wpbeginner.com/deals/hostgator-coupon/" itemprop="url">HostGator Coupon</a></li> 
+           <li id="menu-item-64584" class="menu-item"><a href="https://www.wpbeginner.com/deals/domain-com-coupon/" itemprop="url">Domain.com Coupon</a></li> 
+           <li id="menu-item-64585" class="menu-item"><a href="https://www.wpbeginner.com/deals/constant-contact-coupon/" itemprop="url">Constant Contact</a></li> 
+           <li id="menu-item-64586" class="menu-item"><a href="https://www.wpbeginner.com/deals/" itemprop="url">View All Deals »</a></li> 
+          </ul> </li> 
+         <li id="menu-item-38559" class="menu-item"><a href="https://www.wpbeginner.com/glossary/" itemprop="url">Glossary</a></li> 
+         <li id="menu-item-38560" class="menu-item"><a href="https://videos.wpbeginner.com/" itemprop="url">Videos</a></li> 
+         <li id="menu-item-38561" class="menu-item"><a href="https://www.wpbeginner.com/wordpress-plugins/" itemprop="url">Products</a></li> 
+        </ul>
+       </div> 
+      </div> 
+     </div> 
+     <div class="searchicon"> <a href="#search"><i class="fa fa-search"></i></a> 
+     </div> 
+     <div id="fullscreensearch"> 
+      <div class="closesearch">
+       <a href="#searchclose">X</a>
+      </div> 
+      <form method="get" class="searchform search-form" action="https://www.wpbeginner.com/search"> 
+       <input type="text" value="" placeholder="Search WPBeginner..." name="q" class="s search-input" autocomplete="off"> 
+       <input type="submit" class="searchsubmit search-submit" value="Search"> 
+      </form>
+     </div> <a href="#menutoggle" id="menutoggle">☰</a> 
+     <div id="mobile-menu-container"></div> 
+    </div>
+   </header>
+   <div class="orangeribbon"> 
+    <div class="wrap"> <a href="#" class="ribbonlink" id="guides-slidetoggle"><span class="ribboncaps">Beginner's Guide for WordPress</span> <span class="ribbonsep">/</span> <span class="ribbonlower">Start your WordPress Blog in minutes</span><i class="fa fa-angle-right" aria-hidden="true"></i> </a> 
+    </div> 
+   </div> 
+   <div class="guidesdropdown" style="display: none;"> 
+    <div class="wrap"> <a href="https://www.wpbeginner.com/wordpress-hosting/" class="dropdownhosting" title="Choosing the best WordPress Hosting">Choosing the Best<br>WordPress Hosting</a> <a href="https://www.wpbeginner.com/how-to-install-wordpress/" class="dropdownthemes" title="How to Install WordPress - Complete WordPress Installation Tutorial">How to Easily <br>Install WordPress</a> <a href="https://www.wpbeginner.com/showcase/24-must-have-wordpress-plugins-for-business-websites/" class="dropdownplugins" title="Recommended WordPress Plugins">Recommended<br>WordPress Plugins</a> <a href="https://www.wpbeginner.com/guides/" class="viewallguides" title="View all Guides">View all Guides</a> 
+    </div> 
+   </div> 
+   <div class="clear"></div> 
+   <div class="site-inner">
+    <div class="content-sidebar-wrap">
+     <main class="content">
+      <div class="content-block">
+       <div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
+        <p id="breadcrumbs"><!-- Breadcrumb NavXT 6.3.0 --> <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to WPBeginner." href="https://www.wpbeginner.com" class="home"><span property="name">WPBeginner</span></a>
+          <meta property="position" content="1"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Blog." href="https://www.wpbeginner.com/blog/" class="post-root post-post"><span property="name">Blog</span></a>
+          <meta property="position" content="2"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the Tutorials category archives." href="https://www.wpbeginner.com/category/wp-tutorials/" class="taxonomy category"><span property="name">Tutorials</span></a>
+          <meta property="position" content="3"></span>»&nbsp;<span property="itemListElement" typeof="ListItem"><span property="name">How to Create Custom RSS Feeds in WordPress</span>
+          <meta property="position" content="4"></span></p>
+       </div>
+       <article class="post type-post entry" itemscope itemtype="https://schema.org/CreativeWork">
+        <header class="entry-header">
+         <h1 class="entry-title" itemprop="headline">How to Create Custom RSS Feeds in WordPress</h1> 
+        </header>
+        <div class="singlepostinfo">
+          Last updated on <time itemprop="dateModified" datetime="2016-02-19T12:08:02+00:00">February 19th, 2016</time> by <a href="https://www.wpbeginner.com/author/wpbeginner/" title="Posts by Editorial Staff" rel="author">Editorial Staff</a> 
+        </div>
+        <div id="horizontalsocial" class="horizontalsocial social-buttons"> 
+         <div class="sharertitle"> <span class="total-count">88</span> <span class="total-text">Shares</span> 
+         </div> 
+         <div class="sharerfacebook sharebutton"> <a href="http://www.facebook.com/sharer.php?u=https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" class="facebook" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook"><span class="count">Share</span></a> 
+         </div> 
+         <div class="sharertwitter sharebutton"> <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wpbeginner.com&amp;source=tweetbutton&amp;text=How+to+Create+Custom+RSS+Feeds+in+WordPress&amp;url=https%3A%2F%2Fwww.wpbeginner.com%2Fwp-tutorials%2Fhow-to-create-custom-rss-feeds-in-wordpress%2F&amp;via=wpbeginner" class="twitter" data-text="How to Create Custom RSS Feeds in WordPress" data-url="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" data-count="horizontal" data-via="wpbeginner" data-related="syedbalkhi : Founder of WPBeginner" rel="nofollow noopener noreferrer" target="_blank" title="Share on Twitter"><span class="count">Tweet</span></a> 
+         </div> 
+         <div class="sharerlinkedin sharebutton"> <a href="https://www.linkedin.com/cws/share?url=https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" class="linkedin" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn"><span class="count">Share</span></a> 
+         </div> 
+         <div class="sharerpinterest sharebutton"> <a href="https://pinterest.com/pin/create/button/?url=https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" class="pinterest" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" rel="nofollow" target="_blank" title="Share on Pinterest"><span class="count">Pin</span></a> 
+         </div> 
+        </div> 
+        <div class="singleadthumbcontainer"> 
+         <div class="wpbthumb">
+          <a target="_blank" rel="nofollow" href="https://youtube.com/wpbeginner?sub_confirmation=1" title="Free WordPress Video Tutorials on YouTube by WPBeginner"><img src="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/images/wpbyt.png" alt="Free WordPress Video Tutorials on YouTube by WPBeginner"></a>
+         </div> 
+         <div class="singlethumb"> 
+          <img src="https://cdn2.wpbeginner.com/wp-content/uploads/2010/01/customcontentrss-180x180.gif" title="How to Create Custom RSS Feeds in WordPress" alt="How to Create Custom RSS Feeds in WordPress" class="attachment-singlethumbnail size-singlethumbnail wp-post-image"> 
+         </div> 
+        </div>
+        <div class="entry-content" itemprop="text">
+         <p>WordPress comes with built-in default <a href="https://www.wpbeginner.com/beginners-guide/what-is-rss-how-to-use-rss-in-wordpress/" title="What is RSS? How to Use RSS in WordPress? ">RSS feeds</a>. You can tweak the default feeds by <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-content-and-completely-manipulate-your-wordpress-rss-feeds/" title="How to Add Content and Completely Manipulate Your WordPress RSS Feeds">adding custom content to your RSS Feeds</a>, or even <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-post-thumbnail-to-your-wordpress-rss-feeds/" title="How to Add Post Thumbnail to your WordPress RSS Feeds">adding post thumbnail to your RSS Feeds</a>. The default RSS and Atom feeds are enough for most users, but you may wish to create a custom RSS feed for delivering specific type of content. In this article, we will show you how to create custom RSS feeds in WordPress.</p> 
+         <p>Please note that this tutorial is not intended for beginner level WordPress users. If you are a beginner, and still want to try it, then please do so on a <a href="https://www.wpbeginner.com/wp-tutorials/how-to-install-wordpress-on-your-windows-computer-using-wamp/" title="How to Install WordPress on your Windows Computer Using WAMP">local install</a>. </p> 
+         <p>As always, you must create a <a href="https://www.wpbeginner.com/plugins/keep-your-wordpress-content-safe-with-backupbuddy/" title="Keep Your WordPress Content Safe with BackupBuddy">complete backup of your WordPress website</a> before making any major changes to a live website. </p> 
+         <p>Having said that, let’s get started with your first custom RSS feed in WordPress. </p> 
+         <p>Let’s assume you want to create a new RSS feed which displays just the following information:</p> 
+         <ul> 
+          <li>Title</li> 
+          <li>Link</li> 
+          <li>Published Date</li> 
+          <li>Author</li> 
+          <li>Excerpt</li> 
+         </ul> 
+         <p>First thing you need to do is create the new RSS feed in your theme’s <code>functions.php</code> file or in a <a href="https://www.wpbeginner.com/beginners-guide/what-why-and-how-tos-of-creating-a-site-specific-wordpress-plugin/" title="Site Specific Plugin WordPress">site-specific plugin</a>:</p> 
+         <pre class="brush: php; title: ; notranslate" title="">
+
+add_action('init', 'customRSS');
+function customRSS(){
+        add_feed('feedname', 'customRSSFunc');
+}
+
+</pre> 
+         <p>The above code triggers the <code>customRSS</code> function, which adds the feed. The add_feed function has two arguments, feedname, and a callback function. The feedname will make up your new feed url <code>yourdomain.com/feed/feedname</code> and the callback function will be called to actually create the feed. Make a note of the feedname, as you’ll need this later on.</p> 
+         <p>Once you have initialized the feed, you’ll need to create the callback function to produce the required feed, using the following code in your theme’s <code>functions.php</code> file or in a site specific plugin:</p> 
+         <pre class="brush: php; title: ; notranslate" title="">
+function customRSSFunc(){
+        get_template_part('rss', 'feedname');
+}
+</pre> 
+         <p>The code above is using the <code>get_template_part</code> function to link to a separate template file, however you can also place the RSS code directly into the function. By using <code>get_template_part</code>, we can keep the functionality separate to the layout. The <code>get_template_part</code> function has two arguments, slug and name, that will look for a template file with the name in the following format, starting with the file at the top (if it doesn’t find the first, it will move on to the second, and so on):</p> 
+         <ol> 
+          <li><code>wp-content/themes/child/rss-feedname.php</code></li> 
+          <li><code>wp-content/themes/parent/rss-feedname.php</code></li> 
+          <li><code>wp-content/themes/child/rss.php</code></li> 
+          <li><code>wp-content/themes/parent/rss.php</code></li> 
+         </ol> 
+         <p>For the purposes of this tutorial, it is best to set the slug to the type of feed you’re creating (in this case: rss), and the name to the feedname configured earlier on.</p> 
+         <p>Once you’ve told WordPress to look for the feed template, you’ll need to create it. The below code will produce the layout for the feed with the information we listed earlier. Save this file in your theme folder as the slug-name.php template file configured in the <code>get_template_part</code> function.</p> 
+         <pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+/**
+ * Template Name: Custom RSS Template - Feedname
+ */
+$postCount = 5; // The number of posts to show in the feed
+$posts = query_posts('showposts=' . $postCount);
+header('Content-Type: '.feed_content_type('rss-http').'; charset='.get_option('blog_charset'), true);
+echo '&lt;?xml version="1.0" encoding="'.get_option('blog_charset').'"?'.'&gt;';
+?&gt;
+&lt;rss version="2.0"
+        xmlns:content="http://purl.org/rss/1.0/modules/content/"
+        xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:atom="http://www.w3.org/2005/Atom"
+        xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+        xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+        &lt;?php do_action('rss2_ns'); ?&gt;&gt;
+&lt;channel&gt;
+        &lt;title&gt;&lt;?php bloginfo_rss('name'); ?&gt; - Feed&lt;/title&gt;
+        &lt;atom:link href="&lt;?php self_link(); ?&gt;" rel="self" type="application/rss+xml" /&gt;
+        &lt;link&gt;&lt;?php bloginfo_rss('url') ?&gt;&lt;/link&gt;
+        &lt;description&gt;&lt;?php bloginfo_rss('description') ?&gt;&lt;/description&gt;
+        &lt;lastBuildDate&gt;&lt;?php echo mysql2date('D, d M Y H:i:s +0000', get_lastpostmodified('GMT'), false); ?&gt;&lt;/lastBuildDate&gt;
+        &lt;language&gt;&lt;?php echo get_option('rss_language'); ?&gt;&lt;/language&gt;
+        &lt;sy:updatePeriod&gt;&lt;?php echo apply_filters( 'rss_update_period', 'hourly' ); ?&gt;&lt;/sy:updatePeriod&gt;
+        &lt;sy:updateFrequency&gt;&lt;?php echo apply_filters( 'rss_update_frequency', '1' ); ?&gt;&lt;/sy:updateFrequency&gt;
+        &lt;?php do_action('rss2_head'); ?&gt;
+        &lt;?php while(have_posts()) : the_post(); ?&gt;
+                &lt;item&gt;
+                        &lt;title&gt;&lt;?php the_title_rss(); ?&gt;&lt;/title&gt;
+                        &lt;link&gt;&lt;?php the_permalink_rss(); ?&gt;&lt;/link&gt;
+                        &lt;pubDate&gt;&lt;?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?&gt;&lt;/pubDate&gt;
+                        &lt;dc:creator&gt;&lt;?php the_author(); ?&gt;&lt;/dc:creator&gt;
+                        &lt;guid isPermaLink="false"&gt;&lt;?php the_guid(); ?&gt;&lt;/guid&gt;
+                        &lt;description&gt;&lt;![CDATA[&lt;?php the_excerpt_rss() ?&gt;]]&gt;&lt;/description&gt;
+                        &lt;content:encoded&gt;&lt;![CDATA[&lt;?php the_excerpt_rss() ?&gt;]]&gt;&lt;/content:encoded&gt;
+                        &lt;?php rss_enclosure(); ?&gt;
+                        &lt;?php do_action('rss2_item'); ?&gt;
+                &lt;/item&gt;
+        &lt;?php endwhile; ?&gt;
+&lt;/channel&gt;
+&lt;/rss&gt;
+</pre> 
+         <p>This template code will generate an RSS feed following the above layout. The <code>postCount</code> variable allows you to control the number of posts to display in your feed. The template can be amended as required to display whatever information you require (e.g. post images, comments, etc).</p> 
+         <p>The <code>the_excerpt_rss</code> function will display the excerpt of each post, and for posts that do not have excerpts, it will display the first 120 words of the post’s content.</p> 
+         <p>Finally, to display your feed, you’ll first need to flush your WordPress rewrite rules. The easiest way to do this is by logging in to the WordPress admin, and clicking <strong>Settings -&gt; Permalinks</strong>. Once here, just click <em>Save Changes</em>, which will flush the rewrite rules.</p> 
+         <p>You can now access your new feed at <code>yourdomain.com/feed/feedname</code>, where feedname was the feedname you gave in the <code>add_feed</code> function earlier on.</p> 
+         <p>The W3C offers a <a href="http://validator.w3.org/feed/" title="Feed Validator" target="_blank" rel="nofollow">feed validation service</a>, allowing you to validate the resulting feed.</p> 
+         <h4>Troubleshooting</h4> 
+         <ul> 
+          <li><strong>I’m getting a 404 error when trying to view my feed!</strong> 
+           <ul> 
+            <li>Check to see if you are using the correct feedname in your URL. It has to be the one you supplied in the <code>add_feed</code> function</li> 
+            <li>If you have the correct feedname, your rewrite rules may not have flushed correctly. Re-save your permalinks just to be sure.</li> 
+            <li>If you’ve re-saved your permalinks, you can force a rewrite flush via your theme’s functions.php file. Add the following code to the customRSS function we created earlier. Make sure you add the code after the <code>add_feed</code> function.</li> 
+            <pre class="brush: php; title: ; notranslate" title="">
+global $wp_rewrite;
+$wp_rewrite-&gt;flush_rules();
+</pre> 
+            <li>Once you’ve added this, reload your WordPress site. <strong>NOTE: This should be removed immediately after use. Once is enough for the rules to be flushed.</strong></li> 
+           </ul> </li> 
+          <li><strong>My feed isn’t validating!</strong> 
+           <ul> 
+            <li>Using the W3C feed validator, specific details should be given where your feed isn’t validating. Edit the feed template file to resolve these issues</li> 
+           </ul> </li> 
+          <li><strong>I’m getting a &lt;language /&gt; validation error!</strong> 
+           <ul> 
+            <li>This is common where the RSS language has not been configured on your WordPress installation. To do this, you can add the following code to your theme’s <code>functions.php</code> file, to update the language option.</li> 
+            <pre class="brush: php; title: ; notranslate" title="">
+function rssLanguage(){
+        update_option('rss_language', 'en');
+}
+add_action('admin_init', 'rssLanguage');
+</pre> 
+            <li>Edit the second argument of the update_option function to change the language to one you require. Check out the full list of <a href="http://www.rssboard.org/rss-language-codes#table" title="RSS Language Codes" target="_blank" rel="nofollow">RSS Language Codes</a>.</li> 
+            <li>Once the above code has been added to your functions file, load the WordPress admin screen for it to take effect. <strong>After this, the code should be removed from your WordPress functions file. Loading it once is enough to configure the rss_language setting.</strong></li> 
+            <li>This can also be done directly in the database, by looking for the rss_language option in the wp_options table.</li> 
+           </ul> </li> 
+         </ul> 
+         <p>We hope this article helped you create your own custom RSS Feeds in WordPress. Let us know how and why you will be using custom RSS feeds on your WordPress site by leaving a comment below. </p> 
+        </div>
+        <footer class="entry-footer">
+         <div id="horizontalsocial" class="horizontalsocial social-buttons"> 
+          <div class="sharertitle"> <span class="total-count">88</span> <span class="total-text">Shares</span> 
+          </div> 
+          <div class="sharerfacebook sharebutton"> <a href="http://www.facebook.com/sharer.php?u=https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" class="facebook" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false" rel="nofollow noopener noreferrer" target="_blank" title="Share on Facebook"><span class="count">Share</span></a> 
+          </div> 
+          <div class="sharertwitter sharebutton"> <a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fwww.wpbeginner.com&amp;source=tweetbutton&amp;text=How+to+Create+Custom+RSS+Feeds+in+WordPress&amp;url=https%3A%2F%2Fwww.wpbeginner.com%2Fwp-tutorials%2Fhow-to-create-custom-rss-feeds-in-wordpress%2F&amp;via=wpbeginner" class="twitter" data-text="How to Create Custom RSS Feeds in WordPress" data-url="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" data-count="horizontal" data-via="wpbeginner" data-related="syedbalkhi : Founder of WPBeginner" rel="nofollow noopener noreferrer" target="_blank" title="Share on Twitter"><span class="count">Tweet</span></a> 
+          </div> 
+          <div class="sharerlinkedin sharebutton"> <a href="https://www.linkedin.com/cws/share?url=https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" class="linkedin" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" rel="nofollow noopener noreferrer" target="_blank" title="Share on LinkedIn"><span class="count">Share</span></a> 
+          </div> 
+          <div class="sharerpinterest sharebutton"> <a href="https://pinterest.com/pin/create/button/?url=https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" class="pinterest" data-size="medium" data-href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/" rel="nofollow" target="_blank" title="Share on Pinterest"><span class="count">Pin</span></a> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+         <div class="singlerelated"> 
+          <div class="headingbig">
+           Popular on WPBeginner <span class="headingorange">Right Now!</span>
+          </div> 
+          <div class="relatedentry"> 
+           <ul> 
+            <li class="odd"> <a href="https://www.wpbeginner.com/beginners-guide/checklist-15-things-you-must-do-before-changing-wordpress-themes/" title="Checklist: 15 Things You MUST DO Before Changing WordPress Themes"> <img width="96" height="96" src="https://cdn.wpbeginner.com/wp-content/uploads/2012/01/checklist-96x96.gif" class="relatedthumb wp-post-image" alt="Checklist" title="Checklist: 15 Things You MUST DO Before Changing WordPress Themes"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/checklist-15-things-you-must-do-before-changing-wordpress-themes/" title="Checklist: 15 Things You MUST DO Before Changing WordPress Themes">Checklist: 15 Things You MUST DO Before Changing WordPress Themes</a></p> </li> 
+            <li class="even"> <a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners"> <img width="96" height="96" src="https://cdn2.wpbeginner.com/wp-content/uploads/2010/04/googleanalyticsthumb-96x96.jpg" class="relatedthumb wp-post-image" alt="Google Analytics in WordPress" title="How to Install Google Analytics in WordPress for Beginners"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" title="How to Install Google Analytics in WordPress for Beginners">How to Install Google Analytics in WordPress for Beginners</a></p> </li> 
+            <li class="odd"> <a href="https://www.wpbeginner.com/wp-tutorials/step-by-step-guide-how-to-start-a-podcast-with-wordpress/" title="How to Start Your Own Podcast (Step by Step)"> <img width="96" height="96" src="https://cdn.wpbeginner.com/wp-content/uploads/2018/10/wppodcast-96x96.png" class="relatedthumb wp-post-image" alt="How to Start Your Own Podcast (Step by Step)" title="How to Start Your Own Podcast (Step by Step)"></a> <p class="title"><a href="https://www.wpbeginner.com/wp-tutorials/step-by-step-guide-how-to-start-a-podcast-with-wordpress/" title="How to Start Your Own Podcast (Step by Step)">How to Start Your Own Podcast (Step by Step)</a></p> </li> 
+            <li class="even"> <a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" title="Revealed: Why Building an Email List is so Important Today (6 Reasons)"> <img width="96" height="96" src="https://cdn2.wpbeginner.com/wp-content/uploads/2018/12/emaillistbuilding-96x96.png" class="relatedthumb wp-post-image" alt="Revealed: Why Building an Email List is so Important Today (6 Reasons)" title="Revealed: Why Building an Email List is so Important Today (6 Reasons)"></a> <p class="title"><a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" title="Revealed: Why Building an Email List is so Important Today (6 Reasons)">Revealed: Why Building an Email List is so Important Today (6 Reasons)</a></p> </li> 
+           </ul> 
+          </div> 
+         </div> 
+         <div class="clear"></div>
+        </footer>
+        <section class="author-box" itemprop="author" itemscope itemtype="https://schema.org/Person">
+         <img alt="" src="https://secure.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=70&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/454074f6fb9ff4e95356fd16afad2aef?s=140&amp;d=mm&amp;r=g 2x" class="avatar avatar-70 photo" height="70" width="70">
+         <h4 class="author-box-title"><a href="https://www.wpbeginner.com/author/wpbeginner/" class="aboutauthor" rel="author">About the Editorial Staff</a></h4>
+         <div class="author-box-content" itemprop="description">
+          <p>Editorial Staff at WPBeginner is a team of WordPress experts led by Syed Balkhi. Trusted by over 1.3 million readers worldwide.</p> 
+         </div>
+        </section> 
+       </article>
+      </div> <a href="#" title="Download the Ultimate WordPress Toolkit" class="manual-optin-trigger wptoolkit" data-optin-slug="faamjcr6mcotuufr"> <img src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/ultimatewptoolkit.jpg" alt="The Ultimate WordPress Toolkit"> </a> 
+      <div class="content-block"> 
+       <div class="clear"></div>
+       <div class="entry-comments" id="comments">
+        <h3 class="titlecomments">58 Comments</h3><a href="#respond" class="leavereplybutton">Leave a Reply</a>
+        <ol class="comment-list"> 
+         <li class="comment even thread-even depth-1" id="comment-440267"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/b1e51c144bf089c898840a6ba72e68bf?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b1e51c144bf089c898840a6ba72e68bf?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">MOOSA</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-440267">Feb 18, 2018 at 2:32 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>How can I use “wp_get_shortlink()” Instead of “the_permalink_rss()”</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-440267" onclick="return addComment.moveForm( &quot;comment-440267&quot;, &quot;440267&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to MOOSA">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-405460"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/37bdca0e2ba3d93f3b3c488a8a0864d8?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/37bdca0e2ba3d93f3b3c488a8a0864d8?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">John Snyder</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-405460">Oct 6, 2017 at 4:52 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I need to create an XML feed for a specific page on my WordPress website. Here is the page will I have to edit my functions.php file or is there an easier way?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-405460" onclick="return addComment.moveForm( &quot;comment-405460&quot;, &quot;405460&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to John Snyder">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-401796"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/f7d5f3e616d4de3b81a2776262b6db29?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/f7d5f3e616d4de3b81a2776262b6db29?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Alok Shrestha</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-401796">Sep 19, 2017 at 4:44 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>This article is very helpful but I got some issue.</p> 
+            <p>I did exactly like in your code. But it gives me an error as<br> This page contains the following errors:</p> 
+            <p>error on line 1 at column 7: XML declaration allowed only at the start of the document<br> Below is a rendering of the page up to the first error.</p> 
+            <p>Could you please help me out what could possibly go wrong here?<br> This is very important for me.</p> 
+            <p>Thank you.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-401796" onclick="return addComment.moveForm( &quot;comment-401796&quot;, &quot;401796&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Alok Shrestha">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-409223"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/585f6573581ee0344bbd0b7670b72174?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/585f6573581ee0344bbd0b7670b72174?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Nathan</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-409223">Oct 23, 2017 at 6:57 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>I got the same error. Did you figure out the fix?</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-409223" onclick="return addComment.moveForm( &quot;comment-409223&quot;, &quot;409223&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Nathan">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment even depth-3" id="comment-432774"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/5e68c1a15d5fa291930a02e9699b9360?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/5e68c1a15d5fa291930a02e9699b9360?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Rich</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-432774">Jan 24, 2018 at 9:47 am</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>Use ob_clean(); after php tag</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-432774" onclick="return addComment.moveForm( &quot;comment-432774&quot;, &quot;432774&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Rich">Reply</a> 
+               </div> 
+              </article> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-372548"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a31bc637d3d8b79b51a1f2e609692381?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a31bc637d3d8b79b51a1f2e609692381?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Guillermo</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-372548">Apr 6, 2017 at 1:06 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, is it possible to change de order of the posts in my feeds without creating a new custom feed? I want to use the current feed files but just want to change the displayed order of theme. Using PHP queries as an example, changing order from DESC to RAND()</p> 
+            <p>I will appreciate you help. Thanks.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-372548" onclick="return addComment.moveForm( &quot;comment-372548&quot;, &quot;372548&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Guillermo">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-372296"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/9179069e99c494df31cb46be13c9a93a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/9179069e99c494df31cb46be13c9a93a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jeremy</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-372296">Apr 4, 2017 at 1:58 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Great post! I definitely fall under the rookie status. Many feed readers/aggregators don’t seems to like the /feed/ URL structure, even through the xml returned validates. Is there a way to append the url to end with rss.xml?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-372296" onclick="return addComment.moveForm( &quot;comment-372296&quot;, &quot;372296&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jeremy">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-406718"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/51e08a93aabd411c33e3f0daf4082610?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/51e08a93aabd411c33e3f0daf4082610?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Dave</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-406718">Oct 13, 2017 at 12:57 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Did you get this to work with .xml at the end?</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-406718" onclick="return addComment.moveForm( &quot;comment-406718&quot;, &quot;406718&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Dave">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-368316"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/83a693f36607355e2cf0ca5b243ff10a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/83a693f36607355e2cf0ca5b243ff10a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">JDURAN</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-368316">Mar 12, 2017 at 4:42 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Sorry to say, however, implementing the codes for custom rss has effectively wiped out my entire blog. Having to do a restore and it is taking a long time to get my blog back up. Any advise?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-368316" onclick="return addComment.moveForm( &quot;comment-368316&quot;, &quot;368316&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to JDURAN">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-373961"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/08629d85965fbd1e4cf8e9c098cb07a3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/08629d85965fbd1e4cf8e9c098cb07a3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Mark</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-373961">Apr 13, 2017 at 9:03 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>You need to connect to your site via FTP or your hosting’s file browser in cPanel, and simply remove what you added. If you added the code as a custom plugin, then just rename the plugin folder. If you added the code in functions.php, edit the file and remove the code. Don’t forget to backup the file before editing. Hope this helps for the next time.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-373961" onclick="return addComment.moveForm( &quot;comment-373961&quot;, &quot;373961&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Mark">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-366729"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/dc23cbdee7ae4ae3739e5d3b3c2019f2?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/dc23cbdee7ae4ae3739e5d3b3c2019f2?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">jim</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-366729">Mar 3, 2017 at 11:57 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Fantastic! This works as advertised!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-366729" onclick="return addComment.moveForm( &quot;comment-366729&quot;, &quot;366729&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to jim">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-366081"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/abdcddbf07907a78c09209c26a05a86a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/abdcddbf07907a78c09209c26a05a86a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">DrLightman</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-366081">Feb 27, 2017 at 11:56 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Never mind, it does. I had a bug with YOAST SEO that with the /category/ prefix removal. I have warned them of it I hope they will fix it.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-366081" onclick="return addComment.moveForm( &quot;comment-366081&quot;, &quot;366081&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to DrLightman">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-366062"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/abdcddbf07907a78c09209c26a05a86a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/abdcddbf07907a78c09209c26a05a86a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">DrLightman</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-366062">Feb 27, 2017 at 6:24 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello, thank you for the article, but it seems this will only work for the main site feed, not for the specific catgories feeds:</p> 
+            <p>mysite.com/category/mycat/feed/feedname/</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-366062" onclick="return addComment.moveForm( &quot;comment-366062&quot;, &quot;366062&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to DrLightman">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-361987"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/62499dd880b01b03662cf197d210c1ac?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/62499dd880b01b03662cf197d210c1ac?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Manuel</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-361987">Feb 4, 2017 at 11:17 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Doesn’t work anymore.<br> I got a 404 error, so I activated debug mode. Debug mode says “Notice: The Called Constructor Method For WP_Widget Is Deprecated Since Version 4.3.0! Use __construct()”</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-361987" onclick="return addComment.moveForm( &quot;comment-361987&quot;, &quot;361987&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Manuel">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment even depth-2" id="comment-361989"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/62499dd880b01b03662cf197d210c1ac?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/62499dd880b01b03662cf197d210c1ac?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Manuel</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-361989">Feb 4, 2017 at 11:24 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Ok, I think the problem was elsewhere and this notice is from a different plugin.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-361989" onclick="return addComment.moveForm( &quot;comment-361989&quot;, &quot;361989&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Manuel">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-347574"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/91531166f629c5678b5d18cc3f791f1d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/91531166f629c5678b5d18cc3f791f1d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">git</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-347574">Nov 12, 2016 at 2:21 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>unfortunately this is restricted in its usefulness. inserting screenshots and sample pages would be very helpful, particularly for amateurs/rookies like me.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-347574" onclick="return addComment.moveForm( &quot;comment-347574&quot;, &quot;347574&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to git">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-343730"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/e1220783a12a86f69e807eb01c2d8f18?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/e1220783a12a86f69e807eb01c2d8f18?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Tiffany</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-343730">Oct 14, 2016 at 2:43 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Great article. Any way to add the featured image for the post to the feed?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-343730" onclick="return addComment.moveForm( &quot;comment-343730&quot;, &quot;343730&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Tiffany">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-343985"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-343985">Oct 16, 2016 at 4:07 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Please see our guide on <a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-post-thumbnail-to-your-wordpress-rss-feeds/" title="How to Add Post Thumbnail to your WordPress RSS Feeds">how to add featured image to your WordPress RSS feed</a>.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-343985" onclick="return addComment.moveForm( &quot;comment-343985&quot;, &quot;343985&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-341754"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/eef202d2e8d499b1fab36ca5664313a9?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/eef202d2e8d499b1fab36ca5664313a9?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">CT</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-341754">Sep 28, 2016 at 3:12 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Please see below screenshots – what determines the “…” or “[…]” or “Read More -&gt;” etc etc in feeds?</p> 
+            <p>I’m using the default /feed in 2 different WP sites &amp; these 2 screenshots obviously are showing something different at the end of their excerpts. Thanks!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-341754" onclick="return addComment.moveForm( &quot;comment-341754&quot;, &quot;341754&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to CT">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-341593"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/eef202d2e8d499b1fab36ca5664313a9?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/eef202d2e8d499b1fab36ca5664313a9?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">CT</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-341593">Sep 27, 2016 at 6:00 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Apologizes but that code did not come through clear lol. Lets try that again. Go here to see the exact, raw code I’m looking to remove:</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-341593" onclick="return addComment.moveForm( &quot;comment-341593&quot;, &quot;341593&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to CT">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment even depth-2" id="comment-341604"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-341604">Sep 27, 2016 at 7:48 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>This code is added by Yoast SEO plugin to RSS feeds. You can turn it off by visting <strong>SEO » Advanced</strong> page.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-341604" onclick="return addComment.moveForm( &quot;comment-341604&quot;, &quot;341604&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-334958"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/3a2e2fba050f3ceb6a6526a0025b2228?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/3a2e2fba050f3ceb6a6526a0025b2228?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Stef</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-334958">Aug 1, 2016 at 2:42 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hey, I want to exclude certain post_formats from my custom rss feed. Is that possible and if so, how?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-334958" onclick="return addComment.moveForm( &quot;comment-334958&quot;, &quot;334958&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Stef">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-333437"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/f2971bb8d7e054c53420021c831f2378?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/f2971bb8d7e054c53420021c831f2378?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Neha</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-333437">Jul 20, 2016 at 1:14 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>When I try to view the feed I got 404 Page not found error. I am trying to add code:</p> 
+            <p>global $wp_rewrite;<br> $wp_rewrite-&gt;flush_rules();</p> 
+            <p>then I also got same error. Could this be why?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-333437" onclick="return addComment.moveForm( &quot;comment-333437&quot;, &quot;333437&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Neha">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-327760"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/f0195134f52eaae7e086cfdb9dfee667?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/f0195134f52eaae7e086cfdb9dfee667?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jordan</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-327760">May 30, 2016 at 8:52 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>How do you add multiple feeds? Array is not working. Thanks.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-327760" onclick="return addComment.moveForm( &quot;comment-327760&quot;, &quot;327760&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jordan">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-327382"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/6bbb627cf84043c292b1caa924841fc8?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/6bbb627cf84043c292b1caa924841fc8?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jon Harvey</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-327382">May 26, 2016 at 10:31 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>How would you add multiple custom feeds? Couldn’t get an array to work.<br> Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-327382" onclick="return addComment.moveForm( &quot;comment-327382&quot;, &quot;327382&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jon Harvey">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-327892"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/6bbb627cf84043c292b1caa924841fc8?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/6bbb627cf84043c292b1caa924841fc8?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jon Harvey</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-327892">May 31, 2016 at 6:32 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Got it to work neatly thanks to birgire at Stack exchange:</p> 
+              <p>add_action( ‘init’, ‘custom_feeds’ );</p> 
+              <p>function custom_feeds()<br> {<br> foreach( array( ‘feedname1’, ‘feedname2’ ) as $name )<br> {<br> add_feed( $name,<br> function() use ( $name )<br> {<br> get_template_part( ‘rss’, $name );<br> }<br> );<br> }<br> }</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-327892" onclick="return addComment.moveForm( &quot;comment-327892&quot;, &quot;327892&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jon Harvey">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-325038"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/0ebbbbbf689d8b2acac20836b2fba29e?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/0ebbbbbf689d8b2acac20836b2fba29e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Neal Pope</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-325038">May 3, 2016 at 2:41 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>The “follow” button shows up at the bottom right corner when viewing posts on a personal computer, but does not appear when viewing on a mobile devise (smartphone) (unless I’m just missing it.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-325038" onclick="return addComment.moveForm( &quot;comment-325038&quot;, &quot;325038&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Neal Pope">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-315932"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/4c2a5fc32427473af59bc10382acb630?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/4c2a5fc32427473af59bc10382acb630?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Limbani</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-315932">Mar 1, 2016 at 12:45 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks for sharing it’s work perfectly…</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-315932" onclick="return addComment.moveForm( &quot;comment-315932&quot;, &quot;315932&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Limbani">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-314465"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/eb9562ffa8265cc1d50822f6187ce5ef?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/eb9562ffa8265cc1d50822f6187ce5ef?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jeff</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-314465">Feb 19, 2016 at 10:18 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Sorry, but everything about this is misleading. this is not “beginner” work. and it is not worded for beginners. This is totally irresponsible and can cause major issues to people’s websites.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-314465" onclick="return addComment.moveForm( &quot;comment-314465&quot;, &quot;314465&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jeff">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-314496"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-314496">Feb 19, 2016 at 8:47 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>We have updated the article to add a note about this.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-314496" onclick="return addComment.moveForm( &quot;comment-314496&quot;, &quot;314496&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-301125"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/7cab168cd7258ca25351050b2f22a01e?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/7cab168cd7258ca25351050b2f22a01e?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Christine</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-301125">Oct 28, 2015 at 2:06 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I got this working (kind of). The feed page exists, but will not validate and says there is an error on line 1. </p> 
+            <p>I copied the code exactly from this page and haven’t changed anything. What could be going wrong here?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-301125" onclick="return addComment.moveForm( &quot;comment-301125&quot;, &quot;301125&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Christine">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-311697"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/b03cc583e4b6bfaee9855d2e22c04ce3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/b03cc583e4b6bfaee9855d2e22c04ce3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Flávia</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-311697">Jan 21, 2016 at 5:19 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>W3 will not validate mine as well and says there is an error on line 17.</p> 
+              <p>And I am getting the 404 page!</p> 
+              <p>What should I do?</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-311697" onclick="return addComment.moveForm( &quot;comment-311697&quot;, &quot;311697&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Flávia">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-285733"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/399204149dee556f21ab5a08722806d0?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/399204149dee556f21ab5a08722806d0?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Eugene Asiamah</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-285733">Jul 16, 2015 at 5:04 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>Please i need help in configuring my rss to show all my post content on not just an excerpt of it.</p> 
+            <p>Thank you.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-285733" onclick="return addComment.moveForm( &quot;comment-285733&quot;, &quot;285733&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Eugene Asiamah">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-281854"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/8296d57e1e4a569f05e01087e57d9234?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/8296d57e1e4a569f05e01087e57d9234?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Georgi</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-281854">Jul 3, 2015 at 8:10 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,<br> I need to show only date without time for pubDate. When I use </p> 
+            <p>It’s doesn’t work for firefox,IE.<br> Can you help me?</p> 
+            <p>Thank you in advance!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-281854" onclick="return addComment.moveForm( &quot;comment-281854&quot;, &quot;281854&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Georgi">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-261987"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/534b9953fdac09210efd01ddf88de76d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/534b9953fdac09210efd01ddf88de76d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jan-Philipp</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-261987">Apr 12, 2015 at 4:49 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi.</p> 
+            <p>I would like to change the update pattern of the feed with</p> 
+            <p>sy:updatePeriod<br> echo apply_filters( ‘rss_update_period’, ‘weekly’ );<br> /sy:updatePeriod</p> 
+            <p>sy:updateFrequency<br> echo apply_filters( ‘rss_update_frequency’, ‘1’ );<br> /sy:updateFrequency&gt;</p> 
+            <p>sy:updateBase<br> 2015-03-29T01:00:00+09:00<br> /sy:updateBase</p> 
+            <p>But whatever I tried, it automatically adds a new post when I publish it and does not wait till Sunday ( as defined in the code above) to add it to the RSS.</p> 
+            <p>Do you have any suggestions? Do I maybe need to find a solution within the WP Query?</p> 
+            <p>Your help would be much appriciated.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-261987" onclick="return addComment.moveForm( &quot;comment-261987&quot;, &quot;261987&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jan-Philipp">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-odd thread-alt depth-1" id="comment-261986"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/534b9953fdac09210efd01ddf88de76d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/534b9953fdac09210efd01ddf88de76d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Jan-Philipp</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-261986">Apr 12, 2015 at 4:40 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi.</p> 
+            <p>I would like to change the update pattern of the feed with </p> 
+            <p> 2015-03-29T01:00:00+09:00</p> 
+            <p>But whatever I tried, it automatically adds a new post when I publish it and does not wait till Sunday ( as defined in the code above) to add it to the RSS.</p> 
+            <p>Do you have any suggestions? Do I maybe need to find a solution within the WP Query?</p> 
+            <p>Your help would be much appriciated.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-261986" onclick="return addComment.moveForm( &quot;comment-261986&quot;, &quot;261986&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Jan-Philipp">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-259142"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/9bb822f2ad039db4176abd5315954076?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/9bb822f2ad039db4176abd5315954076?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Issabellla</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-259142">Mar 27, 2015 at 12:24 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi.I try to do as your mention but I’ve seen my site cannot access to the feed page.This is My site I try to use /feed and a lot of word which is mention in wordpress.com or wordpress.org even in the google.Please help me.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-259142" onclick="return addComment.moveForm( &quot;comment-259142&quot;, &quot;259142&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Issabellla">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-259499"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-259499">Mar 29, 2015 at 2:40 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Your site’s feed looks fine to us.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-259499" onclick="return addComment.moveForm( &quot;comment-259499&quot;, &quot;259499&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-255141"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/668878a55aecc89e6568a937576ef171?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/668878a55aecc89e6568a937576ef171?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">xuamox</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-255141">Jul 8, 2014 at 7:30 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>What determines that the feed will be displayed at feed/feedname? I have tried to follow the tutorial, but not luck at all. The feed is not publishing at feed/feedname.php</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-255141" onclick="return addComment.moveForm( &quot;comment-255141&quot;, &quot;255141&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to xuamox">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-240068"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/21b464b0195fe8602112ea09b95e9a0a?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/21b464b0195fe8602112ea09b95e9a0a?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Wouter Bertels</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-240068">May 8, 2014 at 5:09 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Following these exact steps I got this error:</p> 
+            <p>Fatal error: Cannot redeclare get_bloginfo_rss() (previously<br> declared in<br> /home/public_html/wp-includes/feed.php:25)<br> in /home/public_html/wp-content/themes/xxx/rss-name.php on line 39</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-240068" onclick="return addComment.moveForm( &quot;comment-240068&quot;, &quot;240068&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Wouter Bertels">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-239916"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/2913c89f70c9b96e02ab8712587ec9ca?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/2913c89f70c9b96e02ab8712587ec9ca?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">George</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-239916">Apr 29, 2014 at 2:34 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, </p> 
+            <p>My feed is OK when this code is added:</p> 
+            <p> global $wp_rewrite;<br> $wp_rewrite-&gt;flush_rules();</p> 
+            <p>and returns a 404 when it is removed.<br> I only remove it as per your instructions, which is to remove it after reloading wordpress. </p> 
+            <p>At this moment I am testing it on my local server. Could this be why?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-239916" onclick="return addComment.moveForm( &quot;comment-239916&quot;, &quot;239916&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to George">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-254266"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/658765923fdb76d681fd35c6fa5e5bf6?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/658765923fdb76d681fd35c6fa5e5bf6?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">ybmgryzzz</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-254266">Apr 29, 2014 at 8:04 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi there. Thanks for this post! Really appreciated. Worked well at first go! <img src="https://cdn2.wpbeginner.com/wp-content/plugins/classic-smilies/img/icon_smile.gif" alt=":)" class="wp-smiley"></p> 
+            <p>I would also like some assistance as Brian below. For the full text in the RSS instead of the post excerpt.</p> 
+            <p>Thanks in advance.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-254266" onclick="return addComment.moveForm( &quot;comment-254266&quot;, &quot;254266&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to ybmgryzzz">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-233503"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/742ac6f7a2895474240ccc039d91ea7c?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/742ac6f7a2895474240ccc039d91ea7c?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Brian</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-233503">Feb 24, 2014 at 2:37 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>I am trying to add a second RSS feed that is full text (my first RSS feed is summary). If I wanted this custom RSS feed to be full text instead of summary excerpt, what would I change?</p> 
+            <p>Thanks so much!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-233503" onclick="return addComment.moveForm( &quot;comment-233503&quot;, &quot;233503&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Brian">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-233215"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/431321723f4de696d63c165da86f4279?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/431321723f4de696d63c165da86f4279?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Steve Marks</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-233215">Feb 19, 2014 at 2:55 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thanks for this. Just what I was looking for!</p> 
+            <p>I had an issue when I used add_feed(). I could view the RSS feed in the browser absolutely fine, but it would return a 404 when I entered the URL into a third party application (ie. MailChimp, W3C feed validator etc). I had tried flushing the permalinks etc.</p> 
+            <p>The only way I could get round the issue was to create a new blank page and select the template as the one you’ve outlined in this article.</p> 
+            <p>Not sure why it didn’t work, but hopefully this offers a viable solution for others in this situation.</p> 
+            <p>Thanks again!</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-233215" onclick="return addComment.moveForm( &quot;comment-233215&quot;, &quot;233215&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Steve Marks">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-233041"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/20456305593ac2dcbd350ea4ebedc11d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/20456305593ac2dcbd350ea4ebedc11d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Josh McClanahan</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-233041">Feb 16, 2014 at 1:20 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Your article is right on the path of what I was looking for. One question I have (as a noob to RSS), how can I add a link to an RSS feed?<br> The site that I need this for is a church and would like to have a custom feed that would make it easier for our members to be alerted to newly posted sermon posts (that have mp3 download links).<br> Currently, the feed shows the text for the links that I have created on the posts for the sermons. But it only acts as text. Any help would be appreciated.</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-233041" onclick="return addComment.moveForm( &quot;comment-233041&quot;, &quot;233041&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Josh McClanahan">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-233250"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/20456305593ac2dcbd350ea4ebedc11d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/20456305593ac2dcbd350ea4ebedc11d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Josh McClanahan</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-233250">Feb 19, 2014 at 5:57 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Just noticed that I didn’t ask my question correctly.<br> What I was trying to ask was, how can I display a link in the RSS Feed? The links that are in the content of my posts are broken in the feed.<br> Thanks for your help and this article.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-233250" onclick="return addComment.moveForm( &quot;comment-233250&quot;, &quot;233250&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Josh McClanahan">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+           <li class="comment even depth-2" id="comment-233789"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/20456305593ac2dcbd350ea4ebedc11d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/20456305593ac2dcbd350ea4ebedc11d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Josh McClanahan</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-233789">Mar 1, 2014 at 9:32 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>Still curious, if anyone knows why my links would be broken and only show as plain text in a feed?<br> To see what I mean checkout: <a href="http://amfmchurch.com/feed" rel="nofollow">http://amfmchurch.com/feed</a><br> You will see “Download” in plain text. I would like to make it so that people can click the anchor link and download the mp3. This works find on the actual site.</p> 
+              <p>Thanks for any help.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-233789" onclick="return addComment.moveForm( &quot;comment-233789&quot;, &quot;233789&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Josh McClanahan">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-230195"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/1998755c278133086d4cb2bcb2fdbc00?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/1998755c278133086d4cb2bcb2fdbc00?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Neil</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-230195">Jan 11, 2014 at 7:08 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hi, I have the default rss feed.. but I would like to be able to either reduce the size of the images from what is displayed in the post…. (to a maximujm width of 265px) OR to just use the post thumbnail in the rss.</p> 
+            <p>Is either of the above possible?</p> 
+            <p>The reason I am looking to do this is that my RSS feeds an APP and the APP will only display images up to 265px in width (before horizontal scrolling) and 265px is very limiting for online/pc blog posts…</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-230195" onclick="return addComment.moveForm( &quot;comment-230195&quot;, &quot;230195&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Neil">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-192875"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/0857417af2c27a8212f32345a01ae8b3?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/0857417af2c27a8212f32345a01ae8b3?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Cathy Finn-Derecki</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-192875">Dec 10, 2013 at 6:12 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Thank you for this! I am making a custom RSS location part of a plugin I’m developing. As a result, I have included the text for the custom RSS in the function, not in a theme template. It’s working. However, it does not seem to work when I want to restrict the feed to a category. It gives all posts regardless. Any thoughts?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-192875" onclick="return addComment.moveForm( &quot;comment-192875&quot;, &quot;192875&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Cathy Finn-Derecki">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-204584"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-204584">Dec 13, 2013 at 7:58 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>try changing </p> 
+              <pre class="brush: php; title: ; notranslate" title="">$posts = query_posts('showposts=' . $postCount);
+</pre> 
+              <p>To:</p> 
+              <pre class="brush: php; title: ; notranslate" title="">$posts = query_posts('showposts=' . $postCount.'&amp;category_name=staff');</pre> 
+              <p>Replace category_name with your category name.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-204584" onclick="return addComment.moveForm( &quot;comment-204584&quot;, &quot;204584&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> 
+            <ul class="children"> 
+             <li class="comment even depth-3" id="comment-406693"> 
+              <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+               <header class="comment-header"> 
+                <div class="comment-author vcard"> 
+                 <img alt="" src="https://secure.gravatar.com/avatar/62f669c4867d074601bf3455e7ce3f79?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/62f669c4867d074601bf3455e7ce3f79?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Francisco Espinoza</cite> <span class="says">says:</span> 
+                </div><!-- end .comment-author --> 
+                <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-406693">Oct 12, 2017 at 5:16 pm</a> 
+                </div><!-- end .comment-meta --> 
+               </header> 
+               <div class="comment-content"> 
+                <p>Hi Guys. How can I use this to exclude three categories from my new custom feed? What do you suggest?</p> 
+               </div><!-- end .comment-content --> 
+               <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-406693" onclick="return addComment.moveForm( &quot;comment-406693&quot;, &quot;406693&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Francisco Espinoza">Reply</a> 
+               </div> 
+              </article> </li><!-- #comment-## --> 
+            </ul><!-- .children --> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment odd alt thread-even depth-1" id="comment-188074"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/eff05800167935486ddc60a22723044d?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/eff05800167935486ddc60a22723044d?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Alexis</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-188074">Nov 23, 2013 at 3:57 pm</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>Thank you, these explanations are really useful. I just used it to customize my feed so I could put an image in mailchimp’s “RSS to email” feature.</p> 
+            <p>Thank you very much !</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-188074" onclick="return addComment.moveForm( &quot;comment-188074&quot;, &quot;188074&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Alexis">Reply</a> 
+           </div> 
+          </article> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-187647"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/c9d77482cffd1b90bb6e8bb99b16006f?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/c9d77482cffd1b90bb6e8bb99b16006f?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">the Off</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-187647">Nov 14, 2013 at 3:52 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>Till yesterday afternoon, my WordPress (version 3.6.1) blog <a href="http://theoff.info/wordpress/" rel="nofollow">http://theoff.info/wordpress/</a> had no problem. And I successfully added new plugins.</p> 
+            <p>In the night, problems started: (1) I could not login. (2) the RSS feed <a href="http://theoff.info/wordpress/?feed=rss2" rel="nofollow">http://theoff.info/wordpress/?feed=rss2</a> got corrupted. The feed failed validation.</p> 
+            <p>I searched the Web and WordPress Support Forum for solutions. I tried the following:<br> (i) successfully reset the password<br> (ii) deleted new plugins from ftp<br> (iii) renamed Theme folder by adding “-old” and plugin folder by adding “-hold” from ftp</p> 
+            <p>Then I could login and up grade to 3.7.1 version and make changes to the blog.</p> 
+            <p>However, login is still an issue. Every time I am following method mentioned in step (iii) to login.</p> 
+            <p>RSS still does not validate.</p> 
+            <p>Could you help in resolving both login and RSS feed problems?</p> 
+            <p>Note: My webhost does not offer technical help. I am not an IT professional i.e. I have very little technical knowledge.</p> 
+            <p>Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-187647" onclick="return addComment.moveForm( &quot;comment-187647&quot;, &quot;187647&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to the Off">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment byuser comment-author-noumaancomment odd alt depth-2" id="comment-187898"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/43e0d23e5baa473823cafb5b8f906f60?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">WPBeginner Support</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-187898">Nov 19, 2013 at 11:29 pm</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>It is difficult to figure out. Here is one thing you can try. </p> 
+              <p>1. Using FTP download your plugins to your computer for backup and then delete your plugins directory.<br> 2. Create a new plugins directory.<br> 3. Install and all your plugins one by one by downloading fresh copy of the plugin from the source. After you activate each plugin log out and and log back in to see if the problem occurs again. You will probably find a plugin that may be causing the problem or you wont. This could mean that a plugin file on your site may have been compromised. </p> 
+              <p>If this process does not help you, repeat this process process with your themes as well. If you have made a lot of changes to your existing themes then you might want to back it up on your computer by downloading theme folder through FTP. Then delete themes folder from your webserver and create a new themes directory in wp-content folder on your server. From WordPress admin area download and install a fresh copy of default twenty thirteen theme.</p> 
+              <p>Let us know what happens when you do all that. Make Sure to Backup your Site first.</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-187898" onclick="return addComment.moveForm( &quot;comment-187898&quot;, &quot;187898&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to WPBeginner Support">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-even depth-1" id="comment-186796"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/2b6badc38f3506d6dd981b9c1710a479?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/2b6badc38f3506d6dd981b9c1710a479?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Bertrand</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-186796">Oct 26, 2013 at 5:28 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Hello,</p> 
+            <p>When I try to open the new feed, I get an error message:</p> 
+            <p>Fatal error: Call to undefined function query_posts() in /xxxx/wp-content/themes/xxx/rss-feedname.php on line 6</p> 
+            <p>I tried on localhost and web hosting, it is the same…</p> 
+            <p>How can I fix it?</p> 
+            <p>Thanks</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-186796" onclick="return addComment.moveForm( &quot;comment-186796&quot;, &quot;186796&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Bertrand">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-186906"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/2b6badc38f3506d6dd981b9c1710a479?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/2b6badc38f3506d6dd981b9c1710a479?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">Bertrand</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-186906">Oct 28, 2013 at 11:51 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>My fault: <a href="http://wordpress.org/support/topic/error-message-call-to-undefined-function-query_posts?replies=5" rel="nofollow">http://wordpress.org/support/topic/error-message-call-to-undefined-function-query_posts?replies=5</a></p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-186906" onclick="return addComment.moveForm( &quot;comment-186906&quot;, &quot;186906&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to Bertrand">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+         <li class="comment even thread-odd thread-alt depth-1" id="comment-185645"> 
+          <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+           <header class="comment-header"> 
+            <div class="comment-author vcard"> 
+             <img alt="" src="https://secure.gravatar.com/avatar/a027baa3dde7d87bd498e5460a364989?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a027baa3dde7d87bd498e5460a364989?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">ADv</cite> <span class="says">says:</span> 
+            </div><!-- end .comment-author --> 
+            <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-185645">Oct 18, 2013 at 8:01 am</a> 
+            </div><!-- end .comment-meta --> 
+           </header> 
+           <div class="comment-content"> 
+            <p>Does the php template need close tag ?&gt; in the end?</p> 
+           </div><!-- end .comment-content --> 
+           <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-185645" onclick="return addComment.moveForm( &quot;comment-185645&quot;, &quot;185645&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to ADv">Reply</a> 
+           </div> 
+          </article> 
+          <ul class="children"> 
+           <li class="comment odd alt depth-2" id="comment-185651"> 
+            <article itemprop="comment" itemscope itemtype="https://schema.org/Comment"> 
+             <header class="comment-header"> 
+              <div class="comment-author vcard"> 
+               <img alt="" src="https://secure.gravatar.com/avatar/a027baa3dde7d87bd498e5460a364989?s=60&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/a027baa3dde7d87bd498e5460a364989?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60"> <cite class="fn">ADv</cite> <span class="says">says:</span> 
+              </div><!-- end .comment-author --> 
+              <div class="comment-meta commentmetadata"> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#comment-185651">Oct 18, 2013 at 9:03 am</a> 
+              </div><!-- end .comment-meta --> 
+             </header> 
+             <div class="comment-content"> 
+              <p>No, it doesn’t. Silly me = )</p> 
+             </div><!-- end .comment-content --> 
+             <div class="reply"> <a rel="nofollow" class="comment-reply-link" href="#comment-185651" onclick="return addComment.moveForm( &quot;comment-185651&quot;, &quot;185651&quot;, &quot;respond&quot;, &quot;16953&quot; )" aria-label="Reply to ADv">Reply</a> 
+             </div> 
+            </article> </li><!-- #comment-## --> 
+          </ul><!-- .children --> </li><!-- #comment-## --> 
+        </ol>
+       </div>
+       <div class="pagination comment-pagination"></div> 
+       <div id="respond" class="comment-respond"> 
+        <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wp-tutorials/how-to-create-custom-rss-feeds-in-wordpress/#respond" style="display:none;">Cancel reply</a></small></h3> 
+        <form action="https://www.wpbeginner.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate> 
+         <p class="commentpolicy">Thanks for choosing to leave a comment. Please keep in mind that all comments are moderated according to our <a href="https://www.wpbeginner.com/comment-policy/" title="WPBeginner Comment Policy">comment policy</a>, and your email address will NOT be published. Please Do NOT use keywords in the name field. Let's have a personal and meaningful conversation.</p>
+         <div class="commentfields-left">
+          <p class="comment-form-author"><input x-autocompletetype="name-full" id="author" name="author" type="text" value="" placeholder="Your Real Name" size="30" tabindex="1" aria-required="true"><label for="author"></label> <span class="required"></span></p><!-- #form-section-author .form-section --> 
+          <p class="comment-form-email"><input x-autocompletetype="email" id="email" name="email" type="text" value="" placeholder="Email Address..." size="30" tabindex="2" aria-required="true"><label for="email"></label> <span class="required"></span></p><!-- #form-section-email .form-section --> 
+         </div><!-- #form-section-url .form-section --> 
+         <p class="comment-form-comment"><textarea autocomplete="nope" id="a91eb07d4d" name="a91eb07d4d" cols="45" rows="8" tabindex="4" aria-required="true"></textarea><textarea id="comment" aria-hidden="true" name="comment" autocomplete="nope" style="padding:0;clip:rect(1px, 1px, 1px, 1px);position:absolute !important;white-space:nowrap;height:1px;width:1px;overflow:hidden;" tabindex="-1"></textarea><script type="text/javascript">document.getElementById("comment").setAttribute( "id", "a8ea27254fb75210269adedc2215e411" );document.getElementById("a91eb07d4d").setAttribute( "id", "comment" );</script></p><!-- #form-section-comment .form-section --><!-- Subscribe to Comments Reloaded version 180225 --><!-- Subscribe to comments Reloaded MP: '/manage-subscriptions/' --><!-- BEGIN: subscribe to comments reloaded -->
+         <p class="comment-form-subscriptions"><label for="subscribe-reloaded"><select name="subscribe-reloaded" id="subscribe-reloaded"> <option value="none" selected>Don't subscribe</option> <option value="yes">All</option> <option value="replies">Replies to my comments</option> </select> Notify me of followup comments via e-mail. You can also <a href="https://www.wpbeginner.com/manage-subscriptions/?srp=16953&amp;srk=73b8227bdd81bbf20bba6554090cd5a7&amp;sra=s&amp;srsrc=f">subscribe</a> without commenting.</label></p><!-- END: subscribe to comments reloaded -->
+         <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit Comment"> <input type="hidden" name="comment_post_ID" value="16953" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"> </p>
+         <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="61357747ea"></p>
+         <p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="150"></p> 
+        </form> 
+       </div><!-- #respond --> 
+      </div>
+     </main>
+     <aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar" itemscope itemtype="https://schema.org/WPSideBar">
+      <!-- WPBeginner Subscribe --> 
+      <div class="wpbsubscribe widget"> 
+       <div class="widgetheading">
+         Over 1,320,000+ Readers 
+        <p>Get fresh content from WPBeginner</p> 
+       </div> 
+       <div class="socialicons"> <a href="https://facebook.com/wpbeginner" class="fbicon" target="_blank" rel="nofollow" title="Join WPBeginner on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="https://twitter.com/wpbeginner" class="twittericon" target="_blank" rel="nofollow" title="Follow WPBeginner on Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://youtube.com/wpbeginner?sub_confirmation=1" class="yticon" target="_blank" rel="nofollow" title="Subscribe to WPBeginner on YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a> <a href="https://www.linkedin.com/company/wpbeginner/" class="linkedinicon" target="_blank" rel="nofollow" title="Join WPBeginner on LinkedIn"><i class="fa fa-linkedin" aria-hidden="true"></i></a> <a href="https://www.pinterest.com/wpbeginner/" class="pinteresticon" target="_blank" rel="nofollow" title="Follow WPBeginner on Pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a> <a href="#" data-optin-slug="mukj2ocfysjzidb5" class="manual-optin-trigger emailicon" title="Join WPBeginner Weekly Email Newsletter"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
+       </div> 
+      </div> <!-- End WPBeginner Subscribe --> 
+      <div class="featuredplugins sidebardeals widget"> 
+       <div class="widgetheading">
+        <span class="headingred">Featured</span> WordPress Plugin
+       </div> 
+       <div class="relatedentry"> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://optinmonster.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="OptinMonster" target="_blank"><img width="96" height="96" src="https://cdn4.wpbeginner.com/wp-content/uploads/2014/10/optinmonsterlogo-96x96.jpg" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="OptinMonster" title="OptinMonster"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://optinmonster.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="OptinMonster" target="_blank">OptinMonster</a>
+          </div> Convert website visitors into email subscribers. <a href="https://optinmonster.com/?utm_source=wpbeginner&amp;utm_medium=link&amp;utm_campaign=products" title="OptinMonster" target="_blank">Learn More »</a> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a href="https://www.wpbeginner.com/start-a-wordpress-blog/" title="How to Start a Blog (Step by Step)" class="startablog"><img src="https://cdn3.wpbeginner.com/wp-content/themes/wpbv5/images/startablog.png" alt="How to Start a Blog"></a> <a href="https://www.wpbeginner.com/blueprint/" title="WPBeginner WordPress Blueprint" class="blueprint"><img src="https://cdn2.wpbeginner.com/wp-content/themes/wpbv5/images/blueprint.jpg" alt="How to Start a Blog"></a> 
+      <div class="clear"></div> <!-- WordPress Pillar Articles --> 
+      <div class="sidebarhelpwith widget"> 
+       <div class="widgetheading">
+         I need help with ... 
+       </div> 
+       <div class="guideicons"> <a href="https://www.wpbeginner.com/start-a-wordpress-blog/" class="guideicon starting">Starting a<br>Blog</a> <a href="https://www.wpbeginner.com/wordpress-performance-speed/" class="guideicon speed">WordPress<br>Performance</a> <a href="https://www.wpbeginner.com/wordpress-security/" class="guideicon security">WordPress<br>Security</a> <a href="https://www.wpbeginner.com/wordpress-seo/" class="guideicon seo">WordPress<br>SEO</a> <a href="https://www.wpbeginner.com/common-wordpress-errors-and-how-to-fix-them/" class="guideicon errors">WordPress<br>Errors</a> <a href="https://www.wpbeginner.com/wp-tutorials/how-to-start-an-online-store/" class="guideicon store">Building an<br>Online Store</a> 
+       </div> 
+       <div class="guidesearch"> 
+        <form method="get" class="searchform search-form" action="https://www.wpbeginner.com/search"> 
+         <input type="text" value="" placeholder="Search WPBeginner..." name="q" class="s search-input" autocomplete="off"> <button class="guide-submit"></button> 
+        </form> 
+       </div> 
+      </div> <!-- WordPress Guides --> 
+      <div class="sidebarwordpressguides widget"> 
+       <div class="widgetheading"> <span class="headingorange">Useful</span> WordPress Guides 
+       </div> 
+       <div id="unslider"> 
+        <ul> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/plugins/7-best-wordpress-backup-plugins-compared-pros-and-cons/" data-category="guides">7 Best WordPress Backup Plugins Compared (Pros and Cons)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-error-establishing-a-database-connection-in-wordpress/" data-category="guides">How to Fix the Error Establishing a Database Connection in WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-you-need-a-cdn-for-your-wordpress-blog-infographic/" data-category="guides">Why You Need a CDN for your WordPress Blog? [Infographic]</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/make-money-online/" data-category="guides">25 Legit Ways to Make Money Online Blogging with WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/self-hosted-wordpress-org-vs-free-wordpress-com-infograph/" data-category="guides">Self Hosted WordPress.org vs. Free WordPress.com [Infograph]</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/free-recording-wordpress-workshop-for-beginners/" data-category="guides">Free Recording: WordPress Workshop for Beginners</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/24-must-have-wordpress-plugins-for-business-websites/" data-category="guides">24 Must Have WordPress Plugins for Business Websites</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-your-blog-from-wordpress-com-to-wordpress-org/" data-category="guides">How to Properly Move Your Blog from WordPress.com to WordPress.org</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/5-best-contact-form-plugins-for-wordpress-compared/" data-category="guides">5 Best Contact Form Plugins for WordPress Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/best-wordpress-popup-plugin/" data-category="guides">Which is the Best WordPress Popup Plugin? (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/best-woocommerce-hosting/" data-category="guides">Best WooCommerce Hosting in 2020 (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-fix-the-internal-server-error-in-wordpress/" data-category="guides">How to Fix the Internal Server Error in WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/how-to-install-wordpress/" data-category="guides">How to Install WordPress - Complete WordPress Installation Tutorial</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-you-should-start-building-your-email-list-right-away/" data-category="guides">Why You Should Start Building an Email List Right Away</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-wordpress-to-a-new-domain-without-losing-seo/" data-category="guides">How to Properly Move WordPress to a New Domain Without Losing SEO</a></li> 
+           <li><a href="https://www.wpbeginner.com/wordpress-hosting/" data-category="guides">How to Choose the Best WordPress Hosting for Your Website</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-blogging-platform/" data-category="guides">How to Choose the Best Blogging Platform (Comparison)</a></li> 
+           <li><a href="https://www.wpbeginner.com/category/wp-tutorials/" data-category="guides">WordPress Tutorials - 200+ Step by Step WordPress Tutorials</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/best-wordpress-ecommerce-plugins-compared/" data-category="guides">5 Best WordPress Ecommerce Plugins Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/plugins/5-best-wordpress-membership-plugins-compared/" data-category="guides">5 Best WordPress Membership Plugins (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/best-email-marketing-services/" data-category="guides">7 Best Email Marketing Services for Small Business (2020)</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-choose-the-best-domain-registrar/" data-category="guides">How to Choose the Best Domain Registrar (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/the-truth-about-shared-wordpress-web-hosting/" data-category="guides">The Truth About Shared WordPress Web Hosting</a></li> 
+           <li><a href="https://www.wpbeginner.com/managed-wordpress-hosting/" data-category="guides">When Do You Really Need Managed WordPress Hosting?</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/best-drag-and-drop-page-builders-for-wordpress/" data-category="guides">5 Best Drag and Drop WordPress Page Builders Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-switch-from-blogger-to-wordpress-without-losing-google-rankings/" data-category="guides">How to Switch from Blogger to WordPress without Losing Google Rankings</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-switch-from-wix-to-wordpress-step-by-step/" data-category="guides">How to Properly Switch From Wix to WordPress (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-from-weebly-to-wordpress/" data-category="guides">How to Properly Move from Weebly to WordPress (Step by Step)</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/best-vps-hosting-compared/" data-category="guides">Do You Really Need a VPS? Best WordPress VPS Hosting Compared</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-properly-move-from-squarespace-to-wordpress/" data-category="guides">How to Properly Move from Squarespace to WordPress</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-register-a-domain-name-simple-tip-to-get-it-for-free/" data-category="guides">How to Register a Domain Name (+ tip to get it for FREE)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/hostgator/" data-category="guides">HostGator Review - An Honest Look at Speed &amp; Uptime (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/siteground/" data-category="guides">SiteGround Reviews from 1032 Users &amp; Our Experts (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/hosting/bluehost/" data-category="guides">Bluehost Review from Real Users + Performance Stats (2020)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-much-does-it-cost-to-build-a-wordpress-website/" data-category="guides">How Much Does It Really Cost to Build a WordPress Website?</a></li> 
+          </ul> </li> 
+         <li> 
+          <ul> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-create-an-email-newsletter/" data-category="guides">How to Create an Email Newsletter the RIGHT WAY (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/showcase/best-crm-software-for-small-businesses-compared/" data-category="guides">7 Best CRM Software for Small Businesses (Compared)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-create-a-free-business-email-address-in-5-minutes-step-by-step/" data-category="guides">How to Create a Free Business Email Address in 5 Minutes (Step by Step)</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/how-to-install-google-analytics-in-wordpress/" data-category="guides">How to Install Google Analytics in WordPress for Beginners</a></li> 
+           <li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-move-wordpress-to-a-new-host-or-server-with-no-downtime/" data-category="guides">How to Move WordPress to a New Host or Server With No Downtime</a></li> 
+           <li><a href="https://www.wpbeginner.com/beginners-guide/why-is-wordpress-free-what-are-the-costs-what-is-the-catch/" data-category="guides">Why is WordPress Free? What are the Costs? What is the Catch?</a></li> 
+           <li><a href="https://www.wpbeginner.com/guides/" data-category="guides">How to Make a Website in 2020 – Step by Step Guide</a></li> 
+          </ul> </li> 
+        </ul> 
+       </div> 
+      </div> <!-- End WordPress Guides --> 
+      <div class="sidebardeals widget"> 
+       <div class="widgetheading">
+        Deals &amp; Coupons <a href="https://www.wpbeginner.com/deals/" class="viewdeals">(view all)</a>
+       </div> 
+       <div class="relatedentry"> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.wpbeginner.com/deals/connections-pro-coupon/" title="Connections Pro Coupon"> <img width="96" height="96" src="https://cdn4.wpbeginner.com/wp-content/uploads/2019/08/connectionspro-96x96.png" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="Connections Pro" title="Connections Pro Coupon"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.wpbeginner.com/deals/connections-pro-coupon/" title="Connections Pro Coupon">Connections Pro Coupon</a>
+          </div> Get 15% OFF on Connections Pro WordPress directory plugin.
+         </div> 
+        </div> 
+        <div class="dealsentry"> 
+         <div class="dealsthumb"> <a href="https://www.wpbeginner.com/deals/siteground-coupon/" title="SiteGround Coupon"> <img width="96" height="96" src="https://cdn3.wpbeginner.com/wp-content/uploads/2013/12/siteground-96x96.jpg" class="attachment-coupon-thumb size-coupon-thumb wp-post-image" alt="SiteGround" title="SiteGround Coupon"></a> 
+         </div> 
+         <div class="dealsinfo"> 
+          <div class="dealstitle">
+           <a href="https://www.wpbeginner.com/deals/siteground-coupon/" title="SiteGround Coupon">SiteGround Coupon</a>
+          </div> Get 70% off SiteGround WordPress Hosting.
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+     </aside>
+    </div>
+   </div>
+   <div class="clear"></div>
+   <div class="footer-press">
+    <div class="wrap"> <span>Featured In</span> 
+     <div class="logo-wrap"> 
+      <div class="press-logo sprite-inc"></div> 
+      <div class="press-logo sprite-fox"></div> 
+      <div class="press-logo sprite-vb"></div> 
+      <div class="press-logo sprite-huffpost"></div> 
+      <div class="press-logo sprite-yahoo"></div> 
+      <div class="press-logo sprite-entrepreneur"></div> 
+     </div> 
+    </div>
+   </div>
+   <div class="clear"></div>
+   <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
+    <div class="wrap">
+     <div class="aboutwpbeginner footer-widget"> 
+      <div class="footer-heading">
+       About WPBeginner®
+      </div> 
+      <p>WPBeginner is a free WordPress resource site for Beginners. WPBeginner was founded in July 2009 by <u><a href="https://syedbalkhi.com/" title="Syed Balkhi" target="_blank">Syed Balkhi</a></u>. The main goal of this site is to provide quality tips, tricks, hacks, and other WordPress resources that allows WordPress beginners to improve their site(s).</p> 
+     </div> 
+     <div class="site-links footer-widget"> 
+      <div class="footer-heading">
+       Site Links
+      </div> 
+      <ul> 
+       <li><a href="https://www.wpbeginner.com/about-wpbeginner/">About Us</a></li> 
+       <li><a href="https://www.wpbeginner.com/contact/">Contact Us</a></li> 
+       <li><a href="https://www.wpbeginner.com/wpbeginner-disclaimer/">FTC Disclosure</a></li> 
+       <li><a href="https://www.wpbeginner.com/privacy-policy/">Privacy Policy</a></li> 
+       <li><a href="https://www.wpbeginner.com/terms-of-use/">Terms of Service</a></li> 
+       <li><a href="https://www.wpbeginner.com/free-wordpress-blog-setup/">Free Blog Setup</a></li> 
+      </ul> 
+     </div> 
+     <div class="our-sites footer-widget"> 
+      <div class="footer-heading">
+       Our Sites
+      </div> 
+      <ul> 
+       <li><a href="https://optinmonster.com/" target="_blank" title="OptinMonster - Best WordPress Lead Generation Plugin">OptinMonster</a></li> 
+       <li><a href="https://www.monsterinsights.com/" target="_blank" title="MonsterInsights - Best Google Analytics Plugin For WordPress">MonsterInsights</a></li> 
+       <li><a href="https://wpforms.com/" target="_blank" title="WPForms - Best WordPress Contact Form Plugin">WPForms</a></li> 
+       <li><a href="https://www.seedprod.com/" target="_blank" title="SeedProd - Best Coming Soon Page Plugin">SeedProd</a></li> 
+       <li><a href="https://www.nameboy.com/" target="_blank" title="The best domain name generator run by Syed Balkhi">Nameboy</a></li> 
+       <li><a href="https://rafflepress.com/" target="_blank" title="RafflePress - Best WordPress giveaway plugin">RafflePress</a></li> 
+      </ul> 
+     </div> 
+     <div class="clear"></div> 
+    </div>
+   </footer>
+   <div class="footer-copyright">
+    <div class="wrap"> 
+     <p>Copyright © 2009 - 2020 WPBeginner LLC. All Rights Reserved. WPBeginner® is a registered trademark.</p>
+     <p> Managed by <u><a href="https://awesomemotive.com" target="_blank" rel="noopener">Awesome Motive</a></u> | <a href="https://www.wpbeginner.com/wordpress-hosting/" title="How to Choose the Best WordPress Hosting?">WordPress hosting</a> by <u><a href="https://www.wpbeginner.com/refer/siteground/" target="_blank" rel="nofollow">SiteGround</a></u> | WordPress CDN by <u><a href="https://www.wpbeginner.com/blueprint/maxcdn/" title="Why we use MaxCDN">MaxCDN</a></u> | <a href="https://www.wpbeginner.com/wordpress-security/" title="Ultimate WordPress Security Guide">WordPress Security</a> by <u><a href="https://www.wpbeginner.com/opinion/sucuri-review-how-sucuri-helped-us-block-450000-wordpress-attacks-in-3-months/" title="Why we use Sucuri">Sucuri</a></u>.</p>
+     <p> </p>
+    </div>
+   </div>
+  </div><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPBeginner FB Group Slide-in -->
+  <script type="text/javascript" src="https://a.opmnstr.com/app/js/api.min.js" data-campaign="yh0pc4ukorc33zei8rba" data-user="1" data-env="production"></script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPB Exit Weekly -->
+  <div id="om-af1jimjo7o-lightbox-holder"></div>
+  <script>var af1jimjo7o_lightbox,af1jimjo7o_lightbox_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){af1jimjo7o_lightbox_poll(function(){if(window['om_loaded']){if(!af1jimjo7o_lightbox){af1jimjo7o_lightbox=new OptinMonsterApp();return af1jimjo7o_lightbox.init({"u":"1.155459","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;af1jimjo7o_lightbox=new OptinMonsterApp();af1jimjo7o_lightbox.init({"u":"1.155459","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: Ultimate WordPress Toolkit -->
+  <div id="om-faamjcr6mcotuufr-holder"></div>
+  <script>var faamjcr6mcotuufr,faamjcr6mcotuufr_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){faamjcr6mcotuufr_poll(function(){if(window['om_loaded']){if(!faamjcr6mcotuufr){faamjcr6mcotuufr=new OptinMonsterApp();return faamjcr6mcotuufr.init({"u":"1.449354","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;faamjcr6mcotuufr=new OptinMonsterApp();faamjcr6mcotuufr.init({"u":"1.449354","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster --><!-- This site is converting visitors into subscribers and customers with OptinMonster - https://optinmonster.com :: Campaign Title: WPBeginner Newsletter Monsterlink -->
+  <div id="om-mukj2ocfysjzidb5-holder"></div>
+  <script>var mukj2ocfysjzidb5,mukj2ocfysjzidb5_poll=function(){var r=0;return function(n,l){clearInterval(r),r=setInterval(n,l)}}();!function(e,t,n){if(e.getElementById(n)){mukj2ocfysjzidb5_poll(function(){if(window['om_loaded']){if(!mukj2ocfysjzidb5){mukj2ocfysjzidb5=new OptinMonsterApp();return mukj2ocfysjzidb5.init({"u":"1.449662","staging":0,"dev":0,"beta":0});}}},25);return;}var d=false,o=e.createElement(t);o.id=n,o.src="https://a.opmnstr.com/app/js/api.min.js",o.async=true,o.onload=o.onreadystatechange=function(){if(!d){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){try{d=om_loaded=true;mukj2ocfysjzidb5=new OptinMonsterApp();mukj2ocfysjzidb5.init({"u":"1.449662","staging":0,"dev":0,"beta":0});o.onload=o.onreadystatechange=null;}catch(t){}}}};(document.getElementsByTagName("head")[0]||document.documentElement).appendChild(o)}(document,"script","omapi-script");</script><!-- / OptinMonster -->
+  <script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script> 
+  <script type="text/javascript">var yh0pc4ukorc33zei8rba_shortcode = true;var af1jimjo7o_lightbox_shortcode = true;var faamjcr6mcotuufr_shortcode = true;var mukj2ocfysjzidb5_shortcode = true;</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b"></script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.9b"></script> 
+  <script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://cdn4.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://cdn3.wpbeginner.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['auto-links'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script> 
+  <script type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/youtube-fit-videos-hide-related/js/fitvids-ui.min.js"></script> 
+  <script type="text/javascript" async src="https://cdn2.wpbeginner.com/wp-includes/js/comment-reply.min.js?ver=4.9.13"></script> 
+  <script async type="text/javascript" src="https://cdn2.wpbeginner.com/wp-content/plugins/akismet/_inc/form.js?ver=4.1.3"></script> 
+  <script type="text/javascript">var omapi_localized = { ajax: 'https://www.wpbeginner.com/wp-admin/admin-ajax.php?optin-monster-ajax-route=1', nonce: '5d07da5614', slugs: {"yh0pc4ukorc33zei8rba":{"slug":"yh0pc4ukorc33zei8rba","mailpoet":false},"af1jimjo7o_lightbox":{"slug":"af1jimjo7o_lightbox","mailpoet":false},"faamjcr6mcotuufr":{"slug":"faamjcr6mcotuufr","mailpoet":false},"mukj2ocfysjzidb5":{"slug":"mukj2ocfysjzidb5","mailpoet":false}} };</script> 
+  <script type="text/javascript">var omapi_data = {"wc_cart":[],"object_id":16953,"object_key":"post","object_type":"post","term_ids":[5,155,231,4230]};</script> <!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+Object Caching 0/527 objects using apc
+Page Caching using disk: enhanced 
+Content Delivery Network via cdn.wpbeginner.com
+
+Served from: www.wpbeginner.com @ 2020-03-25 16:12:20 by W3 Total Cache
+-->
+ </body>
+</html>

@@ -1,0 +1,564 @@
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en-US" class="touch-styles"> 
+ <head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This is Squarespace. --><!-- engineering --> 
+  <base href=""> 
+  <meta charset="utf-8"> 
+  <title>Squarespace / Engineering</title> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/56ab961ecbced617ccd2461e/1488232272880-FIYFRX6DZWNLZCYKO8PM/ke17ZwdGBToddI8pDm48kNjpXgdB2GQ4GXsvq_1og8aoCXeSvxnTEQmG4uwOsdIceAoHiyRoc52GMN5_2H8Wp6_MLhNeL9yWw1amyLjdgohmCNS_LeH4t9qD0d_SmSPc_VumPslpQQgM4-VHAcYf4g/favicon.ico?format="> 
+  <link rel="canonical" href="https://engineering.squarespace.com"> 
+  <meta property="og:site_name" content="Squarespace / Engineering"> 
+  <meta property="og:title" content="Squarespace / Engineering"> 
+  <meta property="og:url" content="https://engineering.squarespace.com"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:description" content="At Squarespace, our mission is to provide creative tools that help anyone bring their ideas to life. In this blog you'll learn about the ups and downs of our engineering endeavors."> 
+  <meta property="og:image" content="http://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57923ed0e4fcb57da233b96a/1469202129895/home-thumbnail.jpg?format=1500w"> 
+  <meta property="og:image:width" content="1500"> 
+  <meta property="og:image:height" content="1500"> 
+  <meta itemprop="name" content="Squarespace / Engineering"> 
+  <meta itemprop="url" content="https://engineering.squarespace.com"> 
+  <meta itemprop="description" content="At Squarespace, our mission is to provide creative tools that help anyone bring their ideas to life. In this blog you'll learn about the ups and downs of our engineering endeavors."> 
+  <meta itemprop="thumbnailUrl" content="http://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57923ed0e4fcb57da233b96a/1469202129895/home-thumbnail.jpg?format=1500w"> 
+  <link rel="image_src" href="http://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57923ed0e4fcb57da233b96a/1469202129895/home-thumbnail.jpg?format=1500w"> 
+  <meta itemprop="image" content="http://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57923ed0e4fcb57da233b96a/1469202129895/home-thumbnail.jpg?format=1500w"> 
+  <meta name="twitter:title" content="Squarespace / Engineering"> 
+  <meta name="twitter:image" content="http://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57923ed0e4fcb57da233b96a/1469202129895/home-thumbnail.jpg?format=1500w"> 
+  <meta name="twitter:url" content="https://engineering.squarespace.com"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta name="twitter:description" content="At Squarespace, our mission is to provide creative tools that help anyone bring their ideas to life. In this blog you'll learn about the ups and downs of our engineering endeavors."> 
+  <meta name="description" content=""> 
+  <script type="text/javascript" src="//use.typekit.net/ik/kz8S5J9jLlDkZR1UgdWDO8T7UvWFTTgPyBr8fb7T4k6fenGffFHN4UJLFRbh52jhWD9hjAJoFRB8jh4RZAbhwQiRjhbkF2jUZsTRHKo8dciTdcm8Sc80ZkoDSWmyScmDSeBRZPoRdhXCZAo1-Ao8ZW4TdcS0SaBujW48Sagyjh90jhNlOeUzjhBC-eNDifUaiaS0ZAo1-Ao8ZW4TdcS0SaBujW48Sagyjh90jhNlJ6U3ScNt-AuyOAozicIKfcuTdc8zdKu3ScvKgcmuScN3jPG4fHvgIMMjgfMfH6GJCwbgIMMjgPMfH6qJnbIbMg6eJMJ7fbKOMsMMeMS6MKG4f5w7IMMj2PMfH6qJCMIbMg65JMJ7f6KUUMIbMg6VJMJ7fbKwMsMMegI6MKG4f4vuIMIjgPMfH6qJ71qbMy6IJMJ7fbKGpsMfeMS6MKGHf5AeMsMfegI6MTMg7_L2t69.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:900"> 
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script> 
+  <script>(function(rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script> 
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/common-349cf8a8945c3e853ac3b-min.en-US.js"></script>
+  <script crossorigin="anonymous" src="//assets.squarespace.com/universal/scripts-compressed/performance-05c26a7ba97ad91a6081b-min.en-US.js" defer></script>
+  <script data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = {"facebookAppId":"314192535267336","rollups":{"squarespace-announcement-bar":{"css":"//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/announcement-bar-e2fbe92a3604cd7ec3932-min.en-US.js"},"squarespace-audio-player":{"css":"//assets.squarespace.com/universal/styles-compressed/audio-player-52bdd87acccf92a19703e60e09c654bd-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/audio-player-991e7e1c1b3308738ed15-min.en-US.js"},"squarespace-blog-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-342036262b204974aa269-min.en-US.js"},"squarespace-calendar-block-renderer":{"css":"//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-4d22db9ba7880e24bcd44-min.en-US.js"},"squarespace-chartjs-helpers":{"css":"//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-51aceea076ad0ff8aa83b-min.en-US.js"},"squarespace-comments":{"css":"//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/comments-e64031ca98dbe63037354-min.en-US.js"},"squarespace-commerce-cart":{"js":"//assets.squarespace.com/universal/scripts-compressed/commerce-cart-574df707b74266010398b-min.en-US.js"},"squarespace-dialog":{"css":"//assets.squarespace.com/universal/styles-compressed/dialog-afeb96ba160fb642a2d98c892a956065-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/dialog-bec10fad5a854d9b8562f-min.en-US.js"},"squarespace-events-collection":{"css":"//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/events-collection-f75316a66b099d806a536-min.en-US.js"},"squarespace-form-rendering-utils":{"js":"//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-fde3933cf0271ba5b3f63-min.en-US.js"},"squarespace-forms":{"css":"//assets.squarespace.com/universal/styles-compressed/forms-d21f3e517c32f4caba9f220beea0666d-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/forms-24ee632e09d923de05536-min.en-US.js"},"squarespace-gallery-collection-list":{"css":"//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-e23ee315df466f1dba9ec-min.en-US.js"},"squarespace-image-zoom":{"css":"//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/image-zoom-5a660e03e667b16c7a076-min.en-US.js"},"squarespace-pinterest":{"css":"//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/pinterest-4725f00d98ee2610ca950-min.en-US.js"},"squarespace-popup-overlay":{"css":"//assets.squarespace.com/universal/styles-compressed/popup-overlay-e984c5797664760d617b07bce15392a1-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/popup-overlay-07ab56995128d252d7025-min.en-US.js"},"squarespace-product-quick-view":{"css":"//assets.squarespace.com/universal/styles-compressed/product-quick-view-3fa8fd4df0755e7a7878e60166ca3d61-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/product-quick-view-cc9a2874f8c4b6a3f27e6-min.en-US.js"},"squarespace-products-collection-item-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-828c2fbae302bd3e4fe16-min.en-US.js"},"squarespace-products-collection-list-v2":{"css":"//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-f260a4594424060b57c10-min.en-US.js"},"squarespace-search-page":{"css":"//assets.squarespace.com/universal/styles-compressed/search-page-207da8872118254c0a795bf9b187c205-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/search-page-a3d76808795360256a5a6-min.en-US.js"},"squarespace-search-preview":{"js":"//assets.squarespace.com/universal/scripts-compressed/search-preview-9acb915547fb6c41d5a99-min.en-US.js"},"squarespace-share-buttons":{"js":"//assets.squarespace.com/universal/scripts-compressed/share-buttons-b7c8ee26ec3639fa3da50-min.en-US.js"},"squarespace-simple-liking":{"css":"//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/simple-liking-89bbd9e8e108b969eb994-min.en-US.js"},"squarespace-social-buttons":{"css":"//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/social-buttons-547a9a0004ff7f9768043-min.en-US.js"},"squarespace-tourdates":{"css":"//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/tourdates-69d260a4100c302369d4e-min.en-US.js"},"squarespace-website-overlays-manager":{"css":"//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css","js":"//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-43724a83fe4cb8b953146-min.en-US.js"}},"pageType":1,"website":{"id":"56ab961ecbced617ccd2461e","identifier":"engineering","websiteType":1,"contentModifiedOn":1568222803197,"cloneable":false,"developerMode":true,"siteStatus":{},"language":"en-US","timeZone":"America/New_York","machineTimeZoneOffset":-14400000,"timeZoneOffset":-14400000,"timeZoneAbbr":"EDT","siteTitle":"Squarespace / Engineering","fullSiteTitle":"Squarespace / Engineering","siteTagLine":"","siteDescription":"<p>Today, we\u2019re thrilled to announce the launch of the new Engineering Blog, where you can read about many of the technical issues we work on here at Squarespace.</p>","location":{"mapZoom":12.0,"mapLat":38.0322493,"mapLng":-82.53817500000002,"markerLat":38.0322493,"markerLng":-82.53817500000002,"addressTitle":"as","addressLine1":"S","addressLine2":"a","addressCountry":"a"},"logoImageId":"5790dacdbebafb39ee1c7196","socialLogoImageId":"57923ed0e4fcb57da233b96a","shareButtonOptions":{"3":true,"2":true,"1":true},"logoImageUrl":"//static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/5790dacdbebafb39ee1c7196/1568222803197/","socialLogoImageUrl":"//static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57923ed0e4fcb57da233b96a/1568222803197/","authenticUrl":"https://engineering.squarespace.com","internalUrl":"https://engineering.squarespace.com","baseUrl":"https://engineering.squarespace.com","sslSetting":3,"isHstsEnabled":false,"socialAccounts":[{"serviceId":10,"userId":"16085375","userName":"squarespace","screenname":"Squarespace","addedOn":1466700700904,"profileUrl":"http://instagram.com/squarespace","iconUrl":"https://scontent.cdninstagram.com/t51.2885-19/928640_1543728775912010_2062486698_a.jpg","collectionId":"576c139ce4fcb5bcdb37b133","iconEnabled":true,"serviceName":"instagram"},{"serviceId":2,"userId":"10203794036833619","screenname":"Squarespace","addedOn":1466700709936,"profileUrl":"http://www.facebook.com/10203794036833619","iconUrl":"http://graph.facebook.com/10203794036833619/picture?type=square","metaData":{"service":"facebook"},"iconEnabled":true,"serviceName":"facebook"},{"serviceId":4,"userId":"14319981","userName":"squarespace","screenname":"Squarespace","addedOn":1466700772629,"profileUrl":"https://twitter.com/squarespace","iconUrl":"http://pbs.twimg.com/profile_images/479693851599200256/28uIqxzS_normal.png","collectionId":"576c13e4e4fcb5bcdb37b3be","iconEnabled":true,"serviceName":"twitter"}],"typekitId":"","statsMigrated":false,"imageMetadataProcessingEnabled":false,"screenshotId":"c48c212c7984c59ca99e25afa0efc1fefae15cb6e801072fbe93ed17776399b8","showOwnerLogin":false},"websiteSettings":{"id":"56ab961ecbced617ccd24621","websiteId":"56ab961ecbced617ccd2461e","subjects":[],"country":"US","state":"NY","simpleLikingEnabled":true,"mobileInfoBarSettings":{"isContactEmailEnabled":false,"isContactPhoneNumberEnabled":false,"isLocationEnabled":false,"isBusinessHoursEnabled":false},"commentLikesAllowed":true,"commentAnonAllowed":true,"commentThreaded":true,"commentApprovalRequired":false,"commentAvatarsOn":true,"commentSortType":2,"commentFlagThreshold":0,"commentFlagsAllowed":true,"commentEnableByDefault":true,"commentDisableAfterDaysDefault":0,"disqusShortname":"","commentsEnabled":false,"contactPhoneNumber":"","storeSettings":{"returnPolicy":null,"termsOfService":null,"privacyPolicy":null,"expressCheckout":false,"continueShoppingLinkUrl":"/","useLightCart":false,"showNoteField":false,"shippingCountryDefaultValue":"US","billToShippingDefaultValue":false,"showShippingPhoneNumber":true,"isShippingPhoneRequired":false,"showBillingPhoneNumber":true,"isBillingPhoneRequired":false,"currenciesSupported":["CHF","HKD","MXN","EUR","DKK","USD","CAD","MYR","NOK","THB","AUD","SGD","ILS","PLN","GBP","CZK","SEK","NZD","PHP","RUB"],"defaultCurrency":"USD","selectedCurrency":"USD","measurementStandard":1,"showCustomCheckoutForm":false,"enableMailingListOptInByDefault":true,"contactLocation":{"mapZoom":12.0,"mapLat":38.0322493,"mapLng":-82.53817500000002,"markerLat":38.0322493,"markerLng":-82.53817500000002,"addressTitle":"as","addressLine1":"S","addressLine2":"a","addressCountry":"a"},"businessName":"as","sameAsRetailLocation":false,"merchandisingSettings":{"scarcityEnabledOnProductItems":false,"scarcityEnabledOnProductBlocks":false,"scarcityMessageType":"DEFAULT_SCARCITY_MESSAGE","scarcityThreshold":10,"multipleQuantityAllowedForServices":true,"restockNotificationsEnabled":false,"restockNotificationsMailingListSignUpEnabled":false,"relatedProductsEnabled":false,"relatedProductsOrdering":"random","soldOutVariantsDropdownDisabled":false},"isLive":false,"multipleQuantityAllowedForServices":true},"useEscapeKeyToLogin":true,"trialAssistantEnabled":true,"ssBadgeType":1,"ssBadgePosition":4,"ssBadgeVisibility":1,"ssBadgeDevices":1,"pinterestOverlayOptions":{"mode":"disabled","size":"small","shape":"rect","color":"white"},"ampEnabled":true},"cookieSettings":{"isCookieBannerEnabled":false,"isRestrictiveCookiePolicyEnabled":false,"isRestrictiveCookiePolicyAbsolute":false,"cookieBannerText":"","cookieBannerTheme":"","cookieBannerVariant":"","cookieBannerPosition":"","cookieBannerCtaVariant":"","cookieBannerCtaText":""},"websiteCloneable":false,"collection":{"title":"Home","id":"56aba24fc6fc08c6cb69a290","fullUrl":"/","type":1},"subscribed":false,"appDomain":"squarespace.com","templateTweakable":true,"tweakJSON":{"aspect-ratio":"Auto","gallery-arrow-style":"No Background","gallery-aspect-ratio":"3:2 Standard","gallery-auto-crop":"true","gallery-autoplay":"false","gallery-design":"Grid","gallery-info-overlay":"Show on Hover","gallery-loop":"false","gallery-navigation":"Bullets","gallery-show-arrows":"true","gallery-transitions":"Fade","galleryArrowBackground":"rgba(34,34,34,1)","galleryArrowColor":"rgba(255,255,255,1)","galleryAutoplaySpeed":"3","galleryCircleColor":"rgba(255,255,255,1)","galleryInfoBackground":"rgba(0, 0, 0, .7)","galleryThumbnailSize":"100px","gridSize":"350px","gridSpacing":"20px","maxNumberColumns":"3","minColumnWidth":"225","tweak-blog-list-grid-alignment":"Top","tweak-blog-list-grid-narrow-columns":"false","tweak-blog-list-max-width":"Wide","tweak-crop-images":"None","tweak-infinite-scroll":"false","tweak-product-item-image-zoom-factor":"2.5","tweak-product-list-item-hover-behavior":"Show Alternate Image","tweak-product-list-items-per-row":"4","tweak-related-products-items-per-row":"3","tweak-related-products-title-spacing":"50px","tweak-show-progress-indicator":"false","tweak-user-account-link-position":"With Nav"},"templateId":"5c58c9711905f4098aac7c6d","templateVersion":"7","pageFeatures":[1,2,4],"gmRenderKey":"QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4","betaFeatureFlags":["ORDERS-SERVICE-check-digital-good-access-with-service","ORDERS-SERVICE-reset-digital-goods-access-with-service","ORDER_SERVICE-submit-subscription-order-through-service","ORDER_SERVICE-submit-reoccurring-subscription-order-through-service","dg_downloads_from_fastly","generic_iframe_loader_for_campaigns","donations_customer_accounts","product-retriever-v2-enabled","domain_registration_via_registrar_service","domain_locking_via_registrar_service","domain_deletion_via_registrar_service","domain_info_via_registrar_service","content_item_settings","seven_one_image_overlay_opacity","commerce_restock_notifications","newsletter_block_captcha","new_billing_system","gallery_settings_71","commerce_onboarding_wizard","seven_one_portfolio_hover_layouts","domains_allow_async_gsuite"],"yuiEliminationExperimentList":[{"name":"statsMigrationJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"ContributionConfirmed-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"TextPusher-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MenuItemWithProgress-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"billingNewsletters-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"imageProcJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"QuantityChangePreview-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CompositeModel-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"HasPusherMixin-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"INACTIVE"},{"name":"ProviderList-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"MediaTracker-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"pushJobWidget-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"internal-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"BillingPanel-enabled","experimentType":"AB_TEST","variant":"false","containsError":false,"status":"ACTIVE"},{"name":"PopupOverlayEditor-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"},{"name":"CoverPagePicker-enabled","experimentType":"AB_TEST","variant":"true","containsError":false,"status":"ACTIVE"}],"impersonatedSession":false,"tzData":{"zones":[[-300,"US","E%sT",null]],"rules":{"US":[[1967,2006,null,"Oct","lastSun","2:00","0","S"],[1987,2006,null,"Apr","Sun>=1","2:00","1:00","D"],[2007,"max",null,"Mar","Sun>=8","2:00","1:00","D"],[2007,"max",null,"Nov","Sun>=1","2:00","0","S"]]}}};</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://engineering.squarespace.com/blog?format=rss"> 
+  <script type="application/ld+json">{"url":"https://engineering.squarespace.com","name":"Squarespace / Engineering","description":"<p>Today, we\u2019re thrilled to announce the launch of the new Engineering Blog, where you can read about many of the technical issues we work on here at Squarespace.</p>","image":"//static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/5790dacdbebafb39ee1c7196/1568222803197/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <script type="application/ld+json">{"legalName":"as","address":"S\na\na","telephone":"","sameAs":["http://instagram.com/squarespace","http://www.facebook.com/10203794036833619","https://twitter.com/squarespace"],"@context":"http://schema.org","@type":"Organization"}</script>
+  <script type="application/ld+json">{"address":"S\na\na","image":"https://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/5790dacdbebafb39ee1c7196/1568222803197/","name":"as","@context":"http://schema.org","@type":"LocalBusiness"}</script><!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&part=4"/><![endif]--> <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]--> <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/56ab961ecbced617ccd2461e/325/5c58c9711905f4098aac7c6d/5c58c9721905f4098aac7c77/17-05142015/1579878272835/site.css?&amp;filterFeatures=false"><!-- <![endif]--> 
+  <meta name="google-site-verification" content="5kRyMMrz3751BsIgSZxIQEa86H5oYYamwAZYVT068IE">
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script> <!-- End of Squarespace Headers --> 
+  <link rel="stylesheet" type="text/css" href="https://static1.squarespace.com/static/ta/56ab961ecbced617ccd2461e/10/assets/clarkson.css"> 
+  <script>
+    (function(){
+      var touchTest = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+      if (!touchTest) {
+        document.documentElement.className = document.documentElement.className.replace(/touch\-styles/g, '');
+      }
+    })();</script> 
+ </head> 
+ <body id="collection-56aba24fc6fc08c6cb69a290" class="tweak-header-background-color-on  tweak-underline-body-links tweak-ui-icon-weight-light tweak-navigation-link-spacing-small tweak-hide-right-nav-column tweak-site-branding-borders-none tweak-show-site-tagline tweak-site-branding-layout-inline tweak-show-search-in-header  tweak-user-account-link-position-with-nav tweak-quote-block-alignment-left tweak-blog-list-grid-alignment-top tweak-blog-list-max-width-wide  tweak-crop-images-none  tweak-cards tweak-show-excerpt-on-blog-list   tweak-blog-text-alignment-left tweak-blog-promoted-meta-author tweak-blog-date-style-above-title tweak-blog-show-divider  tweak-blog-item-banner-image-width-normal  tweak-show-blog-item-author-profile-below-post  tweak-template-social-icon-style-square-knockout     event-thumbnails event-thumbnail-size-32-standard event-date-label  event-list-show-cats event-list-date event-list-time event-list-address     event-excerpts  event-item-back-link    gallery-design-grid aspect-ratio-auto lightbox-style-light gallery-navigation-bullets gallery-info-overlay-show-on-hover gallery-aspect-ratio-32-standard gallery-arrow-style-no-background gallery-transitions-fade gallery-show-arrows gallery-auto-crop   tweak-product-list-image-aspect-ratio-11-square tweak-product-list-item-hover-behavior-show-alternate-image tweak-product-list-meta-position-under tweak-product-list-mobile-meta-position-under tweak-product-list-meta-alignment-under-left tweak-product-list-meta-alignment-overlay-center-center tweak-product-list-show-title tweak-product-list-show-price tweak-product-list-filter-display-hide tweak-product-list-filter-alignment-left tweak-product-item-nav-show-breadcrumb-and-pagination tweak-product-item-nav-pagination-style-previousnext tweak-product-item-nav-breadcrumb-alignment-left tweak-product-item-nav-pagination-alignment-split tweak-product-item-gallery-position-left tweak-product-item-gallery-design-slideshow tweak-product-item-gallery-aspect-ratio-23-standard-vertical tweak-product-item-gallery-thumbnail-alignment-left tweak-product-item-details-alignment-left tweak-product-item-details-show-title tweak-product-item-details-show-price tweak-product-item-details-show-excerpt tweak-product-item-details-excerpt-position-below-price tweak-product-item-details-show-share-buttons tweak-product-item-details-show-variants tweak-product-item-details-show-quantity tweak-product-item-details-options-style-square tweak-product-item-details-show-add-to-cart-button tweak-product-item-details-add-to-cart-button-style-solid tweak-product-item-details-add-to-cart-button-shape-square tweak-product-item-details-add-to-cart-button-padding-large tweak-product-item-image-zoom-enabled tweak-product-item-image-zoom-behavior-click tweak-product-item-lightbox-enabled tweak-related-products-image-aspect-ratio-11-square tweak-related-products-meta-alignment-under-center tweak-product-badge-style-circle tweak-product-badge-position-top-right tweak-product-badge-inset-floating newsletter-style-dark hide-opentable-icons opentable-style-dark small-button-style-outline small-button-shape-square medium-button-style-solid medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-pill tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light tweak-share-buttons-style-outline tweak-share-buttons-icons-show tweak-share-buttons-labels-show  tweak-share-buttons-standard-icon-color native-currency-code-usd collection-56aba24fc6fc08c6cb69a290 collection-type-blog collection-layout-default homepage view-list mobile-style-available" data-controller="SyncHeader, AddScrollingClass, HeaderScroll, BodyMinHeight"> 
+  <div class="nav-close-overlay"> 
+  </div> 
+  <div class="nav-close-toggle-wrapper" id="navCloseToggleWrapper"> <a class="nav-toggle-close-label responsive-position--left" id="navCloseToggle" data-controller="NavToggle"> 
+    <svg class="Icon Icon--close close-icon" viewbox="0 0 18 18"> <use xlink:href="/assets/ui-icons.svg#close-icon-line"></use> 
+    </svg> </a> 
+  </div> 
+  <div id="sideTrayWrapper" class="sidetray-wrapper"> 
+   <div class="main-nav-wrapper responsive-padding--top responsive-padding--bottom" data-controller="NavOverflow"> 
+    <div class="nav-blocks-wrapper"> 
+     <nav id="mainNavigation" class="main-navigation" role="navigation" data-content-field="navigation"> 
+      <div class="nav-link--collection nav-link--active nav-link--homepage" id="id-56aba24fc6fc08c6cb69a290"> <a href="/"> <span>Home</span> </a> 
+      </div> 
+      <div class="nav-link--external"> <a href="http://squarespace.com" target="_blank"> <span>Squarespace</span> </a> 
+      </div> 
+      <div class="nav-link--collection" id="id-57f2cb86893fc0dc46911588"> <a href="/about"> <span>About</span> </a> 
+      </div> 
+      <div class="nav-link--external"> <a href="http://www.squarespace.com/careers/engineering"> <span>Careers</span> </a> 
+      </div> 
+      <div class="nav-link--external"> <a href="http://squarespace.github.io/" target="_blank"> <span>Open Source</span> </a> 
+      </div> 
+     </nav> 
+     <div class="sqs-layout sqs-grid-1 columns-1 empty" data-layout-label="Nav Blocks" data-type="block-field" data-updated-on="1468846294445" id="navBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1"></div>
+      </div>
+     </div> 
+    </div> 
+   </div><!--
+      -->
+   <div class="sidetray-blocks responsive-padding--top responsive-padding--bottom" data-controller="SidetrayBlocksOverflow"> 
+    <div class="sidetray-blocks-wrapper"> 
+     <div class="sqs-layout sqs-grid-1 columns-1" data-layout-label="Sidetray Blocks" data-type="block-field" data-updated-on="1466176586934" id="sideTrayBlocks">
+      <div class="row sqs-row">
+       <div class="col sqs-col-1 span-1">
+        <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_2_1466176090458_6905">
+         <div class="sqs-block-content">
+          <p class="text-align-center">[placeholder]</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <form class="header-search-form" id="headerSearch" action="/search" method="get"> 
+   <input class="header-search-form-input" name="q" placeholder="Search" type="text" spellcheck="false" value="" autocomplete="off"> 
+  </form> 
+  <div class="mobile-social"> 
+   <nav class="sqs-template-social-icons sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://instagram.com/squarespace" target="_blank" class="sqs-svg-icon--wrapper instagram"> 
+     <div> 
+      <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#instagram-icon"></use> <use class="sqs-use--mask" xlink:href="#instagram-mask"></use> 
+      </svg> 
+     </div> </a> <a href="http://www.facebook.com/10203794036833619" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+     <div> 
+      <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+      </svg> 
+     </div> </a> <a href="https://twitter.com/squarespace" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+     <div> 
+      <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+      </svg> 
+     </div> </a> 
+   </nav> 
+  </div> 
+  <div id="site" class="site-container clearfix"> 
+   <div class="sqs-announcement-bar-dropzone header-announcement-wrapper responsive-padding--left responsive-padding--right" id="headerAnnouncementWrapper"> 
+    <header id="header" class="site-header loading" role="banner"> <a class="nav-toggle-label flex-item" id="navToggle" data-controller="NavToggle"> 
+      <svg class="Icon Icon--hamburger nav-toggle-label-icon" viewbox="0 0 26 18"> <use xlink:href="/assets/ui-icons.svg#hamburger-icon--even"></use> 
+      </svg> </a> 
+     <div class="logo-wrapper flex-item"> 
+      <div class="logo-image branding" data-content-field="site-title"> <a href="/"> <img src="https://static1.squarespace.com/static/ta/56ab961ecbced617ccd2461e/10/assets/logo.svg" alt="Squarespace / Engineering"> </a> 
+      </div> 
+     </div> 
+     <nav class="header-special-social--shown-on-collapse sqs-template-social-icons sqs-svg-icon--list"> <a href="http://instagram.com/squarespace" target="_blank" class="sqs-svg-icon--wrapper instagram"> 
+       <div> 
+        <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#instagram-icon"></use> <use class="sqs-use--mask" xlink:href="#instagram-mask"></use> 
+        </svg> 
+       </div> </a> <a href="http://www.facebook.com/10203794036833619" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+       <div> 
+        <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+        </svg> 
+       </div> </a> <a href="https://twitter.com/squarespace" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+       <div> 
+        <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+        </svg> 
+       </div> </a> 
+     </nav> 
+     <div class="header-special flex-item"> 
+      <div class="social-search-wrapper"> 
+       <div class="social-ellipsis" id="socialEllipsis" data-controller="SocialToggle"> 
+        <svg class="ellipsis-icon" viewbox="0 0 100 24"> <use xlink:href="/assets/ui-icons.svg#ellipsis-icon"></use> 
+        </svg> 
+        <svg class="social-close-icon Icon Icon--close" viewbox="0 0 18 18"> <use xlink:href="/assets/ui-icons.svg#close-icon-line"></use> 
+        </svg> 
+       </div><!--
+               
+               
+                -->
+       <nav class="header-special-social sqs-template-social-icons sqs-svg-icon--list" data-content-field="connected-accounts"> <a href="http://instagram.com/squarespace" target="_blank" class="sqs-svg-icon--wrapper instagram"> 
+         <div> 
+          <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#instagram-icon"></use> <use class="sqs-use--mask" xlink:href="#instagram-mask"></use> 
+          </svg> 
+         </div> </a> <a href="http://www.facebook.com/10203794036833619" target="_blank" class="sqs-svg-icon--wrapper facebook"> 
+         <div> 
+          <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#facebook-icon"></use> <use class="sqs-use--mask" xlink:href="#facebook-mask"></use> 
+          </svg> 
+         </div> </a> <a href="https://twitter.com/squarespace" target="_blank" class="sqs-svg-icon--wrapper twitter"> 
+         <div> 
+          <svg class="sqs-svg-icon--social" viewbox="0 0 64 64"> <use class="sqs-use--icon" xlink:href="#twitter-icon"></use> <use class="sqs-use--mask" xlink:href="#twitter-mask"></use> 
+          </svg> 
+         </div> </a> 
+       </nav><!--
+               
+               
+             --><a href="/search" rel="search" class="header-search" data-controller="SearchToggle"> 
+        <svg class="Icon Icon--search search-icon" viewbox="0 0 20 20" shape-rendering="geometricPrecision"> <use xlink:href="/assets/ui-icons.svg#search-icon"></use> 
+        </svg> 
+        <svg class="Icon Icon--close search-close-icon" viewbox="0 0 18 18"> <use xlink:href="/assets/ui-icons.svg#close-icon-line"></use> 
+        </svg> </a> 
+      </div><!--
+              --><!--
+              --> 
+     </div> 
+    </header> 
+   </div> 
+   <main id="page" class="site-page loading responsive-padding--left responsive-padding--right site-page--blog-list" role="main" data-content-field="main-content" data-controller="FadeInContent"> 
+    <div class="loading-spinner"></div> 
+    <div class="blog-list blog-wrapper" id="blogList" data-controller="BlogLayout">
+     <article class="entry entry--list h-entry grid-hidden hentry author-squarespace-engineering post-type-text article-index-1" id="article-5e29c4af6b1ec3264ac7abb9" label="Blog Post" data-item-id="5e29c4af6b1ec3264ac7abb9" data-offset="1579876200825"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2020/the-nuts-and-bolts-with-franklin-angulo" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2020-01-24" pubdate> 
+            <div class="date-wrapper"> <span class="month">Jan </span><span class="day">24</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2020-01-24" pubdate>Jan 24 </time>The Nuts and Bolts with Franklin Angulo </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5764368cd1758e4b6a99770b" class="blog-author-name">Squarespace Engineering</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">The Nuts and Bolts” is a reoccurring Q&amp;A with Squarespace engineers. Questions are compiled by their peers to guarantee we get right to the good stuff.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-omar-o-abboud post-type-text article-index-2" id="article-5dd45152ddd84449865e399e" label="Blog Post" data-item-id="5dd45152ddd84449865e399e" data-offset="1574276400014"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/checkout-surveys-a-data-science-approach" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-11-20" pubdate> 
+            <div class="date-wrapper"> <span class="month">Nov </span><span class="day">20</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-11-20" pubdate>Nov 20 </time>Checkout Surveys: A Data Science Approach </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5dd4542f96cb345c07b68a25" class="blog-author-name">Omar O. Abboud</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">Squarespace’s Data Science team helps stakeholders across the company make better strategic decisions using data. Marketing attribution, one major focus of the team’s work, is how we answer the question: “How much credit does each form of marketing deserve for a sale or conversion?”</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-laura-elsener post-type-text article-index-3" id="article-5d9605eb9826bd1fd8085410" label="Blog Post" data-item-id="5d9605eb9826bd1fd8085410" data-offset="1570217400091"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/how-we-talk-about-ab-test-results" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-10-04" pubdate> 
+            <div class="date-wrapper"> <span class="month">Oct </span><span class="day"> 4</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-10-04" pubdate>Oct 4 </time>How We Talk About A/B Test Results </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5d9605d0f14cb6013b104a04" class="blog-author-name">Laura Elsener</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">A/B tests can help organizations make better decisions, but we often only hear about the “success stories.” What about the A/B tests that don't have flashy outcomes? Here's how Squarespace communicates about A/B tests to ensure we learn from all tests.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-tanya-reilly post-type-text article-index-4" id="article-5d76c10d279bcc04c3a3a192" label="Blog Post" data-item-id="5d76c10d279bcc04c3a3a192" data-offset="1568228400534"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/the-power-of-yes-if" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-09-11" pubdate> 
+            <div class="date-wrapper"> <span class="month">Sep </span><span class="day">11</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-09-11" pubdate>Sep 11 </time>The Power of “Yes, if”: Iterating on our RFC Process </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5d77c06a8b4c300d55bd156f" class="blog-author-name">Tanya Reilly</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">RFCs, also called Design Documents, let us describe software designs before implementation. But how do you make sure that RFCs get deep review and are seen by the right people? How do you help reviewers catch problems in a system’s design? We’ve been iterating on our RFC review process and here’s what we’ve come up with.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-golam-kawsar post-type-text article-index-5" id="article-5d56b0b516798d0001bb16ea" label="Blog Post" data-item-id="5d56b0b516798d0001bb16ea" data-offset="1565968251159"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/performance-tuning-postgres-within-our-tls-infrastructure" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-08-16" pubdate> 
+            <div class="date-wrapper"> <span class="month">Aug </span><span class="day">16</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-08-16" pubdate>Aug 16 </time>Performance Tuning Postgres within our TLS Infrastructure </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5d56aff9ac4df20001a863df" class="blog-author-name">Golam Kawsar</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">At Squarespace, the Edge team manages the <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security"><span style="text-decoration:underline">TLS</span></a> infrastructure, which handles the life cycle of millions of SSL certificates used by our customers. This makes us one of the largest users of <a href="https://letsencrypt.org/"><span style="text-decoration:underline">Let’s Encrypt</span></a>, a free, automated, and open certificate authority (CA).</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-john-turner post-type-text article-index-6" id="article-5d3872f07f723a00017cb1ba" label="Blog Post" data-item-id="5d3872f07f723a00017cb1ba" data-offset="1563980537110"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/code-review-culture-part-2" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-07-24" pubdate> 
+            <div class="date-wrapper"> <span class="month">Jul </span><span class="day">24</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-07-24" pubdate>Jul 24 </time>Creating a Code Review Culture, Part 2: Code Reviewers </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5d13cf66021d530001abfd0a" class="blog-author-name">John Turner</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">This is part two of a two-part series. In <a href="https://engineering.squarespace.com/blog/2019/code-review-culture-part-1">part one</a> we looked at organizational culture, and how code authors can make their code easier to review. In this final part, we’ll look at some strategies for performing more thorough and empathetic code reviews.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-john-turner post-type-text article-index-7" id="article-5d13c1b444babf0001de5f50" label="Blog Post" data-item-id="5d13c1b444babf0001de5f50" data-offset="1562685300175"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/code-review-culture-part-1" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-07-09" pubdate> 
+            <div class="date-wrapper"> <span class="month">Jul </span><span class="day"> 9</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-07-09" pubdate>Jul 9 </time>Creating a Code Review Culture, Part 1: Organizations and Authors </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5d13cf66021d530001abfd0a" class="blog-author-name">John Turner</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">Code review is one of the most effective tools we have as engineers to safeguard the quality of our code. In this series of posts, we describe what a strong code review culture looks like and how to create it.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-squarespace-engineering post-type-text article-index-8" id="article-5cd1ec4f41920242dee4df93" label="Blog Post" data-item-id="5cd1ec4f41920242dee4df93" data-offset="1557262207884"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/the-nuts-and-bolts-with-polina-giralt" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-05-07" pubdate> 
+            <div class="date-wrapper"> <span class="month">May </span><span class="day"> 7</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-05-07" pubdate>May 7 </time>The Nuts and Bolts with Polina Giralt </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5764368cd1758e4b6a99770b" class="blog-author-name">Squarespace Engineering</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p class="" style="white-space:pre-wrap;">“The Nuts and Bolts” is a reoccurring Q&amp;A with Squarespace engineers. Questions are compiled by their peers to guarantee we get right to the good stuff.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-adam-parks-dave-myers-yannick-guillemot post-type-text article-index-9" id="article-5c9cf2668165f55c91d2f826" label="Blog Post" data-item-id="5c9cf2668165f55c91d2f826" data-offset="1553793126906"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/building-the-squarespace-image-filters" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-03-28" pubdate> 
+            <div class="date-wrapper"> <span class="month">Mar </span><span class="day">28</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-03-28" pubdate>Mar 28 </time>Building the Squarespace Image Filters </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5c9d002f419202c846a6fe9e" class="blog-author-name">Adam Parks, Dave Myers, Yannick Guillemot</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p style="white-space:pre-wrap;">At the end of 2018, we made the decision to build our own Image Editor in order to give our customers essential tools and an intuitive experience. We just released a second version, which has several new powerful, high-quality adjustments including undo/redo and a suite of custom filters that are unmistakably Squarespace. This is how we built the filters.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-jon-thornton post-type-text article-index-10" id="article-5c86d839e5e5f09f4eef4930" label="Blog Post" data-item-id="5c86d839e5e5f09f4eef4930" data-offset="1552586400179"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2019/three-kinds-of-good-tech-debt" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2019-03-14" pubdate> 
+            <div class="date-wrapper"> <span class="month">Mar </span><span class="day">14</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2019-03-14" pubdate>Mar 14 </time>3 Kinds of Good Tech Debt </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5c86d817e2c483a9d35e00b2" class="blog-author-name">Jon Thornton</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p style="white-space:pre-wrap;">What if tech debt wasn’t always an accident, caused by incorrect assumptions and unexpected circumstances? How would you spend a tech debt mortgage?</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-mark-giangreco post-type-text article-index-11" id="article-5c0ab8c7562fa712d48dfdfa" label="Blog Post" data-item-id="5c0ab8c7562fa712d48dfdfa" data-offset="1544206629122"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2018/can-friendly-competition-lead-to-better-models" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2018-12-07" pubdate> 
+            <div class="date-wrapper"> <span class="month">Dec </span><span class="day"> 7</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2018-12-07" pubdate>Dec 7 </time>Can Friendly Competition Lead to Better Models? </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5c0ab8b16d2a7380c25cb017" class="blog-author-name">Mark Giangreco</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p style="white-space: pre-wrap;">Here on Squarespace’s Strategy and Analytics team, we build models that predict customer lifetime value, forecast customer service demand, and even determine how much we should spend on those ubiquitous Squarespace ads you hear on your favorite podcast.</p>
+        </div> 
+       </div> 
+      </div> 
+     </article>
+     <article class="entry entry--list h-entry grid-hidden hentry author-squarespace-engineering post-type-text article-index-12" id="article-5bf5a0e58a922d05d2009912" label="Blog Post" data-item-id="5bf5a0e58a922d05d2009912" data-offset="1542825000920"> 
+      <div class="thumbnail-title-wrapper"> 
+       <div class="entry-title-wrapper"> 
+        <div class="title-bg-wrapper"> 
+         <h2 class="entry-title entry-title--list" data-content-field="title"> <a href="/blog/2018/the-nuts-and-bolts-with-ed-bridges" class="u-url" rel="bookmark"> <time class="dt-published date-callout" datetime="2018-11-21" pubdate> 
+            <div class="date-wrapper"> <span class="month">Nov </span><span class="day">21</span> 
+            </div> </time> <time class="dt-published date-highlight" itemprop="datePublished" datetime="2018-11-21" pubdate>Nov 21 </time>The Nuts and Bolts with Ed Bridges </a> </h2> 
+        </div> 
+       </div> 
+      </div> 
+      <div class="entry-text"> 
+       <div class="entry-content"> 
+        <div class="blog-meta-item blog-meta-author">
+         <a href="/?author=5764368cd1758e4b6a99770b" class="blog-author-name">Squarespace Engineering</a> 
+        </div> 
+        <div class="entry-excerpt p-summary">
+         <p><span style="background-color: rgb(255, 255, 255);">“The Nuts and Bolts” is a reoccurring Q&amp;A with Squarespace engineers. Questions are compiled by their peers to guarantee we get right to the good stuff.</span></p>
+        </div> 
+       </div> 
+      </div> 
+     </article> 
+    </div> 
+    <div class="load-more-wrapper">
+     <a class="load-more" href="/?offset=1542825000920">Load More</a>
+    </div> 
+    <div class="breaker"></div> 
+   </main> 
+   <footer id="footer" class="site-footer responsive-margin--top responsive-padding--left responsive-padding--right responsive-padding--top responsive-padding--bottom" role="contentinfo"> 
+    <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1477322577066" id="footerBlocks">
+     <div class="row sqs-row">
+      <div class="col sqs-col-12 span-12">
+       <div class="row sqs-row">
+        <div class="col sqs-col-3 span-3">
+         <div class="sqs-block markdown-block sqs-block-markdown" data-block-type="44" id="block-yui_3_17_2_6_1468615304442_27967">
+          <div class="sqs-block-content">
+           <p><a href="https://squarespace.com"><img src="https://static1.squarespace.com/static/56ab961ecbced617ccd2461e/t/57894eb42e69cf797de82a65/1468616372751/logo-1-2.png" alt="https://squarespace.com"></a></p> 
+          </div>
+         </div>
+        </div>
+        <div class="col sqs-col-2 span-2">
+         <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_6_1468615304442_3081">
+          <div class="sqs-block-content">
+           <h3>PRODUCTS</h3>
+           <p><a href="https://www.squarespace.com/domains">Domains</a><br><a href="https://www.squarespace.com/websites">Websites</a><br><a href="https://www.squarespace.com/commerce">Online Stores</a><br><a target="_blank" href="https://www.squarespace.com/google">G Suite</a><br><a target="_blank" href="https://www.squarespace.com/apps">Mobile Apps</a><br><a href="https://www.squarespace.com/logo">Logos</a><br><a href="https://www.squarespace.com/pricing">Pricing</a><br><a href="https://www.squarespace.com/feature-index">Feature Index</a><br><a href="https://www.squarespace.com/login">Login</a></p>
+          </div>
+         </div>
+        </div>
+        <div class="col sqs-col-2 span-2">
+         <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_6_1468615304442_15479">
+          <div class="sqs-block-content">
+           <h3>COMPANY</h3>
+           <p><a href="https://www.squarespace.com/about/company">About</a><br><a href="https://www.squarespace.com/about/careers">Careers</a><br><a href="https://www.squarespace.com/customers">Customers</a><br><a href="https://www.squarespace.com/press">Press &amp; Media</a><br><a href="https://status.squarespace.com/">Service Status</a><br><a href="https://www.squarespace.com/terms-of-service">Terms of Service</a><br><a href="https://www.squarespace.com/privacy">Privacy Policy</a><br><a href="https://support.squarespace.com/hc/en-us/requests/new">Contact Us</a></p>
+          </div>
+         </div>
+        </div>
+        <div class="col sqs-col-2 span-2">
+         <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_6_1468615304442_16477">
+          <div class="sqs-block-content">
+           <h3>COMMUNITY</h3>
+           <p><a href="https://support.squarespace.com/">Help &amp; Support</a><br><a href="https://answers.squarespace.com/">Answers</a><br><a href="https://workshops.squarespace.com/">Workshops</a><br><a href="https://specialists.squarespace.com/">Specialists</a><br><a href="https://developers.squarespace.com/">Developers</a><br><a href="https://circle.squarespace.com/">Circle</a></p>
+          </div>
+         </div>
+        </div>
+        <div class="col sqs-col-3 span-3">
+         <div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_6_1468615304442_21908">
+          <div class="sqs-block-content">
+           <h3>FOLLOW</h3>
+           <p><a target="_blank" href="http://blog.squarespace.com">Squarespace Blog</a><br><a href="http://engineering.squarespace.com">Engineering Blog</a><br><a href="https://instagram.com/squarespace">Instagram</a><br><a href="https://facebook.com/squarespace">Facebook</a><br><a href="https://twitter.com/squarespace">Twitter</a><br><a href="https://plus.google.com/+squarespace">Google Plus</a></p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div> 
+    <div id="footerNavWrapper" class="nav-wrapper footer-nav"> 
+    </div> 
+   </footer> 
+  </div> 
+  <div id="mobileBar" class="mobile-bar" data-controller="MobileOffset"> <a class="nav-toggle-label nav-toggle-label--mobile flex-item" id="navToggleMobile" data-controller="NavToggle"> 
+    <svg class="Icon Icon--hamburger nav-toggle-label-icon" viewbox="0 0 26 18"> <use class="use--odd" xlink:href="/assets/ui-icons.svg#hamburger-icon--odd"></use> <use class="use--even" xlink:href="/assets/ui-icons.svg#hamburger-icon--even"></use> 
+    </svg> </a><!--
+      -->
+   <div class="social-ellipsis social-ellipsis--mobile flex-item" id="socialEllipsisMobile" data-controller="SocialToggle"> 
+    <svg class="ellipsis-icon" viewbox="0 0 25 6"> <use xlink:href="/assets/ui-icons.svg#ellipsis-icon"></use> 
+    </svg> 
+    <svg class="Icon Icon--close social-close-icon" viewbox="0 0 18 18"> <use xlink:href="/assets/ui-icons.svg#close-icon-line"></use> 
+    </svg> 
+   </div><!--
+      -->
+   <div class="search-cart--mobile flex-item"> <a href="/search" rel="search" class="header-search header-search--mobile" data-controller="SearchToggle"> 
+     <svg class="Icon Icon--search search-icon" viewbox="0 0 20 20"> <use xlink:href="/assets/ui-icons.svg#search-icon"></use> 
+     </svg> 
+     <svg class="Icon Icon--close search-close-icon" viewbox="0 0 18 18"> <use xlink:href="/assets/ui-icons.svg#close-icon-line"></use> 
+     </svg> </a> 
+   </div><!--
+      --> 
+  </div> 
+  <script src="https://static1.squarespace.com/static/ta/56ab961ecbced617ccd2461e/17/scripts/site-bundle.js" type="text/javascript"></script> 
+  <script>
+  /* Replaces Header Logo with SVG */
+  /*
+  var header = document.getElementById('header')
+  var headerLogoImg = header.querySelector('.logo-image img')
+  if (headerLogoImg) {
+    headerLogoImg.src = 'https://engineering.squarespace.com/s/header-logo.svg'
+  }
+  */
+   
+  /* Replaces Footer Logo with SVG */
+  var footer = document.getElementById('footer')
+  var footerLogoImg = footer.querySelector('a[href$="squarespace.com"] img')
+  if (footerLogoImg) {
+    footerLogoImg.style.maxWidth = '34px'
+    footerLogoImg.src = 'https://engineering.squarespace.com/s/footer-logo.svg'
+  }
+</script> 
+  <script>
+var pastScrollTop = document.body.scrollTop;
+var mobileBar = document.getElementById('mobileBar');
+window.addEventListener('scroll', function(e) {
+  if (0 > (document.body.scrollTop - pastScrollTop) || document.body.scrollTop < 50) {
+    mobileBar.classList.remove('tucked-away');
+  } else {
+    mobileBar.classList.add('tucked-away');
+  }
+  
+  pastScrollTop = document.body.scrollTop;
+});
+</script>
+  <script type="text/javascript" data-sqs-type="imageloader-bootstrapper">(function() {if(window.ImageLoader) { window.ImageLoader.bootstrap({}, document); }})();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none" data-usage="social-icons-svg">
+   <symbol id="instagram-icon" viewbox="0 0 64 64">
+    <path d="M46.91,25.816c-0.073-1.597-0.326-2.687-0.697-3.641c-0.383-0.986-0.896-1.823-1.73-2.657c-0.834-0.834-1.67-1.347-2.657-1.73c-0.954-0.371-2.045-0.624-3.641-0.697C36.585,17.017,36.074,17,32,17s-4.585,0.017-6.184,0.09c-1.597,0.073-2.687,0.326-3.641,0.697c-0.986,0.383-1.823,0.896-2.657,1.73c-0.834,0.834-1.347,1.67-1.73,2.657c-0.371,0.954-0.624,2.045-0.697,3.641C17.017,27.415,17,27.926,17,32c0,4.074,0.017,4.585,0.09,6.184c0.073,1.597,0.326,2.687,0.697,3.641c0.383,0.986,0.896,1.823,1.73,2.657c0.834,0.834,1.67,1.347,2.657,1.73c0.954,0.371,2.045,0.624,3.641,0.697C27.415,46.983,27.926,47,32,47s4.585-0.017,6.184-0.09c1.597-0.073,2.687-0.326,3.641-0.697c0.986-0.383,1.823-0.896,2.657-1.73c0.834-0.834,1.347-1.67,1.73-2.657c0.371-0.954,0.624-2.045,0.697-3.641C46.983,36.585,47,36.074,47,32S46.983,27.415,46.91,25.816z M44.21,38.061c-0.067,1.462-0.311,2.257-0.516,2.785c-0.272,0.7-0.597,1.2-1.122,1.725c-0.525,0.525-1.025,0.85-1.725,1.122c-0.529,0.205-1.323,0.45-2.785,0.516c-1.581,0.072-2.056,0.087-6.061,0.087s-4.48-0.015-6.061-0.087c-1.462-0.067-2.257-0.311-2.785-0.516c-0.7-0.272-1.2-0.597-1.725-1.122c-0.525-0.525-0.85-1.025-1.122-1.725c-0.205-0.529-0.45-1.323-0.516-2.785c-0.072-1.582-0.087-2.056-0.087-6.061s0.015-4.48,0.087-6.061c0.067-1.462,0.311-2.257,0.516-2.785c0.272-0.7,0.597-1.2,1.122-1.725c0.525-0.525,1.025-0.85,1.725-1.122c0.529-0.205,1.323-0.45,2.785-0.516c1.582-0.072,2.056-0.087,6.061-0.087s4.48,0.015,6.061,0.087c1.462,0.067,2.257,0.311,2.785,0.516c0.7,0.272,1.2,0.597,1.725,1.122c0.525,0.525,0.85,1.025,1.122,1.725c0.205,0.529,0.45,1.323,0.516,2.785c0.072,1.582,0.087,2.056,0.087,6.061S44.282,36.48,44.21,38.061z M32,24.297c-4.254,0-7.703,3.449-7.703,7.703c0,4.254,3.449,7.703,7.703,7.703c4.254,0,7.703-3.449,7.703-7.703C39.703,27.746,36.254,24.297,32,24.297z M32,37c-2.761,0-5-2.239-5-5c0-2.761,2.239-5,5-5s5,2.239,5,5C37,34.761,34.761,37,32,37z M40.007,22.193c-0.994,0-1.8,0.806-1.8,1.8c0,0.994,0.806,1.8,1.8,1.8c0.994,0,1.8-0.806,1.8-1.8C41.807,22.999,41.001,22.193,40.007,22.193z" />
+   </symbol><symbol id="instagram-mask" viewbox="0 0 64 64">
+    <path d="M43.693,23.153c-0.272-0.7-0.597-1.2-1.122-1.725c-0.525-0.525-1.025-0.85-1.725-1.122c-0.529-0.205-1.323-0.45-2.785-0.517c-1.582-0.072-2.056-0.087-6.061-0.087s-4.48,0.015-6.061,0.087c-1.462,0.067-2.257,0.311-2.785,0.517c-0.7,0.272-1.2,0.597-1.725,1.122c-0.525,0.525-0.85,1.025-1.122,1.725c-0.205,0.529-0.45,1.323-0.516,2.785c-0.072,1.582-0.087,2.056-0.087,6.061s0.015,4.48,0.087,6.061c0.067,1.462,0.311,2.257,0.516,2.785c0.272,0.7,0.597,1.2,1.122,1.725s1.025,0.85,1.725,1.122c0.529,0.205,1.323,0.45,2.785,0.516c1.581,0.072,2.056,0.087,6.061,0.087s4.48-0.015,6.061-0.087c1.462-0.067,2.257-0.311,2.785-0.516c0.7-0.272,1.2-0.597,1.725-1.122s0.85-1.025,1.122-1.725c0.205-0.529,0.45-1.323,0.516-2.785c0.072-1.582,0.087-2.056,0.087-6.061s-0.015-4.48-0.087-6.061C44.143,24.476,43.899,23.682,43.693,23.153z M32,39.703c-4.254,0-7.703-3.449-7.703-7.703s3.449-7.703,7.703-7.703s7.703,3.449,7.703,7.703S36.254,39.703,32,39.703z M40.007,25.793c-0.994,0-1.8-0.806-1.8-1.8c0-0.994,0.806-1.8,1.8-1.8c0.994,0,1.8,0.806,1.8,1.8C41.807,24.987,41.001,25.793,40.007,25.793z M0,0v64h64V0H0z M46.91,38.184c-0.073,1.597-0.326,2.687-0.697,3.641c-0.383,0.986-0.896,1.823-1.73,2.657c-0.834,0.834-1.67,1.347-2.657,1.73c-0.954,0.371-2.044,0.624-3.641,0.697C36.585,46.983,36.074,47,32,47s-4.585-0.017-6.184-0.09c-1.597-0.073-2.687-0.326-3.641-0.697c-0.986-0.383-1.823-0.896-2.657-1.73c-0.834-0.834-1.347-1.67-1.73-2.657c-0.371-0.954-0.624-2.044-0.697-3.641C17.017,36.585,17,36.074,17,32c0-4.074,0.017-4.585,0.09-6.185c0.073-1.597,0.326-2.687,0.697-3.641c0.383-0.986,0.896-1.823,1.73-2.657c0.834-0.834,1.67-1.347,2.657-1.73c0.954-0.371,2.045-0.624,3.641-0.697C27.415,17.017,27.926,17,32,17s4.585,0.017,6.184,0.09c1.597,0.073,2.687,0.326,3.641,0.697c0.986,0.383,1.823,0.896,2.657,1.73c0.834,0.834,1.347,1.67,1.73,2.657c0.371,0.954,0.624,2.044,0.697,3.641C46.983,27.415,47,27.926,47,32C47,36.074,46.983,36.585,46.91,38.184z M32,27c-2.761,0-5,2.239-5,5s2.239,5,5,5s5-2.239,5-5S34.761,27,32,27z" />
+   </symbol><symbol id="facebook-icon" viewbox="0 0 64 64">
+    <path d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+   </symbol><symbol id="facebook-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+   </symbol><symbol id="twitter-icon" viewbox="0 0 64 64">
+    <path d="M48,22.1c-1.2,0.5-2.4,0.9-3.8,1c1.4-0.8,2.4-2.1,2.9-3.6c-1.3,0.8-2.7,1.3-4.2,1.6 C41.7,19.8,40,19,38.2,19c-3.6,0-6.6,2.9-6.6,6.6c0,0.5,0.1,1,0.2,1.5c-5.5-0.3-10.3-2.9-13.5-6.9c-0.6,1-0.9,2.1-0.9,3.3 c0,2.3,1.2,4.3,2.9,5.5c-1.1,0-2.1-0.3-3-0.8c0,0,0,0.1,0,0.1c0,3.2,2.3,5.8,5.3,6.4c-0.6,0.1-1.1,0.2-1.7,0.2c-0.4,0-0.8,0-1.2-0.1 c0.8,2.6,3.3,4.5,6.1,4.6c-2.2,1.8-5.1,2.8-8.2,2.8c-0.5,0-1.1,0-1.6-0.1c2.9,1.9,6.4,2.9,10.1,2.9c12.1,0,18.7-10,18.7-18.7 c0-0.3,0-0.6,0-0.8C46,24.5,47.1,23.4,48,22.1z" />
+   </symbol><symbol id="twitter-mask" viewbox="0 0 64 64">
+    <path d="M0,0v64h64V0H0z M44.7,25.5c0,0.3,0,0.6,0,0.8C44.7,35,38.1,45,26.1,45c-3.7,0-7.2-1.1-10.1-2.9 c0.5,0.1,1,0.1,1.6,0.1c3.1,0,5.9-1,8.2-2.8c-2.9-0.1-5.3-2-6.1-4.6c0.4,0.1,0.8,0.1,1.2,0.1c0.6,0,1.2-0.1,1.7-0.2 c-3-0.6-5.3-3.3-5.3-6.4c0,0,0-0.1,0-0.1c0.9,0.5,1.9,0.8,3,0.8c-1.8-1.2-2.9-3.2-2.9-5.5c0-1.2,0.3-2.3,0.9-3.3 c3.2,4,8.1,6.6,13.5,6.9c-0.1-0.5-0.2-1-0.2-1.5c0-3.6,2.9-6.6,6.6-6.6c1.9,0,3.6,0.8,4.8,2.1c1.5-0.3,2.9-0.8,4.2-1.6 c-0.5,1.5-1.5,2.8-2.9,3.6c1.3-0.2,2.6-0.5,3.8-1C47.1,23.4,46,24.5,44.7,25.5z" />
+   </symbol>
+  </svg>  
+ </body>
+</html>

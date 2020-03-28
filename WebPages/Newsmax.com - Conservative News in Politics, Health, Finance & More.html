@@ -1,0 +1,1829 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+ <head id="head">
+  <script>
+// akam-sw.js install script version 1.3.3
+"serviceWorker"in navigator&&"find"in[]&&function(){var e=new Promise(function(e){"complete"===document.readyState||!1?e():(window.addEventListener("load",function(){e()}),setTimeout(function(){"complete"!==document.readyState&&e()},1e4))}),n=window.akamServiceWorkerInvoked,r="1.3.3";if(n)aka3pmLog("akam-setup already invoked");else{window.akamServiceWorkerInvoked=!0,window.aka3pmLog=function(){window.akamServiceWorkerDebug&&console.log.apply(console,arguments)};function o(e){(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"sm.sw.s":e,"sm.sw.v":r}])}var i="/akam-sw.js",a=new Map;navigator.serviceWorker.addEventListener("message",function(e){var n,r,o=e.data;if(o.isAka3pm)if(o.command){var i=(n=o.command,(r=a.get(n))&&r.length>0?r.shift():null);i&&i(e.data.response)}else if(o.commandToClient)switch(o.commandToClient){case"enableDebug":window.akamServiceWorkerDebug||(window.akamServiceWorkerDebug=!0,aka3pmLog("Setup script debug enabled via service worker message"),p());break;case"boomerangMQ":o.payload&&(window.BOOMR_mq=window.BOOMR_mq||[]).push(o.payload)}aka3pmLog("akam-sw message: "+JSON.stringify(e.data))});var t=function(e){return new Promise(function(n){var r,o;r=e.command,o=n,a.has(r)||a.set(r,[]),a.get(r).push(o),navigator.serviceWorker.controller&&(e.isAka3pm=!0,navigator.serviceWorker.controller.postMessage(e))})},c=function(e){return t({command:"navTiming",navTiming:e})},s=null,m={},d=function(){var e=i;return s&&(e+="?othersw="+encodeURIComponent(s)),function(e,n){return new Promise(function(r,i){aka3pmLog("Registering service worker with URL: "+e),navigator.serviceWorker.register(e,n).then(function(e){aka3pmLog("ServiceWorker registration successful with scope: ",e.scope),r(e),o(1)}).catch(function(e){aka3pmLog("ServiceWorker registration failed: ",e),o(0),i(e)})})}(e,m)},g=ServiceWorkerContainer.prototype.register;if(ServiceWorkerContainer.prototype.register=function(n,r){return n.includes(i)?g.call(this,n,r):(aka3pmLog("Overriding registration of service worker for: "+n),s=new URL(n,window.location.href),m=r,navigator.serviceWorker.controller?new Promise(function(n,r){var o=navigator.serviceWorker.controller.scriptURL;if(o.includes(i)){var a=encodeURIComponent(s);o.includes(a)?(aka3pmLog("Cancelling registration as we already integrate other SW: "+s),navigator.serviceWorker.getRegistration().then(function(e){n(e)})):e.then(function(){aka3pmLog("Unregistering existing 3pm service worker"),navigator.serviceWorker.getRegistration().then(function(e){e.unregister().then(function(){return d()}).then(function(e){n(e)}).catch(function(e){r(e)})})})}else aka3pmLog("Cancelling registration as we already have akam-sw.js installed"),navigator.serviceWorker.getRegistration().then(function(e){n(e)})}):g.call(this,n,r))},navigator.serviceWorker.controller){var u=navigator.serviceWorker.controller.scriptURL;u.includes("/akam-sw.js")||u.includes("/akam-sw-preprod.js")||u.includes("/threepm-sw.js")||(aka3pmLog("Detected existing service worker. Removing and re-adding inside akam-sw.js"),s=new URL(u,window.location.href),e.then(function(){navigator.serviceWorker.getRegistration().then(function(e){m={scope:e.scope},e.unregister(),d()})}))}else e.then(function(){window.akamServiceWorkerPreprod&&(i="/akam-sw-preprod.js"),d()});if(window.performance){var w=window.performance.timing,l=w.responseEnd-w.responseStart;c(l)}e.then(function(){t({command:"pageLoad"})});var k=!1;function p(){window.akamServiceWorkerDebug&&!k&&(k=!0,aka3pmLog("Initializing debug functions at window scope"),window.aka3pmInjectSwPolicy=function(e){return t({command:"updatePolicy",policy:e})},window.aka3pmDisableInjectedPolicy=function(){return t({command:"disableInjectedPolicy"})},window.aka3pmDeleteInjectedPolicy=function(){return t({command:"deleteInjectedPolicy"})},window.aka3pmGetStateAsync=function(){return t({command:"getState"})},window.aka3pmDumpState=function(){aka3pmGetStateAsync().then(function(e){aka3pmLog(JSON.stringify(e,null,"\t"))})},window.aka3pmInjectTiming=function(e){return c(e)},window.aka3pmUpdatePolicyFromNetwork=function(){return t({command:"pullPolicyFromNetwork"})})}p()}}();</script> 
+  <script id="FormTrack_p_lt_zoneNewHeader_AdobeAnalytics_Adobe" type="text/javascript" src="//assets.adobedtm.com/7014b84c59a7140df850ba0669cdd515a2b62868/satelliteLib-901a5fea21c622cba5fda1689e226b13d134718d.js"></script>
+  <title>
+	Newsmax.com - Conservative News in Politics, Health, Finance &amp; More
+</title>
+  <meta name="description" content="Find today's news headlines and the best in conservative commentary from Newsmax.com. Our stories cover a wide range of current events, including American news, global news, health reports, money news, science, technology &amp; more."> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <meta http-equiv="pragma" content="no-cache"> 
+  <meta http-equiv="content-style-type" content="text/css"> 
+  <meta http-equiv="content-script-type" content="text/javascript"> 
+  <meta name="keywords" content="Newsmax, Newsmax.com, breaking news, conservative news, american news, today's news headlines, current events, Washington, White House, investment, personal health, libertarian, live news stream, news, news videos, politics, republican, democrat, libertarian, liberal"> 
+  <link href="/CMSPages/GetResource.ashx?stylesheetname=Newsmax" type="text/css" rel="stylesheet"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="msvalidate.01" content="FAF1322EC761685A5DD9344A1C19E82A"> <!--CSS--> 
+  <link type="text/css" rel="stylesheet" href="/CMSPages/GetCSS.aspx?stylesheetname=NewsmaxInternalPages"> 
+  <link type="text/css" rel="stylesheet" href="/CMSPages/GetCSS.aspx?stylesheetname=NewsmaxWebparts"> 
+  <link type="text/css" rel="stylesheet" href="/CMSPages/GetCSS.aspx?stylesheetname=NewsmaxNew"> 
+  <link rel="shortcut icon" href="/App_Themes/Newsmax/images/favicon.ico"> 
+  <link rel="icon" href="https://www.newsmax.com/App_Themes/Newsmax/images/favicon.ico"> 
+  <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script> 
+  <script async type="text/javascript" src="/js/jquery-migrate-3.0.0.min.js"></script> 
+  <script async type="text/javascript" src="/js/jquery-ui-1.12.1.min.js"></script> 
+  <script async type="text/javascript" src="/js/SponsoredHeadline.js"></script> 
+  <script type="text/javascript" src="/CMSScripts/jquery/jquery.cookie.js"></script> <!-- Flash Detection Script --> <!-- Used for Video Player --> <!--  Functions in this script are used site wide--> 
+  <script async src="/CMSScripts/newsmax/headerscripts.js" type="text/javascript"> </script> <!-- DFP Scripts --> 
+  <script src="//www.googletagservices.com/tag/js/gpt.js"></script> 
+  <script async type="text/javascript" src="/CMSScripts/Newsmax/jquery.colorbox-min.js"></script> 
+  <link href="/CMSPages/GetCSS.aspx?stylesheetname=colorboxNewsmax" rel="stylesheet" type="text/css"> <!-- One Signal --> 
+  <script async src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"></script> 
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "d4a15f2f-7ca8-48ca-aa1f-0bea58100a1c",
+      autoRegister: true, 
+      httpPermissionRequest: {
+        enable: true
+      },
+      notifyButton: {
+          enable: true
+      }
+    }]);
+</script> <!--BACKGROUND SITE GRAPHIC----> 
+  <script type="text/javascript">
+/*
+	var clickURL = 'http://www.newsmaxtv.com'; // change this to your landing page
+	var mainbodyWidth = 992; // the width of the main body
+	function bgClick() { window.open(clickURL); }
+
+$(document).ready(function(){
+	document.getElementById("bgleft").onclick = bgClick;
+	document.getElementById("bgright").onclick = bgClick;
+	resizeBgAd();
+	window.onresize=resizeBgAd;
+});
+	function resizeBgAd() {
+		if(jQuery(window).width() < 1330) { 
+			jQuery("#bgleft").hide();
+			jQuery("#bgright").hide();
+		} else {
+			jQuery("#bgleft").show();
+			jQuery("#bgright").show();
+			var w=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;
+			document.getElementById("bgleft").style.width = (w-mainbodyWidth)/2+"px";
+			document.getElementById("bgright").style.width = (w-mainbodyWidth)/2+"px";
+		}
+	}
+if (window.location != window.parent.location) {jQuery("html").css('background-color','white !important');}
+*/
+</script>
+  <meta name="google-site-verification" content="Yf9B95rW4xffOEqAHsxzFFUtGpSxF9m0oK7MBL3BoL8"> 
+  <meta http-equiv="Refresh" content="420000"> 
+  <meta name="robots" content="noarchive"> 
+  <meta name="robots" content="index, follow"> 
+  <meta name="author" content="Newsmax"> 
+  <meta name="msvalidate.01" content="615D1058C177694E8651D34498E5BC38"> 
+  <script src="/js/Canvas.js" type="text/javascript"></script> 
+  <link rel="canonical" href="https://www.newsmax.com"> 
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://www.newsmax.com/t/#!newsmax"> 
+  <meta property="og:title" content="Newsmax.com - Breaking news from around the globe"> 
+  <meta property="og:url" content="https://www.newsmax.com/"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:image" content="https://www.newsmax.com/App_Themes/NewsmaxNew/images/NM01.png"> 
+  <meta property="og:description" content="Newsmax.com reports today’s news headlines, live news stream, news videos from Americans and global readers
+seeking the latest in current events, politics, U.S., world news, health, finance, and more."> 
+  <meta property="og:site_name" content="Newsmax"> 
+  <meta property="fb:app_id" content="323020797885219"> 
+  <meta name="twitter:card" content="summary_large_image"> 
+  <meta name="twitter:site" content="@newsmax"> 
+  <meta name="twitter:description" content="Newsmax.com reports today’s news headlines, live news stream, news videos from Americans and global readers
+seeking the latest in current events, politics, U.S., world news, health, finance, and more."> 
+  <meta name="twitter:title" content="Newsmax.com - Breaking news from around the globe"> 
+  <meta name="twitter:image" content="https://www.newsmax.com/App_Themes/Newsmax/images/NM01.png"> 
+  <meta name="twitter:image:alt" content="Newsmax.com - Breaking news from around the globe"> 
+  <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+  <link href="/favicon.ico" type="image/x-icon" rel="icon"> 
+  <script id="FormTrack_p_lt_zoneNewHeader_AdobeAnalytics_AdobeAnalytics" type="text/javascript" src="/js/analytics.js"></script>
+  <script id="DFPScript" type="text/javascript">googletag.defineOutOfPageSlot('/6305169/Newsmax', 'div-gpt-ad-316ffadb-67af-4a45-b20f-cd89b38c22d5').addService(googletag.pubads());
+(function() {
+                                    
+                                    var c = $.cookie('siu-ad-fixed');
+                                    if (!c) {
+    
+                                        var ad = googletag.defineSlot('/6305169/newsmax.mab', [[480,50],[728,90],[1024,90]], 'div-gpt-ad-a032e390-585a-4e87-8ffc-f8af1897ee09').addService(googletag.pubads());
+
+                                        var mapping = googletag.sizeMapping()
+                                            .addSize([1200, 200], [1024, 90])
+                                            .addSize([1024, 200], [768, 90])
+                                            .addSize([980, 200], [768, 90])
+                                            .addSize([640, 200], [480, 50])
+                                            .addSize([0, 0], [])
+                                            .build();
+                                    
+                                       ad.defineSizeMapping(mapping); 
+                                   }
+
+
+                            })();
+googletag.pubads().setTargeting('promo_code','zhs3nmqq');
+googletag.pubads().setTargeting('PubYear','2020');
+googletag.pubads().setTargeting('PubMonth','3');
+googletag.pubads().setTargeting('signedup','false');
+googletag.pubads().collapseEmptyDivs(true);
+googletag.enableServices();
+</script> 
+  <script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"true","rua.cpush":"true","rua.upre":"true","rua.cpre":"true","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"SJ-b7f4a67c-01d6-4a16-8116-72b1e0734e83","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false"}]);</script> 
+  <script>!function(){function o(n,i){if(n&&i)for(var r in i)i.hasOwnProperty(r)&&(void 0===n[r]?n[r]=i[r]:n[r].constructor===Object&&i[r].constructor===Object?o(n[r],i[r]):n[r]=i[r])}try{var n=decodeURIComponent("");if(n.length>0&&window.JSON&&"function"==typeof window.JSON.parse){var i=JSON.parse(n);void 0!==window.BOOMR_config?o(window.BOOMR_config,i):window.BOOMR_config=i}}catch(r){window.console&&"function"==typeof window.console.error&&console.error("mPulse: Could not parse configuration",r)}}();</script> 
+  <script>!function(a){var e="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")a.BOOMR_config=a.BOOMR_config||{},a.BOOMR_config.PageParams=a.BOOMR_config.PageParams||{},a.BOOMR_config.PageParams.pci=!0,e="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="RRNR9-85ANW-4QF6A-ZJTU2-LGRHY",function(){function n(e){a.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!a.BOOMR||!a.BOOMR.version&&!a.BOOMR.snippetExecuted){a.BOOMR=a.BOOMR||{},a.BOOMR.snippetExecuted=!0;var i,o,_,r=document.createElement("iframe");if(a[t])a[t]("load",n,!1);else if(a.attachEvent)a.attachEvent("onload",n);r.src="javascript:void(0)",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="width:0;height:0;border:0;display:none;",_=document.getElementsByTagName("script")[0],_.parentNode.insertBefore(r,_);try{o=r.contentWindow.document}catch(O){i=document.domain,r.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",o=r.contentWindow.document}o.open()._l=function(){var a=this.createElement("script");if(i)this.domain=i;a.id="boomr-if-as",a.src=e+"RRNR9-85ANW-4QF6A-ZJTU2-LGRHY",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(a)},o.write("<bo"+'dy onload="document._l();">'),o.close()}}(),"".length>0)if(a&&"performance"in a&&a.performance&&"function"==typeof a.performance.setResourceTimingBufferSize)a.performance.setResourceTimingBufferSize();!function(){if(BOOMR=a.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var e="true"=="true"?1:0,t="",n="idt5sunyszqjext6qx5q-f-b6632ff5b-clientnsv4-s.akamaihd.net",i={"ak.v":"26","ak.cp":"599651","ak.ai":parseInt("390844",10),"ak.ol":"0","ak.cr":16,"ak.ipv":4,"ak.proto":"","ak.rid":"11f13878","ak.r":34368,"ak.a2":e,"ak.m":"a","ak.n":"essl","ak.bpcip":"64.231.217.0","ak.cport":40794,"ak.gh":"184.150.96.142","ak.quicv":"","ak.tlsv":"tls1.2","ak.0rtt":"","ak.csrc":"-","ak.acc":"reno","ak.t":"1585350139","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==frQDMoySmxAJQ6X5baDd6tJDePqjiV4r8pMBc0/CnOoa6z90Ycwvqg6eRoY7cshElaqFAJQysYgFKdMJDaX4EiuZronuO+tv9G3yStSRHaNcPzbmfKxd5kh7bVWq6Zw64EtdY8hL8Psu1f4WeKNVd7NPjUe4ZpIjE2MauKxjIyplm4a6JzD/B8poqiY33JmTqPDB0/EnWPbqzEvO+bf1Hktm7+RrNNtIoAVUVHtKsB0L7/cog++1hlNAmi4nWhWFsWsJl0P8XxiTOkbGWczpqe3coEi9W7iFTUp367cpKvViikvpCV62bDzzt+9Pmpe0V67t2ZMXiN+CJz5wL7u749j+16MHTznvz/HGaxZGUo3ywMN5UBljGgCOTTt54L+tnIgbxSauOAEJiK/2+4XSYRict+SL3sk+nkLWGz2t2F4="};if(""!==t)i["ak.ruds"]=t;var o={i:!1,av:function(e){var t="http.initiator";if(e&&(!e[t]||"spa_hard"===e[t]))i["ak.feo"]=void 0!==a.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var a=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t"];BOOMR.removeVar(a)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:n,init:function(){if(!o.i){var a=BOOMR.subscribe;a("before_beacon",o.av,null,null),a("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script>
+ </head> 
+ <body class="LTR Safari Chrome Safari44 Chrome44 ENUS ContentBody"> 
+  <form method="post" action="/" id="form"> 
+   <div class="aspNetHidden"> 
+    <input type="hidden" name="manScript_HiddenField" id="manScript_HiddenField" value=""> 
+    <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""> 
+    <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""> 
+   </div> 
+   <script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form'];
+if (!theForm) {
+    theForm = document.form;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script> 
+   <script src="/WebResource.axd?d=ajj-54hEFw_9s8vUhC7aqiqIMz0pNh5t4_SU2ofVsVwummsDI5FJiI5GycwOyKPz2gszbuHXhWsBOxBmW8C9TcQBcJ41&amp;t=636939809749177621" type="text/javascript"></script> 
+   <script type="text/javascript">
+//<![CDATA[
+
+
+            var clickedOnce = false;
+
+            var track = true;
+
+            var digitalData = { };
+
+              function analyticsTracking(event, tab) {
+
+                    jQuery(document).on('click', event, function (e) {
+        
+                        //first try to get the value, if one does not exist then try to get the title tag.
+                        var name = '';
+            
+                            if (typeof e.data.text == 'undefined') {
+                            name = e.data.title.trim();
+                        }
+                        else {
+
+                                if (e.data.text.trim() === '') {
+                                name = e.data.title.trim();
+                            }
+                            else {
+                                name = e.data.text.trim();
+                            }
+                        }
+
+                        digitalData.tab = {
+                            type: tab,
+                            name: name
+                        }
+                        _satellite.track('tab_click');
+
+                        
+                    });
+
+
+                }
+
+            function analyticsFormTracking(id, data) {
+
+                if (clickedOnce == false || clickedOnce && data == 'form_error')
+                {
+                    if (typeof track != 'undefined')
+                    {
+
+                        digitalData.page.form = {
+                            formID : id
+                        };
+        
+    
+                        _satellite.track(data);
+                      
+                    }
+
+                    if( data =='form_start')
+                        { clickedOnce = true;}
+
+                }
+            }
+
+            function analyticsSocialTracking(socialName, socialAction, data) {
+
+                    if (typeof track != 'undefined') {
+
+                        digitalData.page.social = {
+                            socialName: socialName,
+                            socialAction: socialAction
+                        };
+
+                        _satellite.track(data);
+                     
+                    }
+  
+            }
+
+        function analyticsSearchTracking()
+        {
+
+            digitalData.page.search =
+                {
+                    onsiteSearchTerm: encodeURIComponent(document.getElementById('q').value)
+                };
+
+            _satellite.track('search_internal');
+          
+        }
+
+      
+
+
+//]]>
+</script> 
+   <input type="hidden" name="lng" id="lng" value="en-US"> 
+   <script type="text/javascript">
+	//<![CDATA[
+
+function PM_Postback(param) { if (window.top.HideScreenLockWarningAndSync) { window.top.HideScreenLockWarningAndSync(1080); } if(window.CMSContentManager) { CMSContentManager.allowSubmit = true; }; __doPostBack('m$am',param); }
+function PM_Callback(param, callback, ctx) { if (window.top.HideScreenLockWarningAndSync) { window.top.HideScreenLockWarningAndSync(1080); }if (window.CMSContentManager) { CMSContentManager.storeContentChangedStatus(); };WebForm_DoCallback('m$am',param,callback,ctx,null,true); }
+//]]>
+</script> 
+   <script src="/ScriptResource.axd?d=ORS1ZbvWo5JoFtgtIbaJk_l4GDYQZ-6-uPUhpgpWELzpoe7mkzhyG3Hyr8NrKzS32AipLnDjLKQS992FG669kjEf19MFrmfAmXxuW3UZ2Ofnr9Cb0&amp;t=7c776dc1" type="text/javascript"></script> 
+   <script src="/ScriptResource.axd?d=xjgJjMemZB5VupTqb9KqO7eS6UV7WpLygwUt4U2i-s3sMV9ogzXBiDazcof9GuztXaU2sshjeKDuawSKibas2jWT8hKhiXO-mf3jnX9SA80XVK7-HGql8Dbtgd3dGU6fvJAm2A2&amp;t=7c776dc1" type="text/javascript"></script> 
+   <script type="text/javascript">
+	//<![CDATA[
+
+var CMS = CMS || {};
+CMS.Application = {
+  "isRTL": "false",
+  "isDebuggingEnabled": false,
+  "applicationUrl": "/",
+  "imagesUrl": "/CMSPages/GetResource.ashx?image=%5bImages.zip%5d%2f",
+  "isDialog": false
+};
+
+//]]>
+</script> 
+   <div class="aspNetHidden"> 
+    <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A5343185"> 
+    <input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0"> 
+    <input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0"> 
+   </div> 
+   <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('manScript', 'form', ['tctxM',''], [], [], 90, '');
+//]]>
+</script> 
+   <div id="ctxM"> 
+   </div> <!-- station: 10 --> <!-- BACKGROUND AD 
+<div id="bgleft" style="position:fixed;z-index:10000;top:0;left:0;width:250px;height:100%;cursor:pointer;display:block;"></div>
+<div id="bgright" style="position:fixed;z-index:10000;top:0;right:0;width:250px;height:100%;cursor:pointer;display:block;"></div>
+--> <!-- Google Tag Manager --> 
+   <noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WL644C" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+   </noscript> 
+   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WL644C');</script> <!-- End Google Tag Manager --> <!-- Live Validation --> 
+   <script async type="text/javascript" src="/CMSScripts/Newsmax/livevalidation_standalone.compressed.js"></script> 
+   <input type="hidden" value="www.newsmax.com" id="Sitepath"> <!--Main Wrapper --> 
+   <div id="nmMain"> 
+    <div id="nmabm" style="text-align:center; padding:50px; display:none; font-size:28px; font-weight:bold;"> <span style="border:2px solid #000; padding:20px;"></span> 
+    </div> 
+    <script src="/js/ads.adblock.js"></script> 
+    <script>
+(function(){
+
+AdBlockManagement = {
+
+  config:{
+    showmessage:true,
+    reporting:true,
+    debug:true
+  },
+  
+  message:{
+    text:'Please disable your Ad Blocker to view this site properly.',
+    run:function(self){
+        if(self.config.showmessage){
+            var msg = document.getElementById('nmabm');
+            msg.style.display='block';
+            msg.getElementsByTagName('span')[0].innerText=this.text;
+            (self.config.debug)?console.log('[ADBM] - Message added ' + this.text):[];
+        }
+    
+    }  
+  },
+  
+  analytics:{
+     createpixel:function(){
+         var pixel = document.createElement('img');
+         pixel.src = 'https://sb.scorecardresearch.com/p?c1=2&c2=9248945&ns_site=newsmax&name=abl';
+         pixel.height = 1;
+         pixel.width=1;
+         pixel.alt = '*';
+         return pixel;
+     },
+     run:function(self){
+        (self.config.reporting)? document.body.appendChild(this.createpixel()):[]; 
+        (self.config.debug)?console.log('[ADBM] - Pixel added to document'):[];
+     }  
+  },  
+
+  init:function(){
+    if(typeof fake_ad == 'undefined'){
+      this.analytics.run(this);
+      this.message.run(this);
+    }
+  }
+
+}
+
+AdBlockManagement.init();
+
+})();
+</script> <!-- Content container --> 
+    <div class="mainDiv"> 
+     <div> 
+      <div id="nmSiteNav"> <a href="/" id="nmSiteNavNewsmax" class="nmSiteNavBtn Newsmax_a" title="Newsmax" onmouseover="jQuery(this).removeClass('Newsmax_a').addClass('Newsmax_i');" onmouseout="jQuery(this).removeClass('Newsmax_i').addClass('Newsmax_a');" onclick="analyticsTracking(this, 'topNav');"></a> <a style="color: #CCC;" href="http://www.newsmaxtv.com/" id="nmSiteNavNewsmaxTV" class="nmSiteNavBtn TV_i" title="TV" onmouseover="jQuery(this).removeClass('TV_i').addClass('TV_a');" onmouseout="jQuery(this).removeClass('TV_a').addClass('TV_i');" onclick="analyticsTracking(this, 'topNav');"></a> <a href="/health/" id="nmSiteNavNewsmaxHealth" class="nmSiteNavBtn Health_i" title="Health" onmouseover="jQuery(this).removeClass('Health_i').addClass('Health_a');" onmouseout="jQuery(this).removeClass('Health_a').addClass('Health_i');" onclick="analyticsTracking(this, 'topNav');"></a> <a href="/finance/" id="nmSiteNavNewsmaxMoney" class="nmSiteNavBtn Money_i" title="Finance" onmouseover="jQuery(this).removeClass('Money_i').addClass('Money_a');" onmouseout="jQuery(this).removeClass('Money_a').addClass('Money_i');" onclick="analyticsTracking(this, 'topNav');"></a> <a href="/world/" id="nmSiteNavNewsmaxWorld" class="nmSiteNavBtn World_i" title="World" onmouseover="jQuery(this).removeClass('World_i').addClass('World_a');" onmouseout="jQuery(this).removeClass('World_a').addClass('World_i');" onclick="analyticsTracking(this, 'topNav');"></a> 
+       <div id="mobileSiteLink" style="display: none;"> <a href="/?vtype=mob" id="nmSiteNavNewsmaxMobile" title="ViewMobile" class="linkMobileSite" onclick="analyticsTracking(this, 'topNav');">View Newsmax Mobile</a> 
+       </div> 
+      </div>
+      <div id="HeaderMain"> <a href="/" id="nmNewsmaxLogo" title="NEWSMAX - Independent American."> </a> 
+      </div>
+      <div id="NewsmaxHeader"> 
+       <div id="nmTodaysDate"> 
+       </div> 
+       <div id="nmSearchCont"> 
+        <input class="nmSearchInput" title="Search" placeholder="Search Newsmax" type="text" name="q" id="q"> <a id="nmBtnSearch"> </a> 
+       </div> 
+       <div class="clear"> 
+       </div> 
+       <div class="nmNavSepTop"></div> 
+       <div id="nmMainNav"> 
+        <ul> 
+         <li><a id="nmHomeLink" href="/" class="nmMainNavLinkSel" onclick="analyticsTracking(this, 'MainNav');"> Home </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmSubscribeLink" href="/platinum/" class="nmMainNavLink nmSubscribeLink" onclick="analyticsTracking(this, 'MainNav');">Platinum </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmNewsfrontLink" href="/newsfront/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Newsfront </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmAmericaLink" href="/us/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">America </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmPoliticsLink" href="/politics/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Politics </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmInsiderLink" href="/insiders/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Opinion </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmWireLink" href="/thewire/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">The Wire </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBooksLink" href="/books/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Books</a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBestListsLink" href="/newsmaxbest/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Best Lists </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmSpecialsLink" href="/specials/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Specials</a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmSciTechLink" href="/sciencetechnology/" class="nmMainNavLink" onclick="analyticsTracking(this, 'MainNav');">Sci &amp; Tech </a></li> 
+        </ul> 
+       </div> <!-- <div id="nmMainNavBot">
+    </div> --> 
+       <div class="nmNavSepBot"></div> 
+      </div> <!-- BEGIN Soft Click add-on to Comscore --> 
+      <script type="text/javascript">
+        // <![CDATA[
+        function ns_onclick(q, f, u, b, o) { var i = window, l = i.ns_p, m = l && l.src, s = "&ns_", h = document.referrer.replace(/\/$/, ""), f = f || q.href, o = o || "", j = { t: 0, o: 0 }, e = eventURL = c1_match = c2_match = "", c = /\bc1=[^&]+\b/i, g = /\bc2=[^&]+\b/i, p = (i.encodeURIComponent ? encodeURIComponent : escape), n = "3.1312.06"; if (m && (c1_match = l.src.match(c)) && !c.test(u)) { e += "&" + c1_match } if (m && (c2_match = l.src.match(g)) && !g.test(u)) { e += "&" + c2_match } if (m) { var t = l.src, k = t.indexOf("?"); eventURL = t.substr(0, k > -1 ? k : t.length) + "?" } eventURL = [eventURL, u, e, s, "type=", b, s, "action=view", s, "_t=", +new Date, s, "sc_sv=", n, s, "sc_href=", p(f).substr(0, 1000), h ? "&c9=" + p(h) : ""].join(""); var r = q && q.target ? q.target.replace(/^_/, "") : "self", d = new Image(); if (i[r]) { j.t = (function (w, v, a) { return function () { clearTimeout(a.o); d.onload = d.onerror = function () { return }; i[w].location.href = v } })(r, f, j); j.o = setTimeout(j.t, 5000); d.onload = d.onerror = j.t } else { i.open(f, r, o) } d.src = eventURL; return false };
+        // ]]>
+    </script> <!-- END Soft Click add-on to Comscore --> <!-- Begin comScore Inline Tag - Function and No Script Tag - 1.1111.15 --> 
+      <script type="text/javascript">
+        // <![CDATA[
+        function udm_(a) { var b = "comScore=", c = document, d = c.cookie, e = "", f = "indexOf", g = "substring", h = "length", i = 2048, j, k = "&ns_", l = "&", m, n, o, p, q = window, r = q.encodeURIComponent || escape; if (d[f](b) + 1) for (o = 0, n = d.split(";"), p = n[h]; o < p; o++) m = n[o][f](b), m + 1 && (e = l + unescape(n[o][g](m + b[h]))); a += k + "_t=" + +(new Date) + k + "c=" + (c.characterSet || c.defaultCharset || "") + "&c8=" + r(c.title) + e + "&c7=" + r(c.URL) + "&c9=" + r(c.referrer), a[h] > i && a[f](l) > 0 && (j = a[g](0, i - 8).lastIndexOf(l), a = (a[g](0, j) + k + "cut=" + r(a[g](j + 1)))[g](0, i)), c.images ? (m = new Image, q.ns_p || (ns_p = m), m.src = a) : c.write("<", "p", "><", 'img src="', a, '" height="1" width="1" alt="*"', "><", "/p", ">") }
+        udm_('http' + (document.location.href.charAt(4) == 's' ? 's://sb' : '://b') + '.scorecardresearch.com/b?c1=2&c2=9248945&ns_site=newsmax&name=nmx.home.index&category=home&page_type=index');
+        // ]]>
+    </script> 
+      <noscript> 
+       <p> <img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=9248945&amp;ns_site=newsmax&amp;name=nmx.home.index&amp;category=home&amp;page_type=index" height="1" width="1" alt="*"> </p> 
+      </noscript> <!-- End comScore Inline Tag --> 
+      <script type="text/javascript">
+       // jQuery(document).ready(function () {
+          
+           digitalData.page = { 
+pageInfo: { 
+pageName: "nmx:home:index",
+pageType: "index",
+primaryCategory: "home",
+subCategory1: "n/a",
+subCategory2: "n/a",
+reportSuiteID: "nmincnewsmaxproduction",
+status: "logged-out"
+}
+, content: { 
+contentType: "",
+contentID: "",
+contentName: ""
+} 
+};
+          
+
+       // });
+    </script> 
+     </div> <!-- Content --> 
+     <div class="zoneMainContent"> 
+      <div id="nmBreakingNewsCont"> 
+       <div id="nmBreakingNewsTitle">
+         Special 
+       </div> 
+       <div id="nmBreakingNewsArrow"></div> 
+       <div id="nmBreakingText"> 
+        <h2><a href="https://w3.newsmax.com/General/NMM/Offers/Radio-MAG-Trial-4-95-S-H?dkt_nbr=070107zh39fl" target="_blank">Federal and State Authorities Urge You to Get an Emergency Radio</a></h2> 
+       </div> 
+      </div> <!--googleoff: index--> 
+      <div style=""> 
+       <div id="nmCanvasContainer2" class="nmCanvasContainer2"> 
+        <div id="nmCanvas5Container"> 
+         <div id="nmCanvas5Bkg"> 
+          <div id="nmCanvas5Headline"> <a href="/us/fired-furloughed-virus/2020/03/27/id/960301/" class="Default" style="font-size:40px">Nearly 1 in 4 Americans Have Been Fired <br>or Furloughed Due to Virus: Reuters/Ipsos Poll</a> 
+          </div> 
+          <div id="nmCanvas5PhotoCont"> 
+           <div id="nmCanvas5Photo"> <a href="/us/fired-furloughed-virus/2020/03/27/id/960301/"><img style="min-width:300px" src="/CMSPages/GetFile.aspx?guid=91c11eeb-f87d-4df9-877e-ea0bf0ae97e1&amp;SiteName=Newsmax" alt="Nearly 1 in 4 Americans Have Been Fired <br>or Furloughed Due to Virus: Reuters/Ipsos Poll"></a> 
+            <div id="nmCanvas5PhotoCaption">
+              Willie Mae Daniels spends time looking at videos with her granddaughter, Karyah Davis,6, after being laid off from her job as a food service cashier at the University of Miami on March 17 as the university joins in the effort to fight the coronavirus. (Joe Raedle/Getty Images) 
+            </div> 
+           </div> 
+          </div> 
+          <div class="clear"> 
+          </div> 
+          <div id="nmCanvas5Summary">
+            On the flip side, most respondents indicated they want to continue with social distancing and other lockdown measures, as advocated by many doctors, scientists and local officials -- even with the dramatic impact on the economy. Fewer than 1 in 5 said they want to end social distancing as soon as possible "to get the economy going again." <a id="p_lt_zoneContent_pageplaceholder_p_lt_TopCenter_repeater_Headline_repItems_ctl00_ctl00_CMSRepeater1_ctl00_ctl00_hlFullStory" class="linkFullStory" href="/us/fired-furloughed-virus/2020/03/27/id/960301/">[Full&nbsp;Story]</a> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+        </div> 
+       </div> <!--Canvas: Newsmax.Headline.SingleHeadlineWithPreviewTextAndImage - HID: 19406 - NMID: 19423--> 
+       <script>
+jQuery(document).ready(function(){
+	if (jQuery('div[id$=Photo]').html()) {
+  	var picWidth = jQuery('div[id$=Photo]').find('img').width();
+  } else {
+		var picWidth = jQuery('div[id$=Video]').find('img').width();
+  }
+	jQuery('div[id$=PhotoCaption]').css('max-width',picWidth + 'px');
+});
+</script> 
+       <div id="nmLeftColumn"> 
+        <div class="nmSpecialHead">
+         <div class="nmSpecialHeadL"></div> 
+         <div class="nmSpecialHeadLabel"> <a href="/hottopics/topic/coronavirus/389/" class="nmSectionHeadLink">Coronavirus Crisis</a> 
+         </div> 
+         <div class="nmSpecialHeadR"></div>
+        </div> 
+        <div class="nmSectionLead"> 
+         <div class="nmSectionThumb"> 
+          <img src="https://www.newsmax.com/CMSPages/GetFile.aspx?guid=59aba7d7-7cb0-458c-9c09-b86e5a1e3396&amp;SiteName=Newsmax" alt="" width="175"> 
+         </div> 
+         <div id="nmSpecialCovCont"> 
+          <div class="nmSectionHeadline"> 
+           <h2> <a class="nmNewsfrontHeadLink Default" href="/us/pregnancy-babies-infection-pandemic/2020/03/27/id/960304/"> In Shift, Experts Now Say Moms Can Pass Virus to Baby Before Birth </a> </h2> 
+          </div> 
+          <div> 
+           <ul class="nmSpecialLinks" style="margin-top:0px"> 
+            <li> <a class="css1" href="/headline/pandemic-outbreak-testing-confirmed-cases/2020/03/27/id/960236/">US Passes 100K Confirmed COVID-19 Cases, 1,500 Deaths</a></li> 
+            <li> <a class="css1" href="/us/military-pandemic-defense-department/2020/03/27/id/960288/">Military's Virus Data Won't Be Divulged, to Keep It From Foes</a></li> 
+            <li> <a class="css1" href="/us/vaping-virus/2020/03/27/id/960289/">Vaping Could Increase Health Risks Tied to COVID-19: FDA</a></li> 
+            <li> <a class="css1" href="/us/mark-zuckerberg-bill-gates-chan-coronavirus/2020/03/27/id/960242/">Zuck, Gates Join Search for Virus Drug</a></li> 
+            <li> <a class="css1" href="/world/globaltalk/virus-outbreak-canada/2020/03/27/id/960281/">Canada to Cover Up to 75% of Salaries for Businesses</a></li> 
+            <li> <a class="css1" href="/us/virus-outbreak-joe-diffie/2020/03/27/id/960272/">Country Singer Joe Diffie Tests Positive for Coronavirus</a></li> 
+            <li> <a class="css1" href="/us/surgeon-general-adams/2020/03/27/id/960273/">Surgeon General: Emerging Hot Spots Facing 'Worse Week'</a></li> 
+            <li> <a class="css1" href="/newsmax-tv/peter-hollens-youtube-impressionist-pandemic/2020/03/27/id/960275/">Peter Hollens to Newsmax TV: Lathering Up With Levity</a></li> 
+            <li> <a class="css1" href="/newsfront/trump-ventilators-defense-production-act/2020/03/27/id/960220/">Trump Slams GM, Ford Over Ventilators</a></li> 
+            <li> <a class="css1" href="/world/globaltalk/apnewsalert/2020/03/27/id/960161/">UK's Boris Johnson Tests Positive for Coronavirus</a></li> 
+            <li> <a class="css1" href="/us/new-york-andrew-cuomo-covid-19-virus/2020/03/27/id/960181/">Cuomo: Virus Sufferers Need Ventilators for 11-21 Days</a></li> 
+            <li> <a target="_blank" class="css1" href="https://www.newsmax.com/coronavirus/">Newsmax Coronavirus Resource Page</a></li> 
+           </ul> 
+           <br> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="clear"></div> 
+        <div class="spacer"></div> 
+        <div class="nmMoreSection" style="width:500px"> <a class="linkMore" href="/hottopics/topic/coronavirus/389/">More Coronavirus Crisis</a> 
+        </div> 
+        <div class="nmSpecialHead">
+         <div class="nmSpecialHeadL"></div> 
+         <div class="nmSpecialHeadLabel"> <a href="/hottopics/topic/trump-administration/246/" class="nmSectionHeadLink">The Trump Presidency</a> 
+         </div> 
+         <div class="nmSpecialHeadR"></div>
+        </div> 
+        <div class="nmSectionLead"> 
+         <div class="nmSectionThumb"> 
+          <img src="https://www.newsmax.com/CMSPages/GetFile.aspx?guid=fee08848-bcf8-4187-b16b-8a2ea4089276&amp;SiteName=Newsmax" alt="" width="175"> 
+         </div> 
+         <div id="nmSpecialCovCont"> 
+          <div class="nmSectionHeadline"> 
+           <h2> <a class="nmNewsfrontHeadLink Default" href="/us/virus-outbreak-congress/2020/03/27/id/960283/"> Trump Signs $2.2T Stimulus after Congress Resolves Snags </a> </h2> 
+          </div> 
+          <div> 
+           <ul class="nmSpecialLinks" style="margin-top:0px"> 
+            <li> <a class="css1" href="/us/michigan-gretchenwhitmer-virus-covid/2020/03/27/id/960292/">Michigan Governor: Trump Behind Virus Supplies Delay</a></li> 
+            <li> <a class="css1" href="/politics/mnuchin-virus-aid-package-stimulus-covid-19/2020/03/27/id/960244/">Mnuchin: Virus Aid May Keep Half of Americans Working</a></li> 
+            <li> <a class="css1" href="/politics/trump-convention-virus/2020/03/27/id/960263/">Trump Promises GOP Convention Will Be Held This August</a></li> 
+            <li> <a class="css1" href="/john-gizzi/senate-democrats-2-trillion-stimulus-bill/2020/03/27/id/960245/">Gizzi: Some of Dems' 'Wish List' Items Got Into Bill</a></li> 
+            <li> <a class="css1" href="/politics/mike-pence-easter-economy-pandemic/2020/03/27/id/960224/">Pence: Trump's Easter Goal 'Aspirational'</a></li> 
+            <li> <a class="css1" href="/politics/pandemic-response-white-house-americans/2020/03/27/id/960214/">ABC Poll: US Majority Approves of Trump's Virus Response</a></li> 
+            <li> <a class="css1" href="/politics/white-house-virus-easter-deadline/2020/03/27/id/960172/">Advisers Push Trump to Drop Easter Reopening Deadline</a></li> 
+            <li> <a class="css1" href="/newsfront/us-virus-outbreak-congress-oversight/2020/03/27/id/960154/">Rescue Package Tightens Oversight of Trump</a></li> 
+            <li> <a class="css1" href="/finance/streettalk/purell-trump-tariff/2020/03/27/id/960174/">Purell Hand Sanitizer Maker's Tariff Relief Request Denied </a></li> 
+            <li> <a class="css1" href="/world/globaltalk/xi-virus-pandemic-outbreak/2020/03/27/id/960167/">China's Xi to Trump: 'Very Worried About' Virus Outbreak in US</a></li> 
+           </ul> 
+           <br> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="clear"></div> 
+        <div class="spacer"></div> 
+        <div class="nmMoreSection" style="width:500px"> <a class="linkMore" href="/hottopics/topic/trump-administration/246/">More The Trump Presidency</a> 
+        </div> 
+        <script>
+jQuery(document).ready(function(){
+  jQuery('a.css1:contains("Newsmax Coronavirus Resource Page")').css("font-weight","bold");
+});
+</script>
+        <div class="nmSectionHead nmDefault"> 
+         <div class="nmSectionHeadL"></div> 
+         <div class="nmSectionHeadLabel"> <a href="/newsfront/" class="nmSectionHeadLink">Newsfront</a> 
+         </div> 
+         <div class="nmSectionHeadR"></div> 
+        </div> 
+        <div id="nmLeadStoryCont"> 
+         <div id="nmLeadStoryThumb">
+          <img src="/CMSPages/GetFile.aspx?guid=c6f9822c-59cb-4bf4-b823-473ae440cf44&amp;SiteName=Newsmax" alt="Pandemic May Worsen Epidemic of Opiod Use" width="175">
+         </div> 
+         <div id="nmLeadStoryContent"> 
+          <div id="nmleadStoryHead"> 
+           <h2> <a href="/us/opioids-overdose-drugs-virus/2020/03/27/id/960299/">Pandemic May Worsen Epidemic of Opiod Use</a></h2> 
+          </div> 
+          <div id="nmLeadStorySummary">
+            The coronavirus pandemic that's taken over the United States will likely lead to more drug overdoses, a new report concludes...... <a href="/us/opioids-overdose-drugs-virus/2020/03/27/id/960299/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+         </div> 
+        </div> 
+        <div class="clear"></div> <!-- ----------------- Relative articles repeater XXX--------------- --> 
+        <ul class="nmRelatedLinks"> 
+        </ul> 
+        <div class="clear"></div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl00$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl00_ctl00_hfArticleId" value="960294"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=d9707b19-8e78-469e-b8ed-b632e7f3b1a5&amp;SiteName=Newsmax" alt="Recession? Probably. Depression? Only If Virus Stays Untamed" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/streettalk/recession-depression-economy-virus/2020/03/27/id/960294/" class="nmSectionLink Default">Recession? Probably. Depression? Only If Virus Stays Untamed</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            The unpredictable and unprecedented path of the coronavirus has drawn <a href="/finance/streettalk/recession-depression-economy-virus/2020/03/27/id/960294/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl01$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl01_ctl00_hfArticleId" value="960295"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=40213a65-cb7e-496d-932d-ab0c5d2cd943&amp;SiteName=Newsmax" alt=" Ohio Sets All-Mail Primary for April 28; In-Person Vote Mostly Off" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/newsfront/virus-outbreak-ohio-election/2020/03/27/id/960295/" class="nmSectionLink Default"> Ohio Sets All-Mail Primary for April 28; In-Person Vote Mostly Off</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Ohio has set a new, almost exclusively mail-in primary election for <a href="/newsfront/virus-outbreak-ohio-election/2020/03/27/id/960295/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl02$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl02_ctl00_hfArticleId" value="0"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=1d1fc080-1570-46bd-8f05-c41f9bb7f3d1&amp;SiteName=Newsmax" alt="Men: Try This, Never Take Viagra Again" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a class="nmSectionLink Default" href="https://bit.ly/AdsiatoLLC_GoldSW_3-27to3-30" target="_blank">Men: Try This, Never Take Viagra Again</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            SPONSOR: New ED cure sweeps the nation. <a href="https://bit.ly/AdsiatoLLC_GoldSW_3-27to3-30" target="_blank" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl03$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl03_ctl00_hfArticleId" value="960276"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=5dcb9c80-3a28-4930-aa67-4a4b3a90bbe7&amp;SiteName=Newsmax" alt="Oil Drillers in US Cut Most Rigs in a Week Since 2015" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/us/oil-rigs-drilling-texas-new-mexico/2020/03/27/id/960276/" class="nmSectionLink Default">Oil Drillers in US Cut Most Rigs in a Week Since 2015</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            U.S. energy firms cut the most oil rigs in a week since April 2015, <a href="/us/oil-rigs-drilling-texas-new-mexico/2020/03/27/id/960276/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl04$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl04_ctl00_hfArticleId" value="960300"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=1ba47aaf-d5a4-4f20-9ead-a880da2802f0&amp;SiteName=Newsmax" alt="Carnival Seeks Up to $7 Billion Amid Global Travel Halt" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/companies/carnival-7-billion-global-travel/2020/03/27/id/960300/" class="nmSectionLink Default">Carnival Seeks Up to $7 Billion Amid Global Travel Halt</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Carnival Corp. is in talks to raise as much as $7 billion as the <a href="/finance/companies/carnival-7-billion-global-travel/2020/03/27/id/960300/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl05$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl05_ctl00_hfArticleId" value="960184"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=74103e22-19ba-4a2c-9f2f-a5d1509d6e38&amp;SiteName=Newsmax" alt="Dow Drops 900 as US Virus Cases Hit New Global High" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/streettalk/stocks-market-wall-street-dow/2020/03/27/id/960184/" class="nmSectionLink Default">Dow Drops 900 as US Virus Cases Hit New Global High</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Wall Street tumbled on Friday, ending a massive three-day surge after <a href="/finance/streettalk/stocks-market-wall-street-dow/2020/03/27/id/960184/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl06$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl06_ctl00_hfArticleId" value="0"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=e074ba13-113a-45ad-8ad2-f912554ff136&amp;SiteName=Newsmax" alt="Why This Face Mask is Selling Out Fast in United States" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a class="nmSectionLink Default" href="http://bit.ly/JuicyTrends_SilverDN_3-20to3-23" target="_blank">Why This Face Mask is Selling Out Fast in United States</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            SPONSOR: This safe mask is selling out fast in the USA <a href="http://bit.ly/JuicyTrends_SilverDN_3-20to3-23" target="_blank" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl07$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl07_ctl00_hfArticleId" value="960270"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=8f8c5326-79aa-4526-9325-94ac7a8ea5b9&amp;SiteName=Newsmax" alt="Pope Prays for 'Fragile' Humanity Needing Help in Pandemic" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/world/globaltalk/rel-virus-outbreak-vatican/2020/03/27/id/960270/" class="nmSectionLink Default">Pope Prays for 'Fragile' Humanity Needing Help in Pandemic</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Praying in a desolately empty St. Peter's Square, Pope Francis on <a href="/world/globaltalk/rel-virus-outbreak-vatican/2020/03/27/id/960270/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl08$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl08_ctl00_hfArticleId" value="960201"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=70739a89-6b3e-4ab8-82c3-828e674b722b&amp;SiteName=Newsmax" alt="Peter Greenberg: Airlines May Shut Down US Domestic Travel in 72 Hours" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/platinum/airlines-transports-tourism-domestic/2020/03/27/id/960201/" class="nmSectionLink Default">Peter Greenberg: Airlines May Shut Down US Domestic Travel in 72 Hours</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Longtime travel writer and CBS travel editor Peter Greenberg predicts <a href="/platinum/airlines-transports-tourism-domestic/2020/03/27/id/960201/" class="linkFullStory">[Full&nbsp;Story]</a> | <a href="/platinum/airlines-transports-tourism-domestic/2020/03/27/id/960201/" title="Platinum Article"><img src="/app_themes/newsmaxnew/images/key.png"></a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl09$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl09_ctl00_hfArticleId" value="0"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=83fe9524-ce3a-4902-8374-fed62fdc4c21&amp;SiteName=Newsmax" alt="This Secret Mineral Melts 52 Pounds in 28 Days - Try This Today" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a class="nmSectionLink Default" href="https://bit.ly/AdsiatoLLC_BronzeSW_3-27to3-30" target="_blank">This Secret Mineral Melts 52 Pounds in 28 Days - Try This Today</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            SPONSOR: Possibly no diet or exercise required <a href="https://bit.ly/AdsiatoLLC_BronzeSW_3-27to3-30" target="_blank" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl10$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl10_ctl00_hfArticleId" value="960241"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=05bbce4b-b4af-4523-938f-1cd4c6c72f67&amp;SiteName=Newsmax" alt="1 Killed, 9 Hurt in Suspicious New York Subway Fire" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/newsfront/new-york-city-subway-fire/2020/03/27/id/960241/" class="nmSectionLink Default">1 Killed, 9 Hurt in Suspicious New York Subway Fire</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            A New York City subway driver was killed and several other people <a href="/newsfront/new-york-city-subway-fire/2020/03/27/id/960241/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl11$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl11_ctl00_hfArticleId" value="960223"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=aa19846b-4a72-4f41-96ad-7ba6762e6928&amp;SiteName=Newsmax" alt="NY Times Column Blames Evangelicals for Virus 'Hell'" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/us/evangelicals-pandemic-blame-atheists/2020/03/27/id/960223/" class="nmSectionLink Default">NY Times Column Blames Evangelicals for Virus 'Hell'</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            President Donald Trump's "ultraconservative religious allies" are <a href="/us/evangelicals-pandemic-blame-atheists/2020/03/27/id/960223/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl12$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl12_ctl00_hfArticleId" value="959890"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=d94e7228-6a28-4ccb-a839-60a189270d96&amp;SiteName=Newsmax" alt="Hotwire Signs With Newsmax TV for Southeast Rollout" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/newsmax-tv/newsmax-tv-hotwire-southeast-rollout/2020/03/25/id/959890/" class="nmSectionLink Default">Hotwire Signs With Newsmax TV for Southeast Rollout</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Newsmax and Hotwire Communications announced a new distribution deal <a href="/newsmax-tv/newsmax-tv-hotwire-southeast-rollout/2020/03/25/id/959890/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl13$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl13_ctl00_hfArticleId" value="960218"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=f1cde496-89a9-4156-a4c9-94dd9557a1b3&amp;SiteName=Newsmax" alt="Snowden: Govt Surveillance Might Remain After Virus" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/newsfront/pandemic-surveillance-world-spying/2020/03/27/id/960218/" class="nmSectionLink Default">Snowden: Govt Surveillance Might Remain After Virus</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Edward Snowden warned additional surveillance put in place to battle <a href="/newsfront/pandemic-surveillance-world-spying/2020/03/27/id/960218/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl14$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl14_ctl00_hfArticleId" value="960206"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=3d08c305-2627-4f7b-8402-8445d462c98b&amp;SiteName=Newsmax" alt="Economists: US Facing Worst-Ever Quarterly GDP Plunge" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/economy/jpmorgan-gdp-economy-growth/2020/03/27/id/960206/" class="nmSectionLink Default">Economists: US Facing Worst-Ever Quarterly GDP Plunge</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Economists say the U.S. is entering a sharp recession, with some <a href="/finance/economy/jpmorgan-gdp-economy-growth/2020/03/27/id/960206/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl15$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl15_ctl00_hfArticleId" value="960196"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=d503dacf-6bc5-4faf-898e-7bc88f54fcfa&amp;SiteName=Newsmax" alt="Consumer Sentiment Drops by Most Since 2008 on Virus" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/economy/consumer-sentiment-2008-coronavirus/2020/03/27/id/960196/" class="nmSectionLink Default">Consumer Sentiment Drops by Most Since 2008 on Virus</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            U.S. consumer sentiment plummeted in March by the most since October <a href="/finance/economy/consumer-sentiment-2008-coronavirus/2020/03/27/id/960196/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl16$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl16_ctl00_hfArticleId" value="960194"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=3ed05adc-e312-4225-a075-23386894fda9&amp;SiteName=Newsmax" alt="Bosses Panic-Buy Spy Software to Keep Tabs on Remote Workers" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/streettalk/bosses-panic-buy-spy/2020/03/27/id/960194/" class="nmSectionLink Default">Bosses Panic-Buy Spy Software to Keep Tabs on Remote Workers</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Digital surveillance has been used for years on office desktops, yet <a href="/finance/streettalk/bosses-panic-buy-spy/2020/03/27/id/960194/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl17$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl17_ctl00_hfArticleId" value="960220"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=a9ed5c0f-2e68-45df-8263-a2bf2e3a338e&amp;SiteName=Newsmax" alt="Trump Demands GM, Ford Build Ventilators" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/newsfront/trump-ventilators-defense-production-act/2020/03/27/id/960220/" class="nmSectionLink Default">Trump Demands GM, Ford Build Ventilators</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            President Donald Trump urged General Motors Co. and Ford Motor Co. on <a href="/newsfront/trump-ventilators-defense-production-act/2020/03/27/id/960220/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl18$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl18_ctl00_hfArticleId" value="960171"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=a3abda37-f5d4-4060-93d7-dd88f53a725b&amp;SiteName=Newsmax" alt="Poll: Biden Holds Small Lead in Michigan Matchup With Trump" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/politics/michigan/2020/03/27/id/960171/" class="nmSectionLink Default">Poll: Biden Holds Small Lead in Michigan Matchup With Trump</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Forty-four percent of Michigan voters favor Joe Biden, while 41% back <a href="/politics/michigan/2020/03/27/id/960171/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl19$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl19_ctl00_hfArticleId" value="960212"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=26d85931-05fe-407a-96c0-7d053f148cce&amp;SiteName=Newsmax" alt="Collins, Lankford, Friess Blast 'Despicable' Dem Ploys" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/platinum/susan-collins-ray-lankford-foster-friess-democrats/2020/03/27/id/960212/" class="nmSectionLink Default">Collins, Lankford, Friess Blast 'Despicable' Dem Ploys</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Most of the House Democrats' demands for non-coronavirus items in the <a href="/platinum/susan-collins-ray-lankford-foster-friess-democrats/2020/03/27/id/960212/" class="linkFullStory">[Full&nbsp;Story]</a> | <a href="/platinum/susan-collins-ray-lankford-foster-friess-democrats/2020/03/27/id/960212/" title="Platinum Article"><img src="/app_themes/newsmaxnew/images/key.png"></a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl20$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl20_ctl00_hfArticleId" value="960195"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=8d9bf44e-d669-414a-a9e4-8c1a858037f8&amp;SiteName=Newsmax" alt="Consumer Spending Held Up Before Virus Hit" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/finance/economy/consumer-spending-inflation-virus/2020/03/27/id/960195/" class="nmSectionLink Default">Consumer Spending Held Up Before Virus Hit</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            U.S. consumer spending rose moderately in February and momentum is <a href="/finance/economy/consumer-spending-inflation-virus/2020/03/27/id/960195/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> <!-- article start --> 
+        <div class="nmNewsfrontStory"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneLeft$repeater_newsfront$repItems$ctl00$ctl00$qrep$ctl21$ctl00$hfArticleId" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneLeft_repeater_newsfront_repItems_ctl00_ctl00_qrep_ctl21_ctl00_hfArticleId" value="960191"> 
+         <div class="nmNewsfrontThumb">
+          <img class="nmNewsfrontThumb" src="/CMSPages/GetFile.aspx?guid=b69716e8-5b15-458c-b147-d14284733714&amp;SiteName=Newsmax" alt="Trump Blasts GOP Holdout on Virus Bill" width="114">
+         </div> 
+         <div class="nmNewsfrontT"> 
+          <div class="nmNewsfrontHead"> 
+           <h2><a href="/politics/thomas-massie-gop-house-stimulus/2020/03/27/id/960191/" class="nmSectionLink Default">Trump Blasts GOP Holdout on Virus Bill</a></h2> 
+          </div> 
+          <div class="nmNewsfrontSummary">
+            Suggesting he should be thrown out of the Republican Party, President <a href="/politics/thomas-massie-gop-house-stimulus/2020/03/27/id/960191/" class="linkFullStory">[Full&nbsp;Story]</a> 
+          </div> 
+          <div id="nmCanvas1RelatedLinks"> 
+          </div> 
+         </div> 
+         <div class="clear"></div> 
+        </div> 
+        <div class="spacer"></div> 
+        <div class="nmMoreSection" style="background-position-y: -362px;"> <a href="/newsfront/" class="linkMore" style="font-size: 15px;">More Newsfront</a> 
+        </div> 
+        <div class="nmSectionHead nmMoney"> 
+         <div class="nmMoneyHeadL"></div> 
+         <div class="nmMoneyHeadLabel"> <a href="/finance/" class="nmSectionHeadLink">Finance</a> 
+         </div> 
+         <div class="nmMoneyHeadR"></div> 
+        </div>
+        <div id="nmMoneyCon"> 
+         <div class="nmSectionLead"> 
+          <div class="nmSectionThumb">
+           <img src="/CMSPages/GetFile.aspx?guid=d0a7430b-1c7b-487f-a3ff-e65241e2e65c&amp;SiteName=Newsmax" width="140" alt="Bill Gates: Can't Restart Economy and 'Ignore Bodies in Corner'">
+          </div> 
+          <div class="nmSectionT"> 
+           <div class="nmSectionHeadline">
+            <h2><a class="nmNewsfrontHeadLink Default" href="/finance/economy/bill-gates-economy-bodies-corner/2020/03/27/id/960178/">Bill Gates: Can't Restart Economy and 'Ignore Bodies in Corner'</a></h2>
+           </div> 
+           <div class="nmSectionSummary">
+             Microsoft Corp. co-founder Bill Gates has blasted any plans to reopen the global economy while the coronavirus outbreak continues to rage uncontrolled, saying that this strategy would be “very irresponsible.” <a href="/finance/economy/bill-gates-economy-bodies-corner/2020/03/27/id/960178/" class="linkFullStory">[Full&nbsp;Story]</a> | <a href="/finance/economy/bill-gates-economy-bodies-corner/2020/03/27/id/960178/"><img src="/app_themes/newsmaxnew/images/video.png"></a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"></div> <!-- ----------------- Relative articles repeater XXX--------------- --> 
+         <ul class="nmRelatedLinks"> 
+         </ul> 
+         <div class="clear"></div> 
+         <div class="spacer"></div> 
+         <div class="nmSectionLinks"> 
+          <ul class="nmSectionLinks"> 
+           <li> <a href="/finance/markets/gasoline-pimp-prices-2/2020/03/27/id/960306/" class="nmSectionLink Default">Gas Pump Prices Fall Below $2 in First Time in 4 Years</a> </li> 
+           <li> <a href="/finance/johnmauldin/some-positives-virus-world/2020/03/27/id/960269/" class="nmSectionLink Default">John Mauldin: 5 Economic Positives in Virus Wracked World</a> </li> 
+           <li> <a href="/finance/streettalk/fed-kaplan-bostic-chance/2020/03/27/id/960252/" class="nmSectionLink Default">Fed's Kaplan, Bostic Predict Solid Post-Crisis Rebound</a> </li> 
+           <li> <a href="/finance/streettalk/fear-index-stock-market/2020/03/27/id/960251/" class="nmSectionLink Default">Elevated 'Fear Index' Shows Doubts of Market Stability</a> </li> 
+          </ul> 
+         </div> 
+         <div class="clear"></div> 
+         <div class="spacer"></div> 
+        </div>
+        <div class="nmMoreSection"> <a href="/finance/" class="linkMore">More Finance</a> 
+        </div>
+        <div class="nmSectionHead nmHealth"> 
+         <div class="nmHealthHeadL"></div> 
+         <div class="nmHealthHeadLabel"> <a href="/health/" class="nmSectionHeadLink">Health</a> 
+         </div> 
+         <div class="nmHealthHeadR"></div> 
+        </div>
+        <div id="nmHealthCon"> 
+         <div class="nmSectionLead"> 
+          <div class="nmSectionThumb">
+           <img src="/CMSPages/GetFile.aspx?guid=21a993ba-1d72-4a5c-a0e2-487075c552e7&amp;SiteName=Newsmax" width="140" alt="Statistics on Death Rates Can Be Deceiving">
+          </div> 
+          <div class="nmSectionT"> 
+           <div class="nmSectionHeadline">
+            <h2><a class="nmNewsfrontHeadLink Default" href="/health/health-news/virus-covid-19-death-rate/2020/03/27/id/960227/">Statistics on Death Rates Can Be Deceiving</a></h2>
+           </div> 
+           <div class="nmSectionSummary">
+             According to statistics, the coronavirus appears to be more deadly in some countries than in others, NPR reports. <a href="/health/health-news/virus-covid-19-death-rate/2020/03/27/id/960227/" class="linkFullStory">[Full&nbsp;Story]</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"></div> <!-- ----------------- Relative articles repeater XXX--------------- --> 
+         <ul class="nmRelatedLinks"> 
+         </ul> 
+         <div class="clear"></div> 
+         <div class="spacer"></div> 
+         <div class="nmSectionLinks"> 
+          <ul class="nmSectionLinks"> 
+           <li> <a href="/us/pregnancy-babies-infection-pandemic/2020/03/27/id/960304/" class="nmSectionLink Default">Infected Mothers May Pass Virus to Baby Before Birth</a> </li> 
+           <li> <a href="/us/vaping-virus/2020/03/27/id/960289/" class="nmSectionLink Default">Vaping Could Increase Health Risks Tied to COVID-19, FDA Says</a> </li> 
+           <li> <a href="/us/virus/2020/03/27/id/960277/" class="nmSectionLink Default">How to Clean Your Home to Protect Against the Coronavirus</a> </li> 
+           <li> <a href="/health/health-news/hospital-ventilator-dnr-ppe/2020/03/27/id/960254/" class="nmSectionLink Default">Hospitals Forced to Grapple With Life-and-Death Policies</a> </li> 
+          </ul> 
+         </div> 
+         <div class="clear"></div> 
+         <div class="spacer"></div> 
+        </div>
+        <div class="nmMoreSection"> <a href="/health/" class="linkMore">More Health</a> 
+        </div> 
+        <div style="clear: both"></div> 
+        <div style="width: 650px;  float: left; "> 
+         <div style="width: 321px; float: left;"> 
+         </div> 
+         <div style="width: 323px; float: right;" id="centercolumn"> 
+         </div> 
+         <div style="clear: right;"></div> 
+        </div> 
+       </div> 
+       <div id="nmRightColumn"> 
+        <div class="nmSpecialHead" style="width:304px"> 
+         <div class="nmSpecialHeadL"></div> 
+         <div class="nmSpecialHeadLabel">
+           Newsmax TV Live 
+         </div> 
+         <div class="nmSpecialHeadR"></div>
+        </div>
+        <div id="kaltura_player_430834166" style="width: 304px;height: 171px"></div> 
+        <script type="text/javascript" src="https://cdnapisec.kaltura.com/p/2216081/embedPlaykitJs/uiconf_id/44802891"></script> 
+        <script type="text/javascript">
+    try {
+      var kalturaPlayer = KalturaPlayer.setup({
+        targetId: "kaltura_player_430834166",
+        provider: {
+          
+          partnerId: 2216081,
+          uiConfId: 44802891
+        }
+      });
+      kalturaPlayer.loadMedia({entryId: '1_f19eeulz'});      
+    } catch (e) {
+      console.error(e.message)
+    }
+    setTimeout(function(){
+      jQuery(".playkit-bottom-bar").find(".playkit-icon-settings").parent().parent().css("display", "none");
+    }, 4000);
+  </script> 
+        <style>
+  .playkit-bottom-bar {background: rgba(0,0,0,.8) !important;}
+  .playkit-live-tag {color: white !important;}
+  .playkit-icon-settings {display: none !important;}  
+</style>
+        <style>#nmRightColumn{padding:0 !important;}</style>
+        <div class="clear"></div> 
+        <div class="nmModuleHead"> 
+         <div class="nmModuleHeadL"></div> 
+         <div class="nmModuleHeadLabel">
+           Correspondents 
+         </div> 
+         <div class="nmModuleHeadR"></div> 
+        </div> 
+        <div class="nmInsiderCont"> 
+         <div class="nmInsiderThumb"> 
+          <img src="/CMSPages/GetFile.aspx?guid=7866165d-4b7d-4fd4-a195-c6649baf7b06" width="47" height="47"> 
+         </div> 
+         <div class="nmInsiderContent"> 
+          <div class="nmInsiderName"> <a href="/insiders/john-gizzi/id-212/" id="commentary_blogger_name">John Gizzi</a> 
+          </div> 
+          <div class="nmInsiderTitle">
+           John Gizzi on Politics 
+          </div> 
+          <div class="nmInsiderSummary"> <a href="/john-gizzi/boris-johnson-uk-prime-minister-pandemic/2020/03/27/id/960305/" class="blog_subject_sml">Who Is Next in Line Behind UK Prime Minister Boris Johnson?</a>
+          </div> 
+         </div> 
+        </div> 
+        <div class="clear"></div> 
+        <div class="nmInsiderSpacer"></div> 
+        <div class="clear"></div> 
+        <div class="nmModuleHead"> 
+         <div class="nmModuleHeadL"></div> 
+         <div class="nmModuleHeadLabel"> <a href="/insiders/" id="nmModuleHeadLink">Insiders</a> 
+         </div> 
+         <div class="nmModuleHeadR"></div> 
+        </div> 
+        <div class="rptBlogs"> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=2cf6b82c-b719-4fad-9722-02a6cf1cfa44&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/patrickbuchanan/id-333/">Patrick Buchanan</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Conservative Cause 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/patrickbuchanan/cold-war-tribalism-interests-nato/2020/03/27/id/960150/" class="blog_subject_sml">Will Pandemic Usher In New Era of America First? </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=e6e659d5-5c94-4e3e-87a0-822d9f4c5e5d&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/conradblack/id-358/">Conrad Black</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Political View 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/conradblack/deblasio-cuomo-cnn-new-york-city/2020/03/27/id/960204/" class="blog_subject_sml">Dems Have Squandered Last Opportunity to Beat Trump </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=27c08589-7925-4c50-b6e6-52d095f4cb55&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/bradleyblakeman/id-132/">Bradley Blakeman</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Politics of Common Sense 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/bradleyblakeman/hhs-pandemic/2020/03/26/id/960075/" class="blog_subject_sml">Stop Blaming Trump for Coronavirus - Now</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=77c7d94a-63ed-40a3-9b3f-9c242b2f1937&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/billdonohue/id-163/">Bill Donohue</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Culture Watch 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/billdonohue/ffrf-kurtz-prayer-liberty/2020/03/27/id/960243/" class="blog_subject_sml">Should We Accept Bans On Church Gatherings? </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=584f692e-98b7-4c12-8ac7-9739324fc5c8&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/henryfcooper/id-507/">Henry F. Cooper</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             High Frontier 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/henryfcooper/bmd-thaad-sdi-abm/2020/03/27/id/960286/" class="blog_subject_sml">Ballistic Missile Defense Story Is Good, Bad, and Ugly </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=f6226cb8-a481-4308-b67f-91d53df14ee8&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/tawfikhamid/id-59/">Tawfik Hamid</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Inside Islam 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/tawfikhamid/choloroquine-maher-korea-quarantine/2020/03/27/id/960293/" class="blog_subject_sml">Are Anti-Trump Factions Hyping Coronavirus Pandemic? </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=3b6c9086-3170-435f-a96a-a688cbc72d1d&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/stevelevy/id-566/">Steve Levy</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Common Sense Corner 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/stevelevy/coronavirus-trump-economy/2020/03/27/id/960230/" class="blog_subject_sml">Accountable Officials Must Make Decisions on Economy, Coronavirus Therapies</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=b6d2cb13-2b20-4978-842b-2148047b15d9&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/horacecooper/id-635/">Horace Cooper</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             The Law and American Society 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/horacecooper/dpa-youngstown-constitutional-military/2020/03/27/id/960231/" class="blog_subject_sml">Memo to Gov. Cuomo: 1950 Act Not a License for Takeovers </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=fd4f5f45-c5fb-4914-8f4d-bb16120c3d85&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/micahhalpern/id-560/">Micah Halpern</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             The Insighter 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/micahhalpern/lincoln-googlre-garfunkel-covid/2020/03/27/id/960159/" class="blog_subject_sml">If I Didn't Laugh I Would Cry</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=05d72455-fad4-41f4-8e26-2ba8b0904fa1&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/michaeldorstewitz/id-498/">Michael Dorstewitz</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Firing Range 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/michaeldorstewitz/planned-parenthood-abortion-stimulus-covid19/2020/03/27/id/960211/" class="blog_subject_sml">Planned Parenthood Gets Aborted by COVID-19</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=aa2814ec-a475-485f-8542-3bb4bd95eef8&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/tombasile/id-638/">Tom Basile</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Right Now 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/tombasile/newyork-cuomo-budget-deficit/2020/03/27/id/960176/" class="blog_subject_sml">American Taxpayers Shouldn't Pay for Cuomo's Budget Deficit</a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+         <div class="nmInsiderCont"> 
+          <div class="nmInsiderThumb"> 
+           <img src="/CMSPages/GetFile.aspx?guid=927ca1cb-b233-4412-a544-b7ea905323a2&amp;sitename=newsmax&amp;height=47&amp;width=47"> 
+          </div> 
+          <div class="nmInsiderContent"> 
+           <div class="nmInsiderName"> <a href="/insiders/wendylpatrick/id-530/">Wendy L. Patrick</a> 
+           </div> 
+           <div class="nmInsiderTitle">
+             Behind the Scenes 
+           </div> 
+           <div class="nmInsiderSummary"> <a href="/wendylpatrick/socializing-distancing-online-talk/2020/03/26/id/960069/" class="blog_subject_sml">Yes, Social Distance Relationship Building Is Possible </a> 
+           </div> 
+          </div> 
+         </div> 
+         <div class="clear"> 
+         </div> 
+         <div class="nmInsiderSpacer"> 
+         </div> 
+        </div> 
+        <div class="nmMoreInsiders"> <a href="/insiders/" class="linkMore"> All Insiders</a>
+        </div>
+        <div id="EmailSignupContainer"> <!-- ##WebPart## Email Signup Start --> <!-- Email Signup Box Start --> <!--  --> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneRight$NMHomeEmailSignup$hdnPromoCode" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneRight_NMHomeEmailSignup_hdnPromoCode" value="102301bkudee"> 
+         <input type="hidden" name="p$lt$zoneContent$pageplaceholder$p$lt$zoneRight$NMHomeEmailSignup$hdnSignUpList" id="p_lt_zoneContent_pageplaceholder_p_lt_zoneRight_NMHomeEmailSignup_hdnSignUpList" value="495"> 
+         <div id="nmSignUpContainer" class="col-md-12"> 
+          <div class="nmSectionHeadL"></div> 
+          <div class="nmSectionHeadLabel">
+            Free Newsmax E-Alerts 
+          </div> 
+          <div class="nmSectionHeadR"></div> 
+          <div class="clear"></div> 
+          <div id="signupFormWrapper2"> 
+           <div class="signupHeadMain"> 
+           </div> 
+           <div class="form-group col-xs-12"> 
+            <div class="signupError"> 
+             <div id="signupEmailError"></div> 
+            </div> 
+            <div class="nmSignUpLabel col-md-3">
+              Email: 
+            </div> 
+            <div class="nmSignUpInputCont col-md-9"> 
+             <input type="text" class="nmSignUpInput form-control" id="signUpEmail" name="signUpEmail"> 
+            </div> 
+            <div class="clear"></div> 
+           </div> 
+           <div class="form-group col-xs-12"> 
+            <div class="signupError" style="font-size: 0px;"></div> 
+            <div class="nmSignUpLabel col-md-3">
+              Country: 
+            </div> 
+            <div class="nmSignUpInputCont col-md-9"> <select class="nmSignUpInput form-control" id="signupCountryDrop" name="signupCountryDrop"></select> 
+            </div> 
+            <div class="clear"></div> 
+           </div> 
+           <div class="form-group col-xs-12"> 
+            <div class="signupError"> 
+             <div id="signupZipError"></div> 
+            </div> 
+            <div class="ZipCodeGroup"> 
+             <div class="nmSignUpLabel col-md-3">
+               Zip Code: 
+             </div> 
+             <div class="nmSignUpInputCont col-md-9"> 
+              <input type="text" class="nmSignUpInputSm form-control" id="signUpZip" name="signUpZip" maxlength="10"> 
+             </div> 
+            </div> 
+           </div> 
+           <div class="form-group col-xs-12"> 
+            <div class="nmSignUpButtonCont col-md-9 col-md-offset-3"> 
+             <input type="button" value="" class="signupSubmit btn btn-primary btn-block"> 
+            </div> 
+           </div> 
+           <div class="clear"></div> 
+           <div class="signupPrivacy"> <a href="https://www.newsmax.com/privacystatement/" target="_blank">Privacy</a>: We never share your email. 
+           </div> 
+           <div id="Progress">
+            &nbsp;
+           </div> 
+          </div> 
+         </div> <!-- Email Signup Box End --> <!-- ##WebPart## Email Signup End  -->
+        </div> 
+        <script type="text/javascript" src="/CMSScripts/Newsmax/jQuery.signup.js"></script> 
+        <div id="unit_91773">
+         <a href="http://mixi.media/" rel="nofollow"></a>
+        </div> 
+        <script type="text/javascript" charset="utf-8">
+(function()
+
+{ var sc = document.createElement('script'); sc.type = 'text/javascript'; sc.async = true; sc.src = '//mixi.media/data/js/91773.js'; sc.charset = 'utf-8'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sc, s); }
+());
+</script>
+        <div class="clear"></div> 
+        <div class="nmModuleHead"> 
+         <div class="nmModuleHeadL"></div> 
+         <div class="nmModuleHeadLabel">
+           Around The Web 
+         </div> 
+         <div class="nmModuleHeadR"></div> 
+        </div> 
+        <div id="nmSponsorModule"> 
+         <div class="sponsors" data-count="13"></div> 
+         <div class="whatsThis"> <a href="https://www.newsmax.com/advertise">Powered by Newsmax</a> 
+         </div> 
+        </div>
+        <div style="max-width:300px;width:300px;">
+         <script src="//static.newsmaxfeednetwork.com/web-clients/bootloaders/ZlB6kIzR8vJVn32BbZzMWv/bootloader.js" async="true" data-version="3" data-url="[PAGE_URL]" data-zone="[ZONE]" data-organic-clicks="[ORGANIC_TRACKING_PIXEL]" data-paid-clicks="[PAID_TRACKING_PIXEL]" data-display-within-iframe="true"></script>
+        </div>
+        <div class="clear"></div> 
+        <div class="nmModuleHead"> 
+         <div class="nmModuleHeadL"></div> 
+         <div class="nmModuleHeadLabel">
+           The Wire 
+         </div> 
+         <div class="nmModuleHeadR"></div> 
+        </div> 
+        <ul class="feed-random">
+         <li> <a href="/thewire/italy-elderly-vulnerable-pandemic/2020/03/27/id/960222/" target="_self">101-Year-Old Man Recovers From Coronavirus</a><br> <span>Friday, 27 Mar 2020 12:17 PM</span> </li>
+         <li> <a href="/thewire/mark-blum-desperately-seeking-susan/2020/03/27/id/960208/" target="_self">'Desperately Seeking Susan' Star Dies From Coronavirus </a><br> <span>Friday, 27 Mar 2020 11:07 AM</span> </li>
+         <li> <a href="/thewire/tiger-king-neflix-tv-show/2020/03/27/id/960207/" target="_self">'Tiger King' Star Files $94M Lawsuit&nbsp;From&nbsp;Behind Bars</a><br> <span>Friday, 27 Mar 2020 11:03 AM</span> </li>
+         <li> <a href="/thewire/jon-and-kate-gosselin-gosselin-children-gosselin-sextuplets/2020/03/26/id/960054/" target="_self">Lawyer Asks Court to Let Jon and Kate Gosselin's Kids See Each Other</a><br> <span>Thursday, 26 Mar 2020 12:46 PM</span> </li>
+         <li> <a href="/thewire/lori-loughlin-college-admissions-scandal-rick-singer/2020/03/26/id/960036/" target="_self">Lori Loughlin Asks Judge to Dismiss Charges in College Admissions Scandal</a><br> <span>Thursday, 26 Mar 2020 11:37 AM</span> </li>
+         <li> <a href="/thewire/laura-prepon-orange-is-the-new-black-eating-disorder-bulimia/2020/03/26/id/960033/" target="_self">'Orange Is the New Black' Star Says Mom Taught Her to Be Bulimic</a><br> <span>Thursday, 26 Mar 2020 11:25 AM</span> </li> 
+        </ul> <!-- Remarketing Tag Start --> <iframe marginwidth="0" marginheight="0" src="https://intermrkts.vo.llnwd.net/o35/u/remarketing/newsmaxhomeadd.html" frameborder="0" width="0" scrolling="no" height="0" allowtransparency></iframe> <!-- Remarketing Tag End --> 
+        <div style="clear: both"></div> 
+       </div> 
+       <div style="clear: both"></div> 
+       <div style="clear: both"></div> 
+      </div> 
+      <div style="clear: both"></div> <!--googleon: index--> <!-- Google search site info --> 
+      <script type="application/ld+json">
+{"@context" : "http://schema.org",
+ "@type" : "Organization",
+ "name" : "Newsmax",
+ "url" : "https://www.newsmax.com",
+ "logo": "https://www.newsmax.com/App_Themes/NewsmaxNew/images/NM_twitter_profile_photo_400x400.jpg",
+ "sameAs" : [ "https://www.facebook.com/newsmax",
+ "https://www.twitter.com/newsmax_media",
+ "https://plus.google.com/+newsmax",
+ "https://www.linkedin.com/company/newsmax-media-inc.",
+ "https://www.pinterest.com/nmxsocial/"]
+}
+</script> 
+      <style>.sponsorLink{background-color: #eee;padding: 10px 0px 10px 10px;margin-left: 0;}</style> 
+      <script>jQuery(".nmNewsfrontStory").find(".nmNewsfrontSummary:contains('SPONSOR: '),.nmNewsfrontSummary:contains('SPONSORED: ')").parent().addClass("sponsorLink");</script> 
+      <div style="clear:both;line-height:0px;height:0px;"> 
+      </div> 
+     </div> <!-- Footer zone --> 
+     <div style=""> 
+      <div id="divMenuFooter"> 
+       <div class="nmNavSep"></div> 
+       <div id="nmMainNavFooter"> 
+        <ul> 
+         <li><a id="nmBotHomeLink" href="/" class="nmMainNavLinkSel" onclick="analyticsTracking(this, 'BottomNav');"> Home </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotSubscribeLink" href="/platinum/" class="nmMainNavLink nmSubscribeLink" onclick="analyticsTracking(this, 'BottomNav');">Platinum </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotNewsfrontLink" href="/newsfront/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">Newsfront </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotAmericaLink" href="/us/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">America </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotPoliticsLink" href="/politics/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">Politics </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotInsiderLink" href="/insiders/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">Opinion </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotWireLink" href="/thewire/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">The Wire </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotBooksLink" href="/books/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">Books</a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotBestListsLink" href="/newsmaxbest/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">Best Lists </a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotSpecialsLink" href="/specials/" class="nmMainNavLink" onclick="analyticsTracking(this, 'BottomNav');">Specials</a></li> 
+         <li class="nmMainNavSep">&nbsp;</li> 
+         <li><a id="nmBotSciTechLink" href="/sciencetechnology/" class="nmMainNavLink">Sci &amp; Tech </a></li> 
+        </ul> 
+       </div> 
+       <div class="nmNavSepBot"></div> 
+       <div class="statementText"> 
+        <p>Newsmax, Moneynews, Newsmax Health, and Independent. American. are registered trademarks of Newsmax Media, Inc. Newsmax TV, and Newsmax World are trademarks of Newsmax Media, Inc.</p> 
+       </div> 
+       <script type="text/javascript" src="/CMSPages/GetResource.ashx?scriptfile=/js/cookiedrop.js" defer></script>
+       <script type="text/javascript">
+
+    googletag.cmd.push(function () {
+        var Ads =  (function (parent, $) {
+            var module = parent || {};
+            // Slide in Bottom Ad
+            module.siuAdFixed = function (s, e, b, size) {
+                // Animate Ad
+                var ad = document.getElementById(s);
+                if (ad) {
+                    ad.className = s + ' animated slideInUp';
+                    ad.style.cssText = 'bottom: 0; width: ' + size[0] + 'px; height: ' + size[1] + 'px;';
+
+                    // Close
+                    document.getElementById(b).addEventListener('click', function (e) {
+                        $('#' + s).remove();
+
+                        // Create cookie
+                        $.cookie(s, true, { expires: 1, path: '/' });
+                    });
+                }
+            };
+
+            // Slide in Down Ad
+            module.siuAdFixedClose = function (s, e, size) {
+                // Animate Ad
+                var ad = document.getElementById(s);
+                if (ad) {
+                    ad.className = s + ' animated slideInDown';
+                    ad.style.cssText = 'bottom: -110px; width: ' + size[0] + 'px; height: ' + size[1] + 'px;';
+                }
+            };
+
+            module.init = function (s) {
+                // If cookie is set just remove the ad
+                var c = $.cookie(s);
+                if (c) {
+                    $('#' + s).remove();
+                }
+            };
+
+            return module;
+        }(Ads || {}, jQuery));
+
+        jQuery(document).ready(function () {
+            Ads.init('siu-ad-fixed');
+        });
+
+        googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+            if (!event.size) return;
+            var adRendered = false;
+            for (var p in event.slot) {
+                if (event.slot.hasOwnProperty(p)) {
+                    if (event.slot[p] === '/6305169/newsmax.mab') {
+                        adRendered = true;
+                        break;
+                    }
+                }
+            }
+
+            if (adRendered) {
+                var siuAdFixedDidAppear = false;
+                window.onscroll = function () {
+                    if (window.pageYOffset >= 3500) {
+                        if (!siuAdFixedDidAppear) {
+                            Ads.siuAdFixed('siu-ad-fixed', 'siu-ad-fixed-open', 'siu-ad-close-button', event.size);
+                        }
+                        siuAdFixedDidAppear = true;
+                    } else {
+                        if (siuAdFixedDidAppear && window.pageYOffset < 3500) {
+                            Ads.siuAdFixedClose('siu-ad-fixed', 'siu-ad-fixed-close', event.size);
+                            siuAdFixedDidAppear = false;
+                        }
+                    }
+                };
+            }
+        });
+    });
+
+</script> 
+       <style type="text/css">
+   .animated {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }  
+
+    @-webkit-keyframes slideInUp {
+      from {
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .slideInUp {
+      -webkit-animation-name: slideInUp;
+      animation-name: slideInUp;
+    }
+
+   @-webkit-keyframes slideInDown {
+      from {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes slideInDown {
+      from {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+      }
+
+      to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .slideInDown {
+      -webkit-animation-name: slideInDown;
+      animation-name: slideInDown;
+    }
+
+    /* Ad Close */
+    .siu-ad-close-button {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: 0;
+        top: 0;
+        background-image: url(/App_Themes/Newsmax/images/close.png);
+        background-size: 100%;
+        cursor: pointer;
+        z-index: 999999;
+    }
+
+    /* Slide in up Ad - Fixed */
+    .siu-ad-fixed {
+        position: fixed;
+        width: 1024px;
+        height: 110px;
+        z-index: 999998;
+        left: 50%;
+        margin-left: -512px;
+        bottom: -110px; 
+    }
+
+    @media (min-width: 768px) {
+        .siu-ad-fixed {
+            width: 768px;
+            height: 110px;
+            margin-left: -384px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .siu-ad-fixed {
+            width: 768px;
+            height: 110px;
+            margin-left: -384px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .siu-ad-fixed {
+            width: 1024px;
+            height: 110px;
+            margin-left: -512px;
+        }
+    }
+
+</style> 
+       <div id="siu-ad-fixed" class="siu-ad-fixed"> 
+        <div id="siu-ad-close-button" class="siu-ad-close-button"></div> <!-- /6305169/m.newsmax.mab --> 
+        <div id="div-gpt-ad-a032e390-585a-4e87-8ffc-f8af1897ee09"> 
+         <script type="text/javascript">
+                googletag.cmd.push(function () {
+                    googletag.display('div-gpt-ad-a032e390-585a-4e87-8ffc-f8af1897ee09');
+            });
+            </script> 
+        </div> 
+       </div> 
+       <div id="div-gpt-ad-316ffadb-67af-4a45-b20f-cd89b38c22d5"> 
+        <script type="text/javascript">
+                googletag.cmd.push(function () {
+                    googletag.display('div-gpt-ad-316ffadb-67af-4a45-b20f-cd89b38c22d5');
+            });
+            </script> 
+       </div> 
+      </div> 
+      <div class="zoneFooter"> 
+       <div class="zoneFooterAd"> 
+        <div id="nmCopyContainer"> 
+         <div id="nmLogoSm"> 
+         </div> 
+         <div id="nmCopyRight">
+           NEWSMAX.COM
+          <br> America's News Page
+          <br> © <span class="nmYear"></span> Newsmax Media, Inc.
+          <br> All Rights Reserved 
+         </div> 
+        </div> 
+        <div id="nmSupportNavCont"> <a class="nmFooterLink" href="https://www.newsmax.com/contact/" onclick="analyticsTracking(this, 'BottomNav');">Contact</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://www.newsmax.com/advertise/" onclick="analyticsTracking(this, 'BottomNav');">Advertise</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://shop.newsmax.com/" onclick="analyticsTracking(this, 'BottomNav');">Shop</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://www.newsmax.com/rss/" onclick="analyticsTracking(this, 'BottomNav');">RSS</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://www.newsmax.com/archives/" onclick="analyticsTracking(this, 'BottomNav');">Archives</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://www.newsmax.com/links/" onclick="analyticsTracking(this, 'BottomNav');">Links</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://recruiting.ultipro.com/NEW1027/JobBoard/3d5ae180-49c4-20f7-d7b4-adfe940978a7/" target="_blank" onclick="analyticsTracking(this, 'BottomNav');">Careers</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://www.newsmax.com/privacystatement/" onclick="analyticsTracking(this, 'BottomNav');">Privacy Policy</a> <span class="nmFooterSpacer">|</span> <a class="nmFooterLink" href="https://www.newsmax.com/termsconditions/" onclick="analyticsTracking(this, 'BottomNav');">Terms &amp; Conditions</a> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> <!-- Script Includes --> <!-- Header Date Script --> 
+   <script type="text/javascript" language="javascript">
+var now= new Date();
+jQuery("#nmTodaysDate").html(now.format("dddd MMMM dd,  yyyy"));
+//jQuery("#nmYear").html(now.format("yyyy"));
+jQuery(".nmYear").html(now.format("yyyy"));
+</script> <!-- Navigation Script Start--> 
+   <script type="text/javascript"> if(window.location.pathname.toLowerCase().indexOf("/newsfront")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmNewsfrontLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotNewsfrontLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/us")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmAmericaLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotAmericaLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/politics")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmPoliticsLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotPoliticsLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/finance")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmFinanceLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotFinanceLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/insiders")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmInsiderLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotInsiderLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/thewire")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmWireLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotWireLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/books")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmBooksLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotBooksLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/specials")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmSpecialsLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotSpecialsLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/sciencetechnology")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmSciTechLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotSciTechLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/bestlists")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmBestListsLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotBestListsLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/newsmaxbest")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmBestListsLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotBestListsLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/awards")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmBestListsLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotBestListsLink").className="nmMainNavLinkSel";
+}
+else if(window.location.pathname.toLowerCase().indexOf("/jokes")>=0){ document.getElementById("nmHomeLink").className="nmMainNavLink"; document.getElementById("nmJokesLink").className="nmMainNavLinkSel"; document.getElementById("nmBotHomeLink").className="nmMainNavLink"; document.getElementById("nmBotJokesLink").className="nmMainNavLinkSel";
+}
+</script> <!-- Navigation Script End --> <!-- RSS Feed Script --> 
+   <script async type="text/javascript" src="/CMSscripts/newsmax/jquery.zrssfeed.min.js"></script> 
+   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+   <script>
+if((window.location.href.search('/surveys/') > 0) || (window.location.href.search('/survey/') > 0)){
+  jQuery('#tvBanner').hide();
+}
+</script> 
+   <script type="text/javascript">
+//<![CDATA[
+ _satellite.pageBottom();(function() {var fn = function() {$get("manScript_HiddenField").value = '';Sys.Application.remove_init(fn);};Sys.Application.add_init(fn);})();//]]>
+</script> 
+   <script type="text/javascript">
+	//<![CDATA[
+if (typeof(Sys.Browser.WebKit) == 'undefined') {
+    Sys.Browser.WebKit = {};
+}
+if (navigator.userAgent.indexOf('WebKit/') > -1) {
+    Sys.Browser.agent = Sys.Browser.WebKit;
+    Sys.Browser.version = parseFloat(navigator.userAgent.match(/WebKit\/(\d+(\.\d+)?)/)[1]);
+    Sys.Browser.name = 'WebKit';
+}
+//]]>
+</script> 
+   <script type="text/javascript">
+//<![CDATA[
+
+var callBackFrameUrl='/WebResource.axd?d=77jWlglqex52vbFCaPRVP4SMPRhLKOdJ2CJxsjbbCFGCmQQy9GjJ709t9hiLFFQpiEw9ysyf2Qeu8y8EcpWoKNOtn101&t=636939809749177621';
+WebForm_InitCallback();
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]>
+</script> 
+   <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTEyMTY0MTExOTEPFgIeE1ZhbGlkYXRlUmVxdWVzdE1vZGUCARYCAgEPFgIeBmFjdGlvbgUBLxYCAgUPZBYCZg8PFgQeCENzc0NsYXNzBQ9QYWdlUGxhY2Vob2xkZXIeBF8hU0ICAmQWAmYPZBYIAgEPZBYCAgMPZBYCZg9kFgJmDxUDQiZuc19zaXRlPW5ld3NtYXgmbmFtZT1ubXguaG9tZS5pbmRleCZjYXRlZ29yeT1ob21lJnBhZ2VfdHlwZT1pbmRleEImbnNfc2l0ZT1uZXdzbWF4Jm5hbWU9bm14LmhvbWUuaW5kZXgmY2F0ZWdvcnk9aG9tZSZwYWdlX3R5cGU9aW5kZXinAmRpZ2l0YWxEYXRhLnBhZ2UgPSB7IA0KcGFnZUluZm86IHsgDQpwYWdlTmFtZTogIm5teDpob21lOmluZGV4IiwNCnBhZ2VUeXBlOiAiaW5kZXgiLA0KcHJpbWFyeUNhdGVnb3J5OiAiaG9tZSIsDQpzdWJDYXRlZ29yeTE6ICJuL2EiLA0Kc3ViQ2F0ZWdvcnkyOiAibi9hIiwNCnJlcG9ydFN1aXRlSUQ6ICJubWluY25ld3NtYXhwcm9kdWN0aW9uIiwNCnN0YXR1czogImxvZ2dlZC1vdXQiDQp9DQosIGNvbnRlbnQ6IHsgDQpjb250ZW50VHlwZTogIiIsDQpjb250ZW50SUQ6ICIiLA0KY29udGVudE5hbWU6ICIiDQp9IA0KfTtkAgIPZBYCZg9kFgICAg8WFB4MWmVyb1Jvd3NUZXh0BQ1ObyBkYXRhIGZvdW5kHg5EYXRhU291cmNlTmFtZWUeDEVuYWJsZVBhZ2luZ2geEE5lc3RlZENvbnRyb2xzSURlHhBTaG93RGVsZXRlQnV0dG9uaB4dQWx0ZXJuYXRpbmdUcmFuc2Zvcm1hdGlvbk5hbWVlHg5TaG93RWRpdEJ1dHRvbmgeC18hSXRlbUNvdW50AgEeElRyYW5zZm9ybWF0aW9uTmFtZQUoTmV3c21heC5CcmVha2luZ05ld3NIZWFkbGluZS5wcmV2aWV3X25ldx4WSGlkZUNvbnRyb2xGb3JaZXJvUm93c2cWAmYPZBYCZg9kFgJmDxUDB1NwZWNpYWxXaHR0cHM6Ly93My5uZXdzbWF4LmNvbS9HZW5lcmFsL05NTS9PZmZlcnMvUmFkaW8tTUFHLVRyaWFsLTQtOTUtUy1IP2RrdF9uYnI9MDcwMTA3emgzOWZsQEZlZGVyYWwgYW5kIFN0YXRlIEF1dGhvcml0aWVzIFVyZ2UgWW91IHRvIEdldCBhbiBFbWVyZ2VuY3kgUmFkaW9kAgMPZBYCZg9kFgICAg9kFgJmDw8WBB8CBQ9QYWdlUGxhY2Vob2xkZXIfAwICZBYCZg9kFgICCQ9kFgYCAQ8PFgIeB1Zpc2libGVoZGQCAw9kFgICAQ8WAh8LAgwWGAIBD2QWCgIBDxYCHgRUZXh0BXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD0yY2Y2YjgyYy1iNzE5LTRmYWQtOTcyMi0wMmE2Y2YxY2ZhNDQmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTQ3JmFtcDt3aWR0aD00NyIgLz5kAgMPFgQfDwV7PGltZyBzcmM9In4vQ01TUGFnZXMvR2V0RmlsZS5hc3B4P2d1aWQ9MmNmNmI4MmMtYjcxOS00ZmFkLTk3MjItMDJhNmNmMWNmYTQ0JnNpdGVuYW1lPW5ld3NtYXgmYW1wO2hlaWdodD05NSZhbXA7d2lkdGg9MTE0Ii8+Hw5oZAIFDxYCHw8FQTxhIGhyZWY9Ii9pbnNpZGVycy9wYXRyaWNrYnVjaGFuYW4vaWQtMzMzLyIgPlBhdHJpY2sgQnVjaGFuYW48L2E+ZAIHDxYCHw8FEkNvbnNlcnZhdGl2ZSBDYXVzZWQCCQ8WAh8PBaEBPGEgaHJlZj0iL3BhdHJpY2tidWNoYW5hbi9jb2xkLXdhci10cmliYWxpc20taW50ZXJlc3RzLW5hdG8vMjAyMC8wMy8yNy9pZC85NjAxNTAvIiBjbGFzcz0iYmxvZ19zdWJqZWN0X3NtbCI+V2lsbCBQYW5kZW1pYyBVc2hlciBJbiBOZXcgRXJhIG9mIEFtZXJpY2EgRmlyc3Q/IDwvYT5kAgIPZBYKAgEPFgIfDwV7PGltZyBzcmM9In4vQ01TUGFnZXMvR2V0RmlsZS5hc3B4P2d1aWQ9ZTZlNjU5ZDUtNWM5NC00ZTNlLTg3YTAtODIyZDlmNGM1ZTVkJnNpdGVuYW1lPW5ld3NtYXgmYW1wO2hlaWdodD00NyZhbXA7d2lkdGg9NDciIC8+ZAIDDxYEHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPWU2ZTY1OWQ1LTVjOTQtNGUzZS04N2EwLTgyMmQ5ZjRjNWU1ZCZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9OTUmYW1wO3dpZHRoPTExNCIvPh8OaGQCBQ8WAh8PBTk8YSBocmVmPSIvaW5zaWRlcnMvY29ucmFkYmxhY2svaWQtMzU4LyIgPkNvbnJhZCBCbGFjazwvYT5kAgcPFgIfDwUOUG9saXRpY2FsIFZpZXdkAgkPFgIfDwWfATxhIGhyZWY9Ii9jb25yYWRibGFjay9kZWJsYXNpby1jdW9tby1jbm4tbmV3LXlvcmstY2l0eS8yMDIwLzAzLzI3L2lkLzk2MDIwNC8iIGNsYXNzPSJibG9nX3N1YmplY3Rfc21sIj5EZW1zIEhhdmUgU3F1YW5kZXJlZCBMYXN0IE9wcG9ydHVuaXR5IHRvIEJlYXQgVHJ1bXAgPC9hPmQCAw9kFgoCAQ8WAh8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD0yN2MwODU4OS03OTI1LTRjNTAtYjZlNi01MmQwOTVmNGNiNTUmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTQ3JmFtcDt3aWR0aD00NyIgLz5kAgMPFgQfDwV7PGltZyBzcmM9In4vQ01TUGFnZXMvR2V0RmlsZS5hc3B4P2d1aWQ9MjdjMDg1ODktNzkyNS00YzUwLWI2ZTYtNTJkMDk1ZjRjYjU1JnNpdGVuYW1lPW5ld3NtYXgmYW1wO2hlaWdodD05NSZhbXA7d2lkdGg9MTE0Ii8+Hw5oZAIFDxYCHw8FQTxhIGhyZWY9Ii9pbnNpZGVycy9icmFkbGV5Ymxha2VtYW4vaWQtMTMyLyIgPkJyYWRsZXkgQmxha2VtYW48L2E+ZAIHDxYCHw8FGFBvbGl0aWNzIG9mIENvbW1vbiBTZW5zZWQCCQ8WAh8PBYMBPGEgaHJlZj0iL2JyYWRsZXlibGFrZW1hbi9oaHMtcGFuZGVtaWMvMjAyMC8wMy8yNi9pZC85NjAwNzUvIiBjbGFzcz0iYmxvZ19zdWJqZWN0X3NtbCI+U3RvcCBCbGFtaW5nIFRydW1wIGZvciBDb3JvbmF2aXJ1cyAtIE5vdzwvYT5kAgQPZBYKAgEPFgIfDwV7PGltZyBzcmM9In4vQ01TUGFnZXMvR2V0RmlsZS5hc3B4P2d1aWQ9NzdjN2Q5NGEtNjNlZC00MGEzLTliM2YtOWMyNDJiMmYxOTM3JnNpdGVuYW1lPW5ld3NtYXgmYW1wO2hlaWdodD00NyZhbXA7d2lkdGg9NDciIC8+ZAIDDxYEHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPTc3YzdkOTRhLTYzZWQtNDBhMy05YjNmLTljMjQyYjJmMTkzNyZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9OTUmYW1wO3dpZHRoPTExNCIvPh8OaGQCBQ8WAh8PBTk8YSBocmVmPSIvaW5zaWRlcnMvYmlsbGRvbm9odWUvaWQtMTYzLyIgPkJpbGwgRG9ub2h1ZTwvYT5kAgcPFgIfDwUNQ3VsdHVyZSBXYXRjaGQCCQ8WAh8PBZABPGEgaHJlZj0iL2JpbGxkb25vaHVlL2ZmcmYta3VydHotcHJheWVyLWxpYmVydHkvMjAyMC8wMy8yNy9pZC85NjAyNDMvIiBjbGFzcz0iYmxvZ19zdWJqZWN0X3NtbCI+U2hvdWxkIFdlIEFjY2VwdCBCYW5zIE9uIENodXJjaCBHYXRoZXJpbmdzPyA8L2E+ZAIFD2QWCgIBDxYCHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPTU4NGY2OTJlLTk4YjctNGMxMi04YWM3LTk3MzkzMjRmYzVjOCZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9NDcmYW1wO3dpZHRoPTQ3IiAvPmQCAw8WBB8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD01ODRmNjkyZS05OGI3LTRjMTItOGFjNy05NzM5MzI0ZmM1Yzgmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTk1JmFtcDt3aWR0aD0xMTQiLz4fDmhkAgUPFgIfDwU9PGEgaHJlZj0iL2luc2lkZXJzL2hlbnJ5ZmNvb3Blci9pZC01MDcvIiA+SGVucnkgRi4gQ29vcGVyPC9hPmQCBw8WAh8PBQ1IaWdoIEZyb250aWVyZAIJDxYCHw8FlAE8YSBocmVmPSIvaGVucnlmY29vcGVyL2JtZC10aGFhZC1zZGktYWJtLzIwMjAvMDMvMjcvaWQvOTYwMjg2LyIgY2xhc3M9ImJsb2dfc3ViamVjdF9zbWwiPkJhbGxpc3RpYyBNaXNzaWxlIERlZmVuc2UgU3RvcnkgSXMgR29vZCwgQmFkLCBhbmQgVWdseSA8L2E+ZAIGD2QWCgIBDxYCHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPWY2MjI2Y2I4LWE0ODEtNDMwOC1iNjdmLTkxZDUzZGYxNGVlOCZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9NDcmYW1wO3dpZHRoPTQ3IiAvPmQCAw8WBB8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD1mNjIyNmNiOC1hNDgxLTQzMDgtYjY3Zi05MWQ1M2RmMTRlZTgmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTk1JmFtcDt3aWR0aD0xMTQiLz4fDmhkAgUPFgIfDwU4PGEgaHJlZj0iL2luc2lkZXJzL3Rhd2Zpa2hhbWlkL2lkLTU5LyIgPlRhd2ZpayBIYW1pZDwvYT5kAgcPFgIfDwUMSW5zaWRlIElzbGFtZAIJDxYCHw8FowE8YSBocmVmPSIvdGF3ZmlraGFtaWQvY2hvbG9yb3F1aW5lLW1haGVyLWtvcmVhLXF1YXJhbnRpbmUvMjAyMC8wMy8yNy9pZC85NjAyOTMvIiBjbGFzcz0iYmxvZ19zdWJqZWN0X3NtbCI+QXJlIEFudGktVHJ1bXAgRmFjdGlvbnMgSHlwaW5nIENvcm9uYXZpcnVzIFBhbmRlbWljPyA8L2E+ZAIHD2QWCgIBDxYCHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPTNiNmM5MDg2LTMxNzAtNDM1Zi1hOTZhLWE2ODhjYmM3MmQxZCZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9NDcmYW1wO3dpZHRoPTQ3IiAvPmQCAw8WBB8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD0zYjZjOTA4Ni0zMTcwLTQzNWYtYTk2YS1hNjg4Y2JjNzJkMWQmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTk1JmFtcDt3aWR0aD0xMTQiLz4fDmhkAgUPFgIfDwU1PGEgaHJlZj0iL2luc2lkZXJzL3N0ZXZlbGV2eS9pZC01NjYvIiA+U3RldmUgTGV2eTwvYT5kAgcPFgIfDwUTQ29tbW9uIFNlbnNlIENvcm5lcmQCCQ8WAh8PBa0BPGEgaHJlZj0iL3N0ZXZlbGV2eS9jb3JvbmF2aXJ1cy10cnVtcC1lY29ub215LzIwMjAvMDMvMjcvaWQvOTYwMjMwLyIgY2xhc3M9ImJsb2dfc3ViamVjdF9zbWwiPkFjY291bnRhYmxlIE9mZmljaWFscyBNdXN0IE1ha2UgRGVjaXNpb25zIG9uIEVjb25vbXksIENvcm9uYXZpcnVzIFRoZXJhcGllczwvYT5kAggPZBYKAgEPFgIfDwV7PGltZyBzcmM9In4vQ01TUGFnZXMvR2V0RmlsZS5hc3B4P2d1aWQ9YjZkMmNiMTMtMmIyMC00OTc4LTg0MmItMjE0ODA0N2IxNWQ5JnNpdGVuYW1lPW5ld3NtYXgmYW1wO2hlaWdodD00NyZhbXA7d2lkdGg9NDciIC8+ZAIDDxYEHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPWI2ZDJjYjEzLTJiMjAtNDk3OC04NDJiLTIxNDgwNDdiMTVkOSZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9OTUmYW1wO3dpZHRoPTExNCIvPh8OaGQCBQ8WAh8PBTs8YSBocmVmPSIvaW5zaWRlcnMvaG9yYWNlY29vcGVyL2lkLTYzNS8iID5Ib3JhY2UgQ29vcGVyPC9hPmQCBw8WAh8PBRxUaGUgTGF3IGFuZCBBbWVyaWNhbiBTb2NpZXR5ZAIJDxYCHw8FqwE8YSBocmVmPSIvaG9yYWNlY29vcGVyL2RwYS15b3VuZ3N0b3duLWNvbnN0aXR1dGlvbmFsLW1pbGl0YXJ5LzIwMjAvMDMvMjcvaWQvOTYwMjMxLyIgY2xhc3M9ImJsb2dfc3ViamVjdF9zbWwiPk1lbW8gdG8gR292LiBDdW9tbzogMTk1MCBBY3QgTm90IGEgTGljZW5zZSBmb3IgVGFrZW92ZXJzCjwvYT5kAgkPZBYKAgEPFgIfDwV7PGltZyBzcmM9In4vQ01TUGFnZXMvR2V0RmlsZS5hc3B4P2d1aWQ9ZmQ0ZjVmNDUtYzVmYi00OTE0LThmNGQtYmIxNjEyMGMzZDg1JnNpdGVuYW1lPW5ld3NtYXgmYW1wO2hlaWdodD00NyZhbXA7d2lkdGg9NDciIC8+ZAIDDxYEHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPWZkNGY1ZjQ1LWM1ZmItNDkxNC04ZjRkLWJiMTYxMjBjM2Q4NSZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9OTUmYW1wO3dpZHRoPTExNCIvPh8OaGQCBQ8WAh8PBTs8YSBocmVmPSIvaW5zaWRlcnMvbWljYWhoYWxwZXJuL2lkLTU2MC8iID5NaWNhaCBIYWxwZXJuPC9hPmQCBw8WAh8PBQ1UaGUgSW5zaWdodGVyZAIJDxYCHw8FiAE8YSBocmVmPSIvbWljYWhoYWxwZXJuL2xpbmNvbG4tZ29vZ2xyZS1nYXJmdW5rZWwtY292aWQvMjAyMC8wMy8yNy9pZC85NjAxNTkvIiBjbGFzcz0iYmxvZ19zdWJqZWN0X3NtbCI+SWYgSSBEaWRuJ3QgTGF1Z2ggSSBXb3VsZCBDcnk8L2E+ZAIKD2QWCgIBDxYCHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPTA1ZDcyNDU1LWZhZDQtNDFmNC04ZTI2LTJiYThiMDkwNGZhMSZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9NDcmYW1wO3dpZHRoPTQ3IiAvPmQCAw8WBB8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD0wNWQ3MjQ1NS1mYWQ0LTQxZjQtOGUyNi0yYmE4YjA5MDRmYTEmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTk1JmFtcDt3aWR0aD0xMTQiLz4fDmhkAgUPFgIfDwVFPGEgaHJlZj0iL2luc2lkZXJzL21pY2hhZWxkb3JzdGV3aXR6L2lkLTQ5OC8iID5NaWNoYWVsIERvcnN0ZXdpdHo8L2E+ZAIHDxYCHw8FDEZpcmluZyBSYW5nZWQCCQ8WAh8PBagBPGEgaHJlZj0iL21pY2hhZWxkb3JzdGV3aXR6L3BsYW5uZWQtcGFyZW50aG9vZC1hYm9ydGlvbi1zdGltdWx1cy1jb3ZpZDE5LzIwMjAvMDMvMjcvaWQvOTYwMjExLyIgY2xhc3M9ImJsb2dfc3ViamVjdF9zbWwiPlBsYW5uZWQgUGFyZW50aG9vZCBHZXRzIEFib3J0ZWQgYnkgQ09WSUQtMTk8L2E+ZAILD2QWCgIBDxYCHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPWFhMjgxNGVjLWE0NzUtNDg1Zi04NTQyLTNiYjRiZDk1ZWVmOCZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9NDcmYW1wO3dpZHRoPTQ3IiAvPmQCAw8WBB8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD1hYTI4MTRlYy1hNDc1LTQ4NWYtODU0Mi0zYmI0YmQ5NWVlZjgmc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTk1JmFtcDt3aWR0aD0xMTQiLz4fDmhkAgUPFgIfDwU1PGEgaHJlZj0iL2luc2lkZXJzL3RvbWJhc2lsZS9pZC02MzgvIiA+VG9tIEJhc2lsZTwvYT5kAgcPFgIfDwUJUmlnaHQgTm93ZAIJDxYCHw8FoAE8YSBocmVmPSIvdG9tYmFzaWxlL25ld3lvcmstY3VvbW8tYnVkZ2V0LWRlZmljaXQvMjAyMC8wMy8yNy9pZC85NjAxNzYvIiBjbGFzcz0iYmxvZ19zdWJqZWN0X3NtbCI+QW1lcmljYW4gVGF4cGF5ZXJzIFNob3VsZG4ndCBQYXkgZm9yIEN1b21vJ3MgQnVkZ2V0IERlZmljaXQ8L2E+ZAIMD2QWCgIBDxYCHw8FezxpbWcgc3JjPSJ+L0NNU1BhZ2VzL0dldEZpbGUuYXNweD9ndWlkPTkyN2NhMWNiLWIyMzMtNDQxMi1hNTQ0LWI3ZWE5MDUzMjNhMiZzaXRlbmFtZT1uZXdzbWF4JmFtcDtoZWlnaHQ9NDcmYW1wO3dpZHRoPTQ3IiAvPmQCAw8WBB8PBXs8aW1nIHNyYz0ifi9DTVNQYWdlcy9HZXRGaWxlLmFzcHg/Z3VpZD05MjdjYTFjYi1iMjMzLTQ0MTItYTU0NC1iN2VhOTA1MzIzYTImc2l0ZW5hbWU9bmV3c21heCZhbXA7aGVpZ2h0PTk1JmFtcDt3aWR0aD0xMTQiLz4fDmhkAgUPFgIfDwU/PGEgaHJlZj0iL2luc2lkZXJzL3dlbmR5bHBhdHJpY2svaWQtNTMwLyIgPldlbmR5IEwuIFBhdHJpY2s8L2E+ZAIHDxYCHw8FEUJlaGluZCB0aGUgU2NlbmVzZAIJDxYCHw8FpgE8YSBocmVmPSIvd2VuZHlscGF0cmljay9zb2NpYWxpemluZy1kaXN0YW5jaW5nLW9ubGluZS10YWxrLzIwMjAvMDMvMjYvaWQvOTYwMDY5LyIgY2xhc3M9ImJsb2dfc3ViamVjdF9zbWwiPlllcywgU29jaWFsIERpc3RhbmNlIFJlbGF0aW9uc2hpcCBCdWlsZGluZyBJcyBQb3NzaWJsZSA8L2E+ZAIED2QWAgIHDxYCHw9lZAIFD2QWBAIDD2QWAmYPZBYEZg8VASRhMDMyZTM5MC01ODVhLTRlODctOGZmYy1mOGFmMTg5N2VlMDlkAgEPFgIfDmcWAmYPFQEkYTAzMmUzOTAtNTg1YS00ZTg3LThmZmMtZjhhZjE4OTdlZTA5ZAIED2QWAmYPZBYEZg8VASQzMTZmZmFkYi02N2FmLTRhNDUtYjIwZi1jZDg5YjM4YzIyZDVkAgEPFgIfDmcWAmYPFQEkMzE2ZmZhZGItNjdhZi00YTQ1LWIyMGYtY2Q4OWIzOGMyMmQ1ZGQ75RYfGYtmVcOPEE/kc9YlELS3Lw=="> 
+   <script type="text/javascript"> 
+      //<![CDATA[
+      if (window.WebForm_InitCallback) { 
+        __theFormPostData = '';
+        __theFormPostCollection = new Array();
+        window.WebForm_InitCallback(); 
+      }
+      //]]>
+    </script> 
+  </form>  
+ </body>
+</html>

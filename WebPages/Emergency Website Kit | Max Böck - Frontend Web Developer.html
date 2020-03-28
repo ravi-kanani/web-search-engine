@@ -1,0 +1,879 @@
+<!doctype html>
+<html class="no-js" lang="en">
+ <!--!
+  Oh so you're an inspector?
+  View the source here: https://github.com/maxboeck/mxb
+-->
+ <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Emergency Website Kit | Max Böck - Frontend Web Developer</title>
+  <link rel="preload" href="/assets/fonts/noe-display-medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <meta name="description" content="In cases of emergency, many organizations need a quick way to publish critical information. But existing (CMS) websites are often unable to handle sudden spikes in traffic.">
+  <meta property="og:title" content="Emergency Website Kit">
+  <meta property="og:description" content="In cases of emergency, many organizations need a quick way to publish critical information. But existing (CMS) websites are often unable to handle sudden spikes in traffic.">
+  <meta property="og:url" content="https://mxb.dev/blog/emergency-website-kit/">
+  <meta property="og:image" content="https://mxb.dev/assets/media/emergency-site/cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2020-03-22T00:00:00">
+  <meta name="author" content="Max Böck">
+  <meta property="og:site_name" content="Max Böck - Frontend Web Developer">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:site" content="@mxbck">
+  <meta name="twitter:creator" content="@Max Böck">
+  <meta property="fb:app_id" content="127677017332959">
+  <link rel="canonical" href="https://mxb.dev/blog/emergency-website-kit/">
+  <script type="application/ld+json">{
+        "name":"Max Böck",
+        "description":"Max Böck is a professional frontend developer based in Vienna, Austria.",
+        "author": {
+            "@type":"Person",
+            "name":"Max Böck"
+        },
+        "@type":"WebSite",
+        "url":"https://mxb.dev",
+        "image":"https://mxb.dev/assets/images/logo.jpg",
+        "headline":"Max Böck - Frontend Web Developer",
+        "sameAs":[
+            "https://twitter.com/mxbck",
+            "https://github.com/maxboeck",
+            "https://keybase.io/mxb"
+        ],
+        "@context":"http://schema.org"
+    }</script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#1a1a1a">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#1a1a1a">
+  <link type="application/atom+xml" rel="alternate" href="https://mxb.dev/feed.xml" title="Max Böck - Frontend Web Developer">
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+  <link rel="microsub" href="https://aperture.p3k.io/microsub/428">
+  <link rel="dns-prefetch" href="https://webmention.io">
+  <link rel="preconnect" href="https://webmention.io">
+  <link rel="pingback" href="https://webmention.io/mxb.dev/xmlrpc">
+  <link rel="webmention" href="https://webmention.io/mxb.dev/webmention">
+  <script>(localStorage.getItem('darkMode') === 'true') && document.documentElement.classList.add('theme-dark');</script>
+ </head>
+ <body>
+  <a href="#main" class="sr-skip-link">skip to main content</a>
+  <div class="hfeed layout" role="document">
+   <header class="header" role="banner">
+    <div class="header__inner container">
+     <a class="header__brand" href="/" rel="home" aria-label="Go To Homepage">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100" height="35" viewbox="0 0 100 35">
+       <path d="M16.844 17.5L33.736.664v33.628h-5.7V14.2l-11.22 11.255L5.545 14.2v20.09H0V.666L16.844 17.5zm80.197-.003c1.973 1.91 2.96 4.253 2.96 7.032 0 1.327-.26 2.585-.775 3.78-.52 1.2-1.222 2.236-2.11 3.125-.89.89-1.934 1.582-3.13 2.1-1.197.518-2.46.758-3.784.758H71.94V.71H90.2c1.294 0 2.546.236 3.76.753 1.212.52 2.264 1.2 3.153 2.087.89.894 1.593 1.938 2.11 3.13.514 1.2.775 2.457.775 3.788 0 2.75-.987 5.094-2.962 7.038l.005-.01zm-2.668 7.034c0-.55-.105-1.087-.315-1.606-.206-.518-.5-.975-.868-1.36-.37-.39-.82-.708-1.333-.933-.52-.224-1.062-.362-1.65-.362h-12.72v8.477h12.72c.55 0 1.086-.125 1.604-.336.518-.212.972-.53 1.36-.92.386-.388.687-.84.9-1.356.21-.514.315-1.05.315-1.602h-.013zm0-14.07c0-.55-.105-1.086-.315-1.604-.206-.52-.506-.976-.894-1.363s-.838-.7-1.356-.906c-.513-.212-1.05-.337-1.6-.337h-12.72v8.475h12.72c.55 0 1.086-.112 1.6-.337.52-.225.976-.53 1.362-.918.387-.388.687-.844.897-1.363.21-.52.316-1.072.316-1.654l-.01.008zm-43.597-.21L43.263.555h-7.178l11.126 14.22 3.564-4.523v-.004zm4.14 14.537l7.513 9.65h7.13L58.49 20.244l-3.57 4.547-.002-.003zm.52-15.3h.023l-7.614 9.806-.007.076-11.75 15.073h7.18l9.558-12.33.02-.03 3.583-4.572-.012-.068L69.562.556h-7.13L55.436 9.49l-.002-.003z" />
+      </svg></a>
+     <div class="header__nav">
+      <nav class="nav js-nav" role="navigation" aria-label="site" tabindex="-1">
+       <button class="nav__togglebtn js-nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="toggle menu"><span class="menuicon"><span class="menuicon__bar"></span> <span class="menuicon__bar"></span> <span class="menuicon__bar"></span> <span class="menuicon__bar"></span></span></button>
+       <div class="nav__content">
+        <ul class="nav__menu js-nav-menu" id="nav-menu">
+         <li class="nav__item"><a href="/" class="nav__link"><span class="nav__num" aria-hidden="true">01</span> Home</a></li>
+         <li class="nav__item nav__item--active"><a href="/blog/" class="nav__link"><span class="nav__num" aria-hidden="true">02</span> Writing</a></li>
+         <li class="nav__item"><a href="/notes/" class="nav__link"><span class="nav__num" aria-hidden="true">03</span> Notes</a></li>
+         <li class="nav__item"><a href="/about/" class="nav__link"><span class="nav__num" aria-hidden="true">04</span> About</a></li>
+        </ul>
+       </div><button class="nav__darkmodebtn js-darkmode-toggle" title="Toggle Dark Mode" role="switch" aria-checked="false">
+        <svg class="icon icon--moon" role="img" aria-hidden="true" width="24" height="24">
+         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-moon"></use>
+        </svg> 
+        <svg class="icon icon--sun" role="img" aria-hidden="true" width="24" height="24">
+         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-sun"></use>
+        </svg> <span class="sr-only">Toggle Dark Mode</span></button>
+       <div class="nav__bg theme-dark">
+        <div class="nav__bg__circle"></div>
+       </div>
+      </nav>
+     </div>
+    </div>
+   </header>
+   <main class="main container" role="main" id="main" tabindex="-1">
+    <article id="emergency-website-kit" class="post h-entry" role="article" itemscope itemtype="http://schema.org/BlogPosting" aria-labelledby="emergency-website-kit-title">
+     <header class="post__header">
+      <h1 id="emergency-website-kit-title" class="post__title p-name title" itemprop="headline">Emergency Website Kit</h1>
+      <div class="post__meta">
+       <time class="post__date dt-published" itemprop="datePublished" datetime="2020-03-22T00:00:00">22 Mar 2020</time> ⋅ <span class="post__tags p-category">code</span> <a href="https://emergency-site.dev/" class="btn btn--primary post__demo" target="_blank" rel="noopener noreferrer">View Demo</a>
+      </div>
+     </header>
+     <div class="post__content e-content markdown" itemprop="articleBody">
+      <p>In cases of emergency, many organizations need a quick way to publish critical information. But existing (CMS) websites are often unable to handle sudden spikes in traffic.</p>
+      <blockquote class="twitter-tweet">
+       <p lang="en" dir="ltr">Just received a shelter-in-place emergency alert with a web address for more information. Clicked the link. The site is down. All emergency sites should be static.</p>— Nicholas C. Zakas (@slicknet) <a href="https://twitter.com/slicknet/status/1239972949819404291?ref_src=twsrc%5Etfw">March 17, 2020</a>
+      </blockquote>
+      <p>To make things worse, natural disasters can also damage local network infrastructure, sometimes leaving people with very poor mobile connections.</p>
+      <p>I’ve <a href="/blog/hurricane-web/">written about</a> the practice of publishing minimal “text-only” versions of critical news websites before and I think it makes a lot of sense to rely on the <a href="https://en.wikipedia.org/wiki/Rule_of_least_power">rule of least power</a> for these things. When it comes to resilience, you just can’t beat static HTML.</p>
+      <h2 id="h-an-emergency-website-kit"><a class="heading-anchor" href="#h-an-emergency-website-kit">#</a> An Emergency Website Kit</h2>
+      <p>Like so many others, I’m currently in voluntary quarantine at home - and I used some time this weekend to put a small <a href="https://github.com/maxboeck/emergency-site">boilerplate</a> together for this exact usecase.</p>
+      <p>Here’s the main idea:</p>
+      <ul>
+       <li>generate a static site with <a href="https://11ty.dev">Eleventy</a></li>
+       <li>minimal markup, inlined CSS</li>
+       <li>aim to transmit everything in the first connection roundtrip (~14KB)</li>
+       <li>progressively enable offline-support w/ Service Worker</li>
+       <li>set up <a href="https://www.netlifycms.org/">Netlify CMS</a> for easy content editing</li>
+       <li>one-click deployment via Netlify</li>
+      </ul>
+      <p>The site contains only the bare minimum - no webfonts, no tracking, no unnecessary images. The entire thing should fit in a single HTTP request. It’s basically just a small, ultra-lean blog focused on maximum resilience and accessibility. The Service Worker takes it a step further from there so if you’ve visited the site once, the information is still accessible even if you lose network coverage.</p>
+      <p>The end result is just a set of static files that can be easily hosted on cloud infrastructure and put on a CDN. Netlify does this out of the box, but other providers or privately owned servers are possible as well.</p>
+      <p>You can find the <a href="https://github.com/maxboeck/emergency-site">project source on Github</a> as well as a <a href="https://emergency-site.dev/">demo site here</a>.</p>
+      <h2 id="h-not-everyone-is-a-developer"><a class="heading-anchor" href="#h-not-everyone-is-a-developer">#</a> Not Everyone is a Developer</h2>
+      <p>I’m aware that not everyone, especially the people in charge of setting up websites like this, is familiar with things like <code>Node</code> or the command line. I want to keep the barrier to entry as low as possible, so I’m currently working on two ideas:</p>
+      <h3 id="h-1-no-code-setup"><a class="heading-anchor" href="#h-1-no-code-setup">#</a> 1. No-Code Setup</h3>
+      <p>Taking a hint from the excellent <a href="https://www.servicerelief.us/start">servicerelief.us</a> project, it is possible to configure the template in such a way that all configuration can be done via environment variables.</p>
+      <p>These are set in the Netlify UI when the site is first deployed, meaning a user would only need a free Github and Netlify account to get started - without ever touching a line of code or having to mess around with npm or Eleventy itself. The content editing can all be done through Netlify CMS, which offers a much more useable graphical interface.</p>
+      <h3 id="h-2-volunteer-devs"><a class="heading-anchor" href="#h-2-volunteer-devs">#</a> 2. Volunteer Devs</h3>
+      <p>Another great idea came from <a href="https://stephaniewalter.design/">Stephanie Walter</a> on Twitter:</p>
+      <blockquote class="twitter-tweet">
+       <p lang="en" dir="ltr">True, but at some point there will always be single points of failures. I still like the idea of providing something simple to organizations, I just wonder how technical most people in those are. I wonder if there's some places to put in touch organizations with devs to help</p>— Stephanie W. (@WalterStephanie) <a href="https://twitter.com/WalterStephanie/status/1243516998790889473?ref_src=twsrc%5Etfw">March 27, 2020</a>
+      </blockquote>
+      <p>Since even dealing with the unfamiliar landscapes of Github and Netlify might be a big ask for many non-technical organizations, it might be worth considering the help of volunteer developers.</p>
+      <p>The initial setup is a 10-minute job for devs who understand the stack. Organizations could get in touch with a volunteer to help them get the site online, then take over and update the content.</p>
+      <h2 id="h-get-in-touch"><a class="heading-anchor" href="#h-get-in-touch">#</a> Get in Touch!</h2>
+      <p>In the meantime, if you want to set up an emergency website and need help to get started, <a href="mailto:hello@mxb.dev">let me know</a>!</p>
+     </div>
+     <div class="post__footer">
+      <div hidden>
+       <a class="u-url" href="https://mxb.dev/blog/emergency-website-kit/">Emergency Website Kit</a>
+       <p class="h-card p-author"><a class="p-name u-url" rel="author" href="https://mxb.dev">Max Böck</a> <img class="u-photo" src="https://mxb.dev/assets/images/avatar2.jpg"></p>
+      </div>
+      <p class="post__footer__info">Published in [code] ⋅ 22 Mar 2020</p><a href="https://twitter.com/intent/follow?screen_name=mxbck" target="_blank" rel="noopener noreferrer" title="Follow Max Böck on Twitter" class="btn btn--twitter">
+       <svg class="icon icon--twitter" role="img" aria-hidden="true" width="24" height="24">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-twitter"></use>
+       </svg> Follow @mxbck</a>
+     </div>
+    </article>
+    <div class="postsection">
+     <h3 class="postsection__title">Webmentions</h3>
+     <div class="webmentions" id="webmentions" data-url="https://mxb.dev/blog/emergency-website-kit/" data-last-fetched="2020-03-27T15:44:22.858Z">
+      <div data-render-root>
+       <div class="webmentions__header">
+        <span class="webmentions__metric" aria-label="144 Likes">
+         <svg class="icon icon--heart" role="img" aria-hidden="true" width="24" height="24">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-heart"></use>
+         </svg> 144 </span><a href="#webmentions" class="webmentions__metric" aria-label="73 Mentions, show all">
+         <svg class="icon icon--message" role="img" aria-hidden="true" width="24" height="24">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-message"></use>
+         </svg> 73 (Show All)</a>
+        <div class="webmentions__faces">
+         <img class="webmentions__faces__img" src="https://webmention.io/avatar/pbs.twimg.com/bef8b2059829d0a46f469f0bc064f977f6be821d88dcedf0c01a27bb2f1109e9.jpeg" title="Manuel Matuzović" alt="" width="32" height="32" loading="lazy"> 
+         <img class="webmentions__faces__img" src="https://webmention.io/avatar/pbs.twimg.com/6cadd5c7ea8ba3e1336671afc46cd6c449a247920c453bbf3c495905cc811752.jpg" title="Matthias Ott" alt="" width="32" height="32" loading="lazy"> 
+         <img class="webmentions__faces__img" src="https://webmention.io/avatar/pbs.twimg.com/579a474c9b858845a9e64693067e12858642fa71059d542dce6285aed5e10767.jpg" title="Sāra Soueidān" alt="" width="32" height="32" loading="lazy"> 
+         <img class="webmentions__faces__img" src="https://webmention.io/avatar/pbs.twimg.com/579a474c9b858845a9e64693067e12858642fa71059d542dce6285aed5e10767.jpg" title="Sāra Soueidān" alt="" width="32" height="32" loading="lazy"> 
+         <img class="webmentions__faces__img" src="https://webmention.io/avatar/pbs.twimg.com/bbda6d9839ace9389eb5b79449d5f68567f648b821b719ba4bc69aee10f44db7.jpg" title="Dan Boland" alt="" width="32" height="32" loading="lazy"> <span class="webmentions__faces__more">+68</span>
+        </div><a href="https://indieweb.org/Webmention" class="webmentions__info" target="_blank" rel="noopener noreferrer">
+         <svg class="icon icon--question" role="img" aria-hidden="true" width="24" height="24">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-question"></use>
+         </svg> What’s this?</a>
+       </div>
+       <div class="webmentions__content">
+        <ol class="webmentions__list">
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773618">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/mmatuzo/status/1241776176223453184" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/bef8b2059829d0a46f469f0bc064f977f6be821d88dcedf0c01a27bb2f1109e9.jpeg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Manuel Matuzović</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T17:18:06+00:00">22 Mar 2020 - 19:18</time>
+           </div>
+           <div class="webmention__content p-content">
+            Now, that's awesome! Max built a starter kit for emergency websites, optimized for first roundtrip, heavy traffic and maximum resilience. Thanks, Max! <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773617">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/m_ott/status/1241777659107033089" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/6cadd5c7ea8ba3e1336671afc46cd6c449a247920c453bbf3c495905cc811752.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Matthias Ott</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T17:23:59+00:00">22 Mar 2020 - 19:23</time>
+           </div>
+           <div class="webmention__content p-content">
+            Oh yes! A starter kit for emergency websites! 💪👏👏👏 <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773616">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/SaraSoueidan/status/1241779390746427399" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/579a474c9b858845a9e64693067e12858642fa71059d542dce6285aed5e10767.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Sāra Soueidān</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T17:30:52+00:00">22 Mar 2020 - 19:30</time>
+           </div>
+           <div class="webmention__content p-content">
+            The kind of side projects I strongly endorse 👏🏻🙌🏻❤️ This is GREAT <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773571">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/SaraSoueidan/status/1241779421280899074" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/579a474c9b858845a9e64693067e12858642fa71059d542dce6285aed5e10767.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Sāra Soueidān</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T17:30:59+00:00">22 Mar 2020 - 19:30</time>
+           </div>
+           <div class="webmention__content p-content">
+            This is GREAT! <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773615">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/atacrawl/status/1241786808511401992" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/bbda6d9839ace9389eb5b79449d5f68567f648b821b719ba4bc69aee10f44db7.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Dan Boland</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T18:00:21+00:00">22 Mar 2020 - 20:00</time>
+           </div>
+           <div class="webmention__content p-content">
+            A more tech-savvy federal government would roll efforts like this into FEMA and other agencies where quick information dissemination is critical. Truly commendable work. <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773614">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/tela/status/1241786890379907073" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/495c60e83317189ea09ca0df33d0a8155d1ab07e3283f3043f16a3358ff11a41.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">tela</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T18:00:40+00:00">22 Mar 2020 - 20:00</time>
+           </div>
+           <div class="webmention__content p-content">
+            Great project that could really help at scale <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773570">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/CsabaVarszegi/status/1241794099545616384" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/1be32f98b1266eb12fe2e63e21450b3b10a58851cfcd81174718bd6cbc63c6a9.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Csaba 🌳</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T18:29:19+00:00">22 Mar 2020 - 20:29</time>
+           </div>
+           <div class="webmention__content p-content">
+            Can’t a minimal, cached WordPress site work? Maybe easier to update by the owner. With minimal, I mean minimal in transfer size. I have made this one: <a href="https://globalwarning.blog">globalwarning.blog</a> (20-30 kb). <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/melchoyce"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773569">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/CsabaVarszegi/status/1241794479155224576" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/1be32f98b1266eb12fe2e63e21450b3b10a58851cfcd81174718bd6cbc63c6a9.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Csaba 🌳</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T18:30:49+00:00">22 Mar 2020 - 20:30</time>
+           </div>
+           <div class="webmention__content p-content">
+            And there is also the <a href="https://sustywp.com/">sustywp.com</a> theme by <a href="https://twitter.com/JackLenox">@JackLenox</a> 👍 <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/melchoyce"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773568">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/KabirPatel2000/status/1241800568160616448" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/fa3ea7c26da887eb098d35ee9d1af6f536b9980fde38f30f9f9ebb39730c01fd.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Kabir Patel</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T18:55:01+00:00">22 Mar 2020 - 20:55</time>
+           </div>
+           <div class="webmention__content p-content">
+            smashingmag: RT mxbck: ✏️ made a new side project: a starter kit for emergency websites! optimized for first roundtrip, heavy traffic and maximum resilience. powered by eleven_ty and Netlify. more: <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> code: <a href="https://github.com/maxboeck/emergency-site">github.com/maxboeck/emerg…</a> https://t.co/cCwMsDtlHh
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773567">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/AbdullahRafiBD/status/1241811443890237446" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/be58c13f983d225e656603823039be0ed5606c5105e81d7a894d774db1fee440.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Abdullah rafi</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T19:38:14+00:00">22 Mar 2020 - 21:38</time>
+           </div>
+           <div class="webmention__content p-content">
+            goodwebdesign : RT mxbck: ✏️ made a new side project: a starter kit for emergency websites! optimized for first roundtrip, heavy traffic and maximum resilience. powered by eleven_ty and Netlify. more: <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> code: … <a href="https://twitter.com/goodwebdesign/status/1241808616010571776">twitter.com/goodwebdesign/…</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773566">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hn_frontpage/status/1241826079687532547" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/f62929d0a92700ab725c84e5ab3bef64ae5cfc1d462934d3eb81ae6559c63412.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">HN Front Page</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:36:24+00:00">22 Mar 2020 - 22:36</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites L: <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> C: <a href="https://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773551">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://dailyfree.news.blog/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">The Pakistani News Corner</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:37:20+00:00">22 Mar 2020 - 22:37</time>
+           </div>
+           <div class="webmention__content p-content">
+            <a href="https://mxb.dev/blog/emergency-website-kit/">A Starter Kit for Emergency Websites</a> 2 by mxbck | <a href="https://news.ycombinator.com/item?id=22657571">0 comments</a> on Hacker News.<i></i> Share this: <a href="https://dailyfree.news.blog/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/?share=twitter">Twitter</a> <a href="https://dailyfree.news.blog/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/?share=facebook">Facebook</a> Like this: Like Loading... <a></a> <em>Related</em>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773552">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://ultimatenews1.wordpress.com/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">Ultimate News</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:39:27+00:00">22 Mar 2020 - 22:39</time>
+           </div>
+           <div class="webmention__content p-content">
+            <a href="https://mxb.dev/blog/emergency-website-kit/">A Starter Kit for Emergency Websites</a> 2 by mxbck | <a href="https://news.ycombinator.com/item?id=22657571">0 comments</a> on Hacker News.<i></i> March 23, 2020 at 12:33AM Share this News: <a href="https://twitter.com/share">Tweet</a> <a href="https://ultimatenews1.wordpress.com/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/?share=jetpack-whatsapp">WhatsApp</a> Like this: Like Loading... <a></a> <em>Related</em>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773565">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hacker_news_hir/status/1241826996205871106" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e29a0d7dd389ab34c3b5daa9686ac7aeb813d01664f9270956b163e3b26a6428.jpeg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:40:02+00:00">22 Mar 2020 - 22:40</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites : <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> Comments: <a href="https://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773564">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/winsontang/status/1241828634685403137" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/7ee8de772575651fafbec3cd49f9a853f158fcbe894ecf3f0653bcffd9b54286.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Winson Tang</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:46:33+00:00">22 Mar 2020 - 22:46</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/?utm_source=dlvr.it&amp;utm_medium=twitter">mxb.dev/blog/emergency…</a> <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773559">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://protipsss.wordpress.com/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">Creativity4all</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:49:24+00:00">22 Mar 2020 - 22:49</time>
+           </div>
+           <div class="webmention__content p-content">
+            <a href="https://mxb.dev/blog/emergency-website-kit/">A Starter Kit for Emergency Websites</a> 4 by mxbck | <a href="https://news.ycombinator.com/item?id=22657571">0 comments</a> on Hacker News.<i></i> Share this: <a href="https://protipsss.wordpress.com/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/?share=twitter">Twitter</a> <a href="https://protipsss.wordpress.com/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/?share=facebook">Facebook</a> Like this: Like Loading... <a></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773561">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://hckrnews.wordpress.com/2020/03/22/new-top-story-on-hacker-news-a-starter-kit-for-emergency-websites/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/0.gravatar.com/a4ecfe1b705587fdd68c4fbe2b020c37be39eb5f46b39b7131fc3822a63297db.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">hckrnews</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T20:56:08+00:00">22 Mar 2020 - 22:56</time>
+           </div>
+           <div class="webmention__content p-content">
+            <a href="https://mxb.dev/blog/emergency-website-kit/">A Starter Kit for Emergency Websites</a> 4 by mxbck | <a href="https://news.ycombinator.com/item?id=22657571">0 comments</a> on Hacker News.<i></i> <em>Related</em>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773631">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/BtcBee/status/1241841832511836163" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e93fba16e7d17966123ceef10562e33e6c631752626f688d88df1ab32fafc1ff.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Leo</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T21:38:59+00:00">22 Mar 2020 - 23:38</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> <a href="https://twitter.com/search?q=%23AI">#AI</a> <a href="https://twitter.com/search?q=%23news">#news</a> <a href="https://twitter.com/search?q=%23tech">#tech</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773656">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsyc20/status/1241843262828273666" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/84ed93bbecd6a27883192a0f2c680b32c35e4d17fe2004465c80cd34957a4440.gif" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 20</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T21:44:40+00:00">22 Mar 2020 - 23:44</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="https://bit.ly/2UbYe26">bit.ly/2UbYe26</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773655">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/angsuman/status/1241844281913958401" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/548796cca30d8108a5be8261567cba5e4b1f0786fa42bf4bb22bf106a7d6b2b2.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Angsuman Chakraborty</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T21:48:43+00:00">22 Mar 2020 - 23:48</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773643">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://proxap.in/2020/03/23/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">ProXap</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T03:20:16+05:30">22 Mar 2020 - 23:50</time>
+           </div>
+           <div class="webmention__content p-content">
+            mentioned this in <a href="https://proxap.in/2020/03/23/a-starter-kit-for-emergency-websites/">https://proxap.in/2020/03/23/a-starter-kit-for-emergency-websites/</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773654">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsycombinator/status/1241847775047962634" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/1263a7a841ecd37d6232133ab1079c1da854eec25b338a04295a54b873fc8097.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:02:36+00:00">23 Mar 2020 - 00:02</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773653">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/chidalgo/status/1241848544673378310" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/987ba82182cee22aeca2293e6ac98b2fed1c219f528bf3180a93c58179e00e75.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Claudio Hidalgo</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:05:40+00:00">23 Mar 2020 - 00:05</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency Website Kit (usando generador de sitios estáticos Eleventy, y posibilidad de deployar al CMS Netlify) <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773657">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/Lorin/status/1241850625278775297" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/73eaa9039aa38a654d2f450c213077223b1816d09c459a693e12826d0c9b17f8.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Lorin Halpert</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:13:56+00:00">23 Mar 2020 - 00:13</time>
+           </div>
+           <div class="webmention__content p-content">
+            Only feedback: Add basic HOWTO for editing posts, and some older browsers make blind requests for favicon.ico, something to consider. Nice work Max! 👍 <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention webmention--own" id="webmention-773675">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/mxbck/status/1241855818686922754" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/18a4e83da23e07a465feab2cd21362105938e9ac05ff774c757bec8f39bf6141.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Max Böck</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:34:34+00:00">23 Mar 2020 - 00:34</time>
+           </div>
+           <div class="webmention__content p-content">
+            Ah yes thanks! Re favicon: I used a data uri for the favicon, which I think should surpress the blind request <a href="https://twitter.com/Lorin"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773674">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hackernewsj/status/1241857890664792071" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/f8a17e3c35e04435df2233df37ab56ed99e27dba6c5818da055c76d027d6f5c1.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News記事題日本語翻訳</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:42:48+00:00">23 Mar 2020 - 00:42</time>
+           </div>
+           <div class="webmention__content p-content">
+            緊急Webサイトのスターターキット <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773673">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsyc50/status/1241858589679128580" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/84ed93bbecd6a27883192a0f2c680b32c35e4d17fe2004465c80cd34957a4440.gif" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 50</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:45:35+00:00">23 Mar 2020 - 00:45</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="https://bit.ly/2UbYe26">bit.ly/2UbYe26</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773672">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/Sachinhep/status/1241859591291301888" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e12d2f0ac89cc28713ad364e3697e38afb7bf1110fb1efe0e045323431f1ebe8.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Sachin</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:49:33+00:00">23 Mar 2020 - 00:49</time>
+           </div>
+           <div class="webmention__content p-content">
+            An Emergency Website Kit <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773683">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/CompSciFact/status/1241865717777158144" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/30a03db8291a2a5058b5e48bb95205935cacd76fdd2799d03ecee4ca326bb6bd.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Computer Science</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T23:13:54+00:00">23 Mar 2020 - 01:13</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency website kit <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773682">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/Lauren_Hut_SEO/status/1241868788062175239" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/dbc98e7d9839d01ffba66fbd6742e92db6be9a651e1acfd287cdadd92d4c7e64.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Lauren Hutchison</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T23:26:06+00:00">23 Mar 2020 - 01:26</time>
+           </div>
+           <div class="webmention__content p-content">
+            CompSciFact: Emergency website kit <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773711">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/M157q_News_RSS/status/1241873858023448578" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/0f28c2ab2e7fa4ee47668e43d2e61fdb993fa046f8dcf6e89426c6d51d4ef4b1.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">M157q News RSS</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T23:46:15+00:00">23 Mar 2020 - 01:46</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> Article URL: https://t.co/6Wdo0QOXyo Comments URL: <a href="https://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a> Points: 101 # Comments: 33 <a href="https://t.co/6Wdo0QOXyo"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773710">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsyc100/status/1241873940886282240" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/84ed93bbecd6a27883192a0f2c680b32c35e4d17fe2004465c80cd34957a4440.gif" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 100</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T23:46:35+00:00">23 Mar 2020 - 01:46</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="https://bit.ly/2UbYe26">bit.ly/2UbYe26</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773709">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hackernews100/status/1241875105245954049" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e02d2898dc81a68424dd36a4e8781d51f444f5c706eb4ddfc8475d244331b5ef.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 100+</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T23:51:12+00:00">23 Mar 2020 - 01:51</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773734">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hackernewsfeed/status/1241890282360033280" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/95bd4c899a5d95ad88d8a497468e1ee4e8d7795e645b714110bd0f405dd74277.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News Feed</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T00:51:31+00:00">23 Mar 2020 - 02:51</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773750">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/SecurityJar/status/1241898089834635264" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/f1d8c0a5652a71d108f51da27cdb0e7e15c6e4a4a27e9521e37a0596e989beb6.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">SecurityJar</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T01:22:32+00:00">23 Mar 2020 - 03:22</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/?utm_source=dlvr.it&amp;utm_medium=twitter">mxb.dev/blog/emergency…</a> <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773749">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/Hn150/status/1241901863798214658" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/a8b9728caa9d8e724016387e2d89cfe44a78a23b0bae82582bd9d37883126037.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hn150</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T01:37:32+00:00">23 Mar 2020 - 03:37</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="http://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773748">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsyc150/status/1241904389578727428" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e2b1d71bc586c7da470fded2d12c784d46da96f85d870f1cebceb147c3fe13e6.gif" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 150</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T01:47:34+00:00">23 Mar 2020 - 03:47</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="https://bit.ly/2UbYe26">bit.ly/2UbYe26</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773759">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://gadgetstechnews.com/emergency-website-kit/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">Admin</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-22T22:16:59-04:00">23 Mar 2020 - 04:16</time>
+           </div>
+           <div class="webmention__content p-content">
+            In cases of emergency, many organizations need a quick way to publish critical information. But exisiting (CMS) websites are often unable to handle sudden spikes in traffic. Just received a shelter-in-place emergency alert with a web address for more informa… <a href="https://mxb.dev/blog/emergency-website-kit/">Read More</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773777">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/HighSNHN/status/1241922702065184773" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e2fb344040ef7c92fad3764c11c4f91d40af172d206bbb14b86ef92b2d4e029c.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">High S/N HN</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T03:00:20+00:00">23 Mar 2020 - 05:00</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites: <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> ( <a href="https://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a> )
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773817">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/exaday/status/1241940906137268225" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/bbb86a7dbe17c7aaea2220839860595782fc0233a776cdd15c2570e5ff33f6fb.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Exaday</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T04:12:40+00:00">23 Mar 2020 - 06:12</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773652">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://proxap.in/2020/03/23/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">ProXap</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T09:49:11+05:30">23 Mar 2020 - 06:19</time>
+           </div>
+           <div class="webmention__content p-content">
+            mentioned this in <a href="https://proxap.in/2020/03/23/a-starter-kit-for-emergency-websites-3/">https://proxap.in/2020/03/23/a-starter-kit-for-emergency-websites-3/</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773816">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsyc200/status/1241942636870742021" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/fb9236499b32e33f2d4e0a88e4835a477aba131c2a3c39cda94ec604fedf3bd2.gif" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 200</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T04:19:33+00:00">23 Mar 2020 - 06:19</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="http://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773824">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/shinomineko/status/1241955874093977600" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/dffedd43845908967a8c7f4384b0a8840462fd15aaabd88c24000c9dc7a7ba0d.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">shinomin</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T05:12:09+00:00">23 Mar 2020 - 07:12</time>
+           </div>
+           <div class="webmention__content p-content">
+            why would I need a static site generator instead of just writing what I want in html in the first place? <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773644">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://proxap.in/2020/03/23/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo" src="/assets/images/avatar-default.jpg" alt="" width="48" height="48"> <strong class="p-name">ProXap</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T12:06:42+05:30">23 Mar 2020 - 08:36</time>
+           </div>
+           <div class="webmention__content p-content">
+            mentioned this in <a href="https://proxap.in/2020/03/23/a-starter-kit-for-emergency-websites-2/">https://proxap.in/2020/03/23/a-starter-kit-for-emergency-websites-2/</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773844">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/betterhn50/status/1241984166385852416" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/469dd4c9b1edf53573ae747bf6ec9ac5c2979ec473afa4a92b02a64b27b65c1b.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 50</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T07:04:34+00:00">23 Mar 2020 - 09:04</time>
+           </div>
+           <div class="webmention__content p-content">
+            238 – A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773864">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/uncontainer/status/1241994179208593408" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/4c6617dddd8407660c60811a00a00bad502cdcd31186ab1eb3af2a0ef7128402.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Uncontainer</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T07:44:22+00:00">23 Mar 2020 - 09:44</time>
+           </div>
+           <div class="webmention__content p-content">
+            <a href="https://twitter.com/rauchg">@rauchg</a> can we have something like this on Nextjs and now ? <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773863">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/Hn251/status/1241998840644894720" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/c053ccd40ac9d551ec88da15ce7b2061047ce75690ebe7348761bd66978f426c.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hn250</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T08:02:53+00:00">23 Mar 2020 - 10:02</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="http://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773862">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/newsyc250/status/1241999269520867328" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/fb9236499b32e33f2d4e0a88e4835a477aba131c2a3c39cda94ec604fedf3bd2.gif" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News 250</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T08:04:35+00:00">23 Mar 2020 - 10:04</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> (<a href="http://news.ycombinator.com/item?id=22657571">news.ycombinator.com/item?id=226575…</a>)
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775281">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/RonnieRahman5/status/1242023640012673029" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/09b488fef6fcda5f0e983da3c77d0a5a56cebd1ae9a3f20fa48c5881fe410d5e.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Ronnie Rahman</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T09:41:26+00:00">23 Mar 2020 - 11:41</time>
+           </div>
+           <div class="webmention__content p-content">
+            Things are all going crazy around the world. I hope you guys are all keeping safe. Isolate yourself until this is over. If you work for an organization involved in the emergency response, if you need an emergency web site, start here. <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773893">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/javipas/status/1242024089352617985" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/0ca428b5e70d9735dbbf6e1cacd57f276ac8541c96eee946797257d217509b63.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Javier Pastor</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T09:43:13+00:00">23 Mar 2020 - 11:43</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency Website Kit | Max Böck - Frontend Web Developer <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773891">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://wittenbrink.net/lostandfound/content-design-content-strategie-links-23-3-2020/" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/wittenbrink.net/fe65535061aab003485f8c7633e1488d1fb088223665d6f1aab9aa960d76e9c6.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Heinz Wittenbrink</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T10:35:39+00:00">23 Mar 2020 - 12:35</time>
+           </div>
+           <div class="webmention__content p-content">
+            mentioned this in <a href="https://wittenbrink.net/lostandfound/content-design-content-strategie-links-23-3-2020/">https://wittenbrink.net/lostandfound/content-design-content-strategie-links-23-3-2020/</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773925">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hankchizljaw/status/1242044643019313154" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/a1fc5217af9a3c6c76b556ed6f86dc147519a9a0b6d35f44367599283580f572.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Andy Bell</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T11:04:53+00:00">23 Mar 2020 - 13:04</time>
+           </div>
+           <div class="webmention__content p-content">
+            This is so good, Max 🙌 <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773937">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/bentorkington/status/1242051517089058816" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/439a848020593f5b04225d017b86de9417a545eece4df5610880d9ca7d94ebad.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Ben Torkington</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T11:32:12+00:00">23 Mar 2020 - 13:32</time>
+           </div>
+           <div class="webmention__content p-content">
+            1991: Tim Berners-Lee invents World Wide Web 1995-2019: lol we found a way to make it run like shit and generally fuck it up 2020: yeah maybe we should stop doing that <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773978">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/6ltdata/status/1242071336895250434" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/665396953a59cde1a67e6b9965e53fd92994909a70b151f62da15ae4532ee912.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">6LT Data</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T12:50:57+00:00">23 Mar 2020 - 14:50</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites (<a href="http://mxb.dev">mxb.dev</a>) : <a href="https://ift.tt/3di2R2l">ift.tt/3di2R2l</a> <a href="http://mxb.dev/"></a> <a href="https://mxb.dev/"></a> <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-773991">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/ericwbailey/status/1242076620116164610" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/4a415af1325e0bb790c0608a09c5bbfbe7fcb5d2ba19ebbb6563f7ee9853e232.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Eric Bailey</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T13:11:57+00:00">23 Mar 2020 - 15:11</time>
+           </div>
+           <div class="webmention__content p-content">
+            This emergency website kit idea by <a href="https://twitter.com/mxbck">@mxbck</a> is stellar. <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774188">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/pinboard_pop/status/1242118926705844224" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/de70cc4973e180a14044184f3ab73c006fca55cd9ae79dfa8c4dae696e6915d8.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Pinboard Popular</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T16:00:04+00:00">23 Mar 2020 - 18:00</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency Website Kit | Max Böck - Frontend Web Developer <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774224">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/benrmatthews/status/1242133798134976513" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/f3467329841a2d0504ec35899356133a63397aa06d0c53162a0c798fd7c009b7.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">- ̗̀Ben ̖́-</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T16:59:09+00:00">23 Mar 2020 - 18:59</time>
+           </div>
+           <div class="webmention__content p-content">
+            Thanks! The one-click deploy to Netlify worked for me. Have used this to spin up a site listing crisis communications advice around Coronavirus: <a href="https://coronaviruscomms.netlify.com/">coronaviruscomms.netlify.com</a> <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention webmention--own" id="webmention-774225">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/mxbck/status/1242135526603440131" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/18a4e83da23e07a465feab2cd21362105938e9ac05ff774c757bec8f39bf6141.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Max Böck</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T17:06:01+00:00">23 Mar 2020 - 19:06</time>
+           </div>
+           <div class="webmention__content p-content">
+            awesome! <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/benrmatthews"></a> <a href="https://twitter.com/eleven_ty"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774223">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/benrmatthews/status/1242139345613664256" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/f3467329841a2d0504ec35899356133a63397aa06d0c53162a0c798fd7c009b7.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">- ̗̀Ben ̖́-</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T17:21:12+00:00">23 Mar 2020 - 19:21</time>
+           </div>
+           <div class="webmention__content p-content">
+            Now with a mention and links to you in the footer, if that's ok? <a href="https://coronaviruscomms.netlify.com/">coronaviruscomms.netlify.com</a> <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774260">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/hackernewsrobot/status/1242143923650396160" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/9d3cc3d5516ba7d7519d147341735a36fda494cc345902f0e43d797828174579.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Hacker News Robot</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T17:39:23+00:00">23 Mar 2020 - 19:39</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774335">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/spacedawwwg/status/1242178498451714051" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/ed33917ffc1969792ed5d151dc6b3d607c744441ab1486e4bebb2665da8ab93d.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Paul Welsh</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-23T19:56:47+00:00">23 Mar 2020 - 21:56</time>
+           </div>
+           <div class="webmention__content p-content">
+            What a great idea! Love it! <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774497">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/dev_pup/status/1242332556210647042" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/1e313b2df288805d49a125f00b9bda0cbfe085b0165995859a515e2807ce19f0.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">DevPup</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-24T06:08:57+00:00">24 Mar 2020 - 08:08</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774858">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/martinprins/status/1242423086554570753" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/c78eddc112687414d9f2efc606c878a8a773504246e2c8953ec32d3a9d7aaddd.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Martin</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-24T12:08:41+00:00">24 Mar 2020 - 14:08</time>
+           </div>
+           <div class="webmention__content p-content">
+            Really good idea <a href="https://twitter.com/mxbck">@mxbck</a>!! The one-click deploy is just what is needed in this kind of situation. The priority is the content update no the setup. <a href="https://mxb.dev/blog/emergency-website-kit/"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-774974">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/arvidkahl/status/1242450620369571849" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/df0d6af8ea9493326195029f4cc9d3d2411097ea38040d46b28bd73f528aa257.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Arvid Kahl</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-24T13:58:06+00:00">24 Mar 2020 - 15:58</time>
+           </div>
+           <div class="webmention__content p-content">
+            If you are interested in quickly setting up an emergency-related website (or know someone who needs help with that), check out this resource. <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775164">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/websupport_tech/status/1242536662615416833" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/c5c12b85bef3169833c8a05c9c7b759d32388f4647a093f31172ea9ac55a8a6e.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">WebSupport.tech</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-24T19:40:00+00:00">24 Mar 2020 - 21:40</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency Website Kit <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775309">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/MatiasKlemola/status/1242732319670259713" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/16ee0dea857f343161c66a34aad3884aa90e435329e93b8df42ca16acca1a5ec.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Matias Klemola</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-25T08:37:28+00:00">25 Mar 2020 - 10:37</time>
+           </div>
+           <div class="webmention__content p-content">
+            It would be cool to have a network of plain HTML info pages like how teletext works. Page 1 non-dramatic news, page 2 for emergency healthcare info, page 3 for active warnings (floods, storms etc.) and so on. I haven't actually checked if Finnish teletext has this info 🤔 <a href="https://fotis.xyz/"></a> <a href="https://mxb.dev/blog/emergency-website-kit/"></a> <a href="https://twitter.com/isfotis"></a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775280">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/JennyStars7/status/1242771941749952517" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/22702c3f7575093cc00ee8114c19bfb6bb9f9d226616bd04189e604e83b1bff9.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Jenny Stars</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-25T11:14:55+00:00">25 Mar 2020 - 13:14</time>
+           </div>
+           <div class="webmention__content p-content">
+            A Starter Kit for Emergency Websites - <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775325">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/_loupbrun/status/1242836573760208896" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/002cb87d46aa2eaa0e939393a710e0d4a65c239169d7ca4d12c38539c910f23c.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Lou Brassard</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-25T15:31:44+00:00">25 Mar 2020 - 17:31</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency Site Template – via <a href="https://twitter.com/maxb">@maxb</a> Demo site: <a href="https://emergency-site.dev/">emergency-site.dev</a> Blog post: <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775384">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/estherschindler/status/1242911770592886786" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/f0af2289e785aba31d4ceaa4294f534ced3dc98b61dcada0fcbeabc2f016f34e.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Esther Schindler</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-25T20:30:32+00:00">25 Mar 2020 - 22:30</time>
+           </div>
+           <div class="webmention__content p-content">
+            An Emergency Website Kit <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775383">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/davemillar/status/1242921680139366400" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/e9e92ca215c1b8c7f22107c1e0077706cd7a40ef29db551983102d91f49a2c47.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">David Millar - @dave@puz.fun</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-25T21:09:55+00:00">25 Mar 2020 - 23:09</time>
+           </div>
+           <div class="webmention__content p-content">
+            Emergency Website Kit <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775713">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/codepo8/status/1243233375768502272" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/2cb539703b09adb2ef4818c0fa52e2d97c6b8365befe25ba741bbc98ca12fde9.png" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Chris Heilmann</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-26T17:48:29+00:00">26 Mar 2020 - 19:48</time>
+           </div>
+           <div class="webmention__content p-content">
+            👉🏻 “Emergency Website Kit” 🔗 <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a> A highly resilient version of any web site.
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775865">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/WalterStephanie/status/1243511672003858433" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/5dd4dee38b3d29d37f86351f5860997ceb5ead1229032903ec1985c5072fe8b7.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">St�phanie W.</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-27T12:14:20+00:00">27 Mar 2020 - 14:14</time>
+           </div>
+           <div class="webmention__content p-content">
+            I like this emergency website kit with a generated performance static HTML site, but honestly, are organizations who need emergency website able to use the npm, Eleventy and Netlify stack? Isn't that already too technical for most organizations? <a href="https://mxb.dev/blog/emergency-website-kit/">mxb.dev/blog/emergency…</a>
+           </div>
+          </div></li>
+         <li class="webmentions__item">
+          <div class="webmention" id="webmention-775866">
+           <div class="webmention__meta">
+            <a class="webmention__author h-card u-url" href="https://twitter.com/LucaVercellio/status/1243517192672600067" target="_blank" rel="noopener noreferrer"><img class="webmention__author__photo u-photo" src="https://webmention.io/avatar/pbs.twimg.com/eee498c540cb8322314bb4da5d15142c87ee88361319269d40da48a6f41e3751.jpg" alt="" width="48" height="48" loading="lazy"> <strong class="p-name">Luca Vercellio</strong> </a><span class="webmention__meta__divider" aria-hidden="true">⋅</span> <time class="webmention__pubdate dt-published" datetime="2020-03-27T12:36:16+00:00">27 Mar 2020 - 14:36</time>
+           </div>
+           <div class="webmention__content p-content">
+            nice work <a href="https://mxb.dev/"></a> <a href="https://twitter.com/Netlify"></a> <a href="https://twitter.com/eleven_ty"></a> <a href="https://twitter.com/mxbck"></a>
+           </div>
+          </div></li>
+        </ol>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="postsection">
+     <h3 class="postsection__title">Other things I've written</h3>
+     <ol class="otherposts">
+      <li class="otherposts__item"><a href="/blog/making-a-gigposter/" class="otherposts__link"><span class="otherposts__title">Making a Gigposter</span> <time class="otherposts__date" datetime="2020-02-20T00:00:00" aria-label=", written 20 Feb 2020 - 02:00">20 Feb 2020</time></a></li>
+      <li class="otherposts__item"><a href="/blog/year-in-review-2019/" class="otherposts__link"><span class="otherposts__title">A year in review: 2019</span> <time class="otherposts__date" datetime="2019-12-31T00:00:00" aria-label=", written 31 Dec 2019 - 02:00">31 Dec 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/webclerks-conf-2019/" class="otherposts__link"><span class="otherposts__title">Webclerks Conference</span> <time class="otherposts__date" datetime="2019-11-28T00:00:00" aria-label=", written 28 Nov 2019 - 02:00">28 Nov 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/roads/" class="otherposts__link"><span class="otherposts__title">Roads</span> <time class="otherposts__date" datetime="2019-10-20T00:00:00" aria-label=", written 20 Oct 2019 - 02:00">20 Oct 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/indieweb-link-sharing/" class="otherposts__link"><span class="otherposts__title">IndieWeb Link Sharing</span> <time class="otherposts__date" datetime="2019-08-11T00:00:00" aria-label=", written 11 Aug 2019 - 02:00">11 Aug 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/good-enough/" class="otherposts__link"><span class="otherposts__title">Good Enough</span> <time class="otherposts__date" datetime="2019-06-11T00:00:00" aria-label=", written 11 Jun 2019 - 02:00">11 Jun 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/the-css-mindset/" class="otherposts__link"><span class="otherposts__title">The CSS Mindset</span> <time class="otherposts__date" datetime="2019-06-05T00:00:00" aria-label=", written 05 Jun 2019 - 02:00">05 Jun 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/webring-kit/" class="otherposts__link"><span class="otherposts__title">A Webring Kit</span> <time class="otherposts__date" datetime="2019-04-14T00:00:00" aria-label=", written 14 Apr 2019 - 02:00">14 Apr 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/on-simplicity/" class="otherposts__link"><span class="otherposts__title">On Simplicity</span> <time class="otherposts__date" datetime="2019-01-31T00:00:00" aria-label=", written 31 Jan 2019 - 02:00">31 Jan 2019</time></a></li>
+      <li class="otherposts__item"><a href="/blog/using-webmentions-on-static-sites/" class="otherposts__link"><span class="otherposts__title">Static Indieweb pt2: Using Webmentions</span> <time class="otherposts__date" datetime="2019-01-10T00:00:00" aria-label=", written 10 Jan 2019 - 02:00">10 Jan 2019</time></a></li>
+     </ol>
+    </div>
+   </main>
+   <footer class="footer h-card" role="contentinfo">
+    <div class="footer__inner container">
+     <div hidden>
+      <img class="u-photo" src="https://mxb.dev/assets/images/avatar2.jpg">
+      <p class="p-note">Max Böck is a professional frontend developer based in Vienna, Austria.</p>
+     </div>
+     <p class="footer__item"><strong>© 2012–2020</strong><br><a class="p-name u-url" rel="me" href="https://mxb.dev">Max Böck</a></p>
+     <p class="footer__item"><strong>Contact</strong><br><a href="mailto:hello@mxb.dev" rel="me" class="u-email">hello@mxb.dev</a></p>
+     <p class="footer__item"><strong>Social</strong><br><a href="https://twitter.com/mxbck" title="Twitter" rel="me">Twitter</a> / <a href="https://github.com/maxboeck" title="Github" rel="me">Github</a></p>
+     <p class="footer__item"><strong>Legal</strong><br><a href="/privacy/">Privacy Policy</a> / <a href="/legal/">Ownership</a></p>
+     <p class="footer__item footer__item--right"><a href="https://github.com/maxboeck/mxb/tree/master/./src/posts/emergency-site/2020-03-22-emergency-site.md" class="footer__icon" title="Edit this page on Github"><span class="sr-only">Edit this page on Github</span> 
+       <svg class="icon icon--github" role="img" aria-hidden="true" width="24" height="24">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-github"></use>
+       </svg> </a><a href="/feed.xml" class="footer__icon" title="RSS Feed"><span class="sr-only">RSS Feed</span> 
+       <svg class="icon icon--feed" role="img" aria-hidden="true" width="24" height="24">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/icons.sprite.svg#icon-feed"></use>
+       </svg></a></p>
+    </div>
+   </footer>
+  </div>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="//platform.twitter.com/widgets.js" async defer></script>
+  <script src="/assets/js/webmentions.js" defer></script><!--! LAST BUILD: production 2020-03-27T15:44:21.881 -->
+ </body>
+</html>

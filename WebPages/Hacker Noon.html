@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="utf-8"> 
+  <link rel="icon" type="image/png" href="https://hackernoon.com/favicon.png"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Hacker Noon</title> 
+  <meta name="description" content="How hackers start their afternoons."> 
+  <meta property="og:title" content="Hacker Noon"> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:url" content="https://hackernoon.com"> 
+  <meta property="og:image" content="https://hackernoon.com/Devimg/logo-hn.png"> 
+  <meta property="og:description" content="How hackers start their afternoons."> <!-- We're experimenting with web monetization. Checkout webmonetization.org and stay tuned for the story. --> 
+  <meta name="monetization" content="$coil.xrptipbot.com/YYTI8J26TKOe-hCcLNaDZQ"> 
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev" crossorigin="anonymous"> 
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,500,700|Montserrat:300,400,500,700" rel="stylesheet"> 
+  <link rel="stylesheet" href="/story.css"> 
+  <link rel="stylesheet" href="/base.css"> 
+  <link rel="stylesheet" href="/homepage.css"> 
+  <link rel="stylesheet" href="/subscribe-form.css"> 
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script> 
+  <script src="/content.js"></script> <!-- Google Tag Manager --> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WGQVQ44');</script> <!-- End Google Tag Manager --> 
+ </head> 
+ <body> <!-- Google Tag Manager (noscript) --> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGQVQ44" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> <!-- End Google Tag Manager (noscript) --> 
+  <div id="root"> 
+   <header id="header"> 
+    <nav> <a href="https://hackernoon.com" class="logo"><img src="https://hackernoon.com/Devimg/logo-hn.png"><img src="https://hackernoon.com/Devimg/hn-logo.png" class="mobile"></a> 
+     <div class="desktop-nav"> 
+      <div class="spacer"></div> 
+      <div class="search-container" :class="{ active: searchFocus }"> 
+       <input ref="search" class="search-input" v-model="search" @keyup.enter="submitSearch" @blur="searchFocus=false"> <i class="fas fa-search" @mousedown.stop.prevent="submitSearch"></i> 
+      </div> <a href="https://twitter.com/hackernoon" target="_blank"><i class="fab fa-twitter"></i></a> <a href="https://www.facebook.com/hackernoon" target="_blank"><i class="fab fa-facebook-f"></i></a> <a href="https://www.youtube.com/hackernoon" target="_blank"><i class="fab fa-youtube"></i></a> <a href="#subscribe-embed"><button class="outline">Subscribe</button></a> <span v-cloak v-if="user &amp;&amp; userLoaded"> <a :href="profileLink"><img :src="profileImage" class="profile"></a> </span> <span v-cloak v-if="!user &amp;&amp; userLoaded"> <a :href="loginLink"><button class="outline">Get Started</button></a> </span> 
+      <div class="darkmode" @click="darkMode = !darkMode" :class="darkMode ? 'dark' : 'light'"> <i class="light fas fa-sun"></i> <i class="dark fas fa-moon"></i> 
+      </div> 
+     </div> 
+    </nav> 
+   </header> 
+   <div id="top"> <button class="mobile-menu-toggle" :class="{ 'mobile-open': mobileMenuOpen }" @click="toggleMobileMenu"><i class="fas fa-bars"></i></button> 
+    <div class="subnav" :class="{ 'mobile-open': mobileMenuOpen }" @mouseleave="!mobileMenuOpen &amp;&amp; closeNav()" v-cloak v-if="nav"> 
+     <div class="mobile-back" :class="{ 'mobile-open': (mobileMenuOpen &amp;&amp; activeNav !== '') }"> <button @click="activeNav = ''"><i class="fas fa-arrow-left"></i></button> 
+     </div> <a v-for="category in nav" :href="category.href" :class="{ sponsor: category.sponsor }" @mouseover="navHover(category, $event)" @click="navClick(category, $event)"> {{category.text}} </a> 
+     <div class="dropdown" v-bind:class="{ active: activeNav!=='' }" @mouseover="closeNavReset"> 
+      <div class="category" v-for="category in nav" :key="category.name"> 
+       <div class="section" v-for="(section, idx) in category.sections" :key="idx" :class="{ active: activeNav === category.name }"> 
+        <div class="heading"> 
+         <div class="line"></div> <a :href="section.heading.href">{{section.heading.text}}</a> 
+        </div> 
+        <ul class="links"> 
+         <li v-for="(link, linkIdx) in section.links" :key="linkIdx"> <a :href="link.href">{{link.text}}</a> </li> 
+        </ul> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="ads"> <a v-cloak v-if="ad" class="sponsor" @click="recordAdClick" :href="ad.link" target="_blank"> <img class="image" :src="ad.image" :alt="ad.companyName"> {{ad.text}} </a> 
+    </div> 
+   </div> 
+   <div class="more featured"> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading">Featured Stories</h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content featured"> 
+     <div class="story-card long-title"> <a href="/how-350-phds-and-ai-researchers-are-banding-together-to-fight-the-corona-outbreak-7we532xi"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/071p43zp1.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/how-350-phds-and-ai-researchers-are-banding-together-to-fight-the-corona-outbreak-7we532xi">How 350+ PhDs and AI Researchers are Banding Together to Fight the Corona Outbreak</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/rxfyczjA0pgwGwPd0Wsl5c76iSx1.png)"></div> 
+         <div> <a href="/@arturkiulian" class="name">Artur Kiulian</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/ai">Ai</a> 
+     </div> 
+     <div class="story-card long-title"> <a href="/building-a-twitter-bot-to-automate-posting-cryptocurrency-news-with-python-a-step-by-step-guide-iv77327t"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1583330638480-50271adb037e?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/building-a-twitter-bot-to-automate-posting-cryptocurrency-news-with-python-a-step-by-step-guide-iv77327t">Building a Twitter Bot to Automate Posting Cryptocurrency News with Python [A Step-by-Step Guide]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/KTEJnDhnIKRDwTvEqcpOyOu82RD3.png)"></div> 
+         <div> <a href="/@nich" class="name">Nicholas Resendez</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/cryptocurrency">Cryptocurrency</a> 
+     </div> 
+     <div class="story-card long-title"> <a href="/why-the-feds-money-machine-makes-tokenized-gold-a-good-investment-ho2332oj"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/2g2842c7.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/why-the-feds-money-machine-makes-tokenized-gold-a-good-investment-ho2332oj">Why The Fed’s Money Machine Makes Tokenized Gold a Good Investment</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/nFGMPDaUJhN2rZiFEyVXNSMVezD3.png)"></div> 
+         <div> <a href="/@FrederikBussler" class="name">Frederik Bussler</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/gold">Gold</a> 
+     </div> 
+     <div class="story-card false"> <a href="/email-marketing-cold-email-outreach-solutions-review-for-smbs-cb4l3210"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/myiq3yzy.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/email-marketing-cold-email-outreach-solutions-review-for-smbs-cb4l3210">Email Marketing: Cold Email Outreach Solutions Review For SMBs</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/rrklQPNbspZjuipgqdjB7er0G6e2.png)"></div> 
+         <div> <a href="/@ks.shilov" class="name">Kirill</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/saas">Saas</a> 
+     </div> 
+     <div class="story-card false"> <a href="/deploying-complex-microservice-apps-using-pmkft-a-how-to-guide-wq8f325l"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/iiti3yqr.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/deploying-complex-microservice-apps-using-pmkft-a-how-to-guide-wq8f325l">Deploying Complex Microservice Apps Using PMKFT [A How To Guide]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/dOulvf0UJIZL0zzCA8XKt4oyEuJ2.png)"></div> 
+         <div> <a href="/@vamsi.chemitiganti" class="name">Vamsi Chemitiganti</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/microservices">Microservices</a> 
+     </div> 
+     <div class="story-spacer"></div> 
+    </div> 
+   </div> 
+   <div class="more"> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading"><a href="/tagged/blockchain">Blockchain</a></h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content"> 
+     <div class="story-card"> <a href="/blockchain-use-cases-cutting-through-the-hype-489l328r"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/6i31338w.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/blockchain-use-cases-cutting-through-the-hype-489l328r">Blockchain Use Cases: Cutting Through the Hype</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/EBNEt8ZDkqPFfK65oD0aZyPRqBk1.png)"></div> 
+         <div> <a href="/@Carl Lang" class="name">Carl Lang</a> 
+          <div class="published">
+           March 26
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/blockchain">Blockchain</a> 
+     </div> 
+     <div class="story-card"> <a href="/how-far-away-are-we-from-a-completely-cashless-society-6w4g32x9"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/how-far-away-are-we-from-a-completely-cashless-society-6w4g32x9">How Far Away Are We From a Completely Cashless Society?</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/vhfPFLJQfAMvEOtbrxCh5wj0Z1W2.png)"></div> 
+         <div> <a href="/@btcread" class="name">btcread</a> 
+          <div class="published">
+           March 25
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/blockchain">Blockchain</a> 
+     </div> 
+     <div class="story-card"> <a href="/catchain-consensus-algorithm-of-telegrams-ton-blockchain-a-deep-dive-58e232ro"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/ccx3yxk.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/catchain-consensus-algorithm-of-telegrams-ton-blockchain-a-deep-dive-58e232ro">Catchain Consensus Algorithm of Telegram's TON Blockchain [A Deep Dive]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/scuj1BeGz4c1peMP3pd9RPiYQwk1.png)"></div> 
+         <div> <a href="/@mercuryo" class="name">Mercuryo</a> 
+          <div class="published">
+           March 21
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/telegram">Telegram</a> 
+     </div> 
+    </div> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading"><a href="/tagged/ai">A.I.</a></h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content"> 
+     <div class="story-card"> <a href="/automation-on-the-high-seas-ai-driven-cargo-ships-are-here-to-stay-4o3s329l"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/nn2l3y5d.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/automation-on-the-high-seas-ai-driven-cargo-ships-are-here-to-stay-4o3s329l">Automation on the High Seas: AI-driven Cargo Ships Are Here to Stay</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/PVN1qtxyOSTgqH0W7fHB84Zowlt1.png)"></div> 
+         <div> <a href="/@Giorgi-M" class="name">Giorgi Mikhelidze</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/ai">Ai</a> 
+     </div> 
+     <div class="story-card"> <a href="/improving-the-internet-for-those-with-disabilities-feat-artificial-intelligence-uy9f32eo"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/4g10q3yx7.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/improving-the-internet-for-those-with-disabilities-feat-artificial-intelligence-uy9f32eo">Improving the Internet for Those With Disabilities (feat. Artificial Intelligence)</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/TSsca3Yt6USqvrCdUehKUlvjp212.png)"></div> 
+         <div> <a href="/@andrew-rossow" class="name">Andrew Rossow</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/ai">Ai</a> 
+     </div> 
+     <div class="story-card"> <a href="/covid-19-ai-fighting-the-pandemic-terror-9ial3wsz"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/0ee33yvb.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/covid-19-ai-fighting-the-pandemic-terror-9ial3wsz">COVID-19: AI Fighting the Pandemic Terror</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/8cZ8hA2ZNofvNW379lJ8Z7yGUhw1.png)"></div> 
+         <div> <a href="/@michaellyam" class="name">Michaellyam</a> 
+          <div class="published">
+           March 26
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/artificial-intelligence">Artificial Intelligence</a> 
+     </div> 
+     <div class="story-spacer"></div>
+     <div class="story-spacer"></div> 
+    </div> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading"><a href="/tagged/startups">Startups</a></h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content"> 
+     <div class="story-card"> <a href="/how-can-small-businesses-benefit-from-accepting-cryptocurrency-u03032a8"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/Devimg/story-image-default.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/how-can-small-businesses-benefit-from-accepting-cryptocurrency-u03032a8">How Can Small Businesses Benefit from Accepting Cryptocurrency?</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/nsYLIDGfDxZyrWgBGcaI57nAUBE2.png)"></div> 
+         <div> <a href="/@smith-willas" class="name">Smith Willas</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/cryptocurrency">Cryptocurrency</a> 
+     </div> 
+     <div class="story-card"> <a href="/how-to-secure-your-saas-application-tudx3ye6"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/8a2k3yxc.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/how-to-secure-your-saas-application-tudx3ye6">How to Secure Your SaaS Application</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/Slzb2rFHhpglCn4hRXIqKe76Dvy2.png)"></div> 
+         <div> <a href="/@prabalta-rijal" class="name">Prabalta Rijal</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/saas-startups">Saas Startups</a> 
+     </div> 
+     <div class="story-card"> <a href="/pros-and-cons-of-the-gig-economy-can-remote-workers-be-assets-in-small-business-e81d32ss"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/y7j93y6z.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/pros-and-cons-of-the-gig-economy-can-remote-workers-be-assets-in-small-business-e81d32ss">Pros and Cons of The Gig Economy: Can Remote Workers Be Assets in Small Business?</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/f0CdWjjeQOUER2nirNZOxQffs4n2.png)"></div> 
+         <div> <a href="/@daglar-cizmeci" class="name">Daglar Cizmeci</a> 
+          <div class="published">
+           March 26
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/freelancing">Freelancing</a> 
+     </div> 
+     <div class="story-spacer"></div>
+     <div class="story-spacer"></div> 
+    </div> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading"><a href="/tagged/programming">Programming</a></h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content"> 
+     <div class="story-card"> <a href="/exposing-secrets-on-github-what-to-do-after-leaking-credentials-and-api-keys-58dy3yqp"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/ek1pi3ybp.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/exposing-secrets-on-github-what-to-do-after-leaking-credentials-and-api-keys-58dy3yqp">Exposing Secrets on GitHub: What to Do After Leaking Credentials and API Keys</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/nVi3jkw82jMB8ehn71Y1Z77LKY23.png)"></div> 
+         <div> <a href="/@jean-GG" class="name">Jean Dubrulle | GitGuardian</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/cyber-security">Cyber Security</a> 
+     </div> 
+     <div class="story-card"> <a href="/dependency-injection-to-make-your-code-testable-a-how-to-guide-kj883211"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1576765608866-5b51046452be?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/dependency-injection-to-make-your-code-testable-a-how-to-guide-kj883211">Dependency Injection to Make Your Code Testable [A How-To Guide]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/D7Hn3CmOHedLjdaXSIpRfZ5ezZG3.png)"></div> 
+         <div> <a href="/@thawkin3" class="name">Tyler Hawkins</a> 
+          <div class="published">
+           March 26
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/javascript">Javascript</a> 
+     </div> 
+     <div class="story-card"> <a href="/introduction-to-rxjava-observable-pattern-ym493yn4"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1565508476725-23182ae55a01?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/introduction-to-rxjava-observable-pattern-ym493yn4">Introduction to RxJava: Observable Pattern</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/lycBCBC4XANuNhPHKYhTmXsxfQf2.png)"></div> 
+         <div> <a href="/@printfmyname" class="name">Hari Ya</a> 
+          <div class="published">
+           March 26
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/java">Java</a> 
+     </div> 
+     <div class="story-spacer"></div>
+     <div class="story-spacer"></div> 
+    </div> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading"><a href="/tagged/cryptocurrency">Cryptocurrency</a></h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content"> 
+     <div class="story-card"> <a href="/a-brief-review-of-20-crypto-exchanges-for-2020-qodg32pz"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1548124771-9f2040b66df8?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/a-brief-review-of-20-crypto-exchanges-for-2020-qodg32pz">A Brief Review of 20 Crypto Exchanges for 2020</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/DCpjqbBx5ORsCpo2MXVSpdKl13j2.png)"></div> 
+         <div> <a href="/@btc-peers" class="name">BTC Peers</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/exchanges">Exchanges</a> 
+     </div> 
+     <div class="story-card"> <a href="/cryptocurrency-investment-strategies-momentum-trading-versus-call-options-reviewed-vpdz32zx"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/exo32oq.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/cryptocurrency-investment-strategies-momentum-trading-versus-call-options-reviewed-vpdz32zx">Cryptocurrency Investment Strategies: Momentum Trading versus Call Options [Reviewed]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/jUgUN6bf90YLxmZuqiY8RA15M2x1.png)"></div> 
+         <div> <a href="/@philippkallerhoff" class="name">Philipp Kallerhoff</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/cryptocurrency">Cryptocurrency</a> 
+     </div> 
+     <div class="story-card"> <a href="/dpos-mining-yields-for-master-nodes-an-analysis-l79v32jl"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/xgoj31an.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/dpos-mining-yields-for-master-nodes-an-analysis-l79v32jl">DPOS Mining Yields For Master Nodes [An Analysis]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/WOE0c5VxrxZSSvom1aA7H81aG5c2.png)"></div> 
+         <div> <a href="/@alexajosh" class="name">Alexa Josh</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/dpos-mining">Dpos Mining</a> 
+     </div> 
+     <div class="story-spacer"></div>
+     <div class="story-spacer"></div> 
+    </div> 
+   </div> 
+   <div id="about" class="about"> 
+    <div class="boxes"> <button @click="activeCTA='readers'" v-bind:class="{ active: activeCTA==='readers' }"> <i class="fal fa-book-heart"></i> <p>For Readers</p> </button> <button @click="activeCTA='writers'" v-bind:class="{ active: activeCTA==='writers' }"> <i class="fal fa-pen-nib"></i> <p>For Writers</p> </button> <button @click="activeCTA='sponsors'" v-bind:class="{ active: activeCTA==='sponsors' }"> <i class="fal fa-box-usd"></i> <p>For Sponsors</p> </button> <button @click="activeCTA='about'" v-bind:class="{ active: activeCTA==='about' }"> <i class="fal fa-users"></i> <p>About Us</p> </button> 
+    </div> 
+    <div class="message"> 
+     <div class="text" v-bind:class="{ active: activeCTA==='readers' }"> 
+      <p>Hacker Noon reflects the technology industry with unfettered stories and opinions written by real tech professionals. We believe we can get closer to the truth by elevating thousands of voices. To the reader, we pledge no paywall, no pop up ads, and evergreen (get it?) content. Learn how hackers start their afternoons on Hacker Noon.</p> 
+      <div class="cta"> <a class="button" href="https://community.hackernoon.com/session/sso?return_path=https%3A%2F%2Fapp.hackernoon.com">Create Hacker Noon Account</a> 
+      </div> 
+     </div> 
+     <div class="text" v-bind:class="{ active: activeCTA==='writers' }"> 
+      <p>Hacker Noon elevates tech writing far and wide across the interwebs. With 25k+ stories in our library, we’ve cultivated rare publishing and technology expertise. We believe tech infiltrates all aspects of life, so writers from all industries are welcome here. To the contributing writer, we pledge quality distribution, editorial expertise and community access.</p> 
+      <div class="cta"> <a class="button" href="https://community.hackernoon.com/session/sso?return_path=https%3A%2F%2Fapp.hackernoon.com">Submit a Tech Story</a> 
+      </div> 
+     </div> 
+     <div class="text" v-bind:class="{ active: activeCTA==='sponsors' }"> 
+      <p>Hacker Noon partners with companies that build cool products and employ people worth publishing. To sponsors, we currently offer sitewide billboard, brand-as-author stories, podcast placements, and events. Sponsors keep Hacker Noon free for readers forever and add to the reading experience rather than distracting from it. Sponsoring Hacker Noon is great way to make a positive impression on tech’s brightest minds.</p> 
+      <div class="cta"> <a class="button" href="https://sponsor.hackernoon.com">Sponsor Hacker Noon</a> 
+      </div> 
+     </div> 
+     <div class="text" v-bind:class="{ active: activeCTA==='about' }"> 
+      <p>Hacker Noon is an independent technology publication with the tagline, how hackers start their afternoons. Founded in 2016 and run by David Smooke and Linh Dao Smooke, Hacker Noon is one of the fastest growing tech publications with 7,000+ contributing writers, 200,000+ daily readers and 8,000,000+ monthly pageviews. Our traffic is ranked in the top 5K of all websites worldwide and in the top 3k of all US websites by Alexa. We publish ≈ 20 stories per day from around the internet.</p> 
+      <div class="cta"> <a class="button" href="https://hackernoon.com/hacker-noon-faqs-with-six-word-answers-aw1ls3z1q">Learn More About Us</a> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div id="subscribe-embed"> <!-- Begin Mailchimp Signup Form --> 
+    <div id="mc_embed_signup"> 
+     <img class="signup-image" src="https://ucarecdn.com/57662ddc-da7c-407b-afcb-cb45184b2705/" alt=""> 
+     <form action="https://hackernoon.us19.list-manage.com/subscribe/post?u=b48b0ec2173fecf2586c00e80&amp;id=fa796741e6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate> 
+      <div class="subscribe-header"> 
+       <h2>Hackernoon Newsletter curates great stories by real tech professionals</h2> 
+       <p>Get solid gold sent to your inbox. Every week!</p> 
+      </div> 
+      <div class="mc-field-group">  
+       <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address *"> 
+      </div> 
+      <div class="fields-group"> 
+       <div class="mc-field-group"> 
+        <input type="text" value="" name="MMERGE1" class="" id="mce-MMERGE1" placeholder="First Name"> 
+       </div> 
+       <div class="mc-field-group"> 
+        <input type="text" value="" name="MMERGE2" class="" id="mce-MMERGE2" placeholder="Last Name"> 
+       </div> 
+      </div> 
+      <div class="mc-field-group input-group topics-list"> <strong>Topics of interest </strong> 
+       <ul>
+        <li class="checkbox"><input checked type="checkbox" value="1" name="group[3757][1]" id="mce-group[3757]-3757-0"><label for="mce-group[3757]-3757-0">Software Development</label></li> 
+        <li class="checkbox"><input checked type="checkbox" value="2" name="group[3757][2]" id="mce-group[3757]-3757-1"><label for="mce-group[3757]-3757-1">Blockchain Crypto</label></li> 
+        <li class="checkbox"><input checked type="checkbox" value="4" name="group[3757][4]" id="mce-group[3757]-3757-2"><label for="mce-group[3757]-3757-2">General Tech</label></li> 
+        <li class="checkbox"><input checked type="checkbox" value="8" name="group[3757][8]" id="mce-group[3757]-3757-3"><label for="mce-group[3757]-3757-3">Best of Hacker Noon</label></li> 
+       </ul> 
+      </div> 
+      <div id="mce-responses" class="clear"> 
+       <div class="response" id="mce-error-response" style="display:none"></div> 
+       <div class="response" id="mce-success-response" style="display:none"></div> 
+      </div> <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--> 
+      <div style="position: absolute; left: -5000px;" aria-hidden="true">
+       <input type="text" name="b_b48b0ec2173fecf2586c00e80_fa796741e6" tabindex="-1" value="">
+      </div> 
+      <div class="submit-btn">
+       <input type="submit" value="Get great stories by email" name="subscribe" id="mc-embedded-subscribe" class="button">
+      </div> 
+     </form> 
+    </div> <!--End mc_embed_signup--> 
+   </div> 
+   <div class="more"> 
+    <div class="divider-title"> 
+     <div class="divider"></div> 
+     <h1 class="more-heading">More</h1> 
+     <div class="divider"></div> 
+    </div> 
+    <div class="more-content"> 
+     <div class="story-card"> <a href="/telegram-vs-whatsapp-vs-utopia-jy4k32r6"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/syi3ybd.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/telegram-vs-whatsapp-vs-utopia-jy4k32r6">Telegram VS WhatsApp VS Utopia</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/wexjcdgw1fNEWcbWaI66m8Cri743.png)"></div> 
+         <div> <a href="/@Turner" class="name">Matthew</a> 
+          <div class="published">
+           March 27
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/messenger">Messenger</a> 
+     </div> 
+     <div class="story-card"> <a href="/reasons-behind-creating-a-website-with-black-background-e1d23yd4"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/2m2ky3ywo.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/reasons-behind-creating-a-website-with-black-background-e1d23yd4">Reasons Behind Creating A Website with Black Background</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/nrbXM58489WE8Wgwcu7cEcpsnPH3.png)"></div> 
+         <div> <a href="/@kolosek" class="name">Nesha</a> 
+          <div class="published">
+           March 21
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/web-design">Web Design</a> 
+     </div> 
+     <div class="story-card"> <a href="/common-sense-for-companies-during-the-covid-19-pandemic-mv8h32hs"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/as16w3y2q.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/common-sense-for-companies-during-the-covid-19-pandemic-mv8h32hs">Common Sense for Companies During The COVID-19 Pandemic</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/4DEZ3I9NeEYl1VAoqXMD2HiUESS2.png)"></div> 
+         <div> <a href="/@madiha-jamal" class="name">Madiha Jamal</a> 
+          <div class="published">
+           March 21
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/coronavirus-impact-on-business">Coronavirus Impact On Business</a> 
+     </div> 
+     <div class="story-card"> <a href="/10-promising-hardware-startups-to-follow-in-2020-0z2b3yyr"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/10-promising-hardware-startups-to-follow-in-2020-0z2b3yyr">10 Promising Hardware Startups to Follow in 2020</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/wxwb4sGjIIXyBA6KUWwBik2EyqP2.png)"></div> 
+         <div> <a href="/@aaattt" class="name">AT</a> 
+          <div class="published">
+           March 19
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/hardware">Hardware</a> 
+     </div> 
+     <div class="story-card"> <a href="/takeaways-from-sequoia-capitals-black-swan-memo-brdq32za"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1580492516014-4a28466d55df?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/takeaways-from-sequoia-capitals-black-swan-memo-brdq32za">Takeaways from Sequoia Capital's Black Swan Memo</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/82L3ZytVcxe7csUsRFuShupMl6b2.png)"></div> 
+         <div> <a href="/@ndisisnd" class="name">Andy Chan</a> 
+          <div class="published">
+           March 16
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/venture-capital">Venture Capital</a> 
+     </div> 
+     <div class="story-card"> <a href="/as-chess-gains-recognition-as-a-sport-can-e-sports-be-far-behind-z9cr32l4"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/eq6h3y1q.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/as-chess-gains-recognition-as-a-sport-can-e-sports-be-far-behind-z9cr32l4">As Chess Gains Recognition as a Sport, Can e-Sports be Far Behind?</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/v8lCclUQgzPM9G6bxt0vD1SYF932.png)"></div> 
+         <div> <a href="/@james-clarke" class="name">James Clarke</a> 
+          <div class="published">
+           March 15
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/esports">Esports</a> 
+     </div> 
+     <div class="story-card"> <a href="/privacy-matters-even-if-you-have-nothing-to-hide-0p3g32qi"> 
+       <div class="img" style="background-image: url('https://images.unsplash.com/photo-1516345079912-c3e011a5a848?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjEwMDk2Mn0')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/privacy-matters-even-if-you-have-nothing-to-hide-0p3g32qi">Privacy Matters Even IF You "Have Nothing to Hide.”</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/tLLcJ29gvtdu42805IsV0nWEmm42.png)"></div> 
+         <div> <a href="/@freddym" class="name">Freddy Marsden</a> 
+          <div class="published">
+           March 15
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/privacy">Privacy</a> 
+     </div> 
+     <div class="story-card"> <a href="/founders-interview-gauthier-bros-of-atayen-inc-ao2832za"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/5yc0249z.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/founders-interview-gauthier-bros-of-atayen-inc-ao2832za">Founder's Interview: Gauthier Bros of Atayen Inc</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/XEqzyYaV7jheMGp4jlFOGD9fwhH2.png)"></div> 
+         <div> <a href="/@ma.czarinamai" class="name">Ma. Czarina mai Delos Reyes</a> 
+          <div class="published">
+           March 15
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/satt">Satt</a> 
+     </div> 
+     <div class="story-card"> <a href="/using-capital-asset-pricing-model-capm-versus-black-scholes-model-to-value-stocks-a-how-to-guide-r53032tc"> 
+       <div class="img" style="background-image: url('https://hackernoon.com/drafts/111pv3ypv.png')"></div> </a> 
+      <div class="excerpt"> 
+       <div class="title"> <a href="/using-capital-asset-pricing-model-capm-versus-black-scholes-model-to-value-stocks-a-how-to-guide-r53032tc">Using Capital Asset Pricing Model (CAPM) versus Black Scholes Model to value Stocks [A How-To Guide]</a> 
+       </div> 
+       <div class="bio"> 
+        <div class="flex"> 
+         <div class="avatar" style="background-image: url(https://hackernoon.com/avatars/PpXA0UmBbTQPqKC7S8Uzho6nzFf2.png)"></div> 
+         <div> <a href="/@antoine" class="name">antoine</a> 
+          <div class="published">
+           March 15
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> <a class="tag" href="https://hackernoon.com/tagged/finance">Finance</a> 
+     </div> 
+     <div class="story-spacer"></div> 
+    </div> 
+   </div> 
+   <div class="subnav footer"> <a href="https://www.hackernoon.com"><img class="footer__logo" src="/Devimg/hn-logo.png" width="45" height="45"></a> 
+    <div> 
+     <div class="footer__links"> <a href="http://help.hackernoon.com">Help</a> <a href="https://hackernoon.com/hacker-noon-faqs-with-six-word-answers-aw1ls3z1q">About</a> <a href="https://community.hackernoon.com/session/sso?return_path=https%3A%2F%2Fapp.hackernoon.com">Start Writing</a> <a class="footer__sponsor" href="http://sponsor.hackernoon.com">Sponsor:</a> <a class="footer__sponsor-type" href="https://sponsor.hackernoon.com/#brandasauthor">Brand-as-Author</a> <a class="footer__sponsor-type" href="https://sponsor.hackernoon.com/#billboard">Sitewide Billboard</a> 
+     </div> 
+     <div class="footer__privacy-links"> <a href="mailto:support@hackernoon.com">Contact Us</a> <a href="http://privacy.hackernoon.com">Privacy</a> <a href="http://terms.hackernoon.com">Terms</a> 
+     </div> 
+    </div> 
+    <div> <a href="https://twitter.com/hackernoon" rel="noopener noreferrer" target="_blank"><i class="fab fa-twitter"></i></a> <a href="https://www.facebook.com/hackernoon" rel="noopener noreferrer" target="_blank"><i class="fab fa-facebook-f"></i></a> <a href="https://www.linkedin.com/company/hackernoon/" rel="noopener noreferrer" target="_blank"><i class="fab fa-linkedin"></i></a> <a href="https://www.youtube.com/hackernoon" rel="noopener noreferrer" target="_blank"><i class="fab fa-youtube"></i></a> 
+    </div> 
+   </div> 
+  </div> 
+  <script src="/about.js"></script> 
+  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script> 
+  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-auth.js"></script> 
+  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script> 
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCjRAcAgsxlffnuZNIr4zOGaIsEKKEaJCg",
+      authDomain: "hackernoon-app.firebaseapp.com",
+      databaseURL: "https://hackernoon-app.firebaseio.com",
+      projectId: "hackernoon-app",
+      storageBucket: "hackernoon-app.appspot.com",
+      messagingSenderId: "521962009898"
+    };
+    firebase.initializeApp(config);
+  </script> 
+  <script src="/interact.js"></script> 
+  <script>window.upsettings = {'api_key': '24b4421e-81ec-0b84b6a2'}</script>
+  <script>(function(){var w=window;var up=w.Upscribe;if(typeof up==="function"){up('reattach_activator');up('update',upsettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Upscribe=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://upscri.be/js/snippet.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if( w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script> <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65623566-4"></script> 
+  <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'UA-65623566-4', { 'optimize_id': 'GTM-NR267TL'});
+  </script> 
+  <script src="/subscribeform.js"></script> 
+  <script async src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>  
+ </body>
+</html>

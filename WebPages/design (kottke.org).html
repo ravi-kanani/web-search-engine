@@ -1,0 +1,923 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--[if lt IE 7 ]> <html class="ie6" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 7 ]> <html class="ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 8 ]> <html class="ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 9 ]> <html class="ie9" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if (gte IE 10)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <!--<![endif]--> 
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>design (kottke.org)</title> 
+  <link href="/images/2016/ios/32x32.png" rel="icon" type="image/png" sizes="32x32"> 
+  <link href="/images/2016/ios/180x180.png" rel="apple-touch-icon" sizes="180x180"> 
+  <link href="/images/2016/ios/167x167.png" rel="apple-touch-icon" sizes="167x167"> 
+  <link href="/images/2016/ios/152x152.png" rel="apple-touch-icon" sizes="152x152"> 
+  <link href="/images/2016/ios/120x120.png" rel="apple-touch-icon" sizes="120x120"> 
+  <link href="/images/2016/ios/80x80.png" rel="apple-touch-icon" sizes="80x80"> 
+  <link href="/images/2016/ios/76x76.png" rel="apple-touch-icon" sizes="76x76"> 
+  <link href="/images/2016/ios/40x40.png" rel="apple-touch-icon" sizes="40x40"> 
+  <link href="/images/2016/ios/192x192.png" rel="icon" sizes="192x192"> 
+  <link href="/images/2016/ios/128x128.png" rel="icon" sizes="128x128"> 
+  <script src="/templates/2016/js/jquery-1.11.3.min.js"></script> 
+  <script src="/templates/2016/js/jquery-migrate-1.2.1.min.js"></script> 
+  <script src="/templates/2016/js/bigfoot.js"></script> 
+  <script src="/templates/2016/js/jquery.unveil.js"></script> 
+  <script>
+$(document).ready(function() {
+	$(".widescreen iframe").unveil(250);
+	$(".post iframe").unveil(250);
+	$(".widescreen img").unveil(150);
+	$(".post img").unveil(150);
+});
+</script> 
+  <script type="text/javascript">
+  window.MemberfulOptions = {site: "https://kottke.memberful.com"};
+
+  (function() {
+    var s   = document.createElement('script');
+
+    s.type  = 'text/javascript';
+    s.async = true;
+    s.src   = 'https://d35xxde4fgg0cx.cloudfront.net/assets/embedded.js';
+
+    setup = function() { window.MemberfulEmbedded.setup(); }
+
+    if(s.addEventListener) { s.addEventListener("load", setup, false); } else { s.attachEvent("onload", setup); }
+
+    ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+  })();
+</script> 
+  <script type="text/javascript">
+	$.bigfoot(
+        {
+			numberResetSelector: ".post",
+			buttonMarkup: "<div class='bigfoot-footnote__container' aria-hidden=\"true\"> <button class=\"bigfoot-footnote__button\" id=\"{{SUP:data-footnote-backlink-ref}}\" data-footnote-number=\"{{FOOTNOTENUM}}\" data-footnote-identifier=\"{{FOOTNOTEID}}\" aria-hidden=\"true\" rel=\"footnote\" data-bigfoot-footnote=\"{{FOOTNOTECONTENT}}\"> <i class=\"fa fa-plus-circle\"></i> </button></div>"
+        }
+    );
+</script> 
+  <script type="text/javascript">
+$(document).ready(function() {
+	$(".post p a").attr("target","_blank");
+	$('.post p a[href*="//kottke.org"]').removeAttr("target");
+	$(".post p sup a").removeAttr("target");
+	$(".post .footnote a:last-of-type").removeAttr("target");
+	$(".quicklinks-fp-post a").attr("target","_blank");
+	$(".bling-bling a").attr("target","_blank");
+	$(".bling-job a").attr("target","_blank");
+	
+   $(".post p strong:contains('Update:')").each(function() {
+	    $( this ).addClass("post-update").html("Update" + ((typeof $( this ).attr('title') !== typeof undefined && $( this ).attr('title') !== false) ? "<span class='update-timestamp'>&nbsp;&middot;&nbsp; " + $( this ).attr("title") + "</span>" : ""));
+	  });
+    });
+</script> 
+  <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/790324/737040/css/fonts.css"> 
+  <link rel="stylesheet" href="/templates/2016/css/font-awesome-4.7.0/css/font-awesome.min.css"> 
+  <link rel="stylesheet" href="/templates/2016/css/main.css?v=16" type="text/css"> 
+  <link rel="stylesheet" href="/templates/2016/css/bigfoot-default.css" type="text/css"> 
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.kottke.org/main"> 
+  <link rel="alternate" type="application/json" href="http://feeds.kottke.org/json"> 
+ </head> 
+ <body id="kottke-org"> 
+  <div id="header">
+   <a href="/">kottke.org<span id="head-br"><br></span><span id="head-heart"> &nbsp;♥&nbsp; </span> <span id="head-sub">home of fine hypertext products</span></a>
+  </div> 
+  <div id="top-nav-wide">
+   <a href="/">home</a><a href="/about">about</a><a href="/everfresh">archives + tags</a><a href="/shop">shop</a><a href="/members">membership!</a>
+   <div id="follow">
+    <a href="https://twitter.com/kottke" aria-label="Follow kottke.org on Twitter" id="follow-twitter"><i class="fa fa-twitter"></i></a><a href="https://facebook.com/kottke.org" aria-label="Follow kottke.org on Facebook" id="follow-facebook"><i class="fa fa-facebook-square"></i></a><a href="http://bonus.kottke.org/" aria-label="Follow kottke.org on Tumblr" id="follow-tumblr"><i class="fa fa-tumblr-square"></i></a><a href="http://feeds.kottke.org/main" aria-label="Read kottke.org via RSS" id="follow-feed"><i class="fa fa-rss"></i></a>
+   </div>
+  </div> 
+  <div id="top-nav-medium">
+   <a href="/about">about</a><a href="/everfresh">archives</a><a href="/shop">shop</a><a href="/members">membership!</a>
+   <div id="follow">
+    <a href="https://twitter.com/kottke" aria-label="Follow kottke.org on Twitter" id="follow-twitter"><i class="fa fa-twitter"></i></a><a href="https://facebook.com/kottke.org" aria-label="Follow kottke.org on Facebook" id="follow-facebook"><i class="fa fa-facebook-square"></i></a><a href="http://bonus.kottke.org/" aria-label="Follow kottke.org on Tumblr" id="follow-tumblr"><i class="fa fa-tumblr-square"></i></a><a href="http://feeds.kottke.org/main" aria-label="Read kottke.org via RSS" id="follow-feed"><i class="fa fa-rss"></i></a>
+   </div>
+  </div> 
+  <div id="top-nav-narrow">
+   <a href="/about">about</a><a href="/everfresh">archives</a><a href="/members">members!</a>
+  </div> 
+  <div id="easel"> 
+   <h3 style="margin-bottom: 4rem;">kottke.org posts about design</h3> 
+   <ul class="related-tags"> 
+    <li><strong>See also...</strong></li>
+    <li><a href="/tag/art">art</a></li> 
+    <li><a href="/tag/video">video</a></li> 
+    <li><a href="/tag/infoviz">infoviz</a></li> 
+    <li><a href="/tag/logos">logos</a></li> 
+    <li><a href="/tag/typography">typography</a></li> 
+    <li><a href="/tag/music">music</a></li> 
+    <li><a href="/tag/medicine">medicine</a></li> 
+    <li><a href="/tag/remix">remix</a></li> 
+    <li><a href="/tag/movies">movies</a></li> 
+    <li><a href="/tag/Olympic%20Games">Olympic Games</a></li> 
+    <li><a href="/tag/subway">subway</a></li> 
+    <li><a href="/tag/video%20games">video games</a></li> 
+    <li><a href="/tag/games">games</a></li> 
+    <li><a href="/tag/food">food</a></li> 
+    <li><a href="/tag/books">books</a></li> 
+   </ul> 
+   <h2><a href="/20/03/iconic-art-design-reimagined-for-the-social-distancing-era">Iconic Art &amp; Design Reimagined for the Social Distancing Era</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 25, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>While it predates the COVID-19 pandemic and its accompanying social distancing by several years, <a href="http://www.josemanuelballester.com/">José Manuel Ballester</a>’s <a href="http://www.josemanuelballester.com/english/expoEspaciosOcultosMiami1/exposicionEspaciosOcultos1.htm">Concealed Spaces project</a> reimagines iconic works of art without the people in them (like what’s happening <a href="https://kottke.org/20/03/covid-19-empties-out-public-spaces">to our public spaces right now</a>). No one showed up for Leonardo’s Last Supper:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="550" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-01.jpg"></p> 
+    <p>Hieronymus Bosch’s The Garden of Earthly Delights is perhaps just as delightful without people:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="532" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-02.jpg"></p> 
+    <p>And Botticelli’s The Birth of Venus has been rescheduled:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="624" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-03.jpg"></p> 
+    <p><a href="https://twitter.com/bengreenman/status/1240102567243382787">Ben Greenman</a>, <a href="https://twitter.com/waxpancake/status/1241099119143178240">Andy Baio</a>, and <a href="https://6feetcovers.wixsite.com/6feetcovers">Paco Conde &amp; Roberto Fernandez</a> have some suggestions for new album covers:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="921" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-04.jpg"><br><img src="/plus/misc/images/corona-art-design-reimagined-05.jpg" width="1000" height="398" border="0" alt="Corona Art Design Reimagined"><br><img src="/plus/misc/images/corona-art-design-reimagined-06.jpg" width="1000" height="1045" border="0" alt="Corona Art Design Reimagined"></p> 
+    <p>Designer Jure Tovrljan <a href="https://www.behance.net/gallery/93755381/Coronavirus-Logos/">redesigned some company logos</a> for these coronavirus times.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1002" height="621" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-07.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1002" height="605" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-08.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1002" height="588" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-09.jpg"></p> 
+    <p>Coca-Cola even modified their own logo on a Times Square billboard to put some distance between the letters.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="667" border="0" alt="Corona Art Design Reimagined" data-src="/plus/misc/images/corona-art-design-reimagined-10.jpg"></p> 
+    <p>(via <a href="https://www.thisiscolossal.com/2020/03/jose-manuel-ballester-concealed-spaces/">colossal</a> &amp; <a href="https://www.fastcompany.com/90480780/see-famous-logos-get-reimagined-for-the-coronavirus-age">fast company</a>)</p> 
+    <p><strong title="Mar 26, 2020">Update:</strong> <a href="https://www.fastcompany.com/90480769/empty-toilet-rolls-and-hand-sanitizer-emoji-get-redesigned-for-covid-19">Some emoji designed specifically for COVID-19</a>. The Earth with the pause button is my favorite. (via <a href="https://sidebar.io/">sidebar</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Andy%20Baio">Andy Baio</a></li> 
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/Ben%20Greenman">Ben Greenman</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/emoji">emoji</a></li> 
+     <li><a href="/tag/Jose%20Manuel%20Ballester">Jose Manuel Ballester</a></li> 
+     <li><a href="/tag/Jure%20Tovrljan">Jure Tovrljan</a></li> 
+     <li><a href="/tag/logos">logos</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/Paco%20Conde">Paco Conde</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+     <li><a href="/tag/Roberto%20Fernandez">Roberto Fernandez</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-sidebar"> 
+    <div class="bling-title">
+     <a href="https://carbonads.net/" target="_blank">ads via Carbon</a>
+    </div> 
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYICKJY&amp;placement=kottkeorg" id="_carbonads_js"></script> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/stream-helvetica-other-design-documentaries-for-free">Stream Helvetica &amp; Other Design Documentaries for Free</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 23, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Thinking that some people might need high quality entertainment while shut inside due to the COVID-19 pandemic, <a href="https://www.ohyouprettythings.com/free">filmmaker Gary Hustwit is streaming his films online for free</a>, one film per week. First up (from Mar 17-24) is Helvetica, his documentary on typography and graphic design. Here’s the trailer:</p> 
+    <p class="widescreen embedded"><iframe src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen data-src="https://player.vimeo.com/video/232871579"></iframe></p> 
+    <p><a href="https://www.ohyouprettythings.com/free">Click through to watch the whole film</a>. (via <a href="https://daringfireball.net/">daring fireball</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Gary%20Hustwit">Gary Hustwit</a></li> 
+     <li><a href="/tag/Helvetica">Helvetica</a></li> 
+     <li><a href="/tag/movies">movies</a></li> 
+     <li><a href="/tag/trailers">trailers</a></li> 
+     <li><a href="/tag/typography">typography</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/03/no-frills-branding">No Frills Branding</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 12, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="No Frills Branding" data-src="/plus/misc/images/no-frills-branding-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="No Frills Branding" data-src="/plus/misc/images/no-frills-branding-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="No Frills Branding" data-src="/plus/misc/images/no-frills-branding-03.jpg"></p> 
+    <p>Designer Kunel Gaur, head of a creative agency called <a href="https://www.weareanimal.co/">Animal</a>, has redesigned the packaging for several familiar brands using minimal black &amp; white graphics and unadorned typography. The designs don’t seem to be collected in one place, so you’ll have to <a href="https://www.instagram.com/kunelgaur/">poke around his Instagram</a> to find them.</p> 
+    <p>That LV bag actually looks like something <a href="https://www.instagram.com/virgilabloh/">Virgil Abloh</a> would design — it would sell like hotcakes. Dye it <a href="https://www.thecut.com/2020/03/will-the-millennial-aesthetic-ever-end.html">millennial pink</a> and you’ve got a freaking worldwide sensation. Fashion design is so easy!! (via <a href="https://mossandfog.com/brands-reimagined-with-bland-monochromatic-packaging/">moss &amp; fog</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/branding">branding</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Kunel%20Gaur">Kunel Gaur</a></li> 
+     <li><a href="/tag/remix">remix</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/an-international-eye-test-chart-circa-1907">An International Eye Test Chart (circa 1907)</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 27, 2020</span>
+    </div> 
+   </div> 
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="1091" border="0" alt="Mayerle Eye Test Chart" data-src="/plus/misc/images/mayerle-eye-test-chart.jpg"></p> 
+   <div class="post"> 
+    <p>From the collection of the US National Library of Medicine, <a href="https://collections.nlm.nih.gov/catalog/nlm:nlmuid-101573438-img">an eye test chart designed by George Mayerle around 1907</a> to be a complete vision testing solution for speakers of several languages.</p> 
+    <blockquote>
+     <p>Running through the middle of the chart, the seven vertical panels test for acuity of vision with characters in the Roman alphabet (for English, German, and other European readers) and also in Japanese, Chinese, Russian, and Hebrew. A panel in the center replaces the alphabetic characters with symbols for children and adults who were illiterate or who could not read any of the other writing systems offered. Directly above the center panel is a version of the radiant dial that tests for astigmatism. On either side of that are lines that test the muscular strength of the eyes. Finally, across the bottom, boxes test for color vision, a feature intended especially (according to one advertisement) for those working on railroads and steamboats.</p>
+    </blockquote> 
+    <p>Mayerle was a German optometrist working in San Francisco when he made the chart, designing it for use in a city with a diverse population. My pals at 20x200 are <a href="https://20x200.com/products/george-mayerle-eye-test-chart">offering limited-edition prints of Mayerle’s chart</a> in a variety of sizes. </p> 
+    <p>See also <a href="https://ilovetypography.com/2015/07/12/what-are-optotypes-eye-charts-fonts/">the history &amp; typography of eye test charts</a>, <a href="https://kottke.org/18/12/optician-sans">Optician Sans</a> (a font based on eye chart typography), and <a href="https://kottke.org/13/02/eye-charts-for-drones">Eye Charts for Drones</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/George%20Mayerle">George Mayerle</a></li> 
+     <li><a href="/tag/medicine">medicine</a></li> 
+     <li><a href="/tag/typography">typography</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/face-id-compatible-respirator-masks">Face ID Compatible Respirator Masks</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 17, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="800" height="572" border="0" alt="Face ID Respirator Masks" data-src="/plus/misc/images/face-id-masks-01.jpg"></p> 
+    <p><a href="https://faceidmasks.com/">This site</a> is making N95 respirator masks that work with facial recognition software, so that, for example, you can unlock your phone while still wearing a mask.</p> 
+    <blockquote>
+     <p>After uploading your face, we use computational mapping to convert your facial features into an image printed onto the surface of N95 surgical masks without distortion.</p> 
+     <p>Our printer uses inks made of natural dyes. It’s non-toxic and doesn’t affect breathability.</p> 
+     <p>You can use your mask for everyday life as a barrier for airborne particle droplets.</p>
+    </blockquote> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="800" height="800" border="0" alt="Face ID Respirator Masks" data-src="/plus/misc/images/face-id-masks-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="800" height="600" border="0" alt="Face ID Respirator Masks" data-src="/plus/misc/images/face-id-masks-03.jpg"></p> 
+    <p>It is unclear whether these will actually ship or not — “Q: Is this a joke? A: Yes. No. We’re not sure.” — but they’re definitely not planning to make them while there are mask shortages related to COVID-19. And it appears the masks will work with iPhones…you just <a href="https://twitter.com/djbaskin/status/1228800243325472768">add a new face</a> (while wearing the mask) to your phone’s face database. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/medicine">medicine</a></li> 
+     <li><a href="/tag/telephony">telephony</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/the-sleep-blanket">The Sleep Blanket</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 12, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Over a period of three months, Seung Lee <a href="https://twitter.com/Lagomorpho/status/1149754592579600384">knit a blanket</a> showing a visualization of his infant son’s sleep patterns from birth to his first birthday.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1055" border="0" alt="Sleep Blanket" data-src="/plus/misc/images/sleep-blanket.jpg"></p> 
+    <blockquote>
+     <p>The sleep data was collected with the BabyConnect app which lets you export to CSV. The CSVs were filtered and converted into JSON (using Google Apps Script and Python) which could then be used for visualization and tracking.</p>
+    </blockquote> 
+    <p>Brilliant. This deservedly made <a href="https://flowingdata.com/2019/12/19/best-data-visualization-projects-of-2019/">Flowing Data’s list of the Best Data Visualization Projects of 2019</a>. See also <a href="https://kottke.org/18/05/global-warming-blankets">Global Warming Blankets</a> and <a href="https://twitter.com/sara__weber/status/1081950904671240192">this train delay scarf</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/infoviz">infoviz</a></li> 
+     <li><a href="/tag/Seung%20Lee">Seung Lee</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/02/shake-a-typeface-with-parkinsons-disease">Shake: A Typeface with Parkinson’s Disease</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 01, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="546" border="0" alt="Shake typeface" data-src="/plus/misc/images/3E7D689F-D3F2-4FF2-9F3F-1900F0502973.jpeg"></p> 
+    <p><a href="https://writewithparkinsons.com/">Shake</a> is a typeface made from the real handwriting of a person living with Parkinson’s disease. Creative director <a href="http://morten.work/#/shake/">Morten Halvorsen</a>:</p> 
+    <blockquote>
+     <p>My mother was diagnosed with Parkinson’s eight years ago. And her handwriting has changed in the years since. I created this font to preserve her handwriting, and enable her to continue to write with her own letters.</p>
+    </blockquote> 
+    <p>A new version of the font will be available each year to capture his mother’s worsening condition. Donate a few dollars (or more!) to download the font — all proceeds go to finding a cure. You can also download a template so that you can document the handwriting of a loved one living with Parkinson’s — for a fee (donated to Parkinson’s research), Halvorsen will turn it into a font for you. (thx, <a href="https://kk.org/">kevin</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/medicine">medicine</a></li> 
+     <li><a href="/tag/Morten%20Halvorsen">Morten Halvorsen</a></li> 
+     <li><a href="/tag/Parkinson%27s%20disease">Parkinson’s disease</a></li> 
+     <li><a href="/tag/typography">typography</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/a-collection-of-childrens-school-notebooks-from-around-the-world">A Collection of Children’s School Notebooks from Around the World</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 22, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="935" height="1228" border="0" alt="School notebooks" data-src="/plus/misc/images/D3C06348-3DD0-4E8A-91B4-B17ED5BA920C.jpeg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="720" border="0" alt="School notebooks" data-src="/plus/misc/images/6CBB77E3-46F9-436E-B006-E32084797D5C.jpeg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="645" border="0" alt="School notebooks" data-src="/plus/misc/images/CE4C468D-5395-4012-A72D-77D1CA96B93F.jpeg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="938" height="1175" border="0" alt="School notebooks" data-src="/plus/misc/images/C2BCA6E5-6F10-46E7-AF62-CD7F24B4ACE0.jpeg"></p> 
+    <p>For the past 15 years, the folks at the <a href="https://www.exercisebookarchive.org">Exercise Book Archive</a> have been compiling a collection of children’s school notebooks from around the world. In the extensive digital archive, you can find writings, drawings, and aimless doodling in exercise books from as far back as 1773 from countries like the US, Ghana, Latvia, Brazil, and Finland.</p> 
+    <blockquote>
+     <p>The Exercise Book Archive is an ever-growing, participatory archive of old exercise books that allows everyone to discover the history, education, and daily life of children and youth of the past through this unique material. The Archive includes hundreds of exercise books from more than 30 different countries and dated from the late 1700s to the early 2000s. It is preserved and managed by the Milan-based NPO Quaderni Aperti (literally, Open Exercise Books).</p>
+    </blockquote> 
+    <p>If you <a href="https://instagram.com/exercisebookarchive">follow them on Instagram</a>, they are pulling some interesting pieces out of the archive. And if you happen to have any old exercise books from your youth (or your parents’ or grandparents’ youth) lying around, <a href="https://www.exercisebookarchive.org/contribute/">you can donate them to the cause</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/education">education</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/how-to-please-elise">How to Please Elise</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 19, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="970" height="1360" border="0" alt="How to Please Elise" data-src="/plus/misc/images/D4CA49D9-3E37-41E2-877E-889FBB0F6B16.jpeg"></p> 
+    <p>Christoph Niemann with a clever take on the Beethoven composition for piano, Für Elise. He’s offering it <a href="https://shop.christophniemann.com/products/how-to-please-elise">as a letterpress print</a> — but supplies are low so order quick if you want one.</p> 
+    <p>And <a href="https://twitter.com/abstractsunday/status/1218881814057582593">according to Niemann</a>, the chart has been factchecked and is accurate. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Christoph%20Niemann">Christoph Niemann</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/infoviz">infoviz</a></li> 
+     <li><a href="/tag/Ludwig%20van%20Beethoven">Ludwig van Beethoven</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/official-posters-for-the-tokyo-2020-olympic-and-paralympic-games">Official Posters for the Tokyo 2020 Olympic and Paralympic Games</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 16, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Wow, check out the <a href="https://tokyo2020.org/en/games/artposter/">official posters</a> for the Tokyo 2020 Olympic and Paralympic Games.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="941" height="1344" border="0" alt="2020 Olympic Posters" data-src="/plus/misc/images/2020-olympic-posters-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="953" height="1344" border="0" alt="2020 Olympic Posters" data-src="/plus/misc/images/2020-olympic-posters-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="953" height="1344" border="0" alt="2020 Olympic Posters" data-src="/plus/misc/images/2020-olympic-posters-03.jpg"></p> 
+    <p>What an amazing array of styles and disciplines — there’s manga, shodo (calligraphy), Cubism, photography, surrealism, and ukiyo-e. That stunning poster at the top is from <a href="http://www.artnet.com/artists/tomoko-konoike/">Tomoko Konoike</a> — fantastic. As you can see, <a href="https://stillmed.olympic.org/media/Document%20Library/OlympicOrg/Factsheets-Reference-Documents/Games/Posters/Reference-document-OG-Posters.pdf">posters from past Olympics</a> have tended towards the literal, with more straightforward depictions of sports, the rings, stadiums, etc. Kudos to the organizers of the Tokyo Games for casting their net a little wider. Love it. (via <a href="https://sidebar.io/">sidebar</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/2020%20Summer%20Games">2020 Summer Games</a></li> 
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Japan">Japan</a></li> 
+     <li><a href="/tag/Olympic%20Games">Olympic Games</a></li> 
+     <li><a href="/tag/Tomoko%20Konoike">Tomoko Konoike</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/hand-painted-movie-posters-from-ghana-in-the-80s-90s">Hand-Painted Movie Posters from Ghana in the 80s &amp; 90s</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 13, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="640" height="975" border="0" alt="Africa Movie Posters" data-src="/plus/misc/images/africa-movie-posters-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="640" height="851" border="0" alt="Africa Movie Posters" data-src="/plus/misc/images/africa-movie-posters-03.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="640" height="993" border="0" alt="Africa Movie Posters" data-src="/plus/misc/images/africa-movie-posters-04.jpg"></p> 
+    <p>In order to drum up business for local movie theaters in Africa (most notably in Ghana), <a href="https://www.theatlantic.com/entertainment/archive/2016/02/ghanas-wild-golden-age-of-movie-posters/458949/">theater owners would commission local artists to paint movie posters</a>.</p> 
+    <blockquote>
+     <p>When Frank Armah began painting posters for Ghanaian movie theaters in the mid-1980s, he was given a clear mandate: Sell as many tickets as possible. If the movie was gory, the poster should be gorier (skulls, blood, skulls dripping blood). If it was sexy, make the poster sexier (breasts, lots of them, ideally at least watermelon-sized). And when in doubt, throw in a fish. Or don’t you remember the human-sized red fish lunging for James Bond in The Spy Who Loved Me?</p> 
+     <p>“The goal was to get people excited, curious, to make them want to see more,” he says. And if the movie they saw ended up surprisingly light on man-eating fish and giant breasts? So be it. “Often we hadn’t even seen the movies, so these posters were based on our imaginations,” he says. “Sometimes the poster ended up speaking louder than the movie.”</p>
+    </blockquote> 
+    <p>You can check out more of these amazing artworks in <a href="https://twitter.com/retr0joe/status/1215631541579198464">this Twitter thread</a>, <a href="http://www.bbc.com/culture/story/20190313-incredible-ghanaian-film-posters">this BBC story</a>, <a href="https://eyeondesign.aiga.org/the-over-the-top-artistry-of-ghanas-painted-movie-posters/">on the AIGA site</a>, and <a href="https://www.posterhouse.org/exhibition/ghana/">at Poster House</a>, which has an exhibition of these posters up through Feb 16.</p> 
+    <p><strong title="Jan 13, 2020">Update:</strong> I removed <a href="https://kottke.org/plus/misc/images/africa-movie-posters-01.jpg">this modern-day spoof</a> of the Ghanaian posters from the post. The tell is the reference to <a href="https://giphy.com/gifs/mash-up-jurassic-park-ian-malcom-3oD3YQjT2cSZTsy6Va">this amazing GIF</a>. (thx, erik) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Ghana">Ghana</a></li> 
+     <li><a href="/tag/movies">movies</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/world-underwater">World Underwater</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 10, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="666" border="0" alt="World Underwater" data-src="/plus/misc/images/EAF60782-5BAE-4D85-ABD5-8CB35DB9F1F2.jpeg"></p> 
+    <p>Inspired by a trip to Venice, the world’s most prominent example of what life could be like in many of our coastal cities in the years to come, <a href="https://www.haydenclay.com/world-underwater">Hayden Williams made a series of 3D rendered images showing what our world might look like underwater</a>. (via <a href="https://themorningnews.org/">the morning news</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/global%20warming">global warming</a></li> 
+     <li><a href="/tag/Hayden%20Williams">Hayden Williams</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/subway">subway</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/ridgeline-maps-of-the-world">Ridgeline Maps of the World</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 08, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="928" border="0" alt="Ridgeline Map Italy" data-src="/plus/misc/images/ridgeline-map-italy.jpg"></p> 
+    <p>Using Andrei Kashcha’s <a href="https://github.com/anvaka/peak-map">Peak Map tool</a>, you can create what’s called <a href="https://flowingdata.com/charttype/frequency-trails/">a ridgeline chart</a> — picture <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">the album cover for Joy Division’s Unknown Pleasures</a> — of the elevation anywhere on the Earth. <a href="https://anvaka.github.io/peak-map/">Try it out here</a>. (via <a href="https://twitter.com/eramirez">@eramirez</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Andrei%20Kashcha">Andrei Kashcha</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/infoviz">infoviz</a></li> 
+     <li><a href="/tag/Joy%20Division">Joy Division</a></li> 
+     <li><a href="/tag/maps">maps</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/20/01/flowing-datas-best-data-visualizations-of-2019">Flowing Data’s Best Data Visualizations of 2019</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jan 07, 2020</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Nathan Yau of Flowing Data picked <a href="https://flowingdata.com/2019/12/19/best-data-visualization-projects-of-2019/">his ten favorite data visualization projects for 2019</a>. All the projects listed are worth a look … but maybe, just maybe, this post is really just an excuse to let my eyes feast upon <a href="https://kottke.org/19/01/historic-topographic-maps-pushed-into-3d">Scott Reinhard’s historic topographic maps</a> once again.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1154" border="0" alt="Scott Reinhard" data-src="/plus/misc/images/scott-reinhard-01.jpg"></p> 
+    <blockquote>
+     <p>Designer Scott Reinhard takes old geological survey maps and combines them with elevation data to produce <a href="https://scottreinhard.com/Mapping-and-Visualization">these wonderful hybrid topographic maps</a>. From top to bottom, here are Reinhard’s 3D versions of a 1878 USGS Yellowstone map, a 1904 USGS map of Acadia National Park, and a 1899 USGS map of the Grand Tetons.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/best%20of">best of</a></li> 
+     <li><a href="/tag/best%20of%202019">best of 2019</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/infoviz">infoviz</a></li> 
+     <li><a href="/tag/lists">lists</a></li> 
+     <li><a href="/tag/Nathan%20Yau">Nathan Yau</a></li> 
+     <li><a href="/tag/Scott%20Reinhard">Scott Reinhard</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/12/shampoo-packaged-in-bottles-made-of-soap">Shampoo Packaged in “Bottles” Made of Soap</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Dec 18, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Product designer Jonna Breitenhuber has come up with an interesting way to get rid of plastic shampoo and body wash containers: <a href="https://jonnabreitenhuber.de/soapbottle.html">by packaging the liquids in bottles made of slow-dissolving soap</a>.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="625" border="0" alt="Soapbottle" data-src="/plus/misc/images/soapbottle-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="625" border="0" alt="Soapbottle" data-src="/plus/misc/images/soapbottle-02.jpg"></p> 
+    <blockquote>
+     <p>Soapbottle is a packaging made from soap. As the content within is being used, the soap packaging very gradually dissolves. When finished, remnants can be used again, as hand soap or processed into detergents. Soap is made of natural ingredients and is biodegradable: waste can be completely avoided.</p>
+    </blockquote> 
+    <p>You can see Soapbottle in action here:</p> 
+    <p class="widescreen embedded"><iframe src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen data-src="https://player.vimeo.com/video/317115966"></iframe></p> 
+    <p>I love that you open the bottle by cutting the corner off with a knife. See also <a href="https://kottke.org/18/08/biodegradable-food-containers-inspired-by-egg-shells-orange-peels">Biodegradable Food Containers Inspired by Egg Shells &amp; Orange Peels</a>. (via <a href="https://mossandfog.com/ditch-the-plastic-with-this-shampoo-in-soap-bottles/">moss &amp; fog</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Jonna%20Breitenhuber">Jonna Breitenhuber</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/beautiful-news-daily">Beautiful News Daily</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 27, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Beautiful News" data-src="/plus/misc/images/beautiful-news-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Beautiful News" data-src="/plus/misc/images/beautiful-news-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Beautiful News" data-src="/plus/misc/images/beautiful-news-03.jpg"></p> 
+    <p>Each day since the beginning of October, the team of designers, technologists, and researchers at <a href="https://informationisbeautiful.net/beautifulnews/">Beautiful News Daily</a> (a project by Information Is Beautiful) have been posting infographics and data visualizations that share some good news about the world. The site’s tagline is “unseen trends, uplifting stats, creative solutions”.</p> 
+    <p>The bad news we see everyday on news websites, newspaper front pages, and magazine covers is important (or can be, if it’s not designed to keep people frightened and hooked on the news), but the good news is just as significant (or can be, if it doesn’t cause you to forget the world’s true suffering and turmoil).</p> 
+    <p>You can keep up with Beautiful News via <a href="https://informationisbeautiful.net/beautifulnews/">their website</a>, <a href="https://informationisbeautiful.us6.list-manage.com/subscribe?u=ddd60592f59ea1712ed3d1937&amp;id=ea5660be2c">their weekly newsletter</a>, or <a href="https://twitter.com/beautiful__news">Twitter</a> &amp; <a href="https://www.instagram.com/beautifulnews.daily/">Instagram</a>. (via <a href="https://mossandfog.com/2019/11/25/beautiful-news-daily-shows-us-positive-outlook-stories/">moss &amp; fog</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/infoviz">infoviz</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/renderings-of-our-dystopian-pop-culture-future">Renderings of Our Dystopian Pop Culture Future</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 20, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>For more than 11 years for a series he calls <a href="https://www.beeple-crap.com/everydays">Everydays</a>, Mike Winkelmann (aka Beeple) has been making a daily picture. As you might expect from the breakneck pace, some of them aren’t that interesting (there’s a lot of juvenile stuff here tbh), but my favorite ones are the Black Mirror-ish with decayed or repurposed pop cultural references.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1250" border="0" alt="Beeple" data-src="/plus/misc/images/beeple-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1250" border="0" alt="Beeple" data-src="/plus/misc/images/beeple-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1250" border="0" alt="Beeple" data-src="/plus/misc/images/beeple-03.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1250" border="0" alt="Beeple" data-src="/plus/misc/images/beeple-04.jpg"></p> 
+    <p>You can view more of Winkelmann’s work on <a href="https://www.behance.net/beeple">Behance</a>, <a href="https://beeple.tumblr.com/">Tumblr</a>, and <a href="https://www.beeple-crap.com/">his website</a>. (via <a href="https://www.densediscovery.com/">dense discovery</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/illustration">illustration</a></li> 
+     <li><a href="/tag/Mike%20Winkelmann">Mike Winkelmann</a></li> 
+     <li><a href="/tag/Pokemon">Pokemon</a></li> 
+     <li><a href="/tag/Toy%20Story">Toy Story</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/the-hippie-aesthetic-of-the-60s-is-art-nouveau-on-acid">The Hippie Aesthetic of the 60s Is “Art Nouveau on Acid”</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 19, 2019</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/9vuqI2v2IRs"></iframe></p> 
+   <div class="post"> 
+    <p>I had somehow never registered this before, but it was (ridiculously) obvious once it was pointed out to me in this video: the psychedelic design of music posters in the 60s <a href="https://www.kqed.org/arts/11361671/sfo-exhibit-shows-how-artists-adapted-art-nouveau-to-rock-posters">were inspired</a> in part by the Art Nouveau movement of the late 1800s. For instance, here’s an absinthe advertisement from the 1890s and a 1966 Pink Floyd poster.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="691" border="0" alt="60s Posters Art Nouveau" data-src="/plus/misc/images/60s-posters-art-nouveau.jpg"></p> 
+    <blockquote>
+     <p>“You can draw a straight line between Art Nouveau and psychedelic rock posters,” Martin Hohn, president of the Rock Poster Society, says. “Mucha, Jules Chéret, Aubrey Beardsley. Borrow from everything. The world is your palette. It was all meant to be populist art. It was always meant to be disposable.” He later adds: “What the artists were saying graphically was the same thing the rock bands were saying musically.”</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/music">music</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/life-in-miniature">Life in Miniature</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 19, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://www.delphminiatures.co.uk/">Delph Miniatures</a> is a small company that makes what they call “modern miniatures”, 1/12th scale miniatures of everyday things like washing machines, ironing boards, and mobility scooters. <a href="https://www.ellen-evans.com/">Ellen Evans</a>’ short documentary about the miniatures and the mother/daughter team who make them is completely delightful; I love everything about these women and their work.</p> 
+    <p class="widescreen embedded"><iframe src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen data-src="https://player.vimeo.com/video/327010028"></iframe></p> 
+    <p>They make contemporary miniatures because they want to represent our culture as it is right now and not as it was back in Victorian or Elizabethan times.</p> 
+    <blockquote>
+     <p>Our inspiration is not in resource books or museums, but physically around us, all the time, in our homes, in the shops of our home city, Bradford, and in the lives of our friends and family. We love creating something different and modern that someone wants. In this way our range has expanded as people have asked for more new things. Ideas are all around us. You may be living in a Victorian house but you still have your TV, your microwave, and your computer.</p>
+    </blockquote> 
+    <p>Just look at this meticulous work by Kath Holden and Margaret Shaw — the attention to detail is inspiring:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="959" height="540" border="0" alt="Delph Miniatures" data-src="/plus/misc/images/delph-miniatures-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="959" height="539" border="0" alt="Delph Miniatures" data-src="/plus/misc/images/delph-miniatures-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="960" height="540" border="0" alt="Delph Miniatures" data-src="/plus/misc/images/delph-miniatures-03.jpg"></p> 
+    <p>Yes, that’s a wee condom and its wrapper, which Delph assures us is made of actual latex and “the correct size diameter scaled down of a standard condom”. You can <a href="https://store.delphminiatures.co.uk/m257-condom-packet.html">buy your own here</a> for £8.58. The mobility scooter is <a href="https://store.delphminiatures.co.uk/mobility-scooter-red.html">£77.81</a> and you can <a href="https://store.delphminiatures.co.uk/beauty-salon-manicurists.html">buy everything you need to make a mini beauty salon right here</a>, including <a href="https://store.delphminiatures.co.uk/m264-table-top-free-wi-fi-sign.html">a “free wifi” sign</a> and <a href="https://store.delphminiatures.co.uk/m242-dome-security-camera.html">dome-type security camera</a>. <a href="https://store.delphminiatures.co.uk/">Shop the rest of their store here</a>..so many good things! (via <a href="https://themorningnews.org/">the morning news</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Delph%20Miniatures">Delph Miniatures</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Ellen%20Evans">Ellen Evans</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/logos-of-video-game-consoles-from-1976-to-the-present">Logos of Video Game Consoles from 1976 to the Present</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 14, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="998" height="1035" border="0" alt="Video Game Console Logos" data-src="/plus/misc/images/video-game-console-logos.jpg"></p> 
+    <p>Reagan Ray has <a href="http://reaganray.com/2019/11/12/video-game-console-logos.html">collected the logos of video game consoles</a> from 1976 to the present. He ignores the first generation of consoles because there would have been too many to include. (Historical interlude: I didn’t know gaming consoles <a href="https://en.wikipedia.org/wiki/Video_game_console">were broken down into generations</a>. Apparently we’re in the 8th generation now — Wii U, PS4, Xbox One, and Switch.)</p> 
+    <p>See also <a href="https://kottke.org/19/05/classic-airline-logos">Ray’s collections of classic airline logos, record label logos, 80s action figure logos, American car logos, etc.</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/logos">logos</a></li> 
+     <li><a href="/tag/Reagan%20Ray">Reagan Ray</a></li> 
+     <li><a href="/tag/video%20games">video games</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/a-fresh-look-for-the-atlantic">A Fresh Look for The Atlantic</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 13, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="https://www.theatlantic.com/">The Atlantic</a> launched a new visual identity the other day, complete with a new logo, custom typeface, updated website, and iOS app. Here’s the first cover carrying the new look:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1334" border="0" alt="Atlantic Redesign" data-src="/plus/misc/images/atlantic-redesign.jpg"></p> 
+    <p><a href="https://www.theatlantic.com/press-releases/archive/2019/11/atlantic-makes-new-mark/601810/">The effort</a> was led by <a href="https://www.petermendelsund.com/">Peter Mendelsund</a> and his senior art director <a href="https://www.olivermunday.com/">Oliver Munday</a>. You can hear the pair talk a bit about their process here:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/TlkzewtoJ8Q"></iframe></p> 
+    <p>And more from Mendelsund <a href="https://www.theatlantic.com/news/archive/2019/11/introducing-new-look-atlantic/601762/">in this conversation</a> with editor-in-chief Jeffrey Goldberg:</p> 
+    <blockquote>
+     <p>My favorite kind of design is a kind of time-released design, where you look at something and you have an immediate impression of it, and then you, upon further reflection, find something in the design that adds to or subverts that first impression.</p>
+    </blockquote> 
+    <p>Really nice work and methodology behind it. Hearing designers talk about how they approach their work always makes me miss practicing design on a daily basis, a former vocation of mine that seems very very far away these days. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Jeffrey%20Goldberg">Jeffrey Goldberg</a></li> 
+     <li><a href="/tag/magazines">magazines</a></li> 
+     <li><a href="/tag/Oliver%20Munday">Oliver Munday</a></li> 
+     <li><a href="/tag/Peter%20Mendelsund">Peter Mendelsund</a></li> 
+     <li><a href="/tag/The%20Atlantic">The Atlantic</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/posters-as-gateways-to-a-more-expansive-world">Posters as gateways to a more expansive world</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="https://sentiers.media/?src=jk">Patrick Tanguay</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 04, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>While we’re on the <a href="https://kottke.org/19/11/death-strandings-world-building-intersects-with-fashion-and-design">world building</a> topic, here’s another article on design within games, this one about <a href="https://theface.com/culture/video-gaming-posters-bloober-remedy-entertainment">the posters used in the upcoming</a> <i>Control</i> and the Polish cyberpunk-horror game <i>Observer</i>.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1392" border="0" alt="Observer poster by Mateusz Lenart" data-src="/plus/misc/images/observerp1-1000.jpg"></p> 
+    <blockquote>
+     <p>Alongside various made up advertisements, brands, book covers and propaganda signs, posters are symbolic of a&nbsp;larger universe, helping to broaden and flesh out any fictional world. An incredible amount of effort is put into creating video game settings, and the poster is but one of many tiny details carefully designed to draw you deeper.</p>
+    </blockquote> 
+    <p>The designers for both games were able to research the vast number of posters of different periods and locations to inform their own creations.</p> 
+    <blockquote>
+     <p>“Posters were a great tool for us to build a story and establish the world design. In one way, they show how this future world is organised, the rules of it etc. but they also represent the protagonist’s various dilemmas,” Lenart explains.</p>
+    </blockquote> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1353" border="0" alt="Control poster by Jenna Seikkula" data-src="/plus/misc/images/jenna-seikkula-posterit-201-1000.jpg"></p> 
+    <blockquote>
+     <p>“If done right, [the posters] can help convey everything from small trivial details to the broader story arc. These aspects enrich and deepen the lore and the world.”</p>
+    </blockquote> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="740" border="0" alt="Observer glitch poster by Mateusz Lenart" data-src="/plus/misc/images/ObsGlitch1_resize.gif"></p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/games">games</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/11/death-strandings-world-building-intersects-with-fashion-and-design">Death Stranding’s world building intersects with fashion and design </a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="https://sentiers.media/?src=jk">Patrick Tanguay</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 04, 2019</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/XElTCPgVSNo"></iframe></p> 
+   <div class="post"> 
+    <p>Can’t say I’m much of a gamer but I like when things intersect in interesting ways and the launch of Hideo Kojima’s <a href="https://www.playstation.com/en-us/games/death-stranding-ps4/">Death Stranding</a> is one of those times. This is a huge launch with lots and lots of coverage, you’ll probably be seeing it everywhere. The GameSport review, which gives a great idea of the look and gameplay, is above and here’s more of what it’s about, from <a href="https://www.theverge.com/2019/11/1/20941606/death-stranding-review-ps4-hideo-kojima">the review at The Verge</a>:</p> 
+    <blockquote>
+     <p><i>Death Stranding</i> takes place in a distant future, one that has been ravaged by a largely unexplained phenomenon called the death stranding. It wiped out cities and almost all life while opening a gate between the worlds of the living and dead. Those ghostly BTs haunt forests and mountains, and certain humans called repatriates are able to return to life from a strange underwater space known as the Seam. Sam, played by Norman Reedus, is one of these repatriates. He’s also something of a post-apocalyptic delivery man, shuttling supplies from one settlement to the next. Early in the game, he’s given a particularly ambitious task: reunite America (now known as the UCA, or United Cities of America) by traveling across the country, connecting settlements to a sort of internet-like network. At the same time, Sam is trying to reach the west coast of the country to rescue his sister who has been captured by a terrorist organization.</p>
+    </blockquote> 
+    <p>David Erlich at IndieWire is calling it <a href="https://www.indiewire.com/2019/11/death-stranding-review-best-video-game-movie-1202186590/">the best video game movie ever made</a>.</p> 
+    <blockquote>
+     <p>Massive, moody, and — as usual for the video game auteur — weird as hell. The open-world experience has enough contemplative moments to make it feel like a “Grand Theft Auto” sequel directed by Andrei Tarkovsky, and it’s the greatest achievement yet from the most eccentric and forward-thinking designer of a medium in which virtually every large-scale project is created by committee.</p>
+    </blockquote> 
+    <p>But what I’d like to draw your attention to is where Kojima’s vision intersects with fashion and design. As Ryan Epps says at TheGamer, <a href="https://www.thegamer.com/death-stranding-designer-collaborations/">Death Stranding Is A Tangled Web Of Designer Collaborations</a>.</p> 
+    <blockquote>
+     <p>Kojima not only intends on reshaping the landscape of conventional open-world gaming (and redefining the meaning of genre itself), but has his eyes set on revolutionizing narrative design and video game cinematography by way of listless immersion.</p>
+    </blockquote> 
+    <p>The motorbike is a collaboration with Norman Reedus’ television show The Ride, glasses are designed by French eyewear brand J.F.Rey, and some of the better looking clothing is designed by Errolson Hugh’s <a href="https://acrnm.com">Acronym</a>. While it edges (perhaps goes over for some) into product placement, it goes further, being co-designed <i>for</i> the game and each informing the other. The collaborations span the globe and form a mix to draw in more fans.</p> 
+    <blockquote>
+     <p>As so exemplified by these varied artists, designers, and thinkers, Kojima’s project will boast some of the most interesting forms of immersive insight. Much like how the gameplay itself finds players drawing the world back together in a time of hardship and desolation, the game’s own creation has been a global project that will, in essence, capture the hearts and minds of so many gamers just by the sheer amount of worldwide influence present in its DNA.</p>
+    </blockquote> 
+    <p>For my part, the collaboration with Acronym ( <a href="https://hypebeast.com/2019/11/hideo-kojima-death-stranding-acronym-j1a-gt">Hypebeast has a few details</a> and pictures about the collaboration ) is especially of interest with Hugh’s design already being so adjacent to near-future fiction and cyberpunk aesthetics. According to GQ, he <a href="https://www.gq.com/story/errolson-hugh-acronym-profile">Sees the Future</a> and he has been having this same kind of <a href="https://i-d.vice.com/en_us/article/wjdeay/meet-the-creative-minds-behind-the-nikelab-x-acronym-collaboration">bidirectional influence with William Gibson</a> for years.</p> 
+    <p>Please dig through some of the links above if you like this aesthetic and keep an eye on these kinds of collaborations in world building, which are bound to multiply and “attach” more domains of gaming, movies, design, and architecture together. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/games">games</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/10/metro-logos-of-the-world">Metro Logos of the World</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 30, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>From <a href="http://mic-ro.com/metro/index.html">Metrobits</a>, a fantastic resource for all things to do with metros and subways around the world, comes <a href="http://mic-ro.com/metro/metrologos.html">this collection of metro logos</a> (<a href="http://mic-ro.com/metro/metrologos-static-old.html">older page w/ larger logos here</a>).</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="984" height="446" border="0" alt="Metro Logos" data-src="/plus/misc/images/metro-logos.jpg"></p> 
+    <p>See also <a href="http://mic-ro.com/metro/metrofonts.html">metro fonts</a> (names + designers), <a href="http://mic-ro.com/metro/farecollection.html">fare collection schemes</a>, and <a href="http://mic-ro.com/metro/metroart.html">ratings of the art and architecture of metro stations from around the world</a> (highest marks go to Moscow, Paris, Saint Petersburg, and Stockholm). The Moscow and Saint Petersburg stations <a href="https://kottke.org/17/03/photos-of-grand-soviet-era-subway-stations">are incredible</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/logos">logos</a></li> 
+     <li><a href="/tag/subway">subway</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/10/urban-tetris">Urban Tetris</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 30, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Urban Tetris" data-src="/plus/misc/images/urban-tetris-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Urban Tetris" data-src="/plus/misc/images/urban-tetris-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1000" border="0" alt="Urban Tetris" data-src="/plus/misc/images/urban-tetris-03.jpg"></p> 
+    <p>From graphic designer Mariyan Atanasov comes <a href="https://www.behance.net/gallery/85263787/urban-tetris">Urban Tetris</a>, in which apartment buildings in Sofia, Bulgaria are turned into a massive game of Tetris. If you’ve played a bunch of Tetris in your life, just looking at these images should trigger the familiar theme song in your head. Next: make this actually playable. (via <a href="https://www.thisiscolossal.com/2019/10/urban-tetris-by-mariyan-atanasov/">colossal</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/architecture">architecture</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Mariyan%20Atanasov">Mariyan Atanasov</a></li> 
+     <li><a href="/tag/Tetris">Tetris</a></li> 
+     <li><a href="/tag/video%20games">video games</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/10/the-chic-2024-summer-olympics-logo">The Chic 2024 Summer Olympics Logo</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 23, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>On Oct 21, the emblem for the 2024 Summer Olympics and Paralympics was unveiled in Paris, site of the Games. It features a round symbol that represents a gold medal, the Olympic flame, and <a href="https://en.wikipedia.org/wiki/Marianne">Marianne</a>, the “national personification of the French Republic since the French Revolution”.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1024" border="0" alt="Paris 2024 Logo" data-src="/plus/misc/images/paris-2024-logo.jpg"></p> 
+    <p>The emblem’s Marianne is quite chic, so Parisian freelance journalist Megan Clement <a href="https://twitter.com/MegClement/status/1186368272037494785">concocted a vignette of that young woman’s life</a>. It begins like so:</p> 
+    <blockquote>
+     <p>The French Olympic logo tumbles out of bed on a Parisian morning. She tousles her messy bob, dons breton stripes and ballet flats and whisks down the stairs from her fifth-floor apartment to grab a baguette before enigmatically texting two men who are pursuing her romantically.</p> 
+     <p>The French Olympic logo has an expresso and a cigarette for lunch.</p>
+    </blockquote> 
+    <p>(via <a href="https://twitter.com/legalnomads">@legalnomads</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/2024%20Summer%20Olympics">2024 Summer Olympics</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/logos">logos</a></li> 
+     <li><a href="/tag/Megan%20Clement">Megan Clement</a></li> 
+     <li><a href="/tag/Olympic%20Games">Olympic Games</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/10/an-online-collection-of-colorful-fruit-crate-labels-1920s-1950s">An Online Collection of Colorful Fruit Crate Labels, 1920s-1950s</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 17, 2019</span>
+    </div> 
+   </div> 
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="578" border="0" alt="Fruit Crate Labels" data-src="/plus/misc/images/fruit-crate-labels-01.jpg"></p>
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="486" border="0" alt="Fruit Crate Labels" data-src="/plus/misc/images/fruit-crate-labels-02.jpg"></p>
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="587" border="0" alt="Fruit Crate Labels" data-src="/plus/misc/images/fruit-crate-labels-03.jpg"></p>
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="554" border="0" alt="Fruit Crate Labels" data-src="/plus/misc/images/fruit-crate-labels-04.jpg"></p>
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="765" border="0" alt="Fruit Crate Labels" data-src="/plus/misc/images/fruit-crate-labels-05.jpg"></p> 
+   <div class="post"> 
+    <p>From the State Library of Florida comes <a href="https://www.floridamemory.com/collections/crate-labels/">a collection of more than 600 crate labels</a> used by the citrus and vegetable industries from the 1920s to the 1950s.</p> 
+    <blockquote>
+     <p>To help give Florida fruits and vegetables an edge, growers looked to the booming produce packing industry in California, where advertisers were already using bold, elaborate labels to catch buyers’ attention. Florida companies began designing their wooden shipping crates and paper labels based on this successful model.</p> 
+     <p>Paper crate labels were used in Florida from the late 1800s until the 1950s. The earliest paper labels were fairly generic and often didn’t include a brand name. Starting in the 1920s, advertisers began developing more complex marketing strategies, aiming to entice buyers with colorful brand names and imagery.</p>
+    </blockquote> 
+    <p>What an amazing variety of design and typographic styles. There’s also some questionable imagery in there as well: <a href="https://www.floridamemory.com/items/show/342555">Mammy Brand</a>, <a href="https://www.floridamemory.com/items/show/342310">Dixieland Brand</a>, <a href="https://www.floridamemory.com/items/show/342221">Brave Vegetables</a>, <a href="https://www.floridamemory.com/items/show/342472">Indian Chief</a>, etc.</p> 
+    <p>See also <a href="https://kottke.org/15/11/the-us-govts-trove-of-beautiful-apple-paintings">The US Government’s Trove of Beautiful Apple Paintings</a>. (via <a href="https://twitter.com/john_overholt">@john_overholt</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/advertising">advertising</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/typography">typography</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/09/design-for-the-worst">Design for the Worst</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Sep 19, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>In <a href="https://marker.medium.com/why-every-ceo-needs-to-think-like-a-hacker-a-stalker-or-a-white-supremacist-8ef03fd6bf33">Why Every CEO Needs to Think Like a Hacker, Stalker, or White Nationalist</a>, Rob Walker argues that products should be designed with their worst potential users in mind.</p> 
+    <blockquote>
+     <p>“Red teaming” (creating a group with an explicitly adversarial role, to challenge an organization’s strategy or structures) happens in military and intelligence contexts, and even in tech design, when the underlying issue is security or fending off hackers. Maybe big digital-centric companies, and small ones that aspire to scale, need a variation that’s not about fending off direct adversaries. Imagine instead a sort of Black Mirror Department, devoted to nothing but figuring out how the product can be abused — and thus how to minimize malign misuse.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Rob%20Walker">Rob Walker</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/08/a-collection-of-100-years-of-us-national-parks-graphical-ephemera">A Collection of 100 Years of US National Parks’ Graphical Ephemera</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Aug 22, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>From the folks that produced <a href="https://standardsmanual.com/products/nyctacompactedition">the NYC Transit Authority Graphics Standards Manual</a> and <a href="https://standardsmanual.com/products/nasa-graphics-standards-manual">the NASA Standards Manual</a> comes a new book, <a href="https://standardsmanual.com/products/parks">Parks</a>, about the art, maps, and printed materials produced to support American’s national parks.</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="667" border="0" alt="Parks Book" data-src="/plus/misc/images/parks-book-01.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="667" border="0" alt="Parks Book" data-src="/plus/misc/images/parks-book-02.jpg"></p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="667" border="0" alt="Parks Book" data-src="/plus/misc/images/parks-book-03.jpg"></p> 
+    <p>From the book’s introduction by Lyz Nagan-Powell:</p> 
+    <blockquote>
+     <p>If, as Wallace Stegner famously declared, the national parks are “America’s best idea,” how can we explore this idea? There is the historical aspect: America invented the concept of nationally owned and operated parks in 1872, when Ulysses S. Grant signed Yellowstone National Park into existence. But there is more to Stegner’s sentiment than just the invention of the parks. The rest of the quote goes on to say that the parks are “Absolutely American, absolutely democratic, they reflect us at our best rather than our worst.”</p> 
+     <p>The national parks story isn’t simple or easy. It’s full of splendor and glory, as well as greed and exploitation. For every person who loves one of the parks like it’s their own home, there is another who resents the federal government for owning it. Even before Yellowstone became the first national park, park history was fraught with tension. Tension between preservation and use, between indigenous people and white explorers, between local rights and federal oversight, between wild freedom and human control, between park purists and park recreationists, and between commercial exploitation and historic value.</p> 
+     <p>With this tense backdrop, or maybe because of it, art, imagery, writing, and design have played a vital role in the history of the national parks. Compelling creative materials that celebrated the land — including books, paintings, performances, and advertisements — have marked developments and milestones. These items have brought the rich landscapes and their scientific and historical significance to life.</p> 
+     <p>Perhaps together, the tension and celebration make the National Park System - parks, monuments, natural areas, historic sites, and more - the perfect embodiment of America itself, and what the “best idea” of the parks is really all about.</p>
+    </blockquote> 
+    <p>Parks is out in October <a href="https://standardsmanual.com/products/parks">but you can pre-order it now</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/books">books</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Parks">Parks</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/08/le-corbuffet">Le Corbuffet</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Aug 20, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://estherchoi.net/index/le-corbuffet">Le Corbuffet</a> was a series of performances by artist Esther Choi that sought to bring together food with notable artists and designers, along with a healthy dose of puns. A cookbook based on the project will be out in October: <a href="https://www.amazon.com/exec/obidos/ASIN/3791384724/ref=nosim/0sil8">Le Corbuffet: Edible Art and Design Classics</a>. Here’s the page for Quiche Haring:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="775" border="0" alt="Le Corbuffet" data-src="/plus/misc/images/le-corbuffet-01.jpg"></p> 
+    <p>Other dishes include Rhubarbara Kruger Compote, Shigeru Banchan Two Ways, Yokonomiyaki, Rem Brûlée, and the Robert Rauschenburger. Here’s the full menu/table of contents:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1000" height="1507" border="0" alt="Le Corbuffet" data-src="/plus/misc/images/le-corbuffet-02.jpg"></p> 
+    <p>Says Choi about where the idea for the project came from:</p> 
+    <blockquote>
+     <p>In 2014, I stumbled across an elaborate menu crafted by László Moholy-Nagy. The multi-panelled bill of fare was for a dinner held in tribute to the Bauhaus founder and architect, Walter Gropius, in 1937. Inspired by the menu for Gropius’s dinner, and the questions that it raised about the elitism of cultural production, I decided to conduct a social experiment a year later.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/books">books</a></li> 
+     <li><a href="/tag/design">design</a></li> 
+     <li><a href="/tag/Esther%20Choi">Esther Choi</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Le%20Corbuffet">Le Corbuffet</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <p class="page-nav"><a href="/tag/design/2">Older posts &nbsp;<i class="fa fa-arrow-right"></i></a></p> 
+  </div> 
+  <div class="spacer"></div> 
+  <div id="footer"> 
+   <div id="bottom-nav-wide">
+    <span id="loving-you">kottke.org, loving you since 1998</span><a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives + tags</a><a href="/shop">shop</a><a href="/members">membership!</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+   <div id="bottom-nav-medium">
+    <a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives</a><a href="/shop">shop</a><a href="/members">membership!</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+   <div id="bottom-nav-narrow">
+    <a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+  </div> 
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-871179-1', 'auto');
+  ga('send', 'pageview');
+
+</script>  
+ </body>
+</html>

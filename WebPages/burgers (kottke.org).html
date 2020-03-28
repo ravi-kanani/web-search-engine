@@ -1,0 +1,817 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--[if lt IE 7 ]> <html class="ie6" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 7 ]> <html class="ie7" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 8 ]> <html class="ie8" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if IE 9 ]> <html class="ie9" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <![endif]--><!--[if (gte IE 10)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"> <!--<![endif]--> 
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>burgers (kottke.org)</title> 
+  <link href="/images/2016/ios/32x32.png" rel="icon" type="image/png" sizes="32x32"> 
+  <link href="/images/2016/ios/180x180.png" rel="apple-touch-icon" sizes="180x180"> 
+  <link href="/images/2016/ios/167x167.png" rel="apple-touch-icon" sizes="167x167"> 
+  <link href="/images/2016/ios/152x152.png" rel="apple-touch-icon" sizes="152x152"> 
+  <link href="/images/2016/ios/120x120.png" rel="apple-touch-icon" sizes="120x120"> 
+  <link href="/images/2016/ios/80x80.png" rel="apple-touch-icon" sizes="80x80"> 
+  <link href="/images/2016/ios/76x76.png" rel="apple-touch-icon" sizes="76x76"> 
+  <link href="/images/2016/ios/40x40.png" rel="apple-touch-icon" sizes="40x40"> 
+  <link href="/images/2016/ios/192x192.png" rel="icon" sizes="192x192"> 
+  <link href="/images/2016/ios/128x128.png" rel="icon" sizes="128x128"> 
+  <script src="/templates/2016/js/jquery-1.11.3.min.js"></script> 
+  <script src="/templates/2016/js/jquery-migrate-1.2.1.min.js"></script> 
+  <script src="/templates/2016/js/bigfoot.js"></script> 
+  <script src="/templates/2016/js/jquery.unveil.js"></script> 
+  <script>
+$(document).ready(function() {
+	$(".widescreen iframe").unveil(250);
+	$(".post iframe").unveil(250);
+	$(".widescreen img").unveil(150);
+	$(".post img").unveil(150);
+});
+</script> 
+  <script type="text/javascript">
+  window.MemberfulOptions = {site: "https://kottke.memberful.com"};
+
+  (function() {
+    var s   = document.createElement('script');
+
+    s.type  = 'text/javascript';
+    s.async = true;
+    s.src   = 'https://d35xxde4fgg0cx.cloudfront.net/assets/embedded.js';
+
+    setup = function() { window.MemberfulEmbedded.setup(); }
+
+    if(s.addEventListener) { s.addEventListener("load", setup, false); } else { s.attachEvent("onload", setup); }
+
+    ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+  })();
+</script> 
+  <script type="text/javascript">
+	$.bigfoot(
+        {
+			numberResetSelector: ".post",
+			buttonMarkup: "<div class='bigfoot-footnote__container' aria-hidden=\"true\"> <button class=\"bigfoot-footnote__button\" id=\"{{SUP:data-footnote-backlink-ref}}\" data-footnote-number=\"{{FOOTNOTENUM}}\" data-footnote-identifier=\"{{FOOTNOTEID}}\" aria-hidden=\"true\" rel=\"footnote\" data-bigfoot-footnote=\"{{FOOTNOTECONTENT}}\"> <i class=\"fa fa-plus-circle\"></i> </button></div>"
+        }
+    );
+</script> 
+  <script type="text/javascript">
+$(document).ready(function() {
+	$(".post p a").attr("target","_blank");
+	$('.post p a[href*="//kottke.org"]').removeAttr("target");
+	$(".post p sup a").removeAttr("target");
+	$(".post .footnote a:last-of-type").removeAttr("target");
+	$(".quicklinks-fp-post a").attr("target","_blank");
+	$(".bling-bling a").attr("target","_blank");
+	$(".bling-job a").attr("target","_blank");
+	
+   $(".post p strong:contains('Update:')").each(function() {
+	    $( this ).addClass("post-update").html("Update" + ((typeof $( this ).attr('title') !== typeof undefined && $( this ).attr('title') !== false) ? "<span class='update-timestamp'>&nbsp;&middot;&nbsp; " + $( this ).attr("title") + "</span>" : ""));
+	  });
+    });
+</script> 
+  <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/790324/737040/css/fonts.css"> 
+  <link rel="stylesheet" href="/templates/2016/css/font-awesome-4.7.0/css/font-awesome.min.css"> 
+  <link rel="stylesheet" href="/templates/2016/css/main.css?v=16" type="text/css"> 
+  <link rel="stylesheet" href="/templates/2016/css/bigfoot-default.css" type="text/css"> 
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.kottke.org/main"> 
+  <link rel="alternate" type="application/json" href="http://feeds.kottke.org/json"> 
+ </head> 
+ <body id="kottke-org"> 
+  <div id="header">
+   <a href="/">kottke.org<span id="head-br"><br></span><span id="head-heart"> &nbsp;♥&nbsp; </span> <span id="head-sub">home of fine hypertext products</span></a>
+  </div> 
+  <div id="top-nav-wide">
+   <a href="/">home</a><a href="/about">about</a><a href="/everfresh">archives + tags</a><a href="/shop">shop</a><a href="/members">membership!</a>
+   <div id="follow">
+    <a href="https://twitter.com/kottke" aria-label="Follow kottke.org on Twitter" id="follow-twitter"><i class="fa fa-twitter"></i></a><a href="https://facebook.com/kottke.org" aria-label="Follow kottke.org on Facebook" id="follow-facebook"><i class="fa fa-facebook-square"></i></a><a href="http://bonus.kottke.org/" aria-label="Follow kottke.org on Tumblr" id="follow-tumblr"><i class="fa fa-tumblr-square"></i></a><a href="http://feeds.kottke.org/main" aria-label="Read kottke.org via RSS" id="follow-feed"><i class="fa fa-rss"></i></a>
+   </div>
+  </div> 
+  <div id="top-nav-medium">
+   <a href="/about">about</a><a href="/everfresh">archives</a><a href="/shop">shop</a><a href="/members">membership!</a>
+   <div id="follow">
+    <a href="https://twitter.com/kottke" aria-label="Follow kottke.org on Twitter" id="follow-twitter"><i class="fa fa-twitter"></i></a><a href="https://facebook.com/kottke.org" aria-label="Follow kottke.org on Facebook" id="follow-facebook"><i class="fa fa-facebook-square"></i></a><a href="http://bonus.kottke.org/" aria-label="Follow kottke.org on Tumblr" id="follow-tumblr"><i class="fa fa-tumblr-square"></i></a><a href="http://feeds.kottke.org/main" aria-label="Read kottke.org via RSS" id="follow-feed"><i class="fa fa-rss"></i></a>
+   </div>
+  </div> 
+  <div id="top-nav-narrow">
+   <a href="/about">about</a><a href="/everfresh">archives</a><a href="/members">members!</a>
+  </div> 
+  <div id="easel"> 
+   <h3 style="margin-bottom: 4rem;">kottke.org posts about burgers</h3> 
+   <ul class="related-tags"> 
+    <li><strong>See also...</strong></li>
+    <li><a href="/tag/food">food</a></li> 
+    <li><a href="/tag/restaurants">restaurants</a></li> 
+    <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    <li><a href="/tag/NYC">NYC</a></li> 
+    <li><a href="/tag/video">video</a></li> 
+    <li><a href="/tag/Burger%20King">Burger King</a></li> 
+    <li><a href="/tag/Kenji%20Lopez-Alt">Kenji Lopez-Alt</a></li> 
+    <li><a href="/tag/Dean%20Martin">Dean Martin</a></li> 
+    <li><a href="/tag/how%20to">how to</a></li> 
+    <li><a href="/tag/innout">innout</a></li> 
+    <li><a href="/tag/lists">lists</a></li> 
+    <li><a href="/tag/best%20of">best of</a></li> 
+   </ul> 
+   <h2><a href="/19/04/the-rise-of-the-fast-food-veggie-burger">The Rise of the Fast Food Veggie Burger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Apr 01, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Joining Carl’s Jr. and White Castle, <a href="https://www.nytimes.com/2019/04/01/technology/burger-king-impossible-whopper.html?/smid=linkedin">Burger King is adding a tastes-like-beef veggie burger to their menu</a>.</p> 
+    <blockquote>
+     <p>This week, Burger King is introducing a version of its iconic Whopper sandwich filled with a vegetarian patty from the start-up Impossible Foods.</p> 
+     <p>The Impossible Whopper, as it will be known, is the biggest validation — and expansion opportunity — for a young industry that is looking to mimic and replace meat with plant-based alternatives.</p>
+    </blockquote> 
+    <p>The roll-out will start in the chain’s St. Louis restaurants and then proceed nationwide if all goes well. Here’s a commercial in which hardcore BK fans can’t tell the Impossible Whopper from their beloved beef version:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/N9FED3jkNTo"></iframe></p> 
+    <p>As an increasingly conflicted omnivore, I would be perfectly happy if all low- to mid-end burgers were replaced by veggie clones — I don’t care that the Quarter Pounder I eat once every three months is beef…I just want it to taste like a Quarter Pounder — and then high-end burgers (the ones where you <em>can</em> tell the difference and you eat only rarely) were made from humanely raised beef for which consumers pay an appropriate price that accurately reflects <a href="https://en.wikipedia.org/wiki/Environmental_full-cost_accounting">the true-cost accounting</a> of their production. A meat burger that costs a dollar is just being paid for in other ways by someone or something else. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/advertising">advertising</a></li> 
+     <li><a href="/tag/Burger%20King">Burger King</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Impossible%20Foods">Impossible Foods</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-sidebar"> 
+    <div class="bling-title">
+     <a href="https://carbonads.net/" target="_blank">ads via Carbon</a>
+    </div> 
+    <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYICKJY&amp;placement=kottkeorg" id="_carbonads_js"></script> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/19/03/whats-eating-dan">What’s Eating Dan?</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 21, 2019</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>From America’s Test Kitchen and <a href="https://twitter.com/testcook">Dan Souza</a>, the editor-in-chief of Cook’s Illustrated, <a href="https://www.youtube.com/playlist?list=PLnbzopdwFrnaW_eQvwRna_NpP5A3az9m0">a YouTube series called What’s Eating Dan?</a> In each episode, Souza picks a different food — pizza, rice, salmon — shares some of the science involved, and then shows us the best way to cook it. For starters, I’d suggest the first episode on burgers and a more recent one on mushrooms:</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/WXZZj9vio5E"></iframe></p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-src="https://www.youtube.com/embed/XLPLCmwBLBY"></iframe> </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/cooking">cooking</a></li> 
+     <li><a href="/tag/Dan%20Souza">Dan Souza</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/science">science</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/17/05/shake-shack-releases-an-official-cookbook">Shake Shack releases an official cookbook</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; May 11, 2017</span>
+    </div> 
+   </div> 
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1400" height="855" border="0" alt="Anatomy of a ShackBurger" data-src="/plus/misc/images/anatomy-shack-burger.jpg"></p> 
+   <div class="post"> 
+    <p>Big news around these parts: the Shake Shack is <a href="https://www.amazon.com/exec/obidos/ASIN/0553459813/ref=nosim/0sil8">coming out with their first cookbook</a> next week. <a href="https://www.amazon.com/exec/obidos/ASIN/0553459813/ref=nosim/0sil8">Shake Shack: Recipes &amp; Stories</a> details how the Shake Shack came about and spills the beans with recipes for almost all of the food, burgers, chicken sandwiches, and fries included. According to <a href="https://www.eater.com/2017/5/10/15609808/shake-shack-cookbook-preview">Eater</a>, the recipes have been tweaked for the home cook:</p> 
+    <blockquote>
+     <p>Rosati shares almost all of the company’s recipes, though unfortunately he isn’t giving away any real secrets here. The processes have been adapted for the home cook, and Garutti told Eater that only “six people” in the world know the real recipe for Shake Shack’s signature sauce.</p> 
+     <p>The recipe in the book for Shack sauce is a mixture of Hellman’s, Dijon, Heinz, pickle juice, salt, and pepper. “We make our own from scratch,” Garutti says, but when he and Rosati first started testing recipes for the book they came to the conclusion that these weren’t recipes “most people would want to make at home,” because they were labor-intensive, “messy,” and time-consuming.</p>
+    </blockquote> 
+    <p>Immediate pre-order. See also <a href="http://aht.seriouseats.com/archives/2009/10/the-burger-lab-the-fake-shack-how-to-make-shake-shack-burger.html">Kenji’s Fake Shack burger recipe</a>.</p> 
+    <p><strong>Update:</strong> <a href="https://www.eater.com/2017/5/13/15629654/recipe-shake-shack-burger">Here’s the recipe for the ShackBurger and sauce from the book</a>. The ShackSauce recipe includes “&amp;frac14; teaspoon kosher dill pickling brine”, which is also the secret ingredient in my homemade tuna salad. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/books">books</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/16/09/in-n-out-burger-is-overrated">In-N-Out Burger is overrated</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Sep 30, 2016</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>While I don’t quite agree, I did enjoy reading Andy Kryza’s take on In-N-Out: <a href="https://www.thrillist.com/eat/nation/in-n-out-burger-menu-is-disappointing">In-N-Out Is Crushingly Disappointing</a>.</p> 
+    <blockquote>
+     <p>This is your basic, salty, flat-grilled burger that you can get absolutely anywhere. If somebody gave me a blind taste-test between this and most other fast-food burgers, I might be able to distinguish In-N-Out, but it’s not guaranteed. It’s highly generic, as if culled together from a series of stock photos: bun, burger, watery lettuce, and a slice of tomato. Sure, you can get it Animal Style, but be honest: Animal Style sauce tastes like Whole Foods’ version of Big Mac sauce, except not as good.</p>
+    </blockquote> 
+    <p>And as Anil Dash said <a href="https://twitter.com/anildash/status/781691703577219072">on Twitter</a>:</p> 
+    <blockquote>
+     <p>it’s the best burger for people who eat a burger for the vegetables</p>
+    </blockquote> 
+    <p>They are in different leagues — an In-N-Out cheeseburger is $2.35 while a Shackburger goes for $5.29 — so a comparison is unfair, but in my mind, that extra $3 at the Shack buys you a lot of flavor. Still, as Kryza says, next time I’m in CA, I’m gonna get myself a burger at In-N-Out. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Andy%20Kryza">Andy Kryza</a></li> 
+     <li><a href="/tag/Anil%20Dash">Anil Dash</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/In-N-Out">In-N-Out</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/15/07/an-appreciation-of-the-shackburger">An appreciation of the ShackBurger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 30, 2015</span>
+    </div> 
+   </div> 
+   <p class="widescreen"><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="1280" height="816" border="0" alt="Shack Burger" data-src="/plus/misc/images/shack-burger.jpg"></p> 
+   <div class="post"> 
+    <p>From The Message is Medium Rare, <a href="http://www.themessageismediumrare.com/burgers/shakeshack">an appreciation of the ShackBurger</a>, “a straightforward, honest-to-goodness burger”. It includes a review of the typography used by the restaurant:</p> 
+    <blockquote>
+     <p>These three typefaces artfully express the ethos of both the burger and the brand. Neutraface is the bun: sturdy, reliable and architectural. Futura is the patty: basic but bold. Galaxie is the lettuce: wavy, quirky and fresh. To the layperson this comparison may seem like a stretch, but designers know they are purposefully expressive.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/15/07/david-changs-burger-manifesto">David Chang’s burger manifesto</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 16, 2015</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>David Chang has an opinion — several opinions really — <a href="http://luckypeach.com/my-burger-manifesto/">about the proper burger</a>.</p> 
+    <blockquote>
+     <p>My ideal burger is bun, cheese, burger. Sometimes bacon. Ketchup on the side, so I can control it. Pickles — yes! Obviously. And the cheese thing has to be very clear: American cheese only. American cheese was invented for the hamburger. People talk about it being processed and artificial and not real cheese — you know what makes it real? When you put it on a hamburger.</p>
+    </blockquote> 
+    <p>But much of his burger manifesto is about what a burger <em>shouldn’t</em> be.</p> 
+    <blockquote>
+     <p>Grass-fed beef does not make burgers, in my opinion. It’s too lean and the fat content is not evenly distributed, so it can get a little mealy. But the dumbest burger in the world is the wagyu bullshit. It’s like 70 percent fat content — it’s disgusting. Would you eat a ground bacon burger? That’s what you’re doing with a wagyu burger. Or the idiots that have “kobe beef wagyu sliders with like a trio of ketchup” on their menu — that drives me insane. The inventor of the kobe beef slider is right next to the inventor of aluminum siding in the Dumbest Thing I’ve Ever Seen Hall of Fame. And you know what’s even more stupid? The fucking customer that buys it because he’s like, Oooohh, kobe, and it’s like $21. God have mercy on their souls.</p>
+    </blockquote> 
+    <p>I love that Chang loves White Castle; I do too<sup id="fnref:1436912206"><a href="#fn:1436912206" rel="footnote">1</a></sup> and make a trip to the one in Hell’s Kitchen about once a month without ever telling another living soul I do so. I agree with most of the rest of his list, <sup id="fnref:1436913738"><a href="#fn:1436913738" rel="footnote">1</a></sup> but would add one thing: no super-thick burgers, aka most burgers at fancy restaurants. They are too difficult to eat and the massive patty throws everything out of proportion and you end up with a mouthful of burger with very little of anything else. Blech. Balance, people!</p> 
+    <ol>
+     <li class="footnote" id="fn:1436912206"><p>I used to go to White Castle all the time with my dad and my sister when I was a kid, back when those sliders were 25¢ apiece. This was the early/mid 80s…there was no chicken sandwich or anything on the menu. I don’t even remember cheese being an option.<a href="#fnref:1436912206" title="return to article">↩</a></p></li> 
+     <li class="footnote" id="fn:1436913738"><p>Especially the “I do not like a burger with a bunch of shit on it”, although one of my current favorite burgers, <a href="http://www.eatthisny.com/2015/05/07/dish-of-the-week/dish-of-the-week-fedora-burger-at-bar-sardine/">the Fedora burger at Bar Sardine</a>, breaks that rule with sauce, cucumbers, and shoestring fries. Love that smashed bun. (P.S. My all-time fave burger, besides the ones I make at home, is the ShackBurger.)<a href="#fnref:1436913738" title="return to article">↩</a></p></li> 
+    </ol> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/David%20Chang">David Chang</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/White%20Castle">White Castle</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/14/08/custom-burgers-at-home">Custom burgers at home</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Aug 28, 2014</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Advice from Tom Mylan, The Meat Hook’s head butcher, <a href="http://firstwefeast.com/eat/guide-to-burger-blends-with-tom-mylan/">about how to create your own custom burger blend</a> for top notch burgers at home.</p> 
+    <blockquote>
+     <p>Don’t believe the “bedazzled blend” burger hype. Using fancy cuts of beef is not important and kind of a bullshit move, according to Mylan. What is important is making sure the meat is high-quality and comes from mature animals, and that your blend has the right fat content.</p> 
+     <p>Use cheaper cuts of beef from harder-working muscles, like chuck or round. Why? These cuts have more myoglobin, Mylan says, and myoglobin is what gives beef its “beefy” flavor and red color. Each cut will contribute its own flavor and textural nuances, and you can play around with different cuts to bolster the flavors you prefer.</p>
+    </blockquote> 
+    <p>And holy cow! (Ahem.) He suggests using <a href="http://www.amazon.com/exec/obidos/ASIN/B00BP1J6OE/ref=nosim/0sil8">a hamburger patty maker</a>, which I didn’t even know existed. $13! I’m totally getting one and trying this. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Tom%20Mylan">Tom Mylan</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/14/07/the-true-cost-of-a-cheeseburger">The true cost of a cheeseburger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 22, 2014</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Mark Bittman on <a href="http://www.nytimes.com/2014/07/16/opinion/the-true-cost-of-a-burger.html">the true cost of producing a hamburger</a>, after accounting for <a href="http://en.wikipedia.org/wiki/Externality">externalities</a> like carbon generation and obesity.</p> 
+    <blockquote>
+     <p>Cheeseburgers are the coal of the food world, with externalities in spades; in fact it’s unlikely that producers of cheeseburgers bear the full cost of any aspect of making them.</p>
+    </blockquote> 
+    <p>This made me think of <a href="http://www.worldchanging.com/archives/005677.html">something I wrote for Worldchanging</a> several years ago about a True Cost rating:</p> 
+    <blockquote>
+     <p>Wealth doesn’t just magically materialize into your bank account. It comes from the ground, human effort, the flesh of animals, the sun, and the atom. The global economy is driven by nature, and yet it’s not usually found on the accountant’s balance sheet. Perhaps it should be. I’d like to know the true cost of the stuff I buy. Embodied energy and carbon footprint calculations are a good start, but it would be nice if the product itself came with a True Cost number or rating, like the nutritional information on a cereal box or the Energy Star rating on a refrigerator.</p> 
+     <p>When True Cost is factored in, conflict diamonds become a morally expensive choice to make when they’re fueling turmoil in the world. Likewise clothing made in sweatshops. Organic tomatoes flown in from Chile may be less expensive at the register, but how much carbon dioxide was released into the atmosphere flying/driving them to your table? What’s the energy cost of living in the suburbs compared to living downtown? Do the people who made the clock hanging on my wall get paid a fair wage and receive healthcare? Just how bad for the environment is the laptop on which I’m typing?</p>
+    </blockquote> 
+    <p>(via <a href="http://www.subtraction.com/2014/07/17/calculating-the-true-cost-of-a-cheeseburger/">subtraction</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/economics">economics</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Mark%20Bittman">Mark Bittman</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/14/04/the-all-crust-hamburger">The all-crust hamburger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Apr 01, 2014</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Kenji Lopez-Alt and the folks at the Harlem Shake restaurant <a href="http://www.seriouseats.com/2014/03/the-food-lab-maximize-flavor-by-ultra-smashin.html">have invented a burger that’s all delicious brown crust</a>.</p> 
+    <blockquote>
+     <p>See, by placing a ball of meat on a hot, un-oiled griddle and smashing it down firmly into a flat, thin disk, you greatly increase the contact points between the meat and the griddle, which in turn increases the Maillard reaction. That’s the series of chemical reactions that creates the rich brown crust that makes our steaks and burgers taste so freaking good. Maximum crust = maximum flavor = maximum craving.</p> 
+     <p>I’ve already discussed the basic ins and outs of smashed burgers in the past, but after writing that article, I found myself wondering, what if I were to take this to the extreme? Is there a way I can pack even more flavor into a burger?</p> 
+     <p>Spoiler alert: the answer is a big fat (or should I say short smashed?) yes.</p>
+    </blockquote> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Kenji%20Lopez-Alt">Kenji Lopez-Alt</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/13/09/the-ernest-hemingway-burger">The Ernest Hemingway burger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Sep 19, 2013</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Ernest Hemingway liked a good burger and had a specific recipe he wanted his staff to use when preparing meals. Using his instructions, Cheryl Lu-Lien Tan <a href="http://www.theparisreview.org/blog/2013/09/16/hemingways-hamburger/">recently recreated the Hemingway burger</a>.</p> 
+    <blockquote>
+     <p>Fingers deep, I kneaded. Fighting the urge to be careless and quick, I kept the pace rhythmic, slow. Each squeeze, I hoped, would gently ease the flavors — knobby bits of garlic, finely chopped capers, smatterings of dry spices — into the marbled mound before me.</p> 
+     <p>I had made burgers before, countless times on countless evenings. This one was different; I wasn’t making just any burger — I was attempting to recreate Hemingway’s hamburger. And it had to be just right.</p>
+    </blockquote> 
+    <p>Surprisingly, with 11 different ingredients, Hemingway’s burger is not as stripped down as his prose. For a more minimalist burger, you have to turn <a href="http://kottke.org/11/07/dean-martins-burger-recipe">to Dean Martin</a>:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="400" height="625" alt="Dean Martin Burger" data-src="/plus/misc/images/dean-martin-burger.jpg"></p> 
+    <p>Frank Sinatra’s is perhaps even easier:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="400" height="633" border="0" alt="Sinatra Burger" data-src="/plus/misc/images/sinatra_burger.jpg"></p> 
+    <p>One thing is for sure: none of these gentlemen would cotton to the idea of the <a href="http://www.thedailybeast.com/articles/2013/08/09/ramen-burger-s-inventor-talks-about-the-food-craze-eclipsing-the-cronut.html">ramen burger</a>, <a href="http://umamimart.com/2013/09/motoism-ramen-burger/">homemade</a> or no. (via <a href="http://www.openculture.com/2013/09/ernest-hemingways-favorite-hamburger-recipe.html">open culture</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/Cheryl%20Lu-Lien%20Tan">Cheryl Lu-Lien Tan</a></li> 
+     <li><a href="/tag/Dean%20Martin">Dean Martin</a></li> 
+     <li><a href="/tag/Ernest%20Hemingway">Ernest Hemingway</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Frank%20Sinatra">Frank Sinatra</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/12/11/mini-cheeseburger-kit-takes-the-fast-and-food-out-of-fast-food">Mini cheeseburger kit takes the “fast” and “food” out of fast food</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://spavis.tumblr.com/">Sarah Pavis</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Nov 21, 2012</span>
+    </div> 
+   </div> 
+   <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allowfullscreen data-src="https://www.youtube.com/embed/g8gJOCwBuFc"></iframe></p> 
+   <div class="post"> 
+    <p>While I’m not sure I’d call it food, what this kit produces is apparently edible. According to <a href="https://www.youtube.com/watch?v=g8gJOCwBuFc">the YouTube notes</a>: </p> 
+    <blockquote>
+     <p>No artificial colours. No preservatives. 96 calories. </p>
+    </blockquote> 
+    <p>…Yum</p> 
+    <p>(thx <a href="http://twitter.com/chrisoverzero">@chrisoverzero</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/12/07/andy-warhol-eating-a-hamburger">Andy Warhol eating a hamburger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 10, 2012</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>This is a five-minute video of Andy Warhol eating a Burger King hamburger accompanied by Heinz ketchup.</p> 
+    <p class="widescreen embedded"><iframe width="100%" src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" frameborder="0" allowfullscreen data-src="https://www.youtube.com/embed/Ejr9KBQzQPM?rel=0"></iframe></p> 
+    <p>The scene is part of a film done by Jorgen Leth called 66 scenes from america.</p> 
+    <blockquote>
+     <p>Leth had his assistant buy some burgers and directly advised him to buy some in halfway neutral packaging as Leth was afraid that Warhol might reject some brands (Warhol always had an obsession with some of his favorite brands).</p> 
+     <p>So Andy Warhol finally did arrive at the studio, of course along with his bodyguards, and when he saw the selection of burgers the assistant had brought he asked “Where is the McDonald’s?” and Leth — slightly in panic — was immediately like “I thought you would maybe not like to identify…” and Warhol answered “no that is the most beautiful”. Leth offered to let his assistant quickly run to McDonald’s but Warhol refused like “No, never mind, I will take the Burger King.”</p>
+    </blockquote> 
+    <p>(via <a href="http://www.bonappetit.com/blogsandforums/blogs/badaily/2012/07/how-andy-warhol-eats-a-history.html">bon appetit</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/Andy%20Warhol">Andy Warhol</a></li> 
+     <li><a href="/tag/art">art</a></li> 
+     <li><a href="/tag/Burger%20King">Burger King</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Heinz">Heinz</a></li> 
+     <li><a href="/tag/Jorgen%20Leth">Jorgen Leth</a></li> 
+     <li><a href="/tag/video">video</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/11/12/i-cheeseburger">I, Cheeseburger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Dec 05, 2011</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>In thinking about making meals completely from scratch, Waldo Jaquith realizes that <a href="http://waldo.jaquith.org/blog/2011/12/impractical-cheeseburger/">making a simple cheeseburger would have been nearly impossible before the twentieth century</a>.</p> 
+    <blockquote>
+     <p>Tomatoes are in season in the late summer. Lettuce is in season in in the fall. Mammals are slaughtered in early winter. The process of making such a burger would take nearly a year, and would inherently involve omitting some core cheeseburger ingredients. It would be wildly expensive-requiring a trio of cows-and demand many acres of land. There’s just no sense in it.</p>
+     <p>A cheeseburger cannot exist outside of a highly developed, post-agrarian society. It requires a complex interaction between a handful of vendors-in all likelihood, a couple of dozen-and the ability to ship ingredients vast distances while keeping them fresh.</p>
+    </blockquote> 
+    <p>(via <a href="http://stellar.io/">stellar</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Waldo%20Jaquith">Waldo Jaquith</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/11/07/dean-martins-burger-recipe">Dean Martin’s burger recipe</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 11, 2011</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>From <a href="http://www.amazon.com/exec/obidos/ASIN/B000I3CG1A/ref=nosim/0sil8">The Celebrity Cookbook</a> (1967), Dean Martin’s recipe for hamburgers:</p> 
+    <p><img src="data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=" width="400" height="625" alt="Dean Martin Burger" data-src="/plus/misc/images/dean-martin-burger.jpg"></p> 
+    <p>No ice. TV tray. Classy. (via <a href="https://twitter.com/#!/LettersOfNote">@lettersofnote</a>) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/Dean%20Martin">Dean Martin</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/10/07/make-your-own-in-n-out-burger-at-home">Make your own In-N-Out Burger at home</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 23, 2010</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Today in the excellent Food Lab series, <a href="http://aht.seriouseats.com/archives/2010/07/the-burger-lab-how-to-make-an-in-n-out-double-double-animal-style.html">Kenji Lopez-Alt reverse engineers the In-N-Out burger</a>.</p> 
+    <blockquote>
+     <p>According to the In-N-Out nutrition guideline, replacing the Spread with ketchup results in a decrease of 80 calories per sandwich. I know that ketchup has about 15 calories per tablespoon, so If we estimate that an average sandwich has about 2 tablespoons of sauce on it (that’s the amount that’s inside a single packet), then we can calculate that the Spread has got about 55 calories per tablespoon (110 calories in two tablespoons of Spread minus 30 calories in 2 tablespoons of ketchup = 80 calories difference in the sandwich). With me so far?</p>
+     <p>It just so happens that relish has about the same caloric density as ketchup (15 calories per tablespoon), and that mayonnaise has a caloric density of 80 calories per tablespoon. Using all of this information and a bit of 7th grade algebra, I was able to quickly calculate that the composition of the Spread is roughly 62 percent mayo, and 38 percent ketchup/relish blend.</p>
+    </blockquote> 
+    <p><a href="http://www.seriouseats.com/recipes/2010/07/in-n-outs-double-double-animal-style-burger-recipe.html">Here’s the recipe</a> to make your own at home. Pairs well with <a href="http://aht.seriouseats.com/archives/2010/05/the-burger-lab-how-to-make-perfect-mcdonalds-style-french-fries.html">make-at-home McDonald’s french fries</a>. See also <a href="http://aht.seriouseats.com/archives/2009/10/the-burger-lab-the-fake-shack-how-to-make-shake-shack-burger.html">make-at-home Shake Shack burger</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/how%20to">how to</a></li> 
+     <li><a href="/tag/In-N-Out%20Burger">In-N-Out Burger</a></li> 
+     <li><a href="/tag/Kenji%20Lopez-Alt">Kenji Lopez-Alt</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/09/10/the-shake-shack-burger-recipe">The Shake Shack burger recipe</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 19, 2009</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>With a bit of research and social engineering, an enterprising burger enthusiast has figured out <a href="http://aht.seriouseats.com/archives/2009/10/the-burger-lab-the-fake-shack-how-to-make-shake-shack-burger.html">the recipe for the infamous Shake Shack burger</a>.</p> 
+    <p>Exclamation point interlude: !!!!!!!!!!!!!</p> 
+    <blockquote>
+     <p>Upon tasting it, my immediate thoughts are mayo, ketchup, a little yellow mustard, a hint of garlic and paprika, perhaps a touch of cayenne pepper, and an elusive sour quality that I can’t quite pinpoint. It’s definitely not just vinegar or lemon juice, nor is does it have the cloying sweetness of relish. Pickle juice? Cornichon? Some other type of vinegar? I can’t figure it out. This was going to take a little more effort.</p>
+    </blockquote> 
+    <p>Totally doing this for dinner one of these nights. We’ll probably cheat on the ground beef…we’ve got some Pat LaFrieda patties stockpiled in the freezer. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/how%20to">how to</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/09/09/hamburger-style-guide">Hamburger style guide</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Sep 18, 2009</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>A Hamburger Today presents <a href="http://aht.seriouseats.com/archives/2009/09/a-guide-to-glossary-of-regional-american-burger-cheeseburger-styles-and-cooking-methods.html">a guide to all the different styles of hamburgers and cheeseburgers out there</a>, including sliders, the pub burger, and guberburgers (a regional burger featuring melted peanut butter).</p> 
+    <p>See also <a href="http://www.seriouseats.com/2008/07/america-regional-hot-dog-styles-coneys-half-smokes-reds-whites.html">America’s Regional Hot Dog Styles</a> and <a href="http://slice.seriouseats.com/archives/2008/01/a-list-of-regional-pizza-styles.html">A List of Regional Pizza Styles</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/08/07/not-too-much-not-too-little">Not too much, not too little</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 28, 2008</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Four-star chef Eric Ripert checked out the burgers at McDonald’s and Burger King to use as a pattern for a burger at his new D.C. restaurant. Part of what he learned is <a href="http://www.gourmet.com/restaurants/2008/07/ripert_burger">proportion is everything</a>.</p> 
+    <blockquote>
+     <p>Just looking at the basic burgers at each of these chains — particularly the Big Mac — showed me a couple of very key things: First of all, the burgers are a perfect size. You can grab them in both hands, and they’re never too tall or too wide to hold on to. And the toppings are the perfect size, too — all to scale, including the thickness of the tomatoes, the amount of lettuce, etc. In terms of the actual flavors, they taste okay, but you can count on them to be consistent; you always know what you’re going to get.</p>
+    </blockquote> 
+    <p>Ripert’s findings dovetail quite nicely with <a href="http://kottke.org/05/10/the-url-of-sandwich">my theory of sandwichcraft</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/ericripert">ericripert</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/07/03/first-shack-burger-of-the-season-yum">First Shack burger of the season. Yum.</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 19, 2007</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://www.flickr.com/photos/slice/427095152/">First Shack burger of the season</a>. Yum. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/kottke">kottke</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/06/07/shake-shack-vs-innout-smackdown">Shake Shack vs. In-N-Out smackdown</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 18, 2006</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Here it is, the awful truth. After sampling <a href="http://www.in-n-out.com/">In-N-Out Burger</a> twice this past weekend (a cheeseburger with raw onion and, 4 days later, a Double Double w/ no onions) and having had several <a href="http://shakeshacknyc.com">Shack Burgers</a> this year (my most recent one was a couple of weeks ago), an adequate comparison between the two can be made. The verdict?</p> 
+    <p>The Shake Shack burger wins in a landslide. It’s more flavorful, features a better balance of ingredients, and a yummier bun. On the french fries front, In-N-Out’s fresh-cut fries get the nod.</p> 
+    <p>Courtesy of <a href="http://mena.vox.com/">Mena</a>, something to keep in mind: a cheeseburger at In-N-Out is $1.85 while a similarly appointed Shack Burger is $4.38, almost 2.5 times as much. SS french fries are nearly twice the price of In-N-Out fries. The burger comparison is an unfair one because, despite its location and style, Shake Shack is a restaurant and In-N-Out is a fast food joint. That the burgers are even close enough to compare — and make no mistake, I still love the In-N-Out burger — says a great deal about In-N-Out. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/innout">innout</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/06/03/while-not-exactly-a-starred-review-bruni">Bruni reviews Shake Shack</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 28, 2006</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>While not exactly <a href="http://flickr.com/photos/jkottke/115917347/">a starred review</a>, <a href="http://dinersjournal.blogs.nytimes.com/?p=34">Bruni ruminates on the Shake Shack in his blog</a> and is also <a href="http://dinersjournal.blogs.nytimes.com/?p=35">on a more general burger warpath</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Frank%20Bruni">Frank Bruni</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/06/03/i-did-some-important-investigatory-journalism-today">Opening day at Shake Shack</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 21, 2006</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>I did some important investigatory journalism today: <a href="http://flickr.com/photos/jkottke/115917347/">burgers at the Shake Shack on opening day</a>. Journalism has never been so delicious. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/journalism">journalism</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+     <li><a href="/tag/Shake%20Shack">Shake Shack</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/06/03/the-gateway-grizzlies-are-introducing-a-new">Luther burger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 14, 2006</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://www.gatewaygrizzlies.com/news/?id=2723">The Gateway Grizzlies are introducing a new menu item at their ballpark: a bacon cheeseburger with <i>Krispy Kreme donuts</i> as a bun</a>.</p> 
+    <p><b>Update:</b> The burger w/donut buns is not a new invention…it’s commonly called <a href="http://www.snopes.com/food/origins/luther.asp">the “Luther Burger” after Luther Vandross</a>. Double true. (thx, scott) </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/baseball">baseball</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/Krispy%20Kreme">Krispy Kreme</a></li> 
+     <li><a href="/tag/Luther%20Vandross">Luther Vandross</a></li> 
+     <li><a href="/tag/sports">sports</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/06/03/burgerclub-is-a-message-board-for-hambuger">BurgerClub</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Mar 02, 2006</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://www.jahanbini.com/BurgerClub/">BurgerClub is a message board for hambuger enthusiasts</a>. NYC-centric, but includes other locales. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/NYC">NYC</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/06/02/if-i-were-told-that-i-had">Ode to a cheeseburger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Feb 16, 2006</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>“If I were told that I had one last meal before I died and then I was given the choice between a super chic 15 course degustation meal cooked by Thomas Keller, Tetsuya Wakuda, Ferran Adria and Joel Robuchon and a perfect cheeseburger, the choice would be easy. <a href="http://www.chubbyhubby.net/2006/02/cheeseburger-cheeseburger-cheeseburger.html">I’d pick the burger without a moment’s hesitation</a>.” </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/05/10/a-list-of-excellent-hamburgers-to-be">Best burgers in NYC</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Oct 13, 2005</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://bigpicture.typepad.com/writing/2005/09/best_burgers_in.html">A list of excellent hamburgers to be found in NYC</a>. For more on NYC burgers, check out <a href="http://www.ahamburgertoday.com/">A Hamburger Today</a>. I still maintain that NYC isn’t a burger town, although with all the recent activity, it may be one soon. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/best%20of">best of</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/lists">lists</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/05/08/who-knew-the-history-of-the-hambuger">History of the hamburger</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Aug 19, 2005</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p>Who knew the <a href="http://www.ahamburgertoday.com/archives/2005/08/the_history_of.php">history of the hambuger</a> was so convoluted? Here’s what we know: somewhere between Kublai <a href="http://www.khaaan.com/">Khan</a> and the Big Mac, someone somewhere invented it. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/history">history</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/05/07/20-hamburgers-you-must-eat-before-you-die">20 hamburgers you must eat before you die</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; Jul 25, 2005</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://men.style.com/gq/features/full?id=content_2526">20 hamburgers you must eat before you die</a>. That In-N-Out isn’t on here almost got this link disqualified from posting, but since they don’t seem to have any other chains on here, I’ll let it slide. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/best%20of">best of</a></li> 
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/innout">innout</a></li> 
+     <li><a href="/tag/lists">lists</a></li> 
+     <li><a href="/tag/restaurants">restaurants</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+   <h2><a href="/05/05/a-weblog-about-hamburgers">A weblog about hamburgers</a></h2> 
+   <div class="meta"> 
+    <div class="author">
+     <span class="pre-name">posted by </span><a href="http://www.kottke.org">Jason Kottke</a> <span class="timestamp"><i class="fa fa-clock-o" aria-hidden="true" style="font-weight:300;"></i>&nbsp; May 16, 2005</span>
+    </div> 
+   </div> 
+   <div class="post"> 
+    <p><a href="http://www.ahamburgertoday.com/">A weblog about hamburgers</a>. </p> 
+    <div class="entry-tags-title">
+     More about...
+    </div> 
+    <ul class="entry-tags">
+     <li><a href="/tag/burgers">burgers</a></li> 
+     <li><a href="/tag/food">food</a></li> 
+     <li><a href="/tag/weblogs">weblogs</a></li> 
+    </ul> 
+   </div> 
+   <div class="post-spacer-hr"></div> 
+  </div> 
+  <div class="spacer"></div> 
+  <div id="footer"> 
+   <div id="bottom-nav-wide">
+    <span id="loving-you">kottke.org, loving you since 1998</span><a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives + tags</a><a href="/shop">shop</a><a href="/members">membership!</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+   <div id="bottom-nav-medium">
+    <a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives</a><a href="/shop">shop</a><a href="/members">membership!</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+   <div id="bottom-nav-narrow">
+    <a href="/" title="home">home</a><a href="/about" title="about">about</a><a href="/everfresh" title="archives">archives</a><a href="/tag/burgers" title="hamburger menu" aria-hidden="true"><i class="fa fa-bars"></i></a>
+   </div> 
+  </div> 
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-871179-1', 'auto');
+  ga('send', 'pageview');
+
+</script>  
+ </body>
+</html>

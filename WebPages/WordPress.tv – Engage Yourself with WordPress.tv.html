@@ -1,0 +1,452 @@
+<!doctype html><!--[if IE 6]>    <html class="ie6" lang="en"> <![endif]--><!--[if IE 7]>    <html class="ie7" lang="en"> <![endif]--><!--[if IE 8]>    <html class="ie8" lang="en"> <![endif]--><!--[if gt IE 8]><!-->
+<html lang="en"> <!--<![endif]--> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-P24PF4B');</script> 
+  <link rel="alternate" type="application/rss+xml" title="WordPress.tv RSS Feed" href="https://wordpress.tv/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="WordPress.tv Blog RSS Feed" href="https://blog.wordpress.tv/feed/"> 
+  <link rel="profile" href="http://gmpg.org/xfn/11"> 
+  <link rel="pingback" href="https://wordpress.tv/xmlrpc.php"> 
+  <script type="text/javascript" src="https://use.typekit.com/mgi6udv.js"></script> 
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script> 
+  <title>WordPress.tv – Engage Yourself with WordPress.tv</title> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly93b3JkcHJlc3MudHY%3D"
+		+ "&wpcomid=5089392"
+		+ "&time=1585347509";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="dns-prefetch" href="//wptv.wordpress.com"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s1.wp.com/_static/??-eJylkutOwzAMhV+ILOqmlvID8SxpaopHLlXstPTtcW8wbdIQ2p8oOfL5juVYj72yMTAE1j6r3uUOA+mxt9Er8uhgunodLNGTSAqDdbkF0iLoFol146L9VA6bZNKkiScHB4/hx7EH7SldlmcDqVOLk/QZuDczwkwxs+oSthvm34hkGENHf9jfs3OKkEFBi7Nhm4CuTsXpuTq+aBikXnw5cBvHsMY8TN27ZPTgMMDDQGlLxEhMW4fLhwwI4wPQleeEdAm9Vm8CLvbIxgSi+97wXOElyYADL2X3bCO2HfC6WetdMXzdtyw72jR9AiIlp8fsFX9IFt34Vlmb2orKw/F3/G/+tSjrsijLuqjO36xeKDo=?cssminify=yes" type="text/css" media="all"> <!--[if IE 6]>
+<link rel='stylesheet' id='wptv-ie-css'  href='https://s2.wp.com/wp-content/themes/a8c/wptv2/ie6.css?m=1412160810h&#038;ver=5.4-RC1-47426' media='all' />
+<![endif]--> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s2.wp.com/_static/??-eJx9jlEOwiAQRC8kbrCC9cN4FsAtRRdoyjbG20uTGjU1/s0kb14G7oNwOTEmhjiJgSYfUgGPWVB2hkNOX0V0ZMK4daVs4Pd0REvZ1+ihUh/138i4WW7N+E4r/MV2E5EogVHgJXAVLxbQjWwOencET9mayvCDsEDh+tyBJZNuKyn3GCvT75fRDJzjSapWSaVaqa9PA1RqZA==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??-eJx9jdEKwjAMRX/Irsjo8EX8lq7LSkub1CZ1+PfWoS8yhEAI99wcvRUV0KW2AOvY596gPj9riHzS/wCVg69WYMgBv7AjFEB5s4VYMjBbDwdppjkkUI2hdgCla1Y6UvK20hzBye+TkpoPyPoRFiBtmUH2wn6X2s29ccvXszGX0UyTGeMLpChZDA=="></script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/wp-content/mu-plugins/highlander-comments/style.css?m=1530132353h&amp;cssminify=yes" type="text/css" media="all"> <!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' media='all' />
+<![endif]--> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://wptv.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="shortlink" href="https://wp.me/llYY"> 
+  <style>
+		@font-face {
+			font-family: Recoleta;
+			src: url('https://s1.wp.com/i/fonts/recoleta/400.woff2')
+		}
+	</style> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="website"> 
+  <meta property="og:title" content="WordPress.tv"> 
+  <meta property="og:description" content="Engage Yourself with WordPress.tv"> 
+  <meta property="og:url" content="https://wordpress.tv/"> 
+  <meta property="og:site_name" content="WordPress.tv"> 
+  <meta property="og:image" content="https://s0.wp.com/i/blank.jpg"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:creator" content="@WordPressTV"> 
+  <meta name="twitter:site" content="@WordPressTV"> 
+  <meta name="twitter:card" content="player"> 
+  <meta name="twitter:player" content="https://videopress.com/v/NRBIbh7b?autoplay=0"> 
+  <meta name="twitter:player:width" content="560"> 
+  <meta name="twitter:player:height" content="315"> 
+  <meta name="twitter:player:stream" content="https://wptv.files.wordpress.com/2020/03/video-2dc0267797.mp4"> 
+  <meta name="twitter:player:stream:content_type" content="video/mp4"> 
+  <meta property="og:video:type" content="video/mp4"> 
+  <meta property="og:video" content="https://wptv.files.wordpress.com/2020/03/video-2dc0267797.mp4"> 
+  <meta property="og:video:secure_url" content="https://wptv.files.wordpress.com/2020/03/video-2dc0267797.mp4"> 
+  <meta name="twitter:app:name:iphone" content="WordPress"> 
+  <meta name="twitter:app:id:iphone" content="335703880"> 
+  <meta name="twitter:app:name:ipad" content="WordPress"> 
+  <meta name="twitter:app:id:ipad" content="335703880"> 
+  <meta name="twitter:app:name:googleplay" content="WordPress"> 
+  <meta name="twitter:app:id:googleplay" content="org.wordpress.android"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="shortcut icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="icon" type="image/x-icon" href="https://s1.wp.com/i/favicon.ico" sizes="16x16 24x24 32x32 48x48"> 
+  <link rel="apple-touch-icon" href="https://s2.wp.com/i/webclip.png"> 
+  <link rel="openid.server" href="https://wordpress.tv/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://wordpress.tv/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://wordpress.tv/osd.xml" title="WordPress.tv"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <link rel="canonical" href="https://wordpress.tv/">
+  <meta name="application-name" content="WordPress.tv">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-tooltip" content="Engage Yourself with WordPress.tv">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://wordpress.tv/feed/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Engage Yourself with WordPress.tv"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&amp;csblog=llYY&amp;cscache=6&amp;csrev=3"> 
+ </head> 
+ <body class="home blog customizer-styles-applied highlander-enabled highlander-light"> 
+  <noscript>
+   <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24PF4B" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript> 
+  <div id="page"> 
+   <div id="header"> 
+    <div class="sleeve"> 
+     <h1><a rel="home" href="https://wordpress.tv/"><img src="https://s2.wp.com/wp-content/themes/a8c/wptv2/i/wptv-2x.png" alt="WordPress.tv" height="40" width="210"></a></h1> 
+     <form id="searchform" name="searchform" method="get" action="https://wordpress.tv/"> <label for="searchbox" class="screen-reader-text">Search WordPress.tv</label> 
+      <input type="search" placeholder="Search WordPress.tv" id="searchbox" name="s" value=""> 
+      <input type="submit" value="Search"> 
+     </form> 
+     <div id="menu"> 
+      <div class="menu-primary-container">
+       <ul id="menu-primary" class="menu">
+        <li id="menu-item-10486" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10486"><a href="https://wordpress.tv/category/wordcamptv/">WordCamps</a></li> 
+        <li id="menu-item-43586" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-43586"><a href="https://wordpress.tv/category/wordpress-related-events/">Related Events</a></li> 
+        <li id="menu-item-10487" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10487"><a href="https://wordpress.tv/category/how-to/">How To</a></li> 
+        <li id="menu-item-39536" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39536"><a href="https://wordpress.tv/get-involved/">Get Involved</a></li> 
+        <li id="menu-item-10488" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10488"><a href="http://blog.wordpress.tv">Blog</a></li> 
+       </ul>
+      </div> 
+     </div> 
+    </div><!-- .sleeve --> 
+   </div><!-- #header --> 
+   <div class="wptv-hero group"> 
+    <div class="container"> 
+     <div class="main-video"> <iframe width="575" height="324" src="https://videopress.com/embed/yFCmLMGL?hd=1&amp;autoPlay=0&amp;permalink=0&amp;loop=0" frameborder="0" allowfullscreen></iframe>
+      <script src="https://v0.wordpress.com/js/next/videopress-iframe.js?m=1435166243"></script> 
+      <h3> <a href="https://wordpress.tv/2019/10/08/the-history-of-wordpress-in-four-minutes/" rel="bookmark" class="video-title">The History of WordPress (in four&nbsp;minutes)</a> <strong class="video-event"><a href="https://wordpress.tv/event/wordcamp-para-desarrolladores-sevilla-2019/">WordCamp para desarrolladores Sevilla 2019</a></strong> </h3> 
+     </div><!-- .main-video --> 
+     <div class="secondary-videos"> 
+      <h3> WordCampTV <a href="https://wordpress.tv/category/wordcamptv/" class="view-more">More →</a> </h3> 
+      <ul> 
+       <li class="group"> <span class="video-thumbnail"> <a href="https://wordpress.tv/2019/07/04/matt-mullenweg-matt-on-wordpress/" rel="bookmark"> <img src="https://videos.files.wordpress.com/bd2G0c0g/video-f9800148bf_dvd.original.jpg" alt="Matt Mullenweg: Matt on WordPress"> </a> </span> <span class="video-title"> <a href="https://wordpress.tv/2019/07/04/matt-mullenweg-matt-on-wordpress/" rel="bookmark"> Matt Mullenweg: Matt on WordPress </a> </span> <strong class="video-event"><a href="https://wordpress.tv/event/wordcamp-europe-2019/">WordCamp Europe 2019</a></strong> </li> 
+       <li class="group"> <span class="video-thumbnail"> <a href="https://wordpress.tv/2018/12/27/state-of-the-word-2018/" rel="bookmark"> <img src="https://videos.files.wordpress.com/C2yXplLx/video-2bbe854232_scruberthumbnail_1.jpg" alt="Matt Mullenweg: State of the Word 2018"> </a> </span> <span class="video-title"> <a href="https://wordpress.tv/2018/12/27/state-of-the-word-2018/" rel="bookmark"> Matt Mullenweg: State of the Word&nbsp;2018 </a> </span> <strong class="video-event"><a href="https://wordpress.tv/event/wordcamp-us-2018/">WordCamp US 2018</a></strong> </li> 
+       <li class="group"> <span class="video-thumbnail"> <a href="https://wordpress.tv/2018/07/04/matt-mullenweg-a-summertime-update-keynote-and-qa/" rel="bookmark"> <img src="https://videos.files.wordpress.com/qjOKaoL2/video-2877bc99fe_dvd.original.jpg" alt="Matt Mullenweg: A Summertime Update – Keynote and Q&amp;A"> </a> </span> <span class="video-title"> <a href="https://wordpress.tv/2018/07/04/matt-mullenweg-a-summertime-update-keynote-and-qa/" rel="bookmark"> Matt Mullenweg: A Summertime Update – Keynote and&nbsp;Q&amp;A </a> </span> <strong class="video-event"><a href="https://wordpress.tv/event/wordcamp-europe-2018/">WordCamp Europe 2018</a></strong> </li> 
+       <li class="group"> <span class="video-thumbnail"> <a href="https://wordpress.tv/2017/12/04/matt-mullenweg-state-of-the-word-2017/" rel="bookmark"> <img src="https://videos.files.wordpress.com/DK5mLrbr/video-ca6dc0ab4a_scruberthumbnail_2.jpg" alt="Matt Mullenweg: State of the Word 2017"> </a> </span> <span class="video-title"> <a href="https://wordpress.tv/2017/12/04/matt-mullenweg-state-of-the-word-2017/" rel="bookmark"> Matt Mullenweg: State of the Word&nbsp;2017 </a> </span> <strong class="video-event"><a href="https://wordpress.tv/event/wordcamp-us-2017/">WordCamp US 2017</a></strong> </li> 
+      </ul> 
+     </div><!-- .secondary-videos --> 
+    </div><!-- .container --> 
+   </div><!-- .wptv-hero --> 
+   <div class="container"> 
+    <div class="primary-content"> <!-- Latest Videos --> 
+     <h3>Latest Videos</h3> 
+     <ul class="video-list four-col"> 
+      <li> <a href="https://wordpress.tv/2020/03/26/nathan-ingram-dealing-with-problem-clients-building-fences-around-friendly-monsters/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/NRBIbh7b/video-2dc0267797_scruberthumbnail_0.jpg" alt="Nathan Ingram: Dealing with Problem Clients – Building Fences Around Friendly Monsters"></span> <span class="video-title">Nathan Ingram: Dealing with Problem Clients – Building Fences Around Friendly&nbsp;Monsters</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/23/jasmine-andrews-planning-your-website-roadmap-why-every-website-project-needs-one-to-save-it-from-expensive-mistake/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/dfeq2TQo/video-074bc494d3_scruberthumbnail_0.jpg" alt="Jasmine Andrews: Planning Your Website Roadmap: Why Every Website Project Needs One To Save It From Expensive Mistake"></span> <span class="video-title">Jasmine Andrews: Planning Your Website Roadmap: Why Every Website Project Needs One To Save It From Expensive Mistake</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/23/lisa-hewitt-divi-4-x-and-woocommerce-changes/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/GOwv077k/video-07bb7b7035_scruberthumbnail_0.jpg" alt="Lisa Hewitt: Divi 4.x and WooCommerce Changes"></span> <span class="video-title">Lisa Hewitt: Divi 4.x and WooCommerce Changes</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/23/jo-minney-our-wild-journey-implementing-a-headless-wordpress-blog/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/O8DiDkmY/video-429c5d99f1_scruberthumbnail_0.jpg" alt="Jo Minney: Our Wild Journey Implementing A Headless WordPress Blog"></span> <span class="video-title">Jo Minney: Our Wild Journey Implementing A Headless WordPress Blog</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/23/imran-sayed-and-ajit-bohra-digging-into-gutenberg/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/BIRtxyCe/video-aeae7d6dc5_scruberthumbnail_0.jpg" alt="Imran Sayed and Ajit Bohra: Digging into Gutenberg"></span> <span class="video-title">Imran Sayed and Ajit Bohra: Digging into Gutenberg</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/20/patricia-rueda-saez-marcas-o-adornas/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/YKx6W0EB/video-8d75d9f466_scruberthumbnail_0.jpg" alt="Patricia Rueda Sáez: ¿Marcas o adornas?"></span> <span class="video-title">Patricia Rueda Sáez: ¿Marcas o&nbsp;adornas?</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/20/lourdes-gonzalez-perea-sitios-web-accesibles-sitios-web-abiertos-a-la-diversidad/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/kfup6IN9/video-cd753ca0fb_scruberthumbnail_0.jpg" alt="Lourdes González Perea: Sitios web accesibles, sitios web abiertos a la diversidad"></span> <span class="video-title">Lourdes González Perea: Sitios web accesibles, sitios web abiertos a la diversidad</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/20/joen-olsen-10-things-i-learned-about-working-remotely/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/qhbfoKqs/video-591178a663_scruberthumbnail_0.jpg" alt="Joen Olsen: 10 Things I Learned About Working Remotely"></span> <span class="video-title">Joen Olsen: 10 Things I Learned About Working&nbsp;Remotely</span> </a> </li> 
+     </ul> 
+     <h3>Popular Videos</h3> 
+     <ul class="video-list four-col"> 
+      <li> <a href="https://wordpress.tv/2019/10/08/the-history-of-wordpress-in-four-minutes/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/yFCmLMGL/video-ec244445fd_scruberthumbnail_0.jpg" alt="The History of WordPress (in four minutes)"></span> <span class="video-title">The History of WordPress (in four&nbsp;minutes)</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/20/joen-olsen-10-things-i-learned-about-working-remotely/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/qhbfoKqs/video-591178a663_scruberthumbnail_0.jpg" alt="Joen Olsen: 10 Things I Learned About Working Remotely"></span> <span class="video-title">Joen Olsen: 10 Things I Learned About Working&nbsp;Remotely</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2019/12/07/valentina-azzi-come-ho-sconfitto-la-timidezza-grazie-alla-community-di-wordpress/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/hJ31ZA2t/video-647b9a4df1_scruberthumbnail_0.jpg" alt="Valentina Azzi: Come ho sconfitto la timidezza grazie alla Community di WordPress"></span> <span class="video-title">Valentina Azzi: Come ho sconfitto la timidezza grazie alla Community di WordPress</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/20/dani-serrano-instalar-y-configurar-wordpress-por-primera-vez-2/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/nSIMIiKm/video-bfa93b34eb_scruberthumbnail_0.jpg" alt="Dani Serrano: Instalar y configurar WordPress por primera vez"></span> <span class="video-title">Dani Serrano: Instalar y configurar WordPress por primera&nbsp;vez</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/19/alvaro-sanchez-seo-local-esto-no-te-lo-habian-contado/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/4dOOO4ss/video-6373b12db7_scruberthumbnail_0.jpg" alt="Álvaro Sánchez: SEO local: esto no te lo habían contado"></span> <span class="video-title">Álvaro Sánchez: SEO local: esto no te lo habían&nbsp;contado</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/09/lan-smith-the-host-with-the-most-how-to-find-the-right-website-hosting-company-part-2/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/W5t1QUoV/video-e11ed065d9_scruberthumbnail_0.jpg" alt="Lan Smith: The Host with the Most How to Find the Right Website Hosting Company Part 2"></span> <span class="video-title">Lan Smith: The Host with the Most How to Find the Right Website Hosting Company Part&nbsp;2</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/23/jasmine-andrews-planning-your-website-roadmap-why-every-website-project-needs-one-to-save-it-from-expensive-mistake/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/dfeq2TQo/video-074bc494d3_scruberthumbnail_0.jpg" alt="Jasmine Andrews: Planning Your Website Roadmap: Why Every Website Project Needs One To Save It From Expensive Mistake"></span> <span class="video-title">Jasmine Andrews: Planning Your Website Roadmap: Why Every Website Project Needs One To Save It From Expensive Mistake</span> </a> </li> 
+      <li> <a href="https://wordpress.tv/2020/03/23/imran-sayed-and-ajit-bohra-digging-into-gutenberg/"> <span class="video-thumbnail"><img src="https://videos.files.wordpress.com/BIRtxyCe/video-aeae7d6dc5_scruberthumbnail_0.jpg" alt="Imran Sayed and Ajit Bohra: Digging into Gutenberg"></span> <span class="video-title">Imran Sayed and Ajit Bohra: Digging into Gutenberg</span> </a> </li> 
+     </ul> 
+    </div><!-- .primary-content --> 
+    <div class="secondary-content"> 
+     <ul> 
+      <li class="widget"> <h3>Resources</h3> 
+       <ul> 
+        <li><a href="https://meta.trac.wordpress.org/query?component=WordPress.tv">Making WordPress.tv</a></li> 
+        <li><a href="https://wordpress.org/">WordPress.org</a></li> 
+        <li><a href="https://twitter.com/WordPressTV">WordPress.tv on Twitter</a></li> 
+        <li><a href="https://www.youtube.com/c/wordpress">WordPress.tv on YouTube</a></li> 
+        <li><a href="https://make.wordpress.org/tv/">WordPress.tv Team Blog</a></li> 
+       </ul> </li> 
+      <li class="widget_text widget widget_custom_html">
+       <div class="textwidget custom-html-widget">
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>
+        <br>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+       </div></li> 
+     </ul> 
+    </div><!-- .secondary_content --> 
+   </div><!-- .container--> 
+   <div id="footer"> 
+    <div class="container"> 
+     <div class="menu-footer-container">
+      <ul id="menu-footer" class="menu">
+       <li id="menu-item-39309" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39309"><a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></li> 
+       <li id="menu-item-39312" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-39312"><a href="https://wordpress.tv/get-involved/">Get Involved</a></li> 
+       <li id="menu-item-81780" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81780"><a href="https://wordpress.org/about/privacy/">Privacy</a></li> 
+       <li id="menu-item-39310" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39310"><a href="http://videopress.com/">Powered by VideoPress</a></li> 
+      </ul>
+     </div> 
+     <p class="automattic">An <a href="https://automattic.com/"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNy4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxvZ28iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDk0LjQgMzguMiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDk0LjQgMzguMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8cGF0aCBmaWxsPSIjODg4ODg4IiBkPSJNMTc5LjMsMzguMmMtMTIuNiwwLTIwLjctOS4xLTIwLjctMTguNXYtMS4yYzAtOS42LDguMi0xOC41LDIwLjctMTguNWMxMi42LDAsMjAuOCw4LjksMjAuOCwxOC41djEuMg0KCUMyMDAuMSwyOS4xLDE5MS45LDM4LjIsMTc5LjMsMzguMnogTTE5My4zLDE4LjZjMC02LjktNS0xMy0xNC4xLTEzYy05LjEsMC0xNCw2LjEtMTQsMTN2MC45YzAsNi45LDUsMTMuMSwxNCwxMy4xDQoJYzkuMSwwLDE0LjEtNi4yLDE0LjEtMTMuMVYxOC42eiIvPg0KPHBhdGggZmlsbD0iIzg4ODg4OCIgZD0iTTM3LjEsMzYuOEwzMi40LDI4SDExLjZMNywzNi44SDBMMTkuMiwxLjNoNS41bDE5LjUsMzUuNUgzNy4xeiBNMjEuOCw4LjJsLTcuNywxNC45aDE1LjdMMjEuOCw4LjJ6Ii8+DQo8cGF0aCBmaWxsPSIjODg4ODg4IiBkPSJNNzQuNiwzOC4yYy0xMi43LDAtMTguNy02LjktMTguNy0xNi4yVjEuM2g2LjZ2MjAuOWMwLDYuNiw0LjMsMTAuNSwxMi41LDEwLjVjOC40LDAsMTEuOS0zLjksMTEuOS0xMC41VjEuMw0KCWg2LjdWMjJDOTMuNiwzMC44LDg3LjksMzguMiw3NC42LDM4LjJ6Ii8+DQo8cGF0aCBmaWxsPSIjODg4ODg4IiBkPSJNMTMwLjcsNi44djMwaC02Ljd2LTMwaC0xNS41VjEuM2gzNy43djUuNUgxMzAuN3oiLz4NCjxwYXRoIGZpbGw9IiM4ODg4ODgiIGQ9Ik0yNTkuNSwzNi44VjguN2wtMS44LDMuMWwtMTQuOSwyNWgtMy4zbC0xNC43LTI1bC0xLjgtMy4xdjI4LjFoLTYuNVYxLjNoOS4ybDE0LDI0LjRsMS43LDNsMS43LTNMMjU3LDEuMw0KCWg5LjF2MzUuNUgyNTkuNXoiLz4NCjxwYXRoIGZpbGw9IiM4ODg4ODgiIGQ9Ik0zMTYuNSwzNi44bC00LjctOC44SDI5MWwtNC41LDguOGgtN2wxOS4yLTM1LjVoNS41bDE5LjUsMzUuNUgzMTYuNXogTTMwMS4yLDguMmwtNy43LDE0LjloMTUuN0wzMDEuMiw4LjJ6DQoJIi8+DQo8cGF0aCBmaWxsPSIjODg4ODg4IiBkPSJNMzUwLjYsNi44djMwaC02Ljd2LTMwaC0xNS41VjEuM2gzNy43djUuNUgzNTAuNnoiLz4NCjxwYXRoIGZpbGw9IiM4ODg4ODgiIGQ9Ik0zOTkuNSw2Ljh2MzBoLTYuN3YtMzBoLTE1LjVWMS4zSDQxNXY1LjVIMzk5LjV6Ii8+DQo8cGF0aCBmaWxsPSIjODg4ODg4IiBkPSJNNDMxLjQsMzYuOFY0LjZjMi43LDAsMy43LTEuNCwzLjctMy40aDIuOHYzNS41SDQzMS40eiIvPg0KPHBhdGggZmlsbD0iIzg4ODg4OCIgZD0iTTQ5MC4yLDExLjNjLTMuMi0yLjktNy45LTUuNy0xNC4yLTUuN2MtOS41LDAtMTQuOCw2LjUtMTQuOCwxMy4zdjAuN2MwLDYuNyw1LjQsMTMsMTUuMywxMw0KCWM1LjksMCwxMC44LTIuOCwxMy45LTUuN2w0LDQuMmMtMy45LDMuOC0xMC41LDcuMS0xOC4zLDcuMWMtMTMuNCwwLTIxLjYtOC43LTIxLjYtMTguM3YtMS4yYzAtOS42LDguOS0xOC43LDIxLjktMTguNw0KCWM3LjUsMCwxNC4zLDMuMSwxOCw3LjFMNDkwLjIsMTEuM3oiLz4NCjxwYXRoIGZpbGw9IiM4ODg4ODgiIGQ9Ik0xODMuNiwxMi40YzEuMiwwLjgsMS41LDIuNCwwLjgsMy42bC02LjEsOS40Yy0wLjgsMS4yLTIuNCwxLjYtMy42LDAuOGwwLDBjLTEuMi0wLjgtMS41LTIuNC0wLjgtMy42DQoJbDYuMS05LjRDMTgwLjgsMTEuOSwxODIuNCwxMS42LDE4My42LDEyLjRMMTgzLjYsMTIuNHoiLz4NCjwvc3ZnPg0K" alt="Automattic" width="165" height="14"></a> Contraption</p> 
+    </div> 
+   </div><!-- #footer --> 
+  </div><!-- #page --> <!--  --> 
+  <script type="text/javascript">if(jQuery.VideoPress){jQuery.VideoPress.video.flash.params.wmode="opaque";}</script>
+  <script src="//0.gravatar.com/js/gprofiles.js?ver=202013y"></script> 
+  <script>
+var WPGroHo = {"my_hash":""};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1380573781h"></script> 
+  <script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script> 
+  <div style="display:none"> 
+  </div> 
+  <script>
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/wptv.wordpress.com\/public.api\/connect\/?action=request&domain=wordpress.tv","logoutURL":"https:\/\/wptv.wordpress.com\/wp-login.php?action=logout&_wpnonce=800df7e55e","homeURL":"https:\/\/wordpress.tv\/","postID":"101775","gravDefault":"mystery","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+</script> 
+  <script type="text/javascript" src="https://s0.wp.com/_static/??/wp-content/js/jquery/jquery.autoresize.js,/wp-content/mu-plugins/highlander-comments/script.js?m=1573483029j"></script> 
+  <link rel="stylesheet" id="all-css-0-3" href="https://s2.wp.com/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css?m=1583834955h&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"5089392","siteName":"WordPress.tv","siteURL":"https:\/\/wordpress.tv","icon":"<img alt='' src='https:\/\/s2.wp.com\/i\/logo\/wpcom-gray-white.png' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"a8c\/wptv2","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fwordpress.tv%2F2020%2F03%2F26%2Fnathan-ingram-dealing-with-problem-clients-building-fences-around-friendly-monsters%2F&signup_flow=account&domain=wordpress.tv","themeURL":"","xhrURL":"https:\/\/wordpress.tv\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"6599e05017\" \/>","referer":"https:\/\/wordpress.tv\/","canFollow":"1","feedID":"34277","statusMessage":"","customizeLink":"https:\/\/wptv.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fwptv.wordpress.com%2F","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: WordPress.tv v2","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 24,462 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fwordpress.tv%2F2020%2F03%2F26%2Fnathan-ingram-dealing-with-problem-clients-building-fences-around-friendly-monsters%2F&signup_flow=account&domain=wordpress.tv\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJydUEGOwjAM/NAGq4ta4LDiLSUxyCV1qthp4fe4QDlwQGIv1sjjmbEN0+B8YkVW6AQCjuRxuKw6+QGjiH0sAeXOkSiMyCHlmRpSvB4pxlVPvIwvTkMsJ2KBY4nRCSk6DKTEJ/dgoFlX603zu4NDTNZMouIM+vMzhXD6vyfakmq6whrSxE/je5V38j2lL24JaoNd5g5thr4VxWzIpRFzpvkhr96XDppbW+OTyCslnkUvZNP7/q+qt3VV19uq6W76hqFt"></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'5089392','blog_tz':'-7','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'5089392','v':'wpcom','tz':'-7','user_id':'0','subd':'wptv'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1lSiYrZXhzUkM5fD1uTDNLUGt6QzVbd3FKb3Q4aWxFU0VMK3ppSU9RRkVyRmw/bFF4N29ZdnF3Lnxoc0xRaWorQ09SJS14UzNlbj9xNTEsMWpEXUoyZUtHeW9sd01OTS5sZ3BdU3ExbTM4d3gyLlotQzJSXyVyR2xtdVllXTkxRU8xYXQ0MF9XOXE3S0ZBTGFoWTRkJWRwYXN5fnBXUS1FSFpzZzNRTXB4LWlNZn5iNllzP0F0fm9BXXB8b3JOJk9QMFNRayZFXVJnMm5HMzdQVDJfL1g2a3dGSk9KdUUyTmVdSWYtVjJnLUtWW3AsbXQlbXpBUnhBSXdtVXotc0xPW2JbZUx1Vi5OWmcyLWhwRXg='}]);
+_stq.push([ 'clickTrackerInit', '5089392', '0' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> <!--
+	generated 222 seconds ago
+	generated in 0.203 seconds
+	served from batcache in 0.001 seconds
+	expires in 78 seconds
+-->
+ </body>
+</html>

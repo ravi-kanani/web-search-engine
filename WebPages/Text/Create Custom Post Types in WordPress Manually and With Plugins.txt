@@ -1,0 +1,49 @@
+﻿ free resources useful tools blog about us learn how to start a blog how to create custom post types in wordpress written by: anya skrba (published on: january 31st, 2018 last updated: december 12th, 2019) posted in: wordpress 0 comment written by anya skrba before we actually show you how to create your own custom post type which you’ll be proudly using on your new wordpress powered blog, let’s see what a custom post type actually is. a post type is simply a set of rules which are used to describe the way content is presented in your article. each post type has its own parameters which define it so you can tell a difference between a post, page, archive, revision or a navigation menu. but as you will see, if you start writing articles as your posts, everything you write will have the same structure. that’s because you will use the same template for the post. but that is completely ok if you write a blog where one post type is enough to handle your articles. through the not so long history, wordpress has evolved tremendously and it has definitely outgrown its role as a blog platform. it has become one of the most used and appreciated content management systems in the world. allowing people to create custom post types is one of the main reasons for that. learn more about custom post types in #wordpress and finally create your own. click to tweet let’s see what a custom post type can do for you in a simple example. imagine you are running a gaming website. you want to publish news on a regular basis, there are numerous trailers published every day which you can share with your audience, your authors play new games and write reviews, you want to publish screenshots from your latest online match, etc. as you can already guess, there are several content types you would need in this case and if you continue on using regular posts, all of the content will look the same and it will make it harder for you and for your visitors to find a difference between a video article and a review. yes, you want a custom post type to make everything look more organized. stay with that picture just for a few more seconds. if you create a custom post type, your news could have a special area where you can place a link to the source. your game review post type could have a rating the author gave to a certain game including a star-based system, and you can apply different styling for, let’s say, the subtitle of your review. your trailers post type would accentuate a video and let people enjoy it from a lightbox instead of viewing it in a post. we can go on forever, but you get the point, right? create a custom post type create custom post types with plugins create a custom post type: ok, we know you are getting bored with our talk – you are here to learn how to create a custom post so let’s start. stretch your muscles, take a deep breath and when you are ready, let’s start. if you’re interested in digging deeper into wordpress and the code, skip to the plugin that will help you. open functions.php file and paste the following code. make sure the code is placed before the closing php tag (?>) or it won’t work. // creates game reviews custom post type
+function game_reviews_init() {
+    $args = array(
+      'label' => 'game reviews',
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'rewrite' => array('slug' => 'game-reviews'),
+        'query_var' => true,
+        'menu_icon' => 'dashicons-video-alt',
+        'supports' => array(
+            'title',
+            'editor',
+            'excerpt',
+            'trackbacks',
+            'custom-fields',
+            'comments',
+            'revisions',
+            'thumbnail',
+            'author',
+            'page-attributes',)
+        );
+    register_post_type( 'game-reviews', $args );
+}
+add_action( 'init', 'game_reviews_init' ); save changes if you take a look at your admin area in wordpress, you will notice there is a new item “game reviews” available on the menu. so far, it will look like any other post but you will still not be able to see these posts online. you have a few more steps to follow through in order to make the most out of this custom post type. be sure to set up your permalinks before you try your new post or you’ll end up with an error. create a template for your new custom post type: open your theme’s folder create a new file and name it something like game-review-template.php open the file and paste the following: 
+<?php
+/**
+ * template name: game reviews
+ **/
+?>
+ open page.php file which is located in your theme’s folder copy and paste the code into you game-review-template.php find a piece of code which is the same, or similar to this (might depend on your theme): 
+<?php endif; ?>
+<?php endwhile; ?>
+ when you have located this part, let’s modify it so you can show your custom post type on a new page. you should add the $query line above your loop and then modify the loop itself. when you modify the code, it should look like this: 
+<?php
+ $query = new wp_query( array('post_type' => 'game-reviews','posts_per_page' => 5 ) );
+ while ( $query->have_posts() ) : $query->the_post(); ?>
+// your code e.g. "the_content();"
+
+
+ save changes 
+ go to pages -> add new 
+ create a page with a name "game reviews" 
+ on the right side, under "page attributes" tab you should find "template" 
+ choose a template you have created in one of the previous steps and assign it to the page. 
+ 
+ save changes 
+ that's it. you should try everything and create a new game review post. once you open your game review page, you should be able to see your news post types lined up chronologically just like your normal post would be. and this is just the beginning. you have created the custom post type, but now you should modify it the way you like it and add the code which you need. create custom post types with plugins when you start creating your own post types to expand your wordpress, there are two ways to go. we already showed you one - how to manually create a custom post type. by following several steps, you can create a custom post type but it might take much of your time if you are a wordpress beginner and not used to dealing with the code. but you don’t have to mess around with the code - if you need a simpler and quicker solution, you can create numberless custom post types by using one of the plugins. in this part of the tutorial, we’re about to show you one of the best plugins which will create those custom post types for you. you won’t have to code or even copy/paste the code. simply install the plugin, write in the name of your new post type and set it up through gui. custom post type ui price: free if you only need to register a custom post type, this plugin will do a good job. after you install it, you’ll be able to create custom post types and taxonomies. simply go to a newly created menu, add new custom post type and write the name and description of your new post type. it is easy as that but you will have to notice that this plugin won’t handle displaying your new post type. once you register the new post type, it is still up to you how to display it. we suggest that you check out how to do that or go with some other plugin which can also display your posts. additional reading: in-depth guide on wordpress custom post types conclusion custom post types are one of the greatest wordpress features even today. by simply modifying a few lines of code, or using a plugin, you can generate a post type that will be unique to your site. the truth is that it might be a little bit harder for a beginner to complete everything for the first time, but if you stick with this tutorial, you should not have any problems. this entry was posted in wordpress. bookmark the permalink. additional reading make the best out of wordpress tags link posts and pages to an external url wordpress permalink's settings and custom url structure using wordpress pages and creating a new page how to use custom fields in wordpress start your own blog this guide is an introduction to mastering the art of blogging. it provides easy to follow steps to start, maintain, and grow your blog. read the guide « previous how to control excerpts in wordpress next » how to change title attributes in wordpress leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. blog categories blogging wordpress interviews search how to start a blog the beginner's guide 2020 free guide + ebook learn blogging become a successful blogger learn wordpress understand the best practices blog videos glossary learn wordpress write blog content promote your blog make money blogging learn blogging best blog sites website builders domain registrars hosting providers blog setup service all blog posts archive copyright © 2020 free help & guides for web newbies privacy policy terms & conditions contact disclosure: our website receives compensation from the companies whose products we recommend and because of it, we are able to provide help with setting up your blog. we tested and used most of the web hosting sites and domain registrars recommended here.

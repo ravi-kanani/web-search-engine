@@ -1,0 +1,213 @@
+skip to main content css-tricks articles videos almanac snippets newsletter jobs guides back to top contact about archives advertise jobs license subscribe forums guest posting facebook twitter youtube instagram rss search for: search open search open navigation home / articles / how to create an animated countdown timer with html, css and javascript author mateusz rybczonek 12 comments join conversation published feb 3, 2020 javascript personalized marketing with mailchimp have you ever needed a countdown timer on a project? for something like that, it might be natural to reach for a plugin, but it’s actually a lot more straightforward to make one than you might think and only requires the trifecta of html, css and javascript. let’s make one together! this is what we’re aiming for: codepen embed fallback here are a few things the timer does that we’ll be covering in this post: displays the initial time remaining converts the time value to a mm:ss format calculates the difference between the initial time remaining and how much time has passed changes color as the time remaining nears zero displays the progress of time remaining as an animated ring ok, that’s what we want, so let’s make it happen! step 1: start with the basic markup and styles let’s start with creating a basic template for our timer. we will add an svg with a circle element inside to draw a timer ring that will indicate the passing time and add a span to show the remaining time value. note that we’re writing the html in javascript and injecting into the dom by targeting the #app element. sure, we could move a lot of it into an html file, if that's more your thing. document.getelementbyid("app").innerhtml = `
+<div class="base-timer">
+  <svg class="base-timer__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45" />
+    </g>
+  </svg>
+  <span>
+    <!-- remaining time label -->
+  </span>
+</div>
+`; now that we have some markup to work with, let’s style it up a bit so we have a good visual to start with. specifically, we’re going to: set the timer’s size remove the fill and stroke from the circle wrapper element so we get the shape but let the elapsed time show through set the ring’s width and color /* sets the containers height and width */
+.base-timer {
+  position: relative;
+  height: 300px;
+  width: 300px;
+}
+
+/* removes svg styling that would hide the time label */
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/* the svg path that displays the timer's progress */
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+} having that done we end up with a basic template that looks like this. step 2: setting up the time label as you probably noticed, the template includes an empty <span> that’s going to hold the time remaining. we will fill that place with a proper value. we said earlier that the time will be in mm:ss format. to do that we will create a method called formattimeleft: function formattimeleft(time) {
+  // the largest round integer less than or equal to the result of time divided being by 60.
+  const minutes = math.floor(time / 60);
+  
+  // seconds are the remainder of the time divided by 60 (modulus operator)
+  let seconds = time % 60;
+  
+  // if the value of seconds is less than 10, then display seconds with a leading zero
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  // the output in mm:ss format
+  return `${minutes}:${seconds}`;
+} then we will use our method in the template: document.getelementbyid("app").innerhtml = `
+<div class="base-timer">
+  <svg class="base-timer__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+    </g>
+  </svg>
+  <span id="base-timer-label" class="base-timer__label">
+    ${formattime(timeleft)}
+  </span>
+</div>
+` to show the value inside the ring we need to update our styles a bit. .base-timer__label {
+  position: absolute;
+  
+  /* size should match the parent container */
+  width: 300px;
+  height: 300px;
+  
+  /* keep the label aligned to the top */
+  top: 0;
+  
+  /* create a flexible box that centers content vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* sort of an arbitrary number; adjust to your liking */
+  font-size: 48px;
+} ok, we are ready to play with the timeleft value, but the value doesn’t exist yet. let’s create it and set the initial value to our time limit. // start with an initial value of 20 seconds
+const time_limit = 20;
+
+// initially, no time has passed, but this will count up
+// and subtract from the time_limit
+let timepassed = 0;
+let timeleft = time_limit; and we are one step closer. right on! now we have a timer that starts at 20 seconds… but it doesn't do any counting just yet. let’s bring it to life so it counts down to zero seconds. step 3: counting down let’s think about what we need to count down the time. right now, we have a timelimit value that represents our initial time, and a timepassed value that indicates how much time has passed once the countdown starts. what we need to do is increase the value of timepassed by one unit per second and recompute the timeleft value based on the new timepassed value. we can achieve that using the setinterval function. let’s implement a method called starttimer that will: set counter interval increment the timepassed value each second recompute the new value of timeleft update the label value in the template we also need to keep the reference to that interval object to clear it when needed — that’s why we will create a timerinterval variable. let timerinterval = null;
+
+document.getelementbyid("app").innerhtml = `...`
+
+function starttimer() {
+  timerinterval = setinterval(() => {
+    
+    // the amount of time passed increments by one
+    timepassed = timepassed += 1;
+    timeleft = time_limit - timepassed;
+    
+    // the time left label is updated
+    document.getelementbyid("base-timer-label").innerhtml = formattime(timeleft);
+  }, 1000);
+} we have a method that starts the timer but we do not call it anywhere. let’s start our timer immediately on load. document.getelementbyid("app").innerhtml = `...`
+starttimer(); that’s it! our timer will now count down the time. while that’s great and all, it would be nicer if we could add some color to the ring around the time label and change the color at different time values. step 4: cover the timer ring with another ring to visualize time passing, we need to add a second layer to our ring that handles the animation. what we’re doing is essentially stacking a new green ring on top of the original gray ring so that the green ring animates to reveal the gray ring as time passes, like a progress bar. let’s first add a path element in our svg element. document.getelementbyid("app").innerhtml = `
+<div class="base-timer">
+  <svg class="base-timer__svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+      <path
+        id="base-timer-path-remaining"
+        stroke-dasharray="283"
+        class="base-timer__path-remaining ${remainingpathcolor}"
+        d="
+          m 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+      ></path>
+    </g>
+  </svg>
+  <span id="base-timer-label" class="base-timer__label">
+    ${formattime(timeleft)}
+  </span>
+</div>
+`; next, let’s create an initial color for the remaining time path. const color_codes = {
+  info: {
+    color: "green"
+  }
+};
+
+let remainingpathcolor = color_codes.info.color; finally, let’s add few styles to make the circular path look like our original gray ring. the important thing here is to make sure the stroke-width is the same size as the original ring and that the duration of the transition is set to one second so that it animates smoothly and corresponds with the time remaining in the time label. .base-timer__path-remaining {
+  /* just as thick as the original ring */
+  stroke-width: 7px;
+
+  /* rounds the line endings to create a seamless circle */
+  stroke-linecap: round;
+
+  /* makes sure the animation starts at the top of the circle */
+  transform: rotate(90deg);
+  transform-origin: center;
+
+  /* one second aligns with the speed of the countdown timer */
+  transition: 1s linear all;
+
+  /* allows the ring to change color when the color value updates */
+  stroke: currentcolor;
+}
+
+.base-timer__svg {
+  /* flips the svg and makes the animation to move left-to-right */
+  transform: scalex(-1);
+} this will output a stroke that covers the timer ring like it should, but it doesn’t animate just yet to reveal the timer ring as time passes. to animate the length of the remaining time line we are going to use the stroke-dasharray property. chris explains how it’s used to create the illusion of an element “drawing” itself. and there’s more detail about the property and examples of it in the css-tricks almanac. step 5: animate the progress ring let’s see how our ring will look like with different stroke-dasharray values: what we can see is that the value of stroke-dasharray is actually cutting our remaining time ring into equal-length sections, where the length is the time remaining value. that is happening when we set the value of stroke-dasharray to a single-digit number (i.e. 1-9). the name dasharray suggests that we can set multiple values as an array. let’s see how it will behave if we set two numbers instead of one; in this case, those values are 10 and 30. stroke-dasharray: 10 30 that sets the first section (remaining time) length to 10 and the second section (passed time) to 30. we can use that in our timer with a little trick. what we need initially is for the ring to cover the full length of the circle, meaning the remaining time equals the length of our ring. what’s that length? get out your old geometry textbook, because we can calculate the length an arc with some math: length = 2πr = 2 * π * 45 = 282,6 that’s the value we want to use when the ring initially mounted. let’s see how it looks. stroke-dasharray: 283 283 that works! ok, the first value in the array is our remaining time, and the second marks how much time has passed. what we need to do now is to manipulate the first value. let’s see below what we can expect when we change the first value. we will create two methods, one responsible for calculating what fraction of the initial time is left, and one responsible for calculating the stroke-dasharray value and updating the <path> element that represents our remaining time. // divides time left by the defined time limit.
+function calculatetimefraction() {
+  return timeleft / time_limit;
+}
+    
+// update the dasharray value as time passes, starting with 283
+function setcircledasharray() {
+  const circledasharray = `${(
+    calculatetimefraction() * full_dash_array
+  ).tofixed(0)} 283`;
+  document
+    .getelementbyid("base-timer-path-remaining")
+    .setattribute("stroke-dasharray", circledasharray);
+} we also need to update our path each second that passes. that means we need to call the newly created setcircledasharray method inside our timerinterval. function starttimer() {
+  timerinterval = setinterval(() => {
+    timepassed = timepassed += 1;
+    timeleft = time_limit - timepassed;
+    document.getelementbyid("base-timer-label").innerhtml = formattime(timeleft);
+    
+    setcircledasharray();
+  }, 1000);
+} now we can see things moving! woohoo, it works… but… look closely, especially at the end. it looks like our animation is lagging by one second. when we reach 0 a small piece of the ring is still visible. this is due to the animation’s duration being set to one second. when the value of remaining time is set to zero, it still takes one second to actually animate the ring to zero. we can get rid of that by reducing the length of the ring gradually during the countdown. we do that in our calculatetimefraction method. function calculatetimefraction() {
+  const rawtimefraction = timeleft / time_limit;
+  return rawtimefraction - (1 / time_limit) * (1 - rawtimefraction);
+} there we go! oops… there is one more thing. we said we wanted to change the color of the progress indicator when when the time remaining reaches certain points — sort of like letting the user know that time is almost up. step 6: change the progress color at certain points of time first, we need to add two thresholds that will indicate when we should change to the warning and alert states and add colors for each of that states. we’re starting with green, then go to orange as a warning, followed by red when time is nearly up. // warning occurs at 10s
+const warning_threshold = 10;
+// alert occurs at 5s
+const alert_threshold = 5;
+
+const color_codes = {
+  info: {
+    color: "green"
+  },
+  warning: {
+    color: "orange",
+    threshold: warning_threshold
+  },
+  alert: {
+    color: "red",
+    threshold: alert_threshold
+  }
+}; now, let’s create a method that’s responsible for checking if the threshold exceeded and changing the progress color when that happens. function setremainingpathcolor(timeleft) {
+  const { alert, warning, info } = color_codes;
+
+  // if the remaining time is less than or equal to 5, remove the "warning" class and apply the "alert" class.
+  if (timeleft <= alert.threshold) {
+    document
+      .getelementbyid("base-timer-path-remaining")
+      .classlist.remove(warning.color);
+    document
+      .getelementbyid("base-timer-path-remaining")
+      .classlist.add(alert.color);
+
+  // if the remaining time is less than or equal to 10, remove the base color and apply the "warning" class.
+  } else if (timeleft <= warning.threshold) {
+    document
+      .getelementbyid("base-timer-path-remaining")
+      .classlist.remove(info.color);
+    document
+      .getelementbyid("base-timer-path-remaining")
+      .classlist.add(warning.color);
+  }
+} so, we’re basically removing one css class when the timer reaches a point and adding another one in its place. we’re going to need to define those classes. .base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+} voilà, there we have it. here’s the demo again with everything put together. codepen embed fallback our learning partner it's time to take your javascript to the next level frontend masters is the best place on the web to really learn javascript. they have a complete learning course from the biggest and best teachers in javascript to help you make the most out of the web's biggest language. it's time to take your javascript to the next level frontend masters is the best place on the web to really learn javascript. they have a complete learning course from the biggest and best teachers in javascript to help you make the most out of the web's biggest language. comments chris coyier permalink to comment# february 3, 2020 related… chen hui jing’s can you make a countdown timer in pure css? yes you can do it in css but there’s a much better way. involves javascript reply ana tudor permalink to comment# february 7, 2020 here’s another quick pure css version based on the one in this article. changes: simplified the svg by making both elements circles around the 0,0 point (setting the viewbox to -50 -50 100 100 puts the origin 0,0 dead in the middle of the svg and we don’t need to set cx and cy anymore as they both default to 0) animated both the stroke-dashoffset and the stroke using a linear keyframe animations animated the timer content using a steps() keyframe animation (this part can be simplified a lot if we were to use houdini, but then that would be at the expense of support, so i don’t know) phil winston permalink to comment# february 3, 2020 it would be great if it would click a button or automatically go to a specific url when it finished. reply gerard permalink to comment# february 4, 2020 how do you make the timer fill up instead? i want to sample from this example to make a small music player reply thomas permalink to comment# february 6, 2020 you can replace calculatetimefraction() * full_dash_array with full_dash_array - (calculatetimefraction() * full_dash_array). mark permalink to comment# february 4, 2020 nice! i’ve been playing around with timers myself for a bit. just a little thing if anyone is interested, you can forgo the if statement to display the time <10 with a leading 0 by using padstart. like this: return ${minutes}:${seconds.tostring().padstart(2, '0')}; reply pat permalink to comment# february 4, 2020 i thought this would be a good candidate for converting to a custom element, so i tried. i’m almost done, but what the heck: https://codepen.io/amundo/pen/poqywek this was a really cool, well-written article! reply giuseppe permalink to comment# february 4, 2020 there is still a small but in that the ‘ring’ doesn’t appear to start moving until the countdown reaches 00:19. reply eloho oyinvbi permalink to comment# february 4, 2020 is it possible to calculate timer in terms of working days? reply mirka permalink to comment# february 21, 2020 i’d advise a little revision of the tutorial as right now there are some steps missing when following it – e.g. the condition from the starttimer() function (so the timer never stops and goes to negative values) or setting the full_dash_array constant. reply daniel ballheimer permalink to comment# march 16, 2020 this count down clock is beautiful and perfect for a billiards game. would need to be able to start, stop/pause, resume in what i’ve seen called lags, each start and stop report the length of time and giving the balance of time. this is cool, the possibilities… reply tom blair permalink to comment# march 26, 2020 this looks great! how hard would it be to adjust it so that it displays: hours:minutes:seconds reply leave a reply cancel reply your email address will not be published. required fields are marked * comment name * email * website save my name, email, and website in this browser for the next time i comment. get the css-tricks newsletter notify me of follow-up comments by email. copy and paste this code: micuno * leave this field empty all comments are held for moderation. we'll publish all comments that are on topic, not rude, and adhere to our code of conduct. you'll even get little stars if you do an extra good job. you may write comments in markdown. this is the best way to post any code, inline like `<div>this</div>` or multiline blocks within triple backtick fences (```) with double new lines before and after. want to tell us something privately, like pointing out a typo or stuff like that? contact us. we have a code of conduct. be cool. be helpful. the web is a big place. have fun. high five. related how do you stay up to date in this fast⁠-⁠moving industry? a good start is to sign up for our weekly hand-written newsletter. we bring you the best articles and ideas from around the web, and what we think about them. email address subscribe facebook @csstricks twitter @css youtube @realcsstricks instagram @real_css_tricks rss feed css-tricks* is created, written by, and maintained by chris coyier and a team of swell people. the tech stack for this site is fairly boring. that's a good thing! i've used wordpress since day one all the way up to v17, a decision i'm very happy with. i also leverage jetpack for extra functionality and local for local development. *may or may not contain any actual "css" or "tricks". other nav contact about guest writing jobs advertise license subscribe all authors codepen codepen is a place to experiment, debug, and show off your html, css, and javascript creations. flywheel logo flywheel css-tricks is hosted by flywheel, the best wordpress hosting in the business, with a local development tool to match. shoptalk is a podcast all about front-end web design and development. css-tricks presents 📅 upcoming front-end conferences css-tricks presents the power of serverless for front-end developers

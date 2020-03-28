@@ -1,0 +1,1137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"> 
+ <head profile="http://gmpg.org/xfn/11"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>semi-detached | petite anglaise</title> 
+  <link rel="pingback" href="https://petiteanglaise.com/xmlrpc.php"> <!-- Async WordPress.com Remote Login --> 
+  <script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.remove(); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[i].remove();
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+						+ '//' + window.location.hostname;
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly9wZXRpdGVhbmdsYWlzZS5jb20%3D"
+		+ "&wpcomid=14262311"
+		+ "&time=1585342257";
+	document.body.appendChild( iframe );
+}, false );
+</script> 
+  <link rel="dns-prefetch" href="//s2.wp.com"> 
+  <link rel="dns-prefetch" href="//s1.wp.com"> 
+  <link rel="dns-prefetch" href="//petiteanglaise.wordpress.com"> 
+  <link rel="dns-prefetch" href="//s0.wp.com"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Feed" href="https://petiteanglaise.com/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » Comments Feed" href="https://petiteanglaise.com/comments/feed/"> 
+  <link rel="alternate" type="application/rss+xml" title="petite anglaise » semi-detached Comments Feed" href="https://petiteanglaise.com/2006/04/06/semi-detached/feed/"> 
+  <script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script> 
+  <script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s1.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1582709031h&ver=5.4-RC1-47426"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script> 
+  <style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style> 
+  <link rel="stylesheet" id="all-css-0-1" href="https://s2.wp.com/_static/??-eJylk9tuwjAMhl9oaVZQgV1Me5akNZlZTkocur79XFq0DgSbxk0VO/7sP7Yr+yja4Ak8SVdEtMWgzzKBVQSdiCHThVW1OT/JBXZmTGFTQzJ8k0Buq21VS13QdlLb0H4IizqpNMhMg4U/pDlRWR6AohpxNYRCwiTs/psiKUJv8i/4vlgrMhII6HAE5rbIzbpebzerFwlHjmeueOpC76cyD2c9qyR0YNHDwwlZlpmGNivsMJM8IvQ3k7ZhblldrZ6rWvSxDW7ipotqEnWa6wPSJlWW8y6lXXqvCixWdFwy9ruoaIxwXEmBBcdh97AeOwO80xwynwXB531k7IHQOibIWfDXYXGC3rnW9d8wuWUsWrZW5YztjTEuChgIgp/Lyxn8D0PsrcJ0D00wDpmP5vSib3OE3txr3eyauml29ebwBVtYdEw=?cssminify=yes" type="text/css" media="all"> 
+  <style id="wp-block-library-inline-css">
+.has-text-align-justify {
+	text-align:justify;
+}
+</style> 
+  <link rel="stylesheet" id="print-css-1-1" href="https://s2.wp.com/wp-content/mu-plugins/global-print/global-print.css?m=1465851035h&amp;cssminify=yes" type="text/css" media="print"> 
+  <link rel="stylesheet" id="all-css-2-1" href="https://s0.wp.com/_static/??-eJx9jtEOgjAMRX/I2Uwc4oPxW8Yco1o2spYY/96ZQMSQ+NQ2Off2wHNULkXxUWCY1EhTwMhgnWCKrc3fbe+Yd7DCF7abiBSjeOVvKBjD3AJ1patTfThDoNTawsiLPAOLFXTQko2PTenKYUwsqiOLGbi3uRQv81+Kk8Pyi1JIv8cmJL0fik5/nP0+wHW4aNMYbUyj6/sbZOVojw==?cssminify=yes" type="text/css" media="all"> 
+  <style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+</style> 
+  <script>
+var related_posts_js_options = {"post_heading":"h4"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJx9zcEKwjAMBuAXMqs7uOlBfJa5xZLSpLVJGb69HehliBAIIV/yuzUDyRzrgupCq2fF8vq0LujB/QPA5Mtk2DHJF89JDMU2m5Mao+rk8ceW050iQlUsDYi1mEfaO66QY/Uk6grGFrXA9nU3tasbX/vT2F+O4zCcwxtEF0+w"></script> 
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://petiteanglaise.wordpress.com/xmlrpc.php?rsd"> 
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+  <link rel="prev" title="lazyitis" href="https://petiteanglaise.com/2006/04/03/lazyitis/"> 
+  <link rel="next" title="duality" href="https://petiteanglaise.com/2006/04/09/duality/"> 
+  <meta name="generator" content="WordPress.com"> 
+  <link rel="canonical" href="https://petiteanglaise.com/2006/04/06/semi-detached/"> 
+  <link rel="shortlink" href="https://wp.me/pXQhh-7j"> 
+  <link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2006%2F04%2F06%2Fsemi-detached%2F&amp;for=wpcom-auto-discovery">
+  <link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fpetiteanglaise.com%2F2006%2F04%2F06%2Fsemi-detached%2F&amp;for=wpcom-auto-discovery"> <!-- Jetpack Open Graph Tags --> 
+  <meta property="og:type" content="article"> 
+  <meta property="og:title" content="semi-detached"> 
+  <meta property="og:url" content="https://petiteanglaise.com/2006/04/06/semi-detached/"> 
+  <meta property="og:description" content="Can you simply make a decision that you won’t form a deeper attachment to someone? To say that you want nothing more than witty conversation and lighthearted physical proximity? A fling. Unco…"> 
+  <meta property="article:published_time" content="2006-04-06T12:29:13+00:00"> 
+  <meta property="article:modified_time" content="2010-06-27T11:35:18+00:00"> 
+  <meta property="og:site_name" content="petite anglaise"> 
+  <meta property="og:image" content="https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg"> 
+  <meta property="og:image:width" content="200"> 
+  <meta property="og:image:height" content="263"> 
+  <meta property="og:locale" content="en_US"> 
+  <meta name="twitter:site" content="@wordpressdotcom"> 
+  <meta name="twitter:text:title" content="semi-detached"> 
+  <meta name="twitter:card" content="summary"> 
+  <meta property="article:publisher" content="https://www.facebook.com/WordPresscom"> <!-- End Jetpack Open Graph Tags --> 
+  <link rel="openid.server" href="https://petiteanglaise.com/?openidserver=1"> 
+  <link rel="openid.delegate" href="https://petiteanglaise.com/"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://petiteanglaise.com/osd.xml" title="petite anglaise"> 
+  <link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com"> 
+  <style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style> 
+  <meta name="application-name" content="petite anglaise">
+  <meta name="msapplication-window" content="width=device-width;height=device-height">
+  <meta name="msapplication-task" content="name=Subscribe;action-uri=https://petiteanglaise.com/feed/;icon-uri=https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=16">
+  <meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico">
+  <meta name="description" content="Can you simply make a decision that you won't form a deeper attachment to someone? To say that you want nothing more than witty conversation and lighthearted physical proximity? A fling. Uncomplicated fun. Because I haven't had chance to get used to this vibrant single life of mine and all the new friendships and opportunities…"> 
+  <link rel="amphtml" href="https://petiteanglaise.com/2006/04/06/semi-detached/amp/">
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=32" sizes="32x32"> 
+  <link rel="icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101" sizes="192x192"> 
+  <link rel="apple-touch-icon" href="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <meta name="msapplication-TileImage" content="https://petiteanglaise.files.wordpress.com/2017/07/cropped-union-jack.png?w=101"> 
+  <link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&amp;csblog=XQhh&amp;cscache=6&amp;csrev=77"> 
+ </head> 
+ <body class="post-template-default single single-post postid-453 single-format-standard customizer-styles-applied highlander-enabled highlander-light"> 
+  <div id="rap"> 
+   <h1 id="header"><a href="https://petiteanglaise.com/">petite anglaise</a></h1> 
+   <div id="content"> <!-- end header --> 
+    <h2>April 6, 2006</h2> 
+    <div class="post-453 post type-post status-publish format-standard hentry category-single-life" id="post-453"> 
+     <h3 class="storytitle"> semi-detached </h3> 
+     <div class="meta">
+      Filed under: <a href="https://petiteanglaise.com/category/single-life/" rel="category tag">single life</a> — petiteanglaiseparis @ 1:29 pm 
+     </div> 
+     <div class="storycontent"> 
+      <div class="img-shadow">
+       <a href="http://flickr.com/photos/90973553@N00/124221457/" title="cleavage shot courtesy of the lovely anna"><img data-attachment-id="2038" data-permalink="https://petiteanglaise.com/2006/04/06/semi-detached/pebbles/" data-orig-file="https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg" data-orig-size="200,263" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;}" data-image-title="pebbles" data-image-description="" data-medium-file="https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg?w=200" data-large-file="https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg?w=200" src="https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg?w=200&amp;h=263" alt="" title="pebbles" width="200" height="263" class="alignnone size-full wp-image-2038" srcset="https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg 200w, https://petiteanglaise.files.wordpress.com/2006/04/pebbles.jpg?w=114&amp;h=150 114w" sizes="(max-width: 200px) 100vw, 200px"></a>
+      </div> 
+      <div align="justify"> 
+       <p>Can you simply make a decision that you won’t form a deeper attachment to someone? To say that you want nothing more than witty conversation and lighthearted physical proximity? A fling. Uncomplicated fun.</p> 
+       <p>Because I haven’t had chance to get used to this vibrant single life of mine and all the new friendships and opportunities it has to offer. Because I’m finding I take a selfish pleasure in living only for Tadpole and myself, taking no one else into account day to day.</p> 
+       <p>Because it’s much too soon to allow anyone to slip inside the invisible circle I have drawn around myself. Too soon to let the firm ground beneath my feet shake and tilt. Because even though, on the surface, I feel lighter, stronger, more whole than I have in a long time, I am still conscious of a soft, vulnerable centre. Unwilling to test the limits of my new found strength.</p> 
+       <p>Because I’m convinced that, flitting from city to city, this elusive boy seeks no ties.</p> 
+       <p>Wandering around Nice, taking in the opulence of the hilltop villas from the vantage point of an open topped bus, hair buffeted by the wind, cheeks warmed by the hazy sun, tiny details kept insinuating their way into my head. The way his voice changes when he smokes a cigarette. Dark chocolate eyes. The bar where we drank <em>jus de gingembre</em> until the owner chivvied us out of the door, when suddenly we realised chairs were stacked on tables around us and not a soul remained.</p> 
+       <p>And so I shook my head vigorously to clear it, banish those unbidden thoughts, and turned to face my travelling companion.</p> 
+      </div> 
+      <div id="jp-post-flair" class="sharedaddy sd-sharing-enabled">
+       <div class="sharedaddy sd-sharing-enabled">
+        <div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing">
+         <h3 class="sd-title">Share this:</h3>
+         <div class="sd-content">
+          <ul>
+           <li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-453" class="share-twitter sd-button share-icon" href="https://petiteanglaise.com/2006/04/06/semi-detached/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li>
+           <li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-453" class="share-facebook sd-button share-icon" href="https://petiteanglaise.com/2006/04/06/semi-detached/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li>
+           <li class="share-end"></li>
+          </ul>
+         </div>
+        </div>
+       </div> 
+       <div id="jp-relatedposts" class="jp-relatedposts"> 
+        <h3 class="jp-relatedposts-headline"><em>Related</em></h3> 
+       </div>
+      </div> 
+     </div> 
+     <div class="feedback"> <a href="https://petiteanglaise.com/2006/04/06/semi-detached/#comments">Comments (77)</a> 
+     </div> 
+    </div> 
+    <h2 id="comments">77 Comments</h2> 
+    <ol id="commentlist"> 
+     <li id="comment-8401" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8401" class="vcard"> 
+       <p>A year and a half ago I had just ended a three and a half year relationship. The ending was very very messy and I was looking forward to some peace and just ‘getting back to me’ for a while.</p> 
+       <p>I became friends with a guy and we watched movies, went for coffee, talked about books, just hung out in general. I liked the uncomplicated company. I told myself to be careful, it was too soon, I’d end up falling into old and bad patterns from my just ended relationship but did my heart listen???</p> 
+       <p>Nope! A year and a half later I’m with the guy. Heart never listens to head no matter how much you think you need it to!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://fecklessinfrance.blogspot.com" rel="external nofollow ugc" class="url">CoCo</a></span> — April 6, 2006 @ <a href="#comment-8401">1:56 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8402" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8402" class="vcard"> 
+       <p>You certainly have a lovely, lyrical style of writing. It’s unbelievable that you haven’t been offered a book contract yet! I’m sure there are numerous people who’d be interested in the experiences of a perceptive and romantic young woman trying to make a life in Paris.</p> 
+       <p><cite>Comment by <span class="fn">just saying</span> — April 6, 2006 @ <a href="#comment-8402">2:04 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8403" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8403" class="vcard"> 
+       <p>It’s called a “gap guy.” Enjoy it for what it is and don’t bring him home with you.</p> 
+       <p><cite>Comment by <span class="fn">Small Town Diva</span> — April 6, 2006 @ <a href="#comment-8403">2:12 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8404" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8404" class="vcard"> 
+       <p>Oh THAT’S what you were thinking about. I thought you were about to sneeze.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.littleredboat.co.uk" rel="external nofollow ugc" class="url">anna</a></span> — April 6, 2006 @ <a href="#comment-8404">2:45 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8405" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8405" class="vcard"> 
+       <p>Anna, just to dispel any possible ambiguity, when we were in the <a href="http://www.oliviera.com/" rel="nofollow">olive oil restaurant</a>, and I was unable to stop myself from moaning out loud, repeatedly, it was the FOOD on my mind and nothing else.</p> 
+       <p>Promise.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 6, 2006 @ <a href="#comment-8405">2:49 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8406" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8406" class="vcard"> 
+       <p>My experience has been that you can’t “decide” to be detached. Shortly after my divorce, I entered into a doomed relationship where I attempted to be as nonchalant about the whole thing as the boy was. Problem was, he really WAS detached, and I was falling… harder and harder. I broke it off when I realized that we were in two different places. Problem is, it was too late for me, and it hurt like hell. I’m over it now, but determined to never again dabble like that. Good luck.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://kellypuffs.blogspot.com" rel="external nofollow ugc" class="url">kelly</a></span> — April 6, 2006 @ <a href="#comment-8406">2:49 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8407" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8407" class="vcard"> 
+       <p>TWO WORDS (or sounds) : UH OH.</p> 
+       <p><cite>Comment by <span class="fn">magillicuddy</span> — April 6, 2006 @ <a href="#comment-8407">3:09 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8408" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8408" class="vcard"> 
+       <p>I don’t think you can ever ‘decide’ to stay unattached, hearts aren’t rational enough for that! About a year ago a relationship of mine ended really badly and i was devastated, and decided that i needed a year to get over him and concentrate on finishing my degree. And i DEFINATLY wasn’t going to start a relationship with another student. Not only have i been with someone for 6 months but he will be a student for another two years! Anyway my point is your heart rules your head, not the other way round!</p> 
+       <p><cite>Comment by <span class="fn">Ellie</span> — April 6, 2006 @ <a href="#comment-8408">3:18 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8409" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8409" class="vcard"> 
+       <p>Yes, you can make that decision instantly, to not get serious, but my experience is that I got serious anyway. I tricked myself into thinking that it meant nothing. Later (2 and 1/2 years later!), based on my original decision I said that enough was enough, ending. Six months went by and I wished that I hadn’t ended things. Piaf sang that she never regretted a thing (“non, je ne regrette rien”)but I can say that I have.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://cyberfrance.blogspot.com" rel="external nofollow ugc" class="url">Lost in France</a></span> — April 6, 2006 @ <a href="#comment-8409">3:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8410" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8410" class="vcard"> 
+       <p>Well, Petite, I’ve been enjoying your site for some time. And the one thing I wish I’d done when I was dating (umpteen years ago) is listen to that inner voice. It’s telling you something for a reason. And when you said something about him not wanting ties, well…</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.knittingpearls.blogspot.com" rel="external nofollow ugc" class="url">Jouf</a></span> — April 6, 2006 @ <a href="#comment-8410">3:51 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8411" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8411" class="vcard"> 
+       <p>Hope you’re enjoying the lovely weather down here! :)</p> 
+       <p><cite>Comment by <span class="fn">O.</span> — April 6, 2006 @ <a href="#comment-8411">4:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8412" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8412" class="vcard"> 
+       <p>Everyone is different so the advice we give is pointless. If you feel you have grieved enough for the end of your relationship with Jim and even with Mr Frog, then of course you should move slowly on. With baby steps and kid gloves and many other mixed metaphors.</p> 
+       <p>My experience is quite different to that of yours (or rather I have been the flip side of the coin). I have been with my current partner for two years. For the first year he was in a another (long term) relationship with his now ex-girlfriend. When they broke up a year ago, of course I wanted to dive in to a full on “normal” relationship, however he sensibly told me to slow down. And after a year of many many ups and downs and his coming to terms with the baggage he has and mistakes he has made in the past, we are finally becoming a real couple. Throughout this I loved him constantly and somewhat impatiently. Is this new man willing to give you the time and space and 100% support that I gave my Mr Man to help you back into a healthy mind-set?</p> 
+       <p>It takes a strong person to just look after themselves and to not jump into a new relationship just to fill the void of the departed.</p> 
+       <p><cite>Comment by <span class="fn">Hmmm</span> — April 6, 2006 @ <a href="#comment-8412">4:34 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8413" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8413" class="vcard"> 
+       <p>Mmmm, sounds like a delightful “transitional” guy. Just enjoy and don’t THINK so much!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://theboldsoul.lisataylorhuff.com/the_bold_soul/2006/03/my_french_oasis.html" rel="external nofollow ugc" class="url">The Bold Soul</a></span> — April 6, 2006 @ <a href="#comment-8413">4:49 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8414" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8414" class="vcard"> 
+       <p>Being detached is so numbing to the soul…one really isn’t living, it is like being in limbo or purgatory which to me is worse than hell.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.tangoinhereyes.blogspot.com" rel="external nofollow ugc" class="url">Holly</a></span> — April 6, 2006 @ <a href="#comment-8414">5:42 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8415" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8415" class="vcard"> 
+       <p>The answer’s in what you wrote, isn’t it? (I feel that makes me sound very wise, without really saying anything at all – just how I like it). More to the point, where can I get me some “jus de gingembre”?</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://bookpacker.blogspot.com" rel="external nofollow ugc" class="url">rhino75</a></span> — April 6, 2006 @ <a href="#comment-8415">6:36 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8416" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8416" class="vcard"> 
+       <p>yep, that’s my question exactly where can I get “jus de gingembre” miam.</p> 
+       <p>I wonder whether the aphrodisiac character of ginger had anything to do with it all?</p> 
+       <p><cite>Comment by <span class="fn">croque madame</span> — April 6, 2006 @ <a href="#comment-8416">7:54 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8417" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8417" class="vcard"> 
+       <p>Le Panier, rue St Marthe. Fancy going for a cheeky ginger juice Mr Rhino? The owner is barking mad and there are pictures of fluffy kittens on the wall, I think you would approve.</p> 
+       <p>And as for the ginger, I had a ginger ice cream yesterday, and I didn’t jump on Anna, so no, I don’t think so.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 6, 2006 @ <a href="#comment-8417">7:57 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8418" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8418" class="vcard"> 
+       <p>Aaah, you just never know what will happen. I ended up marrying my gap lad. Enjoy yourself.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://dongurigal.blogspot.com" rel="external nofollow ugc" class="url">dongurigal</a></span> — April 6, 2006 @ <a href="#comment-8418">8:12 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8419" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8419" class="vcard"> 
+       <p>No matter what, you’ll make the correct decision. Just listen to yourself and you’ll know. Tadpole will also tell you as well, I’m sure.</p> 
+       <p>:)<br> AM</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://budapestgirl.blogspot.com" rel="external nofollow ugc" class="url">AlieMalie</a></span> — April 6, 2006 @ <a href="#comment-8419">8:26 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8420" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8420" class="vcard"> 
+       <p>I’m finding myself in the same position right now. And I’ve been in it the past. And, as far as I can tell, the only answer is that it’s a difficult line to walk, but ultimately, whatever one tries to make themself feel is pretty much irrelevant. The heart tends to do what it pleases.</p> 
+       <p>As for the jus de gingembre, Franprix (or at least the one near Odeon) sells a bottle for about 3 Euros. It is delicious with ice, soda, and bourbon. A dangerous combination.</p> 
+       <p><cite>Comment by <span class="fn">Kerry</span> — April 6, 2006 @ <a href="#comment-8420">8:35 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8421" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8421" class="vcard"> 
+       <p>I’m sure bloggerers will appreciate knowing that the elusive jus de gingembre, or at least the nectar de gingembre can be bought online at <a href="http://www.houra.fr" rel="nofollow ugc">http://www.houra.fr</a> and delivered to your doorstep. However it does sound like sharing it with a chocolate-eyed gravelly-voiced niçois is much more fun.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://parislights.blogspot.com" rel="external nofollow ugc" class="url">Paris Lights</a></span> — April 6, 2006 @ <a href="#comment-8421">8:46 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8422" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8422" class="vcard"> 
+       <p>not a niçois, you are getting all confused…</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 6, 2006 @ <a href="#comment-8422">8:55 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8423" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8423" class="vcard"> 
+       <p>“… this elusive boy”,…what a wonderfully characterstic Petite turn of words!</p> 
+       <p>But what is the inference to be drawn from the descriptors? From ‘Mr Frog’, a benign combination of the formal and amiably derogatory? ….to ‘Lover’, sybolising lustful passionate abandonment after years of frustration? ….to ‘boy’, suggestive of a Mrs Robinson dominatrex sort of intent?</p> 
+       <p>As for ‘voice changes when smoking’… well, yes, the vocal chord does suffer and unless you are already also a member of the fellowship of the weed, that’s not all…. mouth (his &amp; yours) starts to resemble an ashtray, while carcinogens are being pumped around the cardiovascular system, so not, perhaps, a good long-term bet, or role model for Tadpole?</p> 
+       <p>So why not just enjoy the fantasy in your mind &amp; play it cool for now? Who knows, next time you are in Nice it may be in the company of Michael Winner, whisking you from port to heliport to anchored yacht, while ‘boy’ continues to perambulate around on the top deck of the omnibus?</p> 
+       <p><cite>Comment by <span class="fn">fella</span> — April 6, 2006 @ <a href="#comment-8423">8:58 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8424" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8424" class="vcard"> 
+       <p>Well……..I have read these comments and agreed with the “enjoy it for what it is” sentiment, the “listen to your heart” sentiment and most of all the “don’t think too much” sentiment (because that is such a “me” trait). But most of all I think that at times you can’t control things and most of all you can’t control emotions and how you react to someone else. I know I have tried to remain “stoic” in the aftermath of failed romance and promised myself no ties and a fling……and invariably I fall for them.</p> 
+       <p>I think that as long as you are happy – and have the lovely feelings you describe and are able to see things from both your perspective and his, you should enjoy it and most of all, don’t ponder too much!</p> 
+       <p>I know that is hard because sometimes I just want out of my own head because I can’t switch off from the thinking.</p> 
+       <p>:)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.romanticinclination.blogspot.com/" rel="external nofollow ugc" class="url">Kasey</a></span> — April 6, 2006 @ <a href="#comment-8424">10:09 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8425" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8425" class="vcard"> 
+       <p>Lovely!<br> I think it’s safest to savour the moment, like you do. Pointless pain is wasted life.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.fjlathome.blogspot.com" rel="external nofollow ugc" class="url">fjl</a></span> — April 7, 2006 @ <a href="#comment-8425">2:52 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8426" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8426" class="vcard"> 
+       <p>Pictures of fluffy kittens? Were there any other men in the place?</p> 
+       <p>Don’t worry for the long run so much. your heart and mind are both taking lessons as well as healing. Enjoy the ride!</p> 
+       <p>Meanwhile, I’m sure I’ll find myself perusing the local markets in vain, looking for the ginger out of pure curiosity.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://gettinggruntled.com" rel="external nofollow ugc" class="url">Gruntled</a></span> — April 7, 2006 @ <a href="#comment-8426">3:34 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8427" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8427" class="vcard"> 
+       <p>another one found in the comments box, I presume?</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8427">6:52 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8428" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8428" class="vcard"> 
+       <p>…have I missed something? Where did this new love interest spring from? (Perhaps those at the Blogmeet know – lots of cryptic in-jokes in the comments lately.) But do take care Petite… If anyone is out for “selfish pleasure” it sounds like it’s this boy who “seeks no ties”.</p> 
+       <p><cite>Comment by <span class="fn">old school friend</span> — April 7, 2006 @ <a href="#comment-8428">8:59 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8429" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8429" class="vcard"> 
+       <p>The brown-eyed boy smokes (ugh)and flits from city to city.<br> He’s obviously gay.</p> 
+       <p><cite>Comment by <span class="fn">Parkin Pig</span> — April 7, 2006 @ <a href="#comment-8429">9:07 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8430" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8430" class="vcard"> 
+       <p>*amused by the fact that the male commenters are tending to be so negative and over-protective*</p> 
+       <p>Trevor – no, not even a reader, as it happens. Better that way.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 7, 2006 @ <a href="#comment-8430">10:37 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8431" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8431" class="vcard"> 
+       <p>I tend to think that you should always live your feelings to the max, life is too short to always be careful and even a short fling can bring endless joy and fun – as well as it’s share of heartache but at the end of the day, when you look at the big picture you’ll most likely remember the fun parts more…</p> 
+       <p>so go with the flow and enjoy the ride…(as in voyage) arf arf.</p> 
+       <p><cite>Comment by <span class="fn">croque madame</span> — April 7, 2006 @ <a href="#comment-8431">11:11 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8432" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8432" class="vcard"> 
+       <p>Was going to suggest a charming enthusiastic boy as the way to go (I married mine). If he’s ‘elusive’ then maybe best not to get Tadpole involved just yet (but you knew that anyway).</p> 
+       <p>But mostly, as an advertiser, I wanted to thank you for keeping the blog interesting… ;)</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://http:mirrormirror.typepad.com" rel="external nofollow ugc" class="url">Paola at 'mirror mirror'</a></span> — April 7, 2006 @ <a href="#comment-8432">12:01 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8433" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8433" class="vcard"> 
+       <p>I aim to please. But I hope I don’t just live it this way to increase the readership…</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 7, 2006 @ <a href="#comment-8433">12:04 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8434" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8434" class="vcard"> 
+       <p>Dark chocolate eyes, not even a reader. One of those Johnny Foreigner types then, I presume?</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8434">12:04 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8435" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8435" class="vcard"> 
+       <p>Trevor,what’s it to ya where Petite “finds” anyone? (“Another one found in the comments box, I presume?”)<br> Stop presuming so much; your snippy attitude reeks of envy!</p> 
+       <p>Petite, I think that you are emerging from your cocoon after having undergone a spiritual metamorphosis this past year and are awakening anew, with the background of Spring, to LIFE, full spectrum…</p> 
+       <p>Enjoy Paris<br> Enjoy your young man<br> Enjoy the blessing that is Tadpole and most important of all,</p> 
+       <p>LIVE</p> 
+       <p><cite>Comment by <span class="fn">Belle</span> — April 7, 2006 @ <a href="#comment-8435">12:52 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8436" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8436" class="vcard"> 
+       <p>Ho Ho, he’s a sneeky one is Johnny Foreigner, I’d watch out with that fellah!</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8436">12:59 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8437" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8437" class="vcard"> 
+       <p>Hahahaha.</p> 
+       <p>To answer the qu in your first paragraph: No, probably not.</p> 
+       <p>But does it matter? Live for the moment.</p> 
+       <p>Real life includes pain as well as joy, and the good wouldn’t be good without the bad. But don’t try to preempt it. Just go with the flow.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.claresudbery.co.uk" rel="external nofollow ugc" class="url">Clare</a></span> — April 7, 2006 @ <a href="#comment-8437">1:04 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8438" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8438" class="vcard"> 
+       <p>Oy, not only do I not smoke but I’ve been living in the same city for eight years – so less of the “gay-bashing” Parkin Pig. It’s a well-known fact that people’s sexual orientation can only be determined by browsing through their CD collection or wardrobe (a lot of clingy sleeveless tops, fake tan and Madonna often indicate a “Gentlemen who is good with colours”) The ginger juice café sounds suspiciously like my apartment, fluffy kittens and all, though.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://bookpacker.blogspot.com" rel="external nofollow ugc" class="url">rhino75</a></span> — April 7, 2006 @ <a href="#comment-8438">1:16 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8439" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8439" class="vcard"> 
+       <p>Lordy. Johnny Foreigner indeed. No. English. Friend of a friend.</p> 
+       <p><a href="http://www.urbandictionary.com/define.php?term=fuckbuddy" rel="nofollow">This</a> probably sums it up (don’t click on the link mum and dad! that’s an order!) but given that I am a hopeless romantic and live mostly inside my own head, clearly that concept is fraught with potential problems.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 7, 2006 @ <a href="#comment-8439">1:29 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8440" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8440" class="vcard"> 
+       <p>Here we go again guys! Of course we’re negative and over-protective. We’re blokes and we’ve got another damn rival!</p> 
+       <p><cite>Comment by <span class="fn">Parkin Pig</span> — April 7, 2006 @ <a href="#comment-8440">1:46 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8441" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8441" class="vcard"> 
+       <p>I imagine he will be played by Johnny Depp in the film of your life – Who will play you Petite?</p> 
+       <p><cite>Comment by <span class="fn">Di</span> — April 7, 2006 @ <a href="#comment-8441">1:56 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8442" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8442" class="vcard"> 
+       <p>I had one of “those” and very nice he was too! No worries about where it was leading, quite a few moments of fun and we’re still good friends.</p> 
+       <p>Just what you need for Spring!</p> 
+       <p><cite>Comment by <span class="fn">Hazy</span> — April 7, 2006 @ <a href="#comment-8442">2:05 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8443" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8443" class="vcard"> 
+       <p>Hazy,</p> 
+       <p>What confuses me is that you seem to be saying that “despite having quite a few moments of fun” with this individual, you still remain friends. Could you please clarify by way of a few extra details what exactly you mean by “quite a few moments of fun”? Surely there’s nothing unusual about remaining friends with someone with whom you’ve had lots of fun.</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8443">2:19 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8444" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8444" class="vcard"> 
+       <p>Well Trevor if you look at the Urban Dictionary explanation of “this” I’m sure you can imagine what fun it was. And it sure was fun.</p> 
+       <p>Also I didn’t say “despite”.</p> 
+       <p><cite>Comment by <span class="fn">Hazy</span> — April 7, 2006 @ <a href="#comment-8444">2:24 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8445" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8445" class="vcard"> 
+       <p>YOU DIRTY THING!</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8445">2:31 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8446" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8446" class="vcard"> 
+       <p>A bit prudish, aren’t you Trevor?</p> 
+       <p><cite>Comment by <span class="fn">Hazy</span> — April 7, 2006 @ <a href="#comment-8446">2:34 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8447" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8447" class="vcard"> 
+       <p>English?<br> Wasn’t he Brazilian?<br> Oh no, my mistake, that was a different topic of conversation.</p> 
+       <p><cite>Comment by <span class="fn">Mancunian lass</span> — April 7, 2006 @ <a href="#comment-8447">2:59 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8448" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8448" class="vcard"> 
+       <p>I think he can play himself, in the film version, being as he’s a bit of a thespian. And as for me, as long as I’m not played by Gwyneth Paltrow I will be happy.</p> 
+       <p>Brazilian? Careful. There is only so much of this sort of insinuation my parents can take in one day.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 7, 2006 @ <a href="#comment-8448">3:01 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8449" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8449" class="vcard"> 
+       <p>Don’t get us excited with stories of cheeky gingers…</p> 
+       <p><cite>Comment by <span class="fn">Flighty</span> — April 7, 2006 @ <a href="#comment-8449">5:13 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8450" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8450" class="vcard"> 
+       <p>An unemployed Shakespearian actor. Lock up your daughters!</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8450">6:18 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8451" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8451" class="vcard"> 
+       <p>who is this Trevor? he’s come out of nowhere and taken up residence?</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 7, 2006 @ <a href="#comment-8451">6:20 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8452" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8452" class="vcard"> 
+       <p>Ok, I’ll go then. But you’ll miss me.</p> 
+       <p><cite>Comment by <span class="fn">Trevor</span> — April 7, 2006 @ <a href="#comment-8452">6:22 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8453" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8453" class="vcard"> 
+       <p>Phew!!!….Hmmmn…… its all getting a bit seamy! Not my placed to be censorious…. just wondering whether it might be better to transfer to following Eric’s gentle perambulations around Paris in his daily photo blog?! But, echoing Petite, it would be a bit like mutilating an arm!</p> 
+       <p><cite>Comment by <span class="fn">fella</span> — April 7, 2006 @ <a href="#comment-8453">9:36 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8454" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8454" class="vcard"> 
+       <p>seamy? or steamy?</p> 
+       <p>hope it’s the latter as I am not very good at sewing.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 7, 2006 @ <a href="#comment-8454">11:38 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8455" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8455" class="vcard"> 
+       <p>dear la petite anglaise,</p> 
+       <p>It’s an absolute joy to read your blog.A sheer extraordinary fabulous delight that I stumbled upon it and I shall buy your first novel when it graces our booksellers shelves.</p> 
+       <p>Chapeaux bas,<br> I want to be like u when I grow up,</p> 
+       <p>M</p> 
+       <p><cite>Comment by <span class="fn">M</span> — April 8, 2006 @ <a href="#comment-8455">1:57 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8456" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8456" class="vcard"> 
+       <p>Life is short, nothing wrong with having some fun.<br> I ended up marrying my “gap man” too.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://colourmecrazy.blogspot.com/" rel="external nofollow ugc" class="url">ColourMeCrazy</a></span> — April 8, 2006 @ <a href="#comment-8456">7:50 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8457" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8457" class="vcard"> 
+       <p>That’s a very nice photo Petite. Was it from Nice?</p> 
+       <p><cite>Comment by <span class="fn">Hazy</span> — April 8, 2006 @ <a href="#comment-8457">8:20 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8458" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8458" class="vcard"> 
+       <p>Indeed. If you click on it, you can see all the other photos anna took, and they are gorgeous.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 8, 2006 @ <a href="#comment-8458">8:48 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8459" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8459" class="vcard"> 
+       <p>Well, to be fair, you can’t see all of them, because I haven’t finished titling them yet, because I seem to have taken half a billion.</p> 
+       <p>You can see some, though…</p> 
+       <p>I’m glad you liked this one though, ‘tite.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.littleredboat.co.uk" rel="external nofollow ugc" class="url">anna</a></span> — April 8, 2006 @ <a href="#comment-8459">9:13 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8460" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8460" class="vcard"> 
+       <p>Petite – fabulous picture……so atmospheric….and so fitting for your searchingly written piece.</p> 
+       <p><cite>Comment by <span class="fn">Morbihan Princess</span> — April 8, 2006 @ <a href="#comment-8460">9:27 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8461" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8461" class="vcard"> 
+       <p>at first i thought you were talking about a Cadbury egg… hard shell(well how hard is chocolate really?) soft and gooey in the center. mmmm.. i think it must be close to easter my Cadbury radar keeps going off. keep smiling and hugging Tadpole. :D</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://lynn.2girlsplastic.com" rel="external nofollow ugc" class="url">Lynn</a></span> — April 8, 2006 @ <a href="#comment-8461">10:15 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8462" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8462" class="vcard"> 
+       <p>Ah, the Baie des Anges, the blue chairs of the Promenade des Anglais and the ubiquitous big pebbles below (they kill your feet, but they’re so much part of what makes a beach in Nice they become kind of romantic, don’t they?)… I spent so many summers there at my grandparents’, it’s nice to see pictures of it (well done, Anna!). My grandfater died in November and I fear I will never go back, or, worse, that when I do go back it will just not be the same… I hope you enjoyed your time in Nice, Petite. Did you go up to the castle? And did you eat ‘fougasse’ in the Cours Saleya (see <a href="http://www.locations-saleya.com/nice.html" rel="nofollow ugc">http://www.locations-saleya.com/nice.html</a>)? And did you go to the flower market there as well? It would be lovely to read a post about what you saw in Nice – I’m sure you would describe it exquisitely. Keep writing!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://lotus-flower.blogspot.com" rel="external nofollow ugc" class="url">Lotus Flower</a></span> — April 8, 2006 @ <a href="#comment-8462">11:56 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8463" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8463" class="vcard"> 
+       <p>the guys u leave behind are usually the most fun</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://tenminutesolder.blogspot.com" rel="external nofollow ugc" class="url">piu piu</a></span> — April 8, 2006 @ <a href="#comment-8463">12:11 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8464" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8464" class="vcard"> 
+       <p>First of all, you can only call someone a fuckbuddy if you know the limits. The fact you’ve already lost your senses a bit to him makes him definitely not a fuckbuddy. Second of all, I know the type of girls who can have fuckbuddies. You’re not one of them. You’re too romantic and SERIOUS.</p> 
+       <p>So, what I’m saying is cut it while you can. And that’s my nosy advice to you.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://nardac.blogsome.com" rel="external nofollow ugc" class="url">nardac</a></span> — April 8, 2006 @ <a href="#comment-8464">1:12 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8465" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8465" class="vcard"> 
+       <p>You may well be right Nardac. But my experience this past year has shown me that I would rather live, have feelings, experience things (and cope with the flipside) rather than close myself off (and keep my legs crossed).</p> 
+       <p>Que sera, sera.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 8, 2006 @ <a href="#comment-8465">2:04 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8466" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8466" class="vcard"> 
+       <p>Lovely photos…</p> 
+       <p>The kitty taking a nap in the wine cave, obviously awaiting a date(as 180 Euros is a lot to splurge on a bottle of bubbly for just oneself,no?)is especially charming and one look at the hothouse tomatoes in the Nice market has me lustily entertaining thoughts of making spicy salsa and a slow-simmering sauce…MMM</p> 
+       <p><cite>Comment by <span class="fn">Belle</span> — April 8, 2006 @ <a href="#comment-8466">2:15 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8467" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8467" class="vcard"> 
+       <p>lovely pic – that anna is ace</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.abeautifulrevolution.com" rel="external nofollow ugc" class="url">andre</a></span> — April 8, 2006 @ <a href="#comment-8467">2:46 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8468" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8468" class="vcard"> 
+       <p>oh how I long for a fuck buddy</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.abeautifulrevolution.com" rel="external nofollow ugc" class="url">andre</a></span> — April 8, 2006 @ <a href="#comment-8468">2:58 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8469" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8469" class="vcard"> 
+       <p>My humble opinion is that you should wait a bit longer before you jump into anything else. I just had my heart broken too and I can honestly say that within the months after the breakup, I found out who I really am and became a more confident happy person.</p> 
+       <p>The situation may be different for you, but I think we all need some alone time. I had my “gap men” (notice the plural ;) too but I wouldn’t let it progress into anything serious.</p> 
+       <p>Bonne Chance!</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.julianagoesinternational.blogspot.com" rel="external nofollow ugc" class="url">juliana</a></span> — April 8, 2006 @ <a href="#comment-8469">4:07 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8470" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8470" class="vcard"> 
+       <p>oh lordy, if this carries on I can see I will soon hold the coveted top google spot for both “bad mummy” and “f*ck buddy”.</p> 
+       <p>Lucky me.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 8, 2006 @ <a href="#comment-8470">4:20 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8471" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8471" class="vcard"> 
+       <p>Over two years ago I went through a nasty break up, it was really painful and I thought I need time to get over it. Three months later I bumped into a man in Paris, and since then I was falling… I moved to England because I wanted to be there and because of him. I knew he didn’t want anything serious with me, but two months later he admited he loves me. Year later (since the day we met) we got married, we’ve been together for over two years now, and our relationship is becoming stronger daily. I was afraid to love him, my heart didn’t listen, and I am happy because even if my happines is going to last only until next week it’s worth it. We waste a lot of time of being afraid of getting hurt, give it a try. If doesn’t work just let it go, but never torture yourself for the past, look forward to future. Life is too short. Everyone is different, but I am happy I didn’t refuse relationship with my present husband, he loves me a love him. There is only love and world around us. Good luck petite.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://carrasdream.blogspot.com/" rel="external nofollow ugc" class="url">carra</a></span> — April 8, 2006 @ <a href="#comment-8471">5:33 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8472" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8472" class="vcard"> 
+       <p>Actually you have the top two spots for ‘bad mummy’…</p> 
+       <p><cite>Comment by <span class="fn">Ellie</span> — April 8, 2006 @ <a href="#comment-8472">7:19 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8473" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8473" class="vcard"> 
+       <p>Petite, I can’t help but wander if you’re using an alias for your flickr account… You have mentioned a lot that you cringe at the sound of anyone french pronouncing your name…?<br> /Nep.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://www.concept2.co.uk/forum/weblog.php?w=87" rel="external nofollow ugc" class="url">Neptune, God of the Seas</a></span> — April 9, 2006 @ <a href="#comment-8473">11:20 am</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8474" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8474" class="vcard"> 
+       <p>there’s other ways to live, my dear. well, just be careful… I know how these things work better than you, I think.</p> 
+       <p>and you know I could never judge you for keeping your legs uncrossed… pot and kettle stories.</p> 
+       <p><cite>Comment by <span class="fn"><a href="http://nardac.blogsome.com" rel="external nofollow ugc" class="url">nardac</a></span> — April 9, 2006 @ <a href="#comment-8474">12:41 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8475" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8475" class="vcard"> 
+       <p>pay attention Neptune, it isn’t my flickr account, it’s the blogger I was with in Nice, Anna, of Little Red Boat’s photostream.</p> 
+       <p><cite>Comment by <span class="fn">petite</span> — April 9, 2006 @ <a href="#comment-8475">1:19 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8476" class="comment odd alt thread-odd thread-alt depth-1 highlander-comment"> 
+      <div id="div-comment-8476" class="vcard"> 
+       <p>Be in the moment petite, but keep in mind the moments from the past that have taught you lessons that were hard learned……..Above all, enjoy your life!</p> 
+       <p><cite>Comment by <span class="fn">Dave of the Lake</span> — April 9, 2006 @ <a href="#comment-8476">8:58 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+     <li id="comment-8477" class="comment even thread-even depth-1 highlander-comment"> 
+      <div id="div-comment-8477" class="vcard"> 
+       <p>“Because here I am, an open book, with a broken spine.” It sounds like the best title for the picture, isn’t it ? And all the atttention converging towards the closed hand, half clenching and half digging… Anna has the talent to back yours, Petite !</p> 
+       <p><cite>Comment by <span class="fn">coutho</span> — April 10, 2006 @ <a href="#comment-8477">8:45 pm</a></cite> </p> 
+       <div class="reply"> 
+       </div> 
+      </div> </li><!-- #comment-## --> 
+    </ol> 
+    <div class="navigation"> 
+     <div class="alignleft"></div> 
+     <div class="alignright"></div> 
+    </div> 
+    <br> 
+    <p><a href="https://petiteanglaise.com/2006/04/06/semi-detached/feed/"><abbr title="Really Simple Syndication">RSS</abbr> feed for comments on this post.</a></p> 
+    <p>Sorry, the comment form is closed at this time.</p> <!-- begin footer --> 
+   </div> <!-- begin sidebar --> 
+   <div id="menu"> 
+    <ul> 
+     <li id="search-15" class="widget widget_search">
+      <form role="search" method="get" id="searchform" class="searchform" action="https://petiteanglaise.com/"> 
+       <div> <label class="screen-reader-text" for="s">Search for:</label> 
+        <input type="text" value="" name="s" id="s"> 
+        <input type="submit" id="searchsubmit" value="Search"> 
+       </div> 
+      </form></li> 
+     <li id="text-21" class="widget widget_text"> 
+      <div class="textwidget">
+       <ul> 
+        <li id="text" style="list-style-type:none;"> 
+         <ul> 
+          <li><a title="about this site" href="https://petiteanglaise.wordpress.com/about-this-site/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/union-jack2.jpg" alt="union-jack2.jpg"> about</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/book/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/book.png" alt="book.png"> books</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/press/"><img src="https://petiteanglaise.files.wordpress.com/2010/06/press.jpg" alt="press.jpg"> press</a></li> 
+          <li><a title="Petite Anglaise fan page" href="http://www.facebook.com/pages/Petite-Anglaise/8204603380" target="_TOP" rel="noopener noreferrer"><img src="https://petiteanglaise.files.wordpress.com/2010/06/facebook1.png" alt="facebook.png"> fbk</a></li> 
+         </ul> 
+         <ul> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031190?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031190"><img src="https://petiteanglaise.files.wordpress.com/2010/06/petite-paperback1.gif" alt="buy from amazon uk"></a></li> 
+          <li><a title="buy from amazon us" href="http://www.amazon.com/gp/product/0385522800?ie=UTF8&amp;tag=petiteanglais-20&amp;linkCode=xm2&amp;camp=1789&amp;creativeASIN=0385522800"><img src="https://petiteanglaise.files.wordpress.com/2009/11/petitepbusa.jpg" alt="buy from amazon us"></a></li> 
+          <li><a title="buy from amazon.fr" href="http://www.amazon.fr/Petite-anglaise-Catherine-Sanderson/dp/2702140394/ref=sr_1_2?ie=UTF8&amp;s=books&amp;qid=1258292753&amp;sr=8-2"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french_petite.jpg" alt="buy from amazon france"></a></li> 
+          <li><a title="buy from amazon uk" href="http://www.amazon.co.uk/gp/product/0141031247?ie=UTF8&amp;tag=petiteanglais-21&amp;linkCode=xm2&amp;camp=1634&amp;creativeASIN=0141031247"><img src="https://petiteanglaise.files.wordpress.com/2010/06/french-kissing_web1.jpg" alt="buy from amazon uk"></a></li> 
+         </ul> </li> 
+        <li id="text">potted petite 
+         <ul> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2004/12/02/adoption/">prologue</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/10/burned/">burned</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/05/22/null-and-void/">null and void</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/29/slacker-mum/">part time mummy</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/06/03/baggage/">baggage</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2005/11/23/song/">singing in tongues</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/03/14/eleven-days-later/">eleven days later</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/04/06/semi-detached/">semi-detached</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2006/07/20/suspendered/">suspend<span style="text-decoration:line-through;">er</span>ed</a></li> 
+          <li><a href="https://petiteanglaise.wordpress.com/archives/2007/06/03/sunday/">sunday</a></li> 
+         </ul> </li> 
+        <li id="text">archives 
+         <ul> 
+          <li><a title="January 2011" href="https://petiteanglaise.com/2011/01/">January 2011</a></li> 
+          <li><a title="November 2009" href="https://petiteanglaise.com/2009/11/">November 2009</a></li> 
+          <li><a title="September 2009" href="https://petiteanglaise.com/2009/09/">September 2009</a></li> 
+          <li><a title="August 2009" href="https://petiteanglaise.com/2009/08/">August 2009</a></li> 
+          <li><a title="July 2009" href="https://petiteanglaise.com/2009/07/">July 2009</a></li> 
+          <li><a title="June 2009" href="https://petiteanglaise.com/2009/06/">June 2009</a></li> 
+          <li><a title="May 2009" href="https://petiteanglaise.com/2009/05/">May 2009</a></li> 
+          <li><a title="April 2009" href="https://petiteanglaise.com/2009/04/">April 2009</a></li> 
+          <li><a title="March 2009" href="https://petiteanglaise.com/2009/03/">March 2009</a></li> 
+          <li><a title="February 2009" href="https://petiteanglaise.com/2009/02/">February 2009</a></li> 
+          <li><a title="January 2009" href="https://petiteanglaise.com/2009/01/">January 2009</a></li> 
+          <li><a title="December 2008" href="https://petiteanglaise.com/2008/12/">December 2008</a></li> 
+          <li><a title="November 2008" href="https://petiteanglaise.com/2008/11/">November 2008</a></li> 
+          <li><a title="October 2008" href="https://petiteanglaise.com/2008/10/">October 2008</a></li> 
+          <li><a title="September 2008" href="https://petiteanglaise.com/2008/09/">September 2008</a></li> 
+          <li><a title="August 2008" href="https://petiteanglaise.com/2008/08/">August 2008</a></li> 
+          <li><a title="July 2008" href="https://petiteanglaise.com/2008/07/">July 2008</a></li> 
+          <li><a title="June 2008" href="https://petiteanglaise.com/2008/06/">June 2008</a></li> 
+          <li><a title="May 2008" href="https://petiteanglaise.com/2008/05/">May 2008</a></li> 
+          <li><a title="April 2008" href="https://petiteanglaise.com/2008/04/">April 2008</a></li> 
+          <li><a title="March 2008" href="https://petiteanglaise.com/2008/03/">March 2008</a></li> 
+          <li><a title="February 2008" href="https://petiteanglaise.com/2008/02/">February 2008</a></li> 
+          <li><a title="January 2008" href="https://petiteanglaise.com/2008/01/">January 2008</a></li> 
+          <li><a title="December 2007" href="https://petiteanglaise.com/2007/12/">December 2007</a></li> 
+          <li><a title="November 2007" href="https://petiteanglaise.com/2007/11/">November 2007</a></li> 
+          <li><a title="October 2007" href="https://petiteanglaise.com/2007/10/">October 2007</a></li> 
+          <li><a title="September 2007" href="https://petiteanglaise.com/2007/09/">September 2007</a></li> 
+          <li><a title="August 2007" href="https://petiteanglaise.com/2007/08/">August 2007</a></li> 
+          <li><a title="July 2007" href="https://petiteanglaise.com/2007/07/">July 2007</a></li> 
+          <li><a title="June 2007" href="https://petiteanglaise.com/2007/06/">June 2007</a></li> 
+          <li><a title="May 2007" href="https://petiteanglaise.com/2007/05/">May 2007</a></li> 
+          <li><a title="April 2007" href="https://petiteanglaise.com/2007/04/">April 2007</a></li> 
+          <li><a title="March 2007" href="https://petiteanglaise.com/2007/03/">March 2007</a></li> 
+          <li><a title="February 2007" href="https://petiteanglaise.com/2007/02/">February 2007</a></li> 
+          <li><a title="January 2007" href="https://petiteanglaise.com/2007/01/">January 2007</a></li> 
+          <li><a title="December 2006" href="https://petiteanglaise.com/2006/12/">December 2006</a></li> 
+          <li><a title="November 2006" href="https://petiteanglaise.com/2006/11/">November 2006</a></li> 
+          <li><a title="October 2006" href="https://petiteanglaise.com/2006/10/">October 2006</a></li> 
+          <li><a title="September 2006" href="https://petiteanglaise.com/2006/09/">September 2006</a></li> 
+          <li><a title="August 2006" href="https://petiteanglaise.com/2006/08/">August 2006</a></li> 
+          <li><a title="July 2006" href="https://petiteanglaise.com/2006/07/">July 2006</a></li> 
+          <li><a title="June 2006" href="https://petiteanglaise.com/2006/06/">June 2006</a></li> 
+          <li><a title="May 2006" href="https://petiteanglaise.com/2006/05/">May 2006</a></li> 
+          <li><a title="April 2006" href="https://petiteanglaise.com/2006/04/">April 2006</a></li> 
+          <li><a title="March 2006" href="https://petiteanglaise.com/2006/03/">March 2006</a></li> 
+          <li><a title="February 2006" href="https://petiteanglaise.com/2006/02/">February 2006</a></li> 
+          <li><a title="January 2006" href="https://petiteanglaise.com/2006/01/">January 2006</a></li> 
+          <li><a title="December 2005" href="https://petiteanglaise.com/2005/12/">December 2005</a></li> 
+          <li><a title="November 2005" href="https://petiteanglaise.com/2005/11/">November 2005</a></li> 
+          <li><a title="October 2005" href="https://petiteanglaise.com/2005/10/">October 2005</a></li> 
+          <li><a title="September 2005" href="https://petiteanglaise.com/2005/09/">September 2005</a></li> 
+          <li><a title="August 2005" href="https://petiteanglaise.com/2005/08/">August 2005</a></li> 
+          <li><a title="July 2005" href="https://petiteanglaise.com/2005/07/">July 2005</a></li> 
+          <li><a title="June 2005" href="https://petiteanglaise.com/2005/06/">June 2005</a></li> 
+          <li><a title="May 2005" href="https://petiteanglaise.com/2005/05/">May 2005</a></li> 
+          <li><a title="April 2005" href="https://petiteanglaise.com/2005/04/">April 2005</a></li> 
+          <li><a title="March 2005" href="https://petiteanglaise.com/2005/03/">March 2005</a></li> 
+          <li><a title="February 2005" href="https://petiteanglaise.com/2005/02/">February 2005</a></li> 
+          <li><a title="January 2005" href="https://petiteanglaise.com/2005/01/">January 2005</a></li> 
+          <li><a title="December 2004" href="https://petiteanglaise.com/2004/12/">December 2004</a></li> 
+          <li><a title="November 2004" href="https://petiteanglaise.com/2004/11/">November 2004</a></li> 
+          <li><a title="October 2004" href="https://petiteanglaise.com/2004/10/">October 2004</a></li> 
+          <li><a title="September 2004" href="https://petiteanglaise.com/2004/09/">September 2004</a></li> 
+          <li><a title="August 2004" href="https://petiteanglaise.com/2004/08/">August 2004</a></li> 
+          <li><a title="July 2004" href="https://petiteanglaise.com/2004/07/">July 2004</a></li> 
+         </ul> </li> 
+        <li id="text">categories 
+         <ul> 
+          <li class="cat-item cat-item-19290"><a title="View all posts filed under adoption" href="https://petiteanglaise.com/category/adoption/">adoption</a></li> 
+          <li class="cat-item cat-item-101238"><a title="View all posts filed under book stuff" href="https://petiteanglaise.com/category/book-stuff/">book stuff</a></li> 
+          <li class="cat-item cat-item-269813"><a title="on Paris and Parisians" href="https://petiteanglaise.com/category/city-of-light/">city of light</a></li> 
+          <li class="cat-item cat-item-777392"><a title="View all posts filed under french touch" href="https://petiteanglaise.com/category/french-touch/">french touch</a></li> 
+          <li class="cat-item cat-item-37959060"><a title="View all posts filed under good time girl" href="https://petiteanglaise.com/category/good-time-girl/">good time girl</a></li> 
+          <li class="cat-item cat-item-36442"><a title="View all posts filed under knocked up" href="https://petiteanglaise.com/category/knocked-up/">knocked up</a></li> 
+          <li class="cat-item cat-item-214948"><a title="View all posts filed under knot tying" href="https://petiteanglaise.com/category/knot-tying/">knot tying</a></li> 
+          <li class="cat-item cat-item-34596"><a title="food for thought" href="https://petiteanglaise.com/category/miam/">miam</a></li> 
+          <li class="cat-item cat-item-1455466"><a title="View all posts filed under mills &amp; boon" href="https://petiteanglaise.com/category/mills-boon/">mills &amp; boon</a></li> 
+          <li class="cat-item cat-item-277"><a title="View all posts filed under misc" href="https://petiteanglaise.com/category/misc/">misc</a></li> 
+          <li class="cat-item cat-item-37959061"><a title="England through rose tinted spectacles" href="https://petiteanglaise.com/category/missing-blighty/">missing blighty</a></li> 
+          <li class="cat-item cat-item-7289"><a title="me me me me me" href="https://petiteanglaise.com/category/navel-gazing/">navel gazing</a></li> 
+          <li class="cat-item cat-item-4358"><a title="View all posts filed under on the road" href="https://petiteanglaise.com/category/on-the-road/">on the road</a></li> 
+          <li class="cat-item cat-item-2439939"><a title="View all posts filed under parting ways" href="https://petiteanglaise.com/category/parting-ways/">parting ways</a></li> 
+          <li class="cat-item cat-item-178503"><a title="View all posts filed under single life" href="https://petiteanglaise.com/category/single-life/">single life</a></li> 
+          <li class="cat-item cat-item-37959062"><a title="View all posts filed under Tadpole rearing" href="https://petiteanglaise.com/category/tadpole-rearing/">Tadpole rearing</a></li> 
+          <li class="cat-item cat-item-37959063"><a title="View all posts filed under Tadpole says" href="https://petiteanglaise.com/category/tadpole-says/">Tadpole says</a></li> 
+          <li class="cat-item cat-item-37959065"><a title="View all posts filed under Tadpole sings" href="https://petiteanglaise.com/category/tadpole-sings/">Tadpole sings</a></li> 
+          <li class="cat-item cat-item-1"><a title="View all posts filed under Uncategorized" href="https://petiteanglaise.com/category/uncategorized/">Uncategorized</a></li> 
+          <li class="cat-item cat-item-4612"><a title="View all posts filed under working girl" href="https://petiteanglaise.com/category/working-girl/">working girl</a></li> 
+         </ul> </li> 
+        <li id="text">stats 
+         <ul> 
+          <li>638 posts</li> 
+          <li>27,981 comments</li> 
+          <li><strong>©</strong> catherine sanderson 2004-2009</li> 
+         </ul> </li> 
+       </ul> 
+       <div style="clear:both;"></div> 
+      </div> </li> 
+    </ul> 
+   </div> 
+   <p class="credit"> <a href="https://wordpress.com/?ref=footer_blog" rel="nofollow">Blog at WordPress.com.</a></p> 
+  </div> <!--  --> 
+  <div style="display:none"> 
+  </div> 
+  <div id="carousel-reblog-box"> 
+   <form action="#" name="carousel-reblog"> <textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea> <label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label> <select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id"> </select> 
+    <div class="submit"> <span class="canceltext"><a href="#" class="cancel">Cancel</a></span> 
+     <input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post"> 
+     <input type="hidden" id="carousel-reblog-blog-id" value="14262311"> 
+     <input type="hidden" id="carousel-reblog-blog-url" value="https://petiteanglaise.com"> 
+     <input type="hidden" id="carousel-reblog-blog-title" value="petite anglaise"> 
+     <input type="hidden" id="carousel-reblog-post-url" value=""> 
+     <input type="hidden" id="carousel-reblog-post-title" value=""> 
+    </div> 
+    <input type="hidden" id="_wpnonce" name="_wpnonce" value="7f128e7bbd">
+    <input type="hidden" name="_wp_http_referer" value="/2006/04/06/semi-detached/"> 
+   </form> 
+   <div class="arrow"></div> 
+  </div> 
+  <script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/petiteanglaise.com\/2006\/04\/06\/semi-detached\/":453};
+	</script> 
+  <link rel="stylesheet" id="all-css-0-2" href="https://s0.wp.com/_static/??/wp-content/plugins/gutenberg-blocks/jetpack-layout-grid/blocks/front.css,/wp-content/mu-plugins/carousel/jetpack-carousel.css?m=1583834955j&amp;cssminify=yes" type="text/css" media="all"> 
+  <script>
+var actionbardata = {"siteID":"14262311","siteName":"petite anglaise","siteURL":"https:\/\/petiteanglaise.com","icon":"<img alt='' src='https:\/\/petiteanglaise.files.wordpress.com\/2017\/07\/cropped-union-jack.png?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/classic","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2006%2F04%2F06%2Fsemi-detached%2F&signup_flow=account&domain=petiteanglaise.com","themeURL":"","xhrURL":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cdd9113ebf","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"fe4c42e1ec\" \/>","referer":"https:\/\/petiteanglaise.com\/2006\/04\/06\/semi-detached\/","canFollow":"1","feedID":"269408","statusMessage":"","customizeLink":"https:\/\/petiteanglaise.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fpetiteanglaise.wordpress.com%2F2006%2F04%2F06%2Fsemi-detached%2F","postID":"453","shortlink":"https:\/\/wp.me\/pXQhh-7j","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/petiteanglaise.com\/453","statsLink":"https:\/\/wordpress.com\/stats\/post\/453\/petiteanglaise.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: WordPress Classic","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/read\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 104 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/wordpress.com\/log-in?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2006%2F04%2F06%2Fsemi-detached%2F&signup_flow=account&domain=petiteanglaise.com\">Log in now.<\/a>","stats":"Stats"}};
+</script> 
+  <script>
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/petiteanglaise.com\/wp-admin\/admin-ajax.php","nonce":"cf5efb0e88","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/petiteanglaise.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fpetiteanglaise.com%2F2006%2F04%2F06%2Fsemi-detached%2F","blog_id":"14262311","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=14262311&v=wpcom&tz=2&user_id=0&subd=petiteanglaise","is_public":"1","reblog_enabled":""};
+</script> 
+  <script>
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+</script> 
+  <script type="text/javascript" src="https://s1.wp.com/_static/??-eJydUdFuwjAM/KGlUYfasYdp3xISl7mkSRY7Lfz9XNYCQghpe4ktn+/OsfWUlI2BIbDuSTsY0UI6Vj29aIEwWF8c0BlDYj1CcDHPUIr+1KH31YBhbV+Vki97DKS74r0iZFDgkDHs1S+i2029eWtf3/XORylGYlKS2sPigjD9XxNkSBZeCeziFBbh80v34L3LUNRqZJz8TO1M1oMhhiyZiiPkjPNCLrU/KnA2MsYzkmWMYSZdskfXoHRd+229/y6QT0uobrseeFmTYyHwugdOMpdaC08487FU5w1mTV8mywHWKKTP4aNutk3dNNu67X8ADungjw=="></script> 
+  <script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://s0.wp.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?m=1573572739h&#038;ver=3.0.0"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?m=1540208548h&#038;ver=3.26.0-0"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://s1.wp.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?m=1550600082h&#038;ver=3.0.12"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://s2.wp.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?m=1540208548h&#038;ver=2.0.2"></scr' + 'ipt>' );
+( 'URL' in window ) || document.write( '<script src="https://s0.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-url.f434e7c5.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+( window.DOMRect ) || document.write( '<script src="https://s1.wp.com/wp-content/plugins/gutenberg-core/7.7.1/vendor/wp-polyfill-dom-rect.7e21c103.js?m=1585297571h&#038;ver=3.42.0"></scr' + 'ipt>' );
+</script> 
+  <script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+</script> 
+  <script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>
+  <script src="//stats.wp.com/w.js?61" type="text/javascript" async defer></script> 
+  <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'14262311','blog_tz':'2','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'14262311','v':'wpcom','tz':'2','user_id':'0','post':'453','subd':'petiteanglaise'}]);
+_stq.push(['extra', {'crypt':'UE40eW5QN0p8M2Y/RE1TaVhzUzFMbjdWNHpwZGhTayxPSUFCMGRVYVNrSFguN3FwSmQ5RGtNX3VQcj1yVzhiflM1THQtLGFdQ2toOXYlXzhxdW0vQ1hzcFE3aUFOUjg2Z2sxLXYlMXwsPVRFfjk1RkZUKz9jTHFvci9mNzJHb2NHVj15R1lHeSZtRltRQ3Zpa2tJfkUubDgwd3FXdF1NL2Vjdl8vNVFjQTEvQ0dofHxMfl82WDRxZ3IzcTJjVUgyREQ0SlNddVNbOEk/RnZqdn5QJW1HVltxJVddblVyZGElTnw4JktUUnRPYnl1ejI1Lms2OG1GVmxLelB8RzBLMCV5c3l+YW1wTzRHU1VaOH5UeGRfQzVqWE8wQVhENklSTg=='}]);
+_stq.push([ 'clickTrackerInit', '14262311', '453' ]);
+	</script> 
+  <noscript>
+   <img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="">
+  </noscript> 
+  <script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script> 
+ </body>
+</html>

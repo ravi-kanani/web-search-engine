@@ -23,11 +23,7 @@ public class Crawler {
 		this.webPageList = webPageList;
 	}
 
-	private int maxDepth;
-
-	public Crawler() {
-		maxDepth = 3;
-	}
+	private int maxDepth = 3;
 
 	public void crawl() {
 		String[] urls = { "https://colorlib.com/wp/",

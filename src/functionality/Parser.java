@@ -31,9 +31,7 @@ public class Parser {
 		try {
 			File directory = new File(Path.txtDirectoryPath);
 			File[] files = directory.listFiles();
-			int count = 0;
 			for (File file : files) {
-				System.out.println(++count + " " + file.getName());
 				if (file.isFile()) {
 					webPageFilesList.add(file);
 				}

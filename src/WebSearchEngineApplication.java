@@ -75,7 +75,7 @@ public class WebSearchEngineApplication {
 		Scanner s = new Scanner(System.in);
 		String choice = "y";
 		do {
-			System.out.print("Enter word for search: ");
+			System.out.print("Please enter query to search: ");
 			String query = s.nextLine();
 			System.out.println();
 			SearchResults result = getSearchResults(query);
@@ -83,26 +83,30 @@ public class WebSearchEngineApplication {
 				System.out.println("Showing results for '" + result.getQuery() + "' instead of '" + query + "'");
 			}
 			List<String> suggestions = getSuggestions(result.getQuery());
-			System.out.print("You may also try: ");
 			suggestions.remove(0);
+			suggestions.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+			System.out.print("You may also try: ");
+
 			for (String word : suggestions) {
 				System.out.print(word + ", ");
 			}
 			System.out.println("\nAbout " + result.getResults().size() + " results ("
 					+ String.format("%.5f", result.getTimeTaken() / 1000.0) + " seconds)");
-			System.out.println("Top 10 results...");
+			if (result.getResults().size() > 10)
+				System.out.println("\nTop 10 results...");
 			int count = 0;
 			for (DocRank res : result.getResults()) {
 				if (++count > 10)
 					break;
 				System.out.println(count + "\t" + res.getDocTitle());
 				System.out.println("\t" + res.getDocLink());
-				System.out.println("\tTerm frequency–inverse document frequency: " + res.getTfIdf());
+				System.out.println("\tTfidf: " + res.getTfIdf());
 				System.out.println();
 			}
 			System.out.print("Do you want to search?(y/n): ");
 			choice = s.nextLine();
 		} while (!choice.equalsIgnoreCase("n"));
+		System.out.println("Bye. Have a good day!");
 		s.close();
 	}
 

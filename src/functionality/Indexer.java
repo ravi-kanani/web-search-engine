@@ -41,7 +41,10 @@ public class Indexer {
 //		new Crawler().crawl();
 
 		List<String> tokenWords;
+		int count = 0;
 		for (File file : Parser.getWebPageFilesList()) {
+			System.out.println(
+					"Indexing (" + (++count) + "/" + Parser.getWebPageFilesList().size() + ") " + file.getName());
 			String title = file.getName().substring(0, file.getName().length() - 4);
 			String parentDir = file.getAbsolutePath().replaceAll(Path.txtDirectoryName, "");
 			String link = parentDir.substring(0, parentDir.length() - 4) + ".html";
@@ -75,13 +78,14 @@ public class Indexer {
 
 	public List<DocRank> tfIdf(String term) {
 		List<DocRank> docRankList = new ArrayList<DocRank>();
+		int totalDocuments = Parser.getWebPageFilesList().size();
 		if (indexedTerms.get(term) != null) {
 			double docListLength = indexedTerms.get(term).size();
 			for (DocFrequency doc : indexedTerms.get(term)) {
 				docRankList
 						.add(new DocRank(doc.getDocumentId(), documentIdNameMap.get(doc.getDocumentId()).getDocTitle(),
 								documentIdNameMap.get(doc.getDocumentId()).getDocLink(),
-								doc.getTermFrequency() * (docListLength / 100)));
+								doc.getTermFrequency() * Math.log10(totalDocuments / docListLength)));
 			}
 		}
 		return docRankList;

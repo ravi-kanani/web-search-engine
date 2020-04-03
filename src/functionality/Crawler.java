@@ -26,8 +26,7 @@ public class Crawler {
 	private int maxDepth = 3;
 
 	public void crawl() {
-		String[] urls = { "https://colorlib.com/wp/",
-				"https://www.forbes.com/sites/robertadams/2017/03/02/top-income-earning-blogs",
+		String[] urls = { "https://www.forbes.com/sites/robertadams/2017/03/02/top-income-earning-blogs",
 				"https://firstsiteguide.com/examples-of-blogs",
 				"https://www.lifehack.org/articles/communication/top-10-most-inspirational-bloggers-the-world.html",
 				"https://www.theguardian.com/technology/2008/mar/09/blogs",

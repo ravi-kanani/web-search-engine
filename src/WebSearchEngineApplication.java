@@ -100,7 +100,7 @@ public class WebSearchEngineApplication {
 					break;
 				System.out.println(count + "\t" + res.getDocTitle());
 				System.out.println("\t" + res.getDocLink());
-				System.out.println("\tTfidf: " + res.getTfIdf());
+				System.out.println("\ttf-idf: " + res.getTfIdf());
 				System.out.println();
 			}
 			System.out.print("Do you want to search?(y/n): ");

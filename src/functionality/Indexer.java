@@ -37,8 +37,11 @@ public class Indexer {
 	}
 
 	public void startIndexer() throws IOException {
-		logger.log(Level.INFO, "Indexing Started");
+		logger.log(Level.INFO, "Crawling Started");
 //		new Crawler().crawl();
+		logger.log(Level.INFO, "Crawling Completed");
+
+		logger.log(Level.INFO, "Indexing Started");
 
 		List<String> tokenWords;
 		int count = 0;
